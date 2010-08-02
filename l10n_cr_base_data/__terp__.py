@@ -31,28 +31,33 @@
 #    or implied, of ClearCorp S.A..
 
 {
-	"name" : "Costa Rica localization: Base data",
-	"version" : "0.1",
-	"author" : "ClearCorp S.A.",
-	"website" : "http://clearcorp.co.cr",
-	"category" : "General Modules",
-	"description": """Base data for Costa Rica localization
-Includes:
-  * res.bank: Costa Rican banks
-  * res.country.state: Costa Rican provinces with official codes
-  * res.partner.function: Commonly used functions in Costa Rica
-  * res.partner.title: Commontly used partner titles in Costa Rica
-
-Everything is in English with Spanish translation. Further translations are welcome, please go to
-http://translations.launchpad.net/openerp-costa-rica""",
-	"depends" : [ ],
-	"init_xml" : [ 'res.bank.csv',
-					'res.country.state.csv',
-					'res.partner.function.csv',
-					'res.partner.title.csv',
-					],
-	"demo_xml" : [ ],
-	"update_xml" : [ ],
-	"installable": True
-	"active": False
+    'name': 'Costa Rica localization: Base data',
+    'version': '0.1',
+    'url': 'http://launchpad.net/openerp-costa-rica',
+    'author': 'ClearCorp S.A.',
+    'website': 'http://clearcorp.co.cr',
+    'category': 'Localisation/Generic Modules',
+    'description': """Base data for Costa Rica localization
+    Includes:
+      * res.bank: Costa Rican banks
+      * res.country.state: Costa Rican provinces with official codes
+      * res.partner.function: Commonly used functions in Costa Rica
+      * res.partner.title: Commontly used partner titles in Costa Rica
+    
+    Everything is in English with Spanish translation. Further translations are welcome, please go to
+    http://translations.launchpad.net/openerp-costa-rica
+    """,
+    'depends': [ ],
+    'init_xml': [
+                    'res.bank.csv',
+                    'res.country.state.csv',
+                    'l10n_cr_base_data.xml',
+                    'res.partner.function.csv',
+                    'res.partner.title.csv',
+                ],
+    'demo_xml': [ ],
+    'update_xml': [ ],
+    'license': 'Other OSI approved licence',
+    'installable': True,
+    'active': False,
 }
