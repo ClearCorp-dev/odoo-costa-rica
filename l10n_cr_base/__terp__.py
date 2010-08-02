@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    __terp__.py
-#    l10n_cr_base_data
+#    l10n_cr_base
 #    First author: Carlos Vásquez <carlos.vasquez@clearcorp.co.cr> (ClearCorp S.A.)
 #    Copyright (c) 2010-TODAY ClearCorp S.A. (http://clearcorp.co.cr). All rights reserved.
 #    
@@ -31,13 +31,13 @@
 #    or implied, of ClearCorp S.A..
 
 {
-    'name': 'Costa Rica localization: Base data',
+    'name': 'Costa Rica localization: Base',
     'version': '0.1',
     'url': 'http://launchpad.net/openerp-costa-rica',
     'author': 'ClearCorp S.A.',
     'website': 'http://clearcorp.co.cr',
     'category': 'Localisation/Generic Modules',
-    'description': """Base data for Costa Rica localization
+    'description': """Base module localization for Costa Rica
     Includes:
       * res.bank: Costa Rican banks
       * res.country.state: Costa Rican provinces with official codes

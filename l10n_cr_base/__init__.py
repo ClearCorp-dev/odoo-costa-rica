@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    __init__.py
-#    l10n_cr_base_data
+#    l10n_cr_base
 #    First author: Carlos Vásquez <carlos.vasquez@clearcorp.co.cr> (ClearCorp S.A.)
 #    Copyright (c) 2010-TODAY ClearCorp S.A. (http://clearcorp.co.cr). All rights reserved.
 #    
@@ -29,4 +29,7 @@
 #    The views and conclusions contained in the software and documentation are those of the
 #    authors and should not be interpreted as representing official policies, either expressed
 #    or implied, of ClearCorp S.A..
+#    
+##############################################################################
 
+import l10n_cr_base

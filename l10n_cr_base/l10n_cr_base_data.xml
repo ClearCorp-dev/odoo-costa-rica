@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data noupdate="1">
+		
+		<!--
+		Resource: res.currency.rate
+		Delete default rates
+		-->
+		<delete model="res.currency.rate" search="[]"/>
+		
+		<!--
+		Resource: res.currency
+		Updates currencies and rates
+		-->
+		<delete model="res.currency" search="[('name','<>','USD'),('name','<>','EUR')]"/>
+		<record id="rateUSD" model="res.currency.rate">
+			<field name="rate">1.0</field>
+			<field name="currency_id" ref="base.USD"/>
+			<field eval="time.strftime('%Y-01-01')" name="name"/>
+		</record>
+		<record id="CRC" model="res.currency">
+			<field name="name">CRC</field>
+			<field name="code">CRC</field>
+			<field name="rounding">0.01</field>
+			<field name="accuracy">4</field>
+		</record>
+		
+		<!--
+		Resource: res.partner.funtion
+		Update partner functions
+		-->
+		<delete model="res.partner.function" search="[('code','=','CEO')]"/>
+		<record id="CEO" model="res.partner.function">
+			<field name="code">CEO</field>
+			<field name="name">Chief Executive Officer</field>
+		</record>
+		<record id="COO" model="res.partner.function">
+			<field name="code">COO</field>
+			<field name="name">Chief Operations Officer</field>
+		</record>
+		</record>
+		<record id="Chairman" model="res.partner.function">
+			<field name="code">Chairman</field>
+			<field name="name">Chairman</field>
+		</record>
+		<record id="VP." model="res.partner.function">
+			<field name="code">VP.</field>
+			<field name="name">Vice-President</field>
+		</record>
+		<record id="Dev." model="res.partner.function">
+			<field name="code">Dev.</field>
+			<field name="name">Developer</field>
+		</record>
+		<record id="Sys.Adm." model="res.partner.function">
+			<field name="code">Sys.Adm.</field>
+			<field name="name">System Administrator</field>
+		</record>
+		<record id="Ass't" model="res.partner.function">
+			<field name="code">Ass't</field>
+			<field name="name">Assistant</field>
+		</record>
+		<record id="Sec." model="res.partner.function">
+			<field name="Sec."></field>
+			<field name="Secretary"></field>
+		</record>
+	</data>
+</openerp>
