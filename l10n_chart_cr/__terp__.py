@@ -33,7 +33,7 @@
 ##############################################################################
 
 {
-	'name': 'Costa Rica localisation: Account',
+	'name': 'Costa Rica - Chart of Accounts',
 	'version': '0.1',
 	'url': 'http://launchpad.net/openerp-costa-rica',
 	'author': 'ClearCorp S.A.',
