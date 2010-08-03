@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    __terp__.py
-#    l10n_cr_base
+#    __openerp__.py
+#    l10n_cr_account
 #    First author: Carlos Vásquez <carlos.vasquez@clearcorp.co.cr> (ClearCorp S.A.)
 #    Copyright (c) 2010-TODAY ClearCorp S.A. (http://clearcorp.co.cr). All rights reserved.
 #    
@@ -29,32 +29,28 @@
 #    The views and conclusions contained in the software and documentation are those of the
 #    authors and should not be interpreted as representing official policies, either expressed
 #    or implied, of ClearCorp S.A..
+#    
+##############################################################################
 
 {
-    'name': 'Costa Rica localisation: Base',
-    'version': '0.1',
-    'url': 'http://launchpad.net/openerp-costa-rica',
-    'author': 'ClearCorp S.A.',
-    'website': 'http://clearcorp.co.cr',
-    'category': 'Localisation/Generic Modules',
-    'description': """Base module localization for Costa Rica
+	'name': 'Costa Rica localisation: Account',
+	'version': '0.1',
+	'url': 'http://launchpad.net/openerp-costa-rica',
+	'author': 'ClearCorp S.A.',
+	'website': 'http://clearcorp.co.cr',
+	'category': 'Localisation/General Modules',
+	'description': """Account module localization for Costa Rica
     Includes:
-      * res.bank: Costa Rican banks
-      * res.country.state: Costa Rican provinces with official codes
-      * res.partner.function: Commonly used functions in Costa Rica
-      * res.partner.title: Commontly used partner titles in Costa Rica
+      * account.type: 
     
     Everything is in English with Spanish translation. Further translations are welcome, please go to
     http://translations.launchpad.net/openerp-costa-rica
-    """,
-    'depends': ['base'],
-    'init_xml': [
-                    'res.bank.csv',
-                    'l10n_cr_base_data.xml',
-                ],
-    'demo_xml': [ ],
-    'update_xml': [ ],
-    'license': 'Other OSI approved licence',
-    'installable': True,
-    'active': True,
+	""",
+	'depends': [ ],
+	'init_xml': [ ],
+	'demo_xml': [ ],
+	'update_xml': [ ],
+	'license': 'Other OSI approved licence',
+	'installable': True,
+	'active': False,
 }

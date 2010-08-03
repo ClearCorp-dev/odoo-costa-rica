@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data noupdate="1">
+		<!--
+		Resource: account.account.type
+		Add usual account types
+		-->
+		<record id="account_type_view" model="account.account.type">
+			<field name="name">View</field>
+			<field name="code">V</field>
+			<field name="sequence">0</field>
+			<field name="sign">1</field>
+			<field name="partner_account" eval="False"/>
+			<field name="close_method">none</field>
+		</record>
+		<record id="account_type_active" model="account.account.type">
+			<field name="name">Active</field>
+			<field name="code">A</field>
+			<field name="sequence">10</field>
+			<field name="sign">1</field>
+			<field name="partner_account" eval="False"/>
+			<field name="close_method">balance</field>
+		</record>
+		<record id="account_type_cash" model="account.account.type">
+			<field name="name">Cash</field>
+			<field name="code">C</field>
+			<field name="sequence">11</field>
+			<field name="sign">1</field>
+			<field name="partner_account" eval="False"/>
+			<field name="close_method">balance</field>
+		</record>
+		<record id="account_type_receivable" model="account.account.type">
+			<field name="name">Receivable</field>
+			<field name="code">R</field>
+			<field name="sequence">12</field>
+			<field name="sign">1</field>
+			<field name="partner_account" eval="True"/>
+			<field name="close_method">unreconciled</field>
+		</record>
+		<record id="account_type_active_valuation" model="account.account.type">
+			<field name="name">Active Valuation</field>
+			<field name="code">AV</field>
+			<field name="sequence">13</field>
+			<field name="sign">-1</field>
+			<field name="partner_account" eval="False"/>
+			<field name="close_method">balance</field>
+		</record>
+		<record id="account_type_passive" model="account.account.type">
+			<field name="name">Passive</field>
+			<field name="code">Pas</field>
+			<field name="sequence">20</field>
+			<field name="sign">-1</field>
+			<field name="partner_account" eval="False"/>
+			<field name="close_method">balance</field>
+		</record>
+		<record id="account_type_payable" model="account.account.type">
+			<field name="name">Payable</field>
+			<field name="code">Pay</field>
+			<field name="sequence">21</field>
+			<field name="sign">-1</field>
+			<field name="partner_account" eval="True"/>
+			<field name="close_method">unreconciled</field>
+		</record>
+		<record id="account_type_tax" model="account.account.type">
+			<field name="name">Tax</field>
+			<field name="code">T</field>
+			<field name="sequence">22</field>
+			<field name="sign">-1</field>
+			<field name="partner_account" eval="True"/>
+			<field name="close_method">unreconciled</field>
+		</record>
+		<record id="account_type_equity" model="account.account.type">
+			<field name="name">Equity</field>
+			<field name="code">Eq</field>
+			<field name="sequence">30</field>
+			<field name="sign">-1</field>
+			<field name="partner_account" eval="False"/>
+			<field name="close_method">detail</field>
+		</record>
+		<record id="account_type_income" model="account.account.type">
+			<field name="name">Income</field>
+			<field name="code">I</field>
+			<field name="sequence">40</field>
+			<field name="sign">1</field>
+			<field name="partner_account" eval="False"/>
+			<field name="close_method">none</field>
+		</record>
+		<record id="account_type_expense" model="account.account.type">
+			<field name="name">Expense</field>
+			<field name="code">Ex</field>
+			<field name="sequence">50</field>
+			<field name="sign">-1</field>
+			<field name="partner_account" eval="False"/>
+			<field name="close_method">none</field>
+		</record>
+		
+		<!--
+		Resource: account.tax.code.template
+		Add tax code templates for Costa Rica
+		-->
+		<record id="tax_code_template_CR" model="account.tax.code.template">
+			<field name="name">Costa Rica</field>
+			<field name="code">CR</field>
+			<field name="info">Costa Rica Taxes</field>
+			<field name="sign">1</field>
+			<field name="parent_id" ref=""/>
+			<field name="notprintable" eval="False"/>
+		</record>
+		<record id="tax_code_template_IV" model="account.tax.code.template">
+			<field name="name">Sales Tax</field>
+			<field name="code">IV</field>
+			<field name="info">Costa Rica Sales Tax</field>
+			<field name="sign">1</field>
+			<field name="parent_id" ref="tax_code_template_CR"/>
+			<field name="notprintable" eval="False"/>
+		</record>
+		<record id="tax_code_template_IV_I" model="account.tax.code.template">
+			<field name="name">Sales Tax - Tax</field>
+			<field name="code">IV-I</field>
+			<field name="info">Costa Rica Sales Tax - Tax</field>
+			<field name="sign">1</field>
+			<field name="parent_id" ref="tax_code_template_IV"/>
+			<field name="notprintable" eval="False"/>
+		</record>
+		<record id="tax_code_template_IV_P" model="account.tax.code.template">
+			<field name="name">Sales Tax - Principal</field>
+			<field name="code">IV-P</field>
+			<field name="info">Costa Rica Sales Tax - Principal</field>
+			<field name="sign">1</field>
+			<field name="parent_id" ref="tax_code_template_IV"/>
+			<field name="notprintable" eval="False"/>
+		</record>
+		<record id="tax_code_template_IS" model="account.tax.code.template">
+			<field name="name">Service Tax</field>
+			<field name="code">Serv</field>
+			<field name="info">Costa Rica Service Tax</field>
+			<field name="sign">1</field>
+			<field name="parent_id" ref="tax_code_template_CR"/>
+			<field name="notprintable" eval="False"/>
+		</record>
+		<record id="tax_code_template_IS_I" model="account.tax.code.template">
+			<field name="name">Service Tax - Tax</field>
+			<field name="code">Serv-I</field>
+			<field name="info">Costa Rica Service Tax - Tax</field>
+			<field name="sign">1</field>
+			<field name="parent_id" ref="tax_code_template_IS"/>
+			<field name="notprintable" eval="False"/>
+		</record>
+		<record id="tax_code_template_IS_P" model="account.tax.code.template">
+			<field name="name">Service Tax - Principal</field>
+			<field name="code">Serv-P</field>
+			<field name="info">Costa Rica Service Tax - Principal</field>
+			<field name="sign">1</field>
+			<field name="parent_id" ref="tax_code_template_IS"/>
+			<field name="notprintable" eval="False"/>
+		</record>
+	</data>
+</openerp>
