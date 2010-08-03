@@ -38,18 +38,22 @@
 	'url': 'http://launchpad.net/openerp-costa-rica',
 	'author': 'ClearCorp S.A.',
 	'website': 'http://clearcorp.co.cr',
-	'category': 'Localisation/General Modules',
-	'description': """Account module localization for Costa Rica
+	'category': 'Localisation/Account Charts',
+	'description': """Chart of accounts for Costa Rica
     Includes:
-      * account.type: 
+      * account.type
+      * account.account.template
+      * account.tax.template
+      * account.tax.code.template
+      * account.chart.template
     
     Everything is in English with Spanish translation. Further translations are welcome, please go to
     http://translations.launchpad.net/openerp-costa-rica
 	""",
-	'depends': [ ],
-	'init_xml': [ ],
-	'demo_xml': [ ],
-	'update_xml': [ ],
+	'depends': ['account','account_chart','l10n_cr_base'],
+	'init_xml': [],
+	'demo_xml': [],
+	'update_xml': ['l10n_chart_cr_data.xml'],
 	'license': 'Other OSI approved licence',
 	'installable': True,
 	'active': False,
