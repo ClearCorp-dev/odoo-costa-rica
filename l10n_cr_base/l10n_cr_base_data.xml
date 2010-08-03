@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-	<data noupdate="1">
+	<data noupdate="0">
+		
+		<!--
+		Resource: res.country.state
+		Update states
+		-->
+		<record id="state_SJ" model="res.country.state">
+			<field name="code">SJ</field>
+			<field name="name">San José</field>
+			<field model="res.country" name="country_id" ref="base.cr"/>
+		</record>
+		<record id="state_A" model="res.country.state">
+			<field name="code">A</field>
+			<field name="name">Alajuela</field>
+			<field model="res.country" name="country_id" ref="base.cr"/>
+		</record>
+		<record id="state_H" model="res.country.state">
+			<field name="code">H</field>
+			<field name="name">Heredia</field>
+			<field model="res.country" name="country_id" ref="base.cr"/>
+		</record>
+		<record id="state_C" model="res.country.state">
+			<field name="code">C</field>
+			<field name="name">Cartago</field>
+			<field model="res.country" name="country_id" ref="base.cr"/>
+		</record>
+		<record id="state_P" model="res.country.state">
+			<field name="code">P</field>
+			<field name="name">Puntarenas</field>
+			<field model="res.country" name="country_id" ref="base.cr"/>
+		</record>
+		<record id="state_G" model="res.country.state">
+			<field name="code">G</field>
+			<field name="name">Guanacaste</field>
+			<field model="res.country" name="country_id" ref="base.cr"/>
+		</record>
+		<record id="state_L" model="res.country.state">
+			<field name="code">L</field>
+			<field name="name">Limón</field>
+			<field model="res.country" name="country_id" ref="base.cr"/>
+		</record>
 		
 		<!--
 		Resource: res.currency.rate
@@ -12,7 +52,60 @@
 		Resource: res.currency
 		Updates currencies and rates
 		-->
-		<delete model="res.currency" search="[('name','<>','USD'),('name','<>','EUR')]"/>
+		<record model="res.currency" id="base.VEB">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="res.currency" id="base.CAD">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="res.currency" id="base.CHF">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="res.currency" id="base.BRL">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="res.currency" id="base.CNY">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="res.currency" id="base.COP">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="res.currency" id="base.CZK">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="res.currency" id="base.DKK">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="res.currency" id="base.HUF">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="res.currency" id="base.IDR">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="res.currency" id="base.LVL">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="res.currency" id="base.NOK">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="res.currency" id="base.PAB">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="res.currency" id="base.PLN">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="res.currency" id="base.SEK">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="res.currency" id="base.GBP">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="res.currency" id="base.ARS">
+			<field name="active" eval="False"/>
+		</record>
+		<record model="res.currency" id="base.INR">
+			<field name="active" eval="False"/>
+		</record>
 		<record id="rateUSD" model="res.currency.rate">
 			<field name="rate">1.0</field>
 			<field name="currency_id" ref="base.USD"/>
@@ -38,30 +131,124 @@
 			<field name="code">COO</field>
 			<field name="name">Chief Operations Officer</field>
 		</record>
-		</record>
 		<record id="Chairman" model="res.partner.function">
 			<field name="code">Chairman</field>
 			<field name="name">Chairman</field>
 		</record>
-		<record id="VP." model="res.partner.function">
+		<record id="VP" model="res.partner.function">
 			<field name="code">VP.</field>
 			<field name="name">Vice-President</field>
 		</record>
-		<record id="Dev." model="res.partner.function">
+		<record id="Dev" model="res.partner.function">
 			<field name="code">Dev.</field>
 			<field name="name">Developer</field>
 		</record>
-		<record id="Sys.Adm." model="res.partner.function">
+		<record id="SysAdm" model="res.partner.function">
 			<field name="code">Sys.Adm.</field>
 			<field name="name">System Administrator</field>
 		</record>
-		<record id="Ass't" model="res.partner.function">
+		<record id="Asst" model="res.partner.function">
 			<field name="code">Ass't</field>
 			<field name="name">Assistant</field>
 		</record>
-		<record id="Sec." model="res.partner.function">
-			<field name="Sec."></field>
-			<field name="Secretary"></field>
+		<record id="Sec" model="res.partner.function">
+			<field name="code">Sec.</field>
+			<field name="name">Secretary</field>
+		</record>
+		
+		<!--
+		Resource: res.partner.title
+		Update partner titles
+		-->
+		<record id="base.res_partner_title_pvt_ltd" model="res.partner.title">
+			<field name="name">Corporation</field>
+			<field name="shortcut">Corp.</field>
+			<field name="domain">partner</field>
+		</record>
+		<record id="base.res_partner_title_ltd" model="res.partner.title">
+			<field name="name">Limited Company</field>
+			<field name="shortcut">Ltd.</field>
+			<field name="domain">partner</field>
+		</record>
+		<record id="base.res_partner_title_sir" model="res.partner.title">
+			<field name="name">Mister</field>
+			<field name="shortcut">Sr.</field>
+			<field name="domain">contact</field>
+		</record>
+		<record id="base.res_partner_title_miss" model="res.partner.title">
+			<field name="name">Miss</field>
+			<field name="shortcut">Mss.</field>
+			<field name="domain">contact</field>
+		</record>
+		<record id="base.res_partner_title_madam" model="res.partner.title">
+			<field name="name">Madam</field>
+			<field name="shortcut">Ms.</field>
+			<field name="domain">contact</field>
+		</record>
+		<record id="res_partner_title_sal" model="res.partner.title">
+			<field name="name">Sociedad Anónima Laboral</field>
+			<field name="shortcut">S.A.L.</field>
+			<field name="domain">partner</field>
+		</record>
+		<record id="res_partner_title_asoc" model="res.partner.title">
+			<field name="name">Asociation</field>
+			<field name="shortcut">Asoc.</field>
+			<field name="domain">partner</field>
+		</record>
+		<record id="res_partner_title_gov" model="res.partner.title">
+			<field name="name">Government</field>
+			<field name="shortcut">Gov.</field>
+			<field name="domain">partner</field>
+		</record>
+		<record id="res_partner_title_edu" model="res.partner.title">
+			<field name="name">Educational Institution</field>
+			<field name="shortcut">Edu.</field>
+			<field name="domain">partner</field>
+		</record>
+		<record id="res_partner_title_prof" model="res.partner.title">
+			<field name="name">Professor</field>
+			<field name="shortcut">Prof.</field>
+			<field name="domain">partner</field>
+		</record>
+		<record id="res_partner_title_indprof" model="res.partner.title">
+			<field name="name">Independant Professional</field>
+			<field name="shortcut">Ind. Prof.</field>
+			<field name="domain">partner</field>
+		</record>
+		<record id="res_partner_title_dr" model="res.partner.title">
+			<field name="name">Doctor</field>
+			<field name="shortcut">Dr.</field>
+			<field name="domain">contact</field>
+		</record>
+		<record id="res_partner_title_dra" model="res.partner.title">
+			<field name="name">Doctora</field>
+			<field name="shortcut">Dra.</field>
+			<field name="domain">contact</field>
+		</record>
+		<record id="res_partner_title_msc" model="res.partner.title">
+			<field name="name">Msc.</field>
+			<field name="shortcut">Msc.</field>
+			<field name="domain">contact</field>
+		</record>
+		<record id="res_partner_title_mba" model="res.partner.title">
+			<field name="name">MBA</field>
+			<field name="shortcut">MBA</field>
+			<field name="domain">contact</field>
+		</record>
+		<record id="res_partner_title_lic" model="res.partner.title">
+			<field name="name">Licenciado</field>
+			<field name="shortcut">Lic.</field>
+			<field name="domain">contact</field>
+		</record>
+		<record id="res_partner_title_licda" model="res.partner.title">
+			<field name="name">Licenciada</field>
+			<field name="shortcut">Licda.</field>
+			<field name="domain">contact</field>
+		</record>
+		<record id="res_partner_title_ing" model="res.partner.title">
+			<field name="name">Ingeniero/a</field>
+			<field name="shortcut">Ing.</field>
+			<field name="domain">contact</field>
 		</record>
 	</data>
 </openerp>

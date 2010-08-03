@@ -47,17 +47,14 @@
     Everything is in English with Spanish translation. Further translations are welcome, please go to
     http://translations.launchpad.net/openerp-costa-rica
     """,
-    'depends': [ ],
+    'depends': ['base'],
     'init_xml': [
                     'res.bank.csv',
-                    'res.country.state.csv',
                     'l10n_cr_base_data.xml',
-                    'res.partner.function.csv',
-                    'res.partner.title.csv',
                 ],
     'demo_xml': [ ],
     'update_xml': [ ],
     'license': 'Other OSI approved licence',
     'installable': True,
-    'active': False,
+    'active': True,
 }

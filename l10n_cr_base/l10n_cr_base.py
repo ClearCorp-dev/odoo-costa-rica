@@ -45,3 +45,14 @@ class res_partner_function(osv.osv):
 		'code': fields.char('Code', size=8, required=True, translate=True),
 	}
 res_partner_function()
+
+class res_partner_title(osv.osv):
+	'''
+	Inherits res.partner.title to add translation to shortcut field
+	'''
+	_inherit = 'res.partner.title'
+	
+	_columns = {
+		'shortcut': fields.char('Shortcut', required=True, size=16, translate=True),
+	}
+res_partner_title()
