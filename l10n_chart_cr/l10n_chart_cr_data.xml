@@ -95,67 +95,6 @@
 		</record>
 		
 		<!--
-		Resource: account.tax.code.template
-		Add tax code templates for Costa Rica
-		-->
-		<record id="tax_code_template_CR" model="account.tax.code.template">
-			<field name="name">Costa Rica</field>
-			<field name="code">CR</field>
-			<field name="info">Costa Rica Taxes</field>
-			<field name="sign">1</field>
-			<field name="parent_id" ref=""/>
-			<field name="notprintable" eval="False"/>
-		</record>
-		<record id="tax_code_template_IV" model="account.tax.code.template">
-			<field name="name">Sales Tax</field>
-			<field name="code">IV</field>
-			<field name="info">Costa Rica Sales Tax</field>
-			<field name="sign">1</field>
-			<field name="parent_id" ref="tax_code_template_CR"/>
-			<field name="notprintable" eval="False"/>
-		</record>
-		<record id="tax_code_template_IV_I" model="account.tax.code.template">
-			<field name="name">Sales Tax - Tax</field>
-			<field name="code">IV-I</field>
-			<field name="info">Costa Rica Sales Tax - Tax</field>
-			<field name="sign">1</field>
-			<field name="parent_id" ref="tax_code_template_IV"/>
-			<field name="notprintable" eval="False"/>
-		</record>
-		<record id="tax_code_template_IV_P" model="account.tax.code.template">
-			<field name="name">Sales Tax - Principal</field>
-			<field name="code">IV-P</field>
-			<field name="info">Costa Rica Sales Tax - Principal</field>
-			<field name="sign">1</field>
-			<field name="parent_id" ref="tax_code_template_IV"/>
-			<field name="notprintable" eval="False"/>
-		</record>
-		<record id="tax_code_template_IS" model="account.tax.code.template">
-			<field name="name">Service Tax</field>
-			<field name="code">Serv</field>
-			<field name="info">Costa Rica Service Tax</field>
-			<field name="sign">1</field>
-			<field name="parent_id" ref="tax_code_template_CR"/>
-			<field name="notprintable" eval="False"/>
-		</record>
-		<record id="tax_code_template_IS_I" model="account.tax.code.template">
-			<field name="name">Service Tax - Tax</field>
-			<field name="code">Serv-I</field>
-			<field name="info">Costa Rica Service Tax - Tax</field>
-			<field name="sign">1</field>
-			<field name="parent_id" ref="tax_code_template_IS"/>
-			<field name="notprintable" eval="False"/>
-		</record>
-		<record id="tax_code_template_IS_P" model="account.tax.code.template">
-			<field name="name">Service Tax - Principal</field>
-			<field name="code">Serv-P</field>
-			<field name="info">Costa Rica Service Tax - Principal</field>
-			<field name="sign">1</field>
-			<field name="parent_id" ref="tax_code_template_IS"/>
-			<field name="notprintable" eval="False"/>
-		</record>
-		
-		<!--
 		Resource: account.account.template
 		Account templates for Costa Rica
 		-->
@@ -1731,6 +1670,96 @@
 			<field name="type">gasto</field>
 			<field name="reconcile" eval="False"/>
 			<field name="tax_ids"></field>
+		</record>
+		
+		<!--
+		Resource: account.tax.code.template
+		Add tax code templates for Costa Rica
+		-->
+		<record id="tax_code_template_CR" model="account.tax.code.template">
+			<field name="name">Costa Rica</field>
+			<field name="code">CR</field>
+			<field name="info">Costa Rica</field>
+			<field name="sign">1</field>
+			<field name="parent_id" ref=""/>
+			<field name="notprintable" eval="False"/>
+		</record>
+		<record id="tax_code_template_taxes" model="account.tax.code.template">
+			<field name="name">Taxes</field>
+			<field name="code">Taxes</field>
+			<field name="info">Costa Rica Taxes</field>
+			<field name="sign">1</field>
+			<field name="parent_id" ref="tax_code_template_CR"/>
+			<field name="notprintable" eval="False"/>
+		</record>
+		<record id="tax_code_template_principal" model="account.tax.code.template">
+			<field name="name">Principal</field>
+			<field name="code">Principal</field>
+			<field name="info">Costa Rica Tax Principal</field>
+			<field name="sign">1</field>
+			<field name="parent_id" ref="tax_code_template_CR"/>
+			<field name="notprintable" eval="False"/>
+		</record>
+		<record id="tax_code_template_IV_tax" model="account.tax.code.template">
+			<field name="name">IV Tax</field>
+			<field name="code">IV-Tax</field>
+			<field name="info">Costa Rica IV Tax</field>
+			<field name="sign">1</field>
+			<field name="parent_id" ref="tax_code_template_taxes"/>
+			<field name="notprintable" eval="False"/>
+		</record>
+		<record id="tax_code_template_IV_principal" model="account.tax.code.template">
+			<field name="name">IV Principal</field>
+			<field name="code">IV-Principal</field>
+			<field name="info">Costa Rica IV Principal</field>
+			<field name="sign">1</field>
+			<field name="parent_id" ref="tax_code_template_principal"/>
+			<field name="notprintable" eval="False"/>
+		</record>
+		
+		<!--
+		Resource: account.chart.template
+		Chart template for Costa Rica
+		-->
+		<record id="account_chart_template_0" model="account.chart.template">
+			<field name="name">0-Plan contable</field>
+			<field name="account_root_id" ref="account_account_template_0_000000"/>
+			<field name="tax_code_root_id" ref="tax_code_template_CR"/>
+			<field name="bank_account_view_id" ref="account_account_template_0_111200"/>
+			<field name="property_account_receivable" ref="account_account_template_0_112001"/>
+			<field name="property_account_payable" ref="account_account_template_0_211001"/>
+			<field name="property_account_income" ref="account_account_template_0_410001"/>
+			<field name="property_account_expense" ref="account_account_template_0_510002"/>
+			<field name="property_account_income_categ" ref="account_account_template_0_400000"/>
+			<field name="property_account_expense_categ" ref="account_account_template_0_500000"/>
+		</record>
+		
+		<!--
+		Resource: account.tax.template
+		Tax templates for Costa Rica
+		-->
+		<record id="tax_template_IV" model="account.tax.template">
+			<field name="name">IV</field>
+			<field name="description">Sales Tax</field>
+			<field name="sequence">10</field>
+			<field name="amount">13</field>
+			<field name="type">percent</field>
+			<field name="tax_group">vat</field>
+			<field name="type_tax_use">sale</field>
+			<field name="applicable_type">true</field>
+			<field name="child_depend" eval="False"/>
+			<field name="include_base_amount" eval="False"/>
+			<field name="chart_template_id" ref="account_chart_template_0"/>
+			<field name="account_collected_id" ref="account_account_template_0_212101"/>
+			<field name="account_paid_id" ref="account_account_template_0_212101"/>
+			<field name="base_code_id" ref="tax_code_template_IV_principal"/>
+			<field name="ref_base_code_id" ref="tax_code_template_IV_principal"/>
+			<field name="tax_code_id" ref="tax_code_template_IV_tax"/>
+			<field name="ref_tax_code_id" ref="tax_code_template_IV_tax"/>
+			<field name="base_sign" eval="1"/>
+			<field name="ref_base_sign" eval="-1"/>
+			<field name="tax_sign" eval="1"/>
+			<field name="ref_tax_sign" eval="-1"/>
 		</record>
 	</data>
 </openerp>
