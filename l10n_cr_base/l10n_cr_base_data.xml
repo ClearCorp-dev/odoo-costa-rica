@@ -106,16 +106,26 @@
 		<record model="res.currency" id="base.INR">
 			<field name="active" eval="False"/>
 		</record>
-		<record id="rateUSD" model="res.currency.rate">
-			<field name="rate">1.0</field>
-			<field name="currency_id" ref="base.USD"/>
-			<field eval="time.strftime('%Y-01-01')" name="name"/>
-		</record>
 		<record id="CRC" model="res.currency">
 			<field name="name">CRC</field>
 			<field name="code">CRC</field>
 			<field name="rounding">0.01</field>
 			<field name="accuracy">4</field>
+		</record>
+		<record id="rateUSD" model="res.currency.rate">
+			<field name="rate">1.0</field>
+			<field name="currency_id" ref="base.USD"/>
+			<field eval="time.strftime('%Y-01-01')" name="name"/>
+		</record>
+		<record id="rateCRC" model="res.currency.rate">
+			<field name="rate">571.81</field>
+			<field name="currency_id" ref="base.CRC"/>
+			<field eval="time.strftime('2010-01-01')" name="name"/>
+		</record>
+		<record id="rateEUR" model="res.currency.rate">
+			<field name="rate">1,4324</field>
+			<field name="currency_id" ref="base.EUR"/>
+			<field eval="time.strftime('2010-01-01')" name="name"/>
 		</record>
 		
 		<!--
