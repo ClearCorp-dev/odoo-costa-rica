@@ -46,7 +46,9 @@
 		Resource: res.currency.rate
 		Delete default rates
 		-->
-		<delete model="res.currency.rate" search="[]"/>
+		<delete model="res.currency.rate" search="[('currency_id','=','CRC')]"/>
+		<delete model="res.currency.rate" search="[('currency_id','=','EUR')]"/>
+		<delete model="res.currency.rate" search="[('currency_id','=','USD')]"/>
 		
 		<!--
 		Resource: res.currency
@@ -119,11 +121,11 @@
 		</record>
 		<record id="rateCRC" model="res.currency.rate">
 			<field name="rate">571.81</field>
-			<field name="currency_id" ref="base.CRC"/>
+			<field name="currency_id" ref="CRC"/>
 			<field eval="time.strftime('2010-01-01')" name="name"/>
 		</record>
 		<record id="rateEUR" model="res.currency.rate">
-			<field name="rate">1,4324</field>
+			<field name="rate">1.4324</field>
 			<field name="currency_id" ref="base.EUR"/>
 			<field eval="time.strftime('2010-01-01')" name="name"/>
 		</record>
