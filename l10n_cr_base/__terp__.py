@@ -51,8 +51,9 @@
     'init_xml': [
                     'res.bank.csv',
                     'l10n_cr_base_data.xml',
+                    'l10n_cr_base.sql'
                 ],
-    'demo_xml': [ ],
+    'demo_xml': ['l10n_cr_base_demo.xml'],
     'update_xml': [ ],
     'license': 'Other OSI approved licence',
     'installable': True,

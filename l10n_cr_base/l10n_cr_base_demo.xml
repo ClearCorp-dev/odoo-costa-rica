@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data noupdate="1">
+		<!--
+		Resource: res.users
+		Sets lang and tz on demo user
+		-->
+		<record id="base.demo_user" model="res.users">
+			<field name="context_lang" eval="es_ES"/>
+			<field name="context_tz" eval="America/Costa_Rica"/>
+		</record>
+	</data>
+</openerp>

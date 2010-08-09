@@ -7,15 +7,6 @@
 		Requiered by res.partner.lang default.
 		-->
 		<function name="lang_es_install" model="res.partner"/>
-
-		<!--
-		Resource: res.users
-		Sets lang and tz data for admin and demo users
-		-->
-		<record model="res.user" search="[]">
-			<field name="context_lang" eval="es_ES"/>
-			<field name="context_tz" eval="America/Costa_Rica"/>
-		</record>
 		
 		<!--
 		Resource: res.country.state
