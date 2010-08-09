@@ -61,7 +61,7 @@ res_partner_title()
 
 class res_partner(osv.osv):
     '''
-    Inherits res.partner to add id_number field
+    Inherits res.partner to add id_number field, and lang default value
     '''
     _inherit = 'res.partner'
     _columns = {
@@ -80,3 +80,14 @@ class res_partner(osv.osv):
         return {}
         
 res_partner()
+
+class res_users(osv.osv):
+    '''
+    Inherits res.users to add lang and tz default values
+    '''
+    _inherit = 'res.users'
+    _defaults = {
+        'context_lang': lambda *a: 'es_ES',
+        'context_tz': lambda *a: 'America/Costa_Rica',
+    }
+res_users()
