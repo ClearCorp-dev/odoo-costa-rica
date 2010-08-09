@@ -47,7 +47,7 @@
     Everything is in English with Spanish translation. Further translations are welcome, please go to
     http://translations.launchpad.net/openerp-costa-rica
     """,
-    'depends': ['base'],
+    'depends': ['base','base_contact'],
     'init_xml': [
                     'res.bank.csv',
                     'l10n_cr_base_data.xml',
