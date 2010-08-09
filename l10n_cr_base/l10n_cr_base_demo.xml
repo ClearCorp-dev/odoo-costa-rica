@@ -6,8 +6,8 @@
 		Sets lang and tz on demo user
 		-->
 		<record id="base.demo_user" model="res.users">
-			<field name="context_lang" eval="es_ES"/>
-			<field name="context_tz" eval="America/Costa_Rica"/>
+			<field name="context_lang">es_ES</field>
+			<field name="context_tz">America/Costa_Rica</field>
 		</record>
 	</data>
 </openerp>
