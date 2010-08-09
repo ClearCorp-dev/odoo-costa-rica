@@ -1,1 +1,4 @@
-update into res_users (context_lang, context_tz) values ('es_ES','America/Costa_Rica') where id = 1;
+update res_users
+    context_lang = 'es_ES'
+    context_tz = 'America/Costa_Rica'
+    where id = 1;
