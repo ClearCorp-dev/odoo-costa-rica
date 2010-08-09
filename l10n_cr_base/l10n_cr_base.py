@@ -35,32 +35,32 @@
 from osv import osv,fields
 
 class res_partner_function(osv.osv):
-	'''
-	Inherits res.partner.function to add translation to code and name fields
-	'''
-	_inherit = 'res.partner.function'
-	
-	_columns = {
-		'name': fields.char('Function Name', size=64, required=True, translate=True),
-		'code': fields.char('Code', size=8, required=True, translate=True),
-	}
+    '''
+    Inherits res.partner.function to add translation to code and name fields
+    '''
+    _inherit = 'res.partner.function'
+    
+    _columns = {
+        'name': fields.char('Function Name', size=64, required=True, translate=True),
+        'code': fields.char('Code', size=8, required=True, translate=True),
+    }
 res_partner_function()
 
 class res_partner_title(osv.osv):
-	'''
-	Inherits res.partner.title to add translation to shortcut field
-	'''
-	_inherit = 'res.partner.title'
-	
-	_columns = {
-		'shortcut': fields.char('Shortcut', required=True, size=16, translate=True),
-	}
+    '''
+    Inherits res.partner.title to add translation to shortcut field
+    '''
+    _inherit = 'res.partner.title'
+    
+    _columns = {
+        'shortcut': fields.char('Shortcut', required=True, size=16, translate=True),
+    }
 res_partner_title()
 
 class res_partner(osv.osv):
-	'''
-	Inherits res.partner to add id_number field
-	'''
+    '''
+    Inherits res.partner to add id_number field
+    '''
     _inherit = 'res.partner'
     _columns = {
         'id_number': fields.char('ID Number', size=30,required=False, select=1),
