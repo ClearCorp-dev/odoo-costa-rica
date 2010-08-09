@@ -5,7 +5,7 @@
 		Resource: res.users
 		Sets lang and tz on demo user
 		-->
-		<record id="base.demo_user" model="res.users">
+		<record id="base.user_demo" model="res.users">
 			<field name="context_lang">es_ES</field>
 			<field name="context_tz">America/Costa_Rica</field>
 		</record>
