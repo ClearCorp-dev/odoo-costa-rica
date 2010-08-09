@@ -71,7 +71,7 @@ class res_partner(osv.osv):
     }
     _defaults = {
         'lang': lambda *a: 'es_ES',
-        'title': lambda *a: 'Corporation',
+        'title': lambda *a: 'Corp.',
         'date': lambda *args: time.strftime('%Y-%m-%d'),
     }
     
