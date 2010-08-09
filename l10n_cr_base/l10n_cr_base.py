@@ -70,6 +70,8 @@ class res_partner(osv.osv):
     }
     _defaults = {
         'lang': lambda *a: 'es_ES',
+        'title': lambda *a: 'S.A.',
+        'date': lambda *args: time.strftime('%Y-%m-%d'),
     }
     
     def lang_es_install(self, cr, uid):
