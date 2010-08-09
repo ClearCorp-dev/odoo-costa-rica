@@ -33,6 +33,7 @@
 ##############################################################################
 
 from osv import osv,fields
+import pooler
 from base.res.partner.partner import _lang_get
 
 class res_partner_function(osv.osv):
