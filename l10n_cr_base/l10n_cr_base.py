@@ -90,7 +90,7 @@ class res_partner_address(osv.osv):
         'country_id': lambda self,cr,uid,ctx={}: self.pool.get('res.country').get(cr, uid, 'Costa Rica') or '',
         'state_id': lambda self,cr,uid,ctx={}: self.pool.get('res.country.state').get(cr, uid, 'San José') or '',
     }
-res_users()
+res_partner_address()
 
 class res_users(osv.osv):
     '''
