@@ -81,6 +81,17 @@ class res_partner(osv.osv):
         
 res_partner()
 
+class res_partner_address(osv.osv):
+    '''
+    Inherits res.partner.address to add country and state default values
+    '''
+    _inherit = 'res.users'
+    _defaults = {
+        'country_id': lambda self,cr,uid,ctx={}: self.pool.get('res.country').get(cr, uid, 'Costa Rica') or '',
+        'state_id': lambda self,cr,uid,ctx={}: self.pool.get('res.country.state').get(cr, uid, 'San José') or '',
+    }
+res_users()
+
 class res_users(osv.osv):
     '''
     Inherits res.users to add lang and tz default values
