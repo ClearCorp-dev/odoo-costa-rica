@@ -87,8 +87,8 @@ class res_partner_address(osv.osv):
     '''
     _inherit = 'res.partner.address'
     _defaults = {
-        'country_id': lambda self,cr,uid,ctx={}: self.pool.get('res.country').search(cr, uid, [('name','=','Costa Rica')])[0] or '',
-        'state_id': lambda self,cr,uid,ctx={}: self.pool.get('res.country.state').search(cr, uid, [('name','like','San José')])[0] or '',
+        'country_id': lambda self,cr,uid,ctx={}: self.pool.get('res.country').search(cr, uid, [('name','=','Costa Rica')])[0][0] or '',
+        'state_id': lambda self,cr,uid,ctx={}: self.pool.get('res.country.state').search(cr, uid, [('name','like','San José')])[0][0] or '',
     }
 res_partner_address()
 
