@@ -68,6 +68,6 @@ class res_partner(osv.osv):
         'lang': fields.selection(_lang_get, 'Language', size=5, required=True, help="If the selected language is loaded in the system, all documents related to this partner will be printed in this language. If not, it will be english."),
     }
     _defaults = {
-        'lang': 'es_ES',
+        'lang': lambda *a: 'es_ES',
     }
 res_partner()
