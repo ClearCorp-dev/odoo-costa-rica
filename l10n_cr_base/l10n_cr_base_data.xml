@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
 	<data noupdate="1">
-
+		<!--
+		Resource: res.partner
+		Force es_ES installation on the system.
+		Requiered by res.partner.lang default.
+		-->
 		<function name="lang_es_install" model="res.partner"/>
 		
 		<!--
