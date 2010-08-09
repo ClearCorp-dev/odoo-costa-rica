@@ -56,3 +56,13 @@ class res_partner_title(osv.osv):
 		'shortcut': fields.char('Shortcut', required=True, size=16, translate=True),
 	}
 res_partner_title()
+
+class res_partner(osv.osv):
+	'''
+	Inherits res.partner to add id_number field
+	'''
+    _inherit = 'res.partner'
+    _columns = {
+        'id_number': fields.char('ID Number', size=30,required=False, select=1),
+    }
+res_partner()
