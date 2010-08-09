@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
 	<data noupdate="1">
+
+		<function name="lang_es_install" model="res.partner"/>
 		
 		<!--
 		Resource: res.country.state

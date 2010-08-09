@@ -70,12 +70,12 @@ class res_partner(osv.osv):
     _defaults = {
         'lang': lambda *a: 'es_ES',
     }
+    
+    def lang_es_install(self, cr, uid):
+        lang = 'es_ES'
+        modobj = pooler.get_pool(cr.dbname).get('ir.module.module')
+        mids = modobj.search(cr, uid, [('state', '=', 'installed')])
+        modobj.update_translations(cr, uid, mids, lang)
+        return {}
+        
 res_partner()
-
-def _lang_es_install(cr, uid):
-    lang = 'es_ES'
-    modobj = pooler.get_pool(cr.dbname).get('ir.module.module')
-    mids = modobj.search(cr, uid, [('state', '=', 'installed')])
-    modobj.update_translations(cr, uid, mids, lang)
-    return {}
-_lang_es_install(cr, uid)
