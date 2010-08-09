@@ -33,7 +33,7 @@
 ##############################################################################
 
 from osv import osv,fields
-from base.res.partner import partner
+from base.res.partner.partner import _lang_get
 
 class res_partner_function(osv.osv):
     '''
