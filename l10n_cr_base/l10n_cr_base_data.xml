@@ -140,8 +140,7 @@
 		Resource: res.partner.funtion
 		Update partner functions
 		-->
-		<delete model="res.partner.function" search="[('code','=','CEO')]"/>
-		<record id="CEO" model="res.partner.function">
+		<record id="base.function_director" model="res.partner.function">
 			<field name="code">CEO</field>
 			<field name="name">Chief Executive Officer</field>
 		</record>

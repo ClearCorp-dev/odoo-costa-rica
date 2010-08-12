@@ -9,5 +9,25 @@
 			<field name="context_lang">es_ES</field>
 			<field name="context_tz">America/Costa_Rica</field>
 		</record>
+
+		<!--
+		Resource: res.partner.title
+		Re-adds the changed res.partner.title for base_contact demo data
+		-->
+        <record id="base.res_partner_title_madam" model="res.partner.title">
+            <field name="domain">contact</field>
+            <field name="name">Madam</field>
+            <field name="shortcut">Ms.</field>
+        </record>
+        <record id="base.res_partner_title_miss" model="res.partner.title">
+            <field name="domain">contact</field>
+            <field name="name">Miss</field>
+            <field name="shortcut">Mss</field>
+        </record>
+        <record id="base.res_partner_title_sir" model="res.partner.title">
+            <field name="domain">contact</field>
+            <field name="name">Sir</field>
+            <field name="shortcut">M.</field>
+        </record>
 	</data>
 </openerp>
