@@ -1394,7 +1394,7 @@
 			<field name="currency_id" ref="l10n_cr_base.CRC"/>
 			<field name="type">other</field>
 			<field name="reconcile" eval="False"/>
-			<field name="tax_ids">IV,IS</field>
+			<field name="tax_ids">IV</field>
 		</record>
 		<record id="account_account_template_0_420000" model="account.account.template">
 			<field name="code">0-420000</field>
@@ -2082,6 +2082,39 @@
 			<field name="code">0-530001</field>
 			<field name="name">0-Donaciones no deducibles</field>
 			<field name="shortcut">0-Don</field>
+			<field name="parent_id" ref="account_account_template_0_530000"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_530002" model="account.account.template">
+			<field name="code">0-530002</field>
+			<field name="name">0-Gastos de presidencia</field>
+			<field name="shortcut">0-GPres</field>
+			<field name="parent_id" ref="account_account_template_0_530000"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_530003" model="account.account.template">
+			<field name="code">0-530003</field>
+			<field name="name">0-Multas</field>
+			<field name="shortcut">0-Mul</field>
+			<field name="parent_id" ref="account_account_template_0_530000"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_530004" model="account.account.template">
+			<field name="code">0-530004</field>
+			<field name="name">0-Diferencial cambiario</field>
+			<field name="shortcut">0-Dif.Cam</field>
 			<field name="parent_id" ref="account_account_template_0_530000"/>
 			<field name="user_type" ref="account_account_type_expense"/>
 			<field name="currency_id" ref="l10n_cr_base.CRC"/>
