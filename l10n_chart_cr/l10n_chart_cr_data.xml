@@ -167,7 +167,7 @@
 		<record id="account_account_template_0_111111" model="account.account.template">
 			<field name="code">0-111111</field>
 			<field name="name">0-Fondo de caja oficinas centrales CRC</field>
-			<field name="shortcut">0-Cen</field>
+			<field name="shortcut">0-</field>
 			<field name="parent_id" ref="account_account_template_0_111110"/>
 			<field name="user_type" ref="account_account_type_cash"/>
 			<field name="currency_id" ref="l10n_cr_base.CRC"/>
@@ -189,7 +189,7 @@
 		<record id="account_account_template_0_111121" model="account.account.template">
 			<field name="code">0-111121</field>
 			<field name="name">0-Fondo de caja oficinas centrales USD</field>
-			<field name="shortcut">0-Cen</field>
+			<field name="shortcut">0-</field>
 			<field name="parent_id" ref="account_account_template_0_111120"/>
 			<field name="user_type" ref="account_account_type_cash"/>
 			<field name="currency_id" ref="l10n_cr_base.CRC"/>
@@ -332,7 +332,7 @@
 		<record id="account_account_template_0_111501" model="account.account.template">
 			<field name="code">0-111501</field>
 			<field name="name">0-Inversión 1</field>
-			<field name="shortcut">0-CRC</field>
+			<field name="shortcut">0-</field>
 			<field name="parent_id" ref="account_account_template_0_111500"/>
 			<field name="user_type" ref="account_account_type_asset"/>
 			<field name="currency_id" ref="l10n_cr_base.CRC"/>
@@ -442,7 +442,7 @@
 		<record id="account_account_template_0_113102" model="account.account.template">
 			<field name="code">0-113102</field>
 			<field name="name">0-Inventario de consumibles</field>
-			<field name="shortcut">0-Prod</field>
+			<field name="shortcut">0-Cons</field>
 			<field name="parent_id" ref="account_account_template_0_113100"/>
 			<field name="user_type" ref="account_account_type_asset"/>
 			<field name="currency_id" ref="l10n_cr_base.CRC"/>
@@ -497,7 +497,7 @@
 		<record id="account_account_template_0_121111" model="account.account.template">
 			<field name="code">0-121111</field>
 			<field name="name">0-Terreno 1</field>
-			<field name="shortcut">0-Prod</field>
+			<field name="shortcut">0-</field>
 			<field name="parent_id" ref="account_account_template_0_121110"/>
 			<field name="user_type" ref="account_account_type_asset"/>
 			<field name="currency_id" ref="l10n_cr_base.CRC"/>
@@ -519,7 +519,7 @@
 		<record id="account_account_template_0_121121" model="account.account.template">
 			<field name="code">0-121121</field>
 			<field name="name">0-Terreno 1</field>
-			<field name="shortcut">0-Prod</field>
+			<field name="shortcut">0-</field>
 			<field name="parent_id" ref="account_account_template_0_121120"/>
 			<field name="user_type" ref="account_account_type_asset"/>
 			<field name="currency_id" ref="l10n_cr_base.CRC"/>
@@ -1168,7 +1168,7 @@
 		<record id="account_account_template_0_310001" model="account.account.template">
 			<field name="code">0-310001</field>
 			<field name="name">0-Socio 1</field>
-			<field name="shortcut">0-CRVE</field>
+			<field name="shortcut">0-</field>
 			<field name="parent_id" ref="account_account_template_0_310000"/>
 			<field name="user_type" ref="account_account_type_equity"/>
 			<field name="currency_id" ref="l10n_cr_base.CRC"/>
@@ -1245,7 +1245,7 @@
 		<record id="account_account_template_0_340001" model="account.account.template">
 			<field name="code">0-340001</field>
 			<field name="name">0-Socio 1</field>
-			<field name="shortcut">0-AC</field>
+			<field name="shortcut">0-</field>
 			<field name="parent_id" ref="account_account_template_0_340000"/>
 			<field name="user_type" ref="account_account_type_equity"/>
 			<field name="currency_id" ref="l10n_cr_base.CRC"/>
@@ -1311,7 +1311,7 @@
 		<record id="account_account_template_0_360001" model="account.account.template">
 			<field name="code">0-360001</field>
 			<field name="name">0-Periodo 1</field>
-			<field name="shortcut">0-Ut-Ac</field>
+			<field name="shortcut">0-</field>
 			<field name="parent_id" ref="account_account_template_0_360000"/>
 			<field name="user_type" ref="account_account_type_equity"/>
 			<field name="currency_id" ref="l10n_cr_base.CRC"/>
@@ -1344,7 +1344,7 @@
 		<record id="account_account_template_0_380000" model="account.account.template">
 			<field name="code">0-380000</field>
 			<field name="name">0-Balance inicial</field>
-			<field name="shortcut">0-Ut-Per</field>
+			<field name="shortcut">0-Bal-Ini</field>
 			<field name="parent_id" ref="account_account_template_0_300000"/>
 			<field name="user_type" ref="account_account_type_view"/>
 			<field name="currency_id" ref="l10n_cr_base.CRC"/>
@@ -1355,7 +1355,7 @@
 		<record id="account_account_template_0_380001" model="account.account.template">
 			<field name="code">0-380001</field>
 			<field name="name">0-Balance inicial</field>
-			<field name="shortcut">0-Ut-Per</field>
+			<field name="shortcut">0-Bal-Ini</field>
 			<field name="parent_id" ref="account_account_template_0_380000"/>
 			<field name="user_type" ref="account_account_type_equity"/>
 			<field name="currency_id" ref="l10n_cr_base.CRC"/>
@@ -1388,13 +1388,13 @@
 		<record id="account_account_template_0_410001" model="account.account.template">
 			<field name="code">0-410001</field>
 			<field name="name">0-Categoría 1</field>
-			<field name="shortcut">0-Otros</field>
+			<field name="shortcut">0-</field>
 			<field name="parent_id" ref="account_account_template_0_410000"/>
 			<field name="user_type" ref="account_account_type_income"/>
 			<field name="currency_id" ref="l10n_cr_base.CRC"/>
 			<field name="type">other</field>
 			<field name="reconcile" eval="False"/>
-			<field name="tax_ids">IV</field>
+			<field name="tax_ids">IV,IS</field>
 		</record>
 		<record id="account_account_template_0_420000" model="account.account.template">
 			<field name="code">0-420000</field>
@@ -1509,7 +1509,7 @@
 		<record id="account_account_template_0_510000" model="account.account.template">
 			<field name="code">0-510000</field>
 			<field name="name">0-Gastos principales</field>
-			<field name="shortcut">0-GP</field>
+			<field name="shortcut">0-Gprin</field>
 			<field name="parent_id" ref="account_account_template_0_500000"/>
 			<field name="user_type" ref="account_account_type_view"/>
 			<field name="currency_id" ref="l10n_cr_base.CRC"/>
@@ -1517,33 +1517,484 @@
 			<field name="reconcile" eval="False"/>
 			<field name="tax_ids"></field>
 		</record>
-		<record id="account_account_template_0_510001" model="account.account.template">
-			<field name="code">0-510001</field>
-			<field name="name">0-Gastos de personal</field>
-			<field name="shortcut">0-GP</field>
-			<field name="parent_id" ref="account_account_template_0_510000"/>
-			<field name="user_type" ref="account_account_type_expense"/>
-			<field name="currency_id" ref="l10n_cr_base.CRC"/>
-			<field name="type">other</field>
-			<field name="reconcile" eval="False"/>
-			<field name="tax_ids"></field>
-		</record>
-		<record id="account_account_template_0_510002" model="account.account.template">
-			<field name="code">0-510002</field>
+		<record id="account_account_template_0_511000" model="account.account.template">
+			<field name="code">0-511000</field>
 			<field name="name">0-Gastos operativos</field>
 			<field name="shortcut">0-GO</field>
 			<field name="parent_id" ref="account_account_template_0_510000"/>
+			<field name="user_type" ref="account_account_type_view"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">view</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511100" model="account.account.template">
+			<field name="code">0-511100</field>
+			<field name="name">0-Gastos de personal</field>
+			<field name="shortcut">0-Gpers</field>
+			<field name="parent_id" ref="account_account_template_0_511000"/>
+			<field name="user_type" ref="account_account_type_view"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">view</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511110" model="account.account.template">
+			<field name="code">0-511110</field>
+			<field name="name">0-Salarios y deducciones</field>
+			<field name="shortcut">0-GO</field>
+			<field name="parent_id" ref="account_account_template_0_511100"/>
+			<field name="user_type" ref="account_account_type_view"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">view</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511111" model="account.account.template">
+			<field name="code">0-511111</field>
+			<field name="name">0-Salarios</field>
+			<field name="shortcut">0-Sal</field>
+			<field name="parent_id" ref="account_account_template_0_511110"/>
 			<field name="user_type" ref="account_account_type_expense"/>
 			<field name="currency_id" ref="l10n_cr_base.CRC"/>
 			<field name="type">other</field>
 			<field name="reconcile" eval="False"/>
 			<field name="tax_ids"></field>
 		</record>
-		<record id="account_account_template_0_510003" model="account.account.template">
-			<field name="code">0-510003</field>
+		<record id="account_account_template_0_511112" model="account.account.template">
+			<field name="code">0-511112</field>
+			<field name="name">0-Extras</field>
+			<field name="shortcut">0-Ext</field>
+			<field name="parent_id" ref="account_account_template_0_511110"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511113" model="account.account.template">
+			<field name="code">0-511113</field>
+			<field name="name">0-Bonificaciones</field>
+			<field name="shortcut">0-Bon</field>
+			<field name="parent_id" ref="account_account_template_0_511110"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511114" model="account.account.template">
+			<field name="code">0-511114</field>
+			<field name="name">0-Comisiones</field>
+			<field name="shortcut">0-Com</field>
+			<field name="parent_id" ref="account_account_template_0_511110"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511115" model="account.account.template">
+			<field name="code">0-511115</field>
+			<field name="name">0-Cargas patronales</field>
+			<field name="shortcut">0-Cpat</field>
+			<field name="parent_id" ref="account_account_template_0_511110"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511116" model="account.account.template">
+			<field name="code">0-511116</field>
+			<field name="name">0-Aguinaldo</field>
+			<field name="shortcut">0-Ag</field>
+			<field name="parent_id" ref="account_account_template_0_511110"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511117" model="account.account.template">
+			<field name="code">0-511117</field>
+			<field name="name">0-Preaviso</field>
+			<field name="shortcut">0-Pre</field>
+			<field name="parent_id" ref="account_account_template_0_511110"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511118" model="account.account.template">
+			<field name="code">0-511118</field>
+			<field name="name">0-Cesantía</field>
+			<field name="shortcut">0-Ces</field>
+			<field name="parent_id" ref="account_account_template_0_511110"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511120" model="account.account.template">
+			<field name="code">0-511120</field>
+			<field name="name">0-Viáticos</field>
+			<field name="shortcut">0-Via</field>
+			<field name="parent_id" ref="account_account_template_0_511100"/>
+			<field name="user_type" ref="account_account_type_view"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">view</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511121" model="account.account.template">
+			<field name="code">0-511121</field>
+			<field name="name">0-Transporte</field>
+			<field name="shortcut">0-Trans</field>
+			<field name="parent_id" ref="account_account_template_0_511120"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511122" model="account.account.template">
+			<field name="code">0-511122</field>
+			<field name="name">0-Alimentación</field>
+			<field name="shortcut">0-Alim</field>
+			<field name="parent_id" ref="account_account_template_0_511120"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511123" model="account.account.template">
+			<field name="code">0-511123</field>
+			<field name="name">0-Hospedaje</field>
+			<field name="shortcut">0-Hosp</field>
+			<field name="parent_id" ref="account_account_template_0_511120"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511200" model="account.account.template">
+			<field name="code">0-511200</field>
+			<field name="name">0-Servicios profesionales</field>
+			<field name="shortcut">0-Serv-Prof</field>
+			<field name="parent_id" ref="account_account_template_0_511000"/>
+			<field name="user_type" ref="account_account_type_view"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">view</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511201" model="account.account.template">
+			<field name="code">0-511201</field>
+			<field name="name">0-Categoría 1</field>
+			<field name="shortcut">0-</field>
+			<field name="parent_id" ref="account_account_template_0_511200"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511300" model="account.account.template">
+			<field name="code">0-511300</field>
+			<field name="name">0-Costo de venta de producto</field>
+			<field name="shortcut">0-CVenProd</field>
+			<field name="parent_id" ref="account_account_template_0_511000"/>
+			<field name="user_type" ref="account_account_type_view"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">view</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511301" model="account.account.template">
+			<field name="code">0-511301</field>
+			<field name="name">0-Costo de producto</field>
+			<field name="shortcut">0-CProd</field>
+			<field name="parent_id" ref="account_account_template_0_511300"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511302" model="account.account.template">
+			<field name="code">0-511302</field>
+			<field name="name">0-Costo de materia prima</field>
+			<field name="shortcut">0-CMatPrim</field>
+			<field name="parent_id" ref="account_account_template_0_511300"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511303" model="account.account.template">
+			<field name="code">0-511303</field>
+			<field name="name">0-Costo de producción</field>
+			<field name="shortcut">0-CFab</field>
+			<field name="parent_id" ref="account_account_template_0_511300"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511304" model="account.account.template">
+			<field name="code">0-511304</field>
+			<field name="name">0-Costo de almacenamiento</field>
+			<field name="shortcut">0-CAlm</field>
+			<field name="parent_id" ref="account_account_template_0_511300"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511305" model="account.account.template">
+			<field name="code">0-511305</field>
+			<field name="name">0-Costo de distribución</field>
+			<field name="shortcut">0-CDist</field>
+			<field name="parent_id" ref="account_account_template_0_511300"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511400" model="account.account.template">
+			<field name="code">0-511400</field>
+			<field name="name">0-Gastos de mercadeo</field>
+			<field name="shortcut">0-GMerc</field>
+			<field name="parent_id" ref="account_account_template_0_511000"/>
+			<field name="user_type" ref="account_account_type_view"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">view</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511401" model="account.account.template">
+			<field name="code">0-511401</field>
+			<field name="name">0-Diseño de imagen</field>
+			<field name="shortcut">0-Dis</field>
+			<field name="parent_id" ref="account_account_template_0_511400"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_511402" model="account.account.template">
+			<field name="code">0-511402</field>
+			<field name="name">0-Campañas publicitarias</field>
+			<field name="shortcut">0-Pub</field>
+			<field name="parent_id" ref="account_account_template_0_511400"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_512000" model="account.account.template">
+			<field name="code">0-512000</field>
 			<field name="name">0-Gastos administrativos</field>
-			<field name="shortcut">0-GA</field>
+			<field name="shortcut">0-GAdm</field>
 			<field name="parent_id" ref="account_account_template_0_510000"/>
+			<field name="user_type" ref="account_account_type_view"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">view</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_512100" model="account.account.template">
+			<field name="code">0-512100</field>
+			<field name="name">0-Cuota por administración</field>
+			<field name="shortcut">0-CuAdm</field>
+			<field name="parent_id" ref="account_account_template_0_512000"/>
+			<field name="user_type" ref="account_account_type_view"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">view</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_512101" model="account.account.template">
+			<field name="code">0-512101</field>
+			<field name="name">0-Compañía administradora 1</field>
+			<field name="shortcut">0-</field>
+			<field name="parent_id" ref="account_account_template_0_512100"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_512200" model="account.account.template">
+			<field name="code">0-512200</field>
+			<field name="name">0-Alquiler</field>
+			<field name="shortcut">0-Alq</field>
+			<field name="parent_id" ref="account_account_template_0_512000"/>
+			<field name="user_type" ref="account_account_type_view"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">view</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_512201" model="account.account.template">
+			<field name="code">0-512201</field>
+			<field name="name">0-Oficina 1</field>
+			<field name="shortcut">0-</field>
+			<field name="parent_id" ref="account_account_template_0_512200"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_512300" model="account.account.template">
+			<field name="code">0-512300</field>
+			<field name="name">0-Servicios públicos</field>
+			<field name="shortcut">0-ServPub</field>
+			<field name="parent_id" ref="account_account_template_0_512000"/>
+			<field name="user_type" ref="account_account_type_view"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">view</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_512310" model="account.account.template">
+			<field name="code">0-512310</field>
+			<field name="name">0-Agua</field>
+			<field name="shortcut">0-Ag</field>
+			<field name="parent_id" ref="account_account_template_0_512300"/>
+			<field name="user_type" ref="account_account_type_view"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">view</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_512311" model="account.account.template">
+			<field name="code">0-512311</field>
+			<field name="name">0-Medidor 1</field>
+			<field name="shortcut">0-</field>
+			<field name="parent_id" ref="account_account_template_0_512310"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_512320" model="account.account.template">
+			<field name="code">0-512320</field>
+			<field name="name">0-Luz</field>
+			<field name="shortcut">0-Luz</field>
+			<field name="parent_id" ref="account_account_template_0_512300"/>
+			<field name="user_type" ref="account_account_type_view"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">view</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_512321" model="account.account.template">
+			<field name="code">0-512321</field>
+			<field name="name">0-Medidor 1</field>
+			<field name="shortcut">0-</field>
+			<field name="parent_id" ref="account_account_template_0_512320"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_512330" model="account.account.template">
+			<field name="code">0-512330</field>
+			<field name="name">0-Teléfono</field>
+			<field name="shortcut">0-Tel</field>
+			<field name="parent_id" ref="account_account_template_0_512300"/>
+			<field name="user_type" ref="account_account_type_view"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">view</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_512331" model="account.account.template">
+			<field name="code">0-512331</field>
+			<field name="name">0-Teléfono 1</field>
+			<field name="shortcut">0-</field>
+			<field name="parent_id" ref="account_account_template_0_512330"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_512340" model="account.account.template">
+			<field name="code">0-512340</field>
+			<field name="name">0-Internet</field>
+			<field name="shortcut">0-Int</field>
+			<field name="parent_id" ref="account_account_template_0_512300"/>
+			<field name="user_type" ref="account_account_type_view"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">view</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_512341" model="account.account.template">
+			<field name="code">0-512341</field>
+			<field name="name">0-Contrato 1</field>
+			<field name="shortcut">0-</field>
+			<field name="parent_id" ref="account_account_template_0_512340"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_512400" model="account.account.template">
+			<field name="code">0-512400</field>
+			<field name="name">0-Suministros de oficina</field>
+			<field name="shortcut">0-SumOf</field>
+			<field name="parent_id" ref="account_account_template_0_512000"/>
+			<field name="user_type" ref="account_account_type_view"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">view</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_512401" model="account.account.template">
+			<field name="code">0-512401</field>
+			<field name="name">0-Departamento 1</field>
+			<field name="shortcut">0-</field>
+			<field name="parent_id" ref="account_account_template_0_512400"/>
+			<field name="user_type" ref="account_account_type_expense"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">other</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_512500" model="account.account.template">
+			<field name="code">0-512500</field>
+			<field name="name">0-Equipo de cómputo y comunicación</field>
+			<field name="shortcut">0-CompCom</field>
+			<field name="parent_id" ref="account_account_template_0_512000"/>
+			<field name="user_type" ref="account_account_type_view"/>
+			<field name="currency_id" ref="l10n_cr_base.CRC"/>
+			<field name="type">view</field>
+			<field name="reconcile" eval="False"/>
+			<field name="tax_ids"></field>
+		</record>
+		<record id="account_account_template_0_512501" model="account.account.template">
+			<field name="code">0-512501</field>
+			<field name="name">0-Departamento 1</field>
+			<field name="shortcut">0-</field>
+			<field name="parent_id" ref="account_account_template_0_512500"/>
 			<field name="user_type" ref="account_account_type_expense"/>
 			<field name="currency_id" ref="l10n_cr_base.CRC"/>
 			<field name="type">other</field>
@@ -1553,7 +2004,7 @@
 		<record id="account_account_template_0_520000" model="account.account.template">
 			<field name="code">0-520000</field>
 			<field name="name">0-Otros gastos</field>
-			<field name="shortcut">0-OG</field>
+			<field name="shortcut">0-OtG</field>
 			<field name="parent_id" ref="account_account_template_0_500000"/>
 			<field name="user_type" ref="account_account_type_view"/>
 			<field name="currency_id" ref="l10n_cr_base.CRC"/>
@@ -1631,39 +2082,6 @@
 			<field name="code">0-530001</field>
 			<field name="name">0-Donaciones no deducibles</field>
 			<field name="shortcut">0-Don</field>
-			<field name="parent_id" ref="account_account_template_0_530000"/>
-			<field name="user_type" ref="account_account_type_expense"/>
-			<field name="currency_id" ref="l10n_cr_base.CRC"/>
-			<field name="type">other</field>
-			<field name="reconcile" eval="False"/>
-			<field name="tax_ids"></field>
-		</record>
-		<record id="account_account_template_0_530002" model="account.account.template">
-			<field name="code">0-530002</field>
-			<field name="name">0-Gastos de presidencia</field>
-			<field name="shortcut">0-GPres</field>
-			<field name="parent_id" ref="account_account_template_0_530000"/>
-			<field name="user_type" ref="account_account_type_expense"/>
-			<field name="currency_id" ref="l10n_cr_base.CRC"/>
-			<field name="type">other</field>
-			<field name="reconcile" eval="False"/>
-			<field name="tax_ids"></field>
-		</record>
-		<record id="account_account_template_0_530003" model="account.account.template">
-			<field name="code">0-530003</field>
-			<field name="name">0-Multas</field>
-			<field name="shortcut">0-Mul</field>
-			<field name="parent_id" ref="account_account_template_0_530000"/>
-			<field name="user_type" ref="account_account_type_expense"/>
-			<field name="currency_id" ref="l10n_cr_base.CRC"/>
-			<field name="type">other</field>
-			<field name="reconcile" eval="False"/>
-			<field name="tax_ids"></field>
-		</record>
-		<record id="account_account_template_0_530004" model="account.account.template">
-			<field name="code">0-530004</field>
-			<field name="name">0-Diferencial cambiario</field>
-			<field name="shortcut">0-Dif.Cam</field>
 			<field name="parent_id" ref="account_account_template_0_530000"/>
 			<field name="user_type" ref="account_account_type_expense"/>
 			<field name="currency_id" ref="l10n_cr_base.CRC"/>
