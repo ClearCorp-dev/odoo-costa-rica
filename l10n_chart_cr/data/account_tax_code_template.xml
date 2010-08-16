@@ -10,7 +10,6 @@
 			<field name="name">Costa Rica</field>
 			<field name="info">Costa Rica</field>
 			<field name="sign" eval="1"/>
-			<field name="parent_id" eval="account_tax_code_template_"/>
 			<field name="notprintable" eval="False"/>
 		</record>
 		<record id="account_tax_code_template_Tax" model="account.tax.code.template">
