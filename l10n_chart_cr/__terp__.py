@@ -56,8 +56,8 @@
 	'update_xml': [
 		'data/account_account_type.xml',
 		'data/account_account_template.xml',
-		'data/account_chart_template.xml',
 		'data/account_tax_code_template.xml',
+		'data/account_chart_template.xml',
 		'data/account_tax_template.xml',
 		],
 	'license': 'Other OSI approved licence',
