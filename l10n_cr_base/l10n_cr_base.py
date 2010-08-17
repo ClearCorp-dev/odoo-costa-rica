@@ -105,3 +105,13 @@ class res_users(osv.osv):
         'context_tz': lambda *a: 'America/Costa_Rica',
     }
 res_users()
+
+class res_currency(osv.osv):
+    '''
+    Inherits res.currency
+    '''
+    _inherit = 'res.currency'
+    _columns = {
+        'prefix_symbol': fields.char('Prefix Symbol', size=64, required=False, translate=True),
+        'sufix_symbol': fields.char('Prefix Symbol', size=64, required=False, translate=True),
+res_currency()
