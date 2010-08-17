@@ -113,5 +113,5 @@ class res_currency(osv.osv):
     _inherit = 'res.currency'
     _columns = {
         'prefix_symbol': fields.char('Prefix Symbol', size=64, required=False, translate=True),
-        'sufix_symbol': fields.char('Prefix Symbol', size=64, required=False, translate=True),
+        'sufix_symbol': fields.char('Prefix Symbol', size=64, required=False, translate=True) }
 res_currency()
