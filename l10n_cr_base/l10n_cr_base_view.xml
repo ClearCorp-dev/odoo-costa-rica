@@ -30,7 +30,7 @@
 	<record model="res.currency" id="ccorp_view_currency_form_inherit_symbol">
 		<field name="name">ccorp_view_currency_form_inherit_symbol</field>
 		<field name="model">res.currency</field>
-		<field name="inherit_id" ref="res.currency.view_currency_form"/>
+		<field name="inherit_id" ref="view_currency_form"/>
 		<field name="type">form</field>
 		<field name="arch" type="xml">
 			<field name="active" position="before">
