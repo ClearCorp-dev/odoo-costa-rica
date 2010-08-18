@@ -33,9 +33,10 @@
 		<field name="inherit_id" ref="res.view_currency_form"/>
 		<field name="type">form</field>
 		<field name="arch" type="xml">
-			<field name="active" position="before">
+			<field name="active" position="replace">
 				<field name="sufix_symbol"/>
 				<field name="prefix_symbol"/>
+				<field name="active"/>
 			</field>
 		</field>
 	</record>
