@@ -47,14 +47,17 @@
     Everything is in English with Spanish translation. Further translations are welcome, please go to
     http://translations.launchpad.net/openerp-costa-rica
     """,
-    'depends': ['base'],
+    'depends': ['base','base_currency_symbol'],
     'init_xml': [
-                    'res.bank.csv',
-                    'l10n_cr_base_data.xml',
-                    'l10n_cr_base_view.xml',
-                    'l10n_cr_base.sql'
-                ],
-    'demo_xml': ['l10n_cr_base_demo.xml'],
+        'res.bank.csv',
+        'l10n_cr_base_data.xml',
+        'l10n_cr_base_view.xml',
+        'l10n_cr_base.sql'
+        ],
+    'demo_xml': [
+        'l10n_cr_base_demo.xml',
+        'l10n_cr_base_demo.sql',
+        ],
     'update_xml': [ ],
     'license': 'Other OSI approved licence',
     'installable': True,
