@@ -1,3 +1,3 @@
-update res_partner
-    set lang = 'es_ES'
-    where 1;
+UPDATE res_partner
+    SET lang = 'es_ES'
+    WHERE TRUE;

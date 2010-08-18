@@ -49,16 +49,17 @@
     """,
     'depends': ['base','base_currency_symbol'],
     'init_xml': [
-        'res.bank.csv',
-        'l10n_cr_base_data.xml',
-        'l10n_cr_base_view.xml',
-        'l10n_cr_base.sql'
         ],
     'demo_xml': [
         'l10n_cr_base_demo.xml',
+        ],
+    'update_xml': [
+        'res.bank.csv',
+        'l10n_cr_base_data.xml',
+        'l10n_cr_base_view.xml',
+        'l10n_cr_base.sql',
         'l10n_cr_base_demo.sql',
         ],
-    'update_xml': [ ],
     'license': 'Other OSI approved licence',
     'installable': True,
     'active': True,
