@@ -2,7 +2,7 @@
 		Update fields 
 ]*/
 
-update res_users		
+update res_lang		
 	set name = 'Spanish / Español',
 		active = 'True',
 		translatable = 'True',
@@ -12,4 +12,4 @@ update res_users
 		time_format = '%I:%M:%S %p',
 		decimal_point = ',',
 		thousands_sep = '.'
-	where code = 'es_ES'
+	where code = 'es_ES';
