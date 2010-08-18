@@ -25,5 +25,18 @@
 			</field>
 		</field>
 	</record>
+	
+	<!-- Add Prefix and Sufix symbol fields to res.currency form -->
+	<record model="res.currency" id="ccorp_view_currency_form_inherit_symbol">
+		<field name="name">ccorp_view_currency_form_inherit_symbol</field>
+		<field name="model">res.currency</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<field name="active" position="before">
+				<field name="sufix_symbol"/>
+				<field name="prefix_symbol"/>
+			</field>
+		</field>
+	</record>
     </data>
 </openerp>
