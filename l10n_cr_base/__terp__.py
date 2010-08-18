@@ -54,7 +54,7 @@
         'l10n_cr_base_demo.xml',
         ],
     'update_xml': [
-        'res.bank.csv',
+        #'res.bank.csv',
         'l10n_cr_base_data.xml',
         'l10n_cr_base_view.xml',
         'l10n_cr_base.sql',
