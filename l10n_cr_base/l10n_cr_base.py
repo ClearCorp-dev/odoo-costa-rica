@@ -47,7 +47,7 @@ class res_partner(osv.osv):
     }
     _defaults = {
         'lang': lambda *a: 'es_CR',
-        'title': lambda *a: 'Corp.',
+        'title': lambda self,cr,uid,ctx={}: self.pool.get('res.partner.title').search(cr, uid, [('name','=','Corp.')])[0],
         'date': lambda *args: time.strftime('%Y-%m-%d'),
     }
     
