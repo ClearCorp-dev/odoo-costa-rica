@@ -138,43 +138,6 @@
 		</record>
 		
 		<!--
-		Resource: res.partner.funtion
-		Update partner functions
-		-->
-		<record id="base.function_director" model="res.partner.function">
-			<field name="code">CEO</field>
-			<field name="name">Chief Executive Officer</field>
-		</record>
-		<record id="COO" model="res.partner.function">
-			<field name="code">COO</field>
-			<field name="name">Chief Operations Officer</field>
-		</record>
-		<record id="Chairman" model="res.partner.function">
-			<field name="code">Chairman</field>
-			<field name="name">Chairman</field>
-		</record>
-		<record id="VP" model="res.partner.function">
-			<field name="code">VP.</field>
-			<field name="name">Vice-President</field>
-		</record>
-		<record id="Dev" model="res.partner.function">
-			<field name="code">Dev.</field>
-			<field name="name">Developer</field>
-		</record>
-		<record id="SysAdm" model="res.partner.function">
-			<field name="code">Sys.Adm.</field>
-			<field name="name">System Administrator</field>
-		</record>
-		<record id="Asst" model="res.partner.function">
-			<field name="code">Ass't</field>
-			<field name="name">Assistant</field>
-		</record>
-		<record id="Sec" model="res.partner.function">
-			<field name="code">Sec.</field>
-			<field name="name">Secretary</field>
-		</record>
-		
-		<!--
 		Resource: res.partner.title
 		Update partner titles
 		-->
