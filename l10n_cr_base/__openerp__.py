@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    __terp__.py
+#    __openerp__.py
 #    l10n_cr_base
 #    First author: Carlos Vásquez <carlos.vasquez@clearcorp.co.cr> (ClearCorp S.A.)
 #    Copyright (c) 2010-TODAY ClearCorp S.A. (http://clearcorp.co.cr). All rights reserved.
@@ -47,7 +47,7 @@
     Everything is in English with Spanish translation. Further translations are welcome, please go to
     http://translations.launchpad.net/openerp-costa-rica
     """,
-    'depends': ['base','base_currency_symbol'],
+    'depends': ['base'],
     'init_xml': [
         ],
     'demo_xml': [
