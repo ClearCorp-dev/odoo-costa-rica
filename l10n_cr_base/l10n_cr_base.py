@@ -39,11 +39,10 @@ from base.res.partner.partner import _lang_get
 
 class res_partner(osv.osv):
     '''
-    Inherits res.partner to add id_number field, and lang default value
+    Inherits res.partner to add lang default value
     '''
     _inherit = 'res.partner'
     _columns = {
-        'id_number': fields.char('ID Number', size=30,required=False, select=1),
         'lang': fields.selection(_lang_get, 'Language', size=5, required=True, help="If the selected language is loaded in the system, all documents related to this partner will be printed in this language. If not, it will be english."),
     }
     _defaults = {
