@@ -37,29 +37,6 @@ import pooler
 import time
 from base.res.partner.partner import _lang_get
 
-class res_partner_function(osv.osv):
-    '''
-    Inherits res.partner.function to add translation to code and name fields
-    '''
-    _inherit = 'res.partner.function'
-    
-    _columns = {
-        'name': fields.char('Function Name', size=64, required=True, translate=True),
-        'code': fields.char('Code', size=8, required=True, translate=True),
-    }
-res_partner_function()
-
-class res_partner_title(osv.osv):
-    '''
-    Inherits res.partner.title to add translation to shortcut field
-    '''
-    _inherit = 'res.partner.title'
-    
-    _columns = {
-        'shortcut': fields.char('Shortcut', required=True, size=16, translate=True),
-    }
-res_partner_title()
-
 class res_partner(osv.osv):
     '''
     Inherits res.partner to add id_number field, and lang default value
@@ -70,13 +47,13 @@ class res_partner(osv.osv):
         'lang': fields.selection(_lang_get, 'Language', size=5, required=True, help="If the selected language is loaded in the system, all documents related to this partner will be printed in this language. If not, it will be english."),
     }
     _defaults = {
-        'lang': lambda *a: 'es_ES',
+        'lang': lambda *a: 'es_CR',
         'title': lambda *a: 'Corp.',
         'date': lambda *args: time.strftime('%Y-%m-%d'),
     }
     
     def lang_es_install(self, cr, uid):
-        lang = 'es_ES'
+        lang = 'es_CR'
         modobj = pooler.get_pool(cr.dbname).get('ir.module.module')
         mids = modobj.search(cr, uid, [('state', '=', 'installed')])
         modobj.update_translations(cr, uid, mids, lang)
@@ -101,7 +78,7 @@ class res_users(osv.osv):
     '''
     _inherit = 'res.users'
     _defaults = {
-        'context_lang': lambda *a: 'es_ES',
+        'context_lang': lambda *a: 'es_CR',
         'context_tz': lambda *a: 'America/Costa_Rica',
     }
 res_users()
