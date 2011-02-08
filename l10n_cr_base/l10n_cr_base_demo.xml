@@ -6,7 +6,7 @@
 		Sets lang and tz on demo user
 		-->
 		<record id="base.user_demo" model="res.users">
-			<field name="context_lang">es_ES</field>
+			<field name="context_lang">es_CR</field>
 			<field name="context_tz">America/Costa_Rica</field>
 		</record>
 
