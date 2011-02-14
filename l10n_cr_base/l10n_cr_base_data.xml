@@ -114,11 +114,8 @@
 		<record model="res.currency" id="base.INR">
 			<field name="active" eval="False"/>
 		</record>
-		<record id="CRC" model="res.currency">
-			<field name="name">CRC</field>
-			<field name="code">CRC</field>
-			<field name="rounding">0.01</field>
-			<field name="accuracy">4</field>
+		
+		<record id="base.CRC" model="res.currency">
 			<field name="symbol_prefix">¢ </field>
 		</record>
 		<record id="rateUSD" model="res.currency.rate">
