@@ -153,7 +153,7 @@
 		<record model="res.currency" id="base.SGD">
 			<field name="active" eval="False"/>
 		</record>
-		<record model="res.currency" id="base.THN">
+		<record model="res.currency" id="base.THB">
 			<field name="active" eval="False"/>
 		</record>
 		<record model="res.currency" id="base.TRY">
