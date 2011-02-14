@@ -175,23 +175,29 @@
 			<field name="active" eval="False"/>
 		</record>
 		
+		<record id="base.USD" model="res.currency">
+			<field name="symbol_prefix">$</field>
+		</record>
 		<record id="base.CRC" model="res.currency">
 			<field name="symbol_prefix">¢ </field>
+		</record>
+		<record id="base.EUR" model="res.currency">
+			<field name="symbol_suffix"> €</field>
 		</record>
 		<record id="rateUSD" model="res.currency.rate">
 			<field name="rate">1.0</field>
 			<field name="currency_id" ref="base.USD"/>
-			<field eval="time.strftime('%Y-01-01')" name="name"/>
+			<field eval="time.strftime('10-01-01')" name="name"/>
 		</record>
 		<record id="rateCRC" model="res.currency.rate">
 			<field name="rate">571.81</field>
-			<field name="currency_id" ref="CRC"/>
-			<field eval="time.strftime('%Y-01-01')" name="name"/>
+			<field name="currency_id" ref="base.CRC"/>
+			<field eval="time.strftime('10-01-01')" name="name"/>
 		</record>
 		<record id="rateEUR" model="res.currency.rate">
 			<field name="rate">1.4324</field>
 			<field name="currency_id" ref="base.EUR"/>
-			<field eval="time.strftime('%Y-01-01')" name="name"/>
+			<field eval="time.strftime('10-01-01')" name="name"/>
 		</record>
 		
 		<!--
