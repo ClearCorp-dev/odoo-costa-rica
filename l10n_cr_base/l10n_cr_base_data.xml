@@ -234,6 +234,11 @@
 			<field name="shortcut">S.A.L.</field>
 			<field name="domain">partner</field>
 		</record>
+		<record id="res_partner_title_rl" model="res.partner.title">
+			<field name="name">Cooperativa R.L.</field>
+			<field name="shortcut">R.L.</field>
+			<field name="domain">partner</field>
+		</record>
 		<record id="res_partner_title_asoc" model="res.partner.title">
 			<field name="name">Asociation</field>
 			<field name="shortcut">Asoc.</field>
@@ -249,11 +254,6 @@
 			<field name="shortcut">Edu.</field>
 			<field name="domain">partner</field>
 		</record>
-		<record id="res_partner_title_prof" model="res.partner.title">
-			<field name="name">Professor</field>
-			<field name="shortcut">Prof.</field>
-			<field name="domain">partner</field>
-		</record>
 		<record id="res_partner_title_indprof" model="res.partner.title">
 			<field name="name">Independant Professional</field>
 			<field name="shortcut">Ind. Prof.</field>
@@ -267,6 +267,11 @@
 		<record id="res_partner_title_dra" model="res.partner.title">
 			<field name="name">Doctora</field>
 			<field name="shortcut">Dra.</field>
+			<field name="domain">contact</field>
+		</record>
+		<record id="res_partner_title_prof" model="res.partner.title">
+			<field name="name">Professor</field>
+			<field name="shortcut">Prof.</field>
 			<field name="domain">contact</field>
 		</record>
 		<record id="res_partner_title_msc" model="res.partner.title">

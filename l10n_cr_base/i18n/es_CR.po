@@ -16,14 +16,29 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: l10n_cr_base
+#: model:res.partner.title,shortcut:base.res_partner_title_pvt_ltd
+msgid "Corp."
+msgstr "S.A."
+
+#. module: l10n_cr_base
+#: model:res.partner.title,name:base.res_partner_title_pvt_ltd
+msgid "Corporation"
+msgstr "Sociedad Anónima"
+
+#. module: l10n_cr_base
+#: model:res.partner.title,shortcut:base.res_partner_title_ltd
+msgid "Ltd."
+msgstr "Ltda."
+
+#. module: l10n_cr_base
+#: model:res.partner.title,name:base.res_partner_title_ltd
+msgid "Limited Company"
+msgstr "Sociedad de Responsabilidad Limitada"
+
+#. module: l10n_cr_base
 #: model:res.partner.title,name:base.res_partner_title_madam
 msgid "Madam"
 msgstr "Señora"
-
-#. module: l10n_cr_base
-#: model:res.partner.title,name:base.res_partner_title_miss
-msgid "Miss"
-msgstr "Señorita"
 
 #. module: l10n_cr_base
 #: model:res.partner.title,shortcut:base.res_partner_title_madam
@@ -31,8 +46,13 @@ msgid "Ms."
 msgstr "Sra."
 
 #. module: l10n_cr_base
+#: model:res.partner.title,name:base.res_partner_title_miss
+msgid "Miss"
+msgstr "Señorita"
+
+#. module: l10n_cr_base
 #: model:res.partner.title,shortcut:base.res_partner_title_miss
-msgid "Mss"
+msgid "Mss."
 msgstr "Srta."
 
 #. module: l10n_cr_base
