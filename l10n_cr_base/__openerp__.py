@@ -58,7 +58,7 @@
         #'res.bank.csv',
         'l10n_cr_base_data.xml',
         'l10n_cr_base.sql',
-        'data/res_partner_country.csv',
+        'data/res_partner_country_state.csv',
         'data/res_partner_country_canton.csv',
         'data/res_partner_country_district.csv',
         ],
