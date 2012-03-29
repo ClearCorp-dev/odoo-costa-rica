@@ -1,8 +1,8 @@
-id,name,code,country_id/id
-state_1,San José,1,base.cr
-state_2,Alajuela,2,base.cr
-state_3,Cartago,3,base.cr
-state_4,Heredia,4,base.cr
-state_5,Guanacaste,5,base.cr
-state_6,Puntarenas,6,base.cr
-state_7,Limón,7,base.cr
+"id","name","code","country_id/id"
+"state_1","San José","1","base.cr"
+"state_2","Alajuela","2","base.cr"
+"state_3","Cartago","3","base.cr"
+"state_4","Heredia","4","base.cr"
+"state_5","Guanacaste","5","base.cr"
+"state_6","Puntarenas","6","base.cr"
+"state_7","Limón","7","base.cr"
