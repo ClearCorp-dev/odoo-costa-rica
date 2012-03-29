@@ -35,7 +35,7 @@
 from osv import osv,fields
 import pooler
 import time
-from base.res.res_partner.partner import _lang_get
+from base.res.res_partner import _lang_get
 
 class res_partner(osv.osv):
     '''
