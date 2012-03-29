@@ -7,8 +7,8 @@
         ======================================
         -->
         <record id="view_canton_tree" model="ir.ui.view">
-            <field name="name">res.partner.state.canton.tree</field>
-            <field name="model">res.partner.state.canton</field>
+            <field name="name">res.country.state.canton.tree</field>
+            <field name="model">res.country.state.canton</field>
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Cantons">
@@ -20,8 +20,8 @@
         </record>
 
         <record id="view_canton_form" model="ir.ui.view">
-            <field name="name">res.partner.state.canton.form</field>
-            <field name="model">res.partner.state.canton</field>
+            <field name="name">res.country.state.canton.form</field>
+            <field name="model">res.country.state.canton</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Cantons">
@@ -35,7 +35,7 @@
         <record id="action_canton" model="ir.actions.act_window">
             <field name="name">Canton</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">res.partner.state.canton</field>
+            <field name="res_model">res.country.state.canton</field>
             <field name="view_type">form</field>
             <field name="view_id" ref="view_canton_tree"/>
             <field name="help">If you are working on the Costa Rican market, you can manage the different Cantons you are working on from here. Each canton is attached to one province.</field>
@@ -49,8 +49,8 @@
         -->
 
         <record id="view_canton_district_tree" model="ir.ui.view">
-            <field name="name">res.partner.state.canton.district.tree</field>
-            <field name="model">res.partner.state.canton.district</field>
+            <field name="name">res.country.state.canton.district.tree</field>
+            <field name="model">res.country.state.canton.district</field>
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="District">
@@ -62,8 +62,8 @@
         </record>
 
         <record id="view_canton_district_form" model="ir.ui.view">
-            <field name="name">res.partner.state.canton.district.form</field>
-            <field name="model">res.partner.state.canton.district</field>
+            <field name="name">res.country.state.canton.district.form</field>
+            <field name="model">res.country.state.canton.district</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="District">
@@ -77,7 +77,7 @@
         <record id="action_canton_district" model="ir.actions.act_window">
             <field name="name">District</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">res.partner.state.canton.district</field>
+            <field name="res_model">res.country.state.canton.district</field>
             <field name="view_type">form</field>
             <field name="view_id" ref="view_canton_district_tree"/>
         </record>
@@ -95,8 +95,8 @@
             <field name="arch" type="xml">
                 <data>
                     <field name = "state_id" position = "after">
-                        <field name = "canton_id" attrs = "{'readonly':[('state_id','=','')]}"/>
-                        <field name = "district_id" attrs = "{'readonly':[('canton_id','=','')]}"/>
+                        <field name = "canton_id" attrs = "{'readonly':[('state_id','=','')]}" domain = "[('state_id','=',state_id)]" />
+                        <field name = "district_id" attrs = "{'readonly':[('canton_id','=','')]}" domain = "[('canton_id','=',canton_id)]" />
                     </field>
                 </data>
             </field>
