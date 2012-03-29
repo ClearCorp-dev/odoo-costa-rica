@@ -52,9 +52,9 @@
         #'res.bank.csv',
         'l10n_cr_base_data.xml',
         'l10n_cr_base.sql',
-        'data/res_country_state.csv',
-        'data/res_country_canton.csv',
-        'data/res_country_district.csv',
+        'data/res.country.state.csv',
+        'data/res.country.state.canton.csv',
+        'data/res.country.state.canton.district.csv',
         ],
     'demo_xml': [
         'l10n_cr_base_demo.xml',
