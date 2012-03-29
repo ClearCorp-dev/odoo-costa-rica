@@ -1,0 +1,116 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<openerp>
+    <data>
+        <!--
+        ======================================
+                CANTON
+        ======================================
+        -->
+        <record id="view_canton_tree" model="ir.ui.view">
+            <field name="name">res.partner.state.canton.tree</field>
+            <field name="model">res.partner.state.canton</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Cantons">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="state_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_canton_form" model="ir.ui.view">
+            <field name="name">res.partner.state.canton.form</field>
+            <field name="model">res.partner.state.canton</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Cantons">
+                    <field name="code" select="1"/>
+                    <field name="name" select="1"/>
+                    <field name="state_id" select="1"/>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_canton" model="ir.actions.act_window">
+            <field name="name">Canton</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner.state.canton</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_canton_tree"/>
+            <field name="help">If you are working on the Costa Rican market, you can manage the different Cantons you are working on from here. Each canton is attached to one province.</field>
+        </record>
+        
+        
+        <!--
+        ======================================
+                DISTRICT
+        ======================================
+        -->
+
+        <record id="view_canton_district_tree" model="ir.ui.view">
+            <field name="name">res.partner.state.canton.district.tree</field>
+            <field name="model">res.partner.state.canton.district</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="District">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="canton_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_canton_district_form" model="ir.ui.view">
+            <field name="name">res.partner.state.canton.district.form</field>
+            <field name="model">res.partner.state.canton.district</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="District">
+                    <field name="code" select="1"/>
+                    <field name="name" select="1"/>
+                    <field name="canton_id" select="1"/>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_canton_district" model="ir.actions.act_window">
+            <field name="name">District</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner.state.canton.district</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_canton_district_tree"/>
+        </record>
+        
+        <!--
+        ======================================
+                    CLIENTS
+        ======================================
+        -->
+        <record model = "ir.ui.view" id = "client_form_view">
+            <field name = "name">res.partner.form</field>
+            <field name = "model">res.partner</field>
+            <field name = "type">form</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name = "state_id" position = "after">
+                        <field name = "canton_id" attrs = "{'readonly':[('state_id','=','')]}"/>
+                        <field name = "district_id" attrs = "{'readonly':[('canton_id','=','')]}"/>
+                    </field>
+                </data>
+            </field>
+        </record>
+        
+        <record model = "ir.ui.view" id = "client_tree_view">
+            <field name = "name">res.partner.tree</field>
+            <field name = "model">res.partner</field>
+            <field name = "type">tree</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name = "arch" type = "xml">
+                <data>
+                </data>
+            </field>
+        </record>
+    </data>
+</openerp>
