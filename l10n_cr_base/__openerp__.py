@@ -52,12 +52,15 @@
         ],
     'demo_xml': [
         'l10n_cr_base_demo.xml',
+        'l10n_cr_base_demo.sql',
         ],
     'update_xml': [
         #'res.bank.csv',
         'l10n_cr_base_data.xml',
         'l10n_cr_base.sql',
-        'l10n_cr_base_demo.sql',
+        'data/res_partner_country.csv',
+        'data/res_partner_country_canton.csv',
+        'data/res_partner_country_district.csv',
         ],
     'license': 'Other OSI approved licence',
     'installable': True,
