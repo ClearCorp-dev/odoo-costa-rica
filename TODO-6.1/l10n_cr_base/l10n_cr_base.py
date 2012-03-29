@@ -43,7 +43,7 @@ class res_partner(osv.osv):
     '''
     _inherit = 'res.partner'
     _columns = {
-        'lang': fields.selection(_lang_get, 'Language', size=5, required=True, help="If the selected language is loaded in the system, all documents related to this partner will be printed in this language. If not, it will be english."),
+        'lang': fields.selection(_lang_get, 'Language', required=True, help="If the selected language is loaded in the system, all documents related to this partner will be printed in this language. If not, it will be english."),
     }
     _defaults = {
         'lang': lambda *a: 'es_CR',
@@ -57,8 +57,6 @@ class res_partner(osv.osv):
         mids = modobj.search(cr, uid, [('state', '=', 'installed')])
         modobj.update_translations(cr, uid, mids, lang)
         return {}
-        
-res_partner()
 
 class res_partner_address(osv.osv):
     '''
@@ -69,7 +67,6 @@ class res_partner_address(osv.osv):
         'country_id': lambda self,cr,uid,ctx={}: self.pool.get('res.country').search(cr, uid, [('name','=','Costa Rica')])[0],
         'state_id': lambda self,cr,uid,ctx={}: self.pool.get('res.country.state').search(cr, uid, [('country_id','=','Costa Rica'),('name','=','San José')])[0],
     }
-res_partner_address()
 
 class res_users(osv.osv):
     '''
@@ -80,4 +77,3 @@ class res_users(osv.osv):
         'context_lang': lambda *a: 'es_CR',
         'context_tz': lambda *a: 'America/Costa_Rica',
     }
-res_users()

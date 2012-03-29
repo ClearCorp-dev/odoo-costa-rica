@@ -9,5 +9,5 @@ UPDATE res_lang
         thousands_sep = '.',
         time_format = '%I:%M:%S %p',
         date_format = '%d/%m/%Y',
-        grouping = '[3,3,3,3,3]'
+        grouping = '[3,3,3,3,3,-2]'
     WHERE code = 'es_CR';

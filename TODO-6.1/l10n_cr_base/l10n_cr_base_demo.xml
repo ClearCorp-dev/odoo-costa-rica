@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-	<data noupdate="1">
-		<!--
-		Resource: res.users
-		Sets lang and tz on demo user
-		-->
-		<record id="base.user_demo" model="res.users">
-			<field name="context_lang">es_CR</field>
-			<field name="context_tz">America/Costa_Rica</field>
-		</record>
+    <data noupdate="1">
+        <!--
+        Resource: res.users
+        Sets lang and tz on demo user
+        -->
+        <record id="base.user_demo" model="res.users">
+            <field name="context_lang">es_CR</field>
+            <field name="context_tz">America/Costa_Rica</field>
+        </record>
 
-		<!--
-		Resource: res.partner.title
-		Re-adds the changed res.partner.title for base_contact demo data
-		-->
+        <!--
+        Resource: res.partner.title
+        Re-adds the changed res.partner.title for base_contact demo data
+        -->
         <record id="base.res_partner_title_madam" model="res.partner.title">
             <field name="domain">contact</field>
             <field name="name">Madam</field>
@@ -29,5 +29,5 @@
             <field name="name">Sir</field>
             <field name="shortcut">M.</field>
         </record>
-	</data>
+    </data>
 </openerp>
