@@ -58,11 +58,34 @@ class res_partner(osv.osv):
         modobj.update_translations(cr, uid, mids, lang)
         return {}
 
+class res_country_state_canton(osv.osv):
+     _name = 'res.country.state.canton'
+     _description = 'Canton'
+     _columns = {
+        'state_id'   : fields.many2one('res.country.state','State',required=True),
+        'name'       : fields.char('Name', size=64, required=True),
+        'code'       : fields.integer('Code', size=2, help = 'Official code: XX', required=True),
+     }
+
+class res_country_state_canton_district(osv.osv):
+     _name = 'res.country.state.canton.district'
+     _description = 'District'
+     _columns = {
+        'canton_id'  : fields.many2one('res.country.state.canton','Canton',required=True),
+        'name'       : fields.char('Name', size=64, required=True),
+        'code'       : fields.integer('Code', size=2,help = 'Official code: XX', required=True),
+     }
+
 class res_partner_address(osv.osv):
     '''
     Inherits res.partner.address to add country and state default values
     '''
     _inherit = 'res.partner.address'
+    _columns = {
+            'canton_id'   : fields.many2one('res.country.state.canton', 'Canton'),
+            'district_id' : fields.many2one('res.country.state.canton.district', 'Canton'),
+        }
+
     _defaults = {
         'country_id': lambda self,cr,uid,ctx={}: self.pool.get('res.country').search(cr, uid, [('name','=','Costa Rica')])[0],
         'state_id': lambda self,cr,uid,ctx={}: self.pool.get('res.country.state').search(cr, uid, [('country_id','=','Costa Rica'),('name','=','San José')])[0],

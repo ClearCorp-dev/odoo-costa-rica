@@ -1,0 +1,474 @@
+name,code,id,canton_id/id
+Carmen,01,district_10101,canton_101
+Merced,02,district_10102,canton_101
+Hospital,03,district_10103,canton_101
+Catedral,04,district_10104,canton_101
+Zapote,05,district_10105,canton_101
+San Francisco de Dos Rios,06,district_10106,canton_101
+Uruca,07,district_10107,canton_101
+Mata Redonda,08,district_10108,canton_101
+Pavas,09,district_10109,canton_101
+Hatillo,10,district_10110,canton_101
+San Sebastian,11,district_10111,canton_101
+Escazu,01,district_10201,canton_102
+San Antonio,02,district_10202,canton_102
+San Rafael,03,district_10203,canton_102
+Desamparados,01,district_10301,canton_103
+San Miguel,02,district_10302,canton_103
+San Juan de Dios,03,district_10303,canton_103
+San Rafael Arriba,04,district_10304,canton_103
+San Antonio,05,district_10305,canton_103
+Frailes,06,district_10306,canton_103
+Patarra,07,district_10307,canton_103
+San Cristobal,08,district_10308,canton_103
+Rosario,09,district_10309,canton_103
+Damas,10,district_10310,canton_103
+San Rafael Abajo,11,district_10311,canton_103
+Gravilias,12,district_10312,canton_103
+Los Guido,13,district_10313,canton_103
+Santiago,01,district_10401,canton_104
+Mercedes Sur,02,district_10402,canton_104
+Barbacoas,03,district_10403,canton_104
+Grifo Alto,04,district_10404,canton_104
+San Rafael,05,district_10405,canton_104
+Candelaria,06,district_10406,canton_104
+Desamparaditos,07,district_10407,canton_104
+San Antonio,08,district_10408,canton_104
+Chires,09,district_10409,canton_104
+San Marcos,01,district_10501,canton_105
+San Lorenzo,02,district_10502,canton_105
+San Carlos,03,district_10503,canton_105
+Aserri,01,district_10601,canton_106
+Tarbaca,02,district_10602,canton_106
+Vuelta de Jorco,03,district_10603,canton_106
+San Gabriel,04,district_10604,canton_106
+Legua,05,district_10605,canton_106
+Monterrey,06,district_10606,canton_106
+Salitrillos,07,district_10607,canton_106
+Colon,01,district_10701,canton_107
+Guayabo,02,district_10702,canton_107
+Tabarcia,03,district_10703,canton_107
+Piedras Negras,04,district_10704,canton_107
+Picagres,05,district_10705,canton_107
+Guadalupe,01,district_10801,canton_108
+San Francisco,02,district_10802,canton_108
+Calle Blancos,03,district_10803,canton_108
+Mata de Platano,04,district_10804,canton_108
+Ipis,05,district_10805,canton_108
+Rancho Redondo,06,district_10806,canton_108
+Purral,07,district_10807,canton_108
+Santa Ana,01,district_10901,canton_109
+Salitral,02,district_10902,canton_109
+Pozos,03,district_10903,canton_109
+Uruca,04,district_10904,canton_109
+Piedades,05,district_10905,canton_109
+Brasil,06,district_10906,canton_109
+Alajuelita,01,district_11001,canton_110
+San Josecito,02,district_11002,canton_110
+San Antonio,03,district_11003,canton_110
+Concepcion,04,district_11004,canton_110
+San Felipe,05,district_11005,canton_110
+San Isidro,01,district_11101,canton_111
+San Rafael,02,district_11102,canton_111
+Dulce Nombre de Jesus,03,district_11103,canton_111
+Patalillo,04,district_11104,canton_111
+Cascajal,05,district_11105,canton_111
+San Ignacio de Acosta,01,district_11201,canton_112
+Guaitil,02,district_11202,canton_112
+Palmichal,03,district_11203,canton_112
+Cangrejal,04,district_11204,canton_112
+Sabanillas,05,district_11205,canton_112
+San Juan,01,district_11301,canton_113
+Cinco esquinas,02,district_11302,canton_113
+Anselmo Llorente,03,district_11303,canton_113
+Leon XIII,04,district_11304,canton_113
+Colima,05,district_11305,canton_113
+San Vicente,01,district_11401,canton_114
+San Jeronimo,02,district_11402,canton_114
+Trinidad,03,district_11403,canton_114
+San Pedro,01,district_11501,canton_115
+Sabanilla,02,district_11502,canton_115
+Mercedes,03,district_11503,canton_115
+San Rafael,04,district_11504,canton_115
+San Pablo,01,district_11601,canton_116
+San Pedro,02,district_11602,canton_116
+San Juan de Mata,03,district_11603,canton_116
+San Luis,04,district_11604,canton_116
+Carara,05,district_11605,canton_116
+Santa Maria,01,district_11701,canton_117
+Jardin,02,district_11702,canton_117
+Copey,03,district_11703,canton_117
+Curridabat,01,district_11801,canton_118
+Granadilla,02,district_11802,canton_118
+Sanchez,03,district_11803,canton_118
+Tirrases,04,district_11804,canton_118
+San Isidro del General,01,district_11901,canton_119
+General,02,district_11902,canton_119
+Daniel Flores,03,district_11903,canton_119
+Rivas,04,district_11904,canton_119
+San Pedro,05,district_11905,canton_119
+Platanares,06,district_11906,canton_119
+Pejibaye,07,district_11907,canton_119
+Cajon,08,district_11908,canton_119
+Baru,09,district_11909,canton_119
+Rio Nuevo,10,district_11910,canton_119
+Paramo,11,district_11911,canton_119
+San Pablo,01,district_12001,canton_120
+San Andres,02,district_12002,canton_120
+Llano Bonito,03,district_12003,canton_120
+San Isidro,04,district_12004,canton_120
+Santa Cruz,05,district_12005,canton_120
+San Antonio,06,district_12006,canton_120
+Alajuela,01,district_20101,canton_201
+San Jose,02,district_20102,canton_201
+Carrizal,03,district_20103,canton_201
+San Antonio,04,district_20104,canton_201
+Guacima,05,district_20105,canton_201
+San Isidro,06,district_20106,canton_201
+Sabanilla,07,district_20107,canton_201
+San Rafael,08,district_20108,canton_201
+Rio Segundo,09,district_20109,canton_201
+Desamparados,10,district_20110,canton_201
+Turrucares,11,district_20111,canton_201
+Tambor,12,district_20112,canton_201
+Garita,13,district_20113,canton_201
+Sarapiqui,14,district_20114,canton_201
+San Ramon,01,district_20201,canton_202
+Santiago,02,district_20202,canton_202
+San Juan,03,district_20203,canton_202
+Piedades Norte,04,district_20204,canton_202
+Piedades Sur,05,district_20205,canton_202
+San Rafael,06,district_20206,canton_202
+San Isidro,07,district_20207,canton_202
+angeles,08,district_20208,canton_202
+Alfaro,09,district_20209,canton_202
+Volio,10,district_20210,canton_202
+Concepcion,11,district_20211,canton_202
+Zapotal,12,district_20212,canton_202
+Peñas Blancas,13,district_20213,canton_202
+Grecia,01,district_20301,canton_203
+San Isidro,02,district_20302,canton_203
+San Jose,03,district_20303,canton_203
+San Roque,04,district_20304,canton_203
+Tacares,05,district_20305,canton_203
+Rio Cuarto,06,district_20306,canton_203
+Puente de Piedra,07,district_20307,canton_203
+Bolivar,08,district_20308,canton_203
+San Mateo,01,district_20401,canton_204
+Desmonte,02,district_20402,canton_204
+Jesus Maria,03,district_20403,canton_204
+Atenas,01,district_20501,canton_205
+Jesus,02,district_20502,canton_205
+Mercedes,03,district_20503,canton_205
+San Isidro,04,district_20504,canton_205
+Concepcion,05,district_20505,canton_205
+San Jose,06,district_20506,canton_205
+Santa Eulalia,07,district_20507,canton_205
+Escobal,08,district_20508,canton_205
+Naranjo,01,district_20601,canton_206
+San Miguel,02,district_20602,canton_206
+San Jose,03,district_20603,canton_206
+Cirri Sur,04,district_20604,canton_206
+San Jeronimo,05,district_20605,canton_206
+San Juan,06,district_20606,canton_206
+Rosario,07,district_20607,canton_206
+Palmitos,08,district_20608,canton_206
+Palmares,01,district_20701,canton_207
+Zaragoza,02,district_20702,canton_207
+Buenos Aires,03,district_20703,canton_207
+Santiago,04,district_20704,canton_207
+Candelaria,05,district_20705,canton_207
+Esquipulas,06,district_20706,canton_207
+Granja,07,district_20707,canton_207
+San Pedro,01,district_20801,canton_208
+San Juan,02,district_20802,canton_208
+San Rafael,03,district_20803,canton_208
+Carrillos,04,district_20804,canton_208
+Sabana Redonda,05,district_20805,canton_208
+Orotina,01,district_20901,canton_209
+Mastate,02,district_20902,canton_209
+Hacienda Vieja,03,district_20903,canton_209
+Coyolar,04,district_20904,canton_209
+Ceiba,05,district_20905,canton_209
+Quesada,01,district_21001,canton_210
+Florencia,02,district_21002,canton_210
+Buenavista,03,district_21003,canton_210
+Aguas Zarcas,04,district_21004,canton_210
+Venecia,05,district_21005,canton_210
+Pital,06,district_21006,canton_210
+Fortuna,07,district_21007,canton_210
+Tigra,08,district_21008,canton_210
+Palmera,09,district_21009,canton_210
+Venado,10,district_21010,canton_210
+Cutris,11,district_21011,canton_210
+Monterrey,12,district_21012,canton_210
+Pocosol,13,district_21013,canton_210
+Zarcero,01,district_21101,canton_211
+Laguna,02,district_21102,canton_211
+Tapezco,03,district_21103,canton_211
+Guadalupe,04,district_21104,canton_211
+Palmira,05,district_21105,canton_211
+Zapote,06,district_21106,canton_211
+Brisas,07,district_21107,canton_211
+Sarchi Norte,01,district_21201,canton_212
+Sarchi Sur,02,district_21202,canton_212
+Toro Amarillo,03,district_21203,canton_212
+San Pedro,04,district_21204,canton_212
+Rodriguez,05,district_21205,canton_212
+Upala,01,district_21301,canton_213
+Aguas Claras,02,district_21302,canton_213
+San Jose (Pizote),03,district_21303,canton_213
+Bijagua,04,district_21304,canton_213
+Delicias,05,district_21305,canton_213
+Dos Rios,06,district_21306,canton_213
+Yoliyllal,07,district_21307,canton_213
+Los Chiles,01,district_21401,canton_214
+Caño Negro,02,district_21402,canton_214
+El Amparo,03,district_21403,canton_214
+San Jorge,04,district_21404,canton_214
+San Rafael,01,district_21501,canton_215
+Buenavista,02,district_21502,canton_215
+Cote,03,district_21503,canton_215
+Katira,04,district_21504,canton_215
+Oriental,01,district_30101,canton_301
+Occidental,02,district_30102,canton_301
+Carmen,03,district_30103,canton_301
+San Nicolas,04,district_30104,canton_301
+Aguacaliente (San Francisco),05,district_30105,canton_301
+Guadalupe (Arenilla),06,district_30106,canton_301
+Corralillo,07,district_30107,canton_301
+Tierra Blanca,08,district_30108,canton_301
+Dulce Nombre,09,district_30109,canton_301
+Llano Grande,10,district_30110,canton_301
+Quebradilla,11,district_30111,canton_301
+Paraiso,01,district_30201,canton_302
+Santiago,02,district_30202,canton_302
+Orosi,03,district_30203,canton_302
+Cachi,04,district_30204,canton_302
+Llanos de Santa Lucia,05,district_30205,canton_302
+Tres Rios,01,district_30301,canton_303
+San Diego,02,district_30302,canton_303
+San Juan,03,district_30303,canton_303
+San Rafael,04,district_30304,canton_303
+Concepcion,05,district_30305,canton_303
+Dulce Nombre,06,district_30306,canton_303
+San Ramon,07,district_30307,canton_303
+Rio Azul,08,district_30308,canton_303
+Juan Viñas,01,district_30401,canton_304
+Tucurrique,02,district_30402,canton_304
+Pejibaye,03,district_30403,canton_304
+Turrialba,01,district_30501,canton_305
+La Suiza,02,district_30502,canton_305
+Peralta,03,district_30503,canton_305
+Santa Cruz,04,district_30504,canton_305
+Santa Teresita,05,district_30505,canton_305
+Pavones,06,district_30506,canton_305
+Tuis,07,district_30507,canton_305
+Tayutic,08,district_30508,canton_305
+Santa Rosa,09,district_30509,canton_305
+Tres Equis,10,district_30510,canton_305
+La Isabel,11,district_30511,canton_305
+Chirripo,12,district_30512,canton_305
+Pacayas,01,district_30601,canton_306
+Cervantes,02,district_30602,canton_306
+Capellades,03,district_30603,canton_306
+San Rafael,01,district_30701,canton_307
+Cot,02,district_30702,canton_307
+Potrero Cerrado,03,district_30703,canton_307
+Cipreses,04,district_30704,canton_307
+Santa Rosa,05,district_30705,canton_307
+Tejar,01,district_30801,canton_308
+San Isidro,02,district_30802,canton_308
+Tobosi,03,district_30803,canton_308
+Patio de Agua,04,district_30804,canton_308
+Heredia,01,district_40101,canton_401
+Mercedes,02,district_40102,canton_401
+San Francisco,03,district_40103,canton_401
+Ulloa,04,district_40104,canton_401
+Varablanca,05,district_40105,canton_401
+Barva,01,district_40201,canton_402
+San Pedro,02,district_40202,canton_402
+San Pablo,03,district_40203,canton_402
+San Roque,04,district_40204,canton_402
+Santa Lucia,05,district_40205,canton_402
+San Jose de la Montaña,06,district_40206,canton_402
+Santo Domingo,01,district_40301,canton_403
+San Vicente,02,district_40302,canton_403
+San Miguel,03,district_40303,canton_403
+Paracito,04,district_40304,canton_403
+Santo Tomas,05,district_40305,canton_403
+Santa Rosa,06,district_40306,canton_403
+Tures,07,district_40307,canton_403
+Para,08,district_40308,canton_403
+Santa Barbara,01,district_40401,canton_404
+San Pedro,02,district_40402,canton_404
+San Juan,03,district_40403,canton_404
+Jesus,04,district_40404,canton_404
+Santo Domingo,05,district_40405,canton_404
+Puraba,06,district_40406,canton_404
+San Rafael,01,district_40501,canton_405
+San Josecito,02,district_40502,canton_405
+Santiago,03,district_40503,canton_405
+angeles,04,district_40504,canton_405
+Concepcion,05,district_40505,canton_405
+San Isidro,01,district_40601,canton_406
+San Jose,02,district_40602,canton_406
+Concepcion,03,district_40603,canton_406
+San Francisco,04,district_40604,canton_406
+San Antonio,01,district_40701,canton_407
+Ribera,02,district_40702,canton_407
+Asuncion,03,district_40703,canton_407
+San Joaquín de Flores,01,district_40801,canton_408
+Barrantes,02,district_40802,canton_408
+Llorente,03,district_40803,canton_408
+San Pablo,01,district_40901,canton_409
+Rincón de Sabanilla,02,district_40902,canton_409
+Puerto Viejo,01,district_41001,canton_410
+La Virgen,02,district_41002,canton_410
+Horquetas,03,district_41003,canton_410
+Llanuras del Gaspar,04,district_41004,canton_410
+Cureña,05,district_41005,canton_410
+Liberia,01,district_50101,canton_501
+Cañas Dulces,02,district_50102,canton_501
+Mayorga,03,district_50103,canton_501
+Nacascolo,04,district_50104,canton_501
+Curubande,05,district_50105,canton_501
+Nicoya,01,district_50201,canton_502
+Mansion,02,district_50202,canton_502
+San Antonio,03,district_50203,canton_502
+Quebrada Honda,04,district_50204,canton_502
+Samara,05,district_50205,canton_502
+Nosara,06,district_50206,canton_502
+Belen de Nosarita,07,district_50207,canton_502
+Santa Cruz,01,district_50301,canton_503
+Bolson,02,district_50302,canton_503
+Veintisiete de Abril,03,district_50303,canton_503
+Tempate,04,district_50304,canton_503
+Cartagena,05,district_50305,canton_503
+Cuajiniquil,06,district_50306,canton_503
+Diria,07,district_50307,canton_503
+Cabo Velas,08,district_50308,canton_503
+Tamarindo,09,district_50309,canton_503
+Bagaces,01,district_50401,canton_504
+Fortuna,02,district_50402,canton_504
+Mogote,03,district_50403,canton_504
+Rio Naranjo,04,district_50404,canton_504
+Filadelfia,01,district_50501,canton_505
+Palmira,02,district_50502,canton_505
+Sardinal,03,district_50503,canton_505
+Belen,04,district_50504,canton_505
+Cañas,01,district_50601,canton_506
+Palmira,02,district_50602,canton_506
+San Miguel,03,district_50603,canton_506
+Bebedero,04,district_50604,canton_506
+Porozal,05,district_50605,canton_506
+Juntas,01,district_50701,canton_507
+Sierra,02,district_50702,canton_507
+San Juan,03,district_50703,canton_507
+Colorado,04,district_50704,canton_507
+Tilaran,01,district_50801,canton_508
+Quebrada Grande,02,district_50802,canton_508
+Tronadora,03,district_50803,canton_508
+Santa Rosa,04,district_50804,canton_508
+Libano,05,district_50805,canton_508
+Tierras Morenas,06,district_50806,canton_508
+Arenal,07,district_50807,canton_508
+Carmona,01,district_50901,canton_509
+Santa Rita,02,district_50902,canton_509
+Zapotal,03,district_50903,canton_509
+San Pablo,04,district_50904,canton_509
+Porvenir,05,district_50905,canton_509
+Bejuco,06,district_50906,canton_509
+La Cruz,01,district_51001,canton_510
+Santa Cecilia,02,district_51002,canton_510
+Garita,03,district_51003,canton_510
+Santa Elena,04,district_51004,canton_510
+Hojancha,01,district_51101,canton_511
+Monte Romo,02,district_51102,canton_511
+Puerto Carrillo,03,district_51103,canton_511
+Huacas,04,district_51104,canton_511
+Puntarenas,01,district_60101,canton_601
+Pitahaya,02,district_60102,canton_601
+Chomes,03,district_60103,canton_601
+Lepanto,04,district_60104,canton_601
+Paquera,05,district_60105,canton_601
+Manzanillo,06,district_60106,canton_601
+Guacimal,07,district_60107,canton_601
+Barranca,08,district_60108,canton_601
+Monte Verde,09,district_60109,canton_601
+Isla del Coco,10,district_60110,canton_601
+Cobano,11,district_60111,canton_601
+Chacarita,12,district_60112,canton_601
+Chira,13,district_60113,canton_601
+Acapulco,14,district_60114,canton_601
+El Roble,15,district_60115,canton_601
+Arancibia,16,district_60116,canton_601
+Espiritu Santo,01,district_60201,canton_602
+San Juan Grande,02,district_60202,canton_602
+Macacona,03,district_60203,canton_602
+San Rafael,04,district_60204,canton_602
+San Jeronimo,05,district_60205,canton_602
+Buenos Aires,01,district_60301,canton_603
+Volcan,02,district_60302,canton_603
+Potrero Grande,03,district_60303,canton_603
+Boruca,04,district_60304,canton_603
+Pilas,05,district_60305,canton_603
+Colinas,06,district_60306,canton_603
+Changena,07,district_60307,canton_603
+Briolley,08,district_60308,canton_603
+Brunka,09,district_60309,canton_603
+Miramar,01,district_60401,canton_604
+Union,02,district_60402,canton_604
+San Isidro,03,district_60403,canton_604
+Puerto Cortes,01,district_60501,canton_605
+Palmar,02,district_60502,canton_605
+Sierpe,03,district_60503,canton_605
+Bahia Ballena,04,district_60504,canton_605
+Piedras Blancas,05,district_60505,canton_605
+Quepos,01,district_60601,canton_606
+Savegre,02,district_60602,canton_606
+Naranjito,03,district_60603,canton_606
+Golfito,01,district_60701,canton_607
+Puerto Jimenez,02,district_60702,canton_607
+Guaycara,03,district_60703,canton_607
+Pavon,04,district_60704,canton_607
+San Vito,01,district_60801,canton_608
+Sabalito,02,district_60802,canton_608
+Aguabuena,03,district_60803,canton_608
+Limoncito,04,district_60804,canton_608
+Pittier,05,district_60805,canton_608
+Parrita,01,district_60901,canton_609
+Corredor,01,district_61001,canton_610
+La Cuesta,02,district_61002,canton_610
+Canoas,03,district_61003,canton_610
+Laurel,04,district_61004,canton_610
+Jaco,01,district_61101,canton_611
+Tarcoles,02,district_61102,canton_611
+Limon,01,district_70101,canton_701
+Valle La Estrella,02,district_70102,canton_701
+Rio Blanco,03,district_70103,canton_701
+Matama,04,district_70104,canton_701
+Guapiles,01,district_70201,canton_702
+Jimenez,02,district_70202,canton_702
+Rita,03,district_70203,canton_702
+Roxana,04,district_70204,canton_702
+Cariari,05,district_70205,canton_702
+Colorado,06,district_70206,canton_702
+Siquirres,01,district_70301,canton_703
+Pacuarito,02,district_70302,canton_703
+Florida,03,district_70303,canton_703
+Germania,04,district_70304,canton_703
+Cairo,05,district_70305,canton_703
+Alegria,06,district_70306,canton_703
+Bratsi,01,district_70401,canton_704
+Sixaola,02,district_70402,canton_704
+Cahuita,03,district_70403,canton_704
+Telire,04,district_70404,canton_704
+Matina,01,district_70501,canton_705
+Battan,02,district_70502,canton_705
+Carrandi,03,district_70503,canton_705
+Guacimo,01,district_70601,canton_706
+Mercedes,02,district_70602,canton_706
+Pocora,03,district_70603,canton_706
+Rio Jimenez,04,district_70604,canton_706
+Duacari,05,district_70605,canton_706
