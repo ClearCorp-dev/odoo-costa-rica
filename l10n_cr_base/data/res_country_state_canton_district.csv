@@ -1,4 +1,4 @@
-name,code,id,canton_id/id
+name,code,id,canton_id:id
 Carmen,01,district_10101,canton_101
 Merced,02,district_10102,canton_101
 Hospital,03,district_10103,canton_101

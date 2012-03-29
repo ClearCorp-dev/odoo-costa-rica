@@ -49,18 +49,18 @@
     """,
     'depends': ['base'],
     'init_xml': [
-        ],
-    'demo_xml': [
-        'l10n_cr_base_demo.xml',
-        'l10n_cr_base_demo.sql',
-        ],
-    'update_xml': [
         #'res.bank.csv',
         'l10n_cr_base_data.xml',
         'l10n_cr_base.sql',
         'data/res_country_state.csv',
         'data/res_country_canton.csv',
         'data/res_country_district.csv',
+        ],
+    'demo_xml': [
+        'l10n_cr_base_demo.xml',
+        'l10n_cr_base_demo.sql',
+        ],
+    'update_xml': [
         ],
     'license': 'Other OSI approved licence',
     'installable': True,

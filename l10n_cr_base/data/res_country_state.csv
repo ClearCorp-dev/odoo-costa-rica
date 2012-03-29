@@ -1,4 +1,4 @@
-"id","name","code","country_id/id"
+"id","name","code","country_id:id"
 "state_1","San José","1","base.cr"
 "state_2","Alajuela","2","base.cr"
 "state_3","Cartago","3","base.cr"
