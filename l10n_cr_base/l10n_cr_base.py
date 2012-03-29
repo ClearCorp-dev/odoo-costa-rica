@@ -64,7 +64,7 @@ class res_country_state_canton(osv.osv):
      _columns = {
         'state_id'   : fields.many2one('res.country.state','State',required=True),
         'name'       : fields.char('Name', size=64, required=True),
-        'code'       : fields.integer('Code', size=2, help = 'Official code: XX', required=True),
+        'code'       : fields.char('Code', size=2, help = 'Official code: XX', required=True),
      }
 
 class res_country_state_canton_district(osv.osv):
@@ -73,7 +73,7 @@ class res_country_state_canton_district(osv.osv):
      _columns = {
         'canton_id'  : fields.many2one('res.country.state.canton','Canton',required=True),
         'name'       : fields.char('Name', size=64, required=True),
-        'code'       : fields.integer('Code', size=2,help = 'Official code: XX', required=True),
+        'code'       : fields.char('Code', size=2,help = 'Official code: XX', required=True),
      }
 
 class res_partner_address(osv.osv):
