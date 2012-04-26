@@ -84,7 +84,7 @@ class res_partner_address(osv.osv):
     _columns = {
             'canton_id'   : fields.many2one('res.country.state.canton', 'Canton'),
             'district_id' : fields.many2one('res.country.state.canton.district', 'Canton'),
-        }
+    }
 
     _defaults = {
         'country_id': lambda self,cr,uid,ctx={}: self.pool.get('res.country').search(cr, uid, [('name','=','Costa Rica')])[0],

@@ -65,5 +65,5 @@
         ],
     'license': 'Other OSI approved licence',
     'installable': True,
-    'active': True,
+    'active': False,
 }

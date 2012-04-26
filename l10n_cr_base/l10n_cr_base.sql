@@ -5,8 +5,8 @@ UPDATE res_users
 
 UPDATE res_lang
     SET direction = 'ltr',
-        decimal_point = ',',
-        thousands_sep = '.',
+        decimal_point = '.',
+        thousands_sep = ',',
         time_format = '%I:%M:%S %p',
         date_format = '%d/%m/%Y',
         grouping = '[3,3,3,3,3,-2]'
