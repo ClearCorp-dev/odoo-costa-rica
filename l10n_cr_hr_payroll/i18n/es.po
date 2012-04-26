@@ -1,0 +1,1 @@
+/home/ronald/Development/openerp/openerp-costa-rica/features/l10n_cr_hr_payroll/i18n/es_CR.po
