@@ -46,9 +46,9 @@ class hr_payslip_run_report(report_sxw.rml_parse):
             'cr' : cr,
             'uid': uid,
             'get_text':self.get_text,
-            'get_nh':self.get_nh,
-            'get_eh':self.get_eh,
-            'get_ef':self.get_ef,
+            'get_hn':self.get_hn,
+            'get_he':self.get_he,
+            'get_fe':self.get_fe,
             'get_basic':self.get_basic,
             'get_exs':self.get_exs,
             'get_fes':self.get_fes,
@@ -72,34 +72,31 @@ class hr_payslip_run_report(report_sxw.rml_parse):
         
         return res
         
-    def get_nh(self,line_ids):
-        code = 'NH'
-        res = '0'
-        for line in line_ids:
-            if line.code == code:
-                res = line.number_of_hours
-        
-        
-        return res
-        
-    def get_eh(self,line_ids):
-        code = 'EH'
-        res = '0'
-        for line in line_ids:
-            if line.code == code:
-                res = line.number_of_hours
-        
-        
-        return res
-        
-        
-    def get_ef(self,line_ids):
-        code = 'EF'
+    def get_hn(self,line_ids):
+        code = 'HN'
         res = 0
         for line in line_ids:
             if line.code == code:
-                res = line.number_of_hours
+                res += line.number_of_hours
+                
+        return res
         
+    def get_he(self,line_ids):
+        code = 'HE'
+        res = 0
+        for line in line_ids:
+            if line.code == code:
+                res += line.number_of_hours        
+        
+        return res
+        
+        
+    def get_fe(self,line_ids):
+        code = 'FE'
+        res = 0
+        for line in line_ids:
+            if line.code == code:
+                res += line.number_of_hours        
         
         return res
     
@@ -109,7 +106,6 @@ class hr_payslip_run_report(report_sxw.rml_parse):
         for line in line_ids:
             if line.code == code:
                 res += line.total
-        
         
         return res
         
