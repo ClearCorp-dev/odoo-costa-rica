@@ -52,4 +52,12 @@ class hr_contract(osv.osv):
     
 hr_contract()
 
+class hr_job(osv.osv):
+    _inherit = 'hr.job'
+    _columns = {
+        'code': fields.char('Code', size=128, required=False),
+    }
+
+hr_job()
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
