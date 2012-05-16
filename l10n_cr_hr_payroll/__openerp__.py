@@ -38,10 +38,9 @@ l10n_cr_hr_payroll.
         'hr_contract',
         'hr_payroll',
     ],
-    'init_xml': [
-    ],
     'update_xml': [
-    ],
+        'l10n_cr_hr_payroll.xml',
+        ],
     'installable': True,
     'auto_install': False,
     'application': True,
