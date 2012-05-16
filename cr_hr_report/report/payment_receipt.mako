@@ -1,15 +1,49 @@
 <html>
-<head>
-	<style style="text/css">
-		${css}
-	</style>
-</head>
+    <head>
+        <style type="text/css">
+            ${css}
+
+            .list_table .act_as_row {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                font-size:10px;
+            }
+
+            .account_line {
+                font-weight: bold;
+                font-size: 15px;
+                background-color:#F0F0F0;
+            }
+            
+            .account_line .act_as_cell {
+                height: 30px;
+                vertical-align: bottom;
+            }
+
+        </style>
+    </head>
 <body class = "data">
 	%for payslips in objects :
 		<div class="act_as_tbody">			
-				<div class="act_as_table data_table">
-                %for slip in payslips.slip_ids:     
-					<div class="act_as_row lines" style="vertical-align: top;">           
+		    <div class="act_as_table data_table">
+			<div class="act_as_row labels">
+			    <div class="act_as_cell">${_('Cedula')}</div>
+			    <div class="act_as_cell">${_('Nombre')}</div>
+			    <div class="act_as_cell">${_('Hrs.')}<br />${_('Nor')}</div>
+			    <div class="act_as_cell">${_('Hrs.')}<br />${_('Ext')}</div>
+			    <div class="act_as_cell">${_('Hrs.')}<br />${_('Dob')}</div>
+			    <div class="act_as_cell">${_('Ingr.')}<br />${_('Normal')}</div>
+			    <div class="act_as_cell">${_('Ingr.')}<br />${_('Extra')}</div>
+			    <div class="act_as_cell">${_('Ingr.')}<br />${_('Doble')}</div>
+			    <div class="act_as_cell">${_('Otros')}<br />${_('Ingr.')}</div>
+			    <div class="act_as_cell">${_('Salario')}<br />${_('Bruto')}</div>
+			    <div class="act_as_cell">${_('Deducc.')}<br />${_('CCSS/BP')}</div>
+			    <div class="act_as_cell">${_('Impuesto')}<br />${_('Renta')}</div>
+			    <div class="act_as_cell">${_('Otras')}<br />${_('Deducc.')}</div>
+			    <div class="act_as_cell">${_('Salario')}<br />${_('Neto')}</div>
+			</div>
+                %for slip in payslips.slip_ids:
+			    <div class="act_as_row lines" style="vertical-align: top;">           
                               ## cedula
                               <div class="act_as_cell first_column" style="width: 80px;">${slip.employee_id.identification_id or ''}</div>
                               ## nombre
