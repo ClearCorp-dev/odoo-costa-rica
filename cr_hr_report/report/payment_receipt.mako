@@ -23,7 +23,21 @@
         </style>
     </head>
 <body class = "data">
+	<%
+	total_hn = 0.0
+	total_he = 0.0
+	total_fe = 0.0
+	total_basic = 0.0
+	total_exs = 0.0
+	total_fes = 0.0
+	total_gross = 0.0
+	total_basic = 0.0
+	total_ccss = 0.0
+	total_net = 0.0
+	total_emp = 0
+	%>
 	%for payslips in objects :
+		<div>Fecha desde: ${payslips.date_start}     Fecha hasta: ${payslips.date_end}</div>
 		<div class="act_as_tbody">			
 		    <div class="act_as_table data_table">
 			<div class="act_as_row labels">
@@ -49,7 +63,7 @@
                               ## nombre
                               <div class="act_as_cell">${slip.employee_id.name or '0'}</div>
                               ## nh
-                              <div class="act_as_cell">${get_hn(slip.worked_days_line_ids) or '0'}</div>
+                              <div class="act_as_cell">${get_hn(slip.worked_days_line_ids) or '0'}</div>				
                               ## eh
                               <div class="act_as_cell">${get_he(slip.worked_days_line_ids) or '0'}</div>
                               ## ef
@@ -62,8 +76,8 @@
                               <div class="act_as_cell">${get_fes(slip.line_ids) or '0'}</div>
                               ## otros
                               <div class="act_as_cell">${ '0'}</div>
-                              ## fes
-                              <div class="act_as_cell">${get_gross(slip.line_ids) or '0'}</div>
+                              ## gross
+                              <div class="act_as_cell ">${get_gross(slip.line_ids) or '0'}</div>
                                ## ccss
                               <div class="act_as_cell">${get_ccss(slip.line_ids) or '0'}</div>
                               ## RENTA
@@ -72,24 +86,55 @@
                               <div class="act_as_cell">${ '0'}</div>
                               ## NETOS
                               <div class="act_as_cell">${ get_net(slip.line_ids) or '0'}</div>
+				<%
+				    total_hn += get_hn(slip.worked_days_line_ids)
+				    total_he += get_he(slip.worked_days_line_ids)
+				    total_fe += get_fe(slip.worked_days_line_ids)
+				    total_basic += get_basic(slip.line_ids)
+				    total_exs += get_exs(slip.line_ids)
+				    total_fes += get_fes(slip.line_ids)
+				    total_gross += get_gross(slip.line_ids)
+				    total_ccss += get_ccss(slip.line_ids)
+				    total_net += get_net(slip.line_ids)
+				    total_emp += 1
+				%>
                     </div>
                 %endfor
+		<div class="act_as_row" style="font-weight: bold;">
+		    <div class="act_as_cell">${_('Totales')}</div>
+		    <div class="act_as_cell">${_(' ')}</div>
+		    <div class="act_as_cell">${total_hn}</div>
+		    <div class="act_as_cell">${total_he}</div>
+		    <div class="act_as_cell">${total_fe}</div>
+		    <div class="act_as_cell">${total_basic}</div>
+		    <div class="act_as_cell">${total_exs}</div>
+		    <div class="act_as_cell">${total_fes}</div>
+		    <div class="act_as_cell">${_('0')}</div>
+		    <div class="act_as_cell">${total_gross}</div>
+		    <div class="act_as_cell">${total_ccss}</div>
+		    <div class="act_as_cell">${_('0')}</div>
+		    <div class="act_as_cell">${_('0')}</div>
+		    <div class="act_as_cell">${total_net}</div>
+		</div>
+		<div class="act_as_row" style="font-weight: bold;">
+		    <div class="act_as_cell">${_('Cant. Empleados')}</div>
+		    <div class="act_as_cell">${total_emp}</div>
+		</div>
             </div>
             
             </br></br>
-            <div>Fecha desde: ${payslips.date_start}</div></br>
-			<div>Fecha hasta: ${payslips.date_end}</div>
-            
-            </br></br></br></br>
-            <div>${'HECHO POR: ___________________________________'   } </div> 
-            </br></br></br></br>
-            <div> ${'REVISADO POR: ___________________________________'} </div>
-            </br></br></br></br>
-            <div> ${'APROBADO POR: ___________________________________'} </div>          
+            <div style="font-size: 10px;;">${'HECHO POR: ____________________________________________'   }   ${'REVISADO POR: ____________________________________________'}   ${'APROBADO POR: ____________________________________________'} </div>          
+            </br></br></br></br>            
           
          </div>           
                
 	<p style="page-break-after:always"></p>
 	%endfor
+	
 </body>
 </html>
+
+@decimal-format number {
+  grouping-separator: ",";
+  decimal-separator : "."
+}
