@@ -39,7 +39,6 @@ l10n_cr_hr_payroll.
         'hr_payroll',
     ],
     'update_xml': [
-        'l10n_cr_hr_payroll.xml',
         ],
     'installable': True,
     'auto_install': False,
