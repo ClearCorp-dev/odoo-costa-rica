@@ -55,6 +55,7 @@ class hr_payslip_run_report(report_sxw.rml_parse):
             'get_gross':self.get_gross,
             'get_ccss':self.get_ccss,
             'get_net':self.get_net,
+	    'get_rent':self.get_rent,
         })
     
     def get_prefix(self,currency,company_id):
@@ -161,6 +162,17 @@ class hr_payslip_run_report(report_sxw.rml_parse):
             if line.code == code:
                 res += line.total
             
+        
+        return round(res)
+
+
+    def get_rent(self,line_ids):
+        code = 'Renta'
+        res = 0
+        for line in line_ids:
+            if line.code == code:
+                res += line.total
+        
         
         return res
     
