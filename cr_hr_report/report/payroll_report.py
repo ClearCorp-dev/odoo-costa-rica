@@ -224,5 +224,5 @@ class hr_payslip_run_report(report_sxw.rml_parse):
 report_sxw.report_sxw(
     'report.hr.payslip.run.layout_ccorp',
     'hr.payslip.run',
-    'addons/cr_hr_report/report/payment_receipt.mako',
+    'addons/cr_hr_report/report/payroll_report.mako',
     parser=hr_payslip_run_report)

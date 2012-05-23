@@ -30,15 +30,21 @@ l10n_cr_hr_payroll.
 =======================
     * Employee Contracts
     * Fortnightly Payroll Register
+    * Payroll Report
     """,
-    'author':'Ronald Rubi',
+    'author':'Ronald Rubi', 'Armando Soto'
     'website':'http://www.clearcorp.co.cr',
     'depends': [
         'hr',
         'hr_contract',
         'hr_payroll',
+	'account',
+        'account_voucher_payment_method',
+        'base_currency_symbol',
+        'report_webkit',
     ],
     'update_xml': [
+	'payroll_report.xml', 
         ],
     'installable': True,
     'auto_install': False,

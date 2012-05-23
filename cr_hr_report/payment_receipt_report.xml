@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<openerp>
-	<data>
-		<report auto="False" id="hr_payslip_run_ccorp" model="hr.payslip.run" 
-		name="hr.payslip.run.layout_ccorp"  file="cr_hr_report/report/payment_receipt.mako" string="Reporte de Planilla" report_type="webkit"/>
-	</data>
-</openerp>
