@@ -51,7 +51,7 @@
         ],
     'init_xml': [],
     'update_xml': [
-        'payment_receipt_report.xml', 
+        'payroll_report.xml', 
         ],
     'license': 'Other OSI approved licence',
     'installable': True,

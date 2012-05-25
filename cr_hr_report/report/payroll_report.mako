@@ -23,33 +23,45 @@
         </style>
     </head>
 <body class = "data">
+	%for run in objects :
 	<%
-	total_hn = 0.0
-	total_he = 0.0
-	total_fe = 0.0
-	total_basic = 0.0
-	total_exs = 0.0
-	total_fes = 0.0
-	total_gross = 0.0
-	total_basic = 0.0
-	total_rent = 0.0
-	total_ccss = 0.0
-	total_net = 0.0
-	total_emp = 0
-	dep = []
+	emp_by_dep = get_obj_by_dep(run)
 	%>
-	%for deparments in objects:
-	<%
-	    dep.append(deparments)
-
-	%>
-	%endfor
-	%for payslips in objects :
+		<%
+		total_hn = 0.0
+		total_he = 0.0
+		total_fe = 0.0
+		total_basic = 0.0
+		total_exs = 0.0
+		total_fes = 0.0
+		total_gross = 0.0
+		total_basic = 0.0
+		total_rent = 0.0
+		total_ccss = 0.0
+		total_net = 0.0
+		total_emp = 0
+		%>
 		<div style="font-size: 20px; font-weight: bold; text-align: center;"> ${company.partner_id.name | entity} - ${company.currency_id.name | entity}</div>
 		<div style="font-size: 25px; font-weight: bold; text-align: center;"> Reporte de Planilla</div>
-		<div style="font-size: 20px; font-weight: bold; text-align: center;"> ${payslips.name}</div>
-		<div style="font-size: 16px; font-weight: bold; text-align: center;">Periodo de ${payslips.date_start} a ${payslips.date_end}</div>
+		<div style="font-size: 20px; font-weight: bold; text-align: center;"> ${run.name}</div>
+		<div style="font-size: 16px; font-weight: bold; text-align: center;">Periodo de ${run.date_start} a ${run.date_end}</div>
 		 </br></br>
+		%for department in emp_by_dep:
+		    <%
+		    total_hn_dep = 0.0
+		    total_he_dep = 0.0
+		    total_fe_dep = 0.0
+		    total_basic_dep = 0.0
+		    total_exs_dep = 0.0
+		    total_fes_dep = 0.0
+		    total_gross_dep = 0.0
+		    total_basic_dep = 0.0
+		    total_rent_dep = 0.0
+		    total_ccss_dep = 0.0
+		    total_net_dep = 0.0
+		    total_emp_dep = 0
+		    %>
+		    <div class="account_title bg" style="margin-top: 20px; font-size: 12px; width: 1080px;">${department[0]}</div>
 		    <div class="act_as_table list_table">
 		    <div class="act_as_thead">
 			<div class="act_as_row labels" style="font-weight: bold; font-size: 11x;">
@@ -68,10 +80,10 @@
 			    <div class="act_as_cell amount">${_('Otras')}<br />${_('Deducc.')}</div>
 			    <div class="act_as_cell amount">${_('Salario')}<br />${_('Neto')}</div>
 			</div>
-			</div>
+		    </div>
 			
 			    <div class="act_as_tbody">       
-                %for slip in sorted(payslips.slip_ids, key=lambda slip: slip.employee_id.name):
+                %for slip in sorted(department[1], key=lambda slip: slip.employee_id.name):
 			    <div class="act_as_row lines">           
                               ## cedula
                               <div class="act_as_cell first_column" style="width: 80px;">${slip.employee_id.identification_id or ''}</div>
@@ -102,6 +114,20 @@
                               ## NETOS
                               <div class="act_as_cell amount">${formatLang(get_net(slip.line_ids)) or '0'}</div>
 				<%
+				    ## Totales por Departamento
+				    total_hn_dep += get_hn(slip.worked_days_line_ids)
+				    total_he_dep += get_he(slip.worked_days_line_ids)
+				    total_fe_dep += get_fe(slip.worked_days_line_ids)
+				    total_basic_dep += get_basic(slip.line_ids)
+				    total_exs_dep += get_exs(slip.line_ids)
+				    total_fes_dep += get_fes(slip.line_ids)
+				    total_gross_dep += get_gross(slip.line_ids)
+				    total_rent_dep += get_rent(slip.line_ids)
+				    total_ccss_dep += get_ccss(slip.line_ids)
+				    total_net_dep += get_net(slip.line_ids)
+				    total_emp_dep += 1
+
+				    ## Totales Generales
 				    total_hn += get_hn(slip.worked_days_line_ids)
 				    total_he += get_he(slip.worked_days_line_ids)
 				    total_fe += get_fe(slip.worked_days_line_ids)
@@ -120,10 +146,33 @@
 		<div class="act_as_tfoot">
 		<div class="act_as_row labels"  style="font-weight: bold; font-size: 11x">
 		    <div class="act_as_cell first_column">${_('Total')}</div>
-		    <div class="act_as_cell">${total_emp} Empleados</div>
-		    <div class="act_as_cell amount">${total_hn}</div>
-		    <div class="act_as_cell amount">${total_he}</div>
-		    <div class="act_as_cell amount">${total_fe}</div>
+		    <div class="act_as_cell">${total_emp_dep} Empleados</div>
+		    <div class="act_as_cell amount">${total_hn_dep}</div>
+		    <div class="act_as_cell amount">${total_he_dep}</div>
+		    <div class="act_as_cell amount">${total_fe_dep}</div>
+		    <div class="act_as_cell amount">${formatLang(total_basic_dep)}</div>
+		    <div class="act_as_cell amount">${formatLang(total_exs_dep)}</div>
+		    <div class="act_as_cell amount">${formatLang(total_fes_dep)}</div>
+		    <div class="act_as_cell amount">${_('0')}</div>
+		    <div class="act_as_cell amount">${formatLang(total_gross_dep)}</div>
+		    <div class="act_as_cell amount">${formatLang(total_ccss_dep)}</div>
+		    <div class="act_as_cell amount">${formatLang(total_rent_dep)}</div>
+		    <div class="act_as_cell amount">${_('0')}</div>
+		    <div class="act_as_cell amount">${formatLang(total_net_dep)}</div>
+		</div>
+            </div>
+            </div>
+            
+               
+         %endfor   
+	<div class="act_as_table list_table " style="margin-top: 20px;">
+	    <div class="act_as_tfoot">
+		<div class="act_as_row labels"  style="font-weight: bold; font-size: 11px;">
+		    <div class="act_as_cell first_column" style="width: 85px; font-size: 12px; text-align: left">${_('TOTAL GENERAL')}</div>
+		    <div class="act_as_cell" style="width: 250px;">${total_emp} Empleados</div>
+		    <div class="act_as_cell amount" style="width: 40px;">${total_hn}</div>
+		    <div class="act_as_cell amount" style="width: 40px;">${total_he}</div>
+		    <div class="act_as_cell amount" style="width: 40px;">${total_fe}</div>
 		    <div class="act_as_cell amount">${formatLang(total_basic)}</div>
 		    <div class="act_as_cell amount">${formatLang(total_exs)}</div>
 		    <div class="act_as_cell amount">${formatLang(total_fes)}</div>
@@ -134,22 +183,20 @@
 		    <div class="act_as_cell amount">${_('0')}</div>
 		    <div class="act_as_cell amount">${formatLang(total_net)}</div>
 		</div>
-            </div>
-            </div>
-            
-		<div class="act_as_table data_table" style="margin-top:20px">
-		<div class="act_as_tbody">
-		<div class="act_as_row" style="vertical-align: bottom">
-		<div class="act_as_cell" style="padding-top:80px;padding-bottom:5px">${'HECHO POR:'}</div>
-		<div class="act_as_cell" style="padding-top:80px;padding-bottom:5px">${'REVISADO POR:'}</div>
-		<div class="act_as_cell" style="padding-top:80px;padding-bottom:5px">${'APROBADO POR:'}</div>
-            </div>
-            </div>
-            </div>      
-               
-               
-	<p style="page-break-after:always"></p>
+	    </div>
+	</div>
 	%endfor
+	<div class="act_as_table data_table" style="margin-top:30px">
+	    <div class="act_as_tbody">
+		<div class="act_as_row" style="vertical-align: bottom">
+		    <div class="act_as_cell" style="padding-top:80px;padding-bottom:5px">${'HECHO POR:'}</div>
+		    <div class="act_as_cell" style="padding-top:80px;padding-bottom:5px">${'REVISADO POR:'}</div>
+		    <div class="act_as_cell" style="padding-top:80px;padding-bottom:5px">${'APROBADO POR:'}</div>
+		</div>
+            </div>
+	</div>   
+	<p style="page-break-after:always"></p>
+
 	
 </body>
 </html>

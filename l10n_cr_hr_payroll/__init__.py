@@ -21,5 +21,6 @@
 ##############################################################################
 
 import l10n_cr_hr_payroll
+import report
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

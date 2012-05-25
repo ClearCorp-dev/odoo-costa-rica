@@ -56,6 +56,7 @@ class hr_payslip_run_report(report_sxw.rml_parse):
             'get_ccss':self.get_ccss,
             'get_net':self.get_net,
 	    'get_rent':self.get_rent,
+	    'get_obj_by_dep':self.get_obj_by_dep,
         })
     
     def get_prefix(self,currency,company_id):
@@ -163,7 +164,7 @@ class hr_payslip_run_report(report_sxw.rml_parse):
                 res += line.total
             
         
-        return round(res)
+        return res
 
 
     def get_rent(self,line_ids):
@@ -175,6 +176,33 @@ class hr_payslip_run_report(report_sxw.rml_parse):
         
         
         return res
+
+
+    def get_obj_by_dep(self,run):
+	obj_by_dep = []
+	dep_list = []
+	emp_by_dep = []
+
+	for payslip in run.slip_ids:
+	    dep_name = payslip.employee_id.department_id.name
+	    if dep_name not in dep_list:
+		dep_list.append(dep_name)
+
+	for dep in dep_list:
+	    dep_emp = []
+	    for payslip in run.slip_ids:
+		if payslip.employee_id.department_id.name == dep:
+		    dep_emp.append(payslip)
+	    obj_by_dep.append(dep_emp)
+		
+	i = 0
+	for dep in dep_list:
+	    tup_temp = (dep, obj_by_dep[i])
+	    emp_by_dep.append(tup_temp)
+	    i += 1
+	    
+
+        return emp_by_dep
     
     def get_text(self,amount,currency,lang,company_id):
         separator = ','
@@ -196,5 +224,5 @@ class hr_payslip_run_report(report_sxw.rml_parse):
 report_sxw.report_sxw(
     'report.hr.payslip.run.layout_ccorp',
     'hr.payslip.run',
-    'addons/cr_hr_report/report/payment_receipt.mako',
+    'addons/cr_hr_report/report/payroll_report.mako',
     parser=hr_payslip_run_report)
