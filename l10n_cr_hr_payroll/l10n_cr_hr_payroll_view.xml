@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!-- Jobs -->
+        <record id="hr_job_period_rule_form" model="ir.ui.view">
+            <field name="name">hr.job.period.rule.form</field>
+            <field name="model">hr.job</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+                <data>                
+                    <field name = "name" position = "after">
+                        <field name="code" />
+                    </field>
+                </data>
+            </field>
+        </record>
+        <!-- End Jobs -->
+
+    </data>
+</openerp>
