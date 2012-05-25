@@ -44,7 +44,8 @@ l10n_cr_hr_payroll.
         'report_webkit',
     ],
     'update_xml': [
-	'payroll_report.xml', 
+	'payroll_report.xml',
+	'l10n_cr_hr_payroll_view.xml'
         ],
     'installable': True,
     'auto_install': False,
