@@ -36,7 +36,11 @@ Account Voucher module includes all the basic requirements of Voucher Entries fo
     "website" : "http://clearcorp.co.cr",
     "depends" : ["account_voucher"], 
     "init_xml" : [],
-    "update_xml" : [],
+    "update_xml" : [
+	'l10n_cr_account_voucher_view.xml',
+	"l10n_cr_voucher_payment_receipt_view.xml",
+	"l10n_cr_voucher_sales_purchase_view.xml"
+    ],
     'auto_install': False,
     "application": True,
     "installable": True,

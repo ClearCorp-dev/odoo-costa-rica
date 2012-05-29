@@ -30,9 +30,6 @@ from tools.translate import _
 class account_voucher(osv.osv):
     _name = 'account.voucher' 
     _inherit = 'account.voucher'
-    _columns = {
-        'reference': fields.char('Ref #', size=64, readonly=True, required=True, states={'draft':[('readonly',False)]}, help="Transaction reference number."),
-    }
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="cr_view_low_priority_payment_form" model="ir.ui.view">
+            <field name="name">cr.view.low.priority.payment.form</field>
+            <field name="model">account.voucher</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account_voucher.view_low_priority_payment_form"/>
+            <field name="arch" type="xml">
+                <data>                
+                    <field name = "reference" position = "replace">
+                        <field name="reference" select="1" required="1" string="Payment Ref"/>
+                    </field>
+                </data>
+            </field>
+        </record>
+
+	<record id="cr_view_vendor_payment_form" model="ir.ui.view">
+            <field name="name">cr.view.vendor.payment.form</field>
+            <field name="model">account.voucher</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account_voucher.view_vendor_payment_form"/>
+            <field name="arch" type="xml">
+                <data>                
+                    <field name = "reference" position = "replace">
+                        <field name="reference" select="1" required="1" invisible="context.get('line_type', False)" string="Payment Ref"/>
+                    </field>
+                </data>
+            </field>
+        </record>
+
+	<record id="cr_view_vendor_receipt_form" model="ir.ui.view">
+            <field name="name">cr.view.vendor.receipt.form</field>
+            <field name="model">account.voucher</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account_voucher.view_vendor_receipt_form"/>
+            <field name="arch" type="xml">
+                <data>                
+                    <field name = "reference" position = "replace">
+                        <field name="reference" select="1" required="1" invisible="context.get('line_type', False)" string="Payment Ref"/>
+                    </field>
+                </data>
+            </field>
+        </record>
+
+
+    </data>
+</openerp>
