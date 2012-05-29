@@ -2,7 +2,8 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
+#    Addons modules by CLEARCORP S.A.
+#    Copyright (C) 2009-TODAY CLEARCORP S.A. (<http://clearcorp.co.cr>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,28 +23,29 @@
 {
     "name" : "l10n_cr_account_voucher",
     "version" : "1.0",
-    "author" : 'Armando Soto',
+    "author" : 'CLEARCORP S.A.',
     'complexity': "normal",
     "description": """
-Account Voucher module includes all the basic requirements of Voucher Entries for Bank, Cash, Sales, Purchase, Expanse, Contra, etc.
-====================================================================================================================================
-
-    * Voucher Entry
-    * Voucher Receipt
-    * Cheque Register
-    """,
+Localization of Account Voucher
+Changed the refence field of account_voucher to required
+""",
     "category": 'Accounting & Finance',
+    "sequence": 4,
     "website" : "http://clearcorp.co.cr",
+    "images" : [],
+    "icon" : False,
     "depends" : ["account_voucher"], 
     "init_xml" : [],
+    "demo_xml" : [],
     "update_xml" : [
 	'l10n_cr_account_voucher_view.xml',
 	"l10n_cr_voucher_payment_receipt_view.xml",
 	"l10n_cr_voucher_sales_purchase_view.xml"
     ],
+    "test" : [],
     'auto_install': False,
     "application": True,
     "installable": True,
+    'license': 'AGPL-3',
 }
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
