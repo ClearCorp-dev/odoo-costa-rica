@@ -60,4 +60,22 @@ class hr_job(osv.osv):
 
 hr_job()
 
+
+class hr_payslip_run(osv.osv):
+	_inherit = 'hr.payslip.run'
+	_columns = {
+		'schedule_pay': fields.selection([
+            ('fortnightly', 'Fortnightly'),
+            ('monthly', 'Monthly'),
+            ('quarterly', 'Quarterly'),
+            ('semi-annually', 'Semi-annually'),
+            ('annually', 'Annually'),
+            ('weekly', 'Weekly'),
+            ('bi-weekly', 'Bi-weekly'),
+            ('bi-monthly', 'Bi-monthly'),
+            ], 'Scheduled Pay', select=True, readonly=True, states={'draft': [('readonly', False)]}),
+	}
+	
+hr_payslip_run()
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
