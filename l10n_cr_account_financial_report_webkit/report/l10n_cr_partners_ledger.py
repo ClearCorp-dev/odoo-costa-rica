@@ -38,11 +38,6 @@ class l10n_cr_PartnersLedgerWebkit(PartnersLedgerWebkit):
         self.pool = pooler.get_pool(self.cr.dbname)
         self.cursor = self.cr
 
-        company = self.pool.get('res.users').browse(self.cr, uid, uid, context=context).company_id
-        header_report_name = ' - '.join((_('PARTNER LEDGER'), company.name, company.currency_id.name))
-
-        footer_date_time = self.formatLang(str(datetime.today()), date_time=True)
-
         self.localcontext.update({
             'get_amount': self.get_amount,
             'get_partner_name': self.get_partner_name,
@@ -369,5 +364,5 @@ class l10n_cr_PartnersLedgerWebkit(PartnersLedgerWebkit):
 
 HeaderFooterTextWebKitParser('report.account_financial_report_webkit.account.account_report_partners_ledger_webkit',
                              'account.account',
-                             'addons/l10n_cr_account_financial_report_webkit/report/templates/account_report_partners_ledger.mako',
+                             'addons/l10n_cr_account_financial_report_webkit/report/templates/l10n_cr_account_report_partners_ledger.mako',
                              parser=l10n_cr_PartnersLedgerWebkit)

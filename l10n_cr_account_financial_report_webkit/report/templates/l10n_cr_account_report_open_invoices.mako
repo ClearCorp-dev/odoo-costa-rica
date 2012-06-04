@@ -31,6 +31,8 @@
                 <div class="act_as_cell">${_('Chart of Account')}</div>
                 <div class="act_as_cell">${_('Fiscal Year')}</div>
                 <div class="act_as_cell">
+
+
                     %if filter_form(data) == 'filter_date':
                         ${_('Dates Filter')}
                     %else:

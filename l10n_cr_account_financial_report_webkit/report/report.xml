@@ -5,7 +5,7 @@
                 <!-- we do not use report tag has we can not set header ref -->
        <record id="account_financial_report_webkit.account_report_partners_ledger_webkit" model="ir.actions.report.xml">
             <field name="report_type">webkit</field>
-            <field name="report_name">account.account_report_partners_ledger_webkit</field>
+            <field name="report_name">account_financial_report_webkit.account.account_report_partners_ledger_webkit</field>
             <field eval="[(6,0,[])]" name="groups_id"/>
             <field eval="0" name="multi"/>
             <field eval="0" name="auto"/>
@@ -13,15 +13,15 @@
             <field name="model">account.account</field>
             <field name="type">ir.actions.report.xml</field>
             <field name="name">Partner Ledger Webkit</field>
-            <field name="report_rml">l10n_cr_account_financial_report_webkit/report/templates/account_report_partners_ledger.mako</field>
-            <field name="report_file">l10n_cr_account_financial_report_webkit/report/templates/account_report_partners_ledger.mako</field>
+            <field name="report_rml">l10n_cr_account_financial_report_webkit/report/templates/l10n_cr_account_report_partners_ledger.mako</field>
+            <field name="report_file">l10n_cr_account_financial_report_webkit/report/templates/l10n_cr_account_report_partners_ledger.mako</field>
             <field name="webkit_header" ref="financial_landscape_header"/>
         </record>
 
 
         <record id="account_financial_report_webkit.account_report_open_invoices_webkit" model="ir.actions.report.xml">
              <field name="report_type">webkit</field>
-             <field name="report_name">account.account_report_open_invoices_webkit</field>
+             <field name="report_name">account_financial_report_webkit.account.account_report_open_invoices_webkit</field>
              <field eval="[(6,0,[])]" name="groups_id"/>
              <field eval="0" name="multi"/>
              <field eval="0" name="auto"/>
@@ -29,8 +29,8 @@
              <field name="model">account.account</field>
              <field name="type">ir.actions.report.xml</field>
              <field name="name">Open Invoices Report</field>
-             <field name="report_rml">l10n_cr_account_financial_report_webkit/report/templates/account_report_open_invoices.mako</field>
-             <field name="report_file">l10n_cr_account_financial_report_webkit/report/templates/account_report_open_invoices.mako</field>
+             <field name="report_rml">l10n_cr_account_financial_report_webkit/report/templates/l10n_cr_account_report_open_invoices.mako</field>
+             <field name="report_file">l10n_cr_account_financial_report_webkit/report/templates/l10n_cr_account_report_open_invoices.mako</field>
              <field name="webkit_header" ref="financial_landscape_header"/>
          </record>
 
