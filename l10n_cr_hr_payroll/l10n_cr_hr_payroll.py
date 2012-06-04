@@ -62,9 +62,9 @@ hr_job()
 
 
 class hr_payslip_run(osv.osv):
-	_inherit = 'hr.payslip.run'
-	_columns = {
-		'schedule_pay': fields.selection([
+    _inherit = 'hr.payslip.run'
+    _columns = {
+        'schedule_pay': fields.selection([
             ('fortnightly', 'Fortnightly'),
             ('monthly', 'Monthly'),
             ('quarterly', 'Quarterly'),
@@ -74,8 +74,16 @@ class hr_payslip_run(osv.osv):
             ('bi-weekly', 'Bi-weekly'),
             ('bi-monthly', 'Bi-monthly'),
             ], 'Scheduled Pay', select=True, readonly=True, states={'draft': [('readonly', False)]}),
-	}
-	
+    }
+
+    def confirm_payslips(self, cr, uid, ids, context=None):
+        for payslip_run in self.browse(cr, uid, ids, context=context):
+            payslip_obj = self.pool.get('hr.payslip')
+            payslips = payslip_obj.browse(cr, uid, payslip_run.slip_ids, context)
+            for payslip in payslips:
+                payslip_id = payslip.id
+                payslip_id.process_sheet()
+
 hr_payslip_run()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
