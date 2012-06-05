@@ -31,8 +31,6 @@
                 <div class="act_as_cell">${_('Chart of Account')}</div>
                 <div class="act_as_cell">${_('Fiscal Year')}</div>
                 <div class="act_as_cell">
-
-
                     %if filter_form(data) == 'filter_date':
                         ${_('Dates Filter')}
                     %else:
@@ -92,9 +90,6 @@
                   total_credit = 0.0
                   cumul_balance = 0.0
                   cumul_balance_curr = 0.0
-
-                  part_cumul_balance = 0.0
-                  part_cumul_balance_curr = 0.0 
                 %>
                 <div class="act_as_table list_table" style="margin-top: 5px;">
                     <div class="act_as_caption account_title">
@@ -142,6 +137,8 @@
                           <%
                           total_debit += line.get('debit') or 0.0
                           total_credit += line.get('credit') or 0.0
+                          cumul_balance += line.get('balance') or 0.0
+                          cumul_balance_curr += line.get('amount_currency') or 0.0
 
                           label_elements = [line.get('lname') or '']
                           if line.get('invoice_number'):
@@ -170,8 +167,7 @@
                               ## credit
                               <div class="act_as_cell amount">${formatLang(line.get('credit') or 0.0) | amount }</div>
                               ## balance cumulated
-                              <% cumul_balance += line.get('balance') or 0.0 %>
-                              <div class="act_as_cell amount" style="padding-right: 1px;">${formatLang(cumul_balance) | amount }</div>
+                              <div class="act_as_cell amount" style="padding-right: 1px;">${formatLang(line.get('balance') or 0.0) | amount }</div>
                               %if amount_currency(data):
                                   ## currency balance
                                   <div class="act_as_cell sep_left amount">${formatLang(line.get('amount_currency') or 0.0) | amount }</div>

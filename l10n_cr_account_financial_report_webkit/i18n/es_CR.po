@@ -214,7 +214,7 @@ msgstr "Código"
 #: model:ir.actions.act_window,name:account_financial_report_webkit.action_account_partners_ledger_menu_webkit
 #: model:ir.actions.report.xml,name:account_financial_report_webkit.account_report_partners_ledger_webkit
 msgid "Partner Ledger Webkit"
-msgstr "Libro Mayor de Empresa Webkit"
+msgstr "Libro Mayor de Empresa"
 
 #. module: account_financial_report_webkit
 #: field:account.common.balance.report,display_account:0

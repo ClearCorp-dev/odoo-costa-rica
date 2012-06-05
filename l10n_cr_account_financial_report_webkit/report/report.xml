@@ -13,8 +13,8 @@
             <field name="model">account.account</field>
             <field name="type">ir.actions.report.xml</field>
             <field name="name">Partner Ledger Webkit</field>
-            <field name="report_rml">l10n_cr_account_financial_report_webkit/report/templates/l10n_cr_account_report_partners_ledger.mako</field>
-            <field name="report_file">l10n_cr_account_financial_report_webkit/report/templates/l10n_cr_account_report_partners_ledger.mako</field>
+            <field name="report_rml">l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako</field>
+            <field name="report_file">l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako</field>
             <field name="webkit_header" ref="financial_landscape_header"/>
         </record>
 
@@ -29,8 +29,8 @@
              <field name="model">account.account</field>
              <field name="type">ir.actions.report.xml</field>
              <field name="name">Open Invoices Report</field>
-             <field name="report_rml">l10n_cr_account_financial_report_webkit/report/templates/l10n_cr_account_report_open_invoices.mako</field>
-             <field name="report_file">l10n_cr_account_financial_report_webkit/report/templates/l10n_cr_account_report_open_invoices.mako</field>
+             <field name="report_rml">l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako</field>
+             <field name="report_file">l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako</field>
              <field name="webkit_header" ref="financial_landscape_header"/>
          </record>
 
