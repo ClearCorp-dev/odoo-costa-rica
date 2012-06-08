@@ -34,5 +34,8 @@
              <field name="webkit_header" ref="financial_landscape_header"/>
          </record>
 
+	<report auto="False" id="l10n_cr_partner_balance" model="res.partner" 
+		name="l10n.cr.partner.balance.layout_ccorp"  file="l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partner_balance.mako" string="Estado de Cuenta" report_type="webkit"/>
+
     </data>
 </openerp>
