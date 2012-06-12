@@ -94,6 +94,6 @@ class check_voucher(report_sxw.rml_parse):
 report_sxw.report_sxw(
     'report.webkit_report_l10n_cr_account_voucher_check_bcr',
     'account.voucher',
-    'addons/account_voucher_check/report/l10n_cr_account_voucher_check_bcr.mako',
+    'addons/l10n_cr_account_voucher_check_bcr/report/l10n_cr_account_voucher_check_bcr.mako',
     parser=check_voucher
 )

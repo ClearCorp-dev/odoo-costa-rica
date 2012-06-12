@@ -2,7 +2,7 @@
 <openerp>
     <data >
         <record id="webkit_header_l10n_cr_account_voucher_check_bcr" model="ir.header_webkit">
-            <field name="name">Imprimir Cheque BCR</field>
+            <field name="name">Check print BCR</field>
             <field name="orientation">Portrait</field>
             <field name="format">Letter</field>
             <field eval="0.50" name="margin_top"/>
@@ -185,7 +185,7 @@ body {
                 id="webkit_report_l10n_cr_account_voucher_check_bcr"
                 model="account.voucher"
                 name="webkit_report_l10n_cr_account_voucher_check_bcr"
-                file="account_voucher_check/report/l10n_cr_account_voucher_check_bcr.mako"
+                file="l10n_cr_account_voucher_check_bcr/report/l10n_cr_account_voucher_check_bcr.mako"
                 string="Imprimir Cheque BCR"
                 report_type="webkit"
                

@@ -1,13 +1,13 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* ccorp_payment_receipt
+#	* l10n_cr_account_voucher_check_bcr
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 6.0.3\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2012-01-03 22:28+0000\n"
-"PO-Revision-Date: 2012-01-03 22:28+0000\n"
+"Project-Id-Version: OpenERP Server 6.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-12 16:45+0000\n"
+"PO-Revision-Date: 2012-06-12 16:45+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,72 +15,19 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: ccorp_payment_receipt
-#: report:report.account.voucher.layout_ccorp:39
-msgid "Check No."
-msgstr "CHEQUE No."
+#. module: l10n_cr_account_voucher_check_bcr
+#: model:ir.actions.report.xml,name:l10n_cr_account_voucher_check_bcr.webkit_report_l10n_cr_account_voucher_check_bcr
+msgid "Check print BCR"
+msgstr "Imprimir Cheque BCR"
 
-#. module: ccorp_payment_receipt
-#: report:report.account.voucher.layout_ccorp:13
-msgid "No."
-msgstr "No."
+#. module: l10n_cr_account_voucher_check_bcr
+#: model:ir.actions.act_window,help:l10n_cr_account_voucher_check_bcr.action_check_payment
+msgid "The Check payment form allows you to track the payment by check you do to your suppliers. When you select a supplier, the payment method and an amount for the payment, OpenERP will propose to reconcile your payment with the open supplier invoices or bills."
+msgstr "The Check payment form allows you to track the payment by check you do to your suppliers. When you select a supplier, the payment method and an amount for the payment, OpenERP will propose to reconcile your payment with the open supplier invoices or bills."
 
-#. module: ccorp_payment_receipt
-#: model:ir.actions.report.xml,name:ccorp_payment_receipt.account_voucher_ccorp
-msgid "Payment Voucher"
-msgstr "Imprimir Recibo"
+#. module: l10n_cr_account_voucher_check_bcr
+#: model:ir.actions.act_window,name:l10n_cr_account_voucher_check_bcr.action_check_payment
+#: model:ir.ui.menu,name:l10n_cr_account_voucher_check_bcr.menu_action_vendor_payment
+msgid "Check Payment"
+msgstr "Pago de cheque"
 
-#. module: ccorp_payment_receipt
-#: report:report.account.voucher.layout_ccorp:46
-msgid "AUTORIZADO MEDIANTE OFICIO No.04-00007-97 DE FECHA 30-09-97 DE LA D.G.T.D."
-msgstr "AUTORIZADO MEDIANTE OFICIO No.04-00007-97 DE FECHA 30-09-97 DE LA D.G.T.D."
-
-#. module: ccorp_payment_receipt
-#: report:report.account.voucher.layout_ccorp:23
-msgid "Concept of"
-msgstr "POR CONCEPTO DE"
-
-#. module: ccorp_payment_receipt
-#: report:report.account.voucher.layout_ccorp:45
-msgid "LA VALIDEZ DE ESTE RECIBO QUEDA SUJETA A QUE LOS CHEQUES RECIBIDOS SEAN PAGADOS POR EL BANCO A NUESTRA SATISFACCION"
-msgstr "LA VALIDEZ DE ESTE RECIBO QUEDA SUJETA A QUE LOS CHEQUES RECIBIDOS SEAN PAGADOS POR EL BANCO A NUESTRA SATISFACCION"
-
-#. module: ccorp_payment_receipt
-#: report:report.account.voucher.layout_ccorp:37
-msgid "Cash"
-msgstr "EFECTIVO"
-
-#. module: ccorp_payment_receipt
-#: report:report.account.voucher.layout_ccorp:20
-msgid "The amount of"
-msgstr "LA SUMA DE"
-
-#. module: ccorp_payment_receipt
-#: report:report.account.voucher.layout_ccorp:26
-msgid "Observations"
-msgstr "OBSERVACIONES"
-
-#. module: ccorp_payment_receipt
-#: report:report.account.voucher.layout_ccorp:49
-msgid "P/"
-msgstr "P/"
-
-#. module: ccorp_payment_receipt
-#: report:report.account.voucher.layout_ccorp:17
-msgid "We recieve from"
-msgstr "RECIBIMOS DE"
-
-#. module: ccorp_payment_receipt
-#: report:report.account.voucher.layout_ccorp:1
-msgid "MONEY RECEIPT"
-msgstr "RECIBO DE DINERO"
-
-#. module: ccorp_payment_receipt
-#: report:report.account.voucher.layout_ccorp:1
-msgid "Date"
-msgstr "FECHA"
-
-#. module: ccorp_payment_receipt
-#: report:addons/ccorp_payment_receipt/report/payment_receipt.mako:23
-msgid "In words"
-msgstr "EN LETRAS"
