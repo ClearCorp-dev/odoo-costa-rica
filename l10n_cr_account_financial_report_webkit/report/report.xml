@@ -34,8 +34,23 @@
              <field name="webkit_header" ref="financial_landscape_header"/>
          </record>
 
-	<report auto="False" id="l10n_cr_partner_balance" model="res.partner" 
-		name="l10n.cr.partner.balance.layout_ccorp"  file="l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partner_balance.mako" string="Estado de Cuenta" report_type="webkit"/>
+        <report auto="False" id="l10n_cr_partner_balance" model="res.partner" 
+            name="l10n.cr.partner.balance.layout_ccorp"  file="l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partner_balance.mako" string="Estado de Cuenta" report_type="webkit"/>
+
+        <record id="l10n_cr_account_financial_report_webkit.account_report_account_balances_webkit" model="ir.actions.report.xml">
+             <field name="report_type">webkit</field>
+             <field name="report_name">l10n_cr_account_financial_report_webkit.account.account_report_account_bank_balances_webkit</field>
+             <field eval="[(6,0,[])]" name="groups_id"/>
+             <field eval="0" name="multi"/>
+             <field eval="0" name="auto"/>
+             <field eval="1" name="header"/>
+             <field name="model">account.account</field>
+             <field name="type">ir.actions.report.xml</field>
+             <field name="name">Account Balances Webkit</field>
+             <field name="report_rml">l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako</field>
+             <field name="report_file">l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako</field>
+             <field name="webkit_header" ref="financial_portrait_header"/>
+         </record> 
 
     </data>
 </openerp>

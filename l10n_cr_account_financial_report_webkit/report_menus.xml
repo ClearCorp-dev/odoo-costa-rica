@@ -2,14 +2,17 @@
 <openerp>
     <data>
 
-        
-        <menuitem icon="STOCK_PRINT" name="Partner Ledger"
+        <!--   <menuitem icon="STOCK_PRINT" name="Partner Ledger"
             parent="account.next_id_22" action="action_account_partners_ledger_menu_webkit"
             groups="account.group_account_manager,account.group_account_user" id="account.menu_account_partner_ledger"/>
 
         <menuitem icon="STOCK_PRINT" name="Open Invoices"
             parent="account.next_id_22" action="action_account_open_invoices_menu_webkit"
-            groups="account.group_account_manager,account.group_account_user" id="menu_account_open_invoices"/>
+            groups="account.group_account_manager,account.group_account_user" id="menu_account_open_invoices"/> -->
+
+        <menuitem icon="STOCK_PRINT" name="Account Bank Balances"
+            parent="account.final_accounting_reports" action="action_account_balances_menu_webkit"
+            groups="account.group_account_manager,account.group_account_user" id="account_financial_report_webkit.menu_Account_Balances_report"/>
 
     </data>
 </openerp>

@@ -90,6 +90,8 @@ Instead, the header and footer are created as text with arguments passed to wkht
     'update_xml': ['account_move_line_view.xml',
                    'data/financial_webkit_header.xml',
                    'report/report.xml',
+                   'wizard/account_bank_balances_wizard_view.xml',
+                   'report_menus.xml'
                    ],
     'test': [],
     'active': False,
