@@ -66,13 +66,11 @@
 		    <div class="act_as_thead">
 			<div class="act_as_row labels" style="font-weight: bold; font-size: 11x;">
 			    <div class="act_as_cell first_column" style="width: 85px;  vertical-align: middle">${_('Cedula')}</div>
-			    <div class="act_as_cell" style="width: 250px;  vertical-align: middle">${_('Nombre')}</div>
+			    <div class="act_as_cell" style="width: 230px;  vertical-align: middle">${_('Nombre')}</div>
 			    <div class="act_as_cell amount" style="width: 40px;">${_('Hrs.')}<br />${_('Nor')}</div>
 			    <div class="act_as_cell amount" style="width: 40px;">${_('Hrs.')}<br />${_('Ext')}</div>
-			    <div class="act_as_cell amount" style="width: 40px;">${_('Hrs.')}<br />${_('Dob')}</div>
 			    <div class="act_as_cell amount">${_('Ingr.')}<br />${_('Normal')}</div>
 			    <div class="act_as_cell amount">${_('Ingr.')}<br />${_('Extra')}</div>
-			    <div class="act_as_cell amount">${_('Ingr.')}<br />${_('Doble')}</div>
 			    <div class="act_as_cell amount">${_('Otros')}<br />${_('Ingr.')}</div>
 			    <div class="act_as_cell amount">${_('Salario')}<br />${_('Bruto')}</div>
 			    <div class="act_as_cell amount">${_('Deducc.')}<br />${_('CCSS/BP')}</div>
@@ -86,23 +84,19 @@
                 %for slip in sorted(department[1], key=lambda slip: slip.employee_id.name):
 			    <div class="act_as_row lines">           
                               ## cedula
-                              <div class="act_as_cell first_column" style="width: 80px;">${slip.employee_id.identification_id or ''}</div>
+                              <div class="act_as_cell first_column" style="width: 85px;">${slip.employee_id.identification_id or ''}</div>
                               ## nombre
                               <div class="act_as_cell">${slip.employee_id.name or '0'}</div>
                               ## nh
                               <div class="act_as_cell amount">${get_hn(slip.worked_days_line_ids) or '0'}</div>				
                               ## eh
                               <div class="act_as_cell amount">${get_he(slip.worked_days_line_ids) or '0'}</div>
-                              ## ef
-                              <div class="act_as_cell amount">${get_fe(slip.worked_days_line_ids) or '0'}</div>
                               ## basic
                               <div class="act_as_cell amount">${formatLang(get_basic(slip.line_ids)) or '0'}</div>
                               ## exs
                               <div class="act_as_cell amount">${formatLang(get_exs(slip.line_ids)) or '0'}</div>
-                              ## fes
-                              <div class="act_as_cell amount">${formatLang(get_fes(slip.line_ids)) or '0'}</div>
                               ## otros
-                              <div class="act_as_cell amount">${ '0'}</div>
+                              <div class="act_as_cell amount">${ '0.00'}</div>
                               ## gross
                               <div class="act_as_cell amount ">${formatLang(get_gross(slip.line_ids)) or '0'}</div>
                                ## ccss
@@ -110,7 +104,7 @@
                               ## RENTA
                               <div class="act_as_cell amount">${formatLang(get_rent(slip.line_ids)) or '0'}</div>
                               ## otros
-                              <div class="act_as_cell amount">${ '0'}</div>
+                              <div class="act_as_cell amount">${ '0.00'}</div>
                               ## NETOS
                               <div class="act_as_cell amount">${formatLang(get_net(slip.line_ids)) or '0'}</div>
 				<%
@@ -149,15 +143,13 @@
 		    <div class="act_as_cell">${total_emp_dep} Empleados</div>
 		    <div class="act_as_cell amount">${total_hn_dep}</div>
 		    <div class="act_as_cell amount">${total_he_dep}</div>
-		    <div class="act_as_cell amount">${total_fe_dep}</div>
 		    <div class="act_as_cell amount">${formatLang(total_basic_dep)}</div>
 		    <div class="act_as_cell amount">${formatLang(total_exs_dep)}</div>
-		    <div class="act_as_cell amount">${formatLang(total_fes_dep)}</div>
-		    <div class="act_as_cell amount">${_('0')}</div>
+		    <div class="act_as_cell amount">${_('0.00')}</div>
 		    <div class="act_as_cell amount">${formatLang(total_gross_dep)}</div>
 		    <div class="act_as_cell amount">${formatLang(total_ccss_dep)}</div>
 		    <div class="act_as_cell amount">${formatLang(total_rent_dep)}</div>
-		    <div class="act_as_cell amount">${_('0')}</div>
+		    <div class="act_as_cell amount">${_('0.00')}</div>
 		    <div class="act_as_cell amount">${formatLang(total_net_dep)}</div>
 		</div>
             </div>
@@ -169,18 +161,16 @@
 	    <div class="act_as_tfoot">
 		<div class="act_as_row labels"  style="font-weight: bold; font-size: 11px;">
 		    <div class="act_as_cell first_column" style="width: 85px; font-size: 12px; text-align: left">${_('TOTAL GENERAL')}</div>
-		    <div class="act_as_cell" style="width: 250px;">${total_emp} Empleados</div>
+		    <div class="act_as_cell" style="width: 230px;">${total_emp} Empleados</div>
 		    <div class="act_as_cell amount" style="width: 40px;">${total_hn}</div>
 		    <div class="act_as_cell amount" style="width: 40px;">${total_he}</div>
-		    <div class="act_as_cell amount" style="width: 40px;">${total_fe}</div>
 		    <div class="act_as_cell amount">${formatLang(total_basic)}</div>
 		    <div class="act_as_cell amount">${formatLang(total_exs)}</div>
-		    <div class="act_as_cell amount">${formatLang(total_fes)}</div>
-		    <div class="act_as_cell amount">${_('0')}</div>
+		    <div class="act_as_cell amount">${_('0.00')}</div>
 		    <div class="act_as_cell amount">${formatLang(total_gross)}</div>
 		    <div class="act_as_cell amount">${formatLang(total_ccss)}</div>
 		    <div class="act_as_cell amount">${formatLang(total_rent)}</div>
-		    <div class="act_as_cell amount">${_('0')}</div>
+		    <div class="act_as_cell amount">${_('0.00')}</div>
 		    <div class="act_as_cell amount">${formatLang(total_net)}</div>
 		</div>
 	    </div>
