@@ -35,17 +35,44 @@ from openerp.osv import osv
 from openerp.addons.report_webkit import report_helper
 import addons
 
-from openerp.addons.account_financial_report_webkit.report.open_invoices import PartnersOpenInvoicesWebkit
+from l10n_cr_partners_ledger import l10n_cr_PartnersLedgerWebkit
 from openerp.addons.account_financial_report_webkit.report.webkit_parser_header_fix import HeaderFooterTextWebKitParser
 
-class l10n_cr_PartnersOpenInvoicesWebkit(PartnersOpenInvoicesWebkit):
+class l10n_cr_PartnersOpenInvoicesWebkit(l10n_cr_PartnersLedgerWebkit):
 
     def __init__(self, cursor, uid, name, context):
         super(l10n_cr_PartnersOpenInvoicesWebkit, self).__init__(cursor, uid, name, context=context)
         self.pool = pooler.get_pool(self.cr.dbname)
         self.cursor = self.cr
 
+        company = self.pool.get('res.users').browse(self.cr, uid, uid, context=context).company_id
+        header_report_name = ' - '.join((_('OPEN INVOICES REPORT'), company.name, company.currency_id.name))
 
+        footer_date_time = self.formatLang(str(datetime.today()), date_time=True)
+
+        self.localcontext.update({
+            'is_open': self.is_open,
+            'report_name':_('Open Invoices Report'),
+            'additional_args': [
+                ('--header-font-name', 'Helvetica'),
+                ('--footer-font-name', 'Helvetica'),
+                ('--header-font-size', '10'),
+                ('--footer-font-size', '6'),
+                ('--header-left', header_report_name),
+                ('--header-spacing', '2'),
+                ('--footer-left', footer_date_time),
+                ('--footer-right', ' '.join((_('Page'), '[page]', _('of'), '[topage]'))),
+                ('--footer-line',),
+            ],
+        })
+
+    def is_open(self,cr, uid, account_move_line):
+        move_line_obj = self.pool.get('account.move.line').browse(cr,uid,account_move_line['id'])
+    
+        if move_line_obj.reconcile_id.id == False:
+            return True
+        else:
+            return False
 
 HeaderFooterTextWebKitParser('report.account_financial_report_webkit.account.account_report_open_invoices_webkit',
                              'account.account',
