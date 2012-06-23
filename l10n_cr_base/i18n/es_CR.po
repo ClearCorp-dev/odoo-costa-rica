@@ -81,11 +81,6 @@ msgid "Sec."
 msgstr "Sec."
 
 #. module: l10n_cr_base
-#: model:res.partner.function,code:l10n_cr_base.Chairman
-msgid "Chairman"
-msgstr "Pres."
-
-#. module: l10n_cr_base
 #: model:res.partner.function,name:l10n_cr_base.Chairman
 msgid "Chairman"
 msgstr "Presidente"

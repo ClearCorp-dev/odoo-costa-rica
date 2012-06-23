@@ -46,11 +46,6 @@ msgid "Chairman"
 msgstr ""
 
 #. module: l10n_cr_base
-#: model:res.partner.function,name:l10n_cr_base.Chairman
-msgid "Chairman"
-msgstr ""
-
-#. module: l10n_cr_base
 #: model:res.partner.title,shortcut:l10n_cr_base.res_partner_title_sal
 msgid "S.A.L."
 msgstr ""
