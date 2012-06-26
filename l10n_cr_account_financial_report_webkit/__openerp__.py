@@ -91,7 +91,9 @@ Instead, the header and footer are created as text with arguments passed to wkht
                    'data/financial_webkit_header.xml',
                    'report/report.xml',
                    'wizard/account_bank_balances_wizard_view.xml',
-                   'report_menus.xml'
+                   'wizard/l10n_cr_open_invoices_wizard_view.xml',
+                   'wizard/l10n_cr_partners_ledger_wizard_view.xml',
+                   'report_menus.xml',
                    ],
     'test': [],
     'active': False,

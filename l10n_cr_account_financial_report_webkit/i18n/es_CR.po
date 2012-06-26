@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-13 17:11+0000\n"
-"PO-Revision-Date: 2012-06-13 17:11+0000\n"
+"POT-Creation-Date: 2012-06-22 15:57+0000\n"
+"PO-Revision-Date: 2012-06-22 15:57+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -31,17 +31,18 @@ msgstr "Filtro en las cuentas"
 msgid "Please set a valid time filter"
 msgstr "Por favor, establecer un filtro de tiempo válido"
 
-#. module: account_financial_report_webkit
+#. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: view:general.ledger.webkit:0
+#: view:open.invoices.webkit:0
+#: view:partners.ledger.webkit:0
 #: view:open.invoices.webkit:0
 #: view:partners.ledger.webkit:0
 msgid "Layout Options"
 msgstr "Opciones de Diseño"
 
-#. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
+#. module: account_financial_report_webkit
 #: report:addons/account_financial_report_webkit/report/templates/account_report_general_ledger.mako:203
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partners_ledger.mako:258
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:226
 msgid "Cumulated Balance on Account"
 msgstr "Saldo Acumulado en la Cuenta"
 
@@ -155,11 +156,6 @@ msgstr "Cuenta"
 msgid "TRIAL BALANCE"
 msgstr "BALANCE DE SUMAS Y SALDOS"
 
-#. module: l10n_cr_account_financial_report_webkit
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:115
-msgid "Due Date"
-msgstr "Due Date"
-
 #. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: view:general.ledger.webkit:0
 #: view:open.invoices.webkit:0
@@ -257,8 +253,8 @@ msgstr "Libro Mayor"
 
 #. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partners_ledger.mako:112
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:113
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:118
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:126
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:126
 msgid "Rec."
 msgstr "Rec."
 
@@ -274,7 +270,7 @@ msgstr "¡Error! No se pueden crear cuentas recursivas."
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partners_ledger.mako:34
 #: report:addons/account_financial_report_webkit/report/templates/account_report_trial_balance.mako:58
 #: report:addons/l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako:60
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:37
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:34
 #: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:34
 msgid "Periods Filter"
 msgstr "Filtro por Períodos"
@@ -298,20 +294,20 @@ msgstr "No se encontró el período"
 #: report:addons/account_financial_report_webkit/report/templates/account_report_trial_balance.mako:123
 #: report:addons/l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako:65
 #: report:addons/l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako:160
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:39
 #: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:39
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:166
 msgid "Initial Balance"
 msgstr "Saldo Inicial"
 
 #. module: account_financial_report_webkit
 #: constraint:account.move.line:0
 msgid "The date of your Journal Entry is not in the defined period! You should change the date or remove this constraint from the journal."
-msgstr "¡La fecha de su asiento no está en el periodo definido! Usted debería cambiar la fecha o borrar esta restricción del diario."
+msgstr "¡La fecha de su asiento no está en el periodo definido! Usted debería cambiar la fecha o borar esta restricción del diario."
 
 #. module: account_financial_report_webkit
 #: model:ir.model,name:account_financial_report_webkit.model_general_ledger_webkit
 msgid "General Ledger Report"
-msgstr "Informe del libro mayor"
+msgstr "Informe de Libro Mayor"
 
 #. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: constraint:open.invoices.webkit:0
@@ -337,8 +333,8 @@ msgstr "Este informe le permite imprimir o generar un pdf del saldo de cuentas d
 #. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: report:addons/account_financial_report_webkit/report/templates/account_report_general_ledger.mako:99
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partners_ledger.mako:108
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:109
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:114
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:122
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:122
 msgid "Partner"
 msgstr "Empresa"
 
@@ -364,9 +360,10 @@ msgstr "Seleccione los Planes Contables"
 msgid "Filter by"
 msgstr "Filtrar por"
 
-#. module: account_financial_report_webkit
+#. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: code:addons/account_financial_report_webkit/report/partners_ledger.py:48
 #: view:partners.ledger.webkit:0
+#: model:ir.actions.act_window,name:l10n_cr_account_financial_report_webkit.action_account_partners_ledger_menu_webkit
 #, python-format
 msgid "Partner Ledger"
 msgstr "Libro Mayor de Empresa"
@@ -374,16 +371,16 @@ msgstr "Libro Mayor de Empresa"
 #. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: report:addons/account_financial_report_webkit/report/templates/account_report_general_ledger.mako:114
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partners_ledger.mako:123
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:126
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:135
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:143
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:143
 msgid "Curr."
 msgstr "Curr."
 
 #. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: report:addons/account_financial_report_webkit/report/templates/account_report_general_ledger.mako:101
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partners_ledger.mako:110
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:111
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:116
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:124
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:124
 msgid "Label"
 msgstr "Etiqueta"
 
@@ -403,8 +400,8 @@ msgstr "Sólo las cuentas seleccionadas se imprimirán. Dejar en blanco para imp
 #: report:addons/account_financial_report_webkit/report/templates/account_report_profit_loss.mako:111
 #: report:addons/account_financial_report_webkit/report/templates/account_report_trial_balance.mako:126
 #: report:addons/l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako:169
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:117
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:126
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:134
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:134
 msgid "Debit"
 msgstr "Débito"
 
@@ -424,9 +421,8 @@ msgstr "Por favor, establecer un encabezado en la configuración de la compañí
 msgid "Time Filters"
 msgstr "Filtros de Tiempo"
 
-#. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
+#. module: account_financial_report_webkit
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partners_ledger.mako:224
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:191
 msgid "Cumulated Balance on Partner"
 msgstr "Saldo acumulado en empresa"
 
@@ -434,7 +430,7 @@ msgstr "Saldo acumulado en empresa"
 #: model:ir.actions.act_window,name:account_financial_report_webkit.action_account_partner_balance_menu_webkit
 #: model:ir.actions.report.xml,name:account_financial_report_webkit.account_report_partner_balance_webkit
 msgid "Partner Balance Webkit"
-msgstr "Estado de Cuenta de Empresa"
+msgstr "Partner Balance Webkit"
 
 #. module: account_financial_report_webkit
 #: help:open.invoices.webkit,until_date:0
@@ -451,9 +447,8 @@ msgstr "The clearance date is essentially a tool used for debtors provisionning 
 "By amending the clearance date, you will be, for instance, able to answer the question : 'based on my last year end debtors open invoices, which invoices are still unpaid today (today is my clearance date)?'\n"
 ""
 
-#. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
+#. module: account_financial_report_webkit
 #: report:addons/account_financial_report_webkit/report/templates/account_report_open_invoices.mako:42
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:40
 msgid "Clearance Date"
 msgstr "Fecha de Liquidación"
 
@@ -476,8 +471,10 @@ msgid "With balance is not equal to 0"
 msgstr "Con el balance no es igual a 0"
 
 #. module: l10n_cr_account_financial_report_webkit
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:257
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:300
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:300
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:359
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:297
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:356
 msgid "Saldo"
 msgstr "Saldo"
 
@@ -584,15 +581,16 @@ msgstr "Informe de Balance Común"
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partners_ledger.mako:37
 #: report:addons/account_financial_report_webkit/report/templates/account_report_trial_balance.mako:61
 #: report:addons/l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako:63
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:41
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:37
 #: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:37
 msgid "Accounts Filter"
 msgstr "Filtro por Cuentas"
 
 #. module: l10n_cr_account_financial_report_webkit
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:128
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:136
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:136
 msgid "Manual Move"
-msgstr "Movimiento Manual"
+msgstr "Manual Move"
 
 #. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: selection:account.common.balance.report,comp0_filter:0
@@ -617,7 +615,7 @@ msgstr "Sólo Apertura"
 #. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: report:addons/account_financial_report_webkit/report/templates/account_report_open_invoices.mako:67
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partners_ledger.mako:60
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:65
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:60
 #: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:60
 msgid "Custom Filter"
 msgstr "Filtro Personalizado"
@@ -658,8 +656,8 @@ msgstr "El año fiscal, períodos o plan contable elegidos deben pertenecer a la
 #. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: report:addons/account_financial_report_webkit/report/templates/account_report_general_ledger.mako:109
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partners_ledger.mako:118
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:121
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:130
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:138
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:138
 msgid "Cumul. Bal."
 msgstr "Bal. Acumul."
 
@@ -669,11 +667,12 @@ msgstr "Bal. Acumul."
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partners_ledger.mako:23
 #: report:addons/account_financial_report_webkit/report/templates/account_report_trial_balance.mako:47
 #: report:addons/l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako:47
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:23
 #: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:23
 msgid "Computed"
 msgstr "Procesado"
 
-#. module: account_financial_report_webkit
+#. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: code:addons/account_financial_report_webkit/report/general_ledger.py:64
 #: code:addons/account_financial_report_webkit/report/open_invoices.py:75
 #: code:addons/account_financial_report_webkit/report/partner_balance.py:63
@@ -681,6 +680,7 @@ msgstr "Procesado"
 #: code:addons/account_financial_report_webkit/report/profit_loss.py:68
 #: code:addons/account_financial_report_webkit/report/trial_balance.py:64
 #: code:addons/account_financial_report_webkit/report/webkit_parser_header_fix.py:68
+#: code:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_open_invoices.py:64
 #, python-format
 msgid "of"
 msgstr "de"
@@ -698,6 +698,8 @@ msgstr "Cuentas por Pagar"
 #: code:addons/account_financial_report_webkit/report/open_invoices.py:60
 #: model:ir.actions.report.xml,name:account_financial_report_webkit.account_report_open_invoices_webkit
 #: model:ir.model,name:account_financial_report_webkit.model_open_invoices_webkit
+#: code:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_open_invoices.py:55
+#: model:ir.actions.act_window,name:l10n_cr_account_financial_report_webkit.action_account_open_invoices_menu_webkit
 #: model:ir.model,name:l10n_cr_account_financial_report_webkit.model_open_invoices_webkit
 #, python-format
 msgid "Open Invoices Report"
@@ -748,6 +750,7 @@ msgstr "Fecha de Inicio"
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partners_ledger.mako:23
 #: report:addons/account_financial_report_webkit/report/templates/account_report_trial_balance.mako:47
 #: report:addons/l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako:47
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:23
 #: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:23
 msgid "Opening Entries"
 msgstr "Apuntes de Apertura"
@@ -787,6 +790,7 @@ msgstr "Agrupar Empresa por tipo de moneda"
 #: report:addons/account_financial_report_webkit/report/templates/account_report_profit_loss.mako:94
 #: report:addons/account_financial_report_webkit/report/templates/account_report_trial_balance.mako:47
 #: report:addons/l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako:47
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:23
 #: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:23
 msgid "No"
 msgstr "No"
@@ -914,8 +918,8 @@ msgstr "Webkit Report template not found !"
 #: selection:account.balances,comp1_filter:0
 #: selection:account.balances,comp2_filter:0
 #: selection:account.balances,filter:0
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:101
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:106
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:114
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:114
 msgid "Date"
 msgstr "Fecha"
 
@@ -928,6 +932,14 @@ msgstr "Desactive la opción para mostrar todos los detalles de las cuentas cent
 #: constraint:account.move.line:0
 msgid "You can not create journal items on an account of type view."
 msgstr "No puede crear asientos en una cuenta de tipo vista"
+
+#. module: l10n_cr_account_financial_report_webkit
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:74
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:76
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:74
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:76
+msgid "Accounts in "
+msgstr "Cuentas en "
 
 #. module: account_financial_report_webkit
 #: view:account.move.line:0
@@ -955,7 +967,7 @@ msgstr "Cuando no se selecciona ningún año fiscal, se debe elegir para filtrar
 #: report:addons/account_financial_report_webkit/report/templates/account_report_profit_loss.mako:62
 #: report:addons/account_financial_report_webkit/report/templates/account_report_trial_balance.mako:75
 #: report:addons/l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako:85
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:55
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:51
 #: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:51
 msgid "To:"
 msgstr "Hasta:"
@@ -1025,8 +1037,8 @@ msgstr "La fecha de la última reconciliación (total o parcial) de la línea de
 #: report:addons/account_financial_report_webkit/report/templates/account_report_profit_loss.mako:113
 #: report:addons/account_financial_report_webkit/report/templates/account_report_trial_balance.mako:128
 #: report:addons/l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako:171
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:119
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:124
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:132
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:132
 msgid "Credit"
 msgstr "Crédito"
 
@@ -1051,7 +1063,7 @@ msgstr "Error"
 #. module: l10n_cr_account_financial_report_webkit
 #: model:ir.model,name:l10n_cr_account_financial_report_webkit.model_account_balances
 msgid "Account Balances Report"
-msgstr "Account Balances Report"
+msgstr "Reporte de Saldo de Cuentas de Banco"
 
 #. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partner_balance.mako:152
@@ -1119,7 +1131,7 @@ msgstr "Filtros de Cuentas"
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partners_ledger.mako:32
 #: report:addons/account_financial_report_webkit/report/templates/account_report_trial_balance.mako:56
 #: report:addons/l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako:58
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:35
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:32
 #: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:32
 msgid "Dates Filter"
 msgstr "Filtro por Fechas"
@@ -1163,7 +1175,8 @@ msgid "Periods"
 msgstr "Períodos"
 
 #. module: l10n_cr_account_financial_report_webkit
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:120
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:128
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:128
 msgid "Invoice"
 msgstr "Factura"
 
@@ -1175,8 +1188,8 @@ msgstr "Estado de Cuenta"
 #. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: report:addons/account_financial_report_webkit/report/templates/account_report_general_ledger.mako:112
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partners_ledger.mako:121
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:124
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:133
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:141
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:141
 msgid "Curr. Balance"
 msgstr "Balance Act."
 
@@ -1216,8 +1229,8 @@ msgstr "La cuenta seleccionada en su asiento fuerza a tener una moneda secundari
 #. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: report:addons/account_financial_report_webkit/report/templates/account_report_general_ledger.mako:93
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partners_ledger.mako:102
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:103
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:108
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:116
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:116
 msgid "Period"
 msgstr "Período"
 
@@ -1250,8 +1263,8 @@ msgstr "En el caso de que hayan monedas extranjeras el Saldo Total se calculó s
 #. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: report:addons/account_financial_report_webkit/report/templates/account_report_general_ledger.mako:97
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partners_ledger.mako:106
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:107
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:112
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:120
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:120
 msgid "Journal"
 msgstr "Asiento"
 
@@ -1300,7 +1313,7 @@ msgstr "Nota: "
 #: field:trial.balance.webkit,chart_account_id:0
 #: field:account.balances,chart_account_id:0
 #: report:addons/l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako:54
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:31
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:28
 #: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:28
 msgid "Chart of Account"
 msgstr "Plan Contable"
@@ -1328,7 +1341,7 @@ msgstr "Diferencia"
 #: field:trial.balance.webkit,target_move:0
 #: field:account.balances,target_move:0
 #: report:addons/l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako:64
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:42
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:38
 #: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:38
 msgid "Target Moves"
 msgstr "Movimientos Destino"
@@ -1341,7 +1354,7 @@ msgstr "Movimientos Destino"
 #: report:addons/account_financial_report_webkit/report/templates/account_report_profit_loss.mako:56
 #: report:addons/account_financial_report_webkit/report/templates/account_report_trial_balance.mako:69
 #: report:addons/l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako:71
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:49
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:45
 #: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:45
 msgid "From:"
 msgstr "Desde:"
@@ -1454,13 +1467,14 @@ msgstr "Filtros de Empresas"
 #: field:account.balances,comp2_fiscalyear_id:0
 #: field:account.balances,fiscalyear_id:0
 #: report:addons/l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako:55
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:32
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:29
 #: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:29
 msgid "Fiscal Year"
 msgstr "Año Fiscal"
 
 #. module: l10n_cr_account_financial_report_webkit
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:122
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:130
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:130
 msgid "Payments"
 msgstr "Pagos"
 
@@ -1473,12 +1487,12 @@ msgstr "Sí"
 #. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: report:addons/account_financial_report_webkit/report/templates/account_report_general_ledger.mako:95
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partners_ledger.mako:104
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:105
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:110
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:118
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:118
 msgid "Entry"
 msgstr "Apunte"
 
-#. module: account_financial_report_webkit
+#. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: code:addons/account_financial_report_webkit/report/general_ledger.py:64
 #: code:addons/account_financial_report_webkit/report/open_invoices.py:75
 #: code:addons/account_financial_report_webkit/report/partner_balance.py:63
@@ -1486,6 +1500,7 @@ msgstr "Apunte"
 #: code:addons/account_financial_report_webkit/report/profit_loss.py:68
 #: code:addons/account_financial_report_webkit/report/trial_balance.py:64
 #: code:addons/account_financial_report_webkit/report/webkit_parser_header_fix.py:68
+#: code:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_open_invoices.py:64
 #, python-format
 msgid "Page"
 msgstr "Página"
@@ -1522,13 +1537,14 @@ msgstr "Pérdidas y Ganancias"
 
 #. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partners_ledger.mako:95
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:96
-#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:101
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:109
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_partners_ledger.mako:109
 msgid "No Partner"
 msgstr "No hay Empresa"
 
-#. module: account_financial_report_webkit
+#. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: code:addons/account_financial_report_webkit/report/open_invoices.py:53
+#: code:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_open_invoices.py:49
 #, python-format
 msgid "OPEN INVOICES REPORT"
 msgstr "REPORTE DE FACTURAS PENDIENTES"
