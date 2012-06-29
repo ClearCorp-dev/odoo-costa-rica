@@ -84,7 +84,7 @@ Instead, the header and footer are created as text with arguments passed to wkht
     'category': 'Finance',
     'website': "http://clearcorp.co.cr",
     'images': [],
-    'depends': ['account_financial_report_webkit', ],
+    'depends': ['account_financial_report_webkit', 'account' ],
     'init_xml': [],
     'demo_xml' : [],
     'update_xml': ['account_move_line_view.xml',

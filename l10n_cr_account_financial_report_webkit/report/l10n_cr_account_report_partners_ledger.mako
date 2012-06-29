@@ -7,7 +7,6 @@
                 overflow: hidden;
                 white-space: nowrap;
             }
-
             ${css}
         </style>
     </head>

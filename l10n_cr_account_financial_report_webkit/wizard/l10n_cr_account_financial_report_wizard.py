@@ -22,31 +22,17 @@
 
 from osv import fields, osv
 
-
-class l10n_cr_AccountReportOpenInvoicesWizard(osv.osv_memory):
-    """Will launch partner ledger report and pass required args"""
+class l10n_cr_AccountFinancialReportWizard( osv.osv_memory ):
 
     _inherit = "accounting.report"
-    _name = "open.invoices.webkit"
-    _description = "Open Invoices Report"
+    _name = "accounting.report"
 
+    def _print_report( self, cr, uid, ids, data, context = None ):
+        data['form'].update( self.read( cr, uid, ids, ['date_from_cmp', 'debit_credit', 'date_to_cmp', 'fiscalyear_id_cmp', 'period_from_cmp', 'period_to_cmp', 'filter_cmp', 'account_report_id', 'enable_filter', 'label_filter'], context = context )[0] )
+        return {
+            'type': 'ir.actions.report.xml',
+            'report_name': 'account_financial_report_webkit',
+            'datas': data,
+        }
 
-    def pre_print_report(self, cr, uid, ids, data, context=None):
-        data = super(l10n_cr_AccountReportOpenInvoicesWizard, self).pre_print_report(cr, uid, ids, data, context)
-        if context is None:
-            context = {}
-        vals = self.read(cr, uid, ids,
-                         ['until_date',],
-                         context=context)[0]
-        data['form'].update(vals)
-        return data
-
-
-    def _print_report(self, cursor, uid, ids, data, context=None):
-        context = context or {}
-        # we update form with display account value
-        data = self.pre_print_report(cursor, uid, ids, data, context=context)
-        return {'type': 'ir.actions.report.xml',
-                'report_name': 'account_financial_report_webkit.account.account_report_open_invoices_webkit',
-                'datas': data}
 
