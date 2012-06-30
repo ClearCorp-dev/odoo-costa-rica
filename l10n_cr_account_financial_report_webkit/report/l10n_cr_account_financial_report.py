@@ -19,17 +19,24 @@
 ##############################################################################
 
 from report import report_sxw
-from openerp.addons.account_financial_report_webkit.report.common_reports import CommonReportHeaderWebkit
-from addons.account.report import report_account_common
+from account_financial_report_webkit.report.common_reports import CommonReportHeaderWebkit
+from account.report.account_financial_report import report_account_common
 
-class l10n_cr_account_financial_report_parser( report_sxw.rml_parse, CommonReportHeaderWebkit ):
+class l10n_cr_account_financial_report_parser(report_sxw.rml_parse,CommonReportHeaderWebkit):
 
     def __init__( self, cr, uid, name, context = None ):
-        super( l10n_cr_account_financial_report_parser, self ).__init__( cr, uid, name, context = context )
-        self.localcontext.update( { 
-            #'get_lines' : report_account_common.get_lines,
+        super(l10n_cr_account_financial_report_parser, self).__init__(cr, uid, name, context=context)
+        account = report_account_common(cr,uid,name,context=context)
+        #commonReportHeaderWebkit_instance = CommonReportHeaderWebkit(
+        
+        self.localcontext.update( {           
+            'get_lines': account.get_lines,
+            'filter_form': self._get_filter,
         })
-
+        
+        self.context = context
+        
+    
 #the parameters are the report name and module name 
 report_sxw.report_sxw( 'report.account_financial_report_webkit', 'account.financial.report',
                        'addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_financial_report.mako', parser = l10n_cr_account_financial_report_parser, header = 'internal' )

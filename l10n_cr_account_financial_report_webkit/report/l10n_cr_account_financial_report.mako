@@ -11,8 +11,6 @@
         </style>
     </head>
     <body>        
-        <%setLang(user.context_lang)%>
-        
         <div class="act_as_table data_table">
             <div class="act_as_row labels">
                 <div class="act_as_cell">${_('Chart of Account')}</div>
@@ -24,8 +22,11 @@
                         ${_('Periods Filter')}
                     %endif
                 </div>
-                <div class="act_as_cell"> </div>
+                <div class="act_as_cell">${_('Accounts Filter')}</div>
+                <div class="act_as_cell">${_('Target Moves')}</div>
+                <div class="act_as_cell">${_('Initial Balance')}</div>
             </div>
-        </div>    
+           
+        </div>
     </body>
 </html>
