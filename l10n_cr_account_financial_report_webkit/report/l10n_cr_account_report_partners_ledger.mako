@@ -119,6 +119,7 @@
                       partner_accumulated_balance = account.init_balance.get(p_id, {}).get('init_balance') or 0.0
                       init_balance = 0.0
                       init_balance = get_initial_balance(cr, uid, p_id, account, filter_type, filter_data, fiscal_year, currency[0])
+                      accumulated_balance = init_balance
                     %>
                     <div class="act_as_table list_table" style="margin-top: 5px;">
                         <div class="act_as_caption account_title">
@@ -289,7 +290,7 @@
                                   %endif
                                   </div>
                                   ## balance cumulated
-                                  <% accumulated_balance = (init_balance+invoice_amount+payment_amount+credit_amount+debit_amount+MM_amount) or 0.0 %>
+                                  <% accumulated_balance = (invoice_amount+payment_amount+credit_amount+debit_amount+MM_amount) or 0.0 %>
                                   <div class="act_as_cell amount" style="padding-right: 1px;">${formatLang(accumulated_balance) }</div>
                                   %if amount_currency(data):
                                       ## currency balance
@@ -304,6 +305,11 @@
                               total_accumulated_balance += accumulated_balance
                               %>
                             %endfor
+                            %if init_balance != 0.0:
+                            <%
+                                total_accumulated_balance += init_balance
+                            %>
+                            %endif
                             <div class="act_as_row lines labels">
                               ## date
                               <div class="act_as_cell first_column"></div>
