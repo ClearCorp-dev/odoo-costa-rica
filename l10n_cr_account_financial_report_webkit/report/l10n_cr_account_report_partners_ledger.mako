@@ -21,6 +21,8 @@
 
         <%
         initial_balance_text = {'initial_balance': _('Computed'), 'opening_balance': _('Opening Entries'), False: _('No')}
+        filter_type = ''
+        filter_data = []
         %>
 
         <div class="act_as_table data_table">
@@ -45,14 +47,24 @@
                     ${_('From:')}
                     %if filter_form(data) == 'filter_date':
                         ${formatLang(start_date, date=True) if start_date else u'' }
+                        <%
+                            filter_data.append(start_date) 
+                            filter_type = 'filter_date'
+                        %>
                     %else:
                         ${start_period.name if start_period else u''}
+                        <% 
+                            filter_data.append(start_period) 
+                            filter_type = 'filter_period'
+                        %>
                     %endif
                     ${_('To:')}
                     %if filter_form(data) == 'filter_date':
                         ${ formatLang(stop_date, date=True) if stop_date else u'' }
+                        <% filter_data.append(stop_date) %>
                     %else:
                         ${stop_period.name if stop_period else u'' }
+                        <% filter_data.append(stop_period) %>
                     %endif
                 </div>
                 <div class="act_as_cell">
@@ -103,10 +115,20 @@
 
                       part_cumul_balance = 0.0
                       part_cumul_balance_curr = 0.0 
+                      
+                      part_cumul_balance = account.init_balance.get(p_id, {}).get('init_balance') or 0.0
+                      init_balance = 0.0
+                      init_balance = get_initial_balance(cr, uid, p_id, account, filter_type, filter_data, fiscal_year, currency[0])
                     %>
                     <div class="act_as_table list_table" style="margin-top: 5px;">
                         <div class="act_as_caption account_title">
-                            ${ get_partner_name(cr, uid, partner_name, p_id, p_ref, p_name)  or _('No Partner')}
+                            ${ get_partner_name(cr, uid, partner_name, p_id, p_ref, p_name)  or _('No Partner')}<br />
+                            %if (currency[0] != None):
+                                <% currency_symbol = get_currency_symbol(cr, uid, account.currency_id.id) %>
+                            %else:
+                                <% currency_symbol = get_currency_symbol(cr, uid, company.currency_id.id) %>
+                            %endif
+                            ${_('Initial Balance: ')} ${currency_symbol}${formatLang(init_balance)}
                         </div>
                         <div class="act_as_thead">
                             <div class="act_as_row labels">
@@ -160,8 +182,7 @@
                                   #cumul_balance_curr += part_cumul_balance_curr
                                 %>
                               %endif
-
-
+                            
                             %for line in account.ledger_lines.get(p_id, []):
                               <%
                               label_elements = [line.get('lname') or '']
@@ -268,7 +289,7 @@
                                   %endif
                                   </div>
                                   ## balance cumulated
-                                  <% cumul_balance = (invoice_amount+payment_amount+credit_amount+debit_amount+MM_amount) or 0.0 %>
+                                  <% cumul_balance = (init_balance+invoice_amount+payment_amount+credit_amount+debit_amount+MM_amount) or 0.0 %>
                                   <div class="act_as_cell amount" style="padding-right: 1px;">${formatLang(cumul_balance) }</div>
                                   %if amount_currency(data):
                                       ## currency balance
@@ -279,7 +300,8 @@
                                   <% last_line_currency = line.get('currency_id') %>
                               </div>
                               <%
-                              total_cumul_balance = total_invoice + total_payment + total_debit + total_credit + total_manual_move
+                              #total_cumul_balance = total_invoice + total_payment + total_debit + total_credit + total_manual_move
+                              total_cumul_balance += cumul_balance
                               %>
                             %endfor
                             <div class="act_as_row lines labels">
