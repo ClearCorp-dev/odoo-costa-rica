@@ -249,7 +249,7 @@ msgstr "Cuentas por Cobrar"
 #: model:ir.actions.act_window,name:account_financial_report_webkit.action_account_general_ledger_menu_webkit
 #: model:ir.actions.report.xml,name:account_financial_report_webkit.account_report_general_ledger_webkit
 msgid "General Ledger Webkit"
-msgstr "General Ledger Webkit"
+msgstr "Libro Mayor"
 
 #. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: report:addons/account_financial_report_webkit/report/templates/account_report_partners_ledger.mako:112
@@ -983,7 +983,7 @@ msgstr "¡El código de la cuenta debe ser único por compañía!"
 #: model:ir.ui.menu,name:account_financial_report_webkit.menu_account_open_invoices
 #: view:open.invoices.webkit:0
 msgid "Open Invoices"
-msgstr "Open Invoices"
+msgstr "Facturas Pendientes"
 
 #. modules: l10n_cr_account_financial_report_webkit, account_financial_report_webkit
 #: selection:account.common.balance.report,target_move:0
