@@ -10,8 +10,8 @@
         ${css}
     </style>
 </head>
-<body>  
-    <div style="font-size: 25px; font-weight: bold; text-align: center;">P&eacute;rdidas y ganancias</div>
+<body>      
+    <div style="font-size: 25px; font-weight: bold; text-align: center; align=center;">${ data['form']['account_report_id'][1] }</div>
     <div class="act_as_table data_table">
         <div class="act_as_row labels">
             <div class="act_as_cell">${_('Chart of Account')}</div>
@@ -48,46 +48,51 @@
     %>
     <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>      
     <div class="act_as_table list_table">
-        <div class="act_as_thead">
-            <div class="act_as_row labels" style="font-weight: bold; font-size: 11x;">
+        <div class="act_as_thead" style="vertical-align: right;">
+            <div class="act_as_row labels" style="font-weight: bold; font-size: 11x; vertical-align: right;">
                 %if data['form']['debit_credit'] == 1: 
-                    <div class="act_as_cell first_column" style="width: 200px;  vertical-align: left; align=left">${_('Name')}</div>                
-                    <div class="act_as_cell" style="width: 100px;  vertical-align: left; align=right">${_('Debit')}</div>
-                    <div class="act_as_cell" style="width: 100px;  vertical-align: left; align=right">${_('Credit')}</div>
-                    <div class="act_as_cell" style="width: 100px;  vertical-align: left; align=right">${_('Balance')}</div>
+                    <div class="act_as_cell first_column" style="width: 200px;  vertical-align: right; align:right;">${_('Name')}</div>                
+                    <div class="act_as_cell" style="width: 100px;  vertical-align: right; align:right;">${_('Debit')}</div>
+                    <div class="act_as_cell" style="width: 100px;  vertical-align: right; align:right;">${_('Credit')}</div>
+                    <div class="act_as_cell" style="width: 100px;  vertical-align: right; align:right;">${_('Balance')}</div>
                 %endif
                 %if not data['form']['enable_filter'] and not data['form']['debit_credit']:
-                    <div class="act_as_cell first_column" style="width: 200px;  vertical-align: left; align=left">${_('Name')}</div>  
-                    <div class="act_as_cell" style="width: 100px;  vertical-align: left; align=right">${_('Balance')}</div>
+                    <div class="act_as_cell first_column" style="width: 200px;  vertical-align: right; align:right;">${_('Name')}</div>  
+                    <div class="act_as_cell" style="width: 100px;  vertical-align: right; align:right;">${_('Balance')}</div>
                 %endif
                 %if data['form']['enable_filter'] == 1 and not data['form']['debit_credit']:
-                    <div class="act_as_cell first_column" style="width: 200px;  vertical-align: left; align=left">${_('Name')}</div>  
-                    <div class="act_as_cell" style="width: 100px;  vertical-align: left; align=right">${_('Balance')}</div>
-                    <div class="act_as_cell" style="width: 100px;  vertical-align: left; align=right">${_(data['form']['label_filter'])}</div>
+                    <div class="act_as_cell first_column" style="width: 200px;  vertical-align: right; align:right;">${_('Name')}</div>  
+                    <div class="act_as_cell" style="width: 100px;  vertical-align: right; align:right;">${_('Balance')}</div>
+                    <div class="act_as_cell" style="width: 100px;  vertical-align: right; align:right;">${_(data['form']['label_filter'])}</div>
                 %endif
             </div>
         </div>        
         <div class="act_as_tbody">
             %for line in get_lines_report:
                 %if ((line['type'] == 'account' and line['account_type'] == 'account') or line['type'] == 'report'):
-                    <% bold = True %>
+                    <%bold = True%>
                 %else:
-                    <%bold = False %>
+                    <%bold = False%>
                 %endif
             <div class="act_as_row lines"> 
                 %if data['form']['debit_credit'] == 1:
-                    %if line['level'] > 0:            
-                                
-                        <div class="act_as_cell first_column" style="padding-left:${line['level']*10}px"><% if bold: print("<b>") %>${line['name']}
-                            %if bold:
-                                </b>
-                            %endif
+                    %if line['level'] > 0:
+                        <div class="act_as_cell" style="padding-left:${line['level']*10}px">
+                        %if bold: 
+                            <div class="act_as_cell" ><b>${line['name']}</b></div>
+                        %else:
+                            <div class="act_as_cell" >${line['name']}</div>
+                        %endif
                         </div>
                         <div class="act_as_cell amount" >${line['debit']}</div>
                         <div class="act_as_cell amount" >${line['credit']}</div>
                         <div class="act_as_cell amount" >${line['balance']}</div>                         
-                    %else:
-                        <div class="act_as_cell first_column">${line['name']}${line['account_type']}</div>
+                    %else:                         
+                        %if bold: 
+                            <div class="act_as_cell" ><b>${line['name']}</b></div>
+                        %else:
+                            <div class="act_as_cell" >${line['name']}</div>
+                        %endif
                         <div class="act_as_cell amount" >${line['debit']}</div>
                         <div class="act_as_cell amount" >${line['credit']}</div>
                         <div class="act_as_cell amount" >${line['balance']}</div>  
@@ -95,19 +100,39 @@
                 %endif
                 %if not data['form']['enable_filter'] and not data['form']['debit_credit']:
                     %if line['level'] > 0: 
-                        <div class="act_as_cell first_column" style="padding-left:${line['level']*10}px">${line['name']}${line['account_type']}</div>
+                        <div class="act_as_cell" style="padding-left:${line['level']*10}px">
+                            %if bold: 
+                                <div class="act_as_cell" ><b>${line['name']}</b></div>
+                            %else:
+                                <div class="act_as_cell" >${line['name']}</div>
+                            %endif
+                        </div>
                         <div class="act_as_cell amount" >${line['balance']}</div>
                     %else:
-                        <div class="act_as_cell first_column">${line['name']}${line['account_type']}</div>
+                        %if bold: 
+                            <div class="act_as_cell" ><b>${line['name']}</b></div>
+                        %else:
+                            <div class="act_as_cell" >${line['name']}</div>
+                        %endif
                         <div class="act_as_cell amount" >${line['balance']}</div>
                     %endif
                 %endif
                 %if data['form']['enable_filter'] == 1 and not data['form']['debit_credit']:
                     %if line['level'] > 0:
-                        <div class="act_as_cell first_column" style="padding-left:${line['level']*10}px">${line['name']}${line['account_type']}</div>
+                        <div class="act_as_cell" style="padding-left:${line['level']*10}px">
+                            %if bold: 
+                                <div class="act_as_cell" ><b>${line['name']}</b></div>
+                            %else:
+                                <div class="act_as_cell" >${line['name']}</div>
+                            %endif
+                        </div>
                         <div class="act_as_cell amount" >${line['balance']}</div>                            
                     %else:
-                        <div class="act_as_cell first_column">${line['name']}${line['account_type']}</div>
+                        %if bold: 
+                            <div class="act_as_cell" ><b>${line['name']}</b></div>
+                        %else:
+                            <div class="act_as_cell">${line['name']}</div>
+                        %endif
                         <div class="act_as_cell amount" >${line['balance']}</div>    
                     %endif
                 %endif 
