@@ -97,8 +97,8 @@
                     account_total_debit = 0.0
                     account_total_credit = 0.0
                     account_total_manual_move = 0.0
-                    account_balance_cumul = 0.0
-                    account_balance_cumul_curr = 0.0
+                    account_balance_accumulated = 0.0
+                    account_balance_accumulated_curr = 0.0
                     %>
 
                     <div class="account_title bg" style="width: 1080px; margin-top: 15px; font-size: 12px;">${account.code} - ${account.name} - ${account.currency_id.name or account.company_id.currency_id.name}</div>
@@ -110,13 +110,13 @@
                       total_debit = 0.0
                       total_credit = 0.0
                       total_manual_move = 0.0
-                      cumul_balance = 0.0
-                      cumul_balance_curr = 0.0
+                      accumulated_balance = 0.0
+                      accumulated_balance_curr = 0.0
 
-                      part_cumul_balance = 0.0
-                      part_cumul_balance_curr = 0.0 
+                      partner_accumulated_balance = 0.0
+                      partner_accumulated_balance_curr = 0.0 
                       
-                      part_cumul_balance = account.init_balance.get(p_id, {}).get('init_balance') or 0.0
+                      partner_accumulated_balance = account.init_balance.get(p_id, {}).get('init_balance') or 0.0
                       init_balance = 0.0
                       init_balance = get_initial_balance(cr, uid, p_id, account, filter_type, filter_data, fiscal_year, currency[0])
                     %>
@@ -170,16 +170,16 @@
                             <!--<%
                             #total_debit = account.init_balance.get(p_id, {}).get('debit') or 0.0
                             #total_credit = account.init_balance.get(p_id, {}).get('credit') or 0.0
-                            total_cumul_balance = 0.0
+                            total_accumulated_balance = 0.0
                             %>-->
                               %if initial_balance_mode and (total_debit or total_credit):
                                 <%
-                                  #part_cumul_balance = account.init_balance.get(p_id, {}).get('init_balance') or 0.0
-                                  #part_cumul_balance_curr = account.init_balance.get(p_id, {}).get('init_balance_currency') or 0.0
+                                  #partner_accumulated_balance = account.init_balance.get(p_id, {}).get('init_balance') or 0.0
+                                  #partner_accumulated_balance_curr = account.init_balance.get(p_id, {}).get('init_balance_currency') or 0.0
                                   #balance_forward_currency = account.init_balance.get(p_id, {}).get('currency_name') or ''
 
-                                  #cumul_balance += part_cumul_balance
-                                  #cumul_balance_curr += part_cumul_balance_curr
+                                  #accumulated_balance += partner_accumulated_balance
+                                  #accumulated_balance_curr += partner_accumulated_balance_curr
                                 %>
                               %endif
                             
@@ -289,8 +289,8 @@
                                   %endif
                                   </div>
                                   ## balance cumulated
-                                  <% cumul_balance = (init_balance+invoice_amount+payment_amount+credit_amount+debit_amount+MM_amount) or 0.0 %>
-                                  <div class="act_as_cell amount" style="padding-right: 1px;">${formatLang(cumul_balance) }</div>
+                                  <% accumulated_balance = (init_balance+invoice_amount+payment_amount+credit_amount+debit_amount+MM_amount) or 0.0 %>
+                                  <div class="act_as_cell amount" style="padding-right: 1px;">${formatLang(accumulated_balance) }</div>
                                   %if amount_currency(data):
                                       ## currency balance
                                       <div class="act_as_cell sep_left amount">${formatLang(line.get('amount_currency') or 0.0) }</div>
@@ -300,8 +300,8 @@
                                   <% last_line_currency = line.get('currency_id') %>
                               </div>
                               <%
-                              #total_cumul_balance = total_invoice + total_payment + total_debit + total_credit + total_manual_move
-                              total_cumul_balance += cumul_balance
+                              #total_accumulated_balance = total_invoice + total_payment + total_debit + total_credit + total_manual_move
+                              total_accumulated_balance += accumulated_balance
                               %>
                             %endfor
                             <div class="act_as_row lines labels">
@@ -332,7 +332,7 @@
                                   ## manual move
                                   <div class="act_as_cell amount">${currency_symbol} ${formatLang(total_manual_move) }</div>
                                   ## balance cumulated
-                                  <div class="act_as_cell amount" style="padding-right: 1px;">${currency_symbol} ${formatLang(total_cumul_balance) }</div>
+                                  <div class="act_as_cell amount" style="padding-right: 1px;">${currency_symbol} ${formatLang(total_accumulated_balance) }</div>
                               %else:
                                   ## invoice
                                   <div class="act_as_cell amount">${company.currency_id.symbol} ${formatLang(total_invoice) }</div>
@@ -345,12 +345,12 @@
                                   ## manual move
                                   <div class="act_as_cell amount">${company.currency_id.symbol} ${formatLang(total_manual_move) }</div>
                                   ## balance cumulated
-                                  <div class="act_as_cell amount" style="padding-right: 1px;">${company.currency_id.symbol} ${formatLang(total_cumul_balance) }</div>
+                                  <div class="act_as_cell amount" style="padding-right: 1px;">${company.currency_id.symbol} ${formatLang(total_accumulated_balance) }</div>
                               %endif
                               %if amount_currency(data):
                                   ## currency balance
                                   %if account.currency_id:
-                                      <!--div class="act_as_cell amount sep_left">${formatLang(cumul_balance_curr) | amount }</div-->
+                                      <!--div class="act_as_cell amount sep_left">${formatLang(accumulated_balance_curr) | amount }</div-->
                                   %else:
                                       <div class="act_as_cell sep_left amount">${ u'-' }</div>
                                   %endif
@@ -366,8 +366,8 @@
                         account_total_debit += total_debit
                         account_total_credit += total_credit
                         account_total_manual_move += total_manual_move
-                        account_balance_cumul +=  total_cumul_balance
-                        account_balance_cumul_curr += account_balance_cumul
+                        account_balance_accumulated +=  total_accumulated_balance
+                        account_balance_accumulated_curr += account_balance_accumulated
                     %>
                     %endfor
 
@@ -388,7 +388,7 @@
                                     ## manual move
                                     <div class="act_as_cell amount" style="width: 115px;">${currency_symbol} ${ formatLang(account_total_manual_move) }</div>
                                     ## balance cumulated
-                                    <div class="act_as_cell amount" style="width: 115px; padding-right: 1px;">${currency_symbol} ${ formatLang(account_balance_cumul) }</div>
+                                    <div class="act_as_cell amount" style="width: 115px; padding-right: 1px;">${currency_symbol} ${ formatLang(account_balance_accumulated) }</div>
                                 %else:
                                     ## invoice
                                     <div class="act_as_cell amount" style="width: 100px;">${company.currency_id.symbol} ${ formatLang(account_total_invoice) }</div>
@@ -401,12 +401,12 @@
                                     ## manual move
                                     <div class="act_as_cell amount" style="width: 115px;">${company.currency_id.symbol} ${ formatLang(account_total_manual_move) }</div>
                                     ## balance cumulated
-                                    <div class="act_as_cell amount" style="width: 115px; padding-right: 1px;">${company.currency_id.symbol} ${ formatLang(account_balance_cumul) }</div>
+                                    <div class="act_as_cell amount" style="width: 115px; padding-right: 1px;">${company.currency_id.symbol} ${ formatLang(account_balance_accumulated) }</div>
                                 %endif
                                 %if amount_currency(data):
                                     ## currency balance
                                     %if account.currency_id:
-                                        <!--div class="act_as_cell amount sep_left" style="width: 80px;">${ formatLang(account_balance_cumul_curr) | amount }</div-->
+                                        <!--div class="act_as_cell amount sep_left" style="width: 80px;">${ formatLang(account_balance_accumulated_curr) | amount }</div-->
                                     %else:
                                         <div class="act_as_cell amount sep_left" style="width: 80px;">${ u'-' }</div>
                                     %endif
