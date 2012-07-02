@@ -63,8 +63,8 @@
 		    %>
 		    <div class="account_title bg" style="margin-top: 20px; font-size: 12px; width: 1080px;">${department[0]}</div>
 		    <div class="act_as_table list_table">
-		    <div class="act_as_thead">
-			<div class="act_as_row labels" style="font-weight: bold; font-size: 11x;">
+                <div class="act_as_thead">
+                    <div class="act_as_row labels" style="font-weight: bold; font-size: 11x;">
 			    <div class="act_as_cell first_column" style="width: 85px;  vertical-align: middle">${_('Cedula')}</div>
 			    <div class="act_as_cell" style="width: 230px;  vertical-align: middle">${_('Nombre')}</div>
 			    <div class="act_as_cell amount" style="width: 40px;">${_('Hrs.')}<br />${_('Nor')}</div>
