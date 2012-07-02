@@ -43,6 +43,7 @@ class l10n_cr_PartnersLedgerWebkit(PartnersLedgerWebkit):
             'get_partner_name': self.get_partner_name,
             'get_accounts_by_curr': self.get_accounts_by_curr,
             'get_currency_symbol': self.get_currency_symbol,
+            'get_initial_balance': self.get_initial_balance,
         })
 
     def get_accounts_by_curr(self, cr, uid, objects):
@@ -142,6 +143,36 @@ class l10n_cr_PartnersLedgerWebkit(PartnersLedgerWebkit):
         currency = self.pool.get('res.currency').browse(cr,uid,currency_id)
 
         return currency.symbol
+    
+    def get_initial_balance(self, cr, uid, partner, account, filter_type, filter_data, fiscal_year, currency, context=None):
+        date_start = ''
+        initial_balance = 0.0
+        
+        if filter_type == '':
+            date_start = fiscal_year.date_start
+            move_lines_id = self.pool.get('account.move.line').search(cr, uid, [('account_id', '=', account.id), ('partner_id', '=', partner), ('period_id.fiscalyear_id.date_start', '<', date_start), ('reconcile_id', '=', False)], context=context)
+        else:
+            if filter_type == 'filter_period':
+                date_start = filter_data[0].date_start
+                move_lines_id = self.pool.get('account.move.line').search(cr, uid, [('account_id', '=', account.id), ('partner_id', '=', partner), ('period_id.date_start', '<', date_start), ('reconcile_id', '=', False)], context=context)
+            elif filter_type == 'filter_date':
+                date_start = filter_data[0]
+                move_lines_id = self.pool.get('account.move.line').search(cr, uid, [('account_id', '=', account.id), ('partner_id', '=', partner), ('date', '<', date_start), ('reconcile_id', '=', False)], context=context)
+        
+        move_lines = self.pool.get('account.move.line').browse(cr, uid, move_lines_id)
+        
+        amount = 0.0
+        for move_line in move_lines:
+            if currency != None:
+                amount = move_line.amount_currency
+            else:
+                if move_line.debit != 0.0 :
+                    amount = move_line.debit
+                elif move_line.credit != 0.0 :
+                    amount = move_line.credit * -1
+            initial_balance += amount
+        
+        return initial_balance
 
 HeaderFooterTextWebKitParser('report.account_financial_report_webkit.account.account_report_partners_ledger_webkit',
                              'account.account',
