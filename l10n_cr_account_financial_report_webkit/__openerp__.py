@@ -94,6 +94,7 @@ Instead, the header and footer are created as text with arguments passed to wkht
                    'wizard/l10n_cr_open_invoices_wizard_view.xml',
                    'wizard/l10n_cr_partners_ledger_wizard_view.xml',
                    'report_menus.xml',
+                   'account_view.xml',
                    ],
     'test': [],
     'active': False,

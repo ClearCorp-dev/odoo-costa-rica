@@ -64,14 +64,14 @@ class account_bank_balances(TrialBalanceWebkit):
         all_accounts_by_currency = []
 
         for current_account in accounts:
-            current_name = current_account.currency_id.name
+            current_name = current_account.report_currency_id.name
             if current_name not in currency_names_list:
                 currency_names_list.append(current_name)
 
         for current_name in currency_names_list:
             account_currency = []
             for current_account in accounts:
-                if current_account.currency_id.name == current_name:
+                if current_account.report_currency_id.name == current_name:
                     account_currency.append(current_account)
             accounts_for_currency.append(account_currency)
 

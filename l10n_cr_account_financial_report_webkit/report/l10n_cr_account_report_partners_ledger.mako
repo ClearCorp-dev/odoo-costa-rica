@@ -82,7 +82,7 @@
         account_by_curr = get_accounts_by_curr(cr, uid, objects)
         %>
         %for currency in account_by_curr:
-            %if currency[0] != None:
+            %if currency[0] != 'CRC':
                 <div class="account_title bg" style="margin-top: 20px; font-size: 14px; width: 1080px;">${_('Accounts in ')} ${currency[0]}</div>
 		    %else:
                 <div class="account_title bg" style="margin-top: 20px; font-size: 14px; width: 1080px;">${_('Accounts in ')} ${company.currency_id.name}</div>
@@ -101,7 +101,7 @@
                     account_balance_accumulated_curr = 0.0
                     %>
 
-                    <div class="account_title bg" style="width: 1080px; margin-top: 15px; font-size: 12px;">${account.code} - ${account.name} - ${account.currency_id.name or account.company_id.currency_id.name}</div>
+                    <div class="account_title bg" style="width: 1080px; margin-top: 15px; font-size: 12px;">${account.code} - ${account.name} - ${account.report_currency_id.name or account.company_id.currency_id.name}</div>
                     
                     %for partner_name, p_id, p_ref, p_name in account.partners_order:
                     <%
@@ -124,8 +124,8 @@
                     <div class="act_as_table list_table" style="margin-top: 5px;">
                         <div class="act_as_caption account_title">
                             ${ get_partner_name(cr, uid, partner_name, p_id, p_ref, p_name)  or _('No Partner')}<br />
-                            %if (currency[0] != None):
-                                <% currency_symbol = get_currency_symbol(cr, uid, account.currency_id.id) %>
+                            %if (currency[0] != 'CRC'):
+                                <% currency_symbol = get_currency_symbol(cr, uid, account.report_currency_id.id) %>
                             %else:
                                 <% currency_symbol = get_currency_symbol(cr, uid, company.currency_id.id) %>
                             %endif
@@ -325,7 +325,7 @@
                               <div class="act_as_cell">${_('Saldo')}</div>
                               ## reconcile
                               <!--div class="act_as_cell"></div-->
-                              %if currency[0] != None:
+                              %if currency[0] != 'CRC':
                                   <% currency_symbol = get_currency_symbol(cr, uid, last_line_currency) %>
                                    ## invoice
                                   <div class="act_as_cell amount">${currency_symbol} ${formatLang(total_invoice) }</div>
@@ -355,13 +355,13 @@
                               %endif
                               %if amount_currency(data):
                                   ## currency balance
-                                  %if account.currency_id:
+                                  %if account.report_currency_id:
                                       <!--div class="act_as_cell amount sep_left">${formatLang(accumulated_balance_curr) | amount }</div-->
                                   %else:
                                       <div class="act_as_cell sep_left amount">${ u'-' }</div>
                                   %endif
                                   ## currency code
-                                  <div class="act_as_cell" style="text-align: right; padding-right: 1px;">${ account.currency_id.name if account.currency_id else u'' }</div>
+                                  <div class="act_as_cell" style="text-align: right; padding-right: 1px;">${ account.report_currency_id.name if account.report_currency_id else u'' }</div>
                               %endif
                           </div>
                         </div>
@@ -382,7 +382,7 @@
                                 <div class="act_as_cell first_column" style="width: 300px;">${account.code} - ${account.name}</div>
                                 ## label
                                 <div class="act_as_cell" style="width: 302px;">${_("Saldo")}</div>
-                                %if currency[0] != None:
+                                %if currency[0] != 'CRC':
                                     ## invoice
                                     <div class="act_as_cell amount" style="width: 100px;">${currency_symbol} ${ formatLang(account_total_invoice) }</div>
                                     ## payment
@@ -411,13 +411,13 @@
                                 %endif
                                 %if amount_currency(data):
                                     ## currency balance
-                                    %if account.currency_id:
+                                    %if account.report_currency_id:
                                         <!--div class="act_as_cell amount sep_left" style="width: 80px;">${ formatLang(account_balance_accumulated_curr) | amount }</div-->
                                     %else:
                                         <div class="act_as_cell amount sep_left" style="width: 80px;">${ u'-' }</div>
                                     %endif
                                     ## curency code
-                                    <div class="act_as_cell amount" style="width: 30px; text-align: right; padding-right: 1px;">${ account.currency_id.name if account.currency_id else u'' }</div>
+                                    <div class="act_as_cell amount" style="width: 30px; text-align: right; padding-right: 1px;">${ account.report_currency_id.name if account.report_currency_id else u'' }</div>
                                 %endif
                             </div>
                         </div>
