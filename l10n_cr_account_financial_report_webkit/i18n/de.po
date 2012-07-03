@@ -13,8 +13,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-24 05:54+0000\n"
-"X-Generator: Launchpad (build 15461)\n"
+"X-Launchpad-Export-Date: 2012-07-03 06:29+0000\n"
+"X-Generator: Launchpad (build 15531)\n"
 
 #. module: account_financial_report_webkit
 #: field:account.common.balance.report,account_ids:0
@@ -1350,44 +1350,3 @@ msgstr "Falscher Kredit oder Debit Wert im Buchungseintrag !"
 #: field:trial.balance.webkit,comp2_filter:0
 msgid "Compare By"
 msgstr ""
-
-#~ msgid ""
-#~ "Configuration Error! \n"
-#~ "You cannot define children to an account with internal type different of "
-#~ "\"View\"! "
-#~ msgstr ""
-#~ "Konfigurations Fehler! \n"
-#~ "Ein Konto mit einem anderen Typ als \"Ansicht\" können keine Konten "
-#~ "zugeweisen werden!s "
-
-#~ msgid "You can not create move line on closed account."
-#~ msgstr ""
-#~ "Es können keine Kontobewegungen mit geschlossenen Konten erstellt werden"
-
-#~ msgid "Start period"
-#~ msgstr "Start Periode"
-
-#~ msgid "Open Transactions Report"
-#~ msgstr "Bereicht offener Transaktionen"
-
-#~ msgid "End period"
-#~ msgstr "End Periode"
-
-#~ msgid "Chart of account"
-#~ msgstr "Kontoplan"
-
-#~ msgid "Narration"
-#~ msgstr "Erzählung"
-
-#~ msgid "Company must be same for its related account and period."
-#~ msgstr ""
-#~ "Die Firma muss die selbe sein, wie die dazugehörigen Konten und Perioden."
-
-#~ msgid "Fiscal year"
-#~ msgstr "Geschäftsjahr"
-
-#~ msgid "Open Invoices (Webkit)"
-#~ msgstr "Offene Rechnungen"
-
-#~ msgid "You can not create move line on view account."
-#~ msgstr "Keine Bewegungen für Konten mit Typ Ansicht erlaubt."
