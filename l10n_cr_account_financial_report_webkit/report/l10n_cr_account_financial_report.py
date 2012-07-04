@@ -45,5 +45,4 @@ class l10n_cr_account_financial_report_parser(report_sxw.rml_parse,CommonReportH
 report_sxw.report_sxw( 'report.account_financial_report_webkit', 'account.financial.report',
                        'addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_financial_report.mako', parser = l10n_cr_account_financial_report_parser, header = 'internal' )
 
-
 #vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
