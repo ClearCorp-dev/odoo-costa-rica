@@ -52,14 +52,14 @@ class l10n_cr_PartnersLedgerWebkit(PartnersLedgerWebkit):
         accounts_by_curr = []
 
         for account in objects:
-            currency_name = account.currency_id.name
+            currency_name = account.report_currency_id.name
             if currency_name not in currency_names_list:
                 currency_names_list.append(currency_name)
 
         for currency_name in currency_names_list:
             account_by_curr = []
             for account in objects:
-                if account.currency_id.name == currency_name:
+                if account.report_currency_id.name == currency_name:
                     account_by_curr.append(account)
             accounts_curr_list.append(account_by_curr)
 
@@ -90,7 +90,7 @@ class l10n_cr_PartnersLedgerWebkit(PartnersLedgerWebkit):
         res = ('none', 0.0, 0.0)
 
         amount = 0.0
-        if currency != None:
+        if currency != 'CRC':
             amount = account_move_line['amount_currency']
         else:
             if account_move_line['debit'] != 0.0 :
@@ -163,7 +163,7 @@ class l10n_cr_PartnersLedgerWebkit(PartnersLedgerWebkit):
         
         amount = 0.0
         for move_line in move_lines:
-            if currency != None:
+            if currency != 'CRC':
                 amount = move_line.amount_currency
             else:
                 if move_line.debit != 0.0 :

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Accounts -->
+        <record id="l10n_cr_account_financial_report_view_account_form" model="ir.ui.view">
+            <field name="name">l10n.cr.account.financial.report.view.account.form</field>
+            <field name="model">account.account</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="arch" type="xml">
+                <data>                
+                    <field name = "currency_mode" position = "after">
+                        <field name="report_currency_id" attrs="{'required':[('type','in', ('payable', 'receivable', 'liquidity'))]}"/>
+                    </field>
+                </data>
+            </field>
+        </record>
+        <!-- End Accounts -->
+    </data>
+</openerp>
