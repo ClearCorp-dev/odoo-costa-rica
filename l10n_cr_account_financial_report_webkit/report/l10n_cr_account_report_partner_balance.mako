@@ -43,18 +43,18 @@
 		    balance_curr = 0.0
 		    %>
 		    %if currency[0] != None:
-                <div class="account_title bg" style="margin-top: 20px; font-size: 12px; width: 1080px;">${_('Estado de Cuenta en ')} ${currency[0]}</div>
+                <div class="account_title bg" style="margin-top: 20px; font-size: 12px; width: 1080px;">${_('Partner Balance in ')} ${currency[0]}</div>
 		    %else:
-                <div class="account_title bg" style="margin-top: 20px; font-size: 12px; width: 1080px;">${_('Estado de Cuenta en ')} ${company.currency_id.name}</div>
+                <div class="account_title bg" style="margin-top: 20px; font-size: 12px; width: 1080px;">${_('Partner Balance in ')} ${company.currency_id.name}</div>
 		    %endif
 		    <div class="act_as_table list_table">
 		    <div class="act_as_thead">
 			<div class="act_as_row labels" style="font-weight: bold; font-size: 11x;">
-			    <div class="act_as_cell first_column" style="vertical-align: middle">${_('Fecha')}</div>
-			    <div class="act_as_cell" style="width: 250px;  vertical-align: middle">${_('Detalle')}</div>
-			    <div class="act_as_cell">${_('Fecha de Vencimiento')}</div>
-			    <div class="act_as_cell amount">${_('Cobros')}</div>
-			    <div class="act_as_cell amount">${_('Pagos')}</div>
+			    <div class="act_as_cell first_column" style="vertical-align: middle">${_('Date')}</div>
+			    <div class="act_as_cell" style="width: 250px;  vertical-align: middle">${_('Detail')}</div>
+			    <div class="act_as_cell">${_('Due Date')}</div>
+			    <div class="act_as_cell amount">${_('Credit')}</div>
+			    <div class="act_as_cell amount">${_('Debit')}</div>
 			</div>
 		    </div>
 			
@@ -108,7 +108,7 @@
 		%>
 		<div class="act_as_tfoot">
 		<div class="act_as_row labels"  style="font-weight: bold; font-size: 11px;" >
-		    <div class="act_as_cell first_column" style="vertical-align: middle">${_('SALDO')}</div>
+		    <div class="act_as_cell first_column" style="vertical-align: middle">${_('Balance')}</div>
 		    %if currency[0] != None:
                 <div class="act_as_cell" style="width: 250px;  vertical-align: middle">${move_line.currency_id.symbol} ${formatLang(total_balance_curr)}</div>
                 <div class="act_as_cell">${_('')}</div>
@@ -131,7 +131,7 @@
     	<div class="act_as_table list_table " style="margin-top: 20px;">
     	    <div class="act_as_tfoot">
     		<div class="act_as_row labels"  style="font-weight: bold; font-size: 11px;">
-    		    <div class="act_as_cell first_column" style="width: 205px; font-size: 12px; text-align: left">${_('SAlDO TOTAL en ')} ${company.currency_id.name}</div>
+    		    <div class="act_as_cell first_column" style="width: 205px; font-size: 12px; text-align: left">${_('TOTAL BALANCE in ')} ${company.currency_id.name}</div>
     		    <div class="act_as_cell" style="text-align: left">${company.currency_id.symbol} ${formatLang(total_balance)}</div>
     		</div>
     	    </div>
@@ -147,10 +147,10 @@
                 endif
             %>
     	    <div style="font-family: Helvetica, Arial; font-size: 13px; font-weight: bold; margin-top: 20px;"> ${_('Nota: ')} </div>
-            <div style="font-family: Helvetica, Arial; font-size: 12px;"> ${_('En el caso de que hayan monedas extranjeras el Saldo Total se calculó según el cambio de moneda del día ')} ${formatLang( today, date=True)} (${company.currency_id.symbol} ${conversion_rate})</div>
+            <div style="font-family: Helvetica, Arial; font-size: 12px;"> ${_('In the event of any foreign currencies the Total Balance was calculated according to the exchange rate of the day ')} ${formatLang( today, date=True)} (${company.currency_id.symbol} ${conversion_rate})</div>
     	</div>
     %else:
-        <div class="account_title bg" style="margin-top: 20px; font-size: 14px; width: 1080px;">${_('No hay facturas pendientes')}</div>
+        <div class="account_title bg" style="margin-top: 20px; font-size: 14px; width: 1080px;">${_('There is no open invoices')}</div>
     %endif
         
 	<p style="page-break-after:always"></p>
