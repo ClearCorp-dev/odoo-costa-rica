@@ -126,28 +126,33 @@
             </div>
                            
          %endfor
-
-	<div class="act_as_table list_table " style="margin-top: 20px;">
-	    <div class="act_as_tfoot">
-		<div class="act_as_row labels"  style="font-weight: bold; font-size: 11px;">
-		    <div class="act_as_cell first_column" style="width: 205px; font-size: 12px; text-align: left">${_('SAlDO TOTAL en ')} ${company.currency_id.name}</div>
-		    <div class="act_as_cell" style="text-align: left">${company.currency_id.symbol} ${formatLang(total_balance)}</div>
-		</div>
-	    </div>
-	</div>
-	<div>
-        <%
-            today = get_time_today()
-            if currency[0] != None:
-                conversion_rate = get_conversion_rate(cr, uid, move_line.currency_id, company.currency_id)
-            else:
-                from_currency = get_currency(cr, uid, 2)
-                conversion_rate = get_conversion_rate(cr, uid, from_currency, company.currency_id)
-            endif
-        %>
-	    <div style="font-family: Helvetica, Arial; font-size: 13px; font-weight: bold; margin-top: 20px;"> ${_('Nota: ')} </div>
-        <div style="font-family: Helvetica, Arial; font-size: 12px;"> ${_('En el caso de que hayan monedas extranjeras el Saldo Total se calculó según el cambio de moneda del día ')} ${formatLang( today, date=True)} (${company.currency_id.symbol} ${conversion_rate})</div>
-	</div>
+    
+    %if part_by_curr != []:
+    	<div class="act_as_table list_table " style="margin-top: 20px;">
+    	    <div class="act_as_tfoot">
+    		<div class="act_as_row labels"  style="font-weight: bold; font-size: 11px;">
+    		    <div class="act_as_cell first_column" style="width: 205px; font-size: 12px; text-align: left">${_('SAlDO TOTAL en ')} ${company.currency_id.name}</div>
+    		    <div class="act_as_cell" style="text-align: left">${company.currency_id.symbol} ${formatLang(total_balance)}</div>
+    		</div>
+    	    </div>
+    	</div>
+    	<div>
+            <%
+                today = get_time_today()
+                if currency[0] != None:
+                    conversion_rate = get_conversion_rate(cr, uid, move_line.currency_id, company.currency_id)
+                else:
+                    from_currency = get_currency(cr, uid, 2)
+                    conversion_rate = get_conversion_rate(cr, uid, from_currency, company.currency_id)
+                endif
+            %>
+    	    <div style="font-family: Helvetica, Arial; font-size: 13px; font-weight: bold; margin-top: 20px;"> ${_('Nota: ')} </div>
+            <div style="font-family: Helvetica, Arial; font-size: 12px;"> ${_('En el caso de que hayan monedas extranjeras el Saldo Total se calculó según el cambio de moneda del día ')} ${formatLang( today, date=True)} (${company.currency_id.symbol} ${conversion_rate})</div>
+    	</div>
+    %else:
+        <div class="account_title bg" style="margin-top: 20px; font-size: 14px; width: 1080px;">${_('No hay facturas pendientes')}</div>
+    %endif
+        
 	<p style="page-break-after:always"></p>
 	
 	%endfor
