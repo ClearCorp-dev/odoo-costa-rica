@@ -18,7 +18,7 @@
 #
 ##############################################################################
 
-from . import partners_ledger_wizard
-from . import open_invoices_wizard
-from . import account_bank_balances_wizard
-#from . import account_report_profit_loss_wizard
+import partners_ledger_wizard
+import open_invoices_wizard
+import account_bank_balances_wizard
+import l10n_cr_account_financial_report_wizard
