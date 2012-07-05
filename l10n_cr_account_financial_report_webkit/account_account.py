@@ -1,14 +1,14 @@
-# -*- coding: utf-8 -*-
+#-*- coding:utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Addons modules by CLEARCORP S.A.
-#    Copyright (C) 2009-TODAY CLEARCORP S.A. (<http://clearcorp.co.cr>).
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    d$
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -20,7 +20,14 @@
 #
 ##############################################################################
 
-import account
-from . import wizard
-from . import report
-from . import account_account
+import netsvc
+from osv import fields, orm
+import tools
+from tools.translate import _
+
+class AccountAccount(orm.Model):
+    _inherit = "account.account"
+    
+    _columns = {
+        'report_currency_id': fields.many2one('res.currency', 'Report Currency', help="Currency to show in the reports."),
+    }

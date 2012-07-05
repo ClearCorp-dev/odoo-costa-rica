@@ -142,7 +142,7 @@
                 total_balance_curr = 0.0
                 total_inital_balance_curr = 0.0
             %>
-                %if currency[0] != None:
+                %if currency[0] != 'CRC':
                     <div class="account_title bg" style="margin-top: 20px; font-size: 12px; width: 700px;">${_('Account Bank Balance in ')} ${currency[0]}</div>
                 %else:
                     <div class="account_title bg" style="margin-top: 20px; font-size: 12px; width: 700px;">${_('Account Bank Balance in ')} ${company.currency_id.name}</div>
@@ -201,12 +201,12 @@
                         <%
                         move_lines = get_move_lines_account(cr, uid, filter_type, filter_data, account)
 
-                        if currency[0] != None:
-                            debit = get_debit_account(cr, uid, move_lines, account.currency_id.name)
-                            credit = get_credit_account(cr, uid, move_lines, account.currency_id.name)
-                            deposit = get_deposit_account(cr, uid, move_lines, account.currency_id.name, account)
-                            tefs = get_tefs_account(cr, uid, move_lines, account.currency_id.name, account)
-                            checks = get_checks_account(cr, uid, move_lines, account.currency_id.name, account)
+                        if currency[0] != 'CRC':
+                            debit = get_debit_account(cr, uid, move_lines, account.report_currency_id.name)
+                            credit = get_credit_account(cr, uid, move_lines, account.report_currency_id.name)
+                            deposit = get_deposit_account(cr, uid, move_lines, account.report_currency_id.name, account)
+                            tefs = get_tefs_account(cr, uid, move_lines, account.report_currency_id.name, account)
+                            checks = get_checks_account(cr, uid, move_lines, account.report_currency_id.name, account)
                         else:
                             debit = get_debit_account(cr, uid, move_lines, company.currency_id.name)
                             credit = get_credit_account(cr, uid, move_lines, company.currency_id.name)
@@ -286,14 +286,14 @@
                     <div class="act_as_row labels"  style="font-weight: bold; font-size: 11x">
                         <div class="act_as_cell first_column">${_('Total')}</div>
                         <div class="act_as_cell">${' '}</div>
-                        %if currency[0] != None:
-                            <div class="act_as_cell amount">${account.currency_id.symbol}${formatLang(total_inital_balance_curr)}</div>
-                            <div class="act_as_cell amount">${account.currency_id.symbol}${formatLang(total_tefs_curr)}</div>
-                            <div class="act_as_cell amount">${account.currency_id.symbol}${formatLang(total_checks_curr)}</div>
-                            <div class="act_as_cell amount">${account.currency_id.symbol}${formatLang(total_deposit_curr)}</div>
-                            <div class="act_as_cell amount">${account.currency_id.symbol}${formatLang(total_debit_curr)}</div>
-                            <div class="act_as_cell amount">${account.currency_id.symbol}${formatLang(total_credit_curr)}</div>
-                            <div class="act_as_cell amount">${account.currency_id.symbol}${formatLang(total_balance_curr)}</div>
+                        %if currency[0] != 'CRC':
+                            <div class="act_as_cell amount">${account.report_currency_id.symbol}${formatLang(total_inital_balance_curr)}</div>
+                            <div class="act_as_cell amount">${account.report_currency_id.symbol}${formatLang(total_tefs_curr)}</div>
+                            <div class="act_as_cell amount">${account.report_currency_id.symbol}${formatLang(total_checks_curr)}</div>
+                            <div class="act_as_cell amount">${account.report_currency_id.symbol}${formatLang(total_deposit_curr)}</div>
+                            <div class="act_as_cell amount">${account.report_currency_id.symbol}${formatLang(total_debit_curr)}</div>
+                            <div class="act_as_cell amount">${account.report_currency_id.symbol}${formatLang(total_credit_curr)}</div>
+                            <div class="act_as_cell amount">${account.report_currency_id.symbol}${formatLang(total_balance_curr)}</div>
                         %else:
                             <div class="act_as_cell amount">${company.currency_id.symbol}${formatLang(total_inital_balance_curr)}</div>
                             <div class="act_as_cell amount">${company.currency_id.symbol}${formatLang(total_tefs_curr)}</div>

@@ -1,7 +1,9 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Nicolas Bessi. Copyright Camptocamp SA
+#    OpenERP, Open Source Management Solution
+#    Addons modules by CLEARCORP S.A.
+#    Copyright (C) 2009-TODAY CLEARCORP S.A. (<http://clearcorp.co.cr>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,7 +20,8 @@
 #
 ##############################################################################
 
-from . import partners_ledger_wizard
-from . import open_invoices_wizard
-from . import account_bank_balances_wizard
-#from . import account_report_profit_loss_wizard
+
+import partners_ledger_wizard
+import open_invoices_wizard
+import account_bank_balances_wizard
+import l10n_cr_account_financial_report_wizard
