@@ -93,7 +93,6 @@
             currency_total_credit = 0.0
             currency_total_manual_move = 0.0
             currency_balance_accumulated = 0.0
-            currency_balance_accumulated_curr = 0.0
         %>
 
         %for account in currency[1]:
@@ -384,13 +383,6 @@
                     account_total_manual_move += total_manual_move
                     account_balance_accumulated +=  total_accumulated_balance
                     account_balance_accumulated_curr += account_balance_accumulated
-
-                    currency_total_invoice += account_total_invoice
-                    currency_total_payment += account_total_payment
-                    currency_total_debit += account_total_debit
-                    currency_total_credit += account_total_credit
-                    currency_total_manual_move += account_total_manual_move
-                    currency_balance_accumulated +=  account_balance_accumulated
                 %>
                 %endfor
 
@@ -440,6 +432,14 @@
                     </div>
                 </div>
             %endif
+            <%
+                currency_total_invoice += account_total_invoice
+                currency_total_payment += account_total_payment
+                currency_total_debit += account_total_debit
+                currency_total_credit += account_total_credit
+                currency_total_manual_move += account_total_manual_move
+                currency_balance_accumulated +=  account_balance_accumulated
+            %>
         %endfor
         <div class="act_as_table list_table" style="margin-top:5px;">
             <div class="act_as_row labels" style="font-weight: bold; font-size: 12px;">
