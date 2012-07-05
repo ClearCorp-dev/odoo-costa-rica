@@ -21,6 +21,16 @@
 ##############################################################################
 
 
-import l10n_cr_account_voucher
+import netsvc
+from osv import fields, orm
+import tools
+from tools.translate import _
+
+class AccountVoucher(orm.Model):
+    _inherit = 'account.voucher'
+    
+    _defaults = {
+        'date': '',
+    }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
