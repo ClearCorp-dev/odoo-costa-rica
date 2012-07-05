@@ -86,13 +86,15 @@
             <div class="account_title bg" style="margin-top: 20px; font-size: 14px; width: 1080px;">${_('Accounts in ')} ${company.currency_id.name}</div>
         %endif
 
-        currency_total_invoice = 0.0
-        currency_total_payment = 0.0
-        currency_total_debit = 0.0
-        currency_total_credit = 0.0
-        currency_total_manual_move = 0.0
-        currency_balance_accumulated = 0.0
-        currency_balance_accumulated_curr = 0.0
+        <%
+            currency_total_invoice = 0.0
+            currency_total_payment = 0.0
+            currency_total_debit = 0.0
+            currency_total_credit = 0.0
+            currency_total_manual_move = 0.0
+            currency_balance_accumulated = 0.0
+            currency_balance_accumulated_curr = 0.0
+        %>
 
         %for account in currency[1]:
             %if account.ledger_lines or account.init_balance:
