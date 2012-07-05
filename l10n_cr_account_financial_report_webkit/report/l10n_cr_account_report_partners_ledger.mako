@@ -80,12 +80,6 @@
     account_by_curr = get_accounts_by_curr(cr, uid, objects)
     %>
     %for currency in account_by_curr:
-        %if currency[0] != 'CRC':
-            <div class="account_title bg" style="margin-top: 20px; font-size: 14px; width: 1080px;">${_('Accounts in ')} ${currency[0]}</div>
-        %else:
-            <div class="account_title bg" style="margin-top: 20px; font-size: 14px; width: 1080px;">${_('Accounts in ')} ${company.currency_id.name}</div>
-        %endif
-
         <%
             currency_total_invoice = 0.0
             currency_total_payment = 0.0
@@ -94,6 +88,8 @@
             currency_total_manual_move = 0.0
             currency_balance_accumulated = 0.0
         %>
+
+        <div class="account_title bg" style="margin-top: 20px; font-size: 14px; width: 100%;">${_('Accounts in ')} ${currency[0]}</div>
 
         %for account in currency[1]:
             %if account.ledger_lines or account.init_balance:
@@ -109,7 +105,7 @@
                     account_balance_accumulated_curr = 0.0
                 %>
 
-                <div class="account_title bg" style="width: 1080px; margin-top: 15px; font-size: 12px;">${account.code} - ${account.name} - ${account.report_currency_id.name or account.company_id.currency_id.name}</div>
+                <div class="account_title bg" style="width: 100%; margin-top: 15px; font-size: 12px;">${account.code} - ${account.name} - ${account.report_currency_id.name or account.company_id.currency_id.name}</div>
 
                 %for partner_name, p_id, p_ref, p_name in account.partners_order:
                 <%
