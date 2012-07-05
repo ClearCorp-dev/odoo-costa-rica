@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    <%!
+    <%
         def amount(text):
             return text.replace('-', '&#8209;')  # replace by a non-breaking hyphen (it will not word-wrap between hyphen and numbers)
 
