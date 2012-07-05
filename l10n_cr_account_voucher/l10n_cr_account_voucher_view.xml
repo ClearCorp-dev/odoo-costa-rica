@@ -16,7 +16,7 @@
             </field>
         </record>
 
-	<record id="cr_account_voucher_form" model="ir.ui.view">
+        <record id="cr_account_voucher_form" model="ir.ui.view">
             <field name="name">cr.account.voucher.form</field>
             <field name="model">account.voucher</field>
             <field name="type">form</field>

@@ -16,7 +16,7 @@
             </field>
         </record>
 
-	<record id="cr_view_vendor_payment_form" model="ir.ui.view">
+        <record id="cr_view_vendor_payment_form" model="ir.ui.view">
             <field name="name">cr.view.vendor.payment.form</field>
             <field name="model">account.voucher</field>
             <field name="type">form</field>
@@ -26,11 +26,14 @@
                     <field name = "reference" position = "replace">
                         <field name="reference" select="1" required="1" invisible="context.get('line_type', False)" string="Payment Ref"/>
                     </field>
+                    <field name = "date" position = "replace">
+                        <field name="date" select="1" required = "1" invisible="context.get('line_type', False)" on_change="onchange_date(date, currency_id, payment_rate_currency_id, amount, company_id, context)"/>
+                    </field>
                 </data>
             </field>
         </record>
 
-	<record id="cr_view_vendor_receipt_form" model="ir.ui.view">
+        <record id="cr_view_vendor_receipt_form" model="ir.ui.view">
             <field name="name">cr.view.vendor.receipt.form</field>
             <field name="model">account.voucher</field>
             <field name="type">form</field>
@@ -39,6 +42,9 @@
                 <data>                
                     <field name = "reference" position = "replace">
                         <field name="reference" select="1" required="1" invisible="context.get('line_type', False)" string="Payment Ref"/>
+                    </field>
+                    <field name = "date" position = "replace">
+                        <field name="date" select="1" required = "1" invisible="context.get('line_type', False)" on_change="onchange_date(date, currency_id, payment_rate_currency_id, amount, company_id, context)"/>
                     </field>
                 </data>
             </field>
