@@ -111,6 +111,7 @@
                       total_manual_move = 0.0
                       accumulated_balance = 0.0
                       accumulated_balance_curr = 0.0
+                      total_accumulated_balance = 0.0
 
                       partner_accumulated_balance = 0.0
                       partner_accumulated_balance_curr = 0.0 
@@ -122,13 +123,7 @@
                     %>
                     <div class="act_as_table list_table" style="margin-top: 5px;">
                         <div class="act_as_caption account_title">
-                            ${ get_partner_name(cr, uid, partner_name, p_id, p_ref, p_name)  or _('No Partner')}<br />
-                            %if (currency[0] != 'CRC'):
-                                <% currency_symbol = get_currency_symbol(cr, uid, account.report_currency_id.id) %>
-                            %else:
-                                <% currency_symbol = get_currency_symbol(cr, uid, company.currency_id.id) %>
-                            %endif
-                            ${_('Initial Balance: ')} ${currency_symbol}${formatLang(init_balance)}
+                            ${ get_partner_name(cr, uid, partner_name, p_id, p_ref, p_name)  or _('No Partner')}
                         </div>
                         <div class="act_as_thead">
                             <div class="act_as_row labels">
@@ -167,11 +162,6 @@
                             </div>
                         </div>
                         <div class="act_as_tbody">
-                            <!--<%
-                            #total_debit = account.init_balance.get(p_id, {}).get('debit') or 0.0
-                            #total_credit = account.init_balance.get(p_id, {}).get('credit') or 0.0
-                            total_accumulated_balance = 0.0
-                            %>-->
                               %if initial_balance_mode and (total_debit or total_credit):
                                 <%
                                   #partner_accumulated_balance = account.init_balance.get(p_id, {}).get('init_balance') or 0.0
@@ -182,6 +172,23 @@
                                   #accumulated_balance_curr += partner_accumulated_balance_curr
                                 %>
                               %endif
+                            <div class="act_as_cell first_column" style="width: 50px;">${_('')}</div>
+                            ## period
+                            <div class="act_as_cell" style="width: 70px;">${_('')}</div>
+                            ## move
+                            <div class="act_as_cell" style="width: 70px;">${_('')}</div>
+                            ## journal
+                            <div class="act_as_cell" style="width: 70px;">${_('')}</div>
+                            <div class="act_as_cell" style="width: 270px;">${_('Initial Balance')}</div>
+                            <div class="act_as_cell" style="width: 70px;">${_('')}</div>
+                            <div class="act_as_cell amount" style="width: 100px;">${_('')}</div>
+                            <div class="act_as_cell amount" style="width: 100px;">${_('')}</div>
+                            <div class="act_as_cell amount" style="width: 100px;">${_('')}</div>
+                            <div class="act_as_cell amount" style="width: 100px;">${_('')}</div>
+                            <div class="act_as_cell amount" style="width: 115px;">${_('')}</div>
+                            <div class="act_as_cell amount" style="width: 115px;">${formatLang(init_balance)}</div>
+                            
+                            <%total_accumulated_balance = init_balance %>
                             
                             %for line in account.ledger_lines.get(p_id, []):
                               <%
@@ -289,8 +296,11 @@
                                   %endif
                                   </div>
                                   ## balance cumulated
-                                  <% accumulated_balance = (invoice_amount+payment_amount+credit_amount+debit_amount+MM_amount) or 0.0 %>
-                                  <div class="act_as_cell amount" style="padding-right: 1px;">${formatLang(accumulated_balance) }</div>
+                                  <% 
+                                    accumulated_balance = (invoice_amount+payment_amount+credit_amount+debit_amount+MM_amount) or 0.0
+                                    total_accumulated_balance += accumulated_balance 
+                                  %>
+                                  <div class="act_as_cell amount" style="padding-right: 1px;">${formatLang(total_accumulated_balance) }</div>
                                   %if amount_currency(data):
                                       ## currency balance
                                       <div class="act_as_cell sep_left amount">${formatLang(line.get('amount_currency') or 0.0) }</div>
@@ -299,16 +309,7 @@
                                   %endif
                                   <% last_line_currency = line.get('currency_id') %>
                               </div>
-                              <%
-                              #total_accumulated_balance = total_invoice + total_payment + total_debit + total_credit + total_manual_move
-                              total_accumulated_balance += accumulated_balance
-                              %>
                             %endfor
-                            %if init_balance != 0.0:
-                            <%
-                                total_accumulated_balance += init_balance
-                            %>
-                            %endif
                             <div class="act_as_row lines labels">
                               ## date
                               <div class="act_as_cell first_column"></div>
