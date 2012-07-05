@@ -15,7 +15,7 @@
         def amount(text):
             return text.replace('-', '&#8209;')  # replace by a non-breaking hyphen (it will not word-wrap between hyphen and numbers)
     %>
-    <%!
+    <%
         setLang(user.context_lang)
 
         initial_balance_text = {'initial_balance': _('Computed'), 'opening_balance': _('Opening Entries'), False: _('No')}
