@@ -35,9 +35,9 @@
         <div style="font-size: 20px; font-weight: bold; text-align: center;"> ${account.name}</div>
         </br></br>
         
-        <div class="act_as_table data_table" style="margin-top:30px">
+        <div class="act_as_table data_table" style="margin-top:30px; width: 180px;">
         <div class="act_as_row labels">
-            <div class="act_as_cell" style = "text-align: left;">${_('Bank Balance')}</br>
+            <div class="act_as_cell" style = "text-align: left; width: 90px;">${_('Bank Balance')}</br>
             ${_('Conciled Balance')}</br>
             ${_('Cobros')}</br>
             ${_('Payments')}</br>
@@ -45,7 +45,7 @@
             ${_('Credits')}</br>
             ${_('Total')}</br>
             </div>
-            <div class="act_as_cell" style = "text-align: left;">${formatLang(bank_balance[0])}</br>
+            <div class="act_as_cell" style = "text-align: left; width: 90px;">${formatLang(bank_balance[0])}</br>
             ${formatLang(bank_balance[0])}</br>
             ${formatLang(bank_balance[1])}</br>
             ${formatLang(bank_balance[2])}</br>
@@ -62,9 +62,9 @@
         <div class="act_as_thead">
             <div class="act_as_row labels">
                 ## Account
-                <div class="act_as_cell first_column" style="width: 150px;">${_('Account')}</div>
+                <div class="act_as_cell first_column" style="width: 160px;">${_('Account')}</div>
                 ## Partner
-                <div class="act_as_cell" style="width: 150px;">${_('Partner')}</div>
+                <div class="act_as_cell" style="width: 160px;">${_('Partner')}</div>
                 ## date
                 <div class="act_as_cell" style="width: 70px;">${_('Date')}</div>
                 ## period
@@ -72,7 +72,7 @@
                 ## journal
                 <div class="act_as_cell" style="width: 70px;">${_('Journal')}</div>
                 ## label
-                <div class="act_as_cell" style="width: 270px;">${_('Label')}</div>
+                <div class="act_as_cell" style="width: 250px;">${_('Label')}</div>
                  ## Invoices
                 <div class="act_as_cell amount" style="width: 100px;">${_('Invoice')}</div>
                 ## credit
@@ -195,23 +195,23 @@
                 <div class="act_as_table list_table" style="margin-top:5px;">
                         <div class="act_as_row labels" style="font-weight: bold; font-size: 12px;">
                             ## label
-                            <div class="act_as_cell" style="width: 150px;">${_("Total")}</div>
-                            <div class="act_as_cell" style="width: 150px;">${_('')}</div>
+                            <div class="act_as_cell" style="width: 160px;">${_("Total")}</div>
+                            <div class="act_as_cell" style="width: 160px;">${_('')}</div>
                             <div class="act_as_cell" style="width: 70px;">${_('')}</div>
                             <div class="act_as_cell" style="width: 70px;">${_('')}</div>
                             <div class="act_as_cell" style="width: 70px;">${_('')}</div>
-                            <div class="act_as_cell" style="width: 270px;">${_('')}</div>
+                            <div class="act_as_cell" style="width: 250px;">${_('')}</div>
                             %if account.currency_id.id != False:
                                 ## invoice
-                                <div class="act_as_cell amount" style="width: 100px;">${formatLang(total_invoice)}</div>
+                                <div class="act_as_cell amount" style="width: 100px;">${account.currency_id.symbol} ${formatLang(total_invoice)}</div>
                                 ## payment
-                                <div class="act_as_cell amount" style="width: 100px;">${formatLang(total_payment)}</div>
+                                <div class="act_as_cell amount" style="width: 100px;">${account.currency_id.symbol} ${formatLang(total_payment)}</div>
                                 ## credit
-                                <div class="act_as_cell amount" style="width: 100px;">${formatLang(total_credit)}</div>
+                                <div class="act_as_cell amount" style="width: 100px;">${account.currency_id.symbol} ${formatLang(total_credit)}</div>
                                 ## debit
-                                <div class="act_as_cell amount" style="width: 100px;">${formatLang(total_debit)}</div>
+                                <div class="act_as_cell amount" style="width: 100px;">${account.currency_id.symbol} ${formatLang(total_debit)}</div>
                                 ## balance cumulated
-                                <div class="act_as_cell amount" style="width: 115px;">${formatLang(total_accumulated_balance)}</div>
+                                <div class="act_as_cell amount" style="width: 115px;">${account.currency_id.symbol} ${formatLang(total_accumulated_balance)}</div>
                             %else:
                                 ## invoice
                                 <div class="act_as_cell amount" style="width: 100px;">${company.currency_id.symbol} ${formatLang(total_invoice)}</div>

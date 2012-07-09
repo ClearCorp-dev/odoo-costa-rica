@@ -45,7 +45,9 @@ class l10n_cr_account_financial_report_parser(report_sxw.rml_parse,CommonReportH
         self.context = context        
     
 #the parameters are the report name and module name 
-report_sxw.report_sxw( 'report.account_financial_report_webkit', 'account.financial.report',
-                       'addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_financial_report.mako', parser = l10n_cr_account_financial_report_parser, header = 'internal' )
+report_sxw.report_sxw( 'report.account_financial_report_webkit.account.account_financial_report_webkit', 
+                       'account.account',
+                       'addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_financial_report.mako', 
+                        parser = l10n_cr_account_financial_report_parser)
 
 #vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
