@@ -20,29 +20,25 @@
 #
 ##############################################################################
 
+import time
 
-{
-    'name': 'Webkit based extended report financial report',
-    'description': "",
-    'version': '1.0',
-    'author': 'CLEARCORP S.A.',
-    'category': 'Finance',
-    'website': "http://clearcorp.co.cr",
-    'images': [],
-    'depends': ['account_financial_report_webkit', 'account' ],
-    'init_xml': [],
-    'demo_xml' : [],
-    'update_xml': ['account_move_line_view.xml',
-                   'report/report.xml',
-                   'wizard/account_bank_balances_wizard_view.xml',
-                   'wizard/l10n_cr_partners_ledger_wizard_view.xml',
-                   'wizard/l10n_cr_open_invoices_wizard_view.xml',
-                   'data/financial_webkit_header.xml',
-                   'report_menus.xml',
-                   'account_view.xml',
-                   ],
-    'test': [],
-    'active': False,
-    'installable': True,
-    'license': 'AGPL-3',
-}
+from osv import fields, osv
+
+
+class l10n_cr_ConciliationBankWizard(osv.osv_memory):
+
+    _inherit = "partners.ledger.webkit"
+    _name = "conciliation.bank.webkit"
+    _description = "Conciliation Bank Report"
+
+    _columns = {
+        'bank_account_ids': fields.many2one('account.account', 'Bank Account', domain="[('user_type','==','bank_view')]", help="Bank Account"),
+    }
+
+    def _print_report(self, cursor, uid, ids, data, context=None):
+        context = context or {}
+        # we update form with display account value
+        data = self.pre_print_report(cursor, uid, ids, data, context=context)
+        return {'type': 'ir.actions.report.xml',
+                'report_name': 'account_financial_report_webkit.account.account_report_partners_ledger_webkit',
+                'datas': data}
