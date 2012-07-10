@@ -12,7 +12,6 @@
         <div style="font-size: 20px; font-weight: bold; text-align: center;"> ${company.partner_id.name | entity} - ${company.currency_id.name | entity}</div>
         <div style="font-size: 25px; font-weight: bold; text-align: center;"> Conciliación de Bancos</div>
         <div style="font-size: 20px; font-weight: bold; text-align: center;"> ${account.name}</div>
-        </br></br>
         <div align="center">
             <div class="act_as_table data_table" style="margin-top:20px; margin-bottom: 10px; width:500px">
                 <div class="act_as_row labels">
@@ -48,8 +47,20 @@
             </div>
         </div>
 
-
-        %for line_group_key, line_group in bank_move_lines.items():
+        <%
+            def cmp (first, second):
+                list_ = [
+                    'debits_to_register',
+                    'credits_to_register',
+                    'debits_to_reconcile',
+                    'credits_to_reconcile',
+                ]
+                first_index = len(first) > 0 and first[0] in list_ and list_.index(first[0]) or -1
+                second_index = len(second) > 0 and second[0] in list_ and list_.index(second[0]) or -1
+                
+                return first_index - second_index
+        %>
+        %for line_group_key, line_group in sorted(bank_move_lines.items(),cmp):
             <div class="account_title bg" style="width: 100%; margin-top: 15px; font-size: 12px;">
                 %if line_group_key == 'debits_to_reconcile':
                     ${_('Debits to reconcile')}
@@ -65,17 +76,19 @@
                 <div class="act_as_thead">
                     <div class="act_as_row labels">
                         ## Account
-                        <div class="act_as_cell first_column" style="width: 95px;">${_('Account')}</div>
+                        <div class="act_as_cell first_column" style="width: 70px;">${_('Account')}</div>
                         ## Partner
-                        <div class="act_as_cell" style="width: 330px;">${_('Partner')}</div>
+                        <div class="act_as_cell" style="width: 310px;">${_('Partner')}</div>
                         ## date
                         <div class="act_as_cell" style="width: 55px;">${_('Date')}</div>
                         ## period
                         <div class="act_as_cell" style="width: 60px;">${_('Period')}</div>
                         ## journal
                         <div class="act_as_cell" style="width: 120px;">${_('Journal')}</div>
+                        ## Reference
+                        <div class="act_as_cell" style="width: 50px;">${_('Reference')}</div>
                         ## label
-                        <div class="act_as_cell" style="width: 320px;">${_('Label')}</div>
+                        <div class="act_as_cell" style="width: 315px;">${_('Label')}</div>
                          ## Amount
                         <div class="act_as_cell amount" style="width: 100px;">${_('Amount')}</div>
                     </div>
@@ -93,6 +106,8 @@
                             <div class="act_as_cell">${line.period_id.code}</div>
                             ## journal
                             <div class="act_as_cell">${line.journal_id.code}</div>
+                            ## Reference
+                            <div class="act_as_cell">${line.ref}</div>
                             ## label
                             <div class="act_as_cell">${line.name}</div>
                             ## Amount
@@ -110,7 +125,17 @@
                     <div class="act_as_table list_table" style="margin-top:5px;">
                         <div class="act_as_row labels" style="font-weight: bold; font-size: 12px;">
                             ## label
-                            <div class="act_as_cell" style="width: 880px;">${_("Total")}</div>
+                            <div class="act_as_cell" style="width: 880px;">
+                                %if line_group_key == 'debits_to_reconcile':
+                                    ${_("Total")} ${_('Debits to reconcile')}
+                                %elif line_group_key == 'credits_to_reconcile':
+                                    ${_("Total")} ${_('Credits to reconcile')}
+                                %elif line_group_key == 'debits_to_register':
+                                    ${_("Total")} ${_('Debits to register')}
+                                %else:
+                                    ${_("Total")} ${_('Credits to register')}
+                                %endif
+                            </div>
                             <div class="act_as_cell amount" style="width: 200px;">
                                 %if account_is_foreign:
                                     ${account.currency_id.symbol} ${formatLang(bank_balance[line_group_key])}
