@@ -16,10 +16,10 @@
         <div align="center">
             <div class="act_as_table data_table" style="margin-top:20px; margin-bottom: 10px; width:500px">
                 <div class="act_as_row labels">
-                    <div class="act_as_cell" style = "width: 140px; text-align: left"></div>
-                    <div class="act_as_cell amount" style="width: 100px"></div>
-                    <div class="act_as_cell" style = "width: 140px; font-size: 14px; font-weight: bold; text-align: left">${_('Input Bank Balance')}</div>
-                    <div class="act_as_cell amount" style = "width: 100px; font-size: 14px; font-weight: bold">${formatLang(bank_balance['input_bank_balance'])}</div>
+                    <div class="act_as_cell" style = "width: 150px; text-align: left"></div>
+                    <div class="act_as_cell amount" style="width: 120px"></div>
+                    <div class="act_as_cell" style = "width: 150px; font-size: 14px; font-weight: bold; text-align: left">${_('Input Bank Balance')}</div>
+                    <div class="act_as_cell amount" style = "width: 120px; font-size: 14px; font-weight: bold">${formatLang(bank_balance['input_bank_balance'])}</div>
                 </div>
                 <div class="act_as_row labels">
                     <div class="act_as_cell" style = "font-size: 14px; font-weight: bold; text-align: left">${_('Accounting Balance')}</div>
@@ -65,17 +65,17 @@
                 <div class="act_as_thead">
                     <div class="act_as_row labels">
                         ## Account
-                        <div class="act_as_cell first_column" style="width: 160px;">${_('Account')}</div>
+                        <div class="act_as_cell first_column" style="width: 95px;">${_('Account')}</div>
                         ## Partner
-                        <div class="act_as_cell" style="width: 160px;">${_('Partner')}</div>
+                        <div class="act_as_cell" style="width: 330px;">${_('Partner')}</div>
                         ## date
-                        <div class="act_as_cell" style="width: 70px;">${_('Date')}</div>
+                        <div class="act_as_cell" style="width: 55px;">${_('Date')}</div>
                         ## period
-                        <div class="act_as_cell" style="width: 70px;">${_('Period')}</div>
+                        <div class="act_as_cell" style="width: 60px;">${_('Period')}</div>
                         ## journal
-                        <div class="act_as_cell" style="width: 70px;">${_('Journal')}</div>
+                        <div class="act_as_cell" style="width: 120px;">${_('Journal')}</div>
                         ## label
-                        <div class="act_as_cell" style="width: 250px;">${_('Label')}</div>
+                        <div class="act_as_cell" style="width: 320px;">${_('Label')}</div>
                          ## Amount
                         <div class="act_as_cell amount" style="width: 100px;">${_('Amount')}</div>
                     </div>
@@ -84,15 +84,15 @@
                     %for line in line_group:
                         <div class="act_as_row lines">
                             ## Account
-                            <div class="act_as_cell first_column">${line.account_id.code} ${line.account_id.name}</div>
+                            <div class="act_as_cell first_column">${line.account_id.code}</div>
                             ## Partner
                             <div class="act_as_cell">${line.partner_id.ref} ${line.partner_id.name}</div>
                             ## date
                             <div class="act_as_cell">${formatLang(line.date, date=True)}</div>
                             ## period
-                            <div class="act_as_cell">${line.period_id.name}</div>
+                            <div class="act_as_cell">${line.period_id.code}</div>
                             ## journal
-                            <div class="act_as_cell">${line.journal_id.name}</div>
+                            <div class="act_as_cell">${line.journal_id.code}</div>
                             ## label
                             <div class="act_as_cell">${line.name}</div>
                             ## Amount
@@ -110,13 +110,8 @@
                     <div class="act_as_table list_table" style="margin-top:5px;">
                         <div class="act_as_row labels" style="font-weight: bold; font-size: 12px;">
                             ## label
-                            <div class="act_as_cell" style="width: 160px;">${_("Total")}</div>
-                            <div class="act_as_cell" style="width: 160px;">${_('')}</div>
-                            <div class="act_as_cell" style="width: 70px;">${_('')}</div>
-                            <div class="act_as_cell" style="width: 70px;">${_('')}</div>
-                            <div class="act_as_cell" style="width: 70px;">${_('')}</div>
-                            <div class="act_as_cell" style="width: 250px;">${_('')}</div>
-                            <div class="act_as_cell amount" style="width: 100px;">
+                            <div class="act_as_cell" style="width: 880px;">${_("Total")}</div>
+                            <div class="act_as_cell amount" style="width: 200px;">
                                 %if account_is_foreign:
                                     ${account.currency_id.symbol} ${formatLang(bank_balance[line_group_key])}
                                 %else:
