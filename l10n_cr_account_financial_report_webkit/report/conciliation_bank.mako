@@ -1,27 +1,6 @@
 <html>
 <head>
-    <style type="text/css">
-
-        ${css}
-
-        .list_table .act_as_row {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            font-size:10px;
-        }
-
-        .account_line {
-            font-weight: bold;
-            font-size: 15px;
-            background-color:#F0F0F0;
-        }
-
-        .account_line .act_as_cell {
-            height: 30px;
-            vertical-align: bottom;
-        }
-
-    </style>
+    <style type="text/css">${css}</style>
 </head>
 <body class = "data">
     %for account in objects :
@@ -35,25 +14,37 @@
         <div style="font-size: 25px; font-weight: bold; text-align: center;"> Conciliación de Bancos</div>
         <div style="font-size: 20px; font-weight: bold; text-align: center;"> ${account.name}</div>
         </br></br>
-
-        <div class="act_as_table data_table" style="margin-top:30px; width: 180px;">
-            <div class="act_as_row labels">
-                <div class="act_as_cell" style = "text-align: left; width: 90px;">${_('Bank Balance')}</br>
-                    ${_('Conciled Balance')}</br>
-                    ${_('Cobros')}</br>
-                    ${_('Payments')}</br>
-                    ${_('Debits')}</br>
-                    ${_('Credits')}</br>
-                    ${_('Total')}</br>
+        <div align="center">
+            <div class="act_as_table data_table" style="margin-top:20px; margin-bottom: 10px; width:500px">
+                <div class="act_as_row labels">
+                    <div class="act_as_cell" style = "width: 140px; text-align: left"></div>
+                    <div class="act_as_cell amount" style="width: 100px"></div>
+                    <div class="act_as_cell" style = "width: 140px; font-size: 14px; font-weight: bold; text-align: left">${_('Input Bank Balance')}</div>
+                    <div class="act_as_cell amount" style = "width: 100px; font-size: 14px; font-weight: bold">${formatLang(bank_balance['input_bank_balance'])}</div>
                 </div>
-                <div class="act_as_cell" style = "text-align: left; width: 90px;">${formatLang(bank_balance[0])}</br>
-                    ${formatLang(bank_balance[0])}</br>
-                    ${formatLang(bank_balance[1])}</br>
-                    ${formatLang(bank_balance[2])}</br>
-                    ${formatLang(bank_balance[3])}</br>
-                    ${formatLang(bank_balance[4])}</br>
-                    <% total = bank_balance[0] + bank_balance[1] + bank_balance[2] + bank_balance[3] + bank_balance[4]%>
-                    ${formatLang(total)}
+                <div class="act_as_row labels">
+                    <div class="act_as_cell" style = "font-size: 14px; font-weight: bold; text-align: left">${_('Accounting Balance')}</div>
+                    <div class="act_as_cell amount" style = "font-size: 14px; font-weight: bold">${formatLang(bank_balance['accounting_balance'])}</div>
+                    <div class="act_as_cell" style = "font-size: 14px; font-weight: bold; text-align: left">${_('Bank Balance')}</div>
+                    <div class="act_as_cell amount" style = "font-size: 14px; font-weight: bold">${formatLang(bank_balance['bank_balance'])}</div>
+                </div>
+                <div class="act_as_row labels">
+                    <div class="act_as_cell" style = "font-size: 14px; text-align: left">${_('Debits to register')}</div>
+                    <div class="act_as_cell amount" style = "font-size: 14px">${formatLang(bank_balance['debits_to_register'])}</div>
+                    <div class="act_as_cell" style = "font-size: 14px; text-align: left">${_('Debits to reconcile')}</div>
+                    <div class="act_as_cell amount" style = "font-size: 14px">${formatLang(bank_balance['debits_to_reconcile'])}</div>
+                </div>
+                <div class="act_as_row labels">
+                    <div class="act_as_cell" style = "font-size: 14px; text-align: left">${_('Credits to register')}</div>
+                    <div class="act_as_cell amount" style = "font-size: 14px">${formatLang(bank_balance['credits_to_register'])}</div>
+                    <div class="act_as_cell" style = "font-size: 14px; text-align: left">${_('Credits to reconcile')}</div>
+                    <div class="act_as_cell amount" style = "font-size: 14px">${formatLang(bank_balance['credits_to_reconcile'])}</div>
+                </div>
+                <div class="act_as_row labels">
+                    <div class="act_as_cell" style = "font-size: 14px; font-weight: bold; text-align: left; width: 90px;">${_('Accounting Total')}</div>
+                    <div class="act_as_cell amount" style = "font-size: 14px; font-weight: bold; width: 90px;">${formatLang(bank_balance['accounting_total'])}</div>
+                    <div class="act_as_cell" style = "font-size: 14px; font-weight: bold; text-align: left; width: 90px;">${_('Bank Total')}</div>
+                    <div class="act_as_cell amount" style = "font-size: 14px; font-weight: bold; width: 90px;">${formatLang(bank_balance['bank_total'])}</div>
                 </div>
             </div>
         </div>

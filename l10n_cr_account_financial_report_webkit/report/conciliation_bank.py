@@ -119,11 +119,20 @@ class conciliation_bank(report_sxw.rml_parse):
         return accounts
     
     def get_bank_balance(self, cr, uid, accounts, context=None):
+        input_bank_balance = 0.0
+        bank_balance = 0.0
+        accounting_balance = 0.0
+        debits_to_register = 0.0
+        debits_to_reconcile = 0.0
+        credits_to_register = 0.0
+        credits_to_reconcile = 0.0
+        accounting_total = 0.0
+        bank_total = 0.0
+        
         total_debit = 0.0
         total_credit = 0.0
         total_invoice = 0.0
         total_payment = 0.0
-        result = []
         
         for account in accounts:
             user_type = account.user_type.name
@@ -142,11 +151,25 @@ class conciliation_bank(report_sxw.rml_parse):
                         
         bank_balance = total_debit + total_credit + total_invoice + total_payment
         
+        '''
         result.append(bank_balance)
         result.append(total_invoice)
         result.append(total_payment)
         result.append(total_debit)
         result.append(total_credit)
+        '''
+        
+        result = {
+            'input_bank_balance' : input_bank_balance,
+            'bank_balance' : bank_balance,
+            'accounting_balance' : accounting_balance,
+            'debits_to_register' : debits_to_register,
+            'debits_to_reconcile' : debits_to_reconcile,
+            'credits_to_register' : credits_to_register,
+            'credits_to_reconcile' : credits_to_reconcile,
+            'accounting_total' : accounting_total,
+            'bank_total' : bank_total,
+        }
         
         return result
                 
