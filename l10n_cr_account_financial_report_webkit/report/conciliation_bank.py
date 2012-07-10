@@ -221,20 +221,16 @@ class conciliation_bank(report_sxw.rml_parse):
             contra_line = line
             for other_line in move.line_id:
                 if other_line.id == line.id:
-                    print "CASO 1"
                     continue
                 elif other_line.debit == line.credit or other_line.credit == line.debit:
                     contra_line = other_line
-                    print "CASO 2"
                     break
                 elif account_is_foreign and (other_line.amount_currency == -1 * line.amount_currency):
                     contra_line = other_line
-                    print "CASO 3"
                     break
                 if (line.debit != 0 and contra_line.credit > other_line.credit) or \
                    (line.credit != 0 and contra_line.debit < other_line.debit):
                     contra_line = other_line
-                    print "CASO 4"
                 elif (account_is_foreign and
                       (
                        (line.amount_currency > 0 and
@@ -245,7 +241,6 @@ class conciliation_bank(report_sxw.rml_parse):
                       )
                      ):
                     contra_line = other_line
-                    print "CASO 5"
 
             if line.id == contra_line.id:
                 if account_is_foreign:
@@ -263,33 +258,35 @@ class conciliation_bank(report_sxw.rml_parse):
                         result_move_lines['credits_to_register'].append(line)
                         credits_to_register += line.credit
             else:
-                if account_is_foreign:
-                    if line.amount_currency > 0:
-                        if contra_line.account_id.id == reconciled_account.id:
+                #Debit or credit to register: present in statement but not in other accounts
+                if contra_line.account_id.id == reconciled_account.id:
+                    if account_is_foreign:
+                        if line.amount_currency < 0:
                             result_move_lines['debits_to_register'].append(line)
-                            debits_to_register += line.amount_currency
+                            debits_to_register -= line.amount_currency
                         else:
+                            result_move_lines['credits_to_register'].append(line)
+                            credits_to_register += line.amount_currency
+                    else:
+                        if line.credit > 0:
+                            result_move_lines['debits_to_register'].append(line)
+                            debits_to_register += line.credit
+                        else:
+                            result_move_lines['credits_to_register'].append(line)
+                            credits_to_register += line.debit
+                #Debit or credit to reconcile: present in other accounts but not in statements
+                else:
+                    if account_is_foreign:
+                        if line.amount_currency > 0:
                             result_move_lines['debits_to_reconcile'].append(line)
                             debits_to_reconcile += line.amount_currency
-                    else:
-                        if contra_line.account_id.id == reconciled_account.id:
-                            result_move_lines['credits_to_register'].append(line)
-                            credits_to_register -= line.amount_currency
                         else:
                             result_move_lines['credits_to_reconcile'].append(line)
                             credits_to_reconcile -= line.amount_currency
-                else:
-                    if line.debit > 0:
-                        if contra_line.account_id.id == reconciled_account.id:
-                            result_move_lines['debits_to_register'].append(line)
-                            debits_to_register += line.debit
-                        else:
+                    else:
+                        if line.debit > 0:
                             result_move_lines['debits_to_reconcile'].append(line)
                             debits_to_reconcile += line.debit
-                    else:
-                        if contra_line.account_id.id == reconciled_account.id:
-                            result_move_lines['credits_to_register'].append(line)
-                            credits_to_register += line.credit
                         else:
                             result_move_lines['credits_to_reconcile'].append(line)
                             credits_to_reconcile += line.credit
