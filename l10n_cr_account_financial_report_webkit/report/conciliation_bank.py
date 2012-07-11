@@ -150,10 +150,10 @@ class conciliation_bank(PartnersLedgerWebkit):
         input_bank_balance = 0.0
         bank_balance = 0.0
         accounting_balance = 0.0
-        debits_to_register = 0.0
-        debits_to_reconcile = 0.0
-        credits_to_register = 0.0
+        incomes_to_register = 0.0
         credits_to_reconcile = 0.0
+        expenditures_to_register = 0.0
+        debits_to_reconcile = 0.0
         accounting_total = 0.0
         bank_total = 0.0
 
@@ -196,28 +196,28 @@ class conciliation_bank(PartnersLedgerWebkit):
         unreconciled_move_line_ids = move_line_obj.search(cr, uid, [('account_id','in',transit_account_ids),('reconcile_id','=',False)])
         unreconciled_move_lines = unreconciled_move_line_ids and move_line_obj.browse(cr, uid, unreconciled_move_line_ids) or False
         result_move_lines = {
-            'debits_to_reconcile' :     [],
-            'credits_to_reconcile' :    [],
-            'debits_to_register' :      [],
-            'credits_to_register' :     [],
+            'credits_to_reconcile' :     [],
+            'debits_to_reconcile' :    [],
+            'incomes_to_register' :      [],
+            'expenditures_to_register' :     [],
         }
         for line in unreconciled_move_lines:
             move = line.move_id
             if not move:
                 if account_is_foreign:
                     if line.amount_currency > 0:
-                        result_move_lines['debits_to_register'].append(line)
-                        debits_to_register += line.amount_currency
+                        result_move_lines['incomes_to_register'].append(line)
+                        incomes_to_register += line.amount_currency
                     else:
-                        result_move_lines['credits_to_register'].append(line)
-                        credits_to_register -= line.amount_currency
+                        result_move_lines['expenditures_to_register'].append(line)
+                        expenditures_to_register -= line.amount_currency
                 else:
                     if line.debit > 0:
-                        result_move_lines['debits_to_register'].append(line)
-                        debits_to_register += line.debit
+                        result_move_lines['incomes_to_register'].append(line)
+                        incomes_to_register += line.debit
                     else:
-                        result_move_lines['credits_to_register'].append(line)
-                        credits_to_register += line.credit
+                        result_move_lines['expenditures_to_register'].append(line)
+                        expenditures_to_register += line.credit
                 print "No move"
                 continue
 
@@ -249,63 +249,63 @@ class conciliation_bank(PartnersLedgerWebkit):
             if line.id == contra_line.id:
                 if account_is_foreign:
                     if line.amount_currency > 0:
-                        result_move_lines['debits_to_register'].append(line)
-                        debits_to_register += line.amount_currency
+                        result_move_lines['incomes_to_register'].append(line)
+                        incomes_to_register += line.amount_currency
                     else:
-                        result_move_lines['credits_to_register'].append(line)
-                        credits_to_register -= line.amount_currency
+                        result_move_lines['expenditures_to_register'].append(line)
+                        expenditures_to_register -= line.amount_currency
                 else:
                     if line.debit > 0:
-                        result_move_lines['debits_to_register'].append(line)
-                        debits_to_register += line.debit
+                        result_move_lines['incomes_to_register'].append(line)
+                        incomes_to_register += line.debit
                     else:
-                        result_move_lines['credits_to_register'].append(line)
-                        credits_to_register += line.credit
+                        result_move_lines['expenditures_to_register'].append(line)
+                        expenditures_to_register += line.credit
             else:
                 #Debit or credit to register: present in statement but not in other accounts
                 if contra_line.account_id.id == reconciled_account.id:
                     if account_is_foreign:
                         if line.amount_currency < 0:
-                            result_move_lines['debits_to_register'].append(line)
-                            debits_to_register -= line.amount_currency
+                            result_move_lines['incomes_to_register'].append(line)
+                            incomes_to_register -= line.amount_currency
                         else:
-                            result_move_lines['credits_to_register'].append(line)
-                            credits_to_register += line.amount_currency
+                            result_move_lines['expenditures_to_register'].append(line)
+                            expenditures_to_register += line.amount_currency
                     else:
                         if line.credit > 0:
-                            result_move_lines['debits_to_register'].append(line)
-                            debits_to_register += line.credit
+                            result_move_lines['incomes_to_register'].append(line)
+                            incomes_to_register += line.credit
                         else:
-                            result_move_lines['credits_to_register'].append(line)
-                            credits_to_register += line.debit
+                            result_move_lines['expenditures_to_register'].append(line)
+                            expenditures_to_register += line.debit
                 #Debit or credit to reconcile: present in other accounts but not in statements
                 else:
                     if account_is_foreign:
                         if line.amount_currency > 0:
-                            result_move_lines['debits_to_reconcile'].append(line)
-                            debits_to_reconcile += line.amount_currency
-                        else:
                             result_move_lines['credits_to_reconcile'].append(line)
-                            credits_to_reconcile -= line.amount_currency
+                            credits_to_reconcile += line.amount_currency
+                        else:
+                            result_move_lines['debits_to_reconcile'].append(line)
+                            debits_to_reconcile -= line.amount_currency
                     else:
                         if line.debit > 0:
-                            result_move_lines['debits_to_reconcile'].append(line)
-                            debits_to_reconcile += line.debit
-                        else:
                             result_move_lines['credits_to_reconcile'].append(line)
-                            credits_to_reconcile += line.credit
+                            credits_to_reconcile += line.debit
+                        else:
+                            result_move_lines['debits_to_reconcile'].append(line)
+                            debits_to_reconcile += line.credit
 
-        accounting_total = accounting_balance + debits_to_register - credits_to_register
-        bank_total = bank_balance + debits_to_reconcile - credits_to_reconcile
+        accounting_total = accounting_balance + incomes_to_register - expenditures_to_register
+        bank_total = bank_balance + credits_to_reconcile - debits_to_reconcile
 
         result_bank_balance = {
             'input_bank_balance' : input_bank_balance,
             'bank_balance' : bank_balance,
             'accounting_balance' : accounting_balance,
-            'debits_to_register' : debits_to_register,
-            'debits_to_reconcile' : debits_to_reconcile,
-            'credits_to_register' : credits_to_register,
+            'incomes_to_register' : incomes_to_register,
             'credits_to_reconcile' : credits_to_reconcile,
+            'expenditures_to_register' : expenditures_to_register,
+            'debits_to_reconcile' : debits_to_reconcile,
             'accounting_total' : accounting_total,
             'bank_total' : bank_total,
         }
