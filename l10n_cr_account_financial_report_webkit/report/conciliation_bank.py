@@ -26,11 +26,12 @@ from tools.translate import _
 import pooler
 from datetime import datetime
 
-from openerp.addons.account_financial_report_webkit.report.trial_balance import TrialBalanceWebkit
+from openerp.addons.account_financial_report_webkit.report.partners_ledger import PartnersLedgerWebkit
 from openerp.addons.account_financial_report_webkit.report.webkit_parser_header_fix import HeaderFooterTextWebKitParser
 
 
-class conciliation_bank(report_sxw.rml_parse):
+
+class conciliation_bank(PartnersLedgerWebkit):
     
     def __init__(self, cr, uid, name, context):
         super(conciliation_bank, self).__init__(cr, uid, name, context=context)
@@ -40,6 +41,9 @@ class conciliation_bank(report_sxw.rml_parse):
             'uid': uid,
             'get_amount': self.get_amount,
             'get_bank_data': self.get_bank_data,
+            'get_bank_account': self.get_bank_account,
+            'get_bank_balance': self.get_bank_balance,
+            'get_prueba': self.get_prueba,
         })
     
     def get_amount(self,cr, uid, account_move_line, currency):
@@ -307,9 +311,23 @@ class conciliation_bank(report_sxw.rml_parse):
         }
         
         return result_bank_balance, result_move_lines, account_is_foreign
+    
+    def get_bank_account(self, cr, uid, data):
+        info = data.get('form', {}).get('bank_account_ids')
+        if info:
+            bank_account = self.pool.get('account.account').browse(cr, uid, info[0])
+            return bank_account
+        return False
+    
+    def get_bank_balance(self, cr, uid, data):
+        return self._get_form_param('bank_balance', data)
+    
+    def get_prueba(self, cr, uid):
+        return 'Prueba'
+
 
 report_sxw.report_sxw(
-    'report.l10n.cr.conciliation.bank.layout_ccorp',
+    'report.account_financial_report_webkit.account.account_report_conciliation_bank_webkit',
     'account.account',
     'addons/l10n_cr_account_financial_report_webkit/report/conciliation_bank.mako',
     parser=conciliation_bank)
