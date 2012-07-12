@@ -16,17 +16,21 @@
                     <field name="chart_account_id" position='attributes'>
                         <attribute name="colspan">4</attribute>
                     </field>
-                    <xpath expr="//field[@name='target_move']" position="after">
-                        <field name="result_selection" colspan="4"/>
-                    </xpath>
+                    <field name="chart_account_id" position='after'>
+                        <field name="bank_account_ids" required = 'True'/>
+                        <field name="bank_balance" required = 'True'/>
+                    </field>
                     <page name="filters" position="attributes">
                         <attribute name="string">Time Filters</attribute>
                     </page>
                     <page name="journal_ids" position="attributes">
                         <attribute name="invisible">True</attribute>
                     </page>
-                    <field name="period_from" position="attributes">
-                        <attribute name="domain">[('fiscalyear_id', '=', fiscalyear_id), ('special', '=', False)]</attribute>
+                    <field name="date_from" position="replace">
+                        <field name="date_from" invisible="1" required = "False" attrs="{'readonly':[('filter', '!=', 'filter_date')]}" colspan="4"/>
+                    </field>
+                    <field name="period_from" position="replace">
+                        <field name="period_from" invisible="1" required = "False" domain="[('fiscalyear_id', '=', fiscalyear_id)]" attrs="{'readonly':[('filter','!=','filter_period')]}" colspan="4"/>
                     </field>
                     <field name="period_to" position="attributes">
                         <attribute name="domain">[('fiscalyear_id', '=', fiscalyear_id), ('special', '=', False)]</attribute>

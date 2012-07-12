@@ -26,22 +26,63 @@ from tools.translate import _
 import pooler
 from datetime import datetime
 
-from openerp.addons.account_financial_report_webkit.report.trial_balance import TrialBalanceWebkit
-from openerp.addons.account_financial_report_webkit.report.webkit_parser_header_fix import HeaderFooterTextWebKitParser
+from openerp.addons.account_financial_report_webkit.report.common_reports import CommonReportHeaderWebkit
+from openerp.addons.account_financial_report_webkit.report.partners_ledger import PartnersLedgerWebkit
 
 
-class conciliation_bank(report_sxw.rml_parse):
+
+
+class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
     
-    def __init__(self, cr, uid, name, context):
-        super(conciliation_bank, self).__init__(cr, uid, name, context=context)
+    def __init__(self, cursor, uid, name, context):
+        super(conciliation_bank, self).__init__(cursor, uid, name, context=context)
+        self.pool = pooler.get_pool(self.cr.dbname)
+        self.cursor = self.cr
+        
         self.localcontext.update({
             'time': time,
-            'cr' : cr,
+            'cr' : cursor,
             'uid': uid,
             'get_amount': self.get_amount,
             'get_bank_data': self.get_bank_data,
+            'get_bank_account': self.get_bank_account,
+            'filter_form': self._get_filter,
         })
     
+    def set_context(self, objects, data, ids, report_type=None):
+        main_filter = self._get_form_param('filter', data, default='filter_no')
+        target_move = self._get_form_param('target_move', data, default='all')
+        start_date = self._get_form_param('date_from', data)
+        stop_date = self._get_form_param('date_to', data)
+        input_bank_balance = self._get_form_param('bank_balance', data)
+        start_period = self.get_start_period_br(data)
+        stop_period = self.get_end_period_br(data)
+        fiscalyear = self.get_fiscalyear_br(data)
+        
+        if main_filter == 'filter_no' and fiscalyear:
+            start_period = self.get_first_fiscalyear_period(fiscalyear)
+            stop_period = self.get_last_fiscalyear_period(fiscalyear)            
+        elif main_filter == 'filter_date':
+            start = start_date
+            stop = stop_date
+        else:
+            start = start_period
+            stop = stop_period
+            
+        self.localcontext.update({
+            'fiscalyear': fiscalyear,
+            'start_date': start_date,
+            'stop_date': stop_date,
+            'start_period': start_period,
+            'stop_period': stop_period,
+            'target_move': target_move,
+            'input_bank_balance': input_bank_balance
+            
+        })
+
+        return super(conciliation_bank, self).set_context(objects, data, ids,
+                                                            report_type=report_type)
+
     def get_amount(self,cr, uid, account_move_line, currency):
         account_obj = self.pool.get('account.account').browse(cr,uid,account_move_line.account_id.id)
         
@@ -103,7 +144,7 @@ class conciliation_bank(report_sxw.rml_parse):
 
         return res
 
-    def get_bank_data(self, cr, uid, parent_account_id, context=None):
+    def get_bank_data(self, cr, uid, parent_account_id, filter_type, filter_data, target_move, context=None):
         result_bank_balance = {}
         result_move_lines = []
 
@@ -146,10 +187,10 @@ class conciliation_bank(report_sxw.rml_parse):
         input_bank_balance = 0.0
         bank_balance = 0.0
         accounting_balance = 0.0
-        debits_to_register = 0.0
-        debits_to_reconcile = 0.0
-        credits_to_register = 0.0
+        incomes_to_register = 0.0
         credits_to_reconcile = 0.0
+        expenditures_to_register = 0.0
+        debits_to_reconcile = 0.0
         accounting_total = 0.0
         bank_total = 0.0
 
@@ -189,31 +230,39 @@ class conciliation_bank(report_sxw.rml_parse):
 
         move_obj = self.pool.get('account.move')
         move_line_obj = self.pool.get('account.move.line')
+        
+        if filter_type == 'filter_period':
+            date_stop = filter_data[0].date_stop
+            unreconciled_move_line_ids = move_line_obj('account.move.line').search(cr, uid, [('account_id', '=', account.id), ('partner_id', '=', partner), ('period_id.date_start', '<', date_start), ('reconcile_id', '=', False)], context=context)
+        elif filter_type == 'filter_date':
+            date_stop = filter_data[0]
+            unreconciled_move_line_ids = move_line_obj('account.move.line').search(cr, uid, [('account_id', '=', account.id), ('partner_id', '=', partner), ('date', '<', date_start), ('reconcile_id', '=', False)], context=context)
+        
         unreconciled_move_line_ids = move_line_obj.search(cr, uid, [('account_id','in',transit_account_ids),('reconcile_id','=',False)])
         unreconciled_move_lines = unreconciled_move_line_ids and move_line_obj.browse(cr, uid, unreconciled_move_line_ids) or False
         result_move_lines = {
-            'debits_to_reconcile' :     [],
-            'credits_to_reconcile' :    [],
-            'debits_to_register' :      [],
-            'credits_to_register' :     [],
+            'credits_to_reconcile' :     [],
+            'debits_to_reconcile' :    [],
+            'incomes_to_register' :      [],
+            'expenditures_to_register' :     [],
         }
         for line in unreconciled_move_lines:
             move = line.move_id
             if not move:
                 if account_is_foreign:
                     if line.amount_currency > 0:
-                        result_move_lines['debits_to_register'].append(line)
-                        debits_to_register += line.amount_currency
+                        result_move_lines['incomes_to_register'].append(line)
+                        incomes_to_register += line.amount_currency
                     else:
-                        result_move_lines['credits_to_register'].append(line)
-                        credits_to_register -= line.amount_currency
+                        result_move_lines['expenditures_to_register'].append(line)
+                        expenditures_to_register -= line.amount_currency
                 else:
                     if line.debit > 0:
-                        result_move_lines['debits_to_register'].append(line)
-                        debits_to_register += line.debit
+                        result_move_lines['incomes_to_register'].append(line)
+                        incomes_to_register += line.debit
                     else:
-                        result_move_lines['credits_to_register'].append(line)
-                        credits_to_register += line.credit
+                        result_move_lines['expenditures_to_register'].append(line)
+                        expenditures_to_register += line.credit
                 print "No move"
                 continue
 
@@ -245,71 +294,79 @@ class conciliation_bank(report_sxw.rml_parse):
             if line.id == contra_line.id:
                 if account_is_foreign:
                     if line.amount_currency > 0:
-                        result_move_lines['debits_to_register'].append(line)
-                        debits_to_register += line.amount_currency
+                        result_move_lines['incomes_to_register'].append(line)
+                        incomes_to_register += line.amount_currency
                     else:
-                        result_move_lines['credits_to_register'].append(line)
-                        credits_to_register -= line.amount_currency
+                        result_move_lines['expenditures_to_register'].append(line)
+                        expenditures_to_register -= line.amount_currency
                 else:
                     if line.debit > 0:
-                        result_move_lines['debits_to_register'].append(line)
-                        debits_to_register += line.debit
+                        result_move_lines['incomes_to_register'].append(line)
+                        incomes_to_register += line.debit
                     else:
-                        result_move_lines['credits_to_register'].append(line)
-                        credits_to_register += line.credit
+                        result_move_lines['expenditures_to_register'].append(line)
+                        expenditures_to_register += line.credit
             else:
                 #Debit or credit to register: present in statement but not in other accounts
                 if contra_line.account_id.id == reconciled_account.id:
                     if account_is_foreign:
                         if line.amount_currency < 0:
-                            result_move_lines['debits_to_register'].append(line)
-                            debits_to_register -= line.amount_currency
+                            result_move_lines['incomes_to_register'].append(line)
+                            incomes_to_register -= line.amount_currency
                         else:
-                            result_move_lines['credits_to_register'].append(line)
-                            credits_to_register += line.amount_currency
+                            result_move_lines['expenditures_to_register'].append(line)
+                            expenditures_to_register += line.amount_currency
                     else:
                         if line.credit > 0:
-                            result_move_lines['debits_to_register'].append(line)
-                            debits_to_register += line.credit
+                            result_move_lines['incomes_to_register'].append(line)
+                            incomes_to_register += line.credit
                         else:
-                            result_move_lines['credits_to_register'].append(line)
-                            credits_to_register += line.debit
+                            result_move_lines['expenditures_to_register'].append(line)
+                            expenditures_to_register += line.debit
                 #Debit or credit to reconcile: present in other accounts but not in statements
                 else:
                     if account_is_foreign:
                         if line.amount_currency > 0:
-                            result_move_lines['debits_to_reconcile'].append(line)
-                            debits_to_reconcile += line.amount_currency
-                        else:
                             result_move_lines['credits_to_reconcile'].append(line)
-                            credits_to_reconcile -= line.amount_currency
+                            credits_to_reconcile += line.amount_currency
+                        else:
+                            result_move_lines['debits_to_reconcile'].append(line)
+                            debits_to_reconcile -= line.amount_currency
                     else:
                         if line.debit > 0:
-                            result_move_lines['debits_to_reconcile'].append(line)
-                            debits_to_reconcile += line.debit
-                        else:
                             result_move_lines['credits_to_reconcile'].append(line)
-                            credits_to_reconcile += line.credit
+                            credits_to_reconcile += line.debit
+                        else:
+                            result_move_lines['debits_to_reconcile'].append(line)
+                            debits_to_reconcile += line.credit
 
-        accounting_total = accounting_balance + debits_to_register - credits_to_register
-        bank_total = bank_balance + debits_to_reconcile - credits_to_reconcile
+        accounting_total = accounting_balance + incomes_to_register - expenditures_to_register
+        bank_total = bank_balance + credits_to_reconcile - debits_to_reconcile
 
         result_bank_balance = {
             'input_bank_balance' : input_bank_balance,
             'bank_balance' : bank_balance,
             'accounting_balance' : accounting_balance,
-            'debits_to_register' : debits_to_register,
-            'debits_to_reconcile' : debits_to_reconcile,
-            'credits_to_register' : credits_to_register,
+            'incomes_to_register' : incomes_to_register,
             'credits_to_reconcile' : credits_to_reconcile,
+            'expenditures_to_register' : expenditures_to_register,
+            'debits_to_reconcile' : debits_to_reconcile,
             'accounting_total' : accounting_total,
             'bank_total' : bank_total,
         }
         
         return result_bank_balance, result_move_lines, account_is_foreign
+    
+    def get_bank_account(self, cr, uid, data):
+        info = data.get('form', {}).get('bank_account_ids')
+        if info:
+            bank_account = self.pool.get('account.account').browse(cr, uid, info[0])
+            return bank_account
+        return False
+    
 
 report_sxw.report_sxw(
-    'report.l10n.cr.conciliation.bank.layout_ccorp',
+    'report.account_financial_report_webkit.account.account_report_conciliation_bank_webkit',
     'account.account',
     'addons/l10n_cr_account_financial_report_webkit/report/conciliation_bank.mako',
     parser=conciliation_bank)

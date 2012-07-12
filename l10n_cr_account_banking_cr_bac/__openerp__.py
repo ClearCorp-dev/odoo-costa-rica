@@ -30,23 +30,10 @@
     'depends': ['account_banking'],
     'init_xml': [],
     'update_xml': [
-        'l10n_cr_account_banking_cr_bac.xml',
-        'bac_clientid_view.xml',
-        'data/banking_export_bac.xml',
-        'wizard/export_bac_view.xml',
     ],
     'demo_xml': [],
     'description': '''
-    Module to import HSBC format transation files (S.W.I.F.T MT940) and to export payments for HSBC.net (PAYMUL).
-
-    Currently it is targetting UK market, due to country variances of the MT940 and PAYMUL.
-
-    It is possible to extend this module to work with HSBC.net in other countries and potentially other banks.
-
-    This module adds above import/export filter to the account_banking module.
-    All business logic is in account_banking module.
-
-    Initial release of this module was co-sponsored by Canonical.
+    Module to import BAC CR format transation files (S.W.I.F.T MT940).
     ''',
     'active': False,
     'installable': True,
