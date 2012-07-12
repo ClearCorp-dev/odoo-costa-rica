@@ -10,14 +10,27 @@
     </style>
 </head>
 <body>
-    <% prueba = get_prueba(cr, uid)%>
     <%setLang(user.context_lang)%>
     <%
-        input_bank_balance = get_bank_balance(cr, uid, data)
-        bank_account = get_bank_account(cr, uid, data)
+        filter_type = ''
+        filter_data = []
     %>
+    %if filter_form(data) == 'filter_date':
+        <%
+            filter_data.append(start_date)
+            filter_data.append(stop_date)
+            filter_type = 'filter_date'
+        %>
+    %elif filter_form(data) == 'filter_period':
+        <% 
+            filter_data.append(start_period)
+            filter_data.append(stop_period)
+            filter_type = 'filter_period'
+        %>
+    %endif
     <%
-        bank_balance, bank_move_lines, account_is_foreign = get_bank_data(cr, uid, bank_account.id, context)
+        bank_account = get_bank_account(cr, uid, data)
+        bank_balance, bank_move_lines, account_is_foreign = get_bank_data(cr, uid, bank_account.id, filter_type, filter_data, target_move, context)
     %>
 
     <div style="font-size: 20px; font-weight: bold; text-align: center;"> ${company.partner_id.name | entity} - ${company.currency_id.name | entity}</div>
@@ -29,7 +42,7 @@
                 <div class="act_as_cell" style = "width: 150px; text-align: left"></div>
                 <div class="act_as_cell amount" style="width: 120px"></div>
                 <div class="act_as_cell" style = "width: 150px; font-size: 14px; font-weight: bold; text-align: left">${_('Input Bank Balance')}</div>
-                <div class="act_as_cell amount" style = "width: 120px; font-size: 14px; font-weight: bold">${formatLang(bank_balance['input_bank_balance'])}</div>
+                <div class="act_as_cell amount" style = "width: 120px; font-size: 14px; font-weight: bold">${formatLang(input_bank_balance)}</div>
             </div>
             <div class="act_as_row labels">
                 <div class="act_as_cell" style = "font-size: 14px; font-weight: bold; text-align: left">${_('Accounting Balance')}</div>
