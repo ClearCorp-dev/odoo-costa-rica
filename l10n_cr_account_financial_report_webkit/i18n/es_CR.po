@@ -67,7 +67,7 @@ msgstr "Compañía"
 #: report:addons/l10n_cr_account_financial_report_webkit/report/conciliation_bank.mako:73
 #: report:addons/l10n_cr_account_financial_report_webkit/report/conciliation_bank.mako:148
 msgid "Debits to reconcile"
-msgstr "Débitos por reconciliar"
+msgstr "Débitos por conciliar"
 
 #. module: l10n_cr_account_financial_report_webkit
 #: field:account.balances,journal_ids:0
@@ -151,12 +151,12 @@ msgstr "SALDO TOTAL en "
 #. module: l10n_cr_account_financial_report_webkit
 #: report:addons/l10n_cr_account_financial_report_webkit/report/conciliation_bank.mako:39
 msgid "+ Credits to reconcile"
-msgstr "+ Créditos por reconciliar"
+msgstr "+ Créditos por conciliar"
 
 #. module: l10n_cr_account_financial_report_webkit
 #: report:addons/l10n_cr_account_financial_report_webkit/report/conciliation_bank.mako:45
 msgid "- Debits to reconcile"
-msgstr "- Débitos por reconciliar"
+msgstr "- Débitos por conciliar"
 
 #. module: l10n_cr_account_financial_report_webkit
 #: report:addons/l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako:65
@@ -464,7 +464,7 @@ msgstr "Saldo de Cuentas de Banco en "
 #. module: l10n_cr_account_financial_report_webkit
 #: report:addons/l10n_cr_account_financial_report_webkit/report/conciliation_bank.mako:31
 msgid "Ledger Balance"
-msgstr "Ledger Balance"
+msgstr "Saldo en Libros"
 
 #. module: l10n_cr_account_financial_report_webkit
 #: report:addons/l10n_cr_account_financial_report_webkit/report/conciliation_bank.mako:27
@@ -575,7 +575,7 @@ msgstr "Reporte Financiero de Cuenta"
 #: report:addons/l10n_cr_account_financial_report_webkit/report/conciliation_bank.mako:33
 #: field:conciliation.bank.webkit,bank_balance:0
 msgid "Bank Balance"
-msgstr "Saldo de Banco"
+msgstr "Saldo en Banco"
 
 #. module: l10n_cr_account_financial_report_webkit
 #: report:addons/l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako:176

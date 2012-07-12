@@ -25,7 +25,13 @@
                 <div class="act_as_cell" style="border-left:0px; border-right:0px; border-top:0px"></div>
                 <div class="act_as_cell" style="column-span:2; -webkit-column-span:2; border-left:0px; border-top:0px"></div>
                 <div class="act_as_cell label">${_('Balance according Bank')}</div>
-                <div class="act_as_cell amount">${formatLang(bank_balance['input_bank_balance'])}</div>
+                <div class="act_as_cell amount">
+                    %if bank_balance['input_bank_balance'] == bank_balance['bank_balance']:
+                        ${formatLang(bank_balance['input_bank_balance'])}
+                    %else:
+                        <span style="color:red; font-weight:bold;">${formatLang(bank_balance['input_bank_balance'])}</span>
+                    %endif
+                </div>
             </div>
             <div class="act_as_row">
                 <div class="act_as_cell label">${_('Ledger Balance')}</div>
@@ -70,13 +76,13 @@
     %for line_group_key, line_group in sorted(bank_move_lines.items(),cmp):
         <div class="account_title bg" style="width: 100%; margin-top: 15px; font-size: 12px;">
             %if line_group_key == 'credits_to_reconcile':
-                ${_('Debits to reconcile')}
-            %elif line_group_key == 'debits_to_reconcile':
                 ${_('Credits to reconcile')}
+            %elif line_group_key == 'debits_to_reconcile':
+                ${_('Debits to reconcile')}
             %elif line_group_key == 'incomes_to_register':
-                ${_('Debits to register')}
+                ${_('Incomes to register')}
             %else:
-                ${_('Credits to register')}
+                ${_('Expenditures to register')}
             %endif
         </div>
         <div class="act_as_table list_table" style="margin-top: 5px;">
