@@ -3,15 +3,27 @@
     <style type="text/css">${css}</style>
 </head>
 <body>
-    <% prueba = get_prueba(cr, uid)%>
     <%setLang(user.context_lang)%>
     <%
-        input_bank_balance = get_bank_balance(cr, uid, data)
-        bank_account = get_bank_account(cr, uid, data)
-#        bank_account = objects[0]
+        filter_type = ''
+        filter_data = []
     %>
+    %if filter_form(data) == 'filter_date':
+        <%
+            filter_data.append(start_date)
+            filter_data.append(stop_date)
+            filter_type = 'filter_date'
+        %>
+    %elif filter_form(data) == 'filter_period':
+        <% 
+            filter_data.append(start_period)
+            filter_data.append(stop_period)
+            filter_type = 'filter_period'
+        %>
+    %endif
     <%
-        bank_balance, bank_move_lines, account_is_foreign = get_bank_data(cr, uid, bank_account.id, context)
+        bank_account = get_bank_account(cr, uid, data)
+        bank_balance, bank_move_lines, account_is_foreign = get_bank_data(cr, uid, bank_account.id, filter_type, filter_data, target_move, context)
     %>
 
     <div class="header">
@@ -27,9 +39,9 @@
                 <div class="act_as_cell label">${_('Balance according Bank')}</div>
                 <div class="act_as_cell amount">
                     %if bank_balance['input_bank_balance'] == bank_balance['bank_balance']:
-                        ${formatLang(bank_balance['input_bank_balance'])}
+                        ${formatLang(input_bank_balance)}
                     %else:
-                        <span style="color:red; font-weight:bold;">${formatLang(bank_balance['input_bank_balance'])}</span>
+                        <span style="color:red; font-weight:bold;">${formatLang(input_bank_balance)}</span>
                     %endif
                 </div>
             </div>
