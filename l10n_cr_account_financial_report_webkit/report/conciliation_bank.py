@@ -325,10 +325,8 @@ class conciliation_bank(PartnersLedgerWebkit):
     def get_prueba(self, cr, uid):
         return 'Prueba'
 
-
 report_sxw.report_sxw(
     'report.account_financial_report_webkit.account.account_report_conciliation_bank_webkit',
     'account.account',
     'addons/l10n_cr_account_financial_report_webkit/report/conciliation_bank.mako',
     parser=conciliation_bank)
-
