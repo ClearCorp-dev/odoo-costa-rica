@@ -137,7 +137,8 @@ class statement(models.mem_bank_statement):
             logger.info(record)
         else:
             transaction = self.transactions[-1]
-            transaction.id = ','.join([record[k] for k in ['infoline{0}'.format(i) for i in range(2,5)] if record.has_key(k)])
+            #transaction.id = ','.join([record[k] for k in ['infoline{0}'.format(i) for i in range(2,5)] if record.has_key(k)])
+            transaction.id = record['infoline1']
 
     
 

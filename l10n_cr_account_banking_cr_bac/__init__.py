@@ -19,8 +19,5 @@
 #
 ##############################################################################
 
-import l10n_cr_account_banking_cr_bac
-import wizard
 import bac_mt940
-import bac_clientid
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
