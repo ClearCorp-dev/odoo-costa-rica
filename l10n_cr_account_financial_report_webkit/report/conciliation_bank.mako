@@ -7,23 +7,7 @@
     <%
         filter_type = ''
         filter_data = []
-    %>
-    %if filter_form(data) == 'filter_date':
-        <%
-            filter_data.append(start_date)
-            filter_data.append(stop_date)
-            filter_type = 'filter_date'
-        %>
-    %elif filter_form(data) == 'filter_period':
-        <% 
-            filter_data.append(start_period)
-            filter_data.append(stop_period)
-            filter_type = 'filter_period'
-        %>
-    %endif
-    <%
         bank_account = get_bank_account(cr, uid, data)
-        bank_balance, bank_move_lines, account_is_foreign = get_bank_data(cr, uid, bank_account.id, filter_type, filter_data, target_move, context)
     %>
 
     <div class="header">
@@ -31,6 +15,51 @@
         <div style="font-size: 25px; font-weight: bold; text-align: center;"> Conciliación de Bancos</div>
         <div style="font-size: 20px; font-weight: bold; text-align: center;"> ${bank_account.name} - ${(bank_account.currency_id and bank_account.currency_id.name) or bank_account.company_id.currency_id.name}</div>
     </div>
+    <div class="act_as_table data_table" style="margin-top:10px;">
+        <div class="act_as_row labels" style = "font-size: 12px;">
+            <div class="act_as_cell">${_('Chart of Account')}</div>
+            <div class="act_as_cell">${_('Fiscal Year')}</div>
+            <div class="act_as_cell">
+                %if filter_form(data) == 'filter_date':
+                    ${_('Dates Filter')}
+                    <%
+                        filter_data.append(start_date)
+                        filter_data.append(stop_date)
+                        filter_type = 'filter_date'
+                    %>
+                %elif filter_form(data) == 'filter_period':
+                    ${_('Periods Filter')}
+                    <% 
+                        filter_data.append(start_period)
+                        filter_data.append(stop_period)
+                        filter_type = 'filter_period'
+                    %>
+                %else:
+                    ${_('No Filter')}
+                %endif
+            </div>
+            <div class="act_as_cell">${_('Target Moves')}</div>
+        </div>
+        <div class="act_as_row" style = "font-size: 12px;">
+            <div class="act_as_cell">${ chart_account.name }</div>
+            <div class="act_as_cell">${ fiscalyear.name if fiscalyear else '-' }</div>
+            <div class="act_as_cell">
+                ${_('To:')}
+                %if filter_form(data) == 'filter_date':
+                    ${ formatLang(stop_date, date=True) if stop_date else u'' }
+                %elif filter_form(data) == 'filter_period':
+                    ${stop_period.name if stop_period else u'' }
+                %else:
+                    ${''}
+                %endif
+            </div>
+            <div class="act_as_cell">${ display_target_move(data) }</div>
+        </div>
+    </div>
+    
+    <%
+        bank_balance, bank_move_lines, account_is_foreign = get_bank_data(cr, uid, bank_account.id, filter_type, filter_data, fiscalyear, target_move, context)
+    %>
     <div align="center">
         <div class="act_as_table data_table no_wrap results left" style="margin-top:20px; margin-bottom: 10px; width:500px">
             <div class="act_as_row">

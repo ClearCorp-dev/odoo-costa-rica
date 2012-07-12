@@ -47,6 +47,7 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
             'get_bank_data': self.get_bank_data,
             'get_bank_account': self.get_bank_account,
             'filter_form': self._get_filter,
+            'display_target_move': self._get_display_target_move,
         })
     
     def set_context(self, objects, data, ids, report_type=None):
@@ -58,6 +59,7 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
         start_period = self.get_start_period_br(data)
         stop_period = self.get_end_period_br(data)
         fiscalyear = self.get_fiscalyear_br(data)
+        chart_account = self._get_chart_account_id_br(data)
         
         if main_filter == 'filter_no' and fiscalyear:
             start_period = self.get_first_fiscalyear_period(fiscalyear)
@@ -76,7 +78,8 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
             'start_period': start_period,
             'stop_period': stop_period,
             'target_move': target_move,
-            'input_bank_balance': input_bank_balance
+            'input_bank_balance': input_bank_balance,
+            'chart_account': chart_account,
             
         })
 
@@ -144,7 +147,7 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
 
         return res
 
-    def get_bank_data(self, cr, uid, parent_account_id, filter_type, filter_data, target_move, context=None):
+    def get_bank_data(self, cr, uid, parent_account_id, filter_type, filter_data, fiscalyear, target_move, context=None):
         result_bank_balance = {}
         result_move_lines = []
 
@@ -231,15 +234,30 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
         move_obj = self.pool.get('account.move')
         move_line_obj = self.pool.get('account.move.line')
         
-        if filter_type == 'filter_period':
-            date_stop = filter_data[0].date_stop
-            unreconciled_move_line_ids = move_line_obj('account.move.line').search(cr, uid, [('account_id', '=', account.id), ('partner_id', '=', partner), ('period_id.date_start', '<', date_start), ('reconcile_id', '=', False)], context=context)
-        elif filter_type == 'filter_date':
-            date_stop = filter_data[0]
-            unreconciled_move_line_ids = move_line_obj('account.move.line').search(cr, uid, [('account_id', '=', account.id), ('partner_id', '=', partner), ('date', '<', date_start), ('reconcile_id', '=', False)], context=context)
+        if target_move == 'posted':            
+            if filter_type == 'filter_period':
+                date_stop = filter_data[1].date_stop
+                unreconciled_move_line_ids = move_line_obj.search(cr, uid, [('account_id', 'in', transit_account_ids), ('move_id.state', '=', 'posted'), ('period_id.date_stop', '<', date_stop), ('reconcile_id', '=', False)], context=context)
+            elif filter_type == 'filter_date':
+                date_stop = filter_data[1]
+                unreconciled_move_line_ids = move_line_obj.search(cr, uid, [('account_id', 'in', transit_account_ids), ('move_id.state', '=', 'posted'), ('date', '<', date_stop), ('reconcile_id', '=', False)], context=context)
+            else:
+                date_stop = fiscal_year.date_stop
+                unreconciled_move_line_ids = move_line_obj.search(cr, uid, [('account_id', 'in', transit_account_ids), ('move_id.state', '=', 'posted'), ('date', '<', date_stop), ('reconcile_id', '=', False)], context=context)
+        else:
+            if filter_type == 'filter_period':
+                date_stop = filter_data[1].date_stop
+                unreconciled_move_line_ids = move_line_obj.search(cr, uid, [('account_id', 'in', transit_account_ids), ('period_id.date_stop', '<', date_stop), ('reconcile_id', '=', False)], context=context)
+            elif filter_type == 'filter_date':
+                date_stop = filter_data[1]
+                unreconciled_move_line_ids = move_line_obj.search(cr, uid, [('account_id', 'in', transit_account_ids), ('date', '<', date_stop), ('reconcile_id', '=', False)], context=context)
+            else:
+                date_stop = fiscal_year.date_stop
+                unreconciled_move_line_ids = move_line_obj.search(cr, uid, [('account_id', 'in', transit_account_ids), ('date', '<', date_stop), ('reconcile_id', '=', False)], context=context)
         
-        unreconciled_move_line_ids = move_line_obj.search(cr, uid, [('account_id','in',transit_account_ids),('reconcile_id','=',False)])
-        unreconciled_move_lines = unreconciled_move_line_ids and move_line_obj.browse(cr, uid, unreconciled_move_line_ids) or False
+        unreconciled_move_lines = unreconciled_move_line_ids and move_line_obj.browse(cr, uid, unreconciled_move_line_ids) or []
+        
+            
         result_move_lines = {
             'credits_to_reconcile' :     [],
             'debits_to_reconcile' :    [],
