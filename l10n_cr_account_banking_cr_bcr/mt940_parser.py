@@ -89,6 +89,7 @@ class BCRParser( object ):
             'name' : '',
             'transferred_amount': '',
             'creditmarker': '',
+            'id': '',
         }
         
         lines = []
@@ -131,9 +132,10 @@ class BCRParser( object ):
             mapping['effective_date'] = date
             mapping['local_currency'] = 'CRC'
             mapping['transfer_type'] = 'NTRF'
-            mapping['reference'] = parser.extract_number(sub[25:40])
-            mapping['message'] = sub[26:92]                
-            mapping['name'] = sub[26:92]
+            mapping['reference'] = parser.extract_number(sub[17:36])
+            mapping['message'] = sub[26:80]                
+            mapping['name'] = sub[26:80]
+            mapping['id'] = sub[26:80]
             
             amount = sub[106:]
             amount.replace('\t',' ')
