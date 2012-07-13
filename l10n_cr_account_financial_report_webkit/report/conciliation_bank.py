@@ -242,7 +242,7 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
                 date_stop = filter_data[1]
                 unreconciled_move_line_ids = move_line_obj.search(cr, uid, [('account_id', 'in', transit_account_ids), ('move_id.state', '=', 'posted'), ('date', '<', date_stop), ('reconcile_id', '=', False)], context=context)
             else:
-                date_stop = fiscal_year.date_stop
+                date_stop = fiscalyear.date_stop
                 unreconciled_move_line_ids = move_line_obj.search(cr, uid, [('account_id', 'in', transit_account_ids), ('move_id.state', '=', 'posted'), ('date', '<', date_stop), ('reconcile_id', '=', False)], context=context)
         else:
             if filter_type == 'filter_period':
@@ -252,7 +252,7 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
                 date_stop = filter_data[1]
                 unreconciled_move_line_ids = move_line_obj.search(cr, uid, [('account_id', 'in', transit_account_ids), ('date', '<', date_stop), ('reconcile_id', '=', False)], context=context)
             else:
-                date_stop = fiscal_year.date_stop
+                date_stop = fiscalyear.date_stop
                 unreconciled_move_line_ids = move_line_obj.search(cr, uid, [('account_id', 'in', transit_account_ids), ('date', '<', date_stop), ('reconcile_id', '=', False)], context=context)
         
         unreconciled_move_lines = unreconciled_move_line_ids and move_line_obj.browse(cr, uid, unreconciled_move_line_ids) or []
