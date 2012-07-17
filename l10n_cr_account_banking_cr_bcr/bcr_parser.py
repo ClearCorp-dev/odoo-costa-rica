@@ -1,9 +1,9 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (C) 2011 credativ Ltd (<http://www.credativ.co.uk>).
-#    All Rights Reserved
+#    OpenERP, Open Source Management Solution
+#    Addons modules by CLEARCORP S.A.
+#    Copyright (C) 2009-TODAY CLEARCORP S.A. (<http://clearcorp.co.cr>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,15 +19,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
 """
-Parser for BAC CR MT940 format files
-Based on fi_patu's parser
+Parser for BCR format files
 """
 import re
 from datetime import datetime
 from dateutil import parser
-import pprint
+from pprint import PrettyPrinter
 from copy import copy
 
 class BCRParser( object ):
@@ -45,6 +43,7 @@ class BCRParser( object ):
             'endingbalance': 0.0, #_closing_balance
             'bookingdate': '', #moving_date
             'ammount': 0.0,
+            'id': '',
         }
 
         #file = open( filename, 'r' )
@@ -72,9 +71,15 @@ class BCRParser( object ):
         
         amount_statement = float( line_dict['startingbalance'] ) + float( line_dict['endingbalance'] )
         line_dict['ammount'] = amount_statement
+        
+        date_str = self.parse_date_stamenent(line_dict['bookingdate'])
+        name = date_str + ' - ' + line_dict['account_number']
+        line_dict['id'] = name
 
         self.line_dict = line_dict
-
+        pp = PrettyPrinter()
+        pp.pprint(line_dict)
+        
         return line_dict
             
     def statement_lines ( self, rec ):
@@ -153,6 +158,26 @@ class BCRParser( object ):
             lines.append(copy(mapping))
                             
         return lines 
+        
+    def parse_date_stamenent(self,datestring):
+        try:
+            day = datestring[0:2]
+            month = datestring[2:4]
+            year = datestring[4:8]
+            hour = datestring[8:10]
+            minute = datestring[10:12]
+            second = datestring[12:14]
+        except Exception:
+            day = datestring[2]
+            month = datestring[4]
+            year = datestring[4:8]
+            hour = datestring[8:10]
+            minute = datestring[10:12]
+            second = datestring[12:14]          
+                   
+        date = datetime(int(year),int(month),int(day),int(hour),int(minute),int(second))
+        date_string = date.strftime("%Y-%m-%d %H:%M:%S")
+        return date_string
     
     def parse_stamenent_record( self, rec ):
 

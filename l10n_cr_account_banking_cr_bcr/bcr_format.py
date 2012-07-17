@@ -1,8 +1,9 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (C) 2011 credativ Ltd (<http://www.credativ.co.uk>).
-#    All Rights Reserved
+#    OpenERP, Open Source Management Solution
+#    Addons modules by CLEARCORP S.A.
+#    Copyright (C) 2009-TODAY CLEARCORP S.A. (<http://clearcorp.co.cr>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,12 +19,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-# Import of BAC data in Swift MT940 format
-#
 
 from account_banking.parsers import models
 from tools.translate import _
-from mt940_parser import BCRParser
+from bcr_parser import BCRParser
 import re
 import osv
 import logging
@@ -85,7 +84,7 @@ class statement(models.mem_bank_statement):
         self.local_account = record['account_number']
         
     def _statement_number(self, record):
-        self.id = self.local_account
+        self.id = record['id']
         
     def _opening_balance(self, record):
         self.start_balance = float(record['startingbalance'])
