@@ -48,7 +48,7 @@ class BCRParser( object ):
 
         #file = open( filename, 'r' )
         #line = file.readline()
-        
+        cad = ''
         list_split = rec.split('\r\n')
 
         for l in list_split:
@@ -58,6 +58,11 @@ class BCRParser( object ):
             #_account_number
             if l.find('Movimiento de Cuenta Corriente', 0, len('Movimiento de Cuenta Corriente')) > -1:
                 line_dict['account_number'] = self.extract_number(l)
+                #cad = self.extract_currency_code_USD(l)
+                if l.find('D',0,len(l)) > -1:
+                    line_dict['currencycode'] = 'USD'
+                else:
+                    line_dict['currencycode'] = 'CRC'
             # _transmission_number
             if l.find('Solicitado el', 0, len('Solicitado el'))  > -1 :
                 line_dict['transref'] = self.extract_number(l)
@@ -68,7 +73,7 @@ class BCRParser( object ):
             #_closing_balance
             if l.find('Saldo Final', 0, len('Saldo Final'))  > -1:
                 line_dict['endingbalance'] = self.extract_float(l)
-        
+                    
         amount_statement = float( line_dict['startingbalance'] ) + float( line_dict['endingbalance'] )
         line_dict['ammount'] = amount_statement
         
@@ -98,6 +103,7 @@ class BCRParser( object ):
         
         lines = []
         line_dict = {}
+        currencycode = ''
         
         list_split = rec.split('\r\n')
         entrada = False
@@ -116,7 +122,15 @@ class BCRParser( object ):
                 start += 1
             else:
                 break
-        start += 1            
+        start += 1 
+        
+        for l in list_split:           
+            if l.find('Movimiento de Cuenta Corriente', 0, len('Movimiento de Cuenta Corriente')) > -1:
+                if l.find('D',0,len(l)) > -1:
+                    currencycode = 'USD'
+                else:
+                    currencycode = 'CRC'
+                break
             
         sub_list = list_split [start:end]
         for sub in sub_list:
@@ -134,7 +148,7 @@ class BCRParser( object ):
                 
             mapping['execution_date'] = date                        
             mapping['effective_date'] = date
-            mapping['local_currency'] = 'CRC'
+            mapping['local_currency'] = currencycode
             mapping['transfer_type'] = 'NTRF'
             mapping['reference'] = parser.extract_number(sub[18:26])
             mapping['message'] = sub[27:80]                
@@ -239,6 +253,13 @@ class BCRParser( object ):
         for character in result:
             cad = cad + character       
         return cad   
+    
+    def extract_currency_code_USD(self, currency):
+        cad = ''
+        result = re.findall(r'[D.lares]',currency)
+        for character in result:
+            cad = cad + character
+        return cad
 
     def parse( self, cr, data ):
         records = []
