@@ -95,13 +95,16 @@ class statement(models.mem_bank_statement):
             # The wizard doesn't check for sort code
             self.local_account = record['sortcode'] + record['accnum']
         def _statement_number():
-            self.id = '-'.join([self.id, self.local_account, record['statementnr']])
+            #self.id = '-'.join([self.id, self.local_account, record['statementnr']])
+            self.id = self.local_account + '-' + record['statementnr']
         def _opening_balance():
             self.start_balance = record2float(record,'startingbalance')
             self.local_currency = record['currencycode']
         def _closing_balance():
             self.end_balance = record2float(record, 'endingbalance')
             self.date = record['bookingdate']
+            dateString = record['bookingdate'].strftime("%Y-%m-%d")
+            self.id = dateString + '-' + self.id
         def _transaction_new():
             self.transactions.append(transaction(record))
         def _transaction_info():
