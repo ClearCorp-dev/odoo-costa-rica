@@ -1,9 +1,9 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (C) 2011 credativ Ltd (<http://www.credativ.co.uk>).
-#    All Rights Reserved
+#    OpenERP, Open Source Management Solution
+#    Addons modules by CLEARCORP S.A.
+#    Copyright (C) 2009-TODAY CLEARCORP S.A. (<http://clearcorp.co.cr>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,15 +19,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
 """
-Parser for BAC CR MT940 format files
-Based on fi_patu's parser
+Parser for BCR format files
 """
 import re
 from datetime import datetime
 from dateutil import parser
-import pprint
+from pprint import PrettyPrinter
 from copy import copy
 
 class BCRParser( object ):
@@ -45,11 +43,12 @@ class BCRParser( object ):
             'endingbalance': 0.0, #_closing_balance
             'bookingdate': '', #moving_date
             'ammount': 0.0,
+            'id': '',
         }
 
         #file = open( filename, 'r' )
         #line = file.readline()
-        
+        cad = ''
         list_split = rec.split('\r\n')
 
         for l in list_split:
@@ -59,6 +58,11 @@ class BCRParser( object ):
             #_account_number
             if l.find('Movimiento de Cuenta Corriente', 0, len('Movimiento de Cuenta Corriente')) > -1:
                 line_dict['account_number'] = self.extract_number(l)
+                #cad = self.extract_currency_code_USD(l)
+                if l.find('D',0,len(l)) > -1:
+                    line_dict['currencycode'] = 'USD'
+                else:
+                    line_dict['currencycode'] = 'CRC'
             # _transmission_number
             if l.find('Solicitado el', 0, len('Solicitado el'))  > -1 :
                 line_dict['transref'] = self.extract_number(l)
@@ -69,12 +73,18 @@ class BCRParser( object ):
             #_closing_balance
             if l.find('Saldo Final', 0, len('Saldo Final'))  > -1:
                 line_dict['endingbalance'] = self.extract_float(l)
-        
+                    
         amount_statement = float( line_dict['startingbalance'] ) + float( line_dict['endingbalance'] )
         line_dict['ammount'] = amount_statement
+        
+        date_str = self.parse_date_stamenent(line_dict['bookingdate'])
+        name = date_str + ' - ' + line_dict['account_number']
+        line_dict['id'] = name
 
         self.line_dict = line_dict
-
+        pp = PrettyPrinter()
+        pp.pprint(line_dict)
+        
         return line_dict
             
     def statement_lines ( self, rec ):
@@ -93,6 +103,7 @@ class BCRParser( object ):
         
         lines = []
         line_dict = {}
+        currencycode = ''
         
         list_split = rec.split('\r\n')
         entrada = False
@@ -111,7 +122,15 @@ class BCRParser( object ):
                 start += 1
             else:
                 break
-        start += 1            
+        start += 1 
+        
+        for l in list_split:           
+            if l.find('Movimiento de Cuenta Corriente', 0, len('Movimiento de Cuenta Corriente')) > -1:
+                if l.find('D',0,len(l)) > -1:
+                    currencycode = 'USD'
+                else:
+                    currencycode = 'CRC'
+                break
             
         sub_list = list_split [start:end]
         for sub in sub_list:
@@ -129,7 +148,7 @@ class BCRParser( object ):
                 
             mapping['execution_date'] = date                        
             mapping['effective_date'] = date
-            mapping['local_currency'] = 'CRC'
+            mapping['local_currency'] = currencycode
             mapping['transfer_type'] = 'NTRF'
             mapping['reference'] = parser.extract_number(sub[18:26])
             mapping['message'] = sub[27:80]                
@@ -153,6 +172,26 @@ class BCRParser( object ):
             lines.append(copy(mapping))
                             
         return lines 
+        
+    def parse_date_stamenent(self,datestring):
+        try:
+            day = datestring[0:2]
+            month = datestring[2:4]
+            year = datestring[4:8]
+            hour = datestring[8:10]
+            minute = datestring[10:12]
+            second = datestring[12:14]
+        except Exception:
+            day = datestring[2]
+            month = datestring[4]
+            year = datestring[4:8]
+            hour = datestring[8:10]
+            minute = datestring[10:12]
+            second = datestring[12:14]          
+                   
+        date = datetime(int(year),int(month),int(day),int(hour),int(minute),int(second))
+        date_string = date.strftime("%Y-%m-%d %H:%M:%S")
+        return date_string
     
     def parse_stamenent_record( self, rec ):
 
@@ -214,6 +253,13 @@ class BCRParser( object ):
         for character in result:
             cad = cad + character       
         return cad   
+    
+    def extract_currency_code_USD(self, currency):
+        cad = ''
+        result = re.findall(r'[D.lares]',currency)
+        for character in result:
+            cad = cad + character
+        return cad
 
     def parse( self, cr, data ):
         records = []

@@ -19,6 +19,6 @@
 #
 ##############################################################################
 
-import bcr_mt940
+import bcr_format
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
