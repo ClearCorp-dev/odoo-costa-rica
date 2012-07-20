@@ -139,9 +139,12 @@ class l10n_cr_PartnersLedgerWebkit(PartnersLedgerWebkit):
             
         return res
 
-    def get_currency_symbol(self, cr, uid, currency_id):
-        currency = self.pool.get('res.currency').browse(cr,uid,currency_id)
-
+    def get_currency_symbol(self, cr, uid, currency_name, context=None):
+        currency_obj = self.pool.get('res.currency')
+        
+        currency_id = currency_obj.search(cr, uid, [('name', '=', currency_name)], context=context)[0]
+        currency = currency_obj.browse(cr, uid, currency_id)
+        
         return currency.symbol
     
     def get_initial_balance(self, cr, uid, partner, account, filter_type, filter_data, fiscal_year, currency, context=None):

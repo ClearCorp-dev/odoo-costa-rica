@@ -22,24 +22,17 @@
 
 
 {
-    'name': 'Webkit based extended report financial report',
+    'name': 'Accounting Reports Library',
     'description': "",
     'version': '1.0',
     'author': 'CLEARCORP S.A.',
-    'category': 'Finance',
+    'category': 'Hidden',
     'website': "http://clearcorp.co.cr",
     'images': [],
-    'depends': ['account_financial_report_webkit', 'account' ],
+    'depends': ['account' ],
     'init_xml': [],
     'demo_xml' : [],
-    'update_xml': ['account_move_line_view.xml',
-                   'data/financial_webkit_header.xml',
-                   'report/report.xml',
-                   'wizard/account_bank_balances_wizard_view.xml',
-                   'wizard/l10n_cr_partners_ledger_wizard_view.xml',
-                   'wizard/l10n_cr_open_invoices_wizard_view.xml',
-                   'report_menus.xml',
-                   'account_view.xml',
+    'update_xml': [
                    ],
     'test': [],
     'active': False,
