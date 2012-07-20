@@ -27,7 +27,7 @@ from tools.translate import _
 
 class AccountAccount(orm.Model):
     _inherit = "account.account"
-    
+        
     _columns = {
         'report_currency_id': fields.many2one('res.currency', 'Report Currency', help="Currency to show in the reports."),
     }
