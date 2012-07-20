@@ -152,6 +152,7 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
         result_move_lines = []
 
         account_obj = self.pool.get('account.account')
+        accounting_report_library_obj = self.pool.get('accounting.report.library')
         parent_account = account_obj.browse(cr, uid, parent_account_id)
         child_account_ids = account_obj.search(cr, uid, [('parent_id','=',parent_account_id)])
         child_accounts = child_account_ids and account_obj.browse(cr, uid, child_account_ids) or False
@@ -202,38 +203,39 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
         #      If the wizard is filtered by period, the query needs the valid list of periods in a WHERE statement form
         balance_query_filter = ''
         if account_is_foreign:
-            '''
-            bank_balance = account_obj.__compute(cr,
-                                                 uid,
-                                                 [reconciled_account.id],
-                                                 ['balance'],
-                                                 query=balance_query_filter)[reconciled_account.id]['balance']
-            accounting_balance = account_obj.__compute(cr,
-                                                       uid,
-                                                       [parent_account_id],
-                                                       ['balance'],
-                                                       query=balance_query_filter)[parent_account_id]['balance']
-        else:
-            bank_balance = account_obj.__compute(cr,
+            
+            bank_balance = accounting_report_library_obj.get_balance(cr,
                                                  uid,
                                                  [reconciled_account.id],
                                                  ['balance'],
                                                  query=balance_query_filter)[reconciled_account.id]['foreign_balance']
-            accounting_balance = account_obj.__compute(cr,
+            accounting_balance = accounting_report_library_obj.get_balance(cr,
                                                        uid,
                                                        [parent_account_id],
                                                        ['balance'],
                                                        query=balance_query_filter)[parent_account_id]['foreign_balance']
+        else:
+            bank_balance = accounting_report_library_obj.get_balance(cr,
+                                                 uid,
+                                                 [reconciled_account.id],
+                                                 ['balance'],
+                                                 query=balance_query_filter)[reconciled_account.id]['balance']
+            accounting_balance = accounting_report_library_obj.get_balance(cr,
+                                                       uid,
+                                                       [parent_account_id],
+                                                       ['balance'],
+                                                       query=balance_query_filter)[parent_account_id]['balance']
+            
             '''
             bank_balance = reconciled_account.foreign_balance
             accounting_balance = parent_account.foreign_balance
         else:
             bank_balance = reconciled_account.balance
             accounting_balance = parent_account.balance
+            '''
 
         move_obj = self.pool.get('account.move')
         move_line_obj = self.pool.get('account.move.line')
-        accounting_report_library_obj = self.pool.get('accounting.report.library')
         
         unreconciled_move_lines = accounting_report_library_obj.get_move_lines(cr, uid, transit_account_ids, filter_type=filter_type, filter_data=filter_data, fiscalyear=fiscalyear, target_move=target_move, unreconcile = True, context=context)        
         
