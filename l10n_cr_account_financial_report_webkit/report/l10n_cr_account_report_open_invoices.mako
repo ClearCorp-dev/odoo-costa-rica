@@ -278,7 +278,6 @@
                                           ## curency code
                                           <div class="act_as_cell" style="text-align: right; ">${line.get('currency_code') or ''}</div>
                                       %endif
-                                      <% last_line_currency = line.get('currency_id') %>
                                   </div>
                                   <%
                                   total_cumul_balance = total_invoice + total_payment + total_debit + total_credit + total_manual_move
@@ -301,7 +300,7 @@
                               ## reconcile
                               <!--div class="act_as_cell"></div-->
                               %if currency[0] != 'CRC':
-                                  <% currency_symbol = get_currency_symbol(cr, uid, last_line_currency) %>
+                                  <% currency_symbol = get_currency_symbol(cr, uid, currency[0]) %>
                                    ## invoice
                                   <div class="act_as_cell amount">${currency_symbol} ${formatLang(total_invoice) }</div>
                                   ## payment

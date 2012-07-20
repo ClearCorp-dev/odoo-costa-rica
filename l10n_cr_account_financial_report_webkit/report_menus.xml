@@ -14,9 +14,5 @@
             parent="account.final_accounting_reports" action="action_account_balances_menu_webkit"
             groups="account.group_account_manager,account.group_account_user" id="account_financial_report_webkit.menu_Account_Balances_report"/>
         
-        <menuitem icon="STOCK_PRINT" name="Conciliation Bank"
-            parent="account.next_id_22" action="action_conciliation_bank_menu_webkit"
-            groups="account.group_account_manager,account.group_account_user" id="menu_conciliation_bank"/>
-        
     </data>
 </openerp>
