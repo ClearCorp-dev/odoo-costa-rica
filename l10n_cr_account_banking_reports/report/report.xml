@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>            
+         
+         <record id="l10n_cr_account_financial_report_webkit.account_report_conciliation_bank_webkit" model="ir.actions.report.xml">
+             <field name="report_type">webkit</field>
+             <field name="report_name">account_financial_report_webkit.account.account_report_conciliation_bank_webkit</field>
+             <field eval="[(6,0,[])]" name="groups_id"/>
+             <field eval="0" name="multi"/>
+             <field eval="0" name="auto"/>
+             <field eval="1" name="header"/>
+             <field name="model">account.account</field>
+             <field name="type">ir.actions.report.xml</field>
+             <field name="name">Conciliation Bank Webkit</field>
+             <field name="report_rml">l10n_cr_account_banking_reports/report/conciliation_bank.mako</field>
+             <field name="report_file">l10n_cr_account_banking_reports/report/conciliation_bank.mako</field>
+         </record>
+       
+    </data>
+</openerp>
