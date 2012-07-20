@@ -38,7 +38,6 @@
                    'wizard/account_bank_balances_wizard_view.xml',
                    'wizard/l10n_cr_partners_ledger_wizard_view.xml',
                    'wizard/l10n_cr_open_invoices_wizard_view.xml',
-                   'wizard/conciliation_bank_wizard.xml',
                    'report_menus.xml',
                    'account_view.xml',
                    ],
