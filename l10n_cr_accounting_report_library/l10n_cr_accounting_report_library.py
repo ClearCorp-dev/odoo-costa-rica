@@ -93,7 +93,6 @@ class AccountingReportLibrary(orm.Model):
             
         move_lines = move_line_ids and move_line_obj.browse(cr, uid, move_line_ids) or []
         
-        
         return move_lines
     
     def get_move_lines_unconciled(self, cr, uid, account_ids, filter_type='', filter_data=None, fiscalyear=None, context=None):
@@ -128,5 +127,14 @@ class AccountingReportLibrary(orm.Model):
                         break
                     
         return move_lines_ids
+    
+    def get_balance(self, cr, uid, account_ids, field_names, arg=None, context=None,
+                    query='', query_params=()):
+        account_obj = self.pool.get('account.account')
+        
+        res = account_obj._account_account__compute(cr, uid, account_ids, field_names, arg=arg, context=context,
+                    query=query, query_params=query_params)
+        
+        return res
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
