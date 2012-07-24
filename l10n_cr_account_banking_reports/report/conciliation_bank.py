@@ -150,6 +150,7 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
     def get_bank_data(self, cr, uid, parent_account_id, filter_type, filter_data, fiscalyear, target_move, context=None):
         result_bank_balance = {}
         result_move_lines = []
+        filters = {}
 
         account_obj = self.pool.get('account.account')
         accounting_report_library_obj = self.pool.get('accounting.report.library')
@@ -197,7 +198,16 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
         debits_to_reconcile = 0.0
         accounting_total = 0.0
         bank_total = 0.0
-
+        
+        #Filters for the move lines to use in get_balance 
+        filters['fiscalyear'] = fiscalyear.id
+        if filter_type == 'filter_date':
+            filters['date_from'] = filter_data[0] 
+            filters['date_to'] = filter_data[1]
+        elif filter_type == 'filter_period':
+            periods_ids = self.pool.get('account.period').search(cr, uid, [('date_stop', '<=', filter_data[1].date_stop)])
+            filters['periods'] = periods_ids 
+        
         #TODO: Set the max date or period list for the balance query from the wizard data
         #      If the wizard is filtered by date, the max date is entered as is
         #      If the wizard is filtered by period, the query needs the valid list of periods in a WHERE statement form
@@ -208,23 +218,23 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
                                                  uid,
                                                  [reconciled_account.id],
                                                  ['balance'],
-                                                 query=balance_query_filter)[reconciled_account.id]['foreign_balance']
+                                                 query=balance_query_filter, context=filters)[reconciled_account.id]['balance']
             accounting_balance = accounting_report_library_obj.get_balance(cr,
                                                        uid,
                                                        [parent_account_id],
                                                        ['balance'],
-                                                       query=balance_query_filter)[parent_account_id]['foreign_balance']
+                                                       query=balance_query_filter, context=filters)[parent_account_id]['balance']
         else:
             bank_balance = accounting_report_library_obj.get_balance(cr,
                                                  uid,
                                                  [reconciled_account.id],
                                                  ['balance'],
-                                                 query=balance_query_filter)[reconciled_account.id]['balance']
+                                                 query=balance_query_filter, context=filters)[reconciled_account.id]['balance']
             accounting_balance = accounting_report_library_obj.get_balance(cr,
                                                        uid,
                                                        [parent_account_id],
                                                        ['balance'],
-                                                       query=balance_query_filter)[parent_account_id]['balance']
+                                                       query=balance_query_filter, context=filters)[parent_account_id]['balance']
             
             '''
             bank_balance = reconciled_account.foreign_balance
