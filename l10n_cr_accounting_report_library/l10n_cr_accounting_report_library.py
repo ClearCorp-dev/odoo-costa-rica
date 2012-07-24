@@ -30,6 +30,17 @@ class AccountingReportLibrary(orm.Model):
     _description = "Library for Accounting Reports"
         
     def get_move_lines(self, cr, uid, account_ids, filter_type='', filter_data=None, fiscalyear=None, target_move='all', unreconcile = False, context=None):
+        ''' Get the move lines of the accounts provided and filtered.
+        Arguments:
+        'account_ids': List of accounts ids.
+        'filter_type': Filter used, possibles values: 'filter_date', 'filter_period' or ''.
+        'filter_data': If filter is by date then filter_data is a list of strings with the initial date and the ending date, if filter is by period then
+                       filter_data is a list of browse record with the initial period and the ending period.
+        'fiscalyear':  Browse record of the fiscal year selected.
+        'target_move': Target moves of the report, possibles values: 'all' or 'posted'.
+        'unreconcile': If True then get the move lines unreconciled.
+         Armando was here.
+        '''
         account_obj = self.pool.get('account.account')
         move_line_obj = self.pool.get('account.move.line')
         move_lines_ids = []
@@ -96,6 +107,14 @@ class AccountingReportLibrary(orm.Model):
         return move_lines
     
     def get_move_lines_unconciled(self, cr, uid, account_ids, filter_type='', filter_data=None, fiscalyear=None, context=None):
+        ''' Get the move lines reconciled that their date is greater than the filter given. 
+        Arguments:
+        'account_ids': List of accounts ids.
+        'filter_type': Filter used, possibles values: 'filter_date', 'filter_period' or ''.
+        'filter_data': If filter is by date then filter_data is a list of strings with the initial date and the ending date, if filter is by period then
+                       filter_data is a list of browse record with the initial period and the ending period.
+        'fiscalyear':  Browse record of the fiscal year selected.
+        '''
         account_obj = self.pool.get('account.account')
         move_line_obj = self.pool.get('account.move.line')
         move_reconcile_obj = self.pool.get('account.move.reconcile')
@@ -130,6 +149,19 @@ class AccountingReportLibrary(orm.Model):
     
     def get_balance(self, cr, uid, account_ids, field_names, arg=None, context=None,
                     query='', query_params=()):
+        ''' Get the balance for the provided account ids
+        Arguments:
+        `ids`: account ids
+        `field_names`: the fields to compute (a list of any of
+                       'balance', 'debit' and 'credit')
+        `arg`: unused fields.function stuff
+        `query`: additional query filter (as a string)
+        `query_params`: parameters for the provided query string
+                        (__compute will handle their escaping) as a
+                        tuple
+        'context': The context have the filters for the move lines, to see the proper keys and values that should be used check
+                   the method _query_get of account_move_line
+        '''
         account_obj = self.pool.get('account.account')
         
         res = account_obj._account_account__compute(cr, uid, account_ids, field_names, arg=arg, context=context,
