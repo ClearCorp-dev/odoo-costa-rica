@@ -80,6 +80,9 @@
     account_by_curr = get_accounts_by_curr(cr, uid, objects)
     %>
     %for currency in account_by_curr:
+		%if currency[0] != 'CRC':
+			<%currency_symbol = get_currency_symbol(cr, uid, currency[0]) %>
+		%endif
         <%
             currency_total_invoice = 0.0
             currency_total_payment = 0.0
@@ -330,7 +333,6 @@
                           ## reconcile
                           <!--div class="act_as_cell"></div-->
                           %if currency[0] != 'CRC':
-                              <%currency_symbol = get_currency_symbol(cr, uid, currency[0]) %>
                                ## invoice
                               <div class="act_as_cell amount">${currency_symbol} ${formatLang(total_invoice) }</div>
                               ## payment
