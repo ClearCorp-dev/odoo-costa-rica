@@ -1,19 +1,25 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* l10n_cr_hr_payroll
+# 	* l10n_cr_hr_payroll
+# Ronald Rubi <ronald.rubi@clearcorp.co.cr>, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-03 00:19+0000\n"
-"PO-Revision-Date: 2012-06-03 00:19+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2012-08-23 19:15+0000\n"
+"PO-Revision-Date: 2012-08-23 13:16-0600\n"
+"Last-Translator: Ronald Rubi <ronald.rubi@clearcorp.co.cr>\n"
+"Language-Team: Inglés <ronald.rubi@clearcorp.co.cr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#. module: l10n_cr_hr_payroll
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:75
+msgid "Gross"
+msgstr "Bruto"
 
 #. module: l10n_cr_hr_payroll
 #: selection:hr.payslip.run,schedule_pay:0
@@ -21,19 +27,9 @@ msgid "Bi-monthly"
 msgstr "Bi-mensual"
 
 #. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:77
-msgid "Bruto"
-msgstr "Bruto"
-
-#. module: l10n_cr_hr_payroll
 #: selection:hr.payslip.run,schedule_pay:0
 msgid "Monthly"
 msgstr "Mensual"
-
-#. module: l10n_cr_hr_payroll
-#: view:hr.payslip.run:0
-msgid "Frecuencia de pago"
-msgstr "Frecuencia de pago"
 
 #. module: l10n_cr_hr_payroll
 #: model:ir.model,name:l10n_cr_hr_payroll.model_hr_job
@@ -41,19 +37,19 @@ msgid "Job Description"
 msgstr "Descripción del trabajo"
 
 #. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:79
-msgid "Impuesto"
-msgstr "Impuesto"
-
-#. module: l10n_cr_hr_payroll
 #: selection:hr.payslip.run,schedule_pay:0
 msgid "Quarterly"
 msgstr "Trimestre"
 
 #. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:69
-msgid "Nombre"
-msgstr "Nombre"
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:78
+msgid "Net"
+msgstr "Neto"
+
+#. module: l10n_cr_hr_payroll
+#: view:hr.payslip.run:0
+msgid "Confirm Payslips"
+msgstr "Confirmar Nóminas"
 
 #. module: l10n_cr_hr_payroll
 #: selection:hr.payslip.run,schedule_pay:0
@@ -61,22 +57,25 @@ msgid "Semi-annually"
 msgstr "Semestral"
 
 #. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:68
-msgid "Cedula"
-msgstr "Cedula"
-
-#. module: l10n_cr_hr_payroll
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:73
 msgid "Normal"
 msgstr "Normal"
 
 #. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:156
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:160
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:179
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:183
-msgid "0"
-msgstr "0"
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:166
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:170
+msgid "0.00"
+msgstr "0.00"
+
+#. module: l10n_cr_hr_payroll
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:70
+msgid "Bank account"
+msgstr "Cuenta bancaria"
+
+#. module: l10n_cr_hr_payroll
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:68
+msgid "Id card"
+msgstr "Cédula"
 
 #. module: l10n_cr_hr_payroll
 #: model:ir.model,name:l10n_cr_hr_payroll.model_hr_payslip_run
@@ -84,19 +83,25 @@ msgid "Payslip Batches"
 msgstr "Lotes de Nóminas"
 
 #. module: l10n_cr_hr_payroll
-#: selection:hr.payslip.run,schedule_pay:0
-msgid "Weekly"
-msgstr "Semanal"
+#: view:hr.payslip.run:0
+msgid "Schedule pay"
+msgstr "Plan de pago"
 
 #. module: l10n_cr_hr_payroll
-#: model:ir.model,name:l10n_cr_hr_payroll.model_hr_payslip
-msgid "Pay Slip"
-msgstr "Nómina"
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:159
+msgid "TOTAL"
+msgstr "TOTAL GENERAL"
 
 #. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:70
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:71
 msgid "Nor"
 msgstr "Nor"
+
+#. module: l10n_cr_hr_payroll
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:75
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:78
+msgid "Salary"
+msgstr "Salario"
 
 #. module: l10n_cr_hr_payroll
 #: selection:hr.payslip.run,schedule_pay:0
@@ -104,24 +109,20 @@ msgid "Fortnightly"
 msgstr "Quincena"
 
 #. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:78
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:69
+msgid "Name"
+msgstr "Nombre"
+
+#. module: l10n_cr_hr_payroll
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:76
 msgid "CCSS/BP"
 msgstr "CCSS/BP"
 
 #. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:75
-msgid "Doble"
-msgstr "Doble"
-
-#. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:72
-msgid "Dob"
-msgstr "Dob"
-
-#. module: l10n_cr_hr_payroll
-#: constraint:hr.payslip:0
-msgid "Payslip 'Date From' must be before 'Date To'."
-msgstr "Boleta ' Fecha Desde'  pago debe ser antes de 'Fecha a'."
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:140
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:160
+msgid "Employees"
+msgstr "Empleados"
 
 #. module: l10n_cr_hr_payroll
 #: field:hr.payslip.run,schedule_pay:0
@@ -129,7 +130,6 @@ msgid "Scheduled Pay"
 msgstr "Frecuencia de pago"
 
 #. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:70
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:71
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:72
 msgid "Hrs."
@@ -146,40 +146,31 @@ msgid "Annually"
 msgstr "Anual"
 
 #. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:71
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:45
+#: model:ir.actions.report.xml,name:l10n_cr_hr_payroll.hr_payslip_run_ccorp
+msgid "Payroll Report"
+msgstr "Reporte de planilla"
+
+#. module: l10n_cr_hr_payroll
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:72
 msgid "Ext"
 msgstr "Ext"
 
 #. module: l10n_cr_hr_payroll
 #: constraint:hr.contract:0
 msgid "Error! contract start-date must be lower then contract end-date."
-msgstr "¡Error! La fecha de inicio de contrato debe ser menor que la fecha de finalización."
-
-#. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:148
-msgid "Total"
-msgstr "Total"
-
-#. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:81
-msgid "Neto"
-msgstr "Neto"
-
-#. module: l10n_cr_hr_payroll
-#: model:ir.actions.report.xml,name:l10n_cr_hr_payroll.hr_payslip_run_ccorp
-msgid "Reporte de Planilla"
-msgstr "Reporte de Planilla"
+msgstr ""
+"¡Error! La fecha de inicio de contrato debe ser menor que la fecha de "
+"finalización."
 
 #. module: l10n_cr_hr_payroll
 #: field:hr.job,code:0
 msgid "Code"
-msgstr "Code"
+msgstr "Código"
 
 #. module: l10n_cr_hr_payroll
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:73
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:74
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:75
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:76
 msgid "Ingr."
 msgstr "Ingr."
 
@@ -194,15 +185,9 @@ msgid "Extra"
 msgstr "Extra"
 
 #. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:80
-msgid "Otras"
-msgstr "Otras"
-
-#. module: l10n_cr_hr_payroll
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:77
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:81
-msgid "Salario"
-msgstr "Salario"
+msgid "Tax"
+msgstr "Impuesto"
 
 #. module: l10n_cr_hr_payroll
 #: view:hr.payslip.run:0
@@ -215,23 +200,21 @@ msgid "Bi-weekly"
 msgstr "Bi-semanal"
 
 #. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:79
-msgid "Renta"
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:77
+msgid "Rent"
 msgstr "Renta"
 
 #. module: l10n_cr_hr_payroll
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:139
+msgid "Total"
+msgstr "Total"
+
+#. module: l10n_cr_hr_payroll
+#: selection:hr.payslip.run,schedule_pay:0
+msgid "Weekly"
+msgstr "Semanal"
+
+#. module: l10n_cr_hr_payroll
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:76
-msgid "Otros"
-msgstr "Otros"
-
-#. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:171
-msgid "TOTAL GENERAL"
-msgstr "TOTAL GENERAL"
-
-#. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:78
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:80
 msgid "Deducc."
 msgstr "Deducc."
-
