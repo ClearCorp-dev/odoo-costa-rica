@@ -101,7 +101,7 @@ class hr_payslip_run_report(report_sxw.rml_parse):
         return res
     
     def get_basic(self,line_ids):
-        code = 'BASIC'
+        code = 'BASE'
         res = 0
         for line in line_ids:
             if line.code == code:
@@ -132,7 +132,7 @@ class hr_payslip_run_report(report_sxw.rml_parse):
         
         
     def get_gross(self,line_ids):
-        code = 'GROSS'
+        code = 'BRUTO'
         res = 0
         for line in line_ids:
             if line.code == code:
@@ -155,7 +155,7 @@ class hr_payslip_run_report(report_sxw.rml_parse):
     
     
     def get_net(self,line_ids):
-        code = 'NET'
+        code = 'NETO'
         res = 0
         for line in line_ids:
             if line.code == code:
