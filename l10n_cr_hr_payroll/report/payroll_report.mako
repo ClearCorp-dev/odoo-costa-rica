@@ -176,9 +176,9 @@
 	<div class="act_as_table data_table" style="margin-top:30px">
 	    <div class="act_as_tbody">
 		<div class="act_as_row" style="vertical-align: bottom">
-		    <div class="act_as_cell" style="padding-top:80px;padding-bottom:5px">${'BY:'}</div>
-		    <div class="act_as_cell" style="padding-top:80px;padding-bottom:5px">${'REVIEWED BY:'}</div>
-		    <div class="act_as_cell" style="padding-top:80px;padding-bottom:5px">${'APPROVED BY:'}</div>
+		    <div class="act_as_cell" style="padding-top:80px;padding-bottom:5px"> ${_('BY:')} </div>
+		    <div class="act_as_cell" style="padding-top:80px;padding-bottom:5px"> ${_('REVIEWED BY:')} </div>
+		    <div class="act_as_cell" style="padding-top:80px;padding-bottom:5px"> ${_('APPROVED BY:')} </div>
 		</div>
             </div>
 	</div>   

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-23 19:15+0000\n"
-"PO-Revision-Date: 2012-08-23 13:16-0600\n"
+"POT-Creation-Date: 2012-08-23 20:36+0000\n"
+"PO-Revision-Date: 2012-08-23 14:43-0600\n"
 "Last-Translator: Ronald Rubi <ronald.rubi@clearcorp.co.cr>\n"
 "Language-Team: Inglés <ronald.rubi@clearcorp.co.cr>\n"
 "MIME-Version: 1.0\n"
@@ -52,9 +52,19 @@ msgid "Confirm Payslips"
 msgstr "Confirmar Nóminas"
 
 #. module: l10n_cr_hr_payroll
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:180
+msgid "REVIEWED BY:"
+msgstr "REVISADO POR:"
+
+#. module: l10n_cr_hr_payroll
 #: selection:hr.payslip.run,schedule_pay:0
 msgid "Semi-annually"
 msgstr "Semestral"
+
+#. module: l10n_cr_hr_payroll
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:179
+msgid "BY:"
+msgstr "HECHO POR:"
 
 #. module: l10n_cr_hr_payroll
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:73
@@ -203,6 +213,11 @@ msgstr "Bi-semanal"
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:77
 msgid "Rent"
 msgstr "Renta"
+
+#. module: l10n_cr_hr_payroll
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:181
+msgid "APPROVED BY:"
+msgstr "APROBADO POR:"
 
 #. module: l10n_cr_hr_payroll
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:139
