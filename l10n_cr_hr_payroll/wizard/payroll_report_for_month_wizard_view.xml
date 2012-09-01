@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- inheriting views from more than 2 differents inherited models like
+        account.balances.webkit -> account.common.balance.report -> account.common.account.report
+        is not supported so we have to copy paste the same view for payroll_report_for_month, balance sheet, profit & loss
+          -->
+
+
+        <record id="payroll_report_for_month_view_webkit" model="ir.ui.view">
+            <field name="name">Payroll Report for Month</field>
+            <field name="model">payroll.report.for.month</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.account_common_report_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/form/label[@string='']" position="replace">
+                        <separator string="Payroll Report for Month" colspan="4"/>
+                        <label nolabel="1" colspan="4" string="This report allows you to print or generate a pdf of your payslip in a special month"/>
+                    </xpath>                    
+                    <field name="chart_account_id" position='attributes'>
+                        <attribute name="colspan">4</attribute>
+                    </field>
+                    <field name="fiscalyear_id" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </field>
+                    <field name="target_move" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </field>
+                    <page name="journal_ids" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </page>
+                    <page name="filters" position="replace">
+                        <page string="Filters" name="filters">
+                            <field name="filter" on_change="onchange_filter(filter)" readonly="True" colspan="4"/>
+                            <separator string="Dates" colspan="4"/>
+                            <field name="date_from" attrs="{'readonly':[('filter', '!=', 'filter_date')], 'required':[('filter', '=', 'filter_date')]}" colspan="4"/>
+                            <field name="date_to" attrs="{'readonly':[('filter', '!=', 'filter_date')], 'required':[('filter', '=', 'filter_date')]}"  colspan="4"/>
+                        </page>
+                    </page>
+                </data>
+            </field>
+        </record>
+
+        <record id="action_payroll_report_for_month_menu_webkit" model="ir.actions.act_window">
+            <field name="name">Action Payroll Report for Month</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">payroll.report.for.month</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="payroll_report_for_month_view_webkit"/>
+            <field name="target">new</field>
+        </record>
+        
+        <record model="ir.values" id="action_payroll_report_for_month_values_webkit">
+            <field name="model_id" ref="account.model_account_account"/>
+            <field name="object" eval="1"/>
+            <field name="name">Payroll Report for Month</field>
+            <field name="key2">client_print_multi</field>
+            <field name="value"
+                eval="'ir.actions.act_window,' +str(ref('action_payroll_report_for_month_menu_webkit'))"/>
+            <field name="key">action</field>
+            <field name="model">account.account</field>
+        </record>
+    </data>
+</openerp>

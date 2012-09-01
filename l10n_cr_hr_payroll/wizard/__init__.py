@@ -20,10 +20,5 @@
 #
 ##############################################################################
 
-import hr_payroll
-import account
-from . import wizard
-from . import report
-from . import l10n_cr_hr_payroll
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+import payroll_report_for_month_wizard
