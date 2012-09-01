@@ -21,3 +21,4 @@
 ##############################################################################
 
 import payroll_report
+import payroll_report_for_month

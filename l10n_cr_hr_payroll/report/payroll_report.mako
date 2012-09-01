@@ -90,7 +90,7 @@
                               <div class="act_as_cell">${slip.employee_id.bank_account_id.acc_number or ' '}</div>
                               ## hn
                               <div class="act_as_cell amount">${get_hn(slip.worked_days_line_ids) or '0'}</div>				
-                              ## hr
+                              ## he
                               <div class="act_as_cell amount">${get_he(slip.worked_days_line_ids) or '0'}</div>
                               ## basic
                               <div class="act_as_cell amount">${formatLang(get_basic(slip.line_ids)) or '0'}</div>
@@ -163,11 +163,9 @@
 		    <div class="act_as_cell amount" style="width: 40px;">${total_he}</div>
 		    <div class="act_as_cell amount">${formatLang(total_basic)}</div>
 		    <div class="act_as_cell amount">${formatLang(total_exs)}</div>
-		    <div class="act_as_cell amount">${_('0.00')}</div>
 		    <div class="act_as_cell amount">${formatLang(total_gross)}</div>
 		    <div class="act_as_cell amount">${formatLang(total_ccss)}</div>
 		    <div class="act_as_cell amount">${formatLang(total_rent)}</div>
-		    <div class="act_as_cell amount">${_('0.00')}</div>
 		    <div class="act_as_cell amount">${formatLang(total_net)}</div>
 		</div>
 	    </div>
