@@ -40,8 +40,6 @@
         total_ccss = 0.0
         total_net = 0.0
         total_emp = 0
-        total_emp_RETM = 0.0
-        total_emp_RETS = 0.0
         %>
         <div style="font-size: 20px; font-weight: bold; text-align: center;"> ${company.partner_id.name | entity} - ${company.currency_id.name | entity}</div>
         <div style="font-size: 25px; font-weight: bold; text-align: center;"> ${_('Payroll Report')}</div>
@@ -62,8 +60,6 @@
             total_ccss_dep = 0.0
             total_net_dep = 0.0
             total_emp_dep = 0
-            total_emp_dep_RETM = 0.0
-            total_emp_dep_RETS = 0.0
             %>
             <div class="account_title bg" style="margin-top: 20px; font-size: 12px; width: 1080px;">${department[0]}</div>
             <div class="act_as_table list_table">
@@ -80,8 +76,6 @@
                 <div class="act_as_cell amount">${_('Deducc.')}<br />${_('CCSS/BP')}</div>
                 <div class="act_as_cell amount">${_('Tax')}<br />${_('Rent')}</div>
                 <div class="act_as_cell amount">${_('Salary')}<br />${_('Net')}</div>
-                <div class="act_as_cell amount">${_('RETM')}</div>
-                <div class="act_as_cell amount">${_('RETS')}</div>
             </div>
             </div>
             
@@ -110,10 +104,6 @@
                     <div class="act_as_cell amount">${formatLang(get_rent(slip.line_ids)) or '0'}</div>
                     ## NET
                     <div class="act_as_cell amount">${formatLang(get_net(slip.line_ids)) or '0'}</div>
-                    ## RETM
-                    <div class="act_as_cell amount">${formatLang(get_RETM(slip.line_ids)) or '0'}</div>
-                    ## RETS
-                    <div class="act_as_cell amount">${formatLang(get_RETS(slip.line_ids)) or '0'}</div>
                 <%
                     ## Totals by Departament
                     total_hn_dep += get_hn(slip.worked_days_line_ids)
@@ -127,8 +117,6 @@
                     total_ccss_dep += get_ccss(slip.line_ids)
                     total_net_dep += get_net(slip.line_ids)
                     total_emp_dep += 1
-                    total_emp_dep_RETM += get_RETM(slip.line_ids)
-                    total_emp_dep_RETS += get_RETS(slip.line_ids)
 
                     ## Totals
                     total_hn += get_hn(slip.worked_days_line_ids)
@@ -142,8 +130,6 @@
                     total_ccss += get_ccss(slip.line_ids)
                     total_net += get_net(slip.line_ids)
                     total_emp += 1
-                    total_emp_RETM += get_RETM(slip.line_ids)
-                    total_emp_RETS += get_RETS(slip.line_ids)
                 %>
                     </div>
                 %endfor
@@ -161,8 +147,6 @@
             <div class="act_as_cell amount">${formatLang(total_ccss_dep)}</div>
             <div class="act_as_cell amount">${formatLang(total_rent_dep)}</div>
             <div class="act_as_cell amount">${formatLang(total_net_dep)}</div>
-            <div class="act_as_cell amount">${formatLang(total_emp_dep_RETM)}</div>
-            <div class="act_as_cell amount">${formatLang(total_emp_dep_RETS)}</div>
         </div>
             </div>
             </div>
@@ -183,8 +167,6 @@
             <div class="act_as_cell amount">${formatLang(total_ccss)}</div>
             <div class="act_as_cell amount">${formatLang(total_rent)}</div>
             <div class="act_as_cell amount">${formatLang(total_net)}</div>
-            <div class="act_as_cell amount">${formatLang(total_emp_RETM)}</div>
-            <div class="act_as_cell amount">${formatLang(total_emp_RETS)}</div>
         </div>
         </div>
     </div>
