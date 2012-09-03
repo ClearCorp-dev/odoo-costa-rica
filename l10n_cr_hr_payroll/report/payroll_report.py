@@ -41,8 +41,11 @@ class hr_payslip_run_report(report_sxw.rml_parse):
             'get_gross':self.get_gross,
             'get_ccss':self.get_ccss,
             'get_net':self.get_net,
-	    'get_rent':self.get_rent,
-	    'get_obj_by_dep':self.get_obj_by_dep,
+            'get_rent':self.get_rent,
+            'get_obj_by_dep':self.get_obj_by_dep,
+            'get_RETM':self.get_RETM,
+            'get_RETS':self.get_RETS,
+            'get_retroactive':self.get_retroactive,
         })
     
     def get_prefix(self,currency,company_id):
@@ -74,8 +77,7 @@ class hr_payslip_run_report(report_sxw.rml_parse):
         res = 0
         for line in line_ids:
             if line.code == code:
-                res += line.number_of_hours        
-        
+                res += line.number_of_hours
         return res
         
         
@@ -104,7 +106,7 @@ class hr_payslip_run_report(report_sxw.rml_parse):
             if line.code == code:
                 res += line.total
         
-        
+        res = res + self.get_retroactive(line_ids)
         return res
     
     
@@ -162,7 +164,27 @@ class hr_payslip_run_report(report_sxw.rml_parse):
         
         
         return res
+        
+    def get_RETM(self,line_ids):
+        code = 'RET-MENS'
+        res = 0
+        for line in line_ids:
+            if line.code == code:
+                res += line.total
+        return res
 
+    def get_RETS(self,line_ids):
+        code = 'RET-SEM'
+        res = 0
+        for line in line_ids:
+            if line.code == code:
+                res += line.total
+        return res
+        
+    def get_retroactive(self, line_ids):
+        res = 0
+        res = self.get_RETS(line_ids) + self.get_RETM(line_ids)
+        return res
 
     def get_obj_by_dep(self,run):
 	obj_by_dep = []
