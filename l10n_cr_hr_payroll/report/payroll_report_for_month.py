@@ -52,6 +52,9 @@ class payroll_report_for_month(TrialBalanceWebkit):
             'get_ccss': self.get_ccss,
             'get_rent': self.get_rent,
             'get_net': self.get_net,
+            'get_RETM':self.get_RETM,
+            'get_RETS':self.get_RETS,
+            'get_retroactive':self.get_retroactive,
         })
         
     def set_context(self, objects, data, ids, report_type=None):
@@ -167,6 +170,8 @@ class payroll_report_for_month(TrialBalanceWebkit):
             for line in payslip.line_ids:
                 if line.code == code:
                     res += line.total
+                    
+            res = res + self.get_retroactive(payslip.line_ids)
         return res
         
     def get_gross(self, cr, uid, payslips):
@@ -208,6 +213,27 @@ class payroll_report_for_month(TrialBalanceWebkit):
             for line in payslip.line_ids:
                 if line.code == code:
                     res += line.total
+        return res
+    
+    def get_RETM(self,line_ids):
+        code = 'RET-MENS'
+        res = 0
+        for line in line_ids:
+            if line.code == code:
+                res += line.total
+        return res
+
+    def get_RETS(self,line_ids):
+        code = 'RET-SEM'
+        res = 0
+        for line in line_ids:
+            if line.code == code:
+                res += line.total
+        return res
+        
+    def get_retroactive(self, line_ids):
+        res = 0
+        res = self.get_RETS(line_ids) + self.get_RETM(line_ids)
         return res
 
 HeaderFooterTextWebKitParser(
