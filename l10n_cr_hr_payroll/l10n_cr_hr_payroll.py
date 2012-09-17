@@ -23,6 +23,7 @@
 import netsvc
 from osv import fields, osv
 import tools
+from datetime import datetime
 from tools.translate import _
 
 class hr_contract(osv.osv):
@@ -117,8 +118,14 @@ class HrPayslip(osv.osv):
                 schedule_pay = _('weekly')
             elif contract.schedule_pay == 'monthly':
                 schedule_pay = _('monthly')
-
-        name = _('%s payroll of %s from %s to %s') % (schedule_pay, employee.name, date_from, date_to)
+        
+        #Format dates
+        date_from_payslip = datetime.strptime(date_from, "%Y-%m-%d")
+        date_from_payslip = date_from_payslip.strftime('%d-%m-%Y')
+        date_to_payslip = datetime.strptime(date_to, "%Y-%m-%d")
+        date_to_payslip = date_to_payslip.strftime('%d-%m-%Y')
+        
+        name = _('%s payroll of %s from %s to %s') % (schedule_pay, employee.name, date_from_payslip, date_to_payslip)
         name = name.upper()
         worked_days_line_list = []
         if res['value']['worked_days_line_ids']:
