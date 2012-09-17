@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-31 19:56+0000\n"
-"PO-Revision-Date: 2012-08-31 17:14-0600\n"
+"POT-Creation-Date: 2012-09-14 22:22+0000\n"
+"PO-Revision-Date: 2012-09-14 16:22-0600\n"
 "Last-Translator: Ronald Rubi <ronald.rubi@clearcorp.co.cr>\n"
 "Language-Team: Inglés <ronald.rubi@clearcorp.co.cr>\n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,12 @@ msgstr ""
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report_for_month.mako:85
 msgid "Gross"
 msgstr "Bruto"
+
+#. module: l10n_cr_hr_payroll
+#: code:addons/l10n_cr_hr_payroll/l10n_cr_hr_payroll.py:119
+#, python-format
+msgid "weekly"
+msgstr "semanal"
 
 #. module: l10n_cr_hr_payroll
 #: selection:hr.payslip.run,schedule_pay:0
@@ -51,6 +57,12 @@ msgid ""
 msgstr ""
 "Este informe le permite imprimir o generar un pdf de su recibo de sueldo en "
 "un mes especial"
+
+#. module: l10n_cr_hr_payroll
+#: code:addons/l10n_cr_hr_payroll/l10n_cr_hr_payroll.py:121
+#, python-format
+msgid "monthly"
+msgstr "mensual"
 
 #. module: l10n_cr_hr_payroll
 #: view:hr.payslip.run:0
@@ -87,7 +99,7 @@ msgid "Confirm Payslips"
 msgstr "Confirmar Nóminas"
 
 #. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:180
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:178
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report_for_month.mako:186
 msgid "REVIEWED BY:"
 msgstr "REVISADO POR:"
@@ -108,12 +120,13 @@ msgid "Filter on accounts"
 msgstr "Filtro en cuentas"
 
 #. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report_for_month.mako:43
-msgid "Payslips of:"
-msgstr "Nóminas del:"
+#: code:addons/l10n_cr_hr_payroll/l10n_cr_hr_payroll.py:125
+#, python-format
+msgid "%s payroll of %s from %s to %s"
+msgstr "planilla %s de %s del %s al %s"
 
 #. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:179
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:177
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report_for_month.mako:185
 msgid "BY:"
 msgstr "HECHO POR:"
@@ -143,10 +156,9 @@ msgstr ""
 "misma compañía."
 
 #. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:166
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:170
-msgid "0.00"
-msgstr "0.00"
+#: field:payroll.report.for.month,company_id:0
+msgid "Company"
+msgstr "Compañía"
 
 #. module: l10n_cr_hr_payroll
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:70
@@ -187,9 +199,9 @@ msgid "Date"
 msgstr "Fecha"
 
 #. module: l10n_cr_hr_payroll
-#: view:hr.payslip.run:0
-msgid "Schedule pay"
-msgstr "Plan de pago"
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report_for_month.mako:43
+msgid "Payslips of:"
+msgstr "Nóminas del:"
 
 #. module: l10n_cr_hr_payroll
 #: field:payroll.report.for.month,chart_account_id:0
@@ -273,6 +285,11 @@ msgid "All Posted Entries"
 msgstr "Todas las entradas publicadas"
 
 #. module: l10n_cr_hr_payroll
+#: constraint:hr.payslip:0
+msgid "Payslip 'Date From' must be before 'Date To'."
+msgstr "Boleta ' Fecha Desde'  pago debe ser antes de 'Fecha a'."
+
+#. module: l10n_cr_hr_payroll
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:140
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:160
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report_for_month.mako:151
@@ -332,19 +349,24 @@ msgstr "Semanal"
 #. module: l10n_cr_hr_payroll
 #: help:payroll.report.for.month,fiscalyear_id:0
 msgid "Keep empty for all open fiscal year"
-msgstr "Keep empty for all open fiscal year"
+msgstr "Mantenga vacío para todo el año fiscal abierto"
 
 #. module: l10n_cr_hr_payroll
 #: field:payroll.report.for.month,display_account:0
 msgid "Display Accounts"
-msgstr "Display Accounts"
+msgstr "Mostrar cuentas"
+
+#. module: l10n_cr_hr_payroll
+#: view:hr.payslip.run:0
+msgid "Schedule pay"
+msgstr "Plan de pago"
 
 #. module: l10n_cr_hr_payroll
 #: selection:payroll.report.for.month,comp0_filter:0
 #: selection:payroll.report.for.month,comp1_filter:0
 #: selection:payroll.report.for.month,comp2_filter:0
 msgid "No Comparison"
-msgstr "No Comparison"
+msgstr "No comparar"
 
 #. module: l10n_cr_hr_payroll
 #: selection:payroll.report.for.month,comp0_filter:0
@@ -352,7 +374,7 @@ msgstr "No Comparison"
 #: selection:payroll.report.for.month,comp2_filter:0
 #: selection:payroll.report.for.month,filter:0
 msgid "Opening Only"
-msgstr "Opening Only"
+msgstr "Solo apertura"
 
 #. module: l10n_cr_hr_payroll
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report_for_month.mako:42
@@ -383,7 +405,7 @@ msgstr "Total"
 #. module: l10n_cr_hr_payroll
 #: selection:payroll.report.for.month,display_account:0
 msgid "With movements"
-msgstr "With movements"
+msgstr "Con movimientos"
 
 #. module: l10n_cr_hr_payroll
 #: field:payroll.report.for.month,comp0_period_to:0
@@ -391,12 +413,12 @@ msgstr "With movements"
 #: field:payroll.report.for.month,comp2_period_to:0
 #: field:payroll.report.for.month,period_to:0
 msgid "End Period"
-msgstr "End Period"
+msgstr "Periodo de fin"
 
 #. module: l10n_cr_hr_payroll
 #: selection:payroll.report.for.month,display_account:0
 msgid "All"
-msgstr "All"
+msgstr "Todo"
 
 #. module: l10n_cr_hr_payroll
 #: field:hr.job,code:0
@@ -423,6 +445,11 @@ msgid "Extra"
 msgstr "Extra"
 
 #. module: l10n_cr_hr_payroll
+#: model:ir.model,name:l10n_cr_hr_payroll.model_hr_payslip
+msgid "Pay Slip"
+msgstr "Nómina"
+
+#. module: l10n_cr_hr_payroll
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:77
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report_for_month.mako:87
 msgid "Tax"
@@ -437,7 +464,7 @@ msgstr "Impuesto"
 #: field:payroll.report.for.month,comp2_fiscalyear_id:0
 #: field:payroll.report.for.month,fiscalyear_id:0
 msgid "Fiscal Year"
-msgstr "Fiscal Year"
+msgstr "Año fiscal"
 
 #. module: l10n_cr_hr_payroll
 #: selection:hr.payslip.run,schedule_pay:0
@@ -465,7 +492,7 @@ msgid "Filters"
 msgstr "Filtros"
 
 #. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:181
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:179
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report_for_month.mako:187
 msgid "APPROVED BY:"
 msgstr "APROBADO POR:"
@@ -473,7 +500,7 @@ msgstr "APROBADO POR:"
 #. module: l10n_cr_hr_payroll
 #: help:payroll.report.for.month,chart_account_id:0
 msgid "Select Charts of Accounts"
-msgstr "Select Charts of Accounts"
+msgstr "Seleccione Gráficos de Cuentas"
 
 #. module: l10n_cr_hr_payroll
 #: field:payroll.report.for.month,filter:0
@@ -481,16 +508,11 @@ msgid "Filter by"
 msgstr "Filtrar por"
 
 #. module: l10n_cr_hr_payroll
-#: field:payroll.report.for.month,company_id:0
-msgid "Company"
-msgstr "Compañía"
-
-#. module: l10n_cr_hr_payroll
 #: field:payroll.report.for.month,comp0_filter:0
 #: field:payroll.report.for.month,comp1_filter:0
 #: field:payroll.report.for.month,comp2_filter:0
 msgid "Compare By"
-msgstr "Compare By"
+msgstr "Comparar por"
 
 #. module: l10n_cr_hr_payroll
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:76

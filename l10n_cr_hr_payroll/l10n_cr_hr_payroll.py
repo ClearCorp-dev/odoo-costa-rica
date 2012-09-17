@@ -86,4 +86,52 @@ class hr_payslip_run(osv.osv):
 
 hr_payslip_run()
 
+class HrPayslip(osv.osv):
+    _inherit = 'hr.payslip'
+
+    _columns = {
+                'name': fields.char('Description', size=256, required=False, readonly=True, states={'draft': [('readonly', False)]}),
+    }
+
+    def onchange_employee_id(self, cr, uid, ids, date_from, date_to, employee_id=False, contract_id=False, context=None):
+        res = super(HrPayslip, self).onchange_employee_id(cr, uid, ids, date_from, date_to, employee_id=employee_id, contract_id=contract_id, context=context)
+        
+        if (not employee_id) or (not date_from) or (not date_to):
+            return res
+        
+        employee_obj = self.pool.get('hr.employee')
+        contract_obj = self.pool.get('hr.contract')
+        
+        employee = employee_obj.browse(cr, uid, employee_id, context=context)
+        
+        if (not contract_id):
+            contract_id = contract_obj.search(cr, uid, [('employee_id', '=', employee_id)], context=context)
+        else:
+            contract_id = [contract_id]
+        
+        contract = contract_obj.browse(cr, uid, contract_id, context=context)[0]
+        schedule_pay = ''
+        if contract.schedule_pay:
+            #This is to translate the terms 
+            if contract.schedule_pay == 'weekly':
+                schedule_pay = _('weekly')
+            elif contract.schedule_pay == 'monthly':
+                schedule_pay = _('monthly')
+
+        name = _('%s payroll of %s from %s to %s') % (schedule_pay, employee.name, date_from, date_to)
+        name = name.upper()
+        worked_days_line_list = []
+        if res['value']['worked_days_line_ids']:
+            worked_days_line = res['value']['worked_days_line_ids'][0]
+            worked_days_line['code'] = 'HN'
+            worked_days_line['name'] = name
+            worked_days_line_list = [worked_days_line]
+        
+        res['value'].update({
+                    'name': name,
+                    'worked_days_line_ids' : worked_days_line_list,
+        })
+
+        return res
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
