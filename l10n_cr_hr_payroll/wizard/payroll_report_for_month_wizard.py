@@ -31,19 +31,9 @@ class PayrollReportForMonthWizard(osv.osv_memory):
 
     _defaults = {
             'fiscalyear_id': '',
-            'filter': 'filter_date',
+            'filter': 'filter_period',
     }
-    
-    def pre_print_report(self, cr, uid, ids, data, context=None):
-        data = super(PayrollReportForMonthWizard, self).pre_print_report(cr, uid, ids, data, context)
-        if context is None:
-            context = {}
-        vals = self.read(cr, uid, ids,
-                         ['date_from', 'date_to',],
-                         context=context)[0]
-        data['form'].update(vals)
-        return data
-        
+
     def _print_report(self, cursor, uid, ids, data, context=None):
         context = context or {}
         # we update form with display account value

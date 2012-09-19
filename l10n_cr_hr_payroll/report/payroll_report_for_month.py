@@ -23,7 +23,6 @@
 from report import report_sxw
 from tools.translate import _
 import pooler
-from datetime import datetime
 
 from openerp.addons.account_financial_report_webkit.report.trial_balance import TrialBalanceWebkit
 from openerp.addons.account_financial_report_webkit.report.webkit_parser_header_fix import HeaderFooterTextWebKitParser
@@ -39,7 +38,7 @@ class payroll_report_for_month(TrialBalanceWebkit):
         #This line is to delete, the header of trial balance
         self.localcontext['additional_args'][4] = ('--header-left', '')
         self.localcontext.update({
-            'get_payslips_by_date': self.get_payslips_by_date,
+            'get_payslips_by_period': self.get_payslips_by_period,
             'get_payslips_by_struct': self.get_payslips_by_struct,
             'get_payslips_by_employee': self.get_payslips_by_employee,
             'get_identification': self.get_identification,
@@ -58,23 +57,23 @@ class payroll_report_for_month(TrialBalanceWebkit):
         })
         
     def set_context(self, objects, data, ids, report_type=None):
-        start_date = self._get_form_param('date_from', data)
-        end_date = self._get_form_param('date_to', data)
+        start_period = self._get_form_param('period_from', data)
+        stop_period = self._get_form_param('period_to', data)
         
         self.localcontext.update({
-            'start_date': start_date,
-            'end_date': end_date,
+            'start_period': start_period,
+            'stop_period': stop_period,
             })
 
         return super(payroll_report_for_month, self).set_context(objects, data, ids, report_type=report_type)
     
-    def get_payslips_by_date(self, cr, uid, start_date, end_date):
-        payslips_ids = self.pool.get('hr.payslip').search(cr, uid, [('date_from', '>=' , start_date), ('date_to', '<=' , end_date)])
+    def get_payslips_by_period(self, cr, uid, start_period, stop_period):
+        payslips_ids = self.pool.get('hr.payslip').search(cr, uid, [('date_to', '>=' , start_period.date_start), ('date_to', '<=' , stop_period.date_stop)])
         payslips = self.pool.get('hr.payslip').browse(cr, uid, payslips_ids)
         return payslips
         
-    def get_payslips_by_struct(self, cr, uid, start_date, end_date):
-        all_payslips = self.get_payslips_by_date(cr, uid, start_date, end_date)
+    def get_payslips_by_struct(self, cr, uid, start_period, stop_period):
+        all_payslips = self.get_payslips_by_period(cr, uid, start_period, stop_period)
         obj_by_struct = []
         struct_list = []
         payslip_by_struct = []

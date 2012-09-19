@@ -22,23 +22,33 @@
                     <field name="chart_account_id" position='attributes'>
                         <attribute name="colspan">4</attribute>
                     </field>
-                    <field name="fiscalyear_id" position="attributes">
-                        <attribute name="invisible">True</attribute>
-                    </field>
                     <field name="target_move" position="attributes">
                         <attribute name="invisible">True</attribute>
                     </field>
                     <page name="journal_ids" position="attributes">
                         <attribute name="invisible">True</attribute>
                     </page>
-                    <page name="filters" position="replace">
-                        <page string="Filters" name="filters">
-                            <field name="filter" on_change="onchange_filter(filter)" readonly="True" colspan="4"/>
-                            <separator string="Dates" colspan="4"/>
-                            <field name="date_from" attrs="{'readonly':[('filter', '!=', 'filter_date')], 'required':[('filter', '=', 'filter_date')]}" colspan="4"/>
-                            <field name="date_to" attrs="{'readonly':[('filter', '!=', 'filter_date')], 'required':[('filter', '=', 'filter_date')]}"  colspan="4"/>
-                        </page>
-                    </page>
+                    <field name="fiscalyear_id" position="attributes">
+                        <attribute name="attrs">{'required': True}</attribute>
+                    </field>
+                    <field name="period_from" position="attributes">
+                        <attribute name="domain">[('fiscalyear_id', '=', fiscalyear_id), ('special', '=', False)]</attribute>
+                    </field>
+                    <field name="period_to" position="attributes">
+                        <attribute name="domain">[('fiscalyear_id', '=', fiscalyear_id), ('special', '=', False)]</attribute>
+                    </field>
+                     <field name="filter" position="attributes">
+                        <attribute name="readonly">True</attribute>
+                    </field>
+                    <separator string="Dates" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </separator> 
+                    <field name="date_from" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </field>
+                    <field name="date_to" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </field>
                 </data>
             </field>
         </record>

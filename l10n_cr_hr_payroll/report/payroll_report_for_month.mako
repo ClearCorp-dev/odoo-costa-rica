@@ -39,11 +39,11 @@
 
         
         <div style="font-size: 20px; font-weight: bold; text-align: center;"> ${company.partner_id.name}</div>
-        <div style="font-size: 25px; font-weight: bold; text-align: center;"> ${_('Payroll Report for Specific Dates')}</div>
-        <div style="font-size: 16px; font-weight: bold; text-align: center;">${_('Payslips of:')} ${start_date} ${_('to')} ${end_date}</div>
+        <div style="font-size: 25px; font-weight: bold; text-align: center;"> ${_('Payroll Report for Specific Periods')}</div>
+        <div style="font-size: 16px; font-weight: bold; text-align: center;">${_('Payslips of periods:')} ${start_period.name} ${_('to')} ${stop_period.name}</div>
         
         <%
-        payslips_by_struct = get_payslips_by_struct(cr, uid, start_date, end_date)
+        payslips_by_struct = get_payslips_by_struct(cr, uid, start_period, stop_period)
 
         total_hn = 0.0
         total_he = 0.0
