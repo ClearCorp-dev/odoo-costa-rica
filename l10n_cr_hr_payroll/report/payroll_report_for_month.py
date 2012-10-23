@@ -72,7 +72,6 @@ class payroll_report_for_month(TrialBalanceWebkit):
         hr_payslip_object = self.pool.get('hr.payslip')
         payslips_ids = []
         payslips = []
-        res = {}
             
         payslips_ids = self.pool.get('hr.payslip').search(cr, uid, [('forced_period_id.date_start', '>=' , start_period.date_start), ('forced_period_id.date_stop', '<=' , stop_period.date_stop)])
         
