@@ -76,7 +76,7 @@ class hr_payslip_run(osv.osv):
             ('bi-monthly', 'Bi-monthly'),
             ], 'Scheduled Pay', select=True, readonly=True, states={'draft': [('readonly', False)]}),
                 
-        'period_id': fields.many2one('account.period', 'Force Period'),
+        'period_id': fields.many2one('account.period', 'Force Period', readonly=True, states={'draft': [('readonly', False)]}),
       
     }
 
