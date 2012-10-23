@@ -23,6 +23,7 @@
 from report import report_sxw
 from tools.translate import _
 import pooler
+from osv import fields,osv
 
 from openerp.addons.account_financial_report_webkit.report.trial_balance import TrialBalanceWebkit
 from openerp.addons.account_financial_report_webkit.report.webkit_parser_header_fix import HeaderFooterTextWebKitParser
@@ -68,8 +69,15 @@ class payroll_report_for_month(TrialBalanceWebkit):
         return super(payroll_report_for_month, self).set_context(objects, data, ids, report_type=report_type)
     
     def get_payslips_by_period(self, cr, uid, start_period, stop_period):
-        payslips_ids = self.pool.get('hr.payslip').search(cr, uid, [('date_to', '>=' , start_period.date_start), ('date_to', '<=' , stop_period.date_stop)])
-        payslips = self.pool.get('hr.payslip').browse(cr, uid, payslips_ids)
+        hr_payslip_object = self.pool.get('hr.payslip')
+        payslips_ids = []
+        payslips = []
+            
+        payslips_ids = self.pool.get('hr.payslip').search(cr, uid, [('forced_period_id.date_start', '>=' , start_period.date_start), ('forced_period_id.date_stop', '<=' , stop_period.date_stop)])
+        
+        if len(payslips_ids) > 0:    
+            payslips = self.pool.get('hr.payslip').browse(cr, uid, payslips_ids)
+        
         return payslips
         
     def get_payslips_by_struct(self, cr, uid, start_period, stop_period):
@@ -81,7 +89,7 @@ class payroll_report_for_month(TrialBalanceWebkit):
         for payslip in all_payslips:
             struct_name = payslip.struct_id.name
             if struct_name not in struct_list:
-                struct_list.append(struct_name)
+                struct_list.append(struct_name) 
                 
         for struct in struct_list:
             struct_payslip = []

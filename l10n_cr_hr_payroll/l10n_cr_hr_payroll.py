@@ -75,6 +75,9 @@ class hr_payslip_run(osv.osv):
             ('bi-weekly', 'Bi-weekly'),
             ('bi-monthly', 'Bi-monthly'),
             ], 'Scheduled Pay', select=True, readonly=True, states={'draft': [('readonly', False)]}),
+                
+        'period_id': fields.many2one('account.period', 'Force Period'),
+      
     }
 
     def confirm_payslips(self, cr, uid, ids, context=None):
@@ -91,7 +94,8 @@ class HrPayslip(osv.osv):
     _inherit = 'hr.payslip'
 
     _columns = {
-                'name': fields.char('Description', size=256, required=False, readonly=True, states={'draft': [('readonly', False)]}),
+        'name': fields.char('Description', size=256, required=False, readonly=True, states={'draft': [('readonly', False)]}),
+        'forced_period_id':fields.related('payslip_run_id', 'period_id', type="many2one", relation="account.period", string="Force period", store=True,readonly=True),
     }
 
     def onchange_employee_id(self, cr, uid, ids, date_from, date_to, employee_id=False, contract_id=False, context=None):
