@@ -1,20 +1,19 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-# 	* l10n_cr_hr_payroll
-# Ronald Rubi <ronald.rubi@clearcorp.co.cr>, 2012.
+#	* l10n_cr_hr_payroll
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-19 22:29+0000\n"
-"PO-Revision-Date: 2012-09-19 16:32-0600\n"
-"Last-Translator: Ronald Rubi <ronald.rubi@clearcorp.co.cr>\n"
-"Language-Team: Inglés <ronald.rubi@clearcorp.co.cr>\n"
+"POT-Creation-Date: 2012-10-23 17:52+0000\n"
+"PO-Revision-Date: 2012-10-23 17:52+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
 
 #. module: l10n_cr_hr_payroll
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:75
@@ -35,17 +34,24 @@ msgstr "Mensual"
 #. module: l10n_cr_hr_payroll
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:77
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report_for_month.mako:87
+msgid "Tax"
+msgstr "Impuesto"
+
+#. module: l10n_cr_hr_payroll
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:77
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report_for_month.mako:87
 msgid "Rent"
 msgstr "Renta"
 
 #. module: l10n_cr_hr_payroll
+#: field:hr.payslip,forced_period_id:0
+msgid "Force period"
+msgstr "Forzar periodo"
+
+#. module: l10n_cr_hr_payroll
 #: view:payroll.report.for.month:0
-msgid ""
-"This report allows you to print or generate a pdf of your payslip in a "
-"special month"
-msgstr ""
-"Este informe le permite imprimir o generar un pdf de su recibo de sueldo en "
-"un mes especial"
+msgid "This report allows you to print or generate a pdf of your payslip in a special month"
+msgstr "Este informe le permite imprimir o generar un pdf de su recibo de sueldo en un mes especial"
 
 #. module: l10n_cr_hr_payroll
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report_for_month.mako:43
@@ -64,11 +70,8 @@ msgstr "Descripción del trabajo"
 
 #. module: l10n_cr_hr_payroll
 #: help:payroll.report.for.month,account_ids:0
-msgid ""
-"Only selected accounts will be printed. Leave empty to print all accounts."
-msgstr ""
-"Sólo las cuentas seleccionadas se imprimirán. Dejar en blanco para imprimir "
-"todas las cuentas."
+msgid "Only selected accounts will be printed. Leave empty to print all accounts."
+msgstr "Sólo las cuentas seleccionadas se imprimirán. Dejar en blanco para imprimir todas las cuentas."
 
 #. module: l10n_cr_hr_payroll
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:78
@@ -93,13 +96,13 @@ msgid "to"
 msgstr "al"
 
 #. module: l10n_cr_hr_payroll
-#: code:addons/l10n_cr_hr_payroll/l10n_cr_hr_payroll.py:118
+#: code:addons/l10n_cr_hr_payroll/l10n_cr_hr_payroll.py:122
 #, python-format
 msgid "weekly"
 msgstr "semanal"
 
 #. module: l10n_cr_hr_payroll
-#: code:addons/l10n_cr_hr_payroll/l10n_cr_hr_payroll.py:128
+#: code:addons/l10n_cr_hr_payroll/l10n_cr_hr_payroll.py:132
 #, python-format
 msgid "%s payroll of %s from %s to %s"
 msgstr "planilla %s de %s del %s al %s"
@@ -117,12 +120,8 @@ msgstr "HECHO POR:"
 
 #. module: l10n_cr_hr_payroll
 #: constraint:payroll.report.for.month:0
-msgid ""
-"When no Fiscal year is selected, you must choose to filter by periods or by "
-"date."
-msgstr ""
-"Cuando no se ha seleccionado el año fiscal, se debe optar por filtrar por "
-"puntos o por fecha."
+msgid "When no Fiscal year is selected, you must choose to filter by periods or by date."
+msgstr "Cuando no se ha seleccionado el año fiscal, se debe optar por filtrar por puntos o por fecha."
 
 #. module: l10n_cr_hr_payroll
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:73
@@ -131,7 +130,7 @@ msgid "Normal"
 msgstr "Normal"
 
 #. module: l10n_cr_hr_payroll
-#: code:addons/l10n_cr_hr_payroll/l10n_cr_hr_payroll.py:120
+#: code:addons/l10n_cr_hr_payroll/l10n_cr_hr_payroll.py:124
 #, python-format
 msgid "monthly"
 msgstr "mensual"
@@ -318,12 +317,8 @@ msgstr "Ext"
 
 #. module: l10n_cr_hr_payroll
 #: help:payroll.report.for.month,filter:0
-msgid ""
-"Filter by date : no opening balance will be displayed. (opening balance can "
-"only be calculated based on period to be correct)."
-msgstr ""
-"Filtrar por fecha: el saldo inicial no se mostrará. (balance de apertura "
-"sólo se puede calcular basándose en el período que es correcto)."
+msgid "Filter by date : no opening balance will be displayed. (opening balance can only be calculated based on period to be correct)."
+msgstr "Filtrar por fecha: el saldo inicial no se mostrará. (balance de apertura sólo se puede calcular basándose en el período que es correcto)."
 
 #. module: l10n_cr_hr_payroll
 #: selection:hr.payslip.run,schedule_pay:0
@@ -366,9 +361,7 @@ msgstr "Fecha Inicial"
 #. module: l10n_cr_hr_payroll
 #: constraint:hr.contract:0
 msgid "Error! contract start-date must be lower then contract end-date."
-msgstr ""
-"¡Error! La fecha de inicio de contrato debe ser menor que la fecha de "
-"finalización."
+msgstr "¡Error! La fecha de inicio de contrato debe ser menor que la fecha de finalización."
 
 #. module: l10n_cr_hr_payroll
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:139
@@ -383,12 +376,8 @@ msgstr "Con movimientos"
 
 #. module: l10n_cr_hr_payroll
 #: constraint:payroll.report.for.month:0
-msgid ""
-"The fiscalyear, periods or chart of account chosen have to belong to the "
-"same company."
-msgstr ""
-"El año fiscal, períodos o plan de cuentas elegido tiene que pertenecer a la "
-"misma compañía."
+msgid "The fiscalyear, periods or chart of account chosen have to belong to the same company."
+msgstr "El año fiscal, períodos o plan de cuentas elegido tiene que pertenecer a la misma compañía."
 
 #. module: l10n_cr_hr_payroll
 #: selection:payroll.report.for.month,display_account:0
@@ -425,10 +414,9 @@ msgid "Pay Slip"
 msgstr "Nómina"
 
 #. module: l10n_cr_hr_payroll
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:77
-#: report:addons/l10n_cr_hr_payroll/report/payroll_report_for_month.mako:87
-msgid "Tax"
-msgstr "Impuesto"
+#: field:hr.payslip.run,period_id:0
+msgid "Force Period"
+msgstr "Forzar período"
 
 #. module: l10n_cr_hr_payroll
 #: selection:payroll.report.for.month,comp0_filter:0
@@ -484,3 +472,4 @@ msgstr "Comparar por"
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report_for_month.mako:86
 msgid "Deducc."
 msgstr "Deducc."
+
