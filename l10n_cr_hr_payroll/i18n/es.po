@@ -1,0 +1,1 @@
+/home/diana/Development/openerp/openerp-costa-rica/features/l10n_cr_period_id_payslip_run/l10n_cr_hr_payroll/i18n/es_CR.po
