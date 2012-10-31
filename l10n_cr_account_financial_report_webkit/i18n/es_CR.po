@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-12 00:52+0000\n"
-"PO-Revision-Date: 2012-07-12 00:52+0000\n"
+"POT-Creation-Date: 2012-10-31 20:48+0000\n"
+"PO-Revision-Date: 2012-10-31 20:48+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -249,6 +249,11 @@ msgstr "Transferencias"
 #: model:ir.model,name:l10n_cr_account_financial_report_webkit.model_account_balances
 msgid "Account Bank Balances Report"
 msgstr ""
+
+#. module: l10n_cr_account_financial_report_webkit
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_financial_report.mako:25
+msgid "None Filter"
+msgstr "Ningún Filtro"
 
 #. module: l10n_cr_account_financial_report_webkit
 #: field:account.balances,comp0_period_to:0
@@ -499,6 +504,12 @@ msgstr "Crédito"
 #: model:ir.actions.report.xml,name:l10n_cr_account_financial_report_webkit.l10n_cr_account_financial_report
 msgid "Account Financial Report"
 msgstr "Reporte Financiero de Cuenta"
+
+#. module: l10n_cr_account_financial_report_webkit
+#: selection:account.balances,filter:0
+#: selection:conciliation.bank.webkit,filter:0
+msgid "No Filters"
+msgstr "Sin Filtros"
 
 #. module: l10n_cr_account_financial_report_webkit
 #: report:addons/l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako:176
