@@ -86,63 +86,63 @@
                     %if line['level'] > 0:
                         <div class="act_as_cell" style="padding-left:${line['level']*10}px">
                         %if bold: 
-                            <div class="act_as_cell" ><b>${line['name']}</b></div>
+                            <div class="act_as_cell" ><b>${_(line['name'])}</b></div>
                         %else:
-                            <div class="act_as_cell" >${line['name']}</div>
+                            <div class="act_as_cell" >${_(line['name'])}</div>
                         %endif
                         </div>
-                        <div class="act_as_cell amount" >${line['debit']}</div>
-                        <div class="act_as_cell amount" >${line['credit']}</div>
-                        <div class="act_as_cell amount" >${line['balance']}</div>                         
+                        <div class="act_as_cell amount" >${_(line['debit'])}</div>
+                        <div class="act_as_cell amount" >${_(line['credit'])}</div>
+                        <div class="act_as_cell amount" >${_(line['balance'])}</div>                         
                     %else:                         
                         %if bold: 
-                            <div class="act_as_cell" ><b>${line['name']}</b></div>
+                            <div class="act_as_cell" ><b>${_(line['name'])}</b></div>
                         %else:
-                            <div class="act_as_cell" >${line['name']}</div>
+                            <div class="act_as_cell" >${_(line['name'])}</div>
                         %endif
-                        <div class="act_as_cell amount" >${line['debit']}</div>
-                        <div class="act_as_cell amount" >${line['credit']}</div>
-                        <div class="act_as_cell amount" >${line['balance']}</div>  
+                        <div class="act_as_cell amount" >${_(line['debit'])}</div>
+                        <div class="act_as_cell amount" >${_(line['credit'])}</div>
+                        <div class="act_as_cell amount" >${_(line['balance'])}</div>  
                     %endif
                 %endif
                 %if not data['form']['enable_filter'] and not data['form']['debit_credit']:
                     %if line['level'] > 0: 
                         <div class="act_as_cell" style="padding-left:${line['level']*10}px">
                             %if bold: 
-                                <div class="act_as_cell" ><b>${line['name']}</b></div>
+                                <div class="act_as_cell" ><b>${_(line['name'])}</b></div>
                             %else:
-                                <div class="act_as_cell" >${line['name']}</div>
+                                <div class="act_as_cell" >${_(line['name'])}</div>
                             %endif
                         </div>
-                        <div class="act_as_cell amount" >${line['balance']}</div>
+                        <div class="act_as_cell amount" >${_(line['balance'])}</div>
                     %else:
                         %if bold: 
-                            <div class="act_as_cell" ><b>${line['name']}</b></div>
+                            <div class="act_as_cell" ><b>${_(line['name'])}</b></div>
                         %else:
-                            <div class="act_as_cell" >${line['name']}</div>
+                            <div class="act_as_cell" >${_(line['name'])}</div>
                         %endif
-                        <div class="act_as_cell amount" >${line['balance']}</div>
+                        <div class="act_as_cell amount" >${_(line['balance'])}</div>
                     %endif
                 %endif
                 %if data['form']['enable_filter'] == 1 and not data['form']['debit_credit']:
                     %if line['level'] > 0:
                         <div class="act_as_cell" style="padding-left:${line['level']*10}px">
                             %if bold: 
-                                <div class="act_as_cell" ><b>${line['name']}</b></div>
+                                <div class="act_as_cell" ><b>${_(line['name'])}</b></div>
                             %else:
-                                <div class="act_as_cell" >${line['name']}</div>
+                                <div class="act_as_cell" >${_(line['name'])}</div>
                             %endif
                         </div>
-                        <div class="act_as_cell amount" >${line['balance']}</div>                            
-                        <div class="act_as_cell amount" >${line['balance_cmp']}</div>   
+                        <div class="act_as_cell amount" >${_(line['balance'])}</div>                            
+                        <div class="act_as_cell amount" >${_(line['balance_cmp'])}</div>   
                     %else:
                         %if bold: 
-                            <div class="act_as_cell" ><b>${line['name']}</b></div>
+                            <div class="act_as_cell" ><b>${_(line['name'])}</b></div>
                         %else:
-                            <div class="act_as_cell">${line['name']}</div>
+                            <div class="act_as_cell">${_(line['name'])}</div>
                         %endif
-                        <div class="act_as_cell amount" >${line['balance']}</div>
-                        <div class="act_as_cell amount" >${line['balance_cmp']}</div> 
+                        <div class="act_as_cell amount" >${_(line['balance'])}</div>
+                        <div class="act_as_cell amount" >${_(line['balance_cmp'])}</div> 
                     %endif
                 %endif 
             </div>
