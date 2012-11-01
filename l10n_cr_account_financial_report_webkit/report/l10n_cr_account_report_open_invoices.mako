@@ -113,7 +113,7 @@
                                 ## date
                                 <div class="act_as_cell first_column" style="width: 50px;">${_('Date')}</div>
                                 ## due date
-                                <div class="act_as_cell first_column" style="width: 50px;">${_('Due Date')}</div>
+                                <div class="act_as_cell" style="width: 55px;">${_('Due Date')}</div>
                                 ## period
                                 <div class="act_as_cell" style="width: 70px;">${_('Period')}</div>
                                 ## move
@@ -123,7 +123,7 @@
                                 ## partner
                                 <!--div class="act_as_cell" style="width: 60px;">${_('Partner')}</div-->
                                 ## label
-                                <div class="act_as_cell" style="width: 220px;">${_('Label')}</div>
+                                <div class="act_as_cell" style="width: 215px;">${_('Label')}</div>
                                 ## reconcile
                                 <div class="act_as_cell" style="width: 70px;">${_('Rec.')}</div>
                                  ## Invoices
