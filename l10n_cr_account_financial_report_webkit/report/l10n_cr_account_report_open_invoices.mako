@@ -112,6 +112,8 @@
                             <div class="act_as_row labels">
                                 ## date
                                 <div class="act_as_cell first_column" style="width: 50px;">${_('Date')}</div>
+                                ## due date
+                                <div class="act_as_cell first_column" style="width: 50px;">${_('Due Date')}</div>
                                 ## period
                                 <div class="act_as_cell" style="width: 70px;">${_('Period')}</div>
                                 ## move
@@ -121,7 +123,7 @@
                                 ## partner
                                 <!--div class="act_as_cell" style="width: 60px;">${_('Partner')}</div-->
                                 ## label
-                                <div class="act_as_cell" style="width: 270px;">${_('Label')}</div>
+                                <div class="act_as_cell" style="width: 220px;">${_('Label')}</div>
                                 ## reconcile
                                 <div class="act_as_cell" style="width: 70px;">${_('Rec.')}</div>
                                  ## Invoices
@@ -182,6 +184,8 @@
                                     <div class="act_as_row lines">
                                       ## date
                                       <div class="act_as_cell first_column">${formatLang(line.get('ldate') or '', date=True)}</div>
+                                      ## date
+                                      <div class="act_as_cell">${formatLang(line.get('date_maturity') or '', date=True)}</div>
                                       ## period
                                       <div class="act_as_cell">${line.get('period_code') or ''}</div>
                                       ## move
