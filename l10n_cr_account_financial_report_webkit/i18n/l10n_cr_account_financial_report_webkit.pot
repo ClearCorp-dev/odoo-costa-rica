@@ -105,6 +105,11 @@ msgid "Due Date"
 msgstr ""
 
 #. module: l10n_cr_account_financial_report_webkit
+#: report:addons/l10n_cr_account_financial_report_webkit/report/l10n_cr_account_report_open_invoices.mako:166
+msgid "Due Date"
+msgstr ""
+
+#. module: l10n_cr_account_financial_report_webkit
 #: view:account.balances:0
 msgid "Print only"
 msgstr ""
