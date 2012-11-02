@@ -27,6 +27,7 @@ from mt940_parser import BACParser
 import re
 import osv
 import logging
+import datetime
 
 bt = models.mem_bank_transaction
 logger = logging.getLogger('bac_mt940')
@@ -95,15 +96,14 @@ class statement(models.mem_bank_statement):
             # The wizard doesn't check for sort code
             self.local_account = record['sortcode'] + record['accnum']
         def _statement_number():
-            #self.id = '-'.join([self.id, self.local_account, record['statementnr']])
             self.id = self.local_account + '-' + record['statementnr']
         def _opening_balance():
             self.start_balance = record2float(record,'startingbalance')
             self.local_currency = record['currencycode']
         def _closing_balance():
             self.end_balance = record2float(record, 'endingbalance')
-            self.date = record['bookingdate']
-            dateString = record['bookingdate'].strftime("%Y-%m-%d")
+            today = datetime.datetime.today() 
+            dateString = today.strftime("%Y-%m-%d %H:%M:%S")
             self.id = dateString + '-' + self.id
         def _transaction_new():
             self.transactions.append(transaction(record))
@@ -141,9 +141,7 @@ class statement(models.mem_bank_statement):
         else:
             transaction = self.transactions[-1]
             #transaction.id = ','.join([record[k] for k in ['infoline{0}'.format(i) for i in range(2,5)] if record.has_key(k)])
-            transaction.id = record['infoline1']
-
-    
+            transaction.id = record['infoline1']    
 
 def raise_error(message, line):
     raise osv.osv.except_osv(_('Import error'),
@@ -159,8 +157,11 @@ class parser_bac_mt940(models.parser):
             ''')
 
     def parse(self, cr, data):
-        result = []
+        result = []        
         parser = BACParser()
+        list_record = []
+        inversion_colocada = 0
+        
         # Split into statements
         statements = [st for st in re.split('[\r\n]*(?=:20:)', data)]
         # Split by records
@@ -168,19 +169,83 @@ class parser_bac_mt940(models.parser):
 
         for statement_lines in statement_list:
             stmnt = statement()
-            records = [parser.parse_record(record) for record in statement_lines]
-            [stmnt.import_record(r) for r in records if r is not None]
+            
+            """EXTRACCION DE DATOS """
+            for record in statement_lines:               
+                records = parser.parse_record(record)
 
+                if records is not None:
+                    ############START PAGO CAPITAL INVERSION
+                    if records['recordid'] == '60F':
+                        start_balance = float(records['startingbalance'])
+                    if records['recordid'] == '61':
+                        amount = float(records['amount'])
+                    if records['recordid'] == '86' and records['infoline1'] == 'PAGO CAPITAL INVERSION':
+                        start_amount = amount
+                        start_balance += amount #con la suma ya realizada.
+                    ############END PAGO CAPITAL INVERSION
+                    
+                    ############START INVERSION COLOCADA
+                    if records['recordid'] == '86':
+                        cad = records['infoline1']
+                        if cad.find('INVERSION COLOCADA') > 0:
+                            inversion_colocada = amount
+                            
+                    if records['recordid'] == '62F':                                         
+                        ending_balance = (inversion_colocada + float(records['endingbalance']))
 
-            if stmnt.is_valid():
-                result.append(stmnt)
-            else:
-                logger.info("Invalid Statement:")
-                logger.info(records[0])
-                logger.info(records[1])
-                logger.info(records[2])
-                logger.info(records[3])
-                logger.info(records[4])
+            if records is not None:            
+                """ACTUALIZACION DE DATOS """
+                for record in statement_lines:   
+                    if record is not None:             
+                        records = parser.parse_record(record)    
+                
+                        if (records['recordid'] == '60F'):
+                            dic = {'startingbalance':start_balance}
+                            records.update(dic)
+                        
+                        if (records['recordid'] == '62F'):
+                            dic = {'endingbalance': ending_balance}
+                            records.update(dic)
+
+                        if (records['recordid'] == '64'):
+                            dic = {'endingbalance': ending_balance}
+                            records.update(dic)
+                            
+                        #SI LA LINEA NO ES INVERSION COLOCADA O PAGO CAPITAL INVERSION, SE AGREGA A LA LISTA
+                        #PAGO_CAPITAL
+                        if (records['recordid'] == '86'):
+                            cad = records['infoline1']
+                            
+                            if (cad != "PAGO CAPITAL INVERSION") and (cad.find("INVERSION COLOCADA") < 0): 
+                                list_record.append(records)
+                                
+                        if (records['recordid'] == '61'):
+                            try:
+                                if float(records['amount']) != start_amount and float(records['amount']) != inversion_colocada:
+                                    list_record.append(records)
+                            except:
+                                list_record.append(records)
+                        #####################################################################
+                        
+                        if (records['recordid'] != '61' and records['recordid'] != '86' ):
+                            list_record.append(records)                
+                
+                [stmnt.import_record(r) for r in list_record if r is not None]
+                
+                if stmnt.is_valid():
+                    result.append(stmnt)
+                    list_record = []
+                    inversion_colocada = 0
+                    start_balance = 0
+                else:
+                    logger.info("Invalid Statement:")
+                    logger.info(records[0])
+                    logger.info(records[1])
+                    logger.info(records[2])
+                    logger.info(records[3])
+                    logger.info(records[4])
+                    list_record = []
 
         return result
 
