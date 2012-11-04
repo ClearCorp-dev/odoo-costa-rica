@@ -29,7 +29,7 @@ class AccountingReportLibrary(orm.Model):
     _name =  "accounting.report.library"
     _description = "Library for Accounting Reports"
         
-    def get_move_lines(self, cr, uid, account_ids, filter_type='', filter_data=None, fiscalyear=None, target_move='all', unreconcile = False, historic_strict=False context=None):
+    def get_move_lines(self, cr, uid, account_ids, filter_type='', filter_data=None, fiscalyear=None, target_move='all', unreconcile = False, historic_strict=False, context=None):
         ''' Get the move lines of the accounts provided and filtered.
         Arguments:
         'account_ids': List of accounts ids.
