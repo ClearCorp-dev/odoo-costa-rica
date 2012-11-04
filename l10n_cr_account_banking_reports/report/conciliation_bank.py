@@ -247,7 +247,7 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
         move_obj = self.pool.get('account.move')
         move_line_obj = self.pool.get('account.move.line')
         
-        unreconciled_move_lines = accounting_report_library_obj.get_move_lines(cr, uid, transit_account_ids, filter_type=filter_type, filter_data=filter_data, fiscalyear=fiscalyear, target_move=target_move, unreconcile = True, context=context)        
+        unreconciled_move_lines = accounting_report_library_obj.get_move_lines(cr, uid, transit_account_ids, filter_type=filter_type, filter_data=filter_data, fiscalyear=fiscalyear, target_move=target_move, unreconcile = True, context=context)
         
         result_move_lines = {
             'credits_to_reconcile' :     [],

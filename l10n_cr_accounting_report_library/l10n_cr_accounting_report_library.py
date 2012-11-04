@@ -29,7 +29,7 @@ class AccountingReportLibrary(orm.Model):
     _name =  "accounting.report.library"
     _description = "Library for Accounting Reports"
         
-    def get_move_lines(self, cr, uid, account_ids, filter_type='', filter_data=None, fiscalyear=None, target_move='all', unreconcile = False, context=None):
+    def get_move_lines(self, cr, uid, account_ids, filter_type='', filter_data=None, fiscalyear=None, target_move='all', unreconcile = False, historic_strict=False context=None):
         ''' Get the move lines of the accounts provided and filtered.
         Arguments:
         'account_ids': List of accounts ids.
@@ -39,6 +39,7 @@ class AccountingReportLibrary(orm.Model):
         'fiscalyear':  Browse record of the fiscal year selected.
         'target_move': Target moves of the report, possibles values: 'all' or 'posted'.
         'unreconcile': If True then get the move lines unreconciled.
+        'historic_strict': Used when unreconcile = True, forces to include move lines that where not reconciled at the end date of the filter but are now.
          Armando was here.
         '''
         account_obj = self.pool.get('account.account')
@@ -77,30 +78,36 @@ class AccountingReportLibrary(orm.Model):
                 elif filter_type == 'filter_date':
                     date_stop = filter_data[1]
                     move_line_ids = move_line_obj.search(cr, uid, [('account_id', 'in', account_ids), ('date', '<=', date_stop), ('reconcile_id', '=', False)], context=context)
-                    move_line_ids = move_line_ids + self.get_move_lines_unconciled(cr, uid, account_ids, filter_type=filter_type, filter_data=filter_data, context=context)
+                    if historic_strict:
+                        move_line_ids = move_line_ids + self.get_move_lines_unconciled(cr, uid, account_ids, filter_type=filter_type, filter_data=filter_data, context=context)
                 elif filter_type == 'filter_period':
                     periods_ids = self.pool.get('account.period').search(cr, uid, [('date_stop', '<=', filter_data[1].date_stop)])
                     move_line_ids = move_line_obj.search(cr, uid, [('account_id', 'in', account_ids), ('period_id.id', 'in', periods_ids), ('reconcile_id', '=', False)], context=context)
-                    move_line_ids = move_line_ids + self.get_move_lines_unconciled(cr, uid, account_ids, filter_type=filter_type, filter_data=filter_data, context=context)
+                    if historic_strict:
+                        move_line_ids = move_line_ids + self.get_move_lines_unconciled(cr, uid, account_ids, filter_type=filter_type, filter_data=filter_data, context=context)
                 elif filter_type == '' and fiscalyear != None:
                     date_stop = fiscalyear.date_stop
                     move_line_ids = move_line_obj.search(cr, uid, [('account_id', 'in', account_ids), ('date', '<=', date_stop), ('reconcile_id', '=', False)], context=context)
-                    move_line_ids = move_line_ids + self.get_move_lines_unconciled(cr, uid, account_ids, fiscalyear=fiscalyear, context=context)
+                    if historic_strict:
+                        move_line_ids = move_line_ids + self.get_move_lines_unconciled(cr, uid, account_ids, fiscalyear=fiscalyear, context=context)
             elif target_move == 'posted':
                 if filter_type == '' and filter_data == None and fiscalyear == None:
                     move_line_ids = move_line_obj.search(cr, uid, [('account_id', 'in', account_ids), ('move_id.state', '=', 'posted'), ('reconcile_id', '=', False)], context=context)
                 elif filter_type == 'filter_date':
                     date_stop = filter_data[1]
                     move_line_ids = move_line_obj.search(cr, uid, [('account_id', 'in', account_ids), ('date', '<=', date_stop), ('move_id.state', '=', 'posted'), ('reconcile_id', '=', False)], context=context)
-                    move_line_ids = move_line_ids + self.get_move_lines_unconciled(cr, uid, account_ids, filter_type=filter_type, filter_data=filter_data, context=context)
+                    if historic_strict:
+                        move_line_ids = move_line_ids + self.get_move_lines_unconciled(cr, uid, account_ids, filter_type=filter_type, filter_data=filter_data, context=context)
                 elif filter_type == 'filter_period':
                     periods_ids = self.pool.get('account.period').search(cr, uid, [('date_stop', '<=', filter_data[1].date_stop)])
                     move_line_ids = move_line_obj.search(cr, uid, [('account_id', 'in', account_ids), ('period_id.id', 'in', periods_ids), ('move_id.state', '=', 'posted'), ('reconcile_id', '=', False)], context=context)
-                    move_line_ids = move_line_ids + self.get_move_lines_unconciled(cr, uid, account_ids, filter_type=filter_type, filter_data=filter_data, context=context)
+                    if historic_strict:
+                        move_line_ids = move_line_ids + self.get_move_lines_unconciled(cr, uid, account_ids, filter_type=filter_type, filter_data=filter_data, context=context)
                 elif filter_type == '' and fiscalyear != None:
                     date_stop = fiscalyear.date_stop
                     move_line_ids = move_line_obj.search(cr, uid, [('account_id', 'in', account_ids), ('date', '<=', date_stop), ('move_id.state', '=', 'posted'), ('reconcile_id', '=', False)], context=context)
-                    move_line_ids = move_line_ids + self.get_move_lines_unconciled(cr, uid, account_ids, fiscalyear=fiscalyear, context=context)
+                    if historic_strict:
+                        move_line_ids = move_line_ids + self.get_move_lines_unconciled(cr, uid, account_ids, fiscalyear=fiscalyear, context=context)
             
         move_lines = move_line_ids and move_line_obj.browse(cr, uid, move_line_ids) or []
         
