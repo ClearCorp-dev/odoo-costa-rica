@@ -3,3 +3,5 @@ import l10n_cr_open_invoices
 import l10n_cr_partner_balance
 import account_bank_balances
 import l10n_cr_account_financial_report
+import l10n_cr_account_report_trial_balance
+
