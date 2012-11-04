@@ -64,7 +64,15 @@
              <field name="name">Account Financial Report</field>
              <field name="report_rml">l10n_cr_account_financial_report_webkit/report/l10n_cr_account_financial_report.mako</field>
              <field name="report_file">l10n_cr_account_financial_report_webkit/report/l10n_cr_account_financial_report.mako</field>
-         </record>
-       
+         </record>         
+              
+         <report auto="False"
+            id="account.account_report_trial_balance_webkit"
+            model="account.account"
+            name="account_report_trial_balance_webkit"
+            file="l10n_cr_account_financial_report_webkit/report/account_report_trial_balance.mako"
+            string="Trial Balance Webkit"
+            report_type="webkit"/>
+                            
     </data>
 </openerp>
