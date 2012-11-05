@@ -1,0 +1,1 @@
+/home/ronald/Development/openerp/openerp-costa-rica/features/6.1-l10n_cr_income_statement/l10n_cr_income_statement_report/i18n/es_CR.po
