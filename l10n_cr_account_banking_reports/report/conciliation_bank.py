@@ -153,7 +153,7 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
         filters = {}
 
         account_obj = self.pool.get('account.account')
-        accounting_report_library_obj = self.pool.get('accounting.report.library')
+        account_webkit_report_library_obj = self.pool.get('account.webkit.report.library')
         parent_account = account_obj.browse(cr, uid, parent_account_id)
         child_account_ids = account_obj.search(cr, uid, [('parent_id','=',parent_account_id)])
         child_accounts = child_account_ids and account_obj.browse(cr, uid, child_account_ids) or False
@@ -199,7 +199,7 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
         accounting_total = 0.0
         bank_total = 0.0
         
-        #Filters for the move lines to use in get_balance 
+        #Filters for the move lines to use in get_account_balance 
         filters['fiscalyear'] = fiscalyear.id
         if filter_type == 'filter_date':
             filters['date_from'] = filter_data[0] 
@@ -214,23 +214,23 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
         balance_query_filter = ''
         if account_is_foreign:
             
-            bank_balance = accounting_report_library_obj.get_balance(cr,
+            bank_balance = account_webkit_report_library_obj.get_account_balance(cr,
                                                  uid,
                                                  [reconciled_account.id],
                                                  ['balance'],
                                                  query=balance_query_filter, context=filters)[reconciled_account.id]['balance']
-            accounting_balance = accounting_report_library_obj.get_balance(cr,
+            accounting_balance = account_webkit_report_library_obj.get_account_balance(cr,
                                                        uid,
                                                        [parent_account_id],
                                                        ['balance'],
                                                        query=balance_query_filter, context=filters)[parent_account_id]['balance']
         else:
-            bank_balance = accounting_report_library_obj.get_balance(cr,
+            bank_balance = account_webkit_report_library_obj.get_account_balance(cr,
                                                  uid,
                                                  [reconciled_account.id],
                                                  ['balance'],
                                                  query=balance_query_filter, context=filters)[reconciled_account.id]['balance']
-            accounting_balance = accounting_report_library_obj.get_balance(cr,
+            accounting_balance = account_webkit_report_library_obj.get_account_balance(cr,
                                                        uid,
                                                        [parent_account_id],
                                                        ['balance'],
@@ -247,7 +247,7 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
         move_obj = self.pool.get('account.move')
         move_line_obj = self.pool.get('account.move.line')
         
-        unreconciled_move_lines = accounting_report_library_obj.get_move_lines(cr, uid, transit_account_ids, filter_type=filter_type, filter_data=filter_data, fiscalyear=fiscalyear, target_move=target_move, unreconcile = True, context=context)
+        unreconciled_move_lines = account_webkit_report_library_obj.get_move_lines(cr, uid, transit_account_ids, filter_type=filter_type, filter_data=filter_data, fiscalyear=fiscalyear, target_move=target_move, unreconcile = True, context=context)
         
         result_move_lines = {
             'credits_to_reconcile' :     [],
