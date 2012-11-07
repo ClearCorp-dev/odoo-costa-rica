@@ -138,7 +138,7 @@ class IncomeStatementReport(TrialBalanceWebkit):
             balance = account_webkit_report_library_obj.get_account_balance(cr, uid, [account.id], ['balance'], fiscal_year_id=filter.id)
         else:
             balance = account_webkit_report_library_obj.get_account_balance(cr, uid, [account.id], ['balance'], start_period_id=filter.id, end_period_id=filter.id)
-        return balance
+        return balance[account.id]['balance']
         
 
 HeaderFooterTextWebKitParser(
