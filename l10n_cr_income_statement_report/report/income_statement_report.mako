@@ -57,7 +57,7 @@
                 <%
                     total_period_calculate += get_balance(cr, uid, account, start_period)
                     total_last_period_calculate += get_balance(cr, uid, account, last_period)
-                    total_fiscalyear_calculate += get_balance(cr, uid, account, fiscalyear)
+                    total_fiscalyear_calculate += get_balance(cr, uid, account, fiscalyear, is_year=True)
                     #CORREGIR, QUITAR EL +1
                     total_variation_calculate += (get_balance(cr, uid, account, start_period) - get_balance(cr, uid, account, last_period)) + 1
                 %>
@@ -92,8 +92,8 @@
                             <div class="act_as_cell amount" >${formatLang((get_balance(cr, uid, account, start_period) * 100) / total_period_calculate)}</div>
                             <div class="act_as_cell amount" >${formatLang(get_balance(cr, uid, account, last_period))}</div>
                             <div class="act_as_cell amount" >${formatLang((get_balance(cr, uid, account, last_period) * 100) / total_last_period_calculate)}</div>
-                            <div class="act_as_cell amount" >${formatLang(get_balance(cr, uid, account, fiscalyear))}</div>
-                            <div class="act_as_cell amount" >${formatLang((get_balance(cr, uid, account, fiscalyear) * 100) / total_fiscalyear_calculate)}</div>
+                            <div class="act_as_cell amount" >${formatLang(get_balance(cr, uid, account, fiscalyear, is_year=True))}</div>
+                            <div class="act_as_cell amount" >${formatLang((get_balance(cr, uid, account, fiscalyear, is_year=True) * 100) / total_fiscalyear_calculate)}</div>
                             <div class="act_as_cell amount" >${formatLang((get_balance(cr, uid, account, start_period) - get_balance(cr, uid, account, last_period)))}</div>
                             <div class="act_as_cell amount" >${formatLang(((get_balance(cr, uid, account, start_period) - get_balance(cr, uid, account, last_period)) * 100) / total_variation_calculate)}</div>
                         </div>
@@ -102,8 +102,8 @@
                             subtotal_percentage_period += (get_balance(cr, uid, account, start_period) * 100) / total_period_calculate
                             subtotal_last_period += get_balance(cr, uid, account, last_period)
                             subtotal_percentage_last_period += (get_balance(cr, uid, account, last_period) * 100) / total_last_period_calculate
-                            subtotal_fiscalyear += get_balance(cr, uid, account, fiscalyear)
-                            subtotal_percentage_fiscalyear += (get_balance(cr, uid, account, fiscalyear) * 100) / total_fiscalyear_calculate
+                            subtotal_fiscalyear += get_balance(cr, uid, account, fiscalyear, is_year=True)
+                            subtotal_percentage_fiscalyear += (get_balance(cr, uid, account, fiscalyear, is_year=True) * 100) / total_fiscalyear_calculate
                             subtotal_variation += get_balance(cr, uid, account, start_period) - get_balance(cr, uid, account, last_period)
                             subtotal_percentage_variation += ((get_balance(cr, uid, account, start_period) - get_balance(cr, uid, account, last_period)) * 100) / total_variation_calculate
                         %>

@@ -132,8 +132,12 @@ class IncomeStatementReport(TrialBalanceWebkit):
         fiscalyear = start_period.fiscalyear_id
         return fiscalyear
         
-    def get_balance(self, cr, uid, account, filter):
-        balance = 1000
+    def get_balance(self, cr, uid, account, filter, is_year=False):
+        account_webkit_report_library_obj = self.pool.get('account.webkit.report.library')
+        if is_year:
+            balance = account_webkit_report_library_obj.get_account_balance(cr, uid, account, ['balance'], fiscal_year_id=filter)
+        else:
+            balance = account_webkit_report_library_obj.get_account_balance(cr, uid, account, ['balance'], start_period_id=filter, end_period_id=filter)
         return balance
         
 
