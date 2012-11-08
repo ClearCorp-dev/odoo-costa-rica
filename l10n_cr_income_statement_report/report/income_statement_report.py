@@ -64,8 +64,9 @@ class IncomeStatementReport(TrialBalanceWebkit):
                 period_select = current_period
         return period_select
     
-    def get_last_period(self, cr, uid, start_period):
+    def get_last_period(self, cr, uid, start_period_id):
         account_period_obj = self.pool.get('account.period')
+        start_period = account_period_obj.browse(cr, uid, start_period_id)
         period_ids = account_period_obj.search(cr, uid, [('fiscalyear_id', '=', start_period.fiscalyear_id.id), ('special', '=', False)])
         periods = account_period_obj.browse(cr, uid, period_ids)
         period_select = start_period
