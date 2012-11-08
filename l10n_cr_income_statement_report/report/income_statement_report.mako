@@ -42,27 +42,27 @@
                     income_total_fiscalyear = balance_data['total_income_balances']['fiscal_year']
                     income_total_variation = income_total_period - income_total_last_period
                     income_total_percentage_period = 100
-                    income_total_percentage_last_period = 100 * income_total_last_period / (income_total_period != 0 and income_total_period or 0)
-                    income_total_percentage_fiscalyear = 100 * income_total_fiscalyear / (income_total_period != 0 and income_total_period or 0)
-                    income_total_percentage_variation = 100 * income_total_variation / (income_total_period != 0 and income_total_period or 0)
+                    income_total_percentage_last_period = income_total_period != 0 and (100 * income_total_last_period / income_total_period) or 0
+                    income_total_percentage_fiscalyear = income_total_period != 0 and (100 * income_total_fiscalyear / income_total_period) or 0
+                    income_total_percentage_variation = income_total_last_period != 0 and (100 * income_total_variation / income_total_last_period) or 0
                     
                     expense_total_period = balance_data['total_expense_balances']['period']
                     expense_total_last_period = balance_data['total_expense_balances']['last_period']
                     expense_total_fiscalyear = balance_data['total_expense_balances']['fiscal_year']
                     expense_total_variation = expense_total_period - expense_total_last_period
-                    expense_total_percentage_period = 100 * expense_total_period / (income_total_period != 0 and income_total_period or 0)
-                    expense_total_percentage_last_period = 100 * expense_total_last_period / (income_total_last_period != 0 and income_total_last_period or 0)
-                    expense_total_percentage_fiscalyear = 100 * expense_total_fiscalyear / (income_total_fiscalyear != 0 and income_total_fiscalyear or 0)
-                    expense_total_percentage_variation = 100 * expense_total_variation / (expense_total_period != 0 and expense_total_period or 0)
+                    expense_total_percentage_period = income_total_period != 0 and (100 * expense_total_period / income_total_period) or 0
+                    expense_total_percentage_last_period = income_total_last_period != 0 and (100 * expense_total_last_period / income_total_last_period) or 0
+                    expense_total_percentage_fiscalyear = income_total_fiscalyear != 0 and (100 * expense_total_fiscalyear / income_total_fiscalyear) or 0
+                    expense_total_percentage_variation = income_total_last_period != 0 and (100 * expense_total_variation / income_total_last_period) or 0
                     
                     total_period = income_total_period + expense_total_period
                     total_last_period = income_total_last_period + expense_total_last_period
                     total_fiscalyear = income_total_fiscalyear + expense_total_fiscalyear
                     total_variation = total_period - total_last_period
-                    total_percentage_period = 100 * total_period / (income_total_period != 0 and income_total_period or 0)
-                    total_percentage_last_period = 100 * total_last_period / (income_total_last_period != 0 and income_total_last_period or 0)
-                    total_percentage_fiscalyear = 100 * total_fiscalyear / (income_total_fiscalyear != 0 and income_total_fiscalyear or 0)
-                    total_percentage_variation = 100 * total_variation / (total_period != 0 and total_period or 0)
+                    total_percentage_period = income_total_period != 0 and (100 * total_period / income_total_period) or 0
+                    total_percentage_last_period = income_total_last_period != 0 and (100 * total_last_period / income_total_last_period) or 0
+                    total_percentage_fiscalyear = income_total_fiscalyear != 0 and 100 * total_fiscalyear / income_total_fiscalyear) or 0
+                    total_percentage_variation = income_total_last_period != 0 and (100 * total_variation / income_total_last_period) or 0
                 %>
                 %for account in balance_data['income_accounts']:
                     <%
@@ -70,10 +70,10 @@
                         account_total_last_period = balance_data['income_last_period_balances'][account.id]['balance']
                         account_total_fiscalyear = balance_data['income_fiscal_year_balances'][account.id]['balance']
                         account_total_variation = account_total_period - account_total_last_period
-                        account_total_percentage_period = 100 * account_total_period / (income_total_period != 0 and income_total_period or 0)
-                        account_total_percentage_last_period = 100 * account_total_last_period / (income_total_last_period != 0 and income_total_last_period or 0)
-                        account_total_percentage_fiscalyear = 100 * account_total_fiscalyear / (income_total_fiscalyear != 0 and income_total_fiscalyear or 0)
-                        account_total_percentage_variation = 100 * account_total_variation / (account_total_period != 0 and account_total_period or 0)
+                        account_total_percentage_period = income_total_period != 0 and (100 * account_total_period / income_total_period) or 0
+                        account_total_percentage_last_period = income_total_last_period != 0 and (100 * account_total_last_period / income_total_last_period) or 0
+                        account_total_percentage_fiscalyear = income_total_fiscalyear != 0 and (100 * account_total_fiscalyear / income_total_fiscalyear) or 0
+                        account_total_percentage_variation = account_total_last_period != 0 and (100 * account_total_variation / account_total_last_period) or 0
                     %>
                     <div class="act_as_row lines">
                         %if account.level > 0:
@@ -120,10 +120,10 @@
                         account_total_last_period = balance_data['expense_last_period_balances'][account.id]['balance']
                         account_total_fiscalyear = balance_data['expense_fiscal_year_balances'][account.id]['balance']
                         account_total_variation = account_total_period - account_total_last_period
-                        account_total_percentage_period = 100 * account_total_period / (income_total_period != 0 and income_total_period or 0)
-                        account_total_percentage_last_period = 100 * account_total_last_period / (income_total_last_period != 0 and income_total_last_period or 0)
-                        account_total_percentage_fiscalyear = 100 * account_total_fiscalyear / (income_total_fiscalyear != 0 and income_total_fiscalyear or 0)
-                        account_total_percentage_variation = 100 * account_total_variation / (account_total_period != 0 and account_total_period or 0)
+                        account_total_percentage_period = income_total_period != 0 and (100 * account_total_period / income_total_period) or 0
+                        account_total_percentage_last_period = income_total_last_period != 0 and (100 * account_total_last_period / income_total_last_period) or 0
+                        account_total_percentage_fiscalyear = income_total_fiscalyear != 0 and (100 * account_total_fiscalyear / income_total_fiscalyear) or 0
+                        account_total_percentage_variation = account_total_last_period != 0 and (100 * account_total_variation / account_total_last_period) or 0
                     %>
                     <div class="act_as_row lines">
                         %if account.level > 0:
