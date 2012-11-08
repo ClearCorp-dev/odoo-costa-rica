@@ -66,8 +66,6 @@ class IncomeStatementReport(TrialBalanceWebkit):
     
     def get_last_period(self, cr, uid, start_period):
         account_period_obj = self.pool.get('account.period')
-        #REMOVE: debug
-        print start_period, start_period.fiscalyear_id
         period_ids = account_period_obj.search(cr, uid, [('fiscalyear_id', '=', start_period.fiscalyear_id.id), ('special', '=', False)])
         periods = account_period_obj.browse(cr, uid, period_ids)
         period_select = start_period
@@ -99,7 +97,7 @@ class IncomeStatementReport(TrialBalanceWebkit):
         #TODO: remove dependency of c2c
         account_chart_id = self._get_form_param('chart_account_id', data)
         
-        account_chart = account_account_obj.browse(cr, uid, account_chart_id)[0]
+        account_chart = account_account_obj.browse(cr, uid, account_chart_id)
         company_id = account_chart['company_id'].id
         category_account_ids = library_obj.get_category_accounts(cr, uid, company_id)
         period = self._get_form_param('period_from', data)
