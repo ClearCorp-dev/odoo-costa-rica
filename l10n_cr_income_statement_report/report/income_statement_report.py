@@ -90,25 +90,26 @@ class IncomeStatementReport(TrialBalanceWebkit):
         fiscalyear = start_period.fiscalyear_id
         return fiscalyear
      
-    def get_data(self, cr, uid, context={}):
+    def get_data(self, cr, uid, data, context={}):
         account_account_obj = self.pool.get('account.account')
+        account_period_obj = self.pool.get('account.period')
         library_obj = self.pool.get('account.webkit.report.library')
         
-        #from account/report/common_report_header.py
-        account_chart_id = self._get_account
+        #TODO: remove dependency of c2c
+        account_chart_id = self._get_form_param('chart_account_id', data)
         
         account_chart = account_account_obj.browse(cr, uid, account_chart_id)
         company_id = account_chart['company_id'].id
         category_account_ids = library_obj.get_category_accounts(cr, uid, company_id)
-        period = self._get_form_param('period_from', data)
+        period = account_period_obj.browse(cr, uid, self._get_form_param('period_from', data))
         last_period = self.get_last_period(cr, uid, period)
         fiscal_year = self.get_fiscalyear(cr, uid, period)
         
         #build accounts list
         income_accounts = [category_account_ids['income']]
-        income_accounts.append(library_obj.get_account_child_ids(cr, uid, category_account_ids['income']))
+        income_accounts += (library_obj.get_account_child_ids(cr, uid, category_account_ids['income']))
         expense_accounts = [category_account_ids['expense']]
-        expense_accounts.append(library_obj.get_account_child_ids(cr, uid, category_account_ids['expense']))
+        expense_accounts += (library_obj.get_account_child_ids(cr, uid, category_account_ids['expense']))
         
         #build account_ids list
         income_account_ids = []
