@@ -100,9 +100,9 @@ class IncomeStatementReport(TrialBalanceWebkit):
         account_chart = account_account_obj.browse(cr, uid, account_chart_id)
         company_id = account_chart['company_id'].id
         category_account_ids = library_obj.get_category_accounts(cr, uid, company_id)
-        period = self._get_form_param('period_from', data)
-        last_period = self.get_last_period(cr, uid, period.id)
-        fiscal_year = self.get_fiscalyear(cr, uid, period.id)
+        period_id = self._get_form_param('period_from', data)
+        last_period = self.get_last_period(cr, uid, period_id)
+        fiscal_year = self.get_fiscalyear(cr, uid, period_id)
         
         #build accounts list
         income_accounts = [category_account_ids['income']]
