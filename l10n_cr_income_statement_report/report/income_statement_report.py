@@ -108,10 +108,8 @@ class IncomeStatementReport(TrialBalanceWebkit):
         #build accounts list
         income_accounts = [category_account_ids['income']]
         income_accounts += (library_obj.get_account_child_ids(cr, uid, category_account_ids['income']))
-        print 'income_accounts', income_accounts
         expense_accounts = [category_account_ids['expense']]
         expense_accounts += (library_obj.get_account_child_ids(cr, uid, category_account_ids['expense']))
-        print 'expense_accounts', expense_accounts
         
         #build account_ids list
         income_account_ids = []
@@ -120,10 +118,11 @@ class IncomeStatementReport(TrialBalanceWebkit):
             income_account_ids.append(account.id)
         for account in expense_accounts:
             expense_account_ids.append(account.id)
-        print income_account_ids
         
         #build balances
+        print 'income_period_balances:'
         income_period_balances =        library_obj.get_account_balance(cr, uid, income_account_ids,  ['balance'], start_period_id=period.id, end_period_id=period.id)
+        print 'expense_period_balances:'
         expense_period_balances =       library_obj.get_account_balance(cr, uid, expense_account_ids, ['balance'], start_period_id=period.id, end_period_id=period.id)
         income_last_period_balances =   library_obj.get_account_balance(cr, uid, income_account_ids,  ['balance'], start_period_id=last_period.id, end_period_id=last_period.id)
         expense_last_period_balances =  library_obj.get_account_balance(cr, uid, expense_account_ids, ['balance'], start_period_id=last_period.id, end_period_id=last_period.id)
