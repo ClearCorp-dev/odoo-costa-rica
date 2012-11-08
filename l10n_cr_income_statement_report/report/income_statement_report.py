@@ -67,7 +67,6 @@ class IncomeStatementReport(TrialBalanceWebkit):
     def get_last_period(self, cr, uid, start_period):
         print start_period
         print start_period.fiscalyear_id
-        print account_period_obj
         period_ids = account_period_obj.search(cr, uid, [('fiscalyear_id', '=', start_period.fiscalyear_id.id), ('special', '=', False)])
         periods = account_period_obj.browse(cr, uid, period_ids)
         period_select = start_period
