@@ -35,16 +35,24 @@
                     <div class="act_as_cell first_column" style="width: 100px;  vertical-align: right; align:right;">${_('%')}</div>
                 </div>
             </div>
+            
+            
             <div class="act_as_tbody">
+                
+                
                 <%
-                    #income_total_period = balance_data['total_income_balances']['period']
-                    #income_total_last_period = balance_data['total_income_balances']['last_period']
-                    #income_total_fiscalyear = balance_data['total_income_balances']['fiscal_year']
-                    #income_total_variation = income_total_period - income_total_last_period
-                    #income_total_percentage_period = 100
-                    #income_total_percentage_last_period = income_total_period != 0 and (100 * income_total_last_period / income_total_period) or 0
-                    #income_total_percentage_fiscalyear = income_total_period != 0 and (100 * income_total_fiscalyear / income_total_period) or 0
-                    #income_total_percentage_variation = income_total_last_period != 0 and (100 * income_total_variation / income_total_last_period) or 0
+                
+                
+                    income_total_period = balance_data['total_income_balances']['period']
+                    
+                    
+                    income_total_last_period = balance_data['total_income_balances']['last_period']
+                    income_total_fiscalyear = balance_data['total_income_balances']['fiscal_year']
+                    income_total_variation = income_total_period - income_total_last_period
+                    income_total_percentage_period = 100
+                    income_total_percentage_last_period = income_total_period != 0 and (100 * income_total_last_period / income_total_period) or 0
+                    income_total_percentage_fiscalyear = income_total_period != 0 and (100 * income_total_fiscalyear / income_total_period) or 0
+                    income_total_percentage_variation = income_total_last_period != 0 and (100 * income_total_variation / income_total_last_period) or 0
                     
                     expense_total_period = balance_data['total_expense_balances']['period']
                     expense_total_last_period = balance_data['total_expense_balances']['last_period']
