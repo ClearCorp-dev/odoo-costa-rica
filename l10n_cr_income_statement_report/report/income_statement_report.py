@@ -94,8 +94,8 @@ class IncomeStatementReport(TrialBalanceWebkit):
         account_account_obj = self.pool.get('account.account')
         library_obj = self.pool.get('account.webkit.report.library')
         
-        #from account/report/common_report_header.py
-        account_chart_id = self._get_account
+        #TODO: remove dependency of c2c
+        account_chart_id = self._get_form_param('chart_account_id', data)
         
         account_chart = account_account_obj.browse(cr, uid, account_chart_id)
         company_id = account_chart['company_id'].id
