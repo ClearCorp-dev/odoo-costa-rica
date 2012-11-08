@@ -107,7 +107,9 @@ class IncomeStatementReport(TrialBalanceWebkit):
         
         #build accounts list
         income_accounts = [category_account_ids['income']]
+        print income_accounts
         income_accounts += (library_obj.get_account_child_ids(cr, uid, category_account_ids['income']))
+        print income_accounts
         expense_accounts = [category_account_ids['expense']]
         expense_accounts += (library_obj.get_account_child_ids(cr, uid, category_account_ids['expense']))
         
