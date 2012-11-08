@@ -24,15 +24,15 @@
         <div class="act_as_table data_table">
             <div class="act_as_thead">
                 <div class="act_as_row labels no_wrap">
-                    <div class="act_as_cell first_column" style="width: 200px">${_('Name')}</div>
+                    <div class="act_as_cell first_column" style="width: 100%">${_('Name')}</div>
                     <div class="act_as_cell amount" style="width: 100px">${start_period.name}</div>
-                    <div class="act_as_cell amount" style="width: 30px">${_('%')}</div>
+                    <div class="act_as_cell amount" style="width: 35px">${_('%')}</div>
                     <div class="act_as_cell amount" style="width: 100px">${last_period.name}</div>
-                    <div class="act_as_cell amount" style="width: 30px">${_('%')}</div>
+                    <div class="act_as_cell amount" style="width: 35px">${_('%')}</div>
                     <div class="act_as_cell amount" style="width: 100px">${fiscalyear.name}</div>
-                    <div class="act_as_cell amount" style="width: 30px">${_('%')}</div>
+                    <div class="act_as_cell amount" style="width: 35px">${_('%')}</div>
                     <div class="act_as_cell amount" style="width: 100px">${_('Variation')}</div>
-                    <div class="act_as_cell last_column amount" style="width: 30px">${_('%')}</div>
+                    <div class="act_as_cell last_column amount" style="width: 35px">${_('%')}</div>
                 </div>
             </div>
             <div class="act_as_tbody">
