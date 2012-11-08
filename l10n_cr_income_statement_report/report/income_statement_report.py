@@ -90,7 +90,7 @@ class IncomeStatementReport(TrialBalanceWebkit):
         fiscalyear = start_period.fiscalyear_id
         return fiscalyear
      
-    def get_data(self, cr, uid, context={}):
+    def get_data(self, cr, uid, data, context={}):
         account_account_obj = self.pool.get('account.account')
         library_obj = self.pool.get('account.webkit.report.library')
         

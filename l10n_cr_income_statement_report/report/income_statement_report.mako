@@ -15,7 +15,7 @@
         <%
             last_period = get_last_period(cr, uid, start_period)
             fiscalyear = get_fiscalyear(cr, uid, start_period)
-            data = get_data(cr, uid)
+            balance_data = get_data(cr, uid, data)
         %>
         <div style="font-size: 20px; font-weight: bold; text-align: center;"> ${company.partner_id.name}</div>
         <div style="font-size: 25px; font-weight: bold; text-align: center;"> ${_('Income Statement Report')}</div>
@@ -37,18 +37,18 @@
             </div>
             <div class="act_as_tbody">
                 <%
-                    income_total_period = data['total_income_balances']['period']
-                    income_total_last_period = data['total_income_balances']['last_period']
-                    income_total_fiscalyear = data['total_income_balances']['fiscal_year']
+                    income_total_period = balance_data['total_income_balances']['period']
+                    income_total_last_period = balance_data['total_income_balances']['last_period']
+                    income_total_fiscalyear = balance_data['total_income_balances']['fiscal_year']
                     income_total_variation = income_total_period - income_total_last_period
                     income_total_percentage_period = 100
                     income_total_percentage_last_period = 100 * income_total_last_period / income_total_period
                     income_total_percentage_fiscalyear = 100 * income_total_fiscalyear / income_total_period
                     income_total_percentage_variation = 100 * income_total_variation / income_total_period
                     
-                    expense_total_period = data['total_expense_balances']['period']
-                    expense_total_last_period = data['total_expense_balances']['last_period']
-                    expense_total_fiscalyear = data['total_expense_balances']['fiscal_year']
+                    expense_total_period = balance_data['total_expense_balances']['period']
+                    expense_total_last_period = balance_data['total_expense_balances']['last_period']
+                    expense_total_fiscalyear = balance_data['total_expense_balances']['fiscal_year']
                     expense_total_variation = expense_total_period - expense_total_last_period
                     expense_total_percentage_period = 100 * expense_total_period / income_total_period
                     expense_total_percentage_last_period = 100 * expense_total_last_period / income_total_last_period
@@ -64,11 +64,11 @@
                     total_percentage_fiscalyear = 100 * total_fiscalyear / income_total_fiscalyear
                     total_percentage_variation = 100 * total_variation / total_period
                 %>
-                %for account in data['income_accounts']:
+                %for account in balance_data['income_accounts']:
                     <%
-                        account_total_period = data['income_period_balances'][account.id]['balance']
-                        account_total_last_period = data['income_last_period_balances'][account.id]['balance']
-                        account_total_fiscalyear = data['income_fiscal_year_balances'][account.id]['balance']
+                        account_total_period = balance_data['income_period_balances'][account.id]['balance']
+                        account_total_last_period = balance_data['income_last_period_balances'][account.id]['balance']
+                        account_total_fiscalyear = balance_data['income_fiscal_year_balances'][account.id]['balance']
                         account_total_variation = account_total_period - account_total_last_period
                         account_total_percentage_period = 100 * account_total_period / income_total_period
                         account_total_percentage_last_period = 100 * account_total_last_period / income_total_last_period
@@ -114,11 +114,11 @@
                 </div>
                 <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
                 
-                %for account in data['expense_accounts']:
+                %for account in balance_data['expense_accounts']:
                     <%
-                        account_total_period = data['expense_period_balances'][account.id]['balance']
-                        account_total_last_period = data['expense_last_period_balances'][account.id]['balance']
-                        account_total_fiscalyear = data['expense_fiscal_year_balances'][account.id]['balance']
+                        account_total_period = balance_data['expense_period_balances'][account.id]['balance']
+                        account_total_last_period = balance_data['expense_last_period_balances'][account.id]['balance']
+                        account_total_fiscalyear = balance_data['expense_fiscal_year_balances'][account.id]['balance']
                         account_total_variation = account_total_period - account_total_last_period
                         account_total_percentage_period = 100 * account_total_period / income_total_period
                         account_total_percentage_last_period = 100 * account_total_last_period / income_total_last_period
