@@ -15,6 +15,7 @@
         <%
             last_period = get_last_period(cr, uid, start_period)
             fiscalyear = get_fiscalyear(cr, uid, start_period)
+            data = get_data(cr, uid)
         %>
         <div style="font-size: 20px; font-weight: bold; text-align: center;"> ${company.partner_id.name}</div>
         <div style="font-size: 25px; font-weight: bold; text-align: center;"> ${_('Income Statement Report')}</div>
@@ -35,105 +36,133 @@
                 </div>
             </div>
             <div class="act_as_tbody">
-                <% 
-                    list_all = get_accounts(cr, uid)
-                    
-                    total_period = 0.00
-                    total_percentage_period = 0.00
-                    total_last_period = 0.00
-                    total_percentage_last_period = 0.00
-                    total_fiscalyear = 0.00
-                    total_percentage_fiscalyear = 0.00
-                    total_variation = 0.00
-                    total_percentage_variation = 0.00
-                
-                    list_accounts_initial = list_all[0]
-                    total_period_calculate = 0.00
-                    total_last_period_calculate = 0.00
-                    total_fiscalyear_calculate = 0.00
-                    total_variation_calculate = 0.00
-                %>
-                %for account in list_accounts_initial:
                 <%
-                    total_period_calculate += get_balance(cr, uid, account, start_period)
-                    total_last_period_calculate += get_balance(cr, uid, account, last_period)
-                    total_fiscalyear_calculate += get_balance(cr, uid, account, fiscalyear, is_year=True)
-                    #CORREGIR, QUITAR EL +1
-                    total_variation_calculate += (get_balance(cr, uid, account, start_period) - get_balance(cr, uid, account, last_period)) + 1
+                    income_total_period = data['total_income_balances']['period']
+                    income_total_last_period = data['total_income_balances']['last_period']
+                    income_total_fiscalyear = data['total_income_balances']['fiscal_year']
+                    income_total_variation = income_total_period - income_total_last_period
+                    income_total_percentage_period = 100
+                    income_total_percentage_last_period = 100 * income_total_last_period / income_total_period
+                    income_total_percentage_fiscalyear = 100 * income_total_fiscalyear / income_total_period
+                    income_total_percentage_variation = 100 * income_total_variation / income_total_period
+                    
+                    expense_total_period = data['total_expense_balances']['period']
+                    expense_total_last_period = data['total_expense_balances']['last_period']
+                    expense_total_fiscalyear = data['total_expense_balances']['fiscal_year']
+                    expense_total_variation = expense_total_period - expense_total_last_period
+                    expense_total_percentage_period = 100 * expense_total_period / income_total_period
+                    expense_total_percentage_last_period = 100 * expense_total_last_period / income_total_last_period
+                    expense_total_percentage_fiscalyear = 100 * expense_total_fiscalyear / income_total_fiscalyear
+                    expense_total_percentage_variation = 100 * expense_total_variation / expense_total_period
+                    
+                    total_period = income_total_period + expense_total_period
+                    total_last_period = income_total_last_period + expense_total_last_period
+                    total_fiscalyear = income_total_fiscalyear + expense_total_fiscalyear
+                    total_variation = total_period - total_last_period
+                    total_percentage_period = 100 * total_period / income_total_period
+                    total_percentage_last_period = 100 * total_last_period / income_total_last_period
+                    total_percentage_fiscalyear = 100 * total_fiscalyear / income_total_fiscalyear
+                    total_percentage_variation = 100 * total_variation / total_period
                 %>
-                %endfor
-                %for list_accounts in list_all:
+                %for account in data['income_accounts']:
                     <%
-                        subtotal_period = 0.00
-                        subtotal_percentage_period = 0.00
-                        subtotal_last_period = 0.00
-                        subtotal_percentage_last_period = 0.00
-                        subtotal_fiscalyear = 0.00
-                        subtotal_percentage_fiscalyear = 0.00
-                        subtotal_variation = 0.00
-                        subtotal_percentage_variation = 0.00
+                        account_total_period = data['income_period_balances'][account.id]['balance']
+                        account_total_last_period = data['income_last_period_balances'][account.id]['balance']
+                        account_total_fiscalyear = data['income_fiscal_year_balances'][account.id]['balance']
+                        account_total_variation = account_total_period - account_total_last_period
+                        account_total_percentage_period = 100 * account_total_period / income_total_period
+                        account_total_percentage_last_period = 100 * account_total_last_period / income_total_last_period
+                        account_total_percentage_fiscalyear = 100 * account_total_fiscalyear / income_total_fiscalyear
+                        account_total_percentage_variation = 100 * account_total_variation / account_total_period
                     %>
-                    <% sub_total_name = list_accounts[0].name %>
-                    %for account in list_accounts:
-                        <% subtotal_name = '' %>
-                        <div class="act_as_row lines">
-                            %if account.level > 0:
-                                <div class="act_as_cell" style="padding-left:${account.level*10}px">
-                                    %if account.child_id:
-                                        <div class="act_as_row " ><b>${_(account.name)}</b></div>
-                                    %else:
-                                        <div class="act_as_row " >${_(account.name)}</div>
-                                    %endif
-                                </div>
-                            %else:
-                                <div class="act_as_cell " ><b>${_(account.name)}</b></div>
-                            %endif
-                            <div class="act_as_cell amount" >${formatLang(get_balance(cr, uid, account, start_period))}</div>
-                            <div class="act_as_cell amount" >${formatLang((get_balance(cr, uid, account, start_period) * 100) / total_period_calculate)}</div>
-                            <div class="act_as_cell amount" >${formatLang(get_balance(cr, uid, account, last_period))}</div>
-                            <div class="act_as_cell amount" >${formatLang((get_balance(cr, uid, account, last_period) * 100) / total_last_period_calculate)}</div>
-                            <div class="act_as_cell amount" >${formatLang(get_balance(cr, uid, account, fiscalyear, is_year=True))}</div>
-                            <div class="act_as_cell amount" >${formatLang((get_balance(cr, uid, account, fiscalyear, is_year=True) * 100) / total_fiscalyear_calculate)}</div>
-                            <div class="act_as_cell amount" >${formatLang((get_balance(cr, uid, account, start_period) - get_balance(cr, uid, account, last_period)))}</div>
-                            <div class="act_as_cell amount" >${formatLang(((get_balance(cr, uid, account, start_period) - get_balance(cr, uid, account, last_period)) * 100) / total_variation_calculate)}</div>
-                        </div>
-                        <%
-                            subtotal_period += get_balance(cr, uid, account, start_period)
-                            subtotal_percentage_period += (get_balance(cr, uid, account, start_period) * 100) / total_period_calculate
-                            subtotal_last_period += get_balance(cr, uid, account, last_period)
-                            subtotal_percentage_last_period += (get_balance(cr, uid, account, last_period) * 100) / total_last_period_calculate
-                            subtotal_fiscalyear += get_balance(cr, uid, account, fiscalyear, is_year=True)
-                            subtotal_percentage_fiscalyear += (get_balance(cr, uid, account, fiscalyear, is_year=True) * 100) / total_fiscalyear_calculate
-                            subtotal_variation += get_balance(cr, uid, account, start_period) - get_balance(cr, uid, account, last_period)
-                            subtotal_percentage_variation += ((get_balance(cr, uid, account, start_period) - get_balance(cr, uid, account, last_period)) * 100) / total_variation_calculate
-                        %>
-                    %endfor
-                    <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
-                    <div class="act_as_row lines" style="font-weight: bold; font-size: 12px;">
-                        <div class="act_as_cell" style="padding-left:0px">
-                            <div class="act_as_row " ><b>${_('TOTAL')} ${sub_total_name}</b></div>
-                        </div>
-                        <div class="act_as_cell amount" >${formatLang(subtotal_period)}</div>
-                        <div class="act_as_cell amount" >${formatLang(subtotal_percentage_period)}</div>
-                        <div class="act_as_cell amount" >${formatLang(subtotal_last_period)}</div>
-                        <div class="act_as_cell amount" >${formatLang(subtotal_percentage_last_period)}</div>
-                        <div class="act_as_cell amount" >${formatLang(subtotal_fiscalyear)}</div>
-                        <div class="act_as_cell amount" >${formatLang(subtotal_percentage_fiscalyear)}</div>
-                        <div class="act_as_cell amount" >${formatLang(subtotal_variation)}</div>
-                        <div class="act_as_cell amount" >${formatLang(subtotal_percentage_variation)}</div>
+                    <div class="act_as_row lines">
+                        %if account.level > 0:
+                            <div class="act_as_cell" style="padding-left:${account.level*10}px">
+                                %if account.child_id:
+                                    <div class="act_as_row " ><b>${_(account.name)}</b></div>
+                                %else:
+                                    <div class="act_as_row " >${_(account.name)}</div>
+                                %endif
+                            </div>
+                        %else:
+                            <div class="act_as_cell " ><b>${_(account.name)}</b></div>
+                        %endif
+                        <div class="act_as_cell amount" >${formatLang(account_total_period)}</div>
+                        <div class="act_as_cell amount" >${formatLang(account_total_percentage_period)}</div>
+                        <div class="act_as_cell amount" >${formatLang(account_total_last_period)}</div>
+                        <div class="act_as_cell amount" >${formatLang(account_total_percentage_last_period)}</div>
+                        <div class="act_as_cell amount" >${formatLang(account_total_fiscalyear)}</div>
+                        <div class="act_as_cell amount" >${formatLang(account_total_percentage_fiscalyear)}</div>
+                        <div class="act_as_cell amount" >${formatLang(account_total_variation)}</div>
+                        <div class="act_as_cell amount" >${formatLang(account_total_percentage_variation)}</div>
                     </div>
-                    <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
-                    <%
-                        total_period += subtotal_period
-                        total_percentage_period += subtotal_percentage_period
-                        total_last_period += subtotal_last_period
-                        total_percentage_last_period += subtotal_percentage_last_period
-                        total_fiscalyear += subtotal_fiscalyear
-                        total_percentage_fiscalyear += subtotal_percentage_fiscalyear
-                        total_variation += subtotal_variation
-                        total_percentage_variation += subtotal_percentage_variation
-                    %>
                 %endfor
+                        
+                <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
+                <div class="act_as_row lines" style="font-weight: bold; font-size: 12px;">
+                    <div class="act_as_cell" style="padding-left:0px">
+                        <div class="act_as_row " ><b>${_('ASSET TOTAL')}</b></div>
+                    </div>
+                    <div class="act_as_cell amount" >${formatLang(income_total_period)}</div>
+                    <div class="act_as_cell amount" >${formatLang(income_total_percentage_period)}</div>
+                    <div class="act_as_cell amount" >${formatLang(income_total_last_period)}</div>
+                    <div class="act_as_cell amount" >${formatLang(income_total_percentage_last_period)}</div>
+                    <div class="act_as_cell amount" >${formatLang(income_total_fiscalyear)}</div>
+                    <div class="act_as_cell amount" >${formatLang(income_total_percentage_fiscalyear)}</div>
+                    <div class="act_as_cell amount" >${formatLang(income_total_variation)}</div>
+                    <div class="act_as_cell amount" >${formatLang(income_total_percentage_variation)}</div>
+                </div>
+                <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
+                
+                %for account in data['expense_accounts']:
+                    <%
+                        account_total_period = data['expense_period_balances'][account.id]['balance']
+                        account_total_last_period = data['expense_last_period_balances'][account.id]['balance']
+                        account_total_fiscalyear = data['expense_fiscal_year_balances'][account.id]['balance']
+                        account_total_variation = account_total_period - account_total_last_period
+                        account_total_percentage_period = 100 * account_total_period / income_total_period
+                        account_total_percentage_last_period = 100 * account_total_last_period / income_total_last_period
+                        account_total_percentage_fiscalyear = 100 * account_total_fiscalyear / income_total_fiscalyear
+                        account_total_percentage_variation = 100 * account_total_variation / account_total_period
+                    %>
+                    <div class="act_as_row lines">
+                        %if account.level > 0:
+                            <div class="act_as_cell" style="padding-left:${account.level*10}px">
+                                %if account.child_id:
+                                    <div class="act_as_row " ><b>${_(account.name)}</b></div>
+                                %else:
+                                    <div class="act_as_row " >${_(account.name)}</div>
+                                %endif
+                            </div>
+                        %else:
+                            <div class="act_as_cell " ><b>${_(account.name)}</b></div>
+                        %endif
+                        <div class="act_as_cell amount" >${formatLang(account_total_period)}</div>
+                        <div class="act_as_cell amount" >${formatLang(account_total_percentage_period)}</div>
+                        <div class="act_as_cell amount" >${formatLang(account_total_last_period)}</div>
+                        <div class="act_as_cell amount" >${formatLang(account_total_percentage_last_period)}</div>
+                        <div class="act_as_cell amount" >${formatLang(account_total_fiscalyear)}</div>
+                        <div class="act_as_cell amount" >${formatLang(account_total_percentage_fiscalyear)}</div>
+                        <div class="act_as_cell amount" >${formatLang(account_total_variation)}</div>
+                        <div class="act_as_cell amount" >${formatLang(account_total_percentage_variation)}</div>
+                    </div>
+                %endfor
+                        
+                <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
+                <div class="act_as_row lines" style="font-weight: bold; font-size: 12px;">
+                    <div class="act_as_cell" style="padding-left:0px">
+                        <div class="act_as_row " ><b>${_('EXPENSE TOTAL')}</b></div>
+                    </div>
+                    <div class="act_as_cell amount" >${formatLang(expense_total_period)}</div>
+                    <div class="act_as_cell amount" >${formatLang(expense_total_percentage_period)}</div>
+                    <div class="act_as_cell amount" >${formatLang(expense_total_last_period)}</div>
+                    <div class="act_as_cell amount" >${formatLang(expense_total_percentage_last_period)}</div>
+                    <div class="act_as_cell amount" >${formatLang(expense_total_fiscalyear)}</div>
+                    <div class="act_as_cell amount" >${formatLang(expense_total_percentage_fiscalyear)}</div>
+                    <div class="act_as_cell amount" >${formatLang(expense_total_variation)}</div>
+                    <div class="act_as_cell amount" >${formatLang(expense_total_percentage_variation)}</div>
+                </div>
+                <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
                 <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
                 <div class="act_as_row lines" style="font-weight: bold; font-size: 13px;">
                     <div class="act_as_cell" style="padding-left:0px">

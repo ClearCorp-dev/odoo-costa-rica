@@ -41,10 +41,9 @@ class IncomeStatementReport(TrialBalanceWebkit):
         self.localcontext.update({
             'cr': self.cr,
             'uid': self.uid,
-            'get_accounts': self.get_accounts,
             'get_fiscalyear': self.get_fiscalyear,
             'get_last_period': self.get_last_period,
-            'get_balance': self.get_balance,
+            'get_data': self.get_data,
         })
         
     def set_context(self, objects, data, ids, report_type=None):
@@ -53,48 +52,7 @@ class IncomeStatementReport(TrialBalanceWebkit):
         self.localcontext.update({
             'start_period': start_period,
             })
-
         return super(IncomeStatementReport, self).set_context(objects, data, ids, report_type=report_type)
-    
-    def get_child_ids(self, cr, uid, child_ids, childs_search):
-        account_account_obj = self.pool.get('account.account')
-        accounts = account_account_obj.browse(cr, uid, childs_search)
-        for account in accounts:
-            if account.child_id:
-                new_childs = []
-                for child in account.child_id:
-                    new_childs.append(child.id)
-                index = child_ids.index(account.id)
-                cont = 1
-                for child in new_childs:
-                    child_ids.insert(index+cont,child)
-                    cont += 1
-                self.get_child_ids(cr, uid, child_ids, new_childs)
-        return child_ids
-
-    def get_expense_accounts(self, cr, uid):
-        account_account_obj = self.pool.get('account.account')
-        
-        first_expense_account = account_account_obj.search(cr, uid, [('name', '=', 'GASTOS')])
-        childs_search = first_expense_account
-        expense_account_ids = self.get_child_ids(cr, uid, first_expense_account, childs_search)
-        expense_accounts = account_account_obj.browse(cr, uid, expense_account_ids)
-        
-        return expense_accounts
-
-    def get_asset_accounts(self, cr, uid):
-        account_account_obj = self.pool.get('account.account')
-        
-        first_asset_account_id = account_account_obj.search(cr, uid, [('name', '=', 'ACTIVO')])
-        childs_search = first_asset_account_id
-        asset_account_ids = self.get_child_ids(cr, uid, first_asset_account_id, childs_search)
-        asset_accounts = account_account_obj.browse(cr, uid, asset_account_ids)
-        
-        return asset_accounts
-
-    def get_accounts(self, cr, uid):
-         accounts = [self.get_asset_accounts(cr, uid), self.get_expense_accounts(cr, uid)]
-         return accounts
     
     def get_last_period_fiscalyear(self, cr, uid, fiscalyear):
         account_period_obj = self.pool.get('account.period')
@@ -131,14 +89,69 @@ class IncomeStatementReport(TrialBalanceWebkit):
     def get_fiscalyear(self, cr, uid, start_period):
         fiscalyear = start_period.fiscalyear_id
         return fiscalyear
+     
+    def get_data(self, cr, uid, context={}):
+        account_account_obj = self.pool.get('account.account')
+        library_obj = self.pool.get('account.webkit.report.library')
         
-    def get_balance(self, cr, uid, account, filter, is_year=False):
-        account_webkit_report_library_obj = self.pool.get('account.webkit.report.library')
-        if is_year:
-            balance = account_webkit_report_library_obj.get_account_balance(cr, uid, [account.id], ['balance'], fiscal_year_id=filter.id)
-        else:
-            balance = account_webkit_report_library_obj.get_account_balance(cr, uid, [account.id], ['balance'], start_period_id=filter.id, end_period_id=filter.id)
-        return balance[account.id]['balance']
+        #from account/report/common_report_header.py
+        account_chart_id = self._get_account
+        
+        account_chart = account_account_obj.browse(cr, uid, account_chart_id)
+        company_id = account_chart['company_id'].id
+        category_account_ids = library_obj.get_category_accounts(cr, uid, company_id)
+        period = self._get_form_param('period_from', data)
+        last_period = self.get_last_period(cr, uid, period)
+        fiscal_year = self.get_fiscalyear(cr, uid, period)
+        
+        #build accounts list
+        income_accounts = [category_account_ids['income']]
+        income_accounts.append(library_obj.get_account_child_ids(cr, uid, category_account_ids['income']))
+        expense_accounts = [category_account_ids['expense']]
+        expense_accounts.append(library_obj.get_account_child_ids(cr, uid, category_account_ids['expense']))
+        
+        #build account_ids list
+        income_account_ids = []
+        expense_account_ids = []
+        for account in income_accounts:
+            income_account_ids.append(account.id)
+        for account in expense_accounts:
+            expense_account_ids.append(account.id)
+        
+        #build balances
+        income_period_balances =        library_obj.get_account_balance(cr, uid, income_account_ids,  ['balance'], start_period_id=period.id, end_period_id=period.id)
+        expense_period_balances =       library_obj.get_account_balance(cr, uid, expense_account_ids, ['balance'], start_period_id=period.id, end_period_id=period.id)
+        income_last_period_balances =   library_obj.get_account_balance(cr, uid, income_account_ids,  ['balance'], start_period_id=last_period.id, end_period_id=last_period.id)
+        expense_last_period_balances =  library_obj.get_account_balance(cr, uid, expense_account_ids, ['balance'], start_period_id=last_period.id, end_period_id=last_period.id)
+        income_fiscal_year_balances =   library_obj.get_account_balance(cr, uid, income_account_ids,  ['balance'], fiscal_year_id=fiscal_year.id)
+        expense_fiscal_year_balances =  library_obj.get_account_balance(cr, uid, expense_account_ids, ['balance'], fiscal_year_id=fiscal_year.id)
+        
+        #build total balances
+        total_income_balances = {
+            'period':       income_period_balances[category_account_ids['income'].id]['balance'],
+            'last_period':  income_last_period_balances[category_account_ids['income'].id]['balance'],
+            'fiscal_year':  income_fiscal_year_balances[category_account_ids['income'].id]['balance'],
+        }
+        total_expense_balances = {
+            'period':       expense_period_balances[category_account_ids['expense'].id]['balance'],
+            'last_period':  expense_last_period_balances[category_account_ids['expense'].id]['balance'],
+            'fiscal_year':  expense_fiscal_year_balances[category_account_ids['expense'].id]['balance'],
+        }
+            
+        return {
+            'income_accounts':              income_accounts,
+            'expense_accounts':             expense_accounts,
+            'income_account_ids':           income_account_ids,
+            'expense_account_ids':          expense_account_ids,
+            'total_income_balances':        total_income_balances,
+            'total_expense_balances':       total_expense_balances,
+            'income_period_balances':       income_period_balances,
+            'expense_period_balances':      expense_period_balances,
+            'income_last_period_balances':  income_last_period_balances,
+            'expense_last_period_balances': expense_last_period_balances,
+            'income_fiscal_year_balances':  income_fiscal_year_balances,
+            'expense_fiscal_year_balances': expense_fiscal_year_balances,
+        }
         
 
 HeaderFooterTextWebKitParser(
