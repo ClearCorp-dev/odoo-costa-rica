@@ -26,13 +26,13 @@
                 <div class="act_as_row labels no_wrap">
                     <div class="act_as_cell first_column" style="width: 500px">${_('Name')}</div>
                     <div class="act_as_cell amount" style="width: 100px">${start_period.name}</div>
-                    <div class="act_as_cell amount" style="width: 35px">${_('%')}</div>
+                    <div class="act_as_cell amount" style="width: 40px">${_('%')}</div>
                     <div class="act_as_cell amount" style="width: 100px">${last_period.name}</div>
-                    <div class="act_as_cell amount" style="width: 35px">${_('%')}</div>
+                    <div class="act_as_cell amount" style="width: 40px">${_('%')}</div>
                     <div class="act_as_cell amount" style="width: 100px">${fiscalyear.name}</div>
-                    <div class="act_as_cell amount" style="width: 35px">${_('%')}</div>
+                    <div class="act_as_cell amount" style="width: 40px">${_('%')}</div>
                     <div class="act_as_cell amount" style="width: 100px">${_('Variation')}</div>
-                    <div class="act_as_cell last_column amount" style="width: 35px">${_('%')}</div>
+                    <div class="act_as_cell last_column amount" style="width: 40px">${_('%')}</div>
                 </div>
             </div>
             <div class="act_as_tbody">
@@ -100,7 +100,7 @@
                         
                 <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
                 <div class="act_as_row lines">
-                    <div class="act_as_row first_column" ><b>${_('ASSET TOTAL')}</b></div>
+                    <div class="act_as_cell first_column" ><b>${_('ASSET TOTAL')}</b></div>
                     <div class="act_as_cell amount" >${formatLang(income_total_period)}</div>
                     <div class="act_as_cell amount" >${formatLang(income_total_percentage_period)}</div>
                     <div class="act_as_cell amount" >${formatLang(income_total_last_period)}</div>
@@ -148,7 +148,18 @@
                         
                 <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
                 <div class="act_as_row lines">
-                    <div class="act_as_row first_column" ><b>${_('EXPENSE TOTAL')}</b></div>
+                    <div class="act_as_cell first_column" ><b>${_('ASSET TOTAL')}</b></div>
+                    <div class="act_as_cell amount" >${formatLang(income_total_period)}</div>
+                    <div class="act_as_cell amount" >${formatLang(income_total_percentage_period)}</div>
+                    <div class="act_as_cell amount" >${formatLang(income_total_last_period)}</div>
+                    <div class="act_as_cell amount" >${formatLang(income_total_percentage_last_period)}</div>
+                    <div class="act_as_cell amount" >${formatLang(income_total_fiscalyear)}</div>
+                    <div class="act_as_cell amount" >${formatLang(income_total_percentage_fiscalyear)}</div>
+                    <div class="act_as_cell amount" >${formatLang(income_total_variation)}</div>
+                    <div class="act_as_cell amount last_column" >${formatLang(income_total_percentage_variation)}</div>
+                </div>
+                <div class="act_as_row lines">
+                    <div class="act_as_cell first_column" ><b>${_('EXPENSE TOTAL')}</b></div>
                     <div class="act_as_cell amount" >${formatLang(expense_total_period)}</div>
                     <div class="act_as_cell amount" >${formatLang(expense_total_percentage_period)}</div>
                     <div class="act_as_cell amount" >${formatLang(expense_total_last_period)}</div>
@@ -160,8 +171,8 @@
                 </div>
                 <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
                 <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
-                <div class="act_as_row lines" style="font-weight: bold; font-size: 13px;">
-                    <div class="act_as_row first_column" ><b>${_('TOTAL')}</b></div>
+                <div class="act_as_row lines">
+                    <div class="act_as_cell first_column" ><b>${_('TOTAL')}</b></div>
                     <div class="act_as_cell amount" >${formatLang(total_period)}</div>
                     <div class="act_as_cell amount" >${formatLang(total_percentage_period)}</div>
                     <div class="act_as_cell amount" >${formatLang(total_last_period)}</div>
@@ -171,7 +182,6 @@
                     <div class="act_as_cell amount" >${formatLang(total_variation)}</div>
                     <div class="act_as_cell amount last_column" >${formatLang(total_percentage_variation)}</div>
                 </div>
-                <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
             </div>
         </div>
         <p style="page-break-after:always"></p>
