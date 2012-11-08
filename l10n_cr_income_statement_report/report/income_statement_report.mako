@@ -79,13 +79,13 @@
                         %if account.level > 0:
                             <div class="act_as_cell" style="padding-left:${account.level*10}px">
                                 %if account.child_id:
-                                    <div class="act_as_row first_column" ><b>${account.code _(account.name)}</b></div>
+                                    <div class="act_as_row first_column" ><b>${account.code} ${_(account.name)}</b></div>
                                 %else:
-                                    <div class="act_as_row first_column" >${_(account.code account.name)}</div>
+                                    <div class="act_as_row first_column" >${account.code} ${_(account.name)}</div>
                                 %endif
                             </div>
                         %else:
-                            <div class="act_as_cell first_column" ><b>${_(account.code account.name)}</b></div>
+                            <div class="act_as_cell first_column" ><b>${account.code} ${_(account.name)}</b></div>
                         %endif
                         <div class="act_as_cell amount" >${formatLang(account_total_period)}</div>
                         <div class="act_as_cell amount" >${formatLang(account_total_percentage_period)}</div>
@@ -127,13 +127,13 @@
                         %if account.level > 0:
                             <div class="act_as_cell" style="padding-left:${account.level*10}px">
                                 %if account.child_id:
-                                    <div class="act_as_row first_column" ><b>${_(account.code account.name)}</b></div>
+                                    <div class="act_as_row first_column" ><b>${account.code} ${_(account.name)}</b></div>
                                 %else:
-                                    <div class="act_as_row first_column" >${_(account.code account.name)}</div>
+                                    <div class="act_as_row first_column" >${account.code} ${_(account.name)}</div>
                                 %endif
                             </div>
                         %else:
-                            <div class="act_as_cell first_column" ><b>${_(account.code account.name)}</b></div>
+                            <div class="act_as_cell first_column" ><b>${account.code} ${_(account.name)}</b></div>
                         %endif
                         <div class="act_as_cell amount" >${formatLang(account_total_period)}</div>
                         <div class="act_as_cell amount" >${formatLang(account_total_percentage_period)}</div>
