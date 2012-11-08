@@ -122,12 +122,22 @@ class IncomeStatementReport(TrialBalanceWebkit):
         #build balances
         print 'income_period_balances:'
         income_period_balances =        library_obj.get_account_balance(cr, uid, income_account_ids,  ['balance'], start_period_id=period.id, end_period_id=period.id)
+        print income_period_balances
         print 'expense_period_balances:'
         expense_period_balances =       library_obj.get_account_balance(cr, uid, expense_account_ids, ['balance'], start_period_id=period.id, end_period_id=period.id)
+        print income_period_balances
+        print 'income_last_period_balances:'
         income_last_period_balances =   library_obj.get_account_balance(cr, uid, income_account_ids,  ['balance'], start_period_id=last_period.id, end_period_id=last_period.id)
+        print income_last_period_balances
+        print 'expense_last_period_balances:'
         expense_last_period_balances =  library_obj.get_account_balance(cr, uid, expense_account_ids, ['balance'], start_period_id=last_period.id, end_period_id=last_period.id)
+        print expense_last_period_balances
+        print 'income_fiscal_year_balances:'
         income_fiscal_year_balances =   library_obj.get_account_balance(cr, uid, income_account_ids,  ['balance'], fiscal_year_id=fiscal_year.id)
+        print income_fiscal_year_balances
+        print 'expense_fiscal_year_balances:'
         expense_fiscal_year_balances =  library_obj.get_account_balance(cr, uid, expense_account_ids, ['balance'], fiscal_year_id=fiscal_year.id)
+        print expense_fiscal_year_balances
         
         #build total balances
         total_income_balances = {
