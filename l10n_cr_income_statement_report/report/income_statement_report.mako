@@ -63,6 +63,10 @@
                     expense_total_percentage_fiscalyear = income_total_fiscalyear != 0 and (100 * expense_total_fiscalyear / income_total_fiscalyear) or 0
                     expense_total_percentage_variation = income_total_last_period != 0 and (100 * expense_total_variation / income_total_last_period) or 0
                     
+                    total_period = income_total_period + expense_total_period
+                    total_last_period = income_total_last_period + expense_total_last_period
+                    total_fiscalyear = income_total_fiscalyear + expense_total_fiscalyear
+                    total_variation = total_period - total_last_period
                 %>
                 %for account in balance_data['income_accounts']:
                     <%
