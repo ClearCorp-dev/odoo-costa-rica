@@ -31,9 +31,9 @@ from openerp.addons.account_financial_report_webkit.report.webkit_parser_header_
 def sign(number):
     return cmp(number, 0)
 
-class IncomeStatementReport(TrialBalanceWebkit):
+class ProfitStatementReport(TrialBalanceWebkit):
     def __init__(self, cr, uid, name, context):
-        super(IncomeStatementReport, self).__init__(cr, uid, name, context=context)
+        super(ProfitStatementReport, self).__init__(cr, uid, name, context=context)
         self.pool = pooler.get_pool(self.cr.dbname)
         self.cursor = self.cr
         #This line is to delete, the header of trial balance
@@ -52,7 +52,7 @@ class IncomeStatementReport(TrialBalanceWebkit):
         self.localcontext.update({
             'start_period': start_period,
             })
-        return super(IncomeStatementReport, self).set_context(objects, data, ids, report_type=report_type)
+        return super(ProfitStatementReport, self).set_context(objects, data, ids, report_type=report_type)
     
     def get_last_period_fiscalyear(self, cr, uid, fiscalyear):
         account_period_obj = self.pool.get('account.period')
@@ -156,7 +156,7 @@ class IncomeStatementReport(TrialBalanceWebkit):
         
 
 HeaderFooterTextWebKitParser(
-    'report.l10n_cr_income_statement_report.account.income_statement_report',
+    'report.l10n_cr_account_financial_statements.account.profit_statement_report',
     'account.account',
-    'addons/l10n_cr_income_statement_report/report/income_statement_report.mako',
-    parser=IncomeStatementReport)
+    'addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako',
+    parser=ProfitStatementReport)

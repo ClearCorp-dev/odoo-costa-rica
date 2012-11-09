@@ -18,8 +18,8 @@
             balance_data = get_data(cr, uid, data)
         %>
         <div style="font-size: 20px; font-weight: bold; text-align: center;"> ${company.partner_id.name}</div>
-        <div style="font-size: 25px; font-weight: bold; text-align: center;"> ${_('Income Statement Report')}</div>
-        <div style="font-size: 16px; font-weight: bold; text-align: center;">${_('Income Statement of:')} ${start_period.name}</div>
+        <div style="font-size: 25px; font-weight: bold; text-align: center;"> ${_('Profit Statement')}</div>
+        <div style="font-size: 16px; font-weight: bold; text-align: center;">${_('Profit Statement of:')} ${start_period.name}</div>
         <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
         <div class="act_as_table data_table">
             <div class="act_as_thead">

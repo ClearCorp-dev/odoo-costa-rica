@@ -20,15 +20,16 @@
 #
 ##############################################################################
 {
-    'name': 'l10n_cr_income_statement_report',
+    'name': 'Costa Rica Account Financial Statements',
     'version': '1.0',
     'category': 'Finance',
     "sequence": 38,
     'complexity': "normal",
     'description': """
-l10n_cr_income_statement_report.
-=======================
-    * Income Statement Report
+Costa Rica Account Financial Statements
+=======================================
+    * Profit Statement Report
+    * Situation Balance Statement Report
     """,
     'author': 'CLEARCORP S.A.',
     'website': 'http://www.clearcorp.co.cr',
@@ -40,13 +41,12 @@ l10n_cr_income_statement_report.
     ],
     'update_xml': [
                     'report/report.xml',
-                    'wizard/income_statement_report_wizard_view.xml',
+                    'wizard/profit_statement_report_wizard_view.xml',
+                    'wizard/situation_balance_statement_report_wizard_view.xml',
                     'report_menus.xml',
-                    #'payroll_report.xml',
                     ],
     'installable': True,
     'auto_install': False,
-    'application': True,
 }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
