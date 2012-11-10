@@ -37,7 +37,8 @@ Costa Rica Account Financial Statements
         'account',
         'account_financial_report_webkit',
         'account_voucher_payment_method',
-        'base_currency_symbol',        
+        'base_currency_symbol',    
+        'report_webkit',    
     ],
     'update_xml': [
                     'report/report.xml',
