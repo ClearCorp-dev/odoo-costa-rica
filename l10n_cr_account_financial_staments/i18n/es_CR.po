@@ -1,0 +1,385 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* l10n_cr_account_financial_staments
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-11-12 15:51+0000\n"
+"PO-Revision-Date: 2012-11-12 15:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_cr_account_financial_staments
+#: constraint:income.statement.report:0
+#: constraint:situation.balance.report:0
+msgid "When no Fiscal year is selected, you must choose to filter by periods or by date."
+msgstr "Cuando no se selecciona año fiscal, se debe seleccionar el filtro por periodos o por fechas."
+
+#. module: l10n_cr_account_financial_staments
+#: report:addons/l10n_cr_account_financial_staments/report/situation_balance_report.mako:119
+#: report:addons/l10n_cr_account_financial_staments/report/situation_balance_report.mako:171
+msgid "LIABILITY TOTAL"
+msgstr "TOTAL PASIVO"
+
+#. module: l10n_cr_account_financial_staments
+#: field:income.statement.report,account_ids:0
+#: field:situation.balance.report,account_ids:0
+msgid "Filter on accounts"
+msgstr "Filtro en cuentas"
+
+#. module: l10n_cr_account_financial_staments
+#: report:addons/l10n_cr_account_financial_staments/report/income_statement_report.mako:22
+msgid "Income Statement of:"
+msgstr "Estado de resultados:"
+
+#. module: l10n_cr_account_financial_staments
+#: report:addons/l10n_cr_account_financial_staments/report/situation_balance_report.mako:178
+msgid "EQUITY TOTAL"
+msgstr "TOTAL PATRIMONIO"
+
+#. module: l10n_cr_account_financial_staments
+#: report:addons/l10n_cr_account_financial_staments/report/situation_balance_report.mako:22
+msgid "Situation Balance of Period:"
+msgstr "Balance de Situación del Período:"
+
+#. module: l10n_cr_account_financial_staments
+#: help:income.statement.report,account_ids:0
+#: help:situation.balance.report,account_ids:0
+msgid "Only selected accounts will be printed. Leave empty to print all accounts."
+msgstr "Sólo las cuentas seleccionadas se imprimirán. Dejar en blanco para imprimir todas las cuentas."
+
+#. module: l10n_cr_account_financial_staments
+#: model:ir.actions.report.xml,name:l10n_cr_account_financial_staments.situation_balance_report
+#: model:ir.model,name:l10n_cr_account_financial_staments.model_situation_balance_report
+#: model:ir.ui.menu,name:l10n_cr_account_financial_staments.menu_situation_balance_report
+#: view:situation.balance.report:0
+msgid "Situation Balance Report"
+msgstr "Reporte Balance de Situación"
+
+#. module: l10n_cr_account_financial_staments
+#: report:addons/l10n_cr_account_financial_staments/report/income_statement_report.mako:162
+msgid "EXPENSE TOTAL"
+msgstr "TOTAL GASTOS"
+
+#. module: l10n_cr_account_financial_staments
+#: report:addons/l10n_cr_account_financial_staments/report/situation_balance_report.mako:154
+msgid " TOTAL"
+msgstr " TOTAL"
+
+#. module: l10n_cr_account_financial_staments
+#: report:addons/l10n_cr_account_financial_staments/report/situation_balance_report.mako:21
+msgid "Situation Balance"
+msgstr "Balance de Situación"
+
+#. module: l10n_cr_account_financial_staments
+#: report:addons/l10n_cr_account_financial_staments/report/income_statement_report.mako:29
+#: report:addons/l10n_cr_account_financial_staments/report/income_statement_report.mako:31
+#: report:addons/l10n_cr_account_financial_staments/report/income_statement_report.mako:33
+#: report:addons/l10n_cr_account_financial_staments/report/income_statement_report.mako:35
+#: report:addons/l10n_cr_account_financial_staments/report/situation_balance_report.mako:31
+msgid "%"
+msgstr "%"
+
+#. module: l10n_cr_account_financial_staments
+#: selection:income.statement.report,comp0_filter:0
+#: selection:income.statement.report,comp1_filter:0
+#: selection:income.statement.report,comp2_filter:0
+#: selection:income.statement.report,filter:0
+#: selection:situation.balance.report,comp0_filter:0
+#: selection:situation.balance.report,comp1_filter:0
+#: selection:situation.balance.report,comp2_filter:0
+#: selection:situation.balance.report,filter:0
+msgid "Periods"
+msgstr "Períodos"
+
+#. module: l10n_cr_account_financial_staments
+#: field:income.statement.report,company_id:0
+#: field:situation.balance.report,company_id:0
+msgid "Company"
+msgstr "Compañía"
+
+#. module: l10n_cr_account_financial_staments
+#: report:addons/l10n_cr_account_financial_staments/report/income_statement_report.mako:34
+#: report:addons/l10n_cr_account_financial_staments/report/situation_balance_report.mako:30
+msgid "Variation"
+msgstr "Variación"
+
+#. module: l10n_cr_account_financial_staments
+#: selection:income.statement.report,display_account:0
+#: selection:situation.balance.report,display_account:0
+msgid "With balance is not equal to 0"
+msgstr "Con el saldo no es igual a 0"
+
+#. module: l10n_cr_account_financial_staments
+#: selection:income.statement.report,comp0_filter:0
+#: selection:income.statement.report,comp1_filter:0
+#: selection:income.statement.report,comp2_filter:0
+#: selection:income.statement.report,filter:0
+#: selection:situation.balance.report,comp0_filter:0
+#: selection:situation.balance.report,comp1_filter:0
+#: selection:situation.balance.report,comp2_filter:0
+#: selection:situation.balance.report,filter:0
+msgid "Date"
+msgstr "Fecha"
+
+#. module: l10n_cr_account_financial_staments
+#: field:income.statement.report,chart_account_id:0
+#: field:situation.balance.report,chart_account_id:0
+msgid "Chart of Account"
+msgstr "Chart de la Cuenta"
+
+#. module: l10n_cr_account_financial_staments
+#: report:addons/l10n_cr_account_financial_staments/report/income_statement_report.mako:175
+#: report:addons/l10n_cr_account_financial_staments/report/situation_balance_report.mako:187
+msgid "TOTAL"
+msgstr "TOTAL"
+
+#. module: l10n_cr_account_financial_staments
+#: field:income.statement.report,journal_ids:0
+#: field:situation.balance.report,journal_ids:0
+msgid "Journals"
+msgstr "Diarios"
+
+#. module: l10n_cr_account_financial_staments
+#: field:income.statement.report,target_move:0
+#: field:situation.balance.report,target_move:0
+msgid "Target Moves"
+msgstr "Target Moves"
+
+#. module: l10n_cr_account_financial_staments
+#: selection:income.statement.report,filter:0
+#: selection:situation.balance.report,filter:0
+msgid "No Filters"
+msgstr "Sin filtros"
+
+#. module: l10n_cr_account_financial_staments
+#: field:income.statement.report,comp0_date_to:0
+#: field:income.statement.report,comp1_date_to:0
+#: field:income.statement.report,comp2_date_to:0
+#: field:income.statement.report,date_to:0
+#: field:situation.balance.report,comp0_date_to:0
+#: field:situation.balance.report,comp1_date_to:0
+#: field:situation.balance.report,comp2_date_to:0
+#: field:situation.balance.report,date_to:0
+msgid "End Date"
+msgstr "Fecha de fin"
+
+#. module: l10n_cr_account_financial_staments
+#: view:income.statement.report:0
+#: view:situation.balance.report:0
+msgid "Dates"
+msgstr "Fechas"
+
+#. module: l10n_cr_account_financial_staments
+#: field:income.statement.report,comp0_period_from:0
+#: field:income.statement.report,comp1_period_from:0
+#: field:income.statement.report,comp2_period_from:0
+#: field:income.statement.report,period_from:0
+#: field:situation.balance.report,comp0_period_from:0
+#: field:situation.balance.report,comp1_period_from:0
+#: field:situation.balance.report,comp2_period_from:0
+#: field:situation.balance.report,period_from:0
+msgid "Start Period"
+msgstr "Período Inicial"
+
+#. module: l10n_cr_account_financial_staments
+#: report:addons/l10n_cr_account_financial_staments/report/income_statement_report.mako:27
+#: report:addons/l10n_cr_account_financial_staments/report/situation_balance_report.mako:27
+msgid "Name"
+msgstr "Nombre"
+
+#. module: l10n_cr_account_financial_staments
+#: selection:income.statement.report,target_move:0
+#: selection:situation.balance.report,target_move:0
+msgid "All Posted Entries"
+msgstr "Todas las entradas publicadas"
+
+#. module: l10n_cr_account_financial_staments
+#: code:addons/l10n_cr_account_financial_staments/report/income_statement_report.py:85
+#: code:addons/l10n_cr_account_financial_staments/report/situation_balance_report.py:85
+#: code:addons/l10n_cr_account_financial_staments/report/situation_balance_report.py:103
+#, python-format
+msgid "Error fiscal year"
+msgstr "Error fiscal year"
+
+#. module: l10n_cr_account_financial_staments
+#: help:income.statement.report,fiscalyear_id:0
+#: help:situation.balance.report,fiscalyear_id:0
+msgid "Keep empty for all open fiscal year"
+msgstr "Mantenga vacío para todo el año fiscal abierto"
+
+#. module: l10n_cr_account_financial_staments
+#: field:income.statement.report,comp0_period_to:0
+#: field:income.statement.report,comp1_period_to:0
+#: field:income.statement.report,comp2_period_to:0
+#: field:income.statement.report,period_to:0
+#: field:situation.balance.report,comp0_period_to:0
+#: field:situation.balance.report,comp1_period_to:0
+#: field:situation.balance.report,comp2_period_to:0
+#: field:situation.balance.report,period_to:0
+msgid "End Period"
+msgstr "Período Final"
+
+#. module: l10n_cr_account_financial_staments
+#: selection:income.statement.report,comp0_filter:0
+#: field:income.statement.report,comp0_fiscalyear_id:0
+#: selection:income.statement.report,comp1_filter:0
+#: field:income.statement.report,comp1_fiscalyear_id:0
+#: selection:income.statement.report,comp2_filter:0
+#: field:income.statement.report,comp2_fiscalyear_id:0
+#: field:income.statement.report,fiscalyear_id:0
+#: selection:situation.balance.report,comp0_filter:0
+#: field:situation.balance.report,comp0_fiscalyear_id:0
+#: selection:situation.balance.report,comp1_filter:0
+#: field:situation.balance.report,comp1_fiscalyear_id:0
+#: selection:situation.balance.report,comp2_filter:0
+#: field:situation.balance.report,comp2_fiscalyear_id:0
+#: field:situation.balance.report,fiscalyear_id:0
+msgid "Fiscal Year"
+msgstr "Año Fiscal"
+
+#. module: l10n_cr_account_financial_staments
+#: report:addons/l10n_cr_account_financial_staments/report/income_statement_report.mako:21
+#: view:income.statement.report:0
+#: model:ir.actions.report.xml,name:l10n_cr_account_financial_staments.income_statement_report
+#: model:ir.model,name:l10n_cr_account_financial_staments.model_income_statement_report
+#: model:ir.ui.menu,name:l10n_cr_account_financial_staments.menu_income_statement_report
+msgid "Income Statement Report"
+msgstr "Reporte Estado de Resultado"
+
+#. module: l10n_cr_account_financial_staments
+#: field:income.statement.report,display_account:0
+#: field:situation.balance.report,display_account:0
+msgid "Display Accounts"
+msgstr "Mostrar Cuentas"
+
+#. module: l10n_cr_account_financial_staments
+#: model:ir.actions.act_window,name:l10n_cr_account_financial_staments.action_situation_balance_report_menu_webkit
+msgid "Action Situation Balance Report"
+msgstr "Action Situation Balance Report"
+
+#. module: l10n_cr_account_financial_staments
+#: selection:income.statement.report,comp0_filter:0
+#: selection:income.statement.report,comp1_filter:0
+#: selection:income.statement.report,comp2_filter:0
+#: selection:situation.balance.report,comp0_filter:0
+#: selection:situation.balance.report,comp1_filter:0
+#: selection:situation.balance.report,comp2_filter:0
+msgid "No Comparison"
+msgstr "No hay comparación"
+
+#. module: l10n_cr_account_financial_staments
+#: selection:income.statement.report,comp0_filter:0
+#: selection:income.statement.report,comp1_filter:0
+#: selection:income.statement.report,comp2_filter:0
+#: selection:income.statement.report,filter:0
+#: selection:situation.balance.report,comp0_filter:0
+#: selection:situation.balance.report,comp1_filter:0
+#: selection:situation.balance.report,comp2_filter:0
+#: selection:situation.balance.report,filter:0
+msgid "Opening Only"
+msgstr "Solo Abiertas"
+
+#. module: l10n_cr_account_financial_staments
+#: selection:income.statement.report,display_account:0
+#: selection:situation.balance.report,display_account:0
+msgid "With movements"
+msgstr "Con movimientos"
+
+#. module: l10n_cr_account_financial_staments
+#: constraint:income.statement.report:0
+#: constraint:situation.balance.report:0
+msgid "The fiscalyear, periods or chart of account chosen have to belong to the same company."
+msgstr "El año fiscal, períodos o plan de cuentas elegido tiene que pertenecer a la misma compañía."
+
+#. module: l10n_cr_account_financial_staments
+#: selection:income.statement.report,display_account:0
+#: selection:situation.balance.report,display_account:0
+msgid "All"
+msgstr "Todo"
+
+#. module: l10n_cr_account_financial_staments
+#: help:income.statement.report,filter:0
+#: help:situation.balance.report,filter:0
+msgid "Filter by date : no opening balance will be displayed. (opening balance can only be calculated based on period to be correct)."
+msgstr "Filtrar por fecha: saldo inicial no se mostrará. (balance de apertura sólo se puede calcular basándose en el período que es correcta)."
+
+#. module: l10n_cr_account_financial_staments
+#: report:addons/l10n_cr_account_financial_staments/report/income_statement_report.mako:103
+#: report:addons/l10n_cr_account_financial_staments/report/income_statement_report.mako:151
+#: report:addons/l10n_cr_account_financial_staments/report/situation_balance_report.mako:84
+#: report:addons/l10n_cr_account_financial_staments/report/situation_balance_report.mako:164
+msgid "ASSET TOTAL"
+msgstr "TOTAL ACTIVOS"
+
+#. module: l10n_cr_account_financial_staments
+#: code:addons/l10n_cr_account_financial_staments/report/income_statement_report.py:85
+#: code:addons/l10n_cr_account_financial_staments/report/situation_balance_report.py:85
+#: code:addons/l10n_cr_account_financial_staments/report/situation_balance_report.py:103
+#, python-format
+msgid "There is no previous period to compare"
+msgstr "There is no previous period to compare"
+
+#. module: l10n_cr_account_financial_staments
+#: view:income.statement.report:0
+#: view:situation.balance.report:0
+msgid "Period"
+msgstr "Período"
+
+#. module: l10n_cr_account_financial_staments
+#: view:income.statement.report:0
+#: view:situation.balance.report:0
+msgid "This report allows you to print or generate a pdf of your income statement"
+msgstr "Este informe le permite imprimir o generar un pdf de su estado de resultados"
+
+#. module: l10n_cr_account_financial_staments
+#: model:ir.actions.act_window,name:l10n_cr_account_financial_staments.action_income_statement_report_menu_webkit
+msgid "Action Income Statement Report"
+msgstr "Action Income Statement Report"
+
+#. module: l10n_cr_account_financial_staments
+#: selection:income.statement.report,target_move:0
+#: selection:situation.balance.report,target_move:0
+msgid "All Entries"
+msgstr "Todas las entradas"
+
+#. module: l10n_cr_account_financial_staments
+#: field:income.statement.report,comp0_date_from:0
+#: field:income.statement.report,comp1_date_from:0
+#: field:income.statement.report,comp2_date_from:0
+#: field:income.statement.report,date_from:0
+#: field:situation.balance.report,comp0_date_from:0
+#: field:situation.balance.report,comp1_date_from:0
+#: field:situation.balance.report,comp2_date_from:0
+#: field:situation.balance.report,date_from:0
+msgid "Start Date"
+msgstr "Fecha Inicial"
+
+#. module: l10n_cr_account_financial_staments
+#: help:income.statement.report,chart_account_id:0
+#: help:situation.balance.report,chart_account_id:0
+msgid "Select Charts of Accounts"
+msgstr "Seleccione el chart de las cuentas"
+
+#. module: l10n_cr_account_financial_staments
+#: field:income.statement.report,filter:0
+#: field:situation.balance.report,filter:0
+msgid "Filter by"
+msgstr "Filtrar por"
+
+#. module: l10n_cr_account_financial_staments
+#: field:income.statement.report,comp0_filter:0
+#: field:income.statement.report,comp1_filter:0
+#: field:income.statement.report,comp2_filter:0
+#: field:situation.balance.report,comp0_filter:0
+#: field:situation.balance.report,comp1_filter:0
+#: field:situation.balance.report,comp2_filter:0
+msgid "Compare By"
+msgstr "Comparar por"
+
