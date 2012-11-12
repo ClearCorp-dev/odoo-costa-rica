@@ -20,5 +20,33 @@
 #
 ##############################################################################
 
+from osv import osv
 
-import income_statement_report_wizard
+
+class SituationBalanceReportWizard(osv.osv_memory):
+    
+    _inherit = "trial.balance.webkit"
+    _name = "situation.balance.report"
+    _description = "Situation Balance Report"
+
+    _defaults = {
+            'fiscalyear_id': '',
+            'filter': 'filter_period',
+    }
+
+    def _print_report(self, cursor, uid, ids, data, context=None):
+        context = context or {}
+        # we update form with display account value
+        data = self.pre_print_report(cursor, uid, ids, data, context=context)
+        
+        return {
+            'type': 'ir.actions.report.xml',
+            'report_name': 'l10n_cr_account_financial_staments.account.situation_balance_report',
+            'datas': data}
+            
+    def _build_contexts(self, cr, uid, ids, data, context=None):
+        data['form']['period_to'] = data['form']['period_from']
+        res = super(SituationBalanceReportWizard, self)._build_contexts(cr, uid, ids, data,context=context)
+        return res
+
+SituationBalanceReportWizard()

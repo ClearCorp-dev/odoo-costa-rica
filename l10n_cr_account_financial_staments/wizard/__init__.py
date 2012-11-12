@@ -20,4 +20,6 @@
 #
 ##############################################################################
 
-import income_statement_report
+
+import income_statement_report_wizard
+import situation_balance_report_wizard

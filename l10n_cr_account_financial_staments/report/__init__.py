@@ -20,33 +20,5 @@
 #
 ##############################################################################
 
-from osv import osv
-
-
-class IncomeStatementReportWizard(osv.osv_memory):
-    
-    _inherit = "trial.balance.webkit"
-    _name = "income.statement.report"
-    _description = "Income Statement Report"
-
-    _defaults = {
-            'fiscalyear_id': '',
-            'filter': 'filter_period',
-    }
-
-    def _print_report(self, cursor, uid, ids, data, context=None):
-        context = context or {}
-        # we update form with display account value
-        data = self.pre_print_report(cursor, uid, ids, data, context=context)
-        
-        return {
-            'type': 'ir.actions.report.xml',
-            'report_name': 'l10n_cr_income_statement_report.account.income_statement_report',
-            'datas': data}
-            
-    def _build_contexts(self, cr, uid, ids, data, context=None):
-        data['form']['period_to'] = data['form']['period_from']
-        res = super(IncomeStatementReportWizard, self)._build_contexts(cr, uid, ids, data,context=context)
-        return res
-
-IncomeStatementReportWizard()
+import income_statement_report
+import situation_balance_report

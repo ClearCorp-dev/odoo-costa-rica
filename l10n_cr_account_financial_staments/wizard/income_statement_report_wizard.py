@@ -19,34 +19,34 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'l10n_cr_income_statement_report',
-    'version': '1.0',
-    'category': 'Finance',
-    "sequence": 38,
-    'complexity': "normal",
-    'description': """
-l10n_cr_income_statement_report.
-=======================
-    * Income Statement Report
-    """,
-    'author': 'CLEARCORP S.A.',
-    'website': 'http://www.clearcorp.co.cr',
-    'depends': [
-        'account',
-        'account_financial_report_webkit',
-        'account_voucher_payment_method',
-        'base_currency_symbol',        
-    ],
-    'update_xml': [
-                    'report/report.xml',
-                    'wizard/income_statement_report_wizard_view.xml',
-                    'report_menus.xml',
-                    #'payroll_report.xml',
-                    ],
-    'installable': True,
-    'auto_install': False,
-    'application': True,
-}
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+from osv import osv
+
+
+class IncomeStatementReportWizard(osv.osv_memory):
+    
+    _inherit = "trial.balance.webkit"
+    _name = "income.statement.report"
+    _description = "Income Statement Report"
+
+    _defaults = {
+            'fiscalyear_id': '',
+            'filter': 'filter_period',
+    }
+
+    def _print_report(self, cursor, uid, ids, data, context=None):
+        context = context or {}
+        # we update form with display account value
+        data = self.pre_print_report(cursor, uid, ids, data, context=context)
+        
+        return {
+            'type': 'ir.actions.report.xml',
+            'report_name': 'l10n_cr_account_financial_staments.account.income_statement_report',
+            'datas': data}
+            
+    def _build_contexts(self, cr, uid, ids, data, context=None):
+        data['form']['period_to'] = data['form']['period_from']
+        res = super(IncomeStatementReportWizard, self)._build_contexts(cr, uid, ids, data,context=context)
+        return res
+
+IncomeStatementReportWizard()
