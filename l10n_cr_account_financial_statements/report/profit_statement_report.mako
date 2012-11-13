@@ -1,7 +1,7 @@
 <!DOCTYPE html SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <link rel='stylesheet' href='addons/account_webkit_report_library/webkit_headers/main.css'>
+        <link rel='stylesheet' href='addons/account_webkit_report_library/webkit_headers/main.css' />
     </head>
     <body class="data">
         <%setLang(user.context_lang)%>
@@ -22,7 +22,7 @@
                 <div style="table-cell subtitle">${_('Profit Statement of:')} ${start_period.name}</div>
             </div>
         </div>
-        <div class="act_as_table data_table">
+        <div class="table data_table">
             <div class="act_as_thead">
                 <div class="act_as_row labels no_wrap">
                     <div class="act_as_cell first_column" style="width: 500px">${_('Name')}</div>
