@@ -2,6 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <link rel='stylesheet' href='addons/account_webkit_report_library/webkit_headers/main.css' />
+        <style>
+            ${css}
+        </style>
     </head>
     <body class="data">
         <%setLang(user.context_lang)%>
