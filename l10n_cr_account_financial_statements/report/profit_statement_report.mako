@@ -22,10 +22,6 @@
                 <div style="table-cell subtitle">${_('Profit Statement of:')} ${start_period.name}</div>
             </div>
         </div>
-        <div style="font-size: 20px; font-weight: bold; text-align: center;"> ${company.partner_id.name}</div>
-        <div style="font-size: 25px; font-weight: bold; text-align: center;"> ${_('Profit Statement')}</div>
-        <div style="font-size: 16px; font-weight: bold; text-align: center;">${_('Profit Statement of:')} ${start_period.name}</div>
-        <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
         <div class="act_as_table data_table">
             <div class="act_as_thead">
                 <div class="act_as_row labels no_wrap">
