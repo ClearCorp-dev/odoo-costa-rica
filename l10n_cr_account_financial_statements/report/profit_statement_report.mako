@@ -122,11 +122,11 @@
                         account_total_percentage_variation = account_total_last_period != 0 and (100 * account_total_variation / account_total_last_period) or 0
                     %>
                     %if account.level == 0:
-                    <div class="table_row bold">
+                    <div class="table-row bold">
                     %elif account.child_id:
-                    <div class="table_row bold">
+                    <div class="table-row bold">
                     %else:
-                    <div class="table_row">
+                    <div class="table-row">
                     %endif
                         <div class="table-cell first_column">${account.code}</div>
                         <div class="table-cell" style="padding-left:${account.level*10}px">${_(account.name)}</div>
