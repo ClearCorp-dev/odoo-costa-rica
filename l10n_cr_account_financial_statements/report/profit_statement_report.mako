@@ -26,16 +26,16 @@
         <div class="table list">
             <div class="table-header">
                 <div class="table-row labels no-wrap">
-                    <div class="table-cell first-column" style="width: 100px">${_('Code')}</div>
-                    <div class="table-cell" style="width: 400px">${_('Name')}</div>
-                    <div class="table-cell amount" style="width: 100px">${start_period.name}</div>
-                    <div class="table-cell amount" style="width: 40px">${_('%')}</div>
-                    <div class="table-cell amount" style="width: 100px">${last_period.name}</div>
-                    <div class="table-cell amount" style="width: 40px">${_('%')}</div>
-                    <div class="table-cell amount" style="width: 100px">${fiscalyear.name}</div>
-                    <div class="table-cell amount" style="width: 40px">${_('%')}</div>
-                    <div class="table-cell amount" style="width: 100px">${_('Variation')}</div>
-                    <div class="table-cell last-column amount" style="width: 40px">${_('%')}</div>
+                    <div class="table-cell first-column" style="width: 70px">${_('Account')}<br />${_('Code')}</div>
+                    <div class="table-cell" style="width: 430px">${_('Account')}<br />${_('Name')}</div>
+                    <div class="table-cell amount" style="width: 100px">${_('Previous period')}<br />${last_period.name}</div>
+                    <div class="table-cell amount" style="width: 40px">${_('%')}<br />${_('V')}</div>
+                    <div class="table-cell amount" style="width: 100px">${_('Selected period')}<br />${start_period.name}</div>
+                    <div class="table-cell amount" style="width: 40px">${_('%')}<br />${_('V')}</div>
+                    <div class="table-cell amount" style="width: 100px">${_('Variation')}<br />${_('Prev. vs Sel.')}</div>
+                    <div class="table-cell amount" style="width: 40px">${_('Var.')}<br />${_('%')}</div>
+                    <div class="table-cell amount" style="width: 100px">${_('Acum. Fiscal Year')}<br />${fiscalyear.name}</div>
+                    <div class="table-cell last-column amount" style="width: 40px">${_('%')}<br />${_('V')}</div>
                 </div>
             </div>
             <div class="table-body">
@@ -88,14 +88,14 @@
                     %endif
                         <div class="table-cell first-column">${account.code}</div>
                         <div class="table-cell" style="padding-left:${account.level*10}px">${_(account.name)}</div>
-                        <div class="table-cell amount" >${formatLang(account_total_period)}</div>
-                        <div class="table-cell amount" >${formatLang(account_total_percentage_period)}</div>
                         <div class="table-cell amount" >${formatLang(account_total_last_period)}</div>
                         <div class="table-cell amount" >${formatLang(account_total_percentage_last_period)}</div>
-                        <div class="table-cell amount" >${formatLang(account_total_fiscalyear)}</div>
-                        <div class="table-cell amount" >${formatLang(account_total_percentage_fiscalyear)}</div>
+                        <div class="table-cell amount" >${formatLang(account_total_period)}</div>
+                        <div class="table-cell amount" >${formatLang(account_total_percentage_period)}</div>
                         <div class="table-cell amount" >${formatLang(account_total_variation)}</div>
-                        <div class="table-cell amount last-column" >${formatLang(account_total_percentage_variation)}</div>
+                        <div class="table-cell amount" >${formatLang(account_total_percentage_variation)}</div>
+                        <div class="table-cell amount" >${formatLang(account_total_fiscalyear)}</div>
+                        <div class="table-cell amount last-column" >${formatLang(account_total_percentage_fiscalyear)}</div>
                     </div>
                     <%
                         if row_even:
@@ -107,14 +107,14 @@
                 <div class="table-row subtotal">
                     <div class="table-cell first-column">&nbsp;</div>
                     <div class="table-cell">${_('INCOME TOTAL')}</div>
-                    <div class="table-cell amount" >${formatLang(income_total_period)}</div>
-                    <div class="table-cell amount" >${formatLang(income_total_percentage_period)}</div>
                     <div class="table-cell amount" >${formatLang(income_total_last_period)}</div>
                     <div class="table-cell amount" >${formatLang(income_total_percentage_last_period)}</div>
-                    <div class="table-cell amount" >${formatLang(income_total_fiscalyear)}</div>
-                    <div class="table-cell amount" >${formatLang(income_total_percentage_fiscalyear)}</div>
+                    <div class="table-cell amount" >${formatLang(income_total_period)}</div>
+                    <div class="table-cell amount" >${formatLang(income_total_percentage_period)}</div>
                     <div class="table-cell amount" >${formatLang(income_total_variation)}</div>
-                    <div class="table-cell amount last-column" >${formatLang(income_total_percentage_variation)}</div>
+                    <div class="table-cell amount" >${formatLang(income_total_percentage_variation)}</div>
+                    <div class="table-cell amount" >${formatLang(income_total_fiscalyear)}</div>
+                    <div class="table-cell amount last-column" >${formatLang(income_total_percentage_fiscalyear)}</div>
                 </div>
                 
                 <% row_even = False %>
@@ -138,14 +138,14 @@
                     %endif
                         <div class="table-cell first-column">${account.code}</div>
                         <div class="table-cell" style="padding-left:${account.level*10}px">${_(account.name)}</div>
-                        <div class="table-cell amount" >${formatLang(account_total_period)}</div>
-                        <div class="table-cell amount" >${formatLang(account_total_percentage_period)}</div>
                         <div class="table-cell amount" >${formatLang(account_total_last_period)}</div>
                         <div class="table-cell amount" >${formatLang(account_total_percentage_last_period)}</div>
-                        <div class="table-cell amount" >${formatLang(account_total_fiscalyear)}</div>
-                        <div class="table-cell amount" >${formatLang(account_total_percentage_fiscalyear)}</div>
+                        <div class="table-cell amount" >${formatLang(account_total_period)}</div>
+                        <div class="table-cell amount" >${formatLang(account_total_percentage_period)}</div>
                         <div class="table-cell amount" >${formatLang(account_total_variation)}</div>
-                        <div class="table-cell amount last-column" >${formatLang(account_total_percentage_variation)}</div>
+                        <div class="table-cell amount" >${formatLang(account_total_percentage_variation)}</div>
+                        <div class="table-cell amount" >${formatLang(account_total_fiscalyear)}</div>
+                        <div class="table-cell amount last-column" >${formatLang(account_total_percentage_fiscalyear)}</div>
                     </div>
                     <%
                         if row_even:
@@ -158,38 +158,38 @@
                 <div class="table-row subtotal">
                     <div class="table-cell first-column">&nbsp;</div>
                     <div class="table-cell">${_('INCOME TOTAL')}</div>
-                    <div class="table-cell amount" >${formatLang(income_total_period)}</div>
-                    <div class="table-cell amount" >${formatLang(income_total_percentage_period)}</div>
                     <div class="table-cell amount" >${formatLang(income_total_last_period)}</div>
                     <div class="table-cell amount" >${formatLang(income_total_percentage_last_period)}</div>
-                    <div class="table-cell amount" >${formatLang(income_total_fiscalyear)}</div>
-                    <div class="table-cell amount" >${formatLang(income_total_percentage_fiscalyear)}</div>
+                    <div class="table-cell amount" >${formatLang(income_total_period)}</div>
+                    <div class="table-cell amount" >${formatLang(income_total_percentage_period)}</div>
                     <div class="table-cell amount" >${formatLang(income_total_variation)}</div>
-                    <div class="table-cell amount last-column" >${formatLang(income_total_percentage_variation)}</div>
+                    <div class="table-cell amount" >${formatLang(income_total_percentage_variation)}</div>
+                    <div class="table-cell amount" >${formatLang(income_total_fiscalyear)}</div>
+                    <div class="table-cell amount last-column" >${formatLang(income_total_percentage_fiscalyear)}</div>
                 </div>
                 <div class="table-row subtotal">
                     <div class="table-cell first-column">&nbsp;</div>
                     <div class="table-cell">${_('EXPENSE TOTAL')}</div>
-                    <div class="table-cell amount" >${formatLang(expense_total_period)}</div>
-                    <div class="table-cell amount" >${formatLang(expense_total_percentage_period)}</div>
                     <div class="table-cell amount" >${formatLang(expense_total_last_period)}</div>
                     <div class="table-cell amount" >${formatLang(expense_total_percentage_last_period)}</div>
-                    <div class="table-cell amount" >${formatLang(expense_total_fiscalyear)}</div>
-                    <div class="table-cell amount" >${formatLang(expense_total_percentage_fiscalyear)}</div>
+                    <div class="table-cell amount" >${formatLang(expense_total_period)}</div>
+                    <div class="table-cell amount" >${formatLang(expense_total_percentage_period)}</div>
                     <div class="table-cell amount" >${formatLang(expense_total_variation)}</div>
-                    <div class="table-cell amount last-column" >${formatLang(expense_total_percentage_variation)}</div>
+                    <div class="table-cell amount" >${formatLang(expense_total_percentage_variation)}</div>
+                    <div class="table-cell amount" >${formatLang(expense_total_fiscalyear)}</div>
+                    <div class="table-cell amount last-column" >${formatLang(expense_total_percentage_fiscalyear)}</div>
                 </div>
                 <div class="table-row total">
                     <div class="table-cell first-column">&nbsp;</div>
                     <div class="table-cell">${_('TOTAL')}</div>
-                    <div class="table-cell amount" >${formatLang(total_period)}</div>
-                    <div class="table-cell amount" >${formatLang(total_percentage_period)}</div>
                     <div class="table-cell amount" >${formatLang(total_last_period)}</div>
                     <div class="table-cell amount" >${formatLang(total_percentage_last_period)}</div>
-                    <div class="table-cell amount" >${formatLang(total_fiscalyear)}</div>
-                    <div class="table-cell amount" >${formatLang(total_percentage_fiscalyear)}</div>
+                    <div class="table-cell amount" >${formatLang(total_period)}</div>
+                    <div class="table-cell amount" >${formatLang(total_percentage_period)}</div>
                     <div class="table-cell amount" >${formatLang(total_variation)}</div>
-                    <div class="table-cell amount last-column" >${formatLang(total_percentage_variation)}</div>
+                    <div class="table-cell amount" >${formatLang(total_percentage_variation)}</div>
+                    <div class="table-cell amount" >${formatLang(total_fiscalyear)}</div>
+                    <div class="table-cell amount last-column" >${formatLang(total_percentage_fiscalyear)}</div>
                 </div>
             </div>
         </div>
