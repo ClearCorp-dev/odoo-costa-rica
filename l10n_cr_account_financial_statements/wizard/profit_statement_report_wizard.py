@@ -23,11 +23,11 @@
 from osv import osv
 
 
-class IncomeStatementReportWizard(osv.osv_memory):
+class ProfitStatementReportWizard(osv.osv_memory):
     
     _inherit = "trial.balance.webkit"
-    _name = "income.statement.report"
-    _description = "Income Statement Report"
+    _name = "profit.statement.report"
+    _description = "Profit Statement"
 
     _defaults = {
             'fiscalyear_id': '',
@@ -41,12 +41,10 @@ class IncomeStatementReportWizard(osv.osv_memory):
         
         return {
             'type': 'ir.actions.report.xml',
-            'report_name': 'l10n_cr_income_statement_report.account.income_statement_report',
+            'report_name': 'l10n_cr_account_financial_statements.account.profit_statement_report',
             'datas': data}
             
     def _build_contexts(self, cr, uid, ids, data, context=None):
         data['form']['period_to'] = data['form']['period_from']
-        res = super(IncomeStatementReportWizard, self)._build_contexts(cr, uid, ids, data,context=context)
+        res = super(ProfitStatementReportWizard, self)._build_contexts(cr, uid, ids, data,context=context)
         return res
-
-IncomeStatementReportWizard()

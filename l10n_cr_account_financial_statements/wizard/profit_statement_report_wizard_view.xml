@@ -8,16 +8,16 @@
           -->
 
 
-        <record id="income_statement_report_view_webkit" model="ir.ui.view">
-            <field name="name">Income Statement Report</field>
-            <field name="model">income.statement.report</field>
+        <record id="profit_statement_report_view_webkit" model="ir.ui.view">
+            <field name="name">Profit Statement Report</field>
+            <field name="model">profit.statement.report</field>
             <field name="type">form</field>
             <field name="inherit_id" ref="account.account_common_report_view"/>
             <field name="arch" type="xml">
                 <data>
                     <xpath expr="/form/label[@string='']" position="replace">
-                        <separator string="Income Statement Report" colspan="4"/>
-                        <label nolabel="1" colspan="4" string="This report allows you to print or generate a pdf of your income statement"/>
+                        <separator string="Profit Statement" colspan="4"/>
+                        <label nolabel="1" colspan="4" string="This report allows you to print or generate a pdf of your profit statement"/>
                     </xpath>                    
                     <field name="chart_account_id" position='attributes'>
                         <attribute name="colspan">4</attribute>
@@ -53,23 +53,23 @@
             </field>
         </record>
 
-        <record id="action_income_statement_report_menu_webkit" model="ir.actions.act_window">
-            <field name="name">Action Income Statement Report</field>
+        <record id="action_profit_statement_report_menu_webkit" model="ir.actions.act_window">
+            <field name="name">Action Profit Statement Report</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">income.statement.report</field>
+            <field name="res_model">profit.statement.report</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
-            <field name="view_id" ref="income_statement_report_view_webkit"/>
+            <field name="view_id" ref="profit_statement_report_view_webkit"/>
             <field name="target">new</field>
         </record>
         
-        <record model="ir.values" id="action_income_statement_report_values_webkit">
+        <record model="ir.values" id="action_profit_statement_report_values_webkit">
             <field name="model_id" ref="account.model_account_account"/>
             <field name="object" eval="1"/>
-            <field name="name">Income Statement Report</field>
+            <field name="name">Profit Statement Report</field>
             <field name="key2">client_print_multi</field>
             <field name="value"
-                eval="'ir.actions.act_window,' +str(ref('action_income_statement_report_menu_webkit'))"/>
+                eval="'ir.actions.act_window,' +str(ref('action_profit_statement_report_menu_webkit'))"/>
             <field name="key">action</field>
             <field name="model">account.account</field>
         </record>

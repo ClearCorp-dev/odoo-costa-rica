@@ -20,4 +20,4 @@
 #
 ##############################################################################
 
-import income_statement_report
+import profit_statement_report
