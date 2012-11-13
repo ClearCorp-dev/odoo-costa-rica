@@ -13,16 +13,16 @@
             fiscalyear = get_fiscalyear(cr, uid, start_period)
             balance_data = get_data(cr, uid, data)
         %>
-        <div style="table header">
-            <div style="table-row">
-                <div style="table-cell logo" rowspan="3">${helper.embed_logo_by_name('internal_reports_logo', height=80)|n}</div>
-                <div style="table-cell company">${company.partner_id.name}</div>
+        <div class="table header">
+            <div class="table-row">
+                <div class="table-cell logo" rowspan="3">${helper.embed_logo_by_name('internal_reports_logo', height=80)|n}</div>
+                <div class="table-cell company">${company.partner_id.name}</div>
             </div>
-            <div style="table-row">
-                <div style="table-cell title">${_('Profit Statement')}</div>
+            <div class="table-row">
+                <div class="table-cell title">${_('Profit Statement')}</div>
             </div>
-            <div style="table-row">
-                <div style="table-cell subtitle">${_('Profit Statement of:')} ${start_period.name}</div>
+            <div class="table-row">
+                <div class="table-cell subtitle">${_('Profit Statement of:')} ${start_period.name}</div>
             </div>
         </div>
         <div class="table data_table">
