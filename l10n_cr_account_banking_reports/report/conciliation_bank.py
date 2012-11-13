@@ -212,7 +212,7 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
         fiscal_year_id = fiscalyear.id
         if filter_type == 'filter_date':
             period_ids = False
-            end_date = filter_data[1]
+            end_date = filter_data[1].id
         elif filter_type == 'filter_period':
             period_ids = self.pool.get('account.period').search(cr, uid, [('date_stop', '<=', filter_data[1].date_stop)])
             end_date = False
