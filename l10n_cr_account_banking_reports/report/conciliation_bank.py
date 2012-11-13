@@ -218,23 +218,23 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
                                                  uid,
                                                  [reconciled_account.id],
                                                  ['balance'],
-                                                 query=balance_query_filter, context=filters)[reconciled_account.id]['balance']
+                                                 context=filters)[reconciled_account.id]['balance']
             accounting_balance = account_webkit_report_library_obj.get_account_balance(cr,
                                                        uid,
                                                        [parent_account_id],
                                                        ['balance'],
-                                                       query=balance_query_filter, context=filters)[parent_account_id]['balance']
+                                                       context=filters)[parent_account_id]['balance']
         else:
             bank_balance = account_webkit_report_library_obj.get_account_balance(cr,
                                                  uid,
                                                  [reconciled_account.id],
                                                  ['balance'],
-                                                 query=balance_query_filter, context=filters)[reconciled_account.id]['balance']
+                                                 context=filters)[reconciled_account.id]['balance']
             accounting_balance = account_webkit_report_library_obj.get_account_balance(cr,
                                                        uid,
                                                        [parent_account_id],
                                                        ['balance'],
-                                                       query=balance_query_filter, context=filters)[parent_account_id]['balance']
+                                                       context=filters)[parent_account_id]['balance']
             
             '''
             bank_balance = reconciled_account.foreign_balance
