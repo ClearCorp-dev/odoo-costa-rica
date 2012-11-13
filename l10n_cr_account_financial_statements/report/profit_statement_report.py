@@ -106,10 +106,8 @@ class ProfitStatementReport(TrialBalanceWebkit):
         fiscal_year = self.get_fiscalyear(cr, uid, period)
         
         #build accounts list
-        income_accounts = []
         income_accounts = [category_account_ids['income']]
         income_accounts += library_obj.get_account_child_ids(cr, uid, category_account_ids['income'])
-        expense_accounts = []
         expense_accounts = [category_account_ids['expense']]
         expense_accounts += library_obj.get_account_child_ids(cr, uid, category_account_ids['expense'])
         
