@@ -1,22 +1,27 @@
 <!DOCTYPE html SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <style type="text/css">
-            .overflow_ellipsis {
-                text-overflow: ellipsis;
-                overflow: hidden;
-                white-space: nowrap;
-            }
-            ${css}
-        </style>
+        <link rel='stylesheet' href='addons/account_webkit_report_library/webkit_headers/main.css'>
     </head>
-    <body class = "data">
+    <body class="data">
         <%setLang(user.context_lang)%>
         <%
             last_period = get_last_period(cr, uid, start_period)
             fiscalyear = get_fiscalyear(cr, uid, start_period)
             balance_data = get_data(cr, uid, data)
         %>
+        <div style="table header">
+            <div style="table-row">
+                <div style="table-cell logo" rowspan="3">${helper.embed_logo_by_name('internal_reports_logo', height=80)|n}</div>
+                <div style="table-cell company">${company.partner_id.name}</div>
+            </div>
+            <div style="table-row">
+                <div style="table-cell title">${_('Profit Statement')}</div>
+            </div>
+            <div style="table-row">
+                <div style="table-cell subtitle">${_('Profit Statement of:')} ${start_period.name}</div>
+            </div>
+        </div>
         <div style="font-size: 20px; font-weight: bold; text-align: center;"> ${company.partner_id.name}</div>
         <div style="font-size: 25px; font-weight: bold; text-align: center;"> ${_('Profit Statement')}</div>
         <div style="font-size: 16px; font-weight: bold; text-align: center;">${_('Profit Statement of:')} ${start_period.name}</div>
