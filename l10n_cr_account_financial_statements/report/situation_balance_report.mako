@@ -60,8 +60,8 @@
                     expense_total_variation = expense_total_period - expense_total_fiscalyear
                     expense_total_percentage_variation = expense_total_fiscalyear != 0 and (100 * expense_total_variation / expense_total_fiscalyear) or 0
                     
-                    profit_total_period = income_total_period - expense_total_period
-                    profit_total_fiscalyear = income_total_fiscalyear - expense_total_fiscalyear
+                    profit_total_period = income_total_period + expense_total_period
+                    profit_total_fiscalyear = income_total_fiscalyear + expense_total_fiscalyear
                     profit_total_variation = profit_total_period - profit_total_fiscalyear
                     profit_total_percentage_variation = profit_total_fiscalyear != 0 and (100 * profit_total_variation / profit_total_fiscalyear) or 0
                     
@@ -208,6 +208,14 @@
                     <div class="table-cell amount" >${formatLang(liability_equity_total_period)}</div>
                     <div class="table-cell amount" >${formatLang(liability_equity_total_variation)}</div>
                     <div class="table-cell amount last-column" >${formatLang(liability_equity_total_percentage_variation)}</div>
+                </div>
+                <div class="table-row subtotal">
+                    <div class="table-cell first-column">&nbsp;</div>
+                    <div class="table-cell">${_('PROFIT TOTAL')}</div>
+                    <div class="table-cell amount" >${formatLang(profit_total_fiscalyear)}</div>
+                    <div class="table-cell amount" >${formatLang(profit_total_period)}</div>
+                    <div class="table-cell amount" >${formatLang(profit_total_variation)}</div>
+                    <div class="table-cell amount last-column" >${formatLang(profit_total_percentage_variation)}</div>
                 </div>
                 <div class="table-row total">
                     <div class="table-cell first-column">&nbsp;</div>
