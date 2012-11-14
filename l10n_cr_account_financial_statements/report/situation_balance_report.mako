@@ -66,15 +66,15 @@
                     profit_total_variation = profit_total_period - profit_total_fiscalyear
                     profit_total_percentage_variation = profit_total_fiscalyear != 0 and (100 * profit_total_variation / profit_total_fiscalyear) or 0
                     
-                    liability-equity_total_period = liability_total_period + equity_total_period
-                    liability-equity_total_fiscalyear = liability_total_fiscalyear + equity_total_fiscalyear
-                    liability-equity_total_variation = liability-equity_total_period - liability-equity_total_fiscalyear
-                    liability-equity_total_percentage_variation = liability-equity_total_fiscalyear != 0 and (100 * liability-equity_total_variation / liability-equity_total_fiscalyear) or 0
+                    liability_equity_total_period = liability_total_period + equity_total_period
+                    liability_equity_total_fiscalyear = liability_total_fiscalyear + equity_total_fiscalyear
+                    liability_equity_total_variation = liability_equity_total_period - liability_equity_total_fiscalyear
+                    liability_equity_total_percentage_variation = liability_equity_total_fiscalyear != 0 and (100 * liability_equity_total_variation / liability_equity_total_fiscalyear) or 0
                     
-                    liability-equity-profit_total_period = liability_total_period + equity_total_period + profit_total_period
-                    liability-equity-profit_total_fiscalyear = liability_total_fiscalyear + equity_total_fiscalyear + profit_total_fiscalyear
-                    liability-equity-profit_total_variation = liability-equity-profit_total_period - liability-equity-profit_total_fiscalyear
-                    liability-equity-profit_total_percentage_variation = liability-equity-profit_total_fiscalyear != 0 and (100 * liability-equity-profit_total_variation / liability-equity-profit_total_fiscalyear) or 0
+                    liability_equity_profit_total_period = liability_total_period + equity_total_period + profit_total_period
+                    liability_equity_profit_total_fiscalyear = liability_total_fiscalyear + equity_total_fiscalyear + profit_total_fiscalyear
+                    liability_equity_profit_total_variation = liability_equity_profit_total_period - liability_equity_profit_total_fiscalyear
+                    liability_equity_profit_total_percentage_variation = liability_equity_profit_total_fiscalyear != 0 and (100 * liability_equity_profit_total_variation / liability_equity_profit_total_fiscalyear) or 0
                 %>
                 <% row_even = False %>
                 %for account in balance_data['asset_accounts']:
@@ -205,18 +205,18 @@
                 <div class="table-row subtotal">
                     <div class="table-cell first-column">&nbsp;</div>
                     <div class="table-cell">${_('LIABITLITY + EQUITY TOTAL')}</div>
-                    <div class="table-cell amount" >${formatLang(liability-equity_total_fiscalyear)}</div>
-                    <div class="table-cell amount" >${formatLang(liability-equity_total_period)}</div>
-                    <div class="table-cell amount" >${formatLang(liability-equity_total_variation)}</div>
-                    <div class="table-cell amount last-column" >${formatLang(liability-equity_total_percentage_variation)}</div>
+                    <div class="table-cell amount" >${formatLang(liability_equity_total_fiscalyear)}</div>
+                    <div class="table-cell amount" >${formatLang(liability_equity_total_period)}</div>
+                    <div class="table-cell amount" >${formatLang(liability_equity_total_variation)}</div>
+                    <div class="table-cell amount last-column" >${formatLang(liability_equity_total_percentage_variation)}</div>
                 </div>
                 <div class="table-row total">
                     <div class="table-cell first-column">&nbsp;</div>
                     <div class="table-cell">${_('LIABITLITY + EQUITY + PROFIT TOTAL')}</div>
-                    <div class="table-cell amount" >${formatLang(liability-equity-profit_total_fiscalyear)}</div>
-                    <div class="table-cell amount" >${formatLang(liability-equity-profit_total_period)}</div>
-                    <div class="table-cell amount" >${formatLang(liability-equity-profit_total_variation)}</div>
-                    <div class="table-cell amount last-column" >${formatLang(liability-equity-profit_total_percentage_variation)}</div>
+                    <div class="table-cell amount" >${formatLang(liability_equity_profit_total_fiscalyear)}</div>
+                    <div class="table-cell amount" >${formatLang(liability_equity_profit_total_period)}</div>
+                    <div class="table-cell amount" >${formatLang(liability_equity_profit_total_variation)}</div>
+                    <div class="table-cell amount last-column" >${formatLang(liability_equity_profit_total_percentage_variation)}</div>
                 </div>
                 <div class="table-row total">
                     <div class="table-cell first-column">&nbsp;</div>
