@@ -75,8 +75,8 @@ msgstr "No hay períodos previos para comparar"
 
 #. module: l10n_cr_account_financial_statements
 #: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:205
-msgid "PROFIT"
-msgstr "UTILIDAD"
+msgid "PROFIT OR LOSS"
+msgstr "RESULTADO"
 
 #. module: l10n_cr_account_financial_statements
 #: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:33
