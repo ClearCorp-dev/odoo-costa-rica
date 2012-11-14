@@ -181,7 +181,7 @@
                 </div>
                 <div class="table-row total">
                     <div class="table-cell first-column">&nbsp;</div>
-                    <div class="table-cell">${_('TOTAL')}</div>
+                    <div class="table-cell">${_('PROFIT')}</div>
                     <div class="table-cell amount" >${formatLang(total_last_period)}</div>
                     <div class="table-cell amount" >${formatLang(total_percentage_last_period)}</div>
                     <div class="table-cell amount" >${formatLang(total_period)}</div>
