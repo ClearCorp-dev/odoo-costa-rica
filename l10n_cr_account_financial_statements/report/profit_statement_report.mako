@@ -17,17 +17,17 @@
             <div class="table-row">
                 <div class="table-cell logo">${helper.embed_logo_by_name('internal_reports_logo', height=80)|n}</div>
                 <div class="table-cell text">
-                    <p class="company">${company.partner_id.name}</p>
+                    <p class="company">${company.prefix} ${company.partner_id.name}</p>
                     <p class="title">${_('Profit Statement')}</p>
-                    <p class="subtitle">${_('Profit Statement of:')} ${start_period.name}</p>
+                    <p class="subtitle">${_('Fiscal Year:')} ${fiscalyear.name} - ${_('Until Period:')} ${start_period.name}</p>
                 </div>
             </div>
         </div>
         <div class="table list">
             <div class="table-header">
                 <div class="table-row labels no-wrap">
-                    <div class="table-cell first-column" style="width: 70px">${_('Account')}<br />${_('Code')}</div>
-                    <div class="table-cell" style="width: 430px">${_('Account')}<br />${_('Name')}</div>
+                    <div class="table-cell first-column" style="width: 70px">${_('Account<br />Code')}</div>
+                    <div class="table-cell" style="width: 430px">${_('Account<br />Name')}</div>
                     <div class="table-cell amount" style="width: 100px">${_('Previous period')}<br />${last_period.name}</div>
                     <div class="table-cell amount" style="width: 40px">${_('%')}<br />${_('V')}</div>
                     <div class="table-cell amount" style="width: 100px">${_('Selected period')}<br />${start_period.name}</div>
