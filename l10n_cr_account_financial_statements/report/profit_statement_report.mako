@@ -204,13 +204,13 @@
                     <div class="table-cell first-column">&nbsp;</div>
                     <div class="table-cell">${_('PROFIT')}</div>
                     <div class="table-cell amount ${total_last_period > 0 and 'alert' or ''}" >${formatLang(total_last_period)}</div>
-                    <div class="table-cell amount ${total_percentage_last_period > -100 and 'alert' or ''}" >${formatLang(total_percentage_last_period)}</div>
+                    <div class="table-cell amount ${total_last_period > 0 and 'alert' or ''}" >${formatLang(total_percentage_last_period)}</div>
                     <div class="table-cell amount ${total_period > 0 and 'alert' or ''}" >${formatLang(total_period)}</div>
-                    <div class="table-cell amount ${total_percentage_period > -100 and 'alert' or ''}" >${formatLang(total_percentage_period)}</div>
+                    <div class="table-cell amount ${total_period > 0 and 'alert' or ''}" >${formatLang(total_percentage_period)}</div>
                     <div class="table-cell amount ${total_variation > 0 and 'alert' or ''}" >${formatLang(total_variation)}</div>
                     <div class="table-cell amount ${total_variation > 0 and 'alert' or ''}" >${formatLang(total_percentage_variation)}</div>
                     <div class="table-cell amount ${total_fiscalyear > 0 and 'alert' or ''}" >${formatLang(total_fiscalyear)}</div>
-                    <div class="table-cell amount last-column ${total_percentage_fiscalyear > -100 and 'alert' or ''}" >${formatLang(total_percentage_fiscalyear)}</div>
+                    <div class="table-cell amount last-column ${total_fiscalyear > 0 and 'alert' or ''}" >${formatLang(total_percentage_fiscalyear)}</div>
                 </div>
             </div>
         </div>
