@@ -17,7 +17,7 @@
             <div class="table-row">
                 <div class="table-cell logo">${helper.embed_logo_by_name('internal_reports_logo', height=80)|n}</div>
                 <div class="table-cell text">
-                    <p class="company">${company.prefix} ${company.partner_id.name}</p>
+                    <p class="company">${fiscalyear.company_id.prefix} ${fiscalyear.company_id.partner_id.name}</p>
                     <p class="title">${_('Profit Statement')}</p>
                     <p class="subtitle">${_('Fiscal Year:')} ${fiscalyear.name} - ${_('Until Period:')} ${start_period.name}</p>
                 </div>
@@ -116,6 +116,9 @@
                     <div class="table-cell amount" >${formatLang(income_total_fiscalyear)}</div>
                     <div class="table-cell amount last-column" >${formatLang(income_total_percentage_fiscalyear)}</div>
                 </div>
+                <div class="table-row spacer">
+                    <div class="table-cell">&nbsp;</div>
+                </div>
                 
                 <% row_even = False %>
                 %for account in balance_data['expense_accounts']:
@@ -154,6 +157,24 @@
                             row_even = True
                     %>
                 %endfor
+                <div class="table-row subtotal">
+                    <div class="table-cell first-column">&nbsp;</div>
+                    <div class="table-cell">${_('EXPENSE TOTAL')}</div>
+                    <div class="table-cell amount" >${formatLang(expense_total_last_period)}</div>
+                    <div class="table-cell amount" >${formatLang(expense_total_percentage_last_period)}</div>
+                    <div class="table-cell amount" >${formatLang(expense_total_period)}</div>
+                    <div class="table-cell amount" >${formatLang(expense_total_percentage_period)}</div>
+                    <div class="table-cell amount" >${formatLang(expense_total_variation)}</div>
+                    <div class="table-cell amount" >${formatLang(expense_total_percentage_variation)}</div>
+                    <div class="table-cell amount" >${formatLang(expense_total_fiscalyear)}</div>
+                    <div class="table-cell amount last-column" >${formatLang(expense_total_percentage_fiscalyear)}</div>
+                </div>
+                <div class="table-row spacer">
+                    <div class="table-cell">&nbsp;</div>
+                </div>
+                <div class="table-row spacer">
+                    <div class="table-cell">&nbsp;</div>
+                </div>
                 
                 <div class="table-row subtotal">
                     <div class="table-cell first-column">&nbsp;</div>
