@@ -216,7 +216,7 @@ class IncomeStatementReport(TrialBalanceWebkit):
         
 
 HeaderFooterTextWebKitParser(
-    'report.l10n_cr_account_financial_staments.account.situation_balance_report',
+    'report.l10n_cr_account_financial_statements.account.situation_balance_report',
     'account.account',
-    'addons/l10n_cr_account_financial_staments/report/situation_balance_report.mako',
+    'addons/l10n_cr_account_financial_statements/report/situation_balance_report.mako',
     parser=IncomeStatementReport)

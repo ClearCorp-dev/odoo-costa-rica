@@ -41,7 +41,7 @@ class SituationBalanceReportWizard(osv.osv_memory):
         
         return {
             'type': 'ir.actions.report.xml',
-            'report_name': 'l10n_cr_account_financial_staments.account.situation_balance_report',
+            'report_name': 'l10n_cr_account_financial_statements.account.situation_balance_report',
             'datas': data}
             
     def _build_contexts(self, cr, uid, ids, data, context=None):

@@ -18,9 +18,9 @@
              <field name="report_file">l10n_cr_account_financial_statements/report/profit_statement_report.mako</field>
          </record>
          
-         <record id="l10n_cr_account_financial_staments.situation_balance_report" model="ir.actions.report.xml">
+         <record id="l10n_cr_account_financial_statements.situation_balance_report" model="ir.actions.report.xml">
              <field name="report_type">webkit</field>             
-             <field name="report_name">l10n_cr_account_financial_staments.account.situation_balance_report</field>
+             <field name="report_name">l10n_cr_account_financial_statements.account.situation_balance_report</field>
              <field eval="[(6,0,[])]" name="groups_id"/>
              <field eval="0" name="multi"/>
              <field eval="0" name="auto"/>
@@ -28,8 +28,8 @@
              <field name="model">situation.balance.report</field>
              <field name="type">ir.actions.report.xml</field>
              <field name="name">Situation Balance Report</field>
-             <field name="report_rml">l10n_cr_account_financial_staments/report/situation_balance_report.mako</field>
-             <field name="report_file">l10n_cr_account_financial_staments/report/situation_balance_report.mako</field>
+             <field name="report_rml">l10n_cr_account_financial_statements/report/situation_balance_report.mako</field>
+             <field name="report_file">l10n_cr_account_financial_statements/report/situation_balance_report.mako</field>
          </record>
     </data>
 </openerp>
