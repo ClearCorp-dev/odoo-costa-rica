@@ -115,7 +115,7 @@ class IncomeStatementReport(TrialBalanceWebkit):
         company_id = account_chart['company_id'].id
         category_account_ids = library_obj.get_category_accounts(cr, uid, company_id)
         period = account_period_obj.browse(cr, uid, self._get_form_param('period_from', data))
-        fiscal_year = self.get_opening_period(cr, uid, period)
+        fiscal_year = self.get_fiscalyear(cr, uid, period)
         opening_period = self.get_opening_period(cr, uid, period)
         
         #build account_ids list
