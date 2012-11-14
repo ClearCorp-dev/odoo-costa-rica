@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-14 00:48+0000\n"
-"PO-Revision-Date: 2012-11-14 00:48+0000\n"
+"POT-Creation-Date: 2012-11-14 08:06+0000\n"
+"PO-Revision-Date: 2012-11-14 08:06+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,13 +17,42 @@ msgstr ""
 
 #. module: l10n_cr_account_financial_statements
 #: constraint:profit.statement.report:0
+#: constraint:situation.balance.report:0
 msgid "When no Fiscal year is selected, you must choose to filter by periods or by date."
 msgstr "Cuando el año fiscal no está seleccionado, debe escoger un filtro."
 
 #. module: l10n_cr_account_financial_statements
+#: report:addons/l10n_cr_account_financial_statements/report/situation_balance_report.mako:150
+msgid "LIABILITY TOTAL"
+msgstr "PASIVO TOTAL"
+
+#. module: l10n_cr_account_financial_statements
 #: field:profit.statement.report,account_ids:0
+#: field:situation.balance.report,account_ids:0
 msgid "Filter on accounts"
 msgstr "Filtro por cuentas"
+
+#. module: l10n_cr_account_financial_statements
+#: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:22
+msgid "Until Period:"
+msgstr "Hasta el mes:"
+
+#. module: l10n_cr_account_financial_statements
+#: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:32
+#: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:34
+#: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:38
+msgid "V"
+msgstr "V"
+
+#. module: l10n_cr_account_financial_statements
+#: report:addons/l10n_cr_account_financial_statements/report/situation_balance_report.mako:32
+msgid "Per. vs. FY Open."
+msgstr "Mes vs. Apert."
+
+#. module: l10n_cr_account_financial_statements
+#: report:addons/l10n_cr_account_financial_statements/report/situation_balance_report.mako:191
+msgid "EQUITY TOTAL"
+msgstr "PATRIMONIO TOTAL"
 
 #. module: l10n_cr_account_financial_statements
 #: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:37
@@ -32,8 +61,17 @@ msgstr "Año Fiscal Acum."
 
 #. module: l10n_cr_account_financial_statements
 #: help:profit.statement.report,account_ids:0
+#: help:situation.balance.report,account_ids:0
 msgid "Only selected accounts will be printed. Leave empty to print all accounts."
 msgstr "Solo las cuentas seleccionadas se utilizarán. Deje vacío el campo para utilizar todas las cuentas."
+
+#. module: l10n_cr_account_financial_statements
+#: model:ir.actions.report.xml,name:l10n_cr_account_financial_statements.situation_balance_report
+#: model:ir.model,name:l10n_cr_account_financial_statements.model_situation_balance_report
+#: model:ir.ui.menu,name:l10n_cr_account_financial_statements.menu_situation_balance_report
+#: view:situation.balance.report:0
+msgid "Situation Balance Report"
+msgstr "Balance de Situación"
 
 #. module: l10n_cr_account_financial_statements
 #: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:162
@@ -59,50 +97,71 @@ msgstr "Mes Anterior"
 #: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:34
 #: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:36
 #: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:38
+#: report:addons/l10n_cr_account_financial_statements/report/situation_balance_report.mako:33
 msgid "%"
 msgstr "%"
 
 #. module: l10n_cr_account_financial_statements
 #: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:30
+#: report:addons/l10n_cr_account_financial_statements/report/situation_balance_report.mako:29
 msgid "Account<br />Name"
 msgstr "Nombre de<br />Cuenta"
 
 #. module: l10n_cr_account_financial_statements
 #: code:addons/l10n_cr_account_financial_statements/report/profit_statement_report.py:85
+#: code:addons/l10n_cr_account_financial_statements/report/situation_balance_report.py:85
 #, python-format
 msgid "There is no previous period to compare"
 msgstr "No hay períodos previos para comparar"
 
 #. module: l10n_cr_account_financial_statements
 #: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:205
-msgid "PROFIT OR LOSS"
+msgid "PROFIT"
 msgstr "RESULTADO"
 
 #. module: l10n_cr_account_financial_statements
 #: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:33
+#: report:addons/l10n_cr_account_financial_statements/report/situation_balance_report.mako:31
 msgid "Selected period"
 msgstr "Mes Actual"
 
 #. module: l10n_cr_account_financial_statements
 #: field:profit.statement.report,company_id:0
+#: field:situation.balance.report,company_id:0
 msgid "Company"
 msgstr "Compañía"
 
 #. module: l10n_cr_account_financial_statements
+#: report:addons/l10n_cr_account_financial_statements/report/situation_balance_report.mako:20
+msgid "Situation Balance at "
+msgstr "Balance de Situación al "
+
+#. module: l10n_cr_account_financial_statements
 #: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:35
+#: report:addons/l10n_cr_account_financial_statements/report/situation_balance_report.mako:32
 msgid "Variation"
 msgstr "Variación"
 
 #. module: l10n_cr_account_financial_statements
 #: selection:profit.statement.report,display_account:0
+#: selection:situation.balance.report,display_account:0
 msgid "With balance is not equal to 0"
 msgstr "Con balance diferente a 0"
+
+#. module: l10n_cr_account_financial_statements
+#: report:addons/l10n_cr_account_financial_statements/report/situation_balance_report.mako:222
+msgid "LIABITLITY + EQUITY + PROFIT TOTAL"
+msgstr "PASIVO + PATRIMONIO + RESULTADO TOTAL"
 
 #. module: l10n_cr_account_financial_statements
 #: selection:profit.statement.report,comp0_filter:0
 #: selection:profit.statement.report,comp1_filter:0
 #: selection:profit.statement.report,comp2_filter:0
 #: selection:profit.statement.report,filter:0
+#: selection:situation.balance.report,comp0_filter:0
+#: selection:situation.balance.report,comp1_filter:0
+#: selection:situation.balance.report,comp2_filter:0
+#: selection:situation.balance.report,filter:0
 msgid "Date"
 msgstr "Fecha"
 
@@ -113,21 +172,25 @@ msgstr "Este reporte le permite imprimir o generar un PDF de su Estado de Result
 
 #. module: l10n_cr_account_financial_statements
 #: field:profit.statement.report,chart_account_id:0
+#: field:situation.balance.report,chart_account_id:0
 msgid "Chart of Account"
 msgstr "Catálogo de Cuentas"
 
 #. module: l10n_cr_account_financial_statements
 #: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:36
+#: report:addons/l10n_cr_account_financial_statements/report/situation_balance_report.mako:33
 msgid "Var."
 msgstr "Var."
 
 #. module: l10n_cr_account_financial_statements
 #: field:profit.statement.report,journal_ids:0
+#: field:situation.balance.report,journal_ids:0
 msgid "Journals"
 msgstr "Diarios"
 
 #. module: l10n_cr_account_financial_statements
 #: field:profit.statement.report,target_move:0
+#: field:situation.balance.report,target_move:0
 msgid "Target Moves"
 msgstr "Asientos"
 
@@ -136,6 +199,10 @@ msgstr "Asientos"
 #: selection:profit.statement.report,comp1_filter:0
 #: selection:profit.statement.report,comp2_filter:0
 #: selection:profit.statement.report,filter:0
+#: selection:situation.balance.report,comp0_filter:0
+#: selection:situation.balance.report,comp1_filter:0
+#: selection:situation.balance.report,comp2_filter:0
+#: selection:situation.balance.report,filter:0
 msgid "Periods"
 msgstr "Períodos"
 
@@ -144,11 +211,16 @@ msgstr "Períodos"
 #: field:profit.statement.report,comp1_date_to:0
 #: field:profit.statement.report,comp2_date_to:0
 #: field:profit.statement.report,date_to:0
+#: field:situation.balance.report,comp0_date_to:0
+#: field:situation.balance.report,comp1_date_to:0
+#: field:situation.balance.report,comp2_date_to:0
+#: field:situation.balance.report,date_to:0
 msgid "End Date"
 msgstr "Fecha Final"
 
 #. module: l10n_cr_account_financial_statements
 #: view:profit.statement.report:0
+#: view:situation.balance.report:0
 msgid "Dates"
 msgstr "Fechas"
 
@@ -157,22 +229,29 @@ msgstr "Fechas"
 #: field:profit.statement.report,comp1_period_from:0
 #: field:profit.statement.report,comp2_period_from:0
 #: field:profit.statement.report,period_from:0
+#: field:situation.balance.report,comp0_period_from:0
+#: field:situation.balance.report,comp1_period_from:0
+#: field:situation.balance.report,comp2_period_from:0
+#: field:situation.balance.report,period_from:0
 msgid "Start Period"
 msgstr "Período Inicial"
 
 #. module: l10n_cr_account_financial_statements
 #: selection:profit.statement.report,target_move:0
+#: selection:situation.balance.report,target_move:0
 msgid "All Posted Entries"
 msgstr "Movimientos asentados"
 
 #. module: l10n_cr_account_financial_statements
 #: code:addons/l10n_cr_account_financial_statements/report/profit_statement_report.py:85
+#: code:addons/l10n_cr_account_financial_statements/report/situation_balance_report.py:85
 #, python-format
 msgid "Error fiscal year"
 msgstr "Error de año fiscal"
 
 #. module: l10n_cr_account_financial_statements
 #: help:profit.statement.report,fiscalyear_id:0
+#: help:situation.balance.report,fiscalyear_id:0
 msgid "Keep empty for all open fiscal year"
 msgstr "Deje vacío para todos los años fiscales abiertos"
 
@@ -187,6 +266,10 @@ msgstr "INGRESO TOTAL"
 #: field:profit.statement.report,comp1_period_to:0
 #: field:profit.statement.report,comp2_period_to:0
 #: field:profit.statement.report,period_to:0
+#: field:situation.balance.report,comp0_period_to:0
+#: field:situation.balance.report,comp1_period_to:0
+#: field:situation.balance.report,comp2_period_to:0
+#: field:situation.balance.report,period_to:0
 msgid "End Period"
 msgstr "Período Final"
 
@@ -203,30 +286,39 @@ msgstr "Action Profit Statement Report"
 #: selection:profit.statement.report,comp2_filter:0
 #: field:profit.statement.report,comp2_fiscalyear_id:0
 #: field:profit.statement.report,fiscalyear_id:0
+#: selection:situation.balance.report,comp0_filter:0
+#: field:situation.balance.report,comp0_fiscalyear_id:0
+#: selection:situation.balance.report,comp1_filter:0
+#: field:situation.balance.report,comp1_fiscalyear_id:0
+#: selection:situation.balance.report,comp2_filter:0
+#: field:situation.balance.report,comp2_fiscalyear_id:0
+#: field:situation.balance.report,fiscalyear_id:0
 msgid "Fiscal Year"
 msgstr "Año Fiscal"
 
 #. module: l10n_cr_account_financial_statements
-#: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:22
-msgid "Until Period:"
-msgstr "Hasta el mes:"
+#: report:addons/l10n_cr_account_financial_statements/report/situation_balance_report.mako:206
+msgid "LIABITLITY + EQUITY TOTAL"
+msgstr "PASIVO + PATRIMONIO TOTAL"
 
 #. module: l10n_cr_account_financial_statements
 #: field:profit.statement.report,display_account:0
+#: field:situation.balance.report,display_account:0
 msgid "Display Accounts"
 msgstr "Mostrar Cuentas"
 
 #. module: l10n_cr_account_financial_statements
-#: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:32
-#: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:34
-#: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:38
-msgid "V"
-msgstr "V"
+#: model:ir.actions.act_window,name:l10n_cr_account_financial_statements.action_situation_balance_report_menu_webkit
+msgid "Action Situation Balance Report"
+msgstr "Action Situation Balance Report"
 
 #. module: l10n_cr_account_financial_statements
 #: selection:profit.statement.report,comp0_filter:0
 #: selection:profit.statement.report,comp1_filter:0
 #: selection:profit.statement.report,comp2_filter:0
+#: selection:situation.balance.report,comp0_filter:0
+#: selection:situation.balance.report,comp1_filter:0
+#: selection:situation.balance.report,comp2_filter:0
 msgid "No Comparison"
 msgstr "No Comparación"
 
@@ -235,28 +327,42 @@ msgstr "No Comparación"
 #: selection:profit.statement.report,comp1_filter:0
 #: selection:profit.statement.report,comp2_filter:0
 #: selection:profit.statement.report,filter:0
+#: selection:situation.balance.report,comp0_filter:0
+#: selection:situation.balance.report,comp1_filter:0
+#: selection:situation.balance.report,comp2_filter:0
+#: selection:situation.balance.report,filter:0
 msgid "Opening Only"
 msgstr "Solo apertura"
 
 #. module: l10n_cr_account_financial_statements
 #: selection:profit.statement.report,display_account:0
+#: selection:situation.balance.report,display_account:0
 msgid "With movements"
 msgstr "Con movimientos"
 
 #. module: l10n_cr_account_financial_statements
 #: constraint:profit.statement.report:0
+#: constraint:situation.balance.report:0
 msgid "The fiscalyear, periods or chart of account chosen have to belong to the same company."
 msgstr "El año fiscal, períodos o catálogo de cuentas escogidos tienen que pertenecer a la misma compañía."
 
 #. module: l10n_cr_account_financial_statements
 #: selection:profit.statement.report,display_account:0
+#: selection:situation.balance.report,display_account:0
 msgid "All"
 msgstr "Todos"
 
 #. module: l10n_cr_account_financial_statements
 #: help:profit.statement.report,filter:0
+#: help:situation.balance.report,filter:0
 msgid "Filter by date : no opening balance will be displayed. (opening balance can only be calculated based on period to be correct)."
 msgstr "Filtrar por fecha: ningún balance de apertura se mostrará. (Los balances de apertura necesitan basarse en un período)."
+
+#. module: l10n_cr_account_financial_statements
+#: report:addons/l10n_cr_account_financial_statements/report/situation_balance_report.mako:109
+#: report:addons/l10n_cr_account_financial_statements/report/situation_balance_report.mako:230
+msgid "ASSET TOTAL"
+msgstr "ACTIVO TOTAL"
 
 #. module: l10n_cr_account_financial_statements
 #: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:35
@@ -264,9 +370,20 @@ msgid "Prev. vs Sel."
 msgstr "Actual vs Ant."
 
 #. module: l10n_cr_account_financial_statements
+#: report:addons/l10n_cr_account_financial_statements/report/situation_balance_report.mako:214
+msgid "PROFIT TOTAL"
+msgstr "RESULTADO TOTAL"
+
+#. module: l10n_cr_account_financial_statements
 #: view:profit.statement.report:0
+#: view:situation.balance.report:0
 msgid "Period"
 msgstr "Período"
+
+#. module: l10n_cr_account_financial_statements
+#: view:situation.balance.report:0
+msgid "This report allows you to print or generate a pdf of your income statement"
+msgstr "This report allows you to print or generate a pdf of your income statement"
 
 #. module: l10n_cr_account_financial_statements
 #: model:ir.ui.menu,name:l10n_cr_account_financial_statements.menu_profit_statement_report
@@ -274,17 +391,25 @@ msgid "Profit Statement Report"
 msgstr "Estado de Resultados"
 
 #. module: l10n_cr_account_financial_statements
+#: report:addons/l10n_cr_account_financial_statements/report/situation_balance_report.mako:30
+msgid "Fiscal Year Opening"
+msgstr "Apertura de Año Fiscal"
+
+#. module: l10n_cr_account_financial_statements
 #: selection:profit.statement.report,filter:0
+#: selection:situation.balance.report,filter:0
 msgid "No Filters"
 msgstr "Sin Filtros"
 
 #. module: l10n_cr_account_financial_statements
 #: selection:profit.statement.report,target_move:0
+#: selection:situation.balance.report,target_move:0
 msgid "All Entries"
 msgstr "Todos los movimientos"
 
 #. module: l10n_cr_account_financial_statements
 #: report:addons/l10n_cr_account_financial_statements/report/profit_statement_report.mako:29
+#: report:addons/l10n_cr_account_financial_statements/report/situation_balance_report.mako:28
 msgid "Account<br />Code"
 msgstr "Código de<br />Cuenta"
 
@@ -293,16 +418,22 @@ msgstr "Código de<br />Cuenta"
 #: field:profit.statement.report,comp1_date_from:0
 #: field:profit.statement.report,comp2_date_from:0
 #: field:profit.statement.report,date_from:0
+#: field:situation.balance.report,comp0_date_from:0
+#: field:situation.balance.report,comp1_date_from:0
+#: field:situation.balance.report,comp2_date_from:0
+#: field:situation.balance.report,date_from:0
 msgid "Start Date"
 msgstr "Fecha Inicial"
 
 #. module: l10n_cr_account_financial_statements
 #: help:profit.statement.report,chart_account_id:0
+#: help:situation.balance.report,chart_account_id:0
 msgid "Select Charts of Accounts"
 msgstr "Catálogo de Cuentas seleccionado"
 
 #. module: l10n_cr_account_financial_statements
 #: field:profit.statement.report,filter:0
+#: field:situation.balance.report,filter:0
 msgid "Filter by"
 msgstr "Filtrar por"
 
@@ -315,6 +446,9 @@ msgstr "Año Fiscal:"
 #: field:profit.statement.report,comp0_filter:0
 #: field:profit.statement.report,comp1_filter:0
 #: field:profit.statement.report,comp2_filter:0
+#: field:situation.balance.report,comp0_filter:0
+#: field:situation.balance.report,comp1_filter:0
+#: field:situation.balance.report,comp2_filter:0
 msgid "Compare By"
 msgstr "Comparar por"
 
