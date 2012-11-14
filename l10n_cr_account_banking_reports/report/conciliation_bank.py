@@ -199,6 +199,7 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
         accounting_total = 0.0
         bank_total = 0.0
         
+        '''
         #Filters for the move lines to use in get_account_balance 
         filters['fiscalyear'] = fiscalyear.id
         if filter_type == 'filter_date':
@@ -207,6 +208,15 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
         elif filter_type == 'filter_period':
             periods_ids = self.pool.get('account.period').search(cr, uid, [('date_stop', '<=', filter_data[1].date_stop)])
             filters['periods'] = periods_ids 
+        '''
+        fiscal_year_id = fiscalyear.id
+        if filter_type == 'filter_date':
+            period_ids = False
+            end_date = filter_data[1].id
+        elif filter_type == 'filter_period':
+            period_ids = self.pool.get('account.period').search(cr, uid, [('date_stop', '<=', filter_data[1].date_stop)])
+            end_date = False
+        
         
         #TODO: Set the max date or period list for the balance query from the wizard data
         #      If the wizard is filtered by date, the max date is entered as is
@@ -214,27 +224,39 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
         balance_query_filter = ''
         if account_is_foreign:
             
-            bank_balance = account_webkit_report_library_obj.get_balance_tmp(cr,
-                                                 uid,
-                                                 [reconciled_account.id],
-                                                 ['balance'],
-                                                 context=filters)[reconciled_account.id]['balance']
-            accounting_balance = account_webkit_report_library_obj.get_balance_tmp(cr,
-                                                       uid,
-                                                       [parent_account_id],
-                                                       ['balance'],
-                                                       context=filters)[parent_account_id]['balance']
+            bank_balance = account_webkit_report_library_obj.get_account_balance(cr,
+                                                uid,
+                                                [reconciled_account.id],
+                                                ['balance'],
+                                                end_date=end_date,
+                                                period_ids=period_ids,
+                                                fiscal_year_id=fiscal_year_id,
+                                                context=context)[reconciled_account.id]['balance']
+            accounting_balance = account_webkit_report_library_obj.get_account_balance(cr,
+                                                uid,
+                                                [parent_account_id],
+                                                ['balance'],
+                                                end_date=end_date,
+                                                period_ids=period_ids,
+                                                fiscal_year_id=fiscal_year_id,
+                                                context=context)[parent_account_id]['balance']
         else:
-            bank_balance = account_webkit_report_library_obj.get_balance_tmp(cr,
-                                                 uid,
-                                                 [reconciled_account.id],
-                                                 ['balance'],
-                                                 context=filters)[reconciled_account.id]['balance']
-            accounting_balance = account_webkit_report_library_obj.get_balance_tmp(cr,
-                                                       uid,
-                                                       [parent_account_id],
-                                                       ['balance'],
-                                                       context=filters)[parent_account_id]['balance']
+            bank_balance = account_webkit_report_library_obj.get_account_balance(cr,
+                                                uid,
+                                                [reconciled_account.id],
+                                                ['balance'],
+                                                end_date=end_date,
+                                                period_ids=period_ids,
+                                                fiscal_year_id=fiscal_year_id,
+                                                context=context)[reconciled_account.id]['balance']
+            accounting_balance = account_webkit_report_library_obj.get_account_balance(cr,
+                                                uid,
+                                                [parent_account_id],
+                                                ['balance'],
+                                                end_date=end_date,
+                                                period_ids=period_ids,
+                                                fiscal_year_id=fiscal_year_id,
+                                                context=context)[parent_account_id]['balance']
             
             '''
             bank_balance = reconciled_account.foreign_balance
