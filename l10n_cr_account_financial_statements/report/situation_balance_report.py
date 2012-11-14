@@ -164,12 +164,12 @@ class IncomeStatementReport(TrialBalanceWebkit):
         }
         
         total_income_balance = {
-            'period':       income_period_balances[category_account_ids['income'].id]['balance'],
-            'fiscal_year':  income_fiscal_year_balances[category_account_ids['income'].id]['balance'],
+            'period':       income_period_balance[category_account_ids['income'].id]['balance'],
+            'fiscal_year':  income_fiscal_year_balance[category_account_ids['income'].id]['balance'],
         }
         total_expense_balance = {
-            'period':       expense_period_balances[category_account_ids['expense'].id]['balance'],
-            'fiscal_year':  expense_fiscal_year_balances[category_account_ids['expense'].id]['balance'],
+            'period':       expense_period_balance[category_account_ids['expense'].id]['balance'],
+            'fiscal_year':  expense_fiscal_year_balance[category_account_ids['expense'].id]['balance'],
         }
 
         return {
