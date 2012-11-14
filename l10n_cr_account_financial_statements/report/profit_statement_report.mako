@@ -28,14 +28,14 @@
                 <div class="table-row labels no-wrap">
                     <div class="table-cell first-column" style="width: 70px">${_('Account<br />Code')}</div>
                     <div class="table-cell" style="width: 430px">${_('Account<br />Name')}</div>
-                    <div class="table-cell amount" style="width: 100px">${_('Previous period')}<br />${last_period.name}</div>
-                    <div class="table-cell amount" style="width: 40px">${_('%')}<br />${_('V')}</div>
-                    <div class="table-cell amount" style="width: 100px">${_('Selected period')}<br />${start_period.name}</div>
-                    <div class="table-cell amount" style="width: 40px">${_('%')}<br />${_('V')}</div>
-                    <div class="table-cell amount" style="width: 100px">${_('Variation')}<br />${_('Prev. vs Sel.')}</div>
-                    <div class="table-cell amount" style="width: 40px">${_('Var.')}<br />${_('%')}</div>
-                    <div class="table-cell amount" style="width: 100px">${_('Acum. Fiscal Year')}<br />${fiscalyear.name}</div>
-                    <div class="table-cell last-column amount" style="width: 40px">${_('%')}<br />${_('V')}</div>
+                    <div class="table-cell" style="width: 100px">${_('Previous period')}<br />${last_period.name}</div>
+                    <div class="table-cell" style="width: 40px">${_('%')}<br />${_('V')}</div>
+                    <div class="table-cell" style="width: 100px">${_('Selected period')}<br />${start_period.name}</div>
+                    <div class="table-cell" style="width: 40px">${_('%')}<br />${_('V')}</div>
+                    <div class="table-cell" style="width: 100px">${_('Variation')}<br />${_('Prev. vs Sel.')}</div>
+                    <div class="table-cell" style="width: 40px">${_('Var.')}<br />${_('%')}</div>
+                    <div class="table-cell" style="width: 100px">${_('Acum. Fiscal Year')}<br />${fiscalyear.name}</div>
+                    <div class="table-cell last-column" style="width: 40px">${_('%')}<br />${_('V')}</div>
                 </div>
             </div>
             <div class="table-body">
