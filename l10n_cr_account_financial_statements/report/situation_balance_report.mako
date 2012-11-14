@@ -1,37 +1,40 @@
 <!DOCTYPE html SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <style type="text/css">
-            .overflow_ellipsis {
-                text-overflow: ellipsis;
-                overflow: hidden;
-                white-space: nowrap;
-            }
+        <link rel='stylesheet' href='addons/account_webkit_report_library/webkit_headers/main.css' />
+        <style>
             ${css}
         </style>
     </head>
-    <body class = "data">
+    <body class="data">
         <%setLang(user.context_lang)%>
         <%
-            last_period = get_last_period(cr, uid, start_period)
             fiscalyear = get_fiscalyear(cr, uid, start_period)
+            last_fiscalyear = get_last_fiscal_year(cr, uid, start_period)
             balance_data = get_data(cr, uid, data)
         %>
-        <div style="font-size: 20px; font-weight: bold; text-align: center;"> ${company.partner_id.name}</div>
-        <div style="font-size: 25px; font-weight: bold; text-align: center;"> ${_('Situation Balance')}</div>
-        <div style="font-size: 16px; font-weight: bold; text-align: center;">${_('Situation Balance of Period:')} ${start_period.name}</div>
-        <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
-        <div class="act_as_table data_table">
-            <div class="act_as_thead">
-                <div class="act_as_row labels no_wrap">
-                    <div class="act_as_cell first_column" style="width: 500px">${_('Name')}</div>
-                    <div class="act_as_cell amount" style="width: 100px">${start_period.name}</div>
-                    <div class="act_as_cell amount" style="width: 100px">${fiscalyear.name}</div>
-                    <div class="act_as_cell amount" style="width: 100px">${_('Variation')}</div>
-                    <div class="act_as_cell last_column amount" style="width: 40px">${_('%')}</div>
+        <div class="table header">
+            <div class="table-row">
+                <div class="table-cell logo">${helper.embed_logo_by_name('internal_reports_logo', height=80)|n}</div>
+                <div class="table-cell text">
+                    <p class="company">${fiscalyear.company_id.prefix} ${fiscalyear.company_id.partner_id.name}</p>
+                    <p class="title">${_('Situation Balance at ')}${formatLang(start_period.date_stop, date=True)}</p>
+                    <p class="subtitle">&nbsp;</p>
                 </div>
             </div>
-            <div class="act_as_tbody">
+        </div>
+        <div class="table list">
+            <div class="table-header">
+                <div class="table-row labels no-wrap">
+                    <div class="table-cell first-column" style="width: 70px">${_('Account<br />Code')}</div>
+                    <div class="table-cell" style="width: 650px">${_('Account<br />Name')}</div>
+                    <div class="table-cell" style="width: 100px">${_('Fiscal Year Opening')}<br />${fiscalyear.name}</div>
+                    <div class="table-cell" style="width: 100px">${_('Selected period')}<br />${start_period.name}</div>\
+                    <div class="table-cell" style="width: 100px">${_('Variation')}<br />${_('Per. vs. FY Open.')}</div>
+                    <div class="table-cell last-column" style="width: 40px">${_('Var.')}<br />${_('%')}</div>
+                </div>
+            </div>
+            <div class="table-body">
                 <%
                     asset_total_period = balance_data['total_asset_balances']['period']
                     asset_total_fiscalyear = balance_data['total_asset_balances']['fiscal_year']
@@ -48,47 +51,73 @@
                     equity_total_variation = equity_total_period - equity_total_fiscalyear
                     equity_total_percentage_variation = equity_total_fiscalyear != 0 and (100 * equity_total_variation / equity_total_fiscalyear) or 0
                     
-                    total_period = asset_total_period + liability_total_period + equity_total_period
-                    total_fiscalyear = asset_total_fiscalyear + liability_total_fiscalyear + equity_total_fiscalyear
-                    total_variation = total_period - total_fiscalyear
-                    total_percentage_variation = total_fiscalyear != 0 and (100 * total_variation / total_fiscalyear) or 0
-                
+                    income_total_period = balance_data['total_income_balance']['period']
+                    income_total_fiscalyear = balance_data['total_income_balance']['fiscal_year']
+                    income_total_variation = income_total_period - income_total_fiscalyear
+                    income_total_percentage_variation = income_total_fiscalyear != 0 and (100 * income_total_variation / income_total_fiscalyear) or 0
+                    
+                    expense_total_period = balance_data['total_expense_balance']['period']
+                    expense_total_fiscalyear = balance_data['total_expense_balance']['fiscal_year']
+                    expense_total_variation = expense_total_period - expense_total_fiscalyear
+                    expense_total_percentage_variation = expense_total_fiscalyear != 0 and (100 * expense_total_variation / expense_total_fiscalyear) or 0
+                    
+                    profit_total_period = income_total_period - expense_total_period
+                    profit_total_fiscalyear = income_total_fiscalyear - expense_total_fiscalyear
+                    profit_total_variation = profit_total_period - profit_total_fiscalyear
+                    profit_total_percentage_variation = profit_total_fiscalyear != 0 and (100 * profit_total_variation / profit_total_fiscalyear) or 0
+                    
+                    liability-equity_total_period = liability_total_period + equity_total_period
+                    liability-equity_total_fiscalyear = liability_total_fiscalyear + equity_total_fiscalyear
+                    liability-equity_total_variation = liability-equity_total_period - liability-equity_total_fiscalyear
+                    liability-equity_total_percentage_variation = liability-equity_total_fiscalyear != 0 and (100 * liability-equity_total_variation / liability-equity_total_fiscalyear) or 0
+                    
+                    liability-equity-profit_total_period = liability_total_period + equity_total_period + profit_total_period
+                    liability-equity-profit_total_fiscalyear = liability_total_fiscalyear + equity_total_fiscalyear + profit_total_fiscalyear
+                    liability-equity-profit_total_variation = liability-equity-profit_total_period - liability-equity-profit_total_fiscalyear
+                    liability-equity-profit_total_percentage_variation = liability-equity-profit_total_fiscalyear != 0 and (100 * liability-equity-profit_total_variation / liability-equity-profit_total_fiscalyear) or 0
                 %>
+                <% row_even = False %>
                 %for account in balance_data['asset_accounts']:
                     <%
                         account_total_period = balance_data['asset_period_balances'][account.id]['balance']
                         account_total_fiscalyear = balance_data['asset_fiscal_year_balances'][account.id]['balance']
                         account_total_variation = account_total_period - account_total_fiscalyear
                         account_total_percentage_variation = account_total_fiscalyear != 0 and (100 * account_total_variation / account_total_fiscalyear) or 0
-                   %>
-                    <div class="act_as_row lines">
-                        %if account.level > 0:
-                            <div class="act_as_cell" style="padding-left:${account.level*10}px">
-                                %if account.child_id:
-                                    <div class="act_as_row first_column" ><b>${account.code} ${_(account.name)}</b></div>
-                                %else:
-                                    <div class="act_as_row first_column" >${account.code} ${_(account.name)}</div>
-                                %endif
-                            </div>
-                        %else:
-                            <div class="act_as_cell first_column" ><b>${account.code} ${_(account.name)}</b></div>
-                        %endif
-                        <div class="act_as_cell amount" >${formatLang(account_total_period)}</div>
-                        <div class="act_as_cell amount" >${formatLang(account_total_fiscalyear)}</div>
-                        <div class="act_as_cell amount" >${formatLang(account_total_variation)}</div>
-                        <div class="act_as_cell amount last_column" >${formatLang(account_total_percentage_variation)}</div>
+                    %>
+                    %if account.level == 0:
+                    <div class="table-row bold ${row_even and 'even' or 'odd'}">
+                    %elif account.child_id:
+                    <div class="table-row bold ${row_even and 'even' or 'odd'}">
+                    %else:
+                    <div class="table-row ${row_even and 'even' or 'odd'}">
+                    %endif
+                        <div class="table-cell first-column">${account.code}</div>
+                        <div class="table-cell" style="padding-left:${account.level*10}px">${_(account.name)}</div>
+                        <div class="table-cell amount" >${formatLang(account_total_fiscalyear)}</div>
+                        <div class="table-cell amount" >${formatLang(account_total_period)}</div>
+                        <div class="table-cell amount" >${formatLang(account_total_variation)}</div>
+                        <div class="table-cell amount last-column" >${formatLang(account_total_percentage_variation)}</div>
                     </div>
-                %endfor                        
-                <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
-                <div class="act_as_row lines">
-                    <div class="act_as_cell first_column" ><b>${_('ASSET TOTAL')}</b></div>
-                    <div class="act_as_cell amount" >${formatLang(asset_total_period)}</div>
-                    <div class="act_as_cell amount" >${formatLang(asset_total_fiscalyear)}</div>
-                    <div class="act_as_cell amount" >${formatLang(asset_total_variation)}</div>
-                    <div class="act_as_cell amount last_column" >${formatLang(asset_total_percentage_variation)}</div>
+                    <%
+                        if row_even:
+                            row_even = False
+                        else:
+                            row_even = True
+                    %>
+                %endfor
+                <div class="table-row subtotal">
+                    <div class="table-cell first-column">&nbsp;</div>
+                    <div class="table-cell">${_('ASSET TOTAL')}</div>
+                    <div class="table-cell amount" >${formatLang(asset_total_fiscalyear)}</div>
+                    <div class="table-cell amount" >${formatLang(asset_total_period)}</div>
+                    <div class="table-cell amount" >${formatLang(asset_total_variation)}</div>
+                    <div class="table-cell amount last-column" >${formatLang(asset_total_percentage_variation)}</div>
                 </div>
-                <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
+                <div class="table-row spacer">
+                    <div class="table-cell">&nbsp;</div>
+                </div>
                 
+                <% row_even = False %>
                 %for account in balance_data['liability_accounts']:
                     <%
                         account_total_period = balance_data['liability_period_balances'][account.id]['balance']
@@ -96,34 +125,40 @@
                         account_total_variation = account_total_period - account_total_fiscalyear
                         account_total_percentage_variation = account_total_fiscalyear != 0 and (100 * account_total_variation / account_total_fiscalyear) or 0
                     %>
-                    <div class="act_as_row lines">
-                        %if account.level > 0:
-                            <div class="act_as_cell" style="padding-left:${account.level*10}px">
-                                %if account.child_id:
-                                    <div class="act_as_row first_column" ><b>${account.code} ${_(account.name)}</b></div>
-                                %else:
-                                    <div class="act_as_row first_column" >${account.code} ${_(account.name)}</div>
-                                %endif
-                            </div>
-                        %else:
-                            <div class="act_as_cell first_column" ><b>${account.code} ${_(account.name)}</b></div>
-                        %endif
-                        <div class="act_as_cell amount" >${formatLang(account_total_period)}</div>
-                        <div class="act_as_cell amount" >${formatLang(account_total_fiscalyear)}</div>
-                        <div class="act_as_cell amount" >${formatLang(account_total_variation)}</div>
-                        <div class="act_as_cell amount last_column" >${formatLang(account_total_percentage_variation)}</div>
+                    %if account.level == 0:
+                    <div class="table-row bold ${row_even and 'even' or 'odd'}">
+                    %elif account.child_id:
+                    <div class="table-row bold ${row_even and 'even' or 'odd'}">
+                    %else:
+                    <div class="table-row ${row_even and 'even' or 'odd'}">
+                    %endif
+                        <div class="table-cell first-column">${account.code}</div>
+                        <div class="table-cell" style="padding-left:${account.level*10}px">${_(account.name)}</div>
+                        <div class="table-cell amount" >${formatLang(account_total_fiscalyear)}</div>
+                        <div class="table-cell amount" >${formatLang(account_total_period)}</div>
+                        <div class="table-cell amount" >${formatLang(account_total_variation)}</div>
+                        <div class="table-cell amount last-column" >${formatLang(account_total_percentage_variation)}</div>
                     </div>
-                %endfor            
-                <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
-                <div class="act_as_row lines">
-                    <div class="act_as_cell first_column" ><b>${_('LIABILITY TOTAL')}</b></div>
-                    <div class="act_as_cell amount" >${formatLang(liability_total_period)}</div>
-                    <div class="act_as_cell amount" >${formatLang(liability_total_fiscalyear)}</div>
-                    <div class="act_as_cell amount" >${formatLang(liability_total_variation)}</div>
-                    <div class="act_as_cell amount last_column" >${formatLang(liability_total_percentage_variation)}</div>
+                    <%
+                        if row_even:
+                            row_even = False
+                        else:
+                            row_even = True
+                    %>
+                %endfor
+                <div class="table-row subtotal">
+                    <div class="table-cell first-column">&nbsp;</div>
+                    <div class="table-cell">${_('LIABILITY TOTAL')}</div>
+                    <div class="table-cell amount" >${formatLang(liability_total_fiscalyear)}</div>
+                    <div class="table-cell amount" >${formatLang(liability_total_period)}</div>
+                    <div class="table-cell amount" >${formatLang(liability_total_variation)}</div>
+                    <div class="table-cell amount last-column" >${formatLang(liability_total_percentage_variation)}</div>
                 </div>
-                <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
+                <div class="table-row spacer">
+                    <div class="table-cell">&nbsp;</div>
+                </div>
                 
+                <% row_even = False %>
                 %for account in balance_data['equity_accounts']:
                     <%
                         account_total_period = balance_data['equity_period_balances'][account.id]['balance']
@@ -131,64 +166,65 @@
                         account_total_variation = account_total_period - account_total_fiscalyear
                         account_total_percentage_variation = account_total_fiscalyear != 0 and (100 * account_total_variation / account_total_fiscalyear) or 0
                     %>
-                    <div class="act_as_row lines">
-                        %if account.level > 0:
-                            <div class="act_as_cell" style="padding-left:${account.level*10}px">
-                                %if account.child_id:
-                                    <div class="act_as_row first_column" ><b>${account.code} ${_(account.name)}</b></div>
-                                %else:
-                                    <div class="act_as_row first_column" >${account.code} ${_(account.name)}</div>
-                                %endif
-                            </div>
-                        %else:
-                            <div class="act_as_cell first_column" ><b>${account.code} ${_(account.name)}</b></div>
-                        %endif
-                        <div class="act_as_cell amount" >${formatLang(account_total_period)}</div>
-                        <div class="act_as_cell amount" >${formatLang(account_total_fiscalyear)}</div>
-                        <div class="act_as_cell amount" >${formatLang(account_total_variation)}</div>
-                        <div class="act_as_cell amount last_column" >${formatLang(account_total_percentage_variation)}</div>
+                    %if account.level == 0:
+                    <div class="table-row bold ${row_even and 'even' or 'odd'}">
+                    %elif account.child_id:
+                    <div class="table-row bold ${row_even and 'even' or 'odd'}">
+                    %else:
+                    <div class="table-row ${row_even and 'even' or 'odd'}">
+                    %endif
+                        <div class="table-cell first-column">${account.code}</div>
+                        <div class="table-cell" style="padding-left:${account.level*10}px">${_(account.name)}</div>
+                        <div class="table-cell amount" >${formatLang(account_total_fiscalyear)}</div>
+                        <div class="table-cell amount" >${formatLang(account_total_period)}</div>
+                        <div class="table-cell amount" >${formatLang(account_total_variation)}</div>
+                        <div class="table-cell amount last-column" >${formatLang(account_total_percentage_variation)}</div>
                     </div>
-                %endfor            
-                <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
-                <div class="act_as_row lines">
-                    <div class="act_as_cell first_column" ><b>${_(' TOTAL')}</b></div>
-                    <div class="act_as_cell amount" >${formatLang(equity_total_period)}</div>
-                    <div class="act_as_cell amount" >${formatLang(equity_total_fiscalyear)}</div>
-                    <div class="act_as_cell amount" >${formatLang(equity_total_variation)}</div>
-                    <div class="act_as_cell amount last_column" >${formatLang(equity_total_percentage_variation)}</div>
+                    <%
+                        if row_even:
+                            row_even = False
+                        else:
+                            row_even = True
+                    %>
+                %endfor
+                <div class="table-row subtotal">
+                    <div class="table-cell first-column">&nbsp;</div>
+                    <div class="table-cell">${_('EQUITY TOTAL')}</div>
+                    <div class="table-cell amount" >${formatLang(equity_total_fiscalyear)}</div>
+                    <div class="table-cell amount" >${formatLang(equity_total_period)}</div>
+                    <div class="table-cell amount" >${formatLang(equity_total_variation)}</div>
+                    <div class="table-cell amount last-column" >${formatLang(equity_total_percentage_variation)}</div>
                 </div>
-                <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
-                                        
-                <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
-                <div class="act_as_row lines">
-                    <div class="act_as_cell first_column" ><b>${_('ASSET TOTAL')}</b></div>
-                    <div class="act_as_cell amount" >${formatLang(asset_total_period)}</div>
-                    <div class="act_as_cell amount" >${formatLang(asset_total_fiscalyear)}</div>
-                    <div class="act_as_cell amount" >${formatLang(asset_total_variation)}</div>
-                    <div class="act_as_cell amount last_column" >${formatLang(asset_total_percentage_variation)}</div>
+                
+                <div class="table-row spacer">
+                    <div class="table-cell">&nbsp;</div>
                 </div>
-                <div class="act_as_row lines">
-                    <div class="act_as_cell first_column" ><b>${_('LIABILITY TOTAL')}</b></div>
-                    <div class="act_as_cell amount" >${formatLang(liability_total_period)}</div>
-                    <div class="act_as_cell amount" >${formatLang(liability_total_fiscalyear)}</div>
-                    <div class="act_as_cell amount" >${formatLang(liability_total_variation)}</div>
-                    <div class="act_as_cell amount last_column" >${formatLang(liability_total_percentage_variation)}</div>
+                <div class="table-row spacer">
+                    <div class="table-cell">&nbsp;</div>
                 </div>
-                <div class="act_as_row lines">
-                    <div class="act_as_cell first_column" ><b>${_('EQUITY TOTAL')}</b></div>
-                    <div class="act_as_cell amount" >${formatLang(equity_total_period)}</div>
-                    <div class="act_as_cell amount" >${formatLang(equity_total_fiscalyear)}</div>
-                    <div class="act_as_cell amount" >${formatLang(equity_total_variation)}</div>
-                    <div class="act_as_cell amount last_column" >${formatLang(equity_total_percentage_variation)}</div>
+                <div class="table-row subtotal">
+                    <div class="table-cell first-column">&nbsp;</div>
+                    <div class="table-cell">${_('LIABITLITY + EQUITY TOTAL')}</div>
+                    <div class="table-cell amount" >${formatLang(liability-equity_total_fiscalyear)}</div>
+                    <div class="table-cell amount" >${formatLang(liability-equity_total_period)}</div>
+                    <div class="table-cell amount" >${formatLang(liability-equity_total_variation)}</div>
+                    <div class="table-cell amount last-column" >${formatLang(liability-equity_total_percentage_variation)}</div>
                 </div>
-                <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
-                <div class="" style="margin-top: 20px; font-size: 14px; width: 1080px;"></div>
-                <div class="act_as_row lines">
-                    <div class="act_as_cell first_column" ><b>${_('TOTAL')}</b></div>
-                    <div class="act_as_cell amount" >${formatLang(total_period)}</div>
-                    <div class="act_as_cell amount" >${formatLang(total_fiscalyear)}</div>
-                    <div class="act_as_cell amount" >${formatLang(total_variation)}</div>
-                    <div class="act_as_cell amount last_column" >${formatLang(total_percentage_variation)}</div>
+                <div class="table-row total">
+                    <div class="table-cell first-column">&nbsp;</div>
+                    <div class="table-cell">${_('LIABITLITY + EQUITY + PROFIT TOTAL')}</div>
+                    <div class="table-cell amount" >${formatLang(liability-equity-profit_total_fiscalyear)}</div>
+                    <div class="table-cell amount" >${formatLang(liability-equity-profit_total_period)}</div>
+                    <div class="table-cell amount" >${formatLang(liability-equity-profit_total_variation)}</div>
+                    <div class="table-cell amount last-column" >${formatLang(liability-equity-profit_total_percentage_variation)}</div>
+                </div>
+                <div class="table-row total">
+                    <div class="table-cell first-column">&nbsp;</div>
+                    <div class="table-cell">${_('ASSET TOTAL')}</div>
+                    <div class="table-cell amount" >${formatLang(asset_total_fiscalyear)}</div>
+                    <div class="table-cell amount" >${formatLang(asset_total_period)}</div>
+                    <div class="table-cell amount" >${formatLang(asset_total_variation)}</div>
+                    <div class="table-cell amount last-column" >${formatLang(asset_total_percentage_variation)}</div>
                 </div>
             </div>
         </div>
