@@ -10,7 +10,7 @@
         <%setLang(user.context_lang)%>
         <%
             fiscalyear = get_fiscalyear(cr, uid, start_period)
-            last_fiscalyear = get_last_fiscal_year(cr, uid, start_period)
+            last_fiscalyear = get_opening_period(cr, uid, start_period)
             balance_data = get_data(cr, uid, data)
         %>
         <div class="table header">
