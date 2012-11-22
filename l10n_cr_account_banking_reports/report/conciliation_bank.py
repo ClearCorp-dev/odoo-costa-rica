@@ -29,9 +29,6 @@ from datetime import datetime
 from openerp.addons.account_financial_report_webkit.report.common_reports import CommonReportHeaderWebkit
 from openerp.addons.account_financial_report_webkit.report.partners_ledger import PartnersLedgerWebkit
 
-
-
-
 class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
     
     def __init__(self, cursor, uid, name, context):
