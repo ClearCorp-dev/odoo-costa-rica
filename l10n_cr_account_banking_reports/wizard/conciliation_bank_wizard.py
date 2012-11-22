@@ -24,7 +24,6 @@ import time
 
 from osv import fields, osv
 
-
 class l10n_cr_ConciliationBankWizard(osv.osv_memory):
 
     _inherit = "partners.ledger.webkit"
@@ -34,8 +33,13 @@ class l10n_cr_ConciliationBankWizard(osv.osv_memory):
     _columns = {
         'bank_account_ids': fields.many2one('account.account', 'Bank Account', domain="[('user_type.code','=','BKVI')]", help="Bank Account"),
         'bank_balance': fields.float('Bank Balance'),
+        'filter': fields.selection([('filter_date', 'Date'), ('filter_period', 'Periods')], "Filter by", required=True),
     }
-
+    
+    _defaults = {
+        'filter': 'filter_period',
+    }
+    
     def pre_print_report(self, cr, uid, ids, data, context=None):
         data = super(l10n_cr_ConciliationBankWizard, self).pre_print_report(cr, uid, ids, data, context)
         if context is None:
