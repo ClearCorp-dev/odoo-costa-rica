@@ -86,6 +86,7 @@ class hr_payslip_run(osv.osv):
             payslips = payslip_obj.browse(cr, uid, payslip_run.slip_ids, context)
             for payslip in payslips:
                 payslip_id = payslip.id
+                payslip_id.compute_sheet()
                 payslip_id.process_sheet()
 
 hr_payslip_run()
@@ -143,6 +144,18 @@ class HrPayslip(osv.osv):
                     'worked_days_line_ids' : worked_days_line_list,
         })
 
+        return res
+    
+    def process_sheet(self, cr, uid, ids, context=None):
+        res =  super(HrPayslip, self).process_sheet(cr, uid, ids, context=context)
+        account_move_obj = self.pool.get('account.move')
+        account_move_line_obj = self.pool.get('account.move.line')
+        for payslip in self.browse(cr, uid, ids, context=context):
+            if payslip.forced_period_id:
+                self.write(cr, uid, [payslip.id], {'period_id': payslip.forced_period_id.id}, context=context)
+                account_move_obj.write(cr, uid, [payslip.move_id.id], {'period_id': payslip.forced_period_id.id}, context=context)
+                for line in payslip.move_id.line_id:
+                    account_move_line_obj.write(cr, uid, line.id, {'period_id': payslip.forced_period_id.id}, context=context)
         return res
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
