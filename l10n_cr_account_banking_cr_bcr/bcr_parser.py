@@ -35,12 +35,12 @@ class BCRParser( object ):
     saldos finales. 
     
     El cambio más evidente es el formato de la cuenta de banco, pasa de 1-246447-0 a 001-0246447-0
-    Revisión # 1                                                       Revisión#2
-    Encabezado anterior:                                               Encabezado nuevo
-        BANCO DE COSTA RICA                                              BANCO DE COSTA RICA
-        Movimiento de Cuenta Corriente 1-246447-0 Colones                MOVIMIENTO DE LA CUENTA  CORRIENTE No. 001-0246447-0  COLONES
-        Dueño: COMPA IA INMOBILIARIA CENTROA                             DUENO: COMPA IA INMOBILIARIA CENTROAMERICANA CICCR S                            
-        Movimiento realizado el periodo del 01-10-2012 al 31-10-2012     MOVIMIENTO REALIZADO                           DEL 01-11-2012 AL 30-11-2012
+    Revisión # 1                                                                         Revisión#2
+    Encabezado anterior:                                                                 Encabezado nuevo
+        BANCO DE COSTA RICA                                                              BANCO DE COSTA RICA
+        Movimiento de Cuenta Corriente 1-246447-0 Colones (puede ser Dólares o Dolares)  MOVIMIENTO DE LA CUENTA  CORRIENTE No. 001-0246447-0  COLONES (DOLARES)
+        Dueño: COMPA IA INMOBILIARIA CENTROA                                             DUENO: COMPA IA INMOBILIARIA CENTROAMERICANA CICCR S                            
+        Movimiento realizado el periodo del 01-10-2012 al 31-10-2012                     MOVIMIENTO REALIZADO                           DEL 01-11-2012 AL 30-11-2012
     
     Final de archivo
     Revisión # 1                                                        Revisión #2
@@ -85,7 +85,7 @@ class BCRParser( object ):
             #_account_number -> FIRST REVISION
             if l.find('Movimiento de Cuenta Corriente', 0, len('Movimiento de Cuenta Corriente')) > -1:
                 line_dict['account_number'] = self.extract_number(l)                
-                if l.find('Dolares',0,len(l)) > -1:
+                if (l.find('D',0,len(l)) > -1):
                     line_dict['currencycode'] = 'USD'
                 else:
                     line_dict['currencycode'] = 'CRC'
@@ -97,7 +97,7 @@ class BCRParser( object ):
                 account_2 = account_str[4:]  #246447-0
                 account_complete = account_1+self.extract_number(account_2)#12464470
                 line_dict['account_number'] = self.extract_number(account_complete)
-                if l.find('DOLARES',0,len(l)) > -1:
+                if (l.find('DOLARES',0,len(l)) > -1):
                     line_dict['currencycode'] = 'USD'
                 else:
                     line_dict['currencycode'] = 'CRC'                      
@@ -180,14 +180,14 @@ class BCRParser( object ):
         
         for l in list_split:           
             if l.find('Movimiento de Cuenta Corriente', 0, len('Movimiento de Cuenta Corriente')) > -1:
-                if l.find('D',0,len(l)) > -1:
+                if (l.find('D',0,len(l)) > -1):
                     currencycode = 'USD'
                 else:
                     currencycode = 'CRC'
                 break
             
             elif l.find('MOVIMIENTO DE LA CUENTA  CORRIENTE No.', 0, len('MOVIMIENTO DE LA CUENTA  CORRIENTE No.')) > -1:
-                if l.find('D',0,len(l)) > -1:
+                if (l.find('DOLARES',0,len(l)) > -1):
                     currencycode = 'USD'
                 else:
                     currencycode = 'CRC'
@@ -317,7 +317,7 @@ class BCRParser( object ):
 
     def extract_currency_code_USD(self, currency):
         cad = ''
-        result = re.findall(r'[D.lares]',currency)
+        result = re.findall('[D.lares]',currency)
         for character in result:
             cad = cad + character
         return cad
