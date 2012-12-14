@@ -30,7 +30,6 @@ class SituationBalanceReportWizard(osv.osv_memory):
     _description = "Situation Balance Report"
 
     _defaults = {
-            'fiscalyear_id': '',
             'filter': 'filter_period',
     }
 
