@@ -27,10 +27,10 @@
                         <attribute name="invisible">True</attribute>
                     </page>
                     <field name="fiscalyear_id" position="attributes">
-                        <attribute name="attrs">{'invisible': True}</attribute>
+                        <attribute name="attrs">{'required': True}</attribute>
                     </field>
                     <field name="period_from" position="replace">
-                        <field name="period_from" string="Period" domain="[('state', '=', 'draft'),('special', '=', False)]" attrs="{'readonly':[('filter','!=','filter_period')], 'required':[('filter', '=', 'filter_period')]}" colspan="4" widget="selection"/>
+                        <field name="period_from" string="Period" domain="[('fiscalyear_id', '=', fiscalyear_id)]" attrs="{'readonly':[('filter','!=','filter_period')], 'required':[('filter', '=', 'filter_period')]}" colspan="4"/>
                     </field>
                     <field name="period_to" position="attributes">
                         <attribute name="attrs">{'invisible': True, 'required': False}</attribute>

@@ -30,7 +30,6 @@ class ProfitStatementReportWizard(osv.osv_memory):
     _description = "Profit Statement"
 
     _defaults = {
-            'fiscalyear_id': '',
             'filter': 'filter_period',
     }
 
