@@ -41,6 +41,7 @@
         total_net = 0.0
         total_emp = 0
         %>
+        <br></br><br></br>
         <div style="font-size: 20px; font-weight: bold; text-align: center;"> ${company.partner_id.name | entity} - ${company.currency_id.name | entity}</div>
         <div style="font-size: 25px; font-weight: bold; text-align: center;"> ${_('Payroll Report')}</div>
         <div style="font-size: 20px; font-weight: bold; text-align: center;"> ${run.name}</div>
