@@ -133,12 +133,15 @@ class hr_payslip_run_report(report_sxw.rml_parse):
     
     def get_ccss(self,line_ids):
         code = 'CCSS-EMP'
-        code2 = 'Banco Popular-EMP'
+        code2 = 'CCSS-EMP-PEN'
+        code3 = 'Banco Popular-EMP'
         res = 0
         for line in line_ids:
             if line.code == code:
                 res += line.total
             elif line.code == code2:
+                res += line.total
+            elif line.code == code3:
                 res += line.total
         
         return res
