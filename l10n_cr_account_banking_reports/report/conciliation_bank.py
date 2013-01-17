@@ -145,7 +145,6 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
         return res
 
     def get_bank_data(self, cr, uid, parent_account_id, filter_type, filter_data, fiscalyear, target_move, historic_strict, special_period, context=None):
-        print (filter_data)
         result_bank_balance = {}
         result_move_lines = []
         filters = {}
