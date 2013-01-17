@@ -58,7 +58,7 @@
     </div>
     
     <%
-        bank_balance, bank_move_lines, account_is_foreign = get_bank_data(cr, uid, bank_account.id, filter_type, filter_data, fiscalyear, target_move, context)
+        bank_balance, bank_move_lines, account_is_foreign = get_bank_data(cr, uid, bank_account.id, filter_type, filter_data, fiscalyear, target_move, data['form']['historic_strict'], data['form']['special_period'])
     %>
     <div align="center">
         <div class="act_as_table data_table no_wrap results left" style="margin-top:20px; margin-bottom: 10px; width:500px">
