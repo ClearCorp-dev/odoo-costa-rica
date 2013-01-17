@@ -13,6 +13,9 @@
                         <separator string="Conciliation Bank" colspan="4"/>
                         <label nolabel="1" colspan="4" string="This report allows you to print or generate a pdf of your partner ledger with details of all your payable/receivable account"/>
                     </xpath>
+                    <field name="target_move" position="after">
+                        <field name="historic_strict"></field>
+                    </field>
                     <field name="chart_account_id" position='attributes'>
                         <attribute name="colspan">4</attribute>
                     </field>
@@ -34,6 +37,9 @@
                     </field>
                     <field name="period_to" position="attributes">
                         <attribute name="domain">[('fiscalyear_id', '=', fiscalyear_id), ('special', '=', False)]</attribute>
+                    </field>
+                    <field name="period_to" position="after">
+                        <field name="special_period" attrs="{'readonly':[('filter', '!=', 'filter_period')]}"></field>
                     </field>
                 </data>
             </field>

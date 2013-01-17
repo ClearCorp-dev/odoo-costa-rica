@@ -34,6 +34,8 @@ class l10n_cr_ConciliationBankWizard(osv.osv_memory):
         'bank_account_ids': fields.many2one('account.account', 'Bank Account', domain="[('user_type.code','=','BKVI')]", help="Bank Account"),
         'bank_balance': fields.float('Bank Balance'),
         'filter': fields.selection([('filter_date', 'Date'), ('filter_period', 'Periods')], "Filter by", required=True),
+        'historic_strict': fields.boolean('Strict History', help="If selected, will display a historical unreconciled lines, taking into account the end of the period or date selected"),
+        'special_period': fields.boolean('Special period', help="Include special period"),
     }
     
     _defaults = {
@@ -45,9 +47,9 @@ class l10n_cr_ConciliationBankWizard(osv.osv_memory):
         if context is None:
             context = {}
         # will be used to attach the report on the main account
-        data['ids'] = [data['form']['chart_account_id']]
+        data['ids'] = [data['form']['chart_account_id']]        
         vals = self.read(cr, uid, ids,
-                         ['bank_account_ids', 'bank_balance',],
+                         ['bank_account_ids', 'bank_balance','historic_strict', 'special_period'],
                          context=context)[0]
         data['form'].update(vals)
         return data

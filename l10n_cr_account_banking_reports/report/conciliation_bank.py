@@ -144,7 +144,8 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
 
         return res
 
-    def get_bank_data(self, cr, uid, parent_account_id, filter_type, filter_data, fiscalyear, target_move, context=None):
+    def get_bank_data(self, cr, uid, parent_account_id, filter_type, filter_data, fiscalyear, target_move, historic_strict, special_period, context=None):
+        print (filter_data)
         result_bank_balance = {}
         result_move_lines = []
         filters = {}
@@ -195,21 +196,15 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
         debits_to_reconcile = 0.0
         accounting_total = 0.0
         bank_total = 0.0
-        
-        '''
-        #Filters for the move lines to use in get_account_balance 
-        filters['fiscalyear'] = fiscalyear.id
-        if filter_type == 'filter_date':
-            filters['date_from'] = filter_data[0] 
-            filters['date_to'] = filter_data[1]
-        elif filter_type == 'filter_period':
-            periods_ids = self.pool.get('account.period').search(cr, uid, [('date_stop', '<=', filter_data[1].date_stop)])
-            filters['periods'] = periods_ids 
-        '''
-        fiscal_year_id = fiscalyear.id
+
+        if fiscalyear: 
+            fiscal_year_id = fiscalyear.id
+        else:
+            fiscal_year_id = False
+            
         if filter_type == 'filter_date':
             period_ids = False
-            end_date = filter_data[1].id
+            end_date = filter_data[1]
         elif filter_type == 'filter_period':
             period_ids = self.pool.get('account.period').search(cr, uid, [('date_stop', '<=', filter_data[1].date_stop)])
             end_date = False
@@ -266,7 +261,27 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
         move_obj = self.pool.get('account.move')
         move_line_obj = self.pool.get('account.move.line')
         
-        unreconciled_move_lines = account_webkit_report_library_obj.get_move_lines(cr, uid, transit_account_ids, filter_type=filter_type, filter_data=filter_data, fiscalyear=fiscalyear, target_move=target_move, unreconcile = True, context=context)
+        """
+            Cambio realizado el 9 de enero de 2012
+            
+            Anteriormente, el método get_move_lines (del objeto account.webkit.report.library, librería estándar de los reportes, 
+            sólo se utilizaba en el reporte de Conciliación bancaria. El reporte de conciliación bancaria no recibe el período de inicio
+            por lo que el método de get_move_lines no contempla el período de inicio, necesario en el reporte de saldo de cuenta de bancos.
+            Se realiza el cambio tanto en el reporte de conciliación bancaria para que el período inicial no se tome en cuenta (inicializado en None)
+            y en la librería se especifica que si se encuentra en None no lo tome en cuenta y que si trae información lo utilice dentro del filtro
+            para sacar el rango de periodos que se digita en el wizard. 
+            
+            Se modifica tanto el reporte de conciliación bancaria, como la librería, para que el método funcione solamente con un período final o bien
+            con un rango de períodos, como trabaja el reporte de saldo de cuenta de bancos. 
+            
+            Para el caso de las fechas, se trabaja de la misma forma. (El saldo de cuentas de bancos si toma la fecha de inicio)
+            
+            OBSERVACIÓN -> data['form']['historic_strict'],las variables boleanas (historic_strict y special_period) se deben pasar
+            de esta forma, sino vienen como objetos y no con el valor real (True or False). Esto se hace desde el conciliation_bank.mako
+            
+        """
+        filter_data[0] = None 
+        unreconciled_move_lines = account_webkit_report_library_obj.get_move_lines(cr, uid, transit_account_ids, filter_type=filter_type, filter_data=filter_data, fiscalyear=fiscalyear, target_move=target_move, unreconcile = True, historic_strict=historic_strict, special_period=special_period, context=context)
         
         result_move_lines = {
             'credits_to_reconcile' :     [],
@@ -382,6 +397,8 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
             'accounting_total' : accounting_total,
             'bank_total' : bank_total,
         }
+        
+        #special_period = historic_strict = False
         
         return result_bank_balance, result_move_lines, account_is_foreign
     
