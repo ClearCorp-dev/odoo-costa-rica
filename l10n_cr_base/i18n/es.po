@@ -1,0 +1,236 @@
+# Spanish translation for openerp-costa-rica
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the openerp-costa-rica package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openerp-costa-rica\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-08-02 22:52+0000\n"
+"PO-Revision-Date: 2013-01-20 06:46+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Spanish <es@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-01-21 04:58+0000\n"
+"X-Generator: Launchpad (build 16430)\n"
+
+#. module: l10n_cr_base
+#: model:res.partner.title,name:l10n_cr_base.res_partner_title_ing
+msgid "Ingeniero/a"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,name:l10n_cr_base.res_partner_title_dr
+msgid "Doctor"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,name:l10n_cr_base.res_partner_title_lic
+msgid "Licenciado"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.function,code:l10n_cr_base.Dev
+msgid "Dev."
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.function,code:l10n_cr_base.Sec
+msgid "Sec."
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.function,code:l10n_cr_base.Chairman
+msgid "Chairman"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,shortcut:l10n_cr_base.res_partner_title_sal
+msgid "S.A.L."
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,shortcut:l10n_cr_base.res_partner_title_dr
+msgid "Dr."
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,name:l10n_cr_base.res_partner_title_sal
+msgid "Sociedad Anónima Laboral"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,name:l10n_cr_base.res_partner_title_licda
+msgid "Licenciada"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.function,code:l10n_cr_base.COO
+msgid "COO"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.function,code:l10n_cr_base.VP
+msgid "VP."
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,name:l10n_cr_base.res_partner_title_dra
+msgid "Doctora"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,shortcut:l10n_cr_base.res_partner_title_lic
+msgid "Lic."
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,name:l10n_cr_base.res_partner_title_gov
+msgid "Government"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.function,code:l10n_cr_base.CEO
+msgid "CEO"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.function,name:l10n_cr_base.Asst
+msgid "Assistant"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,name:l10n_cr_base.res_partner_title_edu
+msgid "Educational Institution"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,name:l10n_cr_base.res_partner_title_mba
+#: model:res.partner.title,shortcut:l10n_cr_base.res_partner_title_mba
+msgid "MBA"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.function,name:l10n_cr_base.CEO
+msgid "Chief Executive Officer"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,name:l10n_cr_base.res_partner_title_msc
+#: model:res.partner.title,shortcut:l10n_cr_base.res_partner_title_msc
+msgid "Msc."
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,shortcut:l10n_cr_base.res_partner_title_indprof
+msgid "Ind. Prof."
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.function,name:l10n_cr_base.COO
+msgid "Chief Operations Officer"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,shortcut:l10n_cr_base.res_partner_title_ing
+msgid "Ing."
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,name:l10n_cr_base.res_partner_title_prof
+msgid "Professor"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:ir.module.module,shortdesc:l10n_cr_base.module_meta_information
+msgid "Costa Rica localization: Base"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,shortcut:l10n_cr_base.res_partner_title_licda
+msgid "Licda."
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.function,name:l10n_cr_base.SysAdm
+msgid "System Administrator"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.function,code:l10n_cr_base.Asst
+msgid "Ass't"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.function,name:l10n_cr_base.Sec
+msgid "Secretary"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,shortcut:l10n_cr_base.res_partner_title_gov
+msgid "Gov."
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,name:l10n_cr_base.res_partner_title_indprof
+msgid "Independant Professional"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:ir.module.module,description:l10n_cr_base.module_meta_information
+msgid ""
+"Base module localization for Costa Rica\n"
+"    Includes:\n"
+"      * res.bank: Costa Rican banks\n"
+"      * res.country.state: Costa Rican provinces with official codes\n"
+"      * res.partner.function: Commonly used functions in Costa Rica\n"
+"      * res.partner.title: Commontly used partner titles in Costa Rica\n"
+"    \n"
+"    Everything is in English with Spanish translation. Further translations "
+"are welcome, please go to\n"
+"    http://translations.launchpad.net/openerp-costa-rica\n"
+"    "
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,shortcut:l10n_cr_base.res_partner_title_prof
+msgid "Prof."
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.function,name:l10n_cr_base.VP
+msgid "Vice-President"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,name:l10n_cr_base.res_partner_title_asoc
+msgid "Asociation"
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,shortcut:l10n_cr_base.res_partner_title_asoc
+msgid "Asoc."
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,shortcut:l10n_cr_base.res_partner_title_edu
+msgid "Edu."
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.function,code:l10n_cr_base.SysAdm
+msgid "Sys.Adm."
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.title,shortcut:l10n_cr_base.res_partner_title_dra
+msgid "Dra."
+msgstr ""
+
+#. module: l10n_cr_base
+#: model:res.partner.function,name:l10n_cr_base.Dev
+msgid "Developer"
+msgstr ""
