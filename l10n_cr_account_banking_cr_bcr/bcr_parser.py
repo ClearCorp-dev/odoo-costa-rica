@@ -195,20 +195,17 @@ class BCRParser( object ):
             
         sub_list = list_split [start:end]
         for sub in sub_list:
-            #03-05-12
-            day = sub[0:2]
-            month = sub[3:5]            
-            date_n = datetime.now()                        
-            try:
-                date = datetime(int(date_n.year), int(month), int (day))
-            except Exception:
-                day = sub[1]
-                month = sub[4]
-                date_n = datetime.now()
-                date = datetime(int(date_n.year), int(month), int (day))
-                
-            mapping['execution_date'] = date                        
-            mapping['effective_date'] = date
+            #fecha_contable
+            date_str = ''
+            date_str = self.extract_date_regular_expresion_line(sub,0)
+            date= datetime.strptime(date_str, "%d-%m-%y")               
+            mapping['effective_date'] = date #fecha_contable.
+            
+            #fecha_movimiento
+            date_str = self.extract_date_regular_expresion_line(sub,1)
+            date = datetime.strptime(date_str, "%d-%m-%y")
+            mapping['execution_date'] = date #fecha_movimiento                       
+           
             mapping['local_currency'] = currencycode
             mapping['transfer_type'] = 'NTRF'
             mapping['reference'] = parser.extract_number(sub[18:26])
@@ -302,6 +299,20 @@ class BCRParser( object ):
             result = re.findall('[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}',date)      
         
         for character in result:
+            cad = cad + character       
+        return cad
+    
+    #con el parametro pos se dice cual de las dos fechas se debe traer
+    #result trae una lista con dos elementos, el pos nos dice cual escoger
+    def extract_date_regular_expresion_line(self, date, pos):
+        cad = ''
+        result = []
+        date_string = ''
+        #re.findall('[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}',str)[0]+' '+re.findall('[0-9]{2}:[0-9]{2}:[0-9]{2}',str)[0]
+        result = re.findall('([0-9]{2}-[0-9]{2}-[0-9]{2})[\s]*',date)      
+        date_str = result[pos]
+        
+        for character in date_str:
             cad = cad + character       
         return cad
     
