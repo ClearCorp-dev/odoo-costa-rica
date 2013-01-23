@@ -302,13 +302,12 @@ class BCRParser( object ):
             cad = cad + character       
         return cad
     
-    #con el parametro pos se dice cual de las dos fechas se debe traer
-    #result trae una lista con dos elementos, el pos nos dice cual escoger
+    #with the pos parameter is said which of the two dates must be brought
+    #result brings a list of two elements, the post tells us to choose    
     def extract_date_regular_expresion_line(self, date, pos):
         cad = ''
         result = []
         date_string = ''
-        #re.findall('[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}',str)[0]+' '+re.findall('[0-9]{2}:[0-9]{2}:[0-9]{2}',str)[0]
         result = re.findall('([0-9]{2}-[0-9]{2}-[0-9]{2})[\s]*',date)      
         date_str = result[pos]
         
