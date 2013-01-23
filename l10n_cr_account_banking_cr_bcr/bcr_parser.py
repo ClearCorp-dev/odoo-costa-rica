@@ -195,13 +195,13 @@ class BCRParser( object ):
             
         sub_list = list_split [start:end]
         for sub in sub_list:
-            #fecha_contable
+            #effective_date
             date_str = ''
             date_str = self.extract_date_regular_expresion_line(sub,0)
             date= datetime.strptime(date_str, "%d-%m-%y")               
             mapping['effective_date'] = date #fecha_contable.
             
-            #fecha_movimiento
+            #execution_date
             date_str = self.extract_date_regular_expresion_line(sub,1)
             date = datetime.strptime(date_str, "%d-%m-%y")
             mapping['execution_date'] = date #fecha_movimiento                       
