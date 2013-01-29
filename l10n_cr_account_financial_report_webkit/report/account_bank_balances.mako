@@ -147,7 +147,7 @@
                         %>
                         <%
                             move_lines = get_move_lines_account(cr, uid, account.id,filter_type,filter_data,fiscalyear,t_m)
-                            total_result = get_total_move_lines(cr, uid, move_lines, currency)
+                            total_result = get_total_move_lines(cr, uid, move_lines, account)
                         %>
                         <div class="act_as_row lines ${level_class} ${"%s_account_type" % (account.type,)}">
                             ## code

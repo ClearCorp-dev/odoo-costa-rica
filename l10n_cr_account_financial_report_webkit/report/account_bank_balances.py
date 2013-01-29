@@ -95,175 +95,214 @@ class account_bank_balances(TrialBalanceWebkit):
         
         return move_lines
     
-    """Se pasa la moneda por parámetro desde el mako (viene del diccionario que separa las listas) """
-    def get_total_move_lines(self, cr, uid, account_move_lines,currency):
-        
-        account_move_obj = self.pool.get('account.move')
-        account_move_line_obj = self.pool.get('account.move.line')
-        account_move_reconcile_obj = self.pool.get('account.move.reconcile')
-        
-        amount_transf = amount_check = amount_deposit = amount_debit = amount_credit = 0.0 
-        
-        total_result = {
-                'amount_transf': 0.0,
-                'amount_check': 0.0,
-                'amount_deposit': 0.0,
-                'amount_debit': 0.0,
-                'amount_credit': 0.0,
-                }
-        
-        amount_transf = amount_check = amount_deposit = amount_debit = amount_credit = amount_temp = 0.0
-        move_line_reconcile = move_line_final = None
-        
-        #TODO Translate to english
         """
-        Primero se obtiene de la linea (MLA) su respectivo account_move (M1). Luego se buscan todos los move_lines (MLA2) asociados al move_line.
+        @param account: Es la cuenta a la cual pertenenecen las lineas
+        @param account_move_lines: Son los move_lines que pertenecen a la cuenta 
+    """
+    def get_total_move_lines(self, cr, uid, account_move_lines, account):
+        
+        """
+        #TODO Translate to english
+         
+        Primero se obtiene de la linea (MLA1) su respectivo account_move (MA). Luego se buscan todos los move_lines (MLA2) asociados al move_line.
         Se busca aquella que es diferente a MLA y se obtiene la MLA2. Con esta línea se busca la conciliación (MR) y se obtienen todas las líneas de
         conciliación. Con estas líneas se buscan aquella donde la diferencia de montos debe ser cero o la menor diferencia. Con esa línea se obtiene
         el move (M2) y de ahi se obtiene el journal para sumar los totales.
             
         """
+        amount_transf = amount_check = amount_deposit = amount_debit = amount_credit =  0.0
+        
+        """
+        #LA MONEDA DE LA COMPAÑIA COINCIDA CON LA MONEDA DE LA CUENTA QUE VIENE POR PARÁMETRO -> Si son iguales (Son colones, moneda de la compañía)
+        """
+        foreign_currency = not account.company_id.currency_id.id == account.report_currency_id.id
+
         for line in account_move_lines:
-            #account_move relacionado con la linea (campo de la relacion -> line_id)
-            account_move_id = account_move_obj.search(cr, uid, [('line_id', '=', line.id )])
-            #se buscan las demás lineas asociadas al move.
-            account_move_lines_ids = account_move_line_obj.search (cr, uid, [('move_id', 'in', account_move_id)])            
+            temp_line = temp_line2 = None
+            no_journal = False
+                           
+            #account_move relacionado con la linea (campo de la relacion -> move_id)
+            move =  line.move_id
+            #se buscan las demás lineas asociadas al move (move_id -> line_id)
+            move_lines = move.line_id
             
-            #si solo existe una -> se suma a los créditos / debitos (línea actual)
-            if len(account_move_lines_ids) < 2:
-                if line.amount_currency < 0: 
-                    amount_credit += math.fabs(line.amount_currency)
-                else:
-                    amount_debit += line.amount_currency                
-                continue
+            #si solo existe una -> move_line_final es la línea actual
+            if len(move_lines) < 2:
+                no_journal = True
             
             #si existen dos -> se almacena el par de la actual.
-            if len(account_move_lines_ids) == 2:
-                account_move_lines = account_move_line_obj.browse (cr, uid, account_move_lines_ids)
-                for move_line in account_move_lines:
+            elif len(move_lines) == 2:
+                for move_line in move_lines:
                     if move_line.id != line.id:
-                        move_line_reconcile  = move_line
+                        temp_line = move_line
             
             #si son más de dos se conserva la que tenga el monto mayor.
-            if len(account_move_lines_ids) > 2:
-                account_move_lines = account_move_line_obj.browse (cr, uid, account_move_lines_ids)
-                for move_line in account_move_lines:
-                    if currency == 'CRC':   
-                        if line.debit != 0.0:
-                            amount_line = line.debit
-                        else:
-                            amount_line = line.credit
-                    else:
-                        amount_line = math.fabs(line.amount_currency)
-                                        
-                    if amount_line > amount_temp:
-                        amount_temp = amount_line 
-                        move_line_reconcile  = move_line
-            
-            #si se encontro una línea de conciliación. 
-            if move_line_reconcile:
-                move_reconcile_id = account_move_reconcile_obj.search(cr, uid, [('id','=', move_line_reconcile.reconcile_id.id)])
-                move_reconcile_lines_ids = account_move_line_obj.search(cr, uid, [('reconcile_id', 'in', move_reconcile_id)])
+            else:
+                #Si son dólares se suma el amount_currency
+                if foreign_currency:
+                    amount_temp = math.fabs(line.amount_currency)
+                #si son colones -> se suman los débitos y créditos (uno de los dos es 0)
+                else:
+                    amount_temp = math.fabs(line.debit + line.credit)
                 
-                #si la conciliación tiene líneas, si no tiene se suma a débitos y créditos. (de la línea de conciliación)
-                if len(move_reconcile_lines_ids) > 0:                
-                    #buscamos la linea que tenga la diferencia más pequeña es la que se queda. (se debe comparar con la que está conciliada ->
-                    #account_move_line_reconcile (debit - credit)
-                    #con esa linea es la que se busca el account_move y de ahi se saca el diario. Con el diario
-                    #se suman los montos correspondientes.(transferencia, cheque, depósito, debitos y créditos)
-                    move_line_reconcile_list = account_move_line_obj.browse(cr, uid, move_reconcile_lines_ids)
-                   
-                    #SE INICIALIZAN LAS VARIABLES CON LA LINEA YA ENCONTRADA DE CONCILIACION
-                    #YA QUE SI NO SE ENCUENTRA NINGUNA SE UTILIZA LA LINEA DE CONCILIACION
-                    diff = math.fabs(move_line_reconcile.debit - move_line_reconcile.credit)
-                    move_line_final = move_line_reconcile
-                    
-                    for line_reconcile in move_line_reconcile_list:
-                        amount_reconcile = diff - math.fabs(line_reconcile.debit - line_reconcile.credit)
-                        if amount_reconcile > 0:
-                            diff = amount_reconcile
-                            move_line_final = line_reconcile
-                    
-                    #una vez que se encuentra la línea con la menor diferencia se busca el move al que pertenece la linea
-                    account_move_final_id = account_move_obj.search(cr, uid, [('line_id','=', move_line_final.id)])
-                    account_move_final = account_move_obj.browse(cr, uid, account_move_final_id)[0]
-                    
-                    #se buscan las opciones que tengan seleccionadas el diario. con eso se realiza la suma. 
-                    #si no tiene ninguna, se suma a debitos 
-                    if not account_move_final.journal_id.check is False \
-                        and account_move_final.journal_id.transfers is False \
-                            and account_move_final.journal_id.payment_method_customer is False \
-                                and account_move_final.journal_id.payment_method_supplier is False \
-                                    and account_move_final.journal_id.payment_verification is False:
-                                        if currency == 'CRC':
-                                            if line.debit != 0.0:
-                                                amount_debit += line.debit
-                                            else:
-                                                amount_credit += line.credit
-                                        else:
-                                            if line.amount_currency < 0:
-                                                amount_credit += math.fabs(amount_currency)
-                                            else:
-                                                amount_debit += amount_currency
-                    
-                    #si tienen marcado payment_method_customer -> deposito
-                    if account_move_final.journal_id.payment_method_customer is True:
-                        amount = 0.0
-                        if currency == 'CRC':
-                            if line.debit != 0.0:
-                                amount = line.debit
-                            else:
-                                amount = line.credit
-                            amount_deposit += amount
-                            
+                #se reccorren todas las líneas que no sean iguales a la línea
+                temp_line = line
+                for move_line in move_lines:                    
+                    if not move_line.id == line.id:
+                        #si son dolares -> se saca el valor absoluto del amount_currency y se compara con amount_temp
+                        if foreign_currency:
+                            #Se debe hacer la comparación con los valores contrarios, si el amount_currency de la linea
+                            #original es positivo, se busca su contrario.
+                            if (line.amount_currency > 0 and move_line.amount_currency < 0) or (line.amount_currency < 0 and move_line.amount_currency > 0):
+                                if math.fabs(line.amount_currency + move_line.amount_currency) <= amount_temp:
+                                    temp_line = move_line
+                                    amount_temp = math.fabs(move_line.amount_currency + line.amount_currency)
                         else:
-                            amount_deposit += math.fabs(line.amount_currency)
-                            
-                    #si tiene marcado payment_method_supplier -> transfers (transferencia) / check (cheque)
-                    if account_move_final.journal_id.payment_method_supplier is True:
-                        if account_move_final.journal_id.check is True:
-                             amount = 0.0
-                             if currency == 'CRC':
-                                if line.debit != 0.0:
-                                    amount = line.debit
-                                else:
-                                    amount = line.credit
-                             amount_check += amount
-                             
-                        if account_move_final.journal_id.transfers is True:
-                           amount = 0.0
-                           if currency == 'CRC':
-                               if line.debit != 0.0:
-                                   amount = line.debit
-                               else:
-                                   amount = line.credit
-                           amount_transf += amount
-                        
-                        if  account_move_final.journal_id.check is False and  account_move_final.journal_id.transfers is False:
-                             if currency == 'CRC':
-                                 if line.debit != 0.0:
-                                     amount_debit += line.debit
-                                 else:
-                                     amount_credit += line.credit
-                             else:
-                                 if line.amount_currency < 0:
-                                     amount_credit += math.fabs(amount_currency)
-                                 else:
-                                     amount_debit += amount_currency                    
-                    
-                else:                    
-                    if move_line_reconcile.debit != 0.0:
-                        amount_debit += move_line_reconcile.debit
+                            #si son colones -> se saca el valor absoluto de la diferencia entre los debitos y los créditos de ambas lines
+                            #debe ser menor al amount_temp
+                            #Se debe buscar su contrario, positivos con negativos. La búsqueda no se hace con todos los valores.
+                            if (line.debit > 0 and move_line.credit > 0) or (line.credit > 0 and move_line.debit > 0): 
+                                if math.fabs((move_line.debit + move_line.credit) - (line.debit + line.credit)) <= amount_temp:
+                                    temp_line = move_line
+                                    amount_temp = math.fabs((move_line.debit + move_line.credit) - (line.debit + line.credit))
+            """
+            Debe cumplir ciertas condiciones para seguir el proceso. 
+                1- Debe existir el temp_line, es decir debe ser la misma línea, su línea espejo o bien la línea que cumpla el valor más aproximado
+                2- El temp_line (linea espejo) no puede ser la misma que la línea original
+                3- La línea espejo debe tener conciliación
+            """                    
+            
+            if not temp_line:
+                no_journal = True
+            elif temp_line.id == line.id:
+                no_journal = True
+            elif not temp_line.reconcile_id:
+                no_journal = True
+            
+            """
+                Si se cumplieron las condiciones anteriores entonces se puede buscar la conciliación y las líneas de conciliación correspondientes
+                temp_line corresponde a la línea espejo de la línea original (line)
+            """
+            if not no_journal:
+                #extraemos la conciliacion y las líneas de conciliación 
+                reconcile = temp_line.reconcile_id
+                move_lines = reconcile.line_id
+                
+                #si la conciliación no tiene líneas no se puede continuar el proceso.
+                if len(move_lines) < 2:
+                    no_journal = True
+                
+                #si existen sólo dos líneas de conciliación, se busca la que es diferente. 
+                elif len(move_lines) == 2:
+                    temp_line2 = temp_line
+                    for move_line in move_lines:
+                        if move_line.id != temp_line2.id:
+                            temp_line = move_line
+                
+                else:
+                    if foreign_currency:
+                        amount_temp = math.fabs(temp_line.amount_currency)
                     else:
-                        amount_credit += move_line_reconcile.credit
+                        amount_temp = math.fabs(temp_line.debit - temp_line.credit)
+                    
+                    temp_line2 = temp_line
+                    for move_line in move_lines:
+                        if not move_line.id == temp_line2.id:
+                            if foreign_currency:
+                                #las comparaciones deben hacerse con el monto opuesto (positivo con negativo)
+                                if (temp_line2.amount_currency > 0 and move_line.amount_currency < 0) or (temp_line2.amount_currency < 0 and move_line.amount_currency > 0):
+                                    if math.fabs(move_line.amount_currency + temp_line2.amount_currency) <= amount_temp:
+                                        temp_line = move_line
+                                        amount_temp = math.fabs(move_line.amount_currency + temp_line2.amount_currency)
+                            else:
+                                #las comparaciones se deben hacer con los montos opuestos, (debit - credit)
+                                if (temp_line2.debit > 0 and move_line.credit > 0) or (temp_line2.credit > 0 and move_line.debit > 0):        
+                                    if math.fabs((move_line.debit + move_line.credit) - (temp_line2.debit + temp_line2.credit)) <= amount_temp:
+                                        temp_line = move_line
+                                        amount_temp = math.fabs((move_line.debit + move_line.credit) - (temp_line2.debit + temp_line2.credit))
+                    
+                    if temp_line2.id == temp_line.id:
+                        temp_line = None                    
+                                        
+                if not temp_line or not temp_line.move_id or not temp_line.move_id.journal_id:
+                    no_journal = True
+                
+                else:
+                    #temp_line debe ser la línea de conciliación que más se acerca a la línea de conciliación
+                    #con los valores del journal, se obtienen los cálculos
+                    journal = temp_line.move_id.journal_id
+                    
+                    if journal.payment_method_customer:
+                        if foreign_currency:
+                            amount_deposit += line.amount_currency
+                        else:
+                            amount_deposit += line.debit - line.credit
+                    
+                    elif journal.payment_method_supplier:
+                        if journal.transfers:
+                            if foreign_currency:
+                                amount_transf += line.amount_currency
+                            else:
+                                amount_transf += line.debit - line.credit
+                        
+                        elif journal.check:
+                            if foreign_currency:
+                                amount_check += line.amount_currency
+                            else:
+                                amount_check += line.debit - line.credit
+                        else:
+                            no_journal = True
+                    else:
+                        no_journal = True
+            
+            #si no cumple ninguna de las condiciones anteriores, se suman los resultados a débitos y créditos. 
+            if no_journal:
+                if foreign_currency:
+                    if line.amount_currency > 0:
+                        amount_debit += line.amount_currency
+                    else:
+                        amount_credit += line.amount_currency
+                else:
+                    amount_debit += line.debit
+                    amount_credit += -1 * line.credit
      
-        total_result ['amount_transf'] = amount_transf
-        total_result ['amount_check'] = amount_check
-        total_result ['amount_deposit'] = amount_deposit
-        total_result ['amount_debit']= amount_debit
-        total_result ['amount_credit'] = amount_credit
+        return {
+            'amount_transf' : amount_transf,
+            'amount_check' : amount_check,
+            'amount_deposit' : amount_deposit,
+            'amount_debit' : amount_debit,
+            'amount_credit' : amount_credit,
+        }
+    
+    """
+        @param accounts: cuentas para calcular el balance inicial
+        @param filter_type: tipo de filtro (filter_date, filter_period)
+        @param filter_dat: valores seleccionados en el wizard para generar el reporte
+        @param target_move : posted, all (tipo de apunte)    
+    """
+    def get_initia_balance_accounts (self, cr, uid, accounts, filter_type, filter_data, fiscalyear, target_move):
+        accounts_ids = []
         
-        return total_result                    
+        for account in accounts:
+            accounts_ids.append(account.id)
+            
+        #el metodo get_account_balance devuelve un diccionario con la llave de la cuenta
+        #y el valor que se le está pidiendo, en este caso el balance inicial.
+        
+        if filter_type == 'filter_period':
+            #el método recibe los ids de los períodos
+            start_period_id = filter_data[0].id
+            end_period_id = filter_data[1].id
+        
+        if filter_type == 'filter_date':
+            start_date = filter_data[0]
+            end_date = filter_data[1]
+        
+        if fiscalyear:
+            fiscal_year_id = fiscalyear.id
+        
+        move_lines = self.pool.get('account.webkit.report.library').        
+        
 
 HeaderFooterTextWebKitParser(
     'report.l10n_cr_account_financial_report_webkit.account.account_report_account_bank_balances_webkit',
