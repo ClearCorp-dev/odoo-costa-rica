@@ -43,6 +43,7 @@ class account_bank_balances(TrialBalanceWebkit):
                 'accounts_by_currency': self.accounts_by_currency,
                 'get_move_lines_account': self.get_move_lines_account,
                 'get_total_move_lines': self.get_total_move_lines,
+                'get_initia_balance_accounts': self.get_initia_balance_accounts,
         })
 
     #Change the filter by code == BKRE
@@ -280,29 +281,41 @@ class account_bank_balances(TrialBalanceWebkit):
         @param filter_dat: valores seleccionados en el wizard para generar el reporte
         @param target_move : posted, all (tipo de apunte)    
     """
-    def get_initia_balance_accounts (self, cr, uid, accounts, filter_type, filter_data, fiscalyear, target_move):
+    def get_initia_balance_accounts (self, cr, uid, accounts, filter_type, filter_data, fiscalyear, target_move,chart_account_id,context={}):
         accounts_ids = []
-        
+       
         for account in accounts:
             accounts_ids.append(account.id)
-            
+          
         #el metodo get_account_balance devuelve un diccionario con la llave de la cuenta
         #y el valor que se le está pidiendo, en este caso el balance inicial.
         
         if filter_type == 'filter_period':
-            #el método recibe los ids de los períodos
+            #el método recibe los ids de los períodos (filtro por períodos)
             start_period_id = filter_data[0].id
             end_period_id = filter_data[1].id
-        
+            initial_balance = self.pool.get('account.webkit.report.library').get_account_balance(cr,
+                                                                                        uid, 
+                                                                                        accounts_ids, 
+                                                                                        ['balance'],                                                                                        
+                                                                                        fiscal_year_id=fiscalyear.id,                                                                                
+                                                                                        state = target_move,
+                                                                                        end_period_id = start_period_id,
+                                                                                        chart_account_id=chart_account_id)
         if filter_type == 'filter_date':
+            #el método recibe las fechas (en caso de filtro por fechas)
             start_date = filter_data[0]
             end_date = filter_data[1]
-        
-        if fiscalyear:
-            fiscal_year_id = fiscalyear.id
-        
-        move_lines = self.pool.get('account.webkit.report.library').        
-        
+            initial_balance = self.pool.get('account.webkit.report.library').get_account_balance(cr, 
+                                                                                        uid, 
+                                                                                        accounts_ids, 
+                                                                                        ['balance'],   
+                                                                                        fiscal_year_id=fiscalyear.id,
+                                                                                        state = target_move,                                                                       
+                                                                                        end_date = start_date,                                                                                        
+                                                                                        chart_account_id=chart_account_id)
+                                                                                        
+        return initial_balance
 
 HeaderFooterTextWebKitParser(
     'report.l10n_cr_account_financial_report_webkit.account.account_report_account_bank_balances_webkit',

@@ -63,7 +63,6 @@
                 </div>
                 <div class="act_as_cell">${_('Accounts Filter')}</div>
                 <div class="act_as_cell">${_('Target Moves')}</div>
-                <div class="act_as_cell">${_('Initial Balance')}</div>
             </div>
             <div class="act_as_row">
                 <div class="act_as_cell">${ chart_account.name }</div>
@@ -148,6 +147,7 @@
                         <%
                             move_lines = get_move_lines_account(cr, uid, account.id,filter_type,filter_data,fiscalyear,t_m)
                             total_result = get_total_move_lines(cr, uid, move_lines, account)
+                            initial_balance = get_initia_balance_accounts(cr, uid, accounts,filter_type, filter_data,fiscalyear,t_m,data['form']['chart_account_id'])
                         %>
                         <div class="act_as_row lines ${level_class} ${"%s_account_type" % (account.type,)}">
                             ## code
@@ -155,19 +155,19 @@
                             ## account name
                             <div class="act_as_cell">${account.name}</div>
                             ##initial balance
-                            <div class="act_as_cell amount">${formatLang(0.0)}</div>
+                            <div class="act_as_cell amount">${formatLang(initial_balance[account.id]['balance'])}</div>
                             ##transfer
-                            <div class="act_as_cell amount">${total_result['amount_transf']}</div>
+                            <div class="act_as_cell amount">${formatLang(total_result['amount_transf'])}</div>
                             ##check
-                            <div class="act_as_cell amount">${total_result['amount_check']}</div>
+                            <div class="act_as_cell amount">${formatLang(total_result['amount_check'])}</div>
                             ##deposit
-                            <div class="act_as_cell amount">${total_result['amount_deposit']}</div>
+                            <div class="act_as_cell amount">${formatLang(total_result['amount_deposit'])}</div>
                             ##debit
-                            <div class="act_as_cell amount">${total_result['amount_debit']}</div>
+                            <div class="act_as_cell amount">${formatLang(total_result['amount_debit'])}</div>
                             ##credit
-                            <div class="act_as_cell amount">${total_result['amount_credit']}</div> 
+                            <div class="act_as_cell amount">${formatLang(total_result['amount_credit'])}</div> 
                             ##balance
-                            <div class="act_as_cell amount">${formatLang(0.0)}</div>
+                            <div class="act_as_cell amount">${formatLang(initial_balance[account.id]['balance']+total_result['amount_transf']+total_result['amount_check']+total_result['amount_deposit']+total_result['amount_debit']+total_result['amount_credit'])}</div>
                        </div>
                     %endfor
                 </div>
