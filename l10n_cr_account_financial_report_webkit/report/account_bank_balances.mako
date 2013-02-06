@@ -1,177 +1,158 @@
 <!DOCTYPE html SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-       		<style type="text/css">
-			.account_level_1 {
-				text-transform: uppercase;
-                font-size: 15px;
-                background-color:#F0F0F0;
-            }
-
-            .account_level_2 {
-                font-size: 12px;
-                background-color:#F0F0F0;
-            }
-
-            .regular_account_type {
-                font-weight: normal;
-            }
-
-            .view_account_type {
-                font-weight: bold;
-            }
-
-            .account_level_consol {
-                font-weight: normal;
-            	font-style: italic;
-            }
-
+        <link rel='stylesheet' href='addons/account_webkit_report_library/webkit_headers/main.css' />
+        <style>
             ${css}
-
-            .list_table .act_as_row {
-                margin-top: 10px;
-                margin-bottom: 10px;
-                font-size:10px;
-            }
         </style>
     </head>
     <body>
-        <%!
-        def amount(text):
-            return text.replace('-', '&#8209;')  # replace by a non-breaking hyphen (it will not word-wrap between hyphen and numbers)
-        %>
-
         <%setLang(user.context_lang)%>
-
         <%
-        initial_balance_text = {'initial_balance': _('Computed'), 'opening_balance': _('Opening Entries'), False: _('No')}
         filter_type = ''
         filter_data = []
         t_m = target_move(data) 
         %>
-
-        <div class="act_as_table data_table">
-            <div class="act_as_row labels" style="font-weight: bold;">
-                <div class="act_as_cell">${_('Chart of Account')}</div>
-                <div class="act_as_cell">${_('Fiscal Year')}</div>
-                <div class="act_as_cell">
-                    %if filter_form(data) == 'filter_date':
-                        ${_('Dates Filter')}
-                    %else:
-                        ${_('Periods Filter')}
-                    %endif
+        <div class="table header">
+           <div class="table-row">
+               <div class="table-cell logo">${helper.embed_logo_by_name('internal_reports_logo', height=100)|n}</div>
+               <br/>
+               <div class="table-cell text">
+                    <p class="title">${_('Account Bank Balance Report')}</p>
+               </div>
+           </div>
+       </div>
+        <div class="table list">
+            <div class="table-header">
+                <div class="table-row labels no-wrap">
+                    <div class="table-cell first-column" style="width: 70px">${_('Chart of Account')}<br/>${ chart_account.name }</div>
+                    <div class="table-cell" style="width: 100px">
+                            %if filter_form(data) == 'filter_date':
+                                ${_('Dates Filter')}
+                            %elif filter_form(data) == 'filter_period': 
+                                ${_('Periods Filter')}
+                            %elif filter_form(data) == '':
+                                ${_('Filter')}
+                             %elif filter_form(data) == 'filter_opening':
+                                ${_('Opening filter')}
+                            %endif
+                            <br/>
+                            %if filter_form(data) == 'filter_date':
+                                ${_('From:')}
+                                ${formatLang(start_date, date=True) if start_date else u'' }
+                                <% 
+                                    filter_data.append(start_date) 
+                                    filter_type = 'filter_date'
+                                %>
+                            %elif filter_form(data) == 'filter_period':
+                                ${_('From:')}
+                                ${start_period.name if start_period else u''}
+                                <% 
+                                    filter_data.append(start_period) 
+                                    filter_type = 'filter_period'
+                                %>
+                            %elif filter_form(data) == '':
+                                ${_('No filters')}                             
+                            %elif filter_form(data) == 'filter_opening':
+                                ${_('Opening balance')}
+                            %endif                              
+                            %if filter_form(data) == 'filter_date':
+                                ${_('To:')}
+                                ${ formatLang(stop_date, date=True) if stop_date else u'' }
+                                <% filter_data.append(stop_date) %>                            
+                            %elif filter_form(data) == 'filter_period':
+                                ${_('To:')}
+                                ${stop_period.name if stop_period else u'' }
+                                <% filter_data.append(stop_period) %>                        
+                            %endif             
+                    </div>
+                    <div class="table-cell" style="width: 100px">${_('Fiscal Year')}<br/>${ fiscalyear.name if fiscalyear else '-' }</div>                
+                    <div div class="table-cell" style="width: 100px">${_('Target Moves')}<br/>${ display_target_move(data) }</div>
                 </div>
-                <div class="act_as_cell">${_('Accounts Filter')}</div>
-                <div class="act_as_cell">${_('Target Moves')}</div>
-            </div>
-            <div class="act_as_row">
-                <div class="act_as_cell">${ chart_account.name }</div>
-                <div class="act_as_cell">${ fiscalyear.name if fiscalyear else '-' }</div>
-                <div class="act_as_cell">
-                    ${_('From:')}
-                    %if filter_form(data) == 'filter_date':
-                        ${formatLang(start_date, date=True) if start_date else u'' }
-                        <% 
-                            filter_data.append(start_date) 
-                            filter_type = 'filter_date'
-                        %>
-                    %elif filter_form(data) == 'filter_period':
-                        ${start_period.name if start_period else u''}
-                        <% 
-                            filter_data.append(start_period) 
-                            filter_type = 'filter_period'
-                        %>
-                    %endif
-                    ${_('To:')}
-                    %if filter_form(data) == 'filter_date':
-                        ${ formatLang(stop_date, date=True) if stop_date else u'' }
-                        <% filter_data.append(stop_date) %>
-                    %elif filter_form(data) == 'filter_period':
-                        ${stop_period.name if stop_period else u'' }
-                        <% filter_data.append(stop_period) %>
-                    %endif
-                </div>
-                <div class="act_as_cell">${ display_target_move(data) }</div>
-                <div class="act_as_cell">${ initial_balance_text[initial_balance_mode] }</div>
             </div>
         </div>
+        <%
+        
+        bank_accounts = get_bank_accounts(cr, uid)
+        accounts_currency = accounts_by_currency(cr, uid, bank_accounts)
 
-            <%
-            last_child_consol_ids = []
-            last_level = False
-            
-            bank_accounts = get_bank_accounts(cr, uid)
-            accounts_currency = accounts_by_currency(cr, uid, bank_accounts)
-
-            %>
-            %for currency, accounts in accounts_currency.iteritems():
-                <div class="account_title bg" style="margin-top: 20px; font-size: 12px; width: 700px;">${_('Account Bank Balance in ')} ${currency}</div>
-                <div class="act_as_table list_table" style="margin-top: 10px;">
-                <div class="act_as_thead">
-                    <div class="act_as_row labels" style="font-weight: bold;">
+        %>
+        %for currency, accounts in accounts_currency.iteritems():
+            <br/><br/>
+            <div class="table header">
+                <div class="table-row">
+                   <div class="table-cell text">
+                        <p class="subtitle">${_('Account Bank Balance in: ')} ${currency}</p>
+                   </div>
+                </div>
+            </div>
+            <div class="table list">
+                <div class="table-header">
+                    <div class="table-row labels no-wrap">
                         ## code
-                        <div class="act_as_cell first_column" style="width: 40px;">${_('Code')}</div>
+                        <div class="table-cell first-column" style="width: 40px;">${_('Code')}</div>
                         ## account name
-                        <div class="act_as_cell" style="width: 80px;">${_('Account')}</div>
+                        <div class="table-cell" style="width: 80px;">${_('Account')}</div>
                         ## initial balance
-                        <div class="act_as_cell amount" style="width: 50px;">${_('Initial Balance')}</div>
+                        <div class="table-cell" style="width: 50px;">${_('Initial Balance')}</div>
                         ## TEFS
-                        <div class="act_as_cell amount" style="width: 50px;">${_('Transfers')}</div>
+                        <div class="table-cell" style="width: 50px;">${_('Transfers')}</div>
                         ## Checks
-                        <div class="act_as_cell amount" style="width: 50px;">${_('Checks')}</div>
+                        <div class="table-cell" style="width: 50px;">${_('Checks')}</div>
                         ## Deposit
-                        <div class="act_as_cell amount" style="width: 50px;">${_('Deposit')}</div>
+                        <div class="table-cell" style="width: 50px;">${_('Deposit')}</div>
                         ## debit
-                        <div class="act_as_cell amount" style="width: 50px;">${_('Debit')}</div>
+                        <div class="table-cell" style="width: 50px;">${_('Debit')}</div>
                         ## credit
-                        <div class="act_as_cell amount" style="width: 50px;">${_('Credit')}</div>
+                        <div class="table-cell" style="width: 50px;">${_('Credit')}</div>
                         ## balance
-                        <div class="act_as_cell amount" style="width: 50px;">${_('Balance')}</div>                        
+                        <div class="table-cell" style="width: 50px;">${_('Balance')}</div>                        
                     </div>
-                </div>                  
-                
-                <div class="act_as_tbody">
+                </div>
+                <div class="table-body">
                     %for account in sorted(set(accounts)):
-                        <%
-                            if account.id in last_child_consol_ids:
-                                # current account is a consolidation child of the last account: use the level of last account
-                                level = last_level
-                                level_class = "account_level_consol"
-                            else:
-                                # current account is a not a consolidation child: use its own level
-                                level = account.level or 0
-                                level_class = "account_level_%s" % (level,)
-                                last_child_consol_ids = [child_consol_id.id for child_consol_id in account.child_consol_ids]
-                                last_level = account.level 
-                        %>
                         <%
                             move_lines = get_move_lines_account(cr, uid, account.id,filter_type,filter_data,fiscalyear,t_m)
                             total_result = get_total_move_lines(cr, uid, move_lines, account)
                             initial_balance = get_initia_balance_accounts(cr, uid, accounts,filter_type, filter_data,fiscalyear,t_m,data['form']['chart_account_id'])
                         %>
-                        <div class="act_as_row lines ${level_class} ${"%s_account_type" % (account.type,)}">
+                        <div class="table-row ${row_even and 'even' or 'odd'}">
                             ## code
-                            <div class="act_as_cell first_column">${account.code}</div>
+                            <div class="table-cell first-column">${account.code}</div>
                             ## account name
-                            <div class="act_as_cell">${account.name}</div>
-                            ##initial balance
-                            <div class="act_as_cell amount">${formatLang(initial_balance[account.id]['balance'])}</div>
+                            <div class="table-cell">${account.name}</div>
+                            <% 
+                                foreign_currency = not account.company_id.currency_id.id == account.report_currency_id.id 
+                            %>
+                            %if foreign_currency:
+                                ##foreign_balance
+                                <div class="table-cell amount">${formatLang(initial_balance[account.id]['foreign_balance'])}</div>
+                            %else:
+                                 ##balance
+                                <div class="table-cell amount">${formatLang(initial_balance[account.id]['balance'])}</div>
+                            %endif
                             ##transfer
-                            <div class="act_as_cell amount">${formatLang(total_result['amount_transf'])}</div>
+                            <div class="table-cell amount">${formatLang(total_result['amount_transf'])}</div>
                             ##check
-                            <div class="act_as_cell amount">${formatLang(total_result['amount_check'])}</div>
+                            <div class="table-cell amount">${formatLang(total_result['amount_check'])}</div>
                             ##deposit
-                            <div class="act_as_cell amount">${formatLang(total_result['amount_deposit'])}</div>
+                            <div class="table-cell amount">${formatLang(total_result['amount_deposit'])}</div>
                             ##debit
-                            <div class="act_as_cell amount">${formatLang(total_result['amount_debit'])}</div>
+                            <div class="table-cell amount">${formatLang(total_result['amount_debit'])}</div>
                             ##credit
-                            <div class="act_as_cell amount">${formatLang(total_result['amount_credit'])}</div> 
-                            ##balance
-                            <div class="act_as_cell amount">${formatLang(initial_balance[account.id]['balance']+total_result['amount_transf']+total_result['amount_check']+total_result['amount_deposit']+total_result['amount_debit']+total_result['amount_credit'])}</div>
-                       </div>
+                            <div class="table-cell amount">${formatLang(total_result['amount_credit'])}</div> 
+                            %if foreign_currency:
+                                ##foreign_balance
+                                <div class="table-cell amount">${formatLang(initial_balance[account.id]['foreign_balance']+total_result['amount_transf']+total_result['amount_check']+total_result['amount_deposit']+total_result['amount_debit']+total_result['amount_credit'])}</div>
+                            %else:                            
+                                ##balance
+                                <div class="table-cell amount">${formatLang(initial_balance[account.id]['balance']+total_result['amount_transf']+total_result['amount_check']+total_result['amount_deposit']+total_result['amount_debit']+total_result['amount_credit'])}</div>
+                           %endif
+                        </div>                        
                     %endfor
                 </div>
-            </div>        
-         %endfor        
+            </div>  
+         %endfor  
+        <p style="page-break-after:always"></p>         
     </body>
 </html>

@@ -38,7 +38,12 @@ class account_bank_balances(TrialBalanceWebkit):
         super(account_bank_balances, self).__init__(cursor, uid, name, context=context)
         self.pool = pooler.get_pool(self.cr.dbname)
         self.cursor = self.cr   
+        
+        company = self.pool.get('res.users').browse(self.cr, uid, uid, context=context).company_id
+        header_report_name = ' - '.join((_('Account Bank Balance'), company.name, company.currency_id.name))
+        
         self.localcontext.update({
+                'report_name': _('Account Bank Balance'),
                 'get_bank_accounts': self.get_bank_accounts, 
                 'accounts_by_currency': self.accounts_by_currency,
                 'get_move_lines_account': self.get_move_lines_account,
@@ -284,24 +289,39 @@ class account_bank_balances(TrialBalanceWebkit):
     def get_initia_balance_accounts (self, cr, uid, accounts, filter_type, filter_data, fiscalyear, target_move,chart_account_id,context={}):
         accounts_ids = []
        
+        #todas las cuentas ya vienen agrupadas por moneda.
         for account in accounts:
             accounts_ids.append(account.id)
-          
-        #el metodo get_account_balance devuelve un diccionario con la llave de la cuenta
-        #y el valor que se le está pidiendo, en este caso el balance inicial.
         
+        #si la moneda no es colones, se pide el foreign_balance. si son colones se pide el balance.
+        account_foreign_currency = accounts[0]  
+        foreign_currency = not account_foreign_currency.company_id.currency_id.id == account_foreign_currency.report_currency_id.id
+        if foreign_currency:
+            field_names = ['foreign_balance']
+        else:
+            field_names = ['balance']
+        
+        #el metodo get_account_balance devuelve un diccionario con la llave de la cuenta
+        #y el valor que se le está pidiendo, en este caso el balance inicial.        
         if filter_type == 'filter_period':
             #el método recibe los ids de los períodos (filtro por períodos)
-            start_period_id = filter_data[0].id
+            if filter_data[0]:
+                start_period_id = filter_data[0].id
+            else:
+                start_period_id = False
+                
             end_period_id = filter_data[1].id
             initial_balance = self.pool.get('account.webkit.report.library').get_account_balance(cr,
                                                                                         uid, 
                                                                                         accounts_ids, 
-                                                                                        ['balance'],                                                                                        
+                                                                                        field_names,     
+                                                                                        initial_balance=True,                                                                                   
                                                                                         fiscal_year_id=fiscalyear.id,                                                                                
                                                                                         state = target_move,
-                                                                                        end_period_id = start_period_id,
-                                                                                        chart_account_id=chart_account_id)
+                                                                                        start_period_id = start_period_id,
+                                                                                        end_period_id = end_period_id,
+                                                                                        chart_account_id=chart_account_id,
+                                                                                        filter_type=filter_type)
         if filter_type == 'filter_date':
             #el método recibe las fechas (en caso de filtro por fechas)
             start_date = filter_data[0]
@@ -309,12 +329,41 @@ class account_bank_balances(TrialBalanceWebkit):
             initial_balance = self.pool.get('account.webkit.report.library').get_account_balance(cr, 
                                                                                         uid, 
                                                                                         accounts_ids, 
-                                                                                        ['balance'],   
+                                                                                        field_names,  
+                                                                                        initial_balance=True, 
                                                                                         fiscal_year_id=fiscalyear.id,
-                                                                                        state = target_move,                                                                       
-                                                                                        end_date = start_date,                                                                                        
-                                                                                        chart_account_id=chart_account_id)
-                                                                                        
+                                                                                        state = target_move, 
+                                                                                        start_date = start_date,                                                                      
+                                                                                        end_date = end_date,                                                                                        
+                                                                                        chart_account_id=chart_account_id,
+                                                                                        filter_type=filter_type)
+        if filter_type == '':
+            initial_balance = self.pool.get('account.webkit.report.library').get_account_balance(cr, 
+                                                                                        uid, 
+                                                                                        accounts_ids, 
+                                                                                        field_names,  
+                                                                                        initial_balance=True, 
+                                                                                        fiscal_year_id=fiscalyear.id,
+                                                                                        state = target_move, 
+                                                                                        chart_account_id=chart_account_id,
+                                                                                        filter_type=filter_type)
+        
+        #CASO ESPECIAL PARA ESTE TIPO DE REPORTE -> FILTRO DE SOLAMENTE PERIODO DE APERTURA                                                                                        
+        if filter_type == 'filter_opening':
+            period_ids = [self.pool.get('account.period').search(cr, uid, [('fiscalyear_id','=',fiscal_year_id),('special','=',True)],order='date_start asc')[0]]
+            
+            initial_balance = self.pool.get('account.webkit.report.library').get_account_balance(cr, 
+                                                                                        uid, 
+                                                                                        accounts_ids, 
+                                                                                        field_names,  
+                                                                                        initial_balance=True, 
+                                                                                        fiscal_year_id=fiscalyear.id,
+                                                                                        state = target_move, 
+                                                                                        period_ids = period_ids,
+                                                                                        chart_account_id=chart_account_id,
+                                                                                        filter_type=filter_type)
+        
+        
         return initial_balance
 
 HeaderFooterTextWebKitParser(

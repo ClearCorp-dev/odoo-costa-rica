@@ -43,13 +43,11 @@
              <field eval="[(6,0,[])]" name="groups_id"/>
              <field eval="0" name="multi"/>
              <field eval="0" name="auto"/>
-             <field eval="1" name="header"/>
              <field name="model">account.account</field>
              <field name="type">ir.actions.report.xml</field>
              <field name="name">Account Balances Webkit</field>
              <field name="report_rml">l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako</field>
              <field name="report_file">l10n_cr_account_financial_report_webkit/report/account_bank_balances.mako</field>
-             <field name="webkit_header" ref="financial_portrait_header"/>
          </record>
 
         <record id="l10n_cr_account_financial_report_webkit.account_financial_report_webkit" model="ir.actions.report.xml">

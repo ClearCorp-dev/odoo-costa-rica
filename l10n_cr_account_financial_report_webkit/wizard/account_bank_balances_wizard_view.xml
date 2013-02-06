@@ -35,7 +35,7 @@
                         <attribute name="domain">[('fiscalyear_id', '=', fiscalyear_id), ('special', '=', False)]</attribute>
                     </field>
                     <field name="fiscalyear_id" position="attributes">
-                        <attribute name="attrs">{'required': [('filter', '=', 'filter_opening')]}</attribute>
+                        <attribute name="attrs">{'required':True}</attribute>
                     </field>
                 </data>
             </field>
