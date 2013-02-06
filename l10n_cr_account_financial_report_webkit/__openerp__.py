@@ -29,7 +29,7 @@
     'category': 'Finance',
     'website': "http://clearcorp.co.cr",
     'images': [],
-    'depends': ['account_financial_report_webkit', 'account' ],
+    'depends': ['account' ],
     'init_xml': [],
     'demo_xml' : [],
     'update_xml': ['account_move_line_view.xml',
