@@ -89,7 +89,7 @@ class statement(models.mem_bank_statement):
     Bank statement imported data
     '''
 
-    def import_record(self, record):
+    def import_record(self, record,**kwargs):
         def _transmission_number():
             self.id = record['transref']
         def _account_number():
@@ -156,7 +156,16 @@ class parser_bac_mt940(models.parser):
             the BAC web interface.
             ''')
 
-    def parse(self, cr, data):
+    def parse(self, cr, data,**kwargs):
+        '''
+            ** Kwargs parameter is used for a dynamic list of parameters. 
+            The wizard imported extracts used in all parsers and not all parsers have all the necessary information in your file, 
+            so get information from the wizard and passed by the ** kwargs. 
+            Then in the parses that are needed, are extracted from the ** kwargs and if needed, 
+            the parser still works the same way without this parameter.
+            
+            The rest of the methods must receive this parameter. (As the method that parse the header and the lines).
+        '''
         result = []        
         parser = BACParser()
         list_record = []
