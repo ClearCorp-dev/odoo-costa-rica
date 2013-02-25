@@ -54,7 +54,7 @@ class BCRParser( object ):
                                                                         FINAL               32,525,741.66
     Solicitado el 01/11/2012 20:03:34                                   SOLICITADO EL 01-12-2012 A LAS 15:36:15:17                                       
     """
-    def statement_record ( self, rec ):
+    def statement_record ( self, rec, **kwargs):
         lines = []
         line_dict = {}
 
@@ -231,11 +231,11 @@ class BCRParser( object ):
                             
         return lines    
     
-    def parse_stamenent_record( self, rec ):
+    def parse_stamenent_record( self, rec, **kwargs):
 
         matchdict = dict()
 
-        matchdict = self.statement_record( rec );
+        matchdict = self.statement_record( rec, **kwargs );
 
         # Remove members set to None
         matchdict = dict( [( k, v ) for k, v in matchdict.iteritems() if v] )

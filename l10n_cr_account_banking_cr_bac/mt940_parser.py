@@ -73,7 +73,7 @@ class BACParser(object):
         self.recparse = recparse
 
 
-    def parse_record(self, line):
+    def parse_record(self, line,**kwargs):
         """
         Parse record using regexps and apply post processing
         """

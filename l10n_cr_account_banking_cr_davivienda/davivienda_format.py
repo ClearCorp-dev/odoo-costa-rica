@@ -22,7 +22,7 @@
 
 from account_banking.parsers import models
 from tools.translate import _
-from bcr_parser import BCRParser
+from davivienda_parser import DaviviendaParser
 import re
 import osv
 import logging
@@ -30,13 +30,7 @@ import pprint
 from datetime import datetime
 
 bt = models.mem_bank_transaction
-logger = logging.getLogger( 'bcr_mt940' )
-
-def record2float(record, value):
-    if record == 'C':
-        return float (value)
-    else:
-        return -float(value)
+logger = logging.getLogger( 'davivienda_logger' )
 
 class transaction(models.mem_bank_transaction):
 
@@ -57,8 +51,8 @@ class transaction(models.mem_bank_transaction):
         '''
         Transaction creation
         '''
+        #record is a dictionary, that is the reason to use iteritems().
         super(transaction, self).__init__(*args, **kwargs)
-        #for r in record:
         for key, value in record.iteritems():
             if record.has_key(key):
                 setattr(self, key, record[key])
@@ -79,30 +73,26 @@ class statement(models.mem_bank_statement):
       
     def _transmission_number(self, record):
         self.id = record['transref']
-        
+    
     def _account_number(self, record):
         self.local_account = record['account_number']
-        
+
     def _statement_number(self, record):
         self.id = record['id']
         
     def _opening_balance(self, record):
         self.start_balance = float(record['startingbalance'])
-        self.local_currency = record['currencycode']
     
     def _closing_balance(self, record):
         self.end_balance = float(record['endingbalance'])
         self.date = record['bookingdate']
      
     def _transaction_new(self, record):
-        parser = BCRParser()
+        parser = DaviviendaParser()
         sub_record = parser.statement_lines(record) #dictionary
         for sub in sub_record:
             self.transactions.append(transaction(sub))
-    
-    #def _transaction_info():
-        #self.transaction_info(record)
-    
+
     def _not_used():
         logger.info("Didn't use record: %s", record)
         
@@ -130,32 +120,39 @@ def raise_error(message, line):
     raise osv.osv.except_osv(_('Import error'),
         'Error in import:%s\n\n%s' % (message, line))
 
-class parser_bcr_mt940( models.parser ):
-    code = 'BCR-MT940'
-    name = _( 'BCR statement import' )
+class parser_davivienda( models.parser ):
+    
+    '''
+        This adds a new parser in the selection options. 
+        When the account is associated to a parser, the following code makes it appear as an option
+    '''
+    code = 'Davivienda-Parser'
+    name = _( 'Davivienda statement import' )
     country_code = 'CR'
     doc = _('''\
             This format is available through
-            the BCR  web interface.
+            the Davivienda  web interface.
             ''')
+    '''
+        ** Kwargs parameter is used for a dynamic list of parameters. 
+        The wizard imported extracts used in all parsers and not all parsers have all the necessary information in your file, 
+        so get information from the wizard and passed by the ** kwargs. 
+        Then in the parses that are needed, are extracted from the ** kwargs and if needed, 
+        the parser still works the same way without this parameter.
+        
+        The rest of the methods must receive this parameter. (As the method that parse the header and the lines). 
+        
+        If you need a new parameter, you specify its name and value, using the ** kwargs is a dictionary, 
+        extract its value, with the respective key
+    '''
 
     def parse(self, cr, data, **kwargs):
-        
-        '''
-            ** Kwargs parameter is used for a dynamic list of parameters. 
-            The wizard imported extracts used in all parsers and not all parsers have all the necessary information in your file, 
-            so get information from the wizard and passed by the ** kwargs. 
-            Then in the parses that are needed, are extracted from the ** kwargs and if needed, 
-            the parser still works the same way without this parameter.
-            
-            The rest of the methods must receive this parameter. (As the method that parse the header and the lines).
-        '''
-        
         result = []
-        parser = BCRParser()
+        parser = DaviviendaParser()
         stmnt = statement()
         
-        records = parser.parse_stamenent_record(data)        
+        #parse the data for the header of the stament.
+        records = parser.parse_stamenent_record(data, **kwargs)        
         
         stmnt._transmission_number(records)
         stmnt._account_number(records)
@@ -164,8 +161,12 @@ class parser_bcr_mt940( models.parser ):
         stmnt._closing_balance(records)
         stmnt._forward_available(records)
         stmnt._execution_date_transferred_amount (records)
-        stmnt._transaction_new(data)
+        stmnt._transaction_new(data)#call the method statement_lines in parser to parse all the lines in file and add to stament.
                   
+        '''
+        A stament must have a header and transacctions. The method parse_stamenent_record parse the header and the 
+        method _transaction_new parse all the line (transactions) in the file. 
+        '''
         if stmnt.is_valid():
             result.append(stmnt)
                       
