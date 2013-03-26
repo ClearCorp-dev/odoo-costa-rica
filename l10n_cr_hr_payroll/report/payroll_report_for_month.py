@@ -20,25 +20,18 @@
 #
 ##############################################################################
 
+import pooler
 from report import report_sxw
 from tools.translate import _
-import pooler
-from osv import fields,osv
 
-from openerp.addons.account_financial_report_webkit.report.trial_balance import TrialBalanceWebkit
-from openerp.addons.account_financial_report_webkit.report.webkit_parser_header_fix import HeaderFooterTextWebKitParser
-
-def sign(number):
-    return cmp(number, 0)
-
-class payroll_report_for_month(TrialBalanceWebkit):
+class PayrollReportForMonth(report_sxw.rml_parse):
     def __init__(self, cr, uid, name, context):
-        super(payroll_report_for_month, self).__init__(cr, uid, name, context=context)
+        super(PayrollReportForMonth, self).__init__(cr, uid, name, context=context)
         self.pool = pooler.get_pool(self.cr.dbname)
         self.cursor = self.cr
-        #This line is to delete, the header of trial balance
-        self.localcontext['additional_args'][4] = ('--header-left', '')
         self.localcontext.update({
+            'cr' : cr,
+            'uid': uid,
             'get_payslips_by_period': self.get_payslips_by_period,
             'get_payslips_by_struct': self.get_payslips_by_struct,
             'get_payslips_by_employee': self.get_payslips_by_employee,
@@ -56,18 +49,7 @@ class payroll_report_for_month(TrialBalanceWebkit):
             'get_RETS':self.get_RETS,
             'get_retroactive':self.get_retroactive,
         })
-        
-    def set_context(self, objects, data, ids, report_type=None):
-        start_period = self._get_form_param('period_from', data)
-        stop_period = self._get_form_param('period_to', data)
-        
-        self.localcontext.update({
-            'start_period': start_period,
-            'stop_period': stop_period,
-            })
-
-        return super(payroll_report_for_month, self).set_context(objects, data, ids, report_type=report_type)
-    
+            
     def get_payslips_by_period(self, cr, uid, start_period, stop_period):
         hr_payslip_object = self.pool.get('hr.payslip')
         payslips_ids = []
@@ -243,8 +225,10 @@ class payroll_report_for_month(TrialBalanceWebkit):
         res = self.get_RETS(line_ids) + self.get_RETM(line_ids)
         return res
 
-HeaderFooterTextWebKitParser(
+report_sxw.report_sxw(
     'report.l10n_cr_hr_payroll.account.payroll_report_for_month',
     'account.account',
     'addons/l10n_cr_hr_payroll/report/payroll_report_for_month.mako',
-    parser=payroll_report_for_month)
+    parser=PayrollReportForMonth)
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

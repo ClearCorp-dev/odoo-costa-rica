@@ -20,28 +20,7 @@
 #
 ##############################################################################
 
-from osv import osv
+import payroll_report
+import payroll_report_for_month
 
-
-class PayrollReportForMonthWizard(osv.osv_memory):
-    
-    _inherit = "trial.balance.webkit"
-    _name = "payroll.report.for.month"
-    _description = "Payroll Report for Month"
-
-    _defaults = {
-            'fiscalyear_id': '',
-            'filter': 'filter_period',
-    }
-
-    def _print_report(self, cursor, uid, ids, data, context=None):
-        context = context or {}
-        # we update form with display account value
-        data = self.pre_print_report(cursor, uid, ids, data, context=context)
-        
-        return {
-            'type': 'ir.actions.report.xml',
-            'report_name': 'l10n_cr_hr_payroll.account.payroll_report_for_month',
-            'datas': data}
-
-PayrollReportForMonthWizard()
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
