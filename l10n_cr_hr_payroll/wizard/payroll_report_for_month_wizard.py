@@ -20,28 +20,31 @@
 #
 ##############################################################################
 
-from osv import osv
+from osv import osv, fields
 
 
-class PayrollReportForMonthWizard(osv.osv_memory):
-    
-    _inherit = "trial.balance.webkit"
+class PayrollReportForMonthWizard(osv.osv):
+
     _name = "payroll.report.for.month"
     _description = "Payroll Report for Month"
-
-    _defaults = {
-            'fiscalyear_id': '',
-            'filter': 'filter_period',
+    
+    _columns = {
+        'company_id': fields.many2one('res.company', 'Company'),
+        'period_from': fields.many2one('account.period', 'Start Period'),
+        'period_to': fields.many2one('account.period', 'End Period'),
     }
-
-    def _print_report(self, cursor, uid, ids, data, context=None):
-        context = context or {}
-        # we update form with display account value
-        data = self.pre_print_report(cursor, uid, ids, data, context=context)
-        
+            
+    def _print_report(self, cursor, uid, ids, datas, context={}):
         return {
             'type': 'ir.actions.report.xml',
             'report_name': 'l10n_cr_hr_payroll.account.payroll_report_for_month',
-            'datas': data}
+            'datas': datas}
 
-PayrollReportForMonthWizard()
+    def action_validate(self, cr, uid, ids, context={}):
+        datas = {}
+        datas['ids'] = context.get('active_ids', [])
+        datas['model'] = context.get('active_model', 'ir.ui.menu')
+        datas['form'] = self.read(cr, uid, ids, ['company_id',  'period_from', 'period_to'], context=context)[0]
+        return self._print_report(cr, uid, ids, datas, context=context)
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
