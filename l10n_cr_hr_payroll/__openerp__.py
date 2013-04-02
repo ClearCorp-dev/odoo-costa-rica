@@ -19,6 +19,34 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+{
+    'name': 'l10n_cr_hr_payroll',
+    'version': '1.0',
+    'category': 'Human Resources',
+    "sequence": 38,
+    'complexity': "normal",
+    'description': """
+l10n_cr_hr_payroll.
+=======================
+    * Employee Contracts
+    * Fortnightly Payroll Register
+    * Payroll Report
+    """,
+    'author': 'CLEARCORP S.A.',
+    'website': 'http://www.clearcorp.co.cr',
+    'depends': [
+        'account',
+        'hr_payroll_account',
+    ],
+    'update_xml': [
+                    'l10n_cr_hr_payroll_view.xml',
+                    'report/report.xml',
+                    'wizard/payroll_report_for_month_wizard_view.xml',
+                    'report_menus.xml',
+                    ],
+    'installable': True,
+    'auto_install': False,
+    'application': True,
+}
 
-import payroll_report
-import payroll_report_for_month
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

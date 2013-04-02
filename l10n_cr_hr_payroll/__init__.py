@@ -22,8 +22,8 @@
 
 import hr_payroll
 import account
-from . import wizard
-from . import report
-from . import l10n_cr_hr_payroll
+import wizard
+import report
+import l10n_cr_hr_payroll
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
