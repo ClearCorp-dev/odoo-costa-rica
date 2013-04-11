@@ -1,0 +1,224 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* l10n_account_situation_balance
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-08 16:52+0000\n"
+"PO-Revision-Date: 2013-04-08 16:52+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_account_situation_balance
+#: report:addons/l10n_account_situation_balance/report/l10n_cr_account_financial_report_situation_balance_report.mako:151
+msgid "LIABILITY TOTAL"
+msgstr "TOTAL PASIVO"
+
+#. module: l10n_account_situation_balance
+#: report:addons/l10n_account_situation_balance/report/l10n_cr_account_financial_report_situation_balance_report.mako:33
+msgid "Per. vs. FY Open."
+msgstr "Per. vs. AF abierto."
+
+#. module: l10n_account_situation_balance
+#: report:addons/l10n_account_situation_balance/report/l10n_cr_account_financial_report_situation_balance_report.mako:192
+msgid "EQUITY TOTAL"
+msgstr "TOTAL PATRIMONIO"
+
+#. module: l10n_account_situation_balance
+#: view:situation.balance.report.wiz:0
+msgid "Situation Balance Report"
+msgstr "Reporte Balance de Situación"
+
+#. module: l10n_account_situation_balance
+#: model:ir.model,name:l10n_account_situation_balance.model_situation_balance_report_wiz
+msgid "Situation Balance Report Wizard"
+msgstr "Asistente para el reporte de Balance de Situación"
+
+#. module: l10n_account_situation_balance
+#: report:addons/l10n_account_situation_balance/report/l10n_cr_account_financial_report_situation_balance_report.mako:30
+msgid "Account<br />Name"
+msgstr "Account<br />Name"
+
+#. module: l10n_account_situation_balance
+#: view:situation.balance.report.wiz:0
+msgid "{'invisible': True, 'required': False}"
+msgstr "{'invisible': True, 'required': False}"
+
+#. module: l10n_account_situation_balance
+#: model:ir.ui.menu,name:l10n_account_situation_balance.menu_situation_balance_report
+msgid "Balance Sheet"
+msgstr "Balance de situación"
+
+#. module: l10n_account_situation_balance
+#: report:addons/l10n_account_situation_balance/report/l10n_cr_account_financial_report_situation_balance_report.mako:32
+msgid "Selected period"
+msgstr "Seleccionar período"
+
+#. module: l10n_account_situation_balance
+#: field:situation.balance.report.wiz,company_id:0
+msgid "Company"
+msgstr "Compañía"
+
+#. module: l10n_account_situation_balance
+#: report:addons/l10n_account_situation_balance/report/l10n_cr_account_financial_report_situation_balance_report.mako:21
+msgid "Situation Balance at "
+msgstr "Balance de situación del período "
+
+#. module: l10n_account_situation_balance
+#: report:addons/l10n_account_situation_balance/report/l10n_cr_account_financial_report_situation_balance_report.mako:33
+msgid "Variation"
+msgstr "Variación"
+
+#. module: l10n_account_situation_balance
+#: selection:situation.balance.report.wiz,target_move:0
+msgid "All Posted Entries"
+msgstr "Todos los apuntes publicados"
+
+#. module: l10n_account_situation_balance
+#: selection:situation.balance.report.wiz,filter:0
+msgid "Date"
+msgstr "Fecha"
+
+#. module: l10n_account_situation_balance
+#: field:situation.balance.report.wiz,chart_account_id:0
+msgid "Chart of Account"
+msgstr "Catálogo de cuentas"
+
+#. module: l10n_account_situation_balance
+#: report:addons/l10n_account_situation_balance/report/l10n_cr_account_financial_report_situation_balance_report.mako:34
+msgid "Var."
+msgstr "Var."
+
+#. module: l10n_account_situation_balance
+#: view:situation.balance.report.wiz:0
+#: field:situation.balance.report.wiz,journal_ids:0
+msgid "Journals"
+msgstr "Diarios"
+
+#. module: l10n_account_situation_balance
+#: field:situation.balance.report.wiz,target_move:0
+msgid "Target Moves"
+msgstr "Movimientos destino"
+
+#. module: l10n_account_situation_balance
+#: help:situation.balance.report.wiz,chart_account_id:0
+msgid "Select Charts of Accounts"
+msgstr "Seleccionar catálogo de cuentas"
+
+#. module: l10n_account_situation_balance
+#: field:situation.balance.report.wiz,date_to:0
+msgid "End Date"
+msgstr "Fecha Final"
+
+#. module: l10n_account_situation_balance
+#: view:situation.balance.report.wiz:0
+msgid "Dates"
+msgstr "Fechas"
+
+#. module: l10n_account_situation_balance
+#: field:situation.balance.report.wiz,period_from:0
+msgid "Start Period"
+msgstr "Período inicial"
+
+#. module: l10n_account_situation_balance
+#: report:addons/l10n_account_situation_balance/report/l10n_cr_account_financial_report_situation_balance_report.mako:223
+msgid "LIABITLITY + EQUITY + PROFIT TOTAL"
+msgstr "TOTAL PASIVO + PATRIMONIO + UTILIDAD"
+
+#. module: l10n_account_situation_balance
+#: view:situation.balance.report.wiz:0
+msgid "{'required': True}"
+msgstr "{'required': True}"
+
+#. module: l10n_account_situation_balance
+#: help:situation.balance.report.wiz,fiscalyear_id:0
+msgid "Keep empty for all open fiscal year"
+msgstr "Mantener vacío para todo el año fiscal abierto"
+
+#. module: l10n_account_situation_balance
+#: field:situation.balance.report.wiz,period_to:0
+msgid "End Period"
+msgstr "Período final"
+
+#. module: l10n_account_situation_balance
+#: field:situation.balance.report.wiz,fiscalyear_id:0
+msgid "Fiscal Year"
+msgstr "Año fiscal"
+
+#. module: l10n_account_situation_balance
+#: view:situation.balance.report.wiz:0
+msgid "True"
+msgstr "True"
+
+#. module: l10n_account_situation_balance
+#: report:addons/l10n_account_situation_balance/report/l10n_cr_account_financial_report_situation_balance_report.mako:207
+msgid "LIABITLITY + EQUITY TOTAL"
+msgstr "TOTAL PASIVO + PATRIMONIO"
+
+#. module: l10n_account_situation_balance
+#: selection:situation.balance.report.wiz,filter:0
+msgid "No Filters"
+msgstr "Sin filtros"
+
+#. module: l10n_account_situation_balance
+#: model:ir.actions.act_window,name:l10n_account_situation_balance.action_situation_balance_report_menu_webkit
+msgid "Action Situation Balance Report"
+msgstr "Imprimir Reporte Balance de Situación"
+
+#. module: l10n_account_situation_balance
+#: report:addons/l10n_account_situation_balance/report/l10n_cr_account_financial_report_situation_balance_report.mako:110
+#: report:addons/l10n_account_situation_balance/report/l10n_cr_account_financial_report_situation_balance_report.mako:231
+msgid "ASSET TOTAL"
+msgstr "TOTAL ACTIVO"
+
+#. module: l10n_account_situation_balance
+#: report:addons/l10n_account_situation_balance/report/l10n_cr_account_financial_report_situation_balance_report.mako:215
+msgid "PROFIT TOTAL"
+msgstr "TOTAL UTILIDAD"
+
+#. module: l10n_account_situation_balance
+#: view:situation.balance.report.wiz:0
+msgid "Period"
+msgstr "Período"
+
+#. module: l10n_account_situation_balance
+#: view:situation.balance.report.wiz:0
+msgid "This report allows you to print or generate a pdf of your income statement"
+msgstr "Este informe le permite imprimir o generar un pdf de su cuenta de resultados"
+
+#. module: l10n_account_situation_balance
+#: report:addons/l10n_account_situation_balance/report/l10n_cr_account_financial_report_situation_balance_report.mako:31
+msgid "Fiscal Year Opening"
+msgstr "Año fiscal abierto"
+
+#. module: l10n_account_situation_balance
+#: selection:situation.balance.report.wiz,filter:0
+msgid "Periods"
+msgstr "Períodos"
+
+#. module: l10n_account_situation_balance
+#: report:addons/l10n_account_situation_balance/report/l10n_cr_account_financial_report_situation_balance_report.mako:29
+msgid "Account<br />Code"
+msgstr "Account<br />Code"
+
+#. module: l10n_account_situation_balance
+#: field:situation.balance.report.wiz,date_from:0
+msgid "Start Date"
+msgstr "Fecha inicial"
+
+#. module: l10n_account_situation_balance
+#: field:situation.balance.report.wiz,filter:0
+msgid "Filter by"
+msgstr "Filtrado por"
+
+#. module: l10n_account_situation_balance
+#: selection:situation.balance.report.wiz,target_move:0
+msgid "All Entries"
+msgstr "Todos los movimientos"
+
