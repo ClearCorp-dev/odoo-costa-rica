@@ -236,6 +236,34 @@
                 </div>
             </div>
         </div>
+        <div class="table-row spacer">
+            <div class="table-cell">&nbsp;</div>
+        </div>
+        <% 
+           signatures = get_signatures_report(cr, uid, 'Situation Balance Report')
+           cont = 0
+        %>
+        <div class="table header">
+            <div class="table-row">
+                <div class="table-cell text">
+                    <p class="title">${_('Authorized by: ')}</p>
+                </div>
+            </div>
+       </div>
+       <br/><br/>
+       <div class="table header">
+            <div class="table-row">
+                <div class="table-cell text">
+                %for user_sign in signatures:
+                    <div class="table-cell text">_________________________________________________________<br/>
+                                                    <p class="subtitle">${user_sign.name}</p>
+                                                    <p class="company"><i>${user_sign.job_id.name or ''}</i></p>
+                    </div>
+                    <br/><br/><br/>
+                </div>
+                %endfor                
+            </div>
+        </div>
         <p style="page-break-after:always"></p>
     </body>
 </html>

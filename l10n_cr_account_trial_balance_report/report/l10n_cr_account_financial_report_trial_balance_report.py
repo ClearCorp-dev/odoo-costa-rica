@@ -35,7 +35,7 @@ class trialBalancereport(accountReportbase):
             'uid':uid,
             'get_data':self.get_data,
             'get_accounts':self.get_accounts,
-            'filter_form': self.get_filter,
+            'filter_form': self.get_filter, 
         })
     
     """   

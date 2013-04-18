@@ -36,6 +36,7 @@ class profitStatementreport(accountReportbase):
             'get_last_period': self.get_last_period,
             'get_start_period': self.get_start_period,
             'get_data': self.get_data,
+            'get_signatures_report':self.get_signatures_report,
         })
               
     def get_last_period(self, cr, uid, data):
