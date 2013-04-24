@@ -20,10 +20,25 @@
 #
 ##############################################################################
 
-import hr_payroll
-import account
-import wizard
-import report
-import l10n_cr_hr_payroll
+from osv import osv
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+class situationBalancereportWizard(osv.osv_memory):
+    
+    _inherit = "account.report.wiz"
+    _name = "profit.statement.report.wiz"
+    _description = "Profit Statement Report Wizard"
+
+    _defaults = {
+            'filter': 'filter_period',
+    }
+
+    def _print_report(self, cursor, uid, ids, data, context=None):
+        context = context or {}
+
+        return {
+            'type': 'ir.actions.report.xml',
+            'report_name': 'l10n_cr_profit_statement_report',
+            'datas': data
+            }
+
+situationBalancereportWizard()

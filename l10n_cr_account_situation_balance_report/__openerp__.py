@@ -20,10 +20,25 @@
 #
 ##############################################################################
 
-import hr_payroll
-import account
-import wizard
-import report
-import l10n_cr_hr_payroll
+{
+    'name': 'Account Financial Situation Balance Report',
+    'description': "Create the situation balance report",
+    'version': '1.0',
+    'author': 'CLEARCORP S.A.',
+    'category': 'Finance',
+    'website': "http://clearcorp.co.cr",
+    'images': [],
+    'depends': ['account_report_lib', 'account_report_signatures',
+                ],
+    'init_xml': [],
+    'demo_xml' : [],
+    'update_xml': ['report/report.xml',
+                   'wizard/l10n_cr_account_situation_balance_wizard_view.xml',
+                   'report_menus.xml'
+                   ],
+    'test': [],
+    'active': False,
+    'installable': True,
+    'license': 'AGPL-3',
+}
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
