@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<openerp>
+    <data >        
+        
+        <report auto="False"
+                id="webkit_report_l10n_cr_account_voucher_check_bcr"
+                model="account.voucher"
+                name="webkit_report_l10n_cr_account_voucher_check_bcr"
+                file="l10n_cr_account_voucher_check_bcr/report/l10n_cr_account_voucher_check_bcr.mako"
+                string="Imprimir Cheque"
+                report_type="webkit"               
+        />
+        
+        <record id="webkit_report_l10n_cr_account_voucher_check_bcr" model="ir.actions.report.xml">
+            <field name="webkit_header" ref="report_webkit_lib.webkit_header_l10n_cr_account_voucher_check_bcr" />
+        </record>
+        
+    </data>
+</openerp>
