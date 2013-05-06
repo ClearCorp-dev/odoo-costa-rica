@@ -179,13 +179,16 @@ class PayrollReportForMonth(report_sxw.rml_parse):
     
     def get_ccss(self, cr, uid, payslips):
         code = 'CCSS-EMP'
-        code2 = 'Banco Popular-EMP'
+        code2 = 'CCSS-EMP-PEN'
+        code3 = 'Banco Popular-EMP'
         res = 0.00
         for payslip in payslips:
             for line in payslip.line_ids:
                 if line.code == code:
                     res += line.total
                 elif line.code == code2:
+                    res += line.total
+                elif line.code == code3:
                     res += line.total
         return res
     
