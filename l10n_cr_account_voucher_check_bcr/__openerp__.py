@@ -25,7 +25,7 @@
 	"version"     : "0.1",
 	"depends"     : ["base","account","account_report_lib","base_currency_symbol"],
 	"init_xml"    : [],
-	"update_xml"  : ['webkit_report/l10n_cr_account_voucher_check_bcr_webkit_header.xml',
+	"update_xml"  : ['data/l10n_cr_account_voucher_check_bcr_webkit_header.xml',
 					'l10n_cr_account_voucher_check_bcr_view.xml',
 					'l10n_cr_account_voucher_check_bcr_report.xml',],
 	"category"    : "Accounting",
