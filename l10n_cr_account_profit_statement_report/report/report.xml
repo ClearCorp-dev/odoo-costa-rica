@@ -10,6 +10,7 @@
              <field name="name">Profit Statement</field>
              <field name="report_rml">l10n_cr_account_profit_statement_report/report/l10n_cr_account_profit_statement_report.mako</field>
              <field name="report_file">l10n_cr_account_profit_statement_report/report/l10n_cr_account_profit_statement_report.mako</field>
-         </record>
+             <field name="webkit_header" ref="report_webkit_lib.webkit_header_clearcorp_official_portrait"</field>              
+        </record>
     </data>
 </openerp>
