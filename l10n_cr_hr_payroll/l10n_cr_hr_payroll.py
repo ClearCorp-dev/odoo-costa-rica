@@ -81,13 +81,13 @@ class hr_payslip_run(osv.osv):
     }
 
     def confirm_payslips(self, cr, uid, ids, context=None):
-        for payslip_run in self.browse(cr, uid, ids, context=context):
-            payslip_obj = self.pool.get('hr.payslip')
-            payslips = payslip_obj.browse(cr, uid, payslip_run.slip_ids, context)
-            for payslip in payslips:
-                payslip_id = payslip.id
-                payslip_id.compute_sheet()
-                payslip_id.process_sheet()
+        payslip_obj = self.pool.get('hr.payslip')
+        for batches in self.browse(cr, uid, ids, context=context):
+            payslip_ids = map(lambda x: x.id, batches.slip_ids)
+            for payslip in payslip_obj.browse(cr, uid, payslip_ids):
+                    if payslip.state == 'draft':
+                        payslip_obj.process_sheet(cr, uid, [payslip.id], context=context)
+        return True
 
 hr_payslip_run()
 
