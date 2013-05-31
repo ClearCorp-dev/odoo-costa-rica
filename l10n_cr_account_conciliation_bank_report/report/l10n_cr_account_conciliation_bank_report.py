@@ -21,18 +21,18 @@
 ##############################################################################
 
 import time
+import pooler
 from report import report_sxw
 from tools.translate import _
-import pooler
-from datetime import datetime
 
-from openerp.addons.account_financial_report_webkit.report.common_reports import CommonReportHeaderWebkit
-from openerp.addons.account_financial_report_webkit.report.partners_ledger import PartnersLedgerWebkit
+from openerp.addons.account_report_lib.account_report_base import accountReportbase
 
-class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
+class conciliationBankreport(accountReportbase):
     
     def __init__(self, cursor, uid, name, context):
-        super(conciliation_bank, self).__init__(cursor, uid, name, context=context)
+        #change uid by 1, because 1 is the id for the admin user
+        #problems with partner read.
+        super(conciliationBankreport, self).__init__(cursor, 1, name, context=context)
         self.pool = pooler.get_pool(self.cr.dbname)
         self.cursor = self.cr
         
@@ -41,54 +41,25 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
             'cr' : cursor,
             'uid': uid,
             'get_amount': self.get_amount,
-            'get_bank_data': self.get_bank_data,
-            'get_bank_account': self.get_bank_account,
-            'filter_form': self._get_filter,
-            'display_target_move': self._get_display_target_move,
+            'get_bank_account': self.get_accounts_ids,
+            'get_chart_account_id': self.get_chart_account_id,
+            'get_data': self.get_data,
+            'filter_form': self.get_filter,
+            'get_display_target_move': self.get_display_target_move,
+            'get_bank_balance': self.get_bank_balance, 
+            'get_parent_account': self.get_accounts_ids, 
         })
+   
+    def get_bank_balance(self, data):
+        return self._get_form_param('bank_balance', data)
     
-    def set_context(self, objects, data, ids, report_type=None):
-        main_filter = self._get_form_param('filter', data, default='filter_no')
-        target_move = self._get_form_param('target_move', data, default='all')
-        start_date = self._get_form_param('date_from', data)
-        stop_date = self._get_form_param('date_to', data)
-        input_bank_balance = self._get_form_param('bank_balance', data)
-        start_period = self.get_start_period_br(data)
-        stop_period = self.get_end_period_br(data)
-        fiscalyear = self.get_fiscalyear_br(data)
-        chart_account = self._get_chart_account_id_br(data)
-        
-        if main_filter == 'filter_no' and fiscalyear:
-            start_period = self.get_first_fiscalyear_period(fiscalyear)
-            stop_period = self.get_last_fiscalyear_period(fiscalyear)            
-        elif main_filter == 'filter_date':
-            start = start_date
-            stop = stop_date
-        else:
-            start = start_period
-            stop = stop_period
-            
-        self.localcontext.update({
-            'fiscalyear': fiscalyear,
-            'start_date': start_date,
-            'stop_date': stop_date,
-            'start_period': start_period,
-            'stop_period': stop_period,
-            'target_move': target_move,
-            'input_bank_balance': input_bank_balance,
-            'chart_account': chart_account,
-            
-        })
-
-        return super(conciliation_bank, self).set_context(objects, data, ids,
-                                                            report_type=report_type)
-
     def get_amount(self,cr, uid, account_move_line, currency):
         account_obj = self.pool.get('account.account').browse(cr,uid,account_move_line.account_id.id)
         
         obj_invoice = self.pool.get('account.invoice')
         invoice_search = obj_invoice.search(cr,uid,[('move_id','=',account_move_line.move_id.id)])
         invoice = None
+        
         if invoice_search != []:
             invoice = obj_invoice.browse(cr,uid,invoice_search[0])
         
@@ -102,6 +73,7 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
         res = ('none', 0.0, 0.0)
 
         amount = 0.0
+        
         if currency != False:
             amount = account_move_line.amount_currency
         else:
@@ -144,10 +116,19 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
 
         return res
 
-    def get_bank_data(self, cr, uid, parent_account_id, filter_type, filter_data, fiscalyear, target_move, historic_strict, special_period, context=None):
+    def get_data(self, cr, uid, data, parent_account_id, context=None):
         result_bank_balance = {}
         result_move_lines = []
         filters = {}
+        account_foreign = False
+        filter_data = []
+        
+        ########Parameters
+        fiscalyear = self.get_fiscalyear(data)
+        target_move = self.get_target_move(data)
+        historic_strict = self.get_historic_strict(data)
+        special_period = self.get_special_period(data)
+        filter_type = self.get_filter(data)
 
         account_obj = self.pool.get('account.account')
         account_webkit_report_library_obj = self.pool.get('account.webkit.report.library')
@@ -164,6 +145,7 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
             account_currency = parent_account.currency_id
         else:
             account_currency = parent_account.company_id.currency_id
+        
         if account_currency.id == parent_account.company_id.currency_id.id:
             account_is_foreign = False
         else:
@@ -203,60 +185,64 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
             
         if filter_type == 'filter_date':
             period_ids = False
-            end_date = filter_data[1]
+            end_date = self.get_date_to(data)
+            #Build the filter data
+            filter_data.append(None)
+            filter_data.append(end_date)
+            
         elif filter_type == 'filter_period':
-            period_ids = self.pool.get('account.period').search(cr, uid, [('date_stop', '<=', filter_data[1].date_stop)])
+            period_ids = [self.get_end_period(data).id]            
             end_date = False
-        
+            #Build the filter data
+            filter_data.append(None)
+            filter_data.append(self.get_end_period(data))
         
         #TODO: Set the max date or period list for the balance query from the wizard data
         #      If the wizard is filtered by date, the max date is entered as is
         #      If the wizard is filtered by period, the query needs the valid list of periods in a WHERE statement form
+        
         balance_query_filter = ''
-        if account_is_foreign:
-            
+        if account_is_foreign:            
             bank_balance = account_webkit_report_library_obj.get_account_balance(cr,
-                                                uid,
+                                                1,
                                                 [reconciled_account.id],
                                                 ['balance'],
+                                                filter_type = filter_type,
                                                 end_date=end_date,
                                                 period_ids=period_ids,
                                                 fiscal_year_id=fiscal_year_id,
                                                 context=context)[reconciled_account.id]['balance']
-            accounting_balance = account_webkit_report_library_obj.get_account_balance(cr,
-                                                uid,
-                                                [parent_account_id],
-                                                ['balance'],
-                                                end_date=end_date,
-                                                period_ids=period_ids,
-                                                fiscal_year_id=fiscal_year_id,
-                                                context=context)[parent_account_id]['balance']
-        else:
-            bank_balance = account_webkit_report_library_obj.get_account_balance(cr,
-                                                uid,
-                                                [reconciled_account.id],
-                                                ['balance'],
-                                                end_date=end_date,
-                                                period_ids=period_ids,
-                                                fiscal_year_id=fiscal_year_id,
-                                                context=context)[reconciled_account.id]['balance']
-            accounting_balance = account_webkit_report_library_obj.get_account_balance(cr,
-                                                uid,
-                                                [parent_account_id],
-                                                ['balance'],
-                                                end_date=end_date,
-                                                period_ids=period_ids,
-                                                fiscal_year_id=fiscal_year_id,
-                                                context=context)[parent_account_id]['balance']
-            
-            '''
-            bank_balance = reconciled_account.foreign_balance
-            accounting_balance = parent_account.foreign_balance
-        else:
-            bank_balance = reconciled_account.balance
-            accounting_balance = parent_account.balance
-            '''
 
+            accounting_balance = account_webkit_report_library_obj.get_account_balance(cr,
+                                                1,
+                                                [parent_account_id],
+                                                ['balance'],
+                                                filter_type = filter_type,
+                                                end_date=end_date,
+                                                period_ids=period_ids,
+                                                fiscal_year_id=fiscal_year_id,
+                                                context=context)[parent_account_id]['balance']
+        else:
+            bank_balance = account_webkit_report_library_obj.get_account_balance(cr,
+                                                1,
+                                                [reconciled_account.id],
+                                                ['balance'],
+                                                filter_type = filter_type,
+                                                end_date=end_date,
+                                                period_ids=period_ids,
+                                                fiscal_year_id=fiscal_year_id,
+                                                context=context)[reconciled_account.id]['balance']
+                                                
+            accounting_balance = account_webkit_report_library_obj.get_account_balance(cr,
+                                                1,
+                                                [parent_account_id],
+                                                ['balance'],
+                                                filter_type = filter_type,
+                                                end_date=end_date,
+                                                period_ids=period_ids,
+                                                fiscal_year_id=fiscal_year_id,
+                                                context=context)[parent_account_id]['balance']
+        
         move_obj = self.pool.get('account.move')
         move_line_obj = self.pool.get('account.move.line')
         
@@ -278,9 +264,9 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
             OBSERVACIÓN -> data['form']['historic_strict'],las variables boleanas (historic_strict y special_period) se deben pasar
             de esta forma, sino vienen como objetos y no con el valor real (True or False). Esto se hace desde el conciliation_bank.mako
             
-        """
-        filter_data[0] = None 
-        unreconciled_move_lines = account_webkit_report_library_obj.get_move_lines(cr, uid, transit_account_ids, filter_type=filter_type, filter_data=filter_data, fiscalyear=fiscalyear, target_move=target_move, unreconcile = True, historic_strict=historic_strict, special_period=special_period, context=context)
+        """     
+                
+        unreconciled_move_lines = account_webkit_report_library_obj.get_move_lines(cr, 1, transit_account_ids, filter_type=filter_type, filter_data=filter_data, fiscalyear=fiscalyear, target_move=target_move, unreconcile = True, historic_strict=historic_strict, special_period=special_period, context=context)
         
         result_move_lines = {
             'credits_to_reconcile' :     [],
@@ -288,6 +274,7 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
             'incomes_to_register' :      [],
             'expenditures_to_register' :     [],
         }
+        
         for line in unreconciled_move_lines:
             move = line.move_id
             if not move:
@@ -397,21 +384,11 @@ class conciliation_bank(report_sxw.rml_parse, CommonReportHeaderWebkit):
             'bank_total' : bank_total,
         }
         
-        #special_period = historic_strict = False
-        
         return result_bank_balance, result_move_lines, account_is_foreign
-    
-    def get_bank_account(self, cr, uid, data):
-        info = data.get('form', {}).get('bank_account_ids')
-        if info:
-            bank_account = self.pool.get('account.account').browse(cr, uid, info[0])
-            return bank_account
-        return False
-    
 
 report_sxw.report_sxw(
-    'report.account_financial_report_webkit.account.account_report_conciliation_bank_webkit',
+    'report.conciliation_bank_report_webkit',
     'account.account',
-    'addons/l10n_cr_account_banking_reports/report/conciliation_bank.mako',
-    parser=conciliation_bank)
+    'addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako',
+    parser=conciliationBankreport)
 

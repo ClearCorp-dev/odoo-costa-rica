@@ -15,7 +15,7 @@
         %>
         <div class="table header">
             <div class="table-row">
-                <div class="table-cell logo">${helper.embed_logo_by_name('internal_reports_logo', height=80)|n}</div>
+                <div class="table-cell logo">${helper.embed_logo_by_name('default_logo', height=80)|n}</div>
                 <div class="table-cell text">
                     <p class="company">${fiscalyear.company_id.partner_id.name}</p>
                     <p class="title">${_('Profit Statement')}</p>
@@ -23,6 +23,7 @@
                 </div>
             </div>
         </div>
+        <br/><br/>
         <div class="table list">
             <div class="table-header">
                 <div class="table-row labels no-wrap">
@@ -221,27 +222,29 @@
            signatures = get_signatures_report(cr, uid, 'Profit Statement')
            cont = 0
         %>
-        <div class="table header">
-            <div class="table-row">
-                <div class="table-cell text">
-                    <p class="title">${_('Authorized by: ')}</p>
-                </div>
-            </div>
-       </div>
-       <br/><br/>
-       <div class="table header">
-            <div class="table-row">
-                <div class="table-cell text">
-                %for user_sign in signatures:
-                    <div class="table-cell text">_________________________________________________________<br/>
-                                                    <p class="subtitle">${user_sign.name}</p>
-                                                    <p class="company"><i>${user_sign.job_id.name or ''}</i></p>
+        %if len(signatures) > 0:
+            <div class="table header">
+                <div class="table-row">
+                    <div class="table-cell text">
+                        <p class="title">${_('Authorized by: ')}</p>
                     </div>
-                    <br/><br/><br/>
                 </div>
-                %endfor                
+           </div>
+           <br/><br/>
+           <div class="table header">
+                <div class="table-row">
+                    <div class="table-cell text">
+                    %for user_sign in signatures:
+                        <div class="table-cell text">_________________________________________________________<br/>
+                                                        <p class="subtitle">${user_sign.name}</p>
+                                                        <p class="company"><i>${user_sign.job_id.name or ''}</i></p>
+                        </div>
+                        <br/><br/><br/>
+                    </div>
+                    %endfor                
+                </div>
             </div>
-        </div>
+        %endif
         <p style="page-break-after:always"></p>
     </body>
 </html>

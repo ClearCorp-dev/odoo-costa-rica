@@ -28,10 +28,13 @@
     'category': 'Finance',
     'website': "http://clearcorp.co.cr",
     'images': [],
-    'depends': ['account_report_lib','account_report_signatures',],
+    'depends': ['account',
+                'account_report_lib',
+                'account_report_signatures',],
     'init_xml': [],
     'demo_xml' : [],
-    'update_xml': ['report/report.xml',
+    'update_xml': [
+                   'report/report.xml',
                    'wizard/l10n_cr_account_profit_statement_wizard_view.xml',
                    'report_menus.xml'
                    ],
