@@ -20,22 +20,17 @@
 #
 ##############################################################################
 
-import time
-
 from osv import fields, osv
 
-class l10n_cr_ConciliationBankWizard(osv.osv_memory):
+class conciliationBankreportWizard(osv.osv_memory):
 
-    _inherit = "partners.ledger.webkit"
-    _name = "conciliation.bank.webkit"
-    _description = "Conciliation Bank Report"
+    _inherit = "account.report.wiz"
+    _name = "conciliation.bank.report.wiz"
+    _description = "Conciliation Bank Report Wizard"
     
     _columns = {
-        'bank_account_ids': fields.many2one('account.account', 'Bank Account', domain="[('user_type.code','=','BKVI')]", help="Bank Account"),
         'bank_balance': fields.float('Bank Balance'),
-        'filter': fields.selection([('filter_date', 'Date'), ('filter_period', 'Periods')], "Filter by", required=True),
-        'historic_strict': fields.boolean('Strict History', help="If selected, will display a historical unreconciled lines, taking into account the end of the period or date selected"),
-        'special_period': fields.boolean('Special period', help="Include special period"),
+        'account_ids':fields.many2one('account.account', 'Bank Account', domain="[('user_type.code','=','BKVI')]", help="Bank Account"),
     }
     
     _defaults = {
@@ -43,21 +38,27 @@ class l10n_cr_ConciliationBankWizard(osv.osv_memory):
     }
     
     def pre_print_report(self, cr, uid, ids, data, context=None):
-        data = super(l10n_cr_ConciliationBankWizard, self).pre_print_report(cr, uid, ids, data, context)
+       
         if context is None:
             context = {}
-        # will be used to attach the report on the main account
-        data['ids'] = [data['form']['chart_account_id']]        
-        vals = self.read(cr, uid, ids,
-                         ['bank_account_ids', 'bank_balance','historic_strict', 'special_period'],
-                         context=context)[0]
+            
+        # read the bank_banlance, because this field don't belongs to the account.report.wiz
+        # this field is added by conciliation.bank.report.wiz and add to data['form']                
+        vals = self.read(cr, uid, ids,['bank_balance'], context=context)[0] #this method read the field and included it in the form (account.common.report has this method)
+        
         data['form'].update(vals)
+        
         return data
-
+       
     def _print_report(self, cursor, uid, ids, data, context=None):
+
         context = context or {}
         # we update form with display account value
+        
         data = self.pre_print_report(cursor, uid, ids, data, context=context)
-        return {'type': 'ir.actions.report.xml',
-                'report_name': 'account_financial_report_webkit.account.account_report_conciliation_bank_webkit',
-                'datas': data}
+
+        return {
+                'type': 'ir.actions.report.xml',
+                'report_name': 'conciliation_bank_report_webkit',
+                'datas': data
+                }

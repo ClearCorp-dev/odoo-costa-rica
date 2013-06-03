@@ -20,25 +20,30 @@
 #
 ##############################################################################
 
-from osv import osv
 
-class profitStatementreportWizard(osv.osv_memory):
-    
-    _inherit = "account.report.wiz"
-    _name = "profit.statement.report.wiz"
-    _description = "Profit Statement Report Wizard"
-
-    _defaults = {
-            'filter': 'filter_period',
-    }
-
-    def _print_report(self, cursor, uid, ids, data, context=None):
-        context = context or {}
-
-        return {
-            'type': 'ir.actions.report.xml',
-            'report_name': 'l10n_cr_profit_statement_report',
-            'datas': data
-            }
-
-profitStatementreportWizard()
+{
+    'name': 'Conciliation Bank Report Webkit',
+    'description': "Install the Conciliation Bank Report.",
+    'version': '1.0',
+    'author': 'CLEARCORP S.A.',
+    'category': 'Finance',
+    'website': "http://clearcorp.co.cr",
+    'images': [],
+    'depends': [
+                'account', 
+                'account_report_lib', 
+                'account_report_signatures', ],
+                
+    'init_xml': [],
+    'demo_xml' : [],
+    'update_xml': [
+                   'data/l10n_cr_account_conciliation_bank_webkit.xml',
+                   'report/report.xml',                   
+                   'wizard/l10n_cr_account_conciliation_bank_report_wizard.xml',
+                   'report_menus.xml',
+                   ],
+    'test': [],
+    'active': False,
+    'installable': True,
+    'license': 'AGPL-3',
+}

@@ -20,24 +20,4 @@
 #
 ##############################################################################
 
-
-{
-    'name': 'Webkit reports for Banking',
-    'description': "",
-    'version': '1.0',
-    'author': 'CLEARCORP S.A.',
-    'category': 'Finance',
-    'website': "http://clearcorp.co.cr",
-    'images': [],
-    'depends': ['account_financial_report_webkit', 'account', 'account_webkit_report_library' ],
-    'init_xml': [],
-    'demo_xml' : [],
-    'update_xml': ['report/report.xml',                   
-                   'wizard/conciliation_bank_wizard.xml',
-                   'report_menus.xml',
-                   ],
-    'test': [],
-    'active': False,
-    'installable': True,
-    'license': 'AGPL-3',
-}
+import l10n_cr_account_conciliation_bank_report

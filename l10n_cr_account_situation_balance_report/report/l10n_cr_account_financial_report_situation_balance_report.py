@@ -49,6 +49,7 @@ class situationBalancereport(accountReportbase):
         period = self.get_start_period(data)
         fiscal_year = self.get_fiscalyear(data)
         opening_period = account_period_obj.get_opening_period(cr, uid, period)
+        filter_type = self.get_filter(data)
         
         #build account_ids list
         asset_account_ids = library_obj.get_account_child_ids(cr, uid, category_account_ids['asset'])
@@ -65,20 +66,19 @@ class situationBalancereport(accountReportbase):
         expense_account = category_account_ids['expense']
         
         #build balances
-        asset_period_balances =     library_obj.get_account_balance(cr, uid, asset_account_ids,  ['balance'], end_period_id=period.id, fiscal_year_id=fiscal_year.id)
-        liability_period_balances = library_obj.get_account_balance(cr, uid, liability_account_ids, ['balance'], end_period_id=period.id, fiscal_year_id=fiscal_year.id)
-        equity_period_balances =    library_obj.get_account_balance(cr, uid, equity_account_ids, ['balance'], end_period_id=period.id, fiscal_year_id=fiscal_year.id)
-        income_period_balance =     library_obj.get_account_balance(cr, uid, [income_account_id],  ['balance'], end_period_id=period.id, fiscal_year_id=fiscal_year.id)
-        expense_period_balance =    library_obj.get_account_balance(cr, uid, [expense_account_id], ['balance'], end_period_id=period.id, fiscal_year_id=fiscal_year.id)
+        #build balances
+        asset_period_balances =     library_obj.get_account_balance(cr, uid, asset_account_ids,  ['balance'], end_period_id=period.id, fiscal_year_id=fiscal_year.id,filter_type=filter_type)
+        liability_period_balances = library_obj.get_account_balance(cr, uid, liability_account_ids, ['balance'], end_period_id=period.id, fiscal_year_id=fiscal_year.id, filter_type=filter_type)
+        equity_period_balances =    library_obj.get_account_balance(cr, uid, equity_account_ids, ['balance'], end_period_id=period.id, fiscal_year_id=fiscal_year.id, filter_type=filter_type)
+        income_period_balance =     library_obj.get_account_balance(cr, uid, [income_account_id],  ['balance'], end_period_id=period.id, fiscal_year_id=fiscal_year.id, filter_type=filter_type)
+        expense_period_balance =    library_obj.get_account_balance(cr, uid, [expense_account_id], ['balance'], end_period_id=period.id, fiscal_year_id=fiscal_year.id,filter_type=filter_type)
         
-        asset_fiscal_year_balances =     library_obj.get_account_balance(cr, uid, asset_account_ids,  ['balance'], start_period_id=opening_period.id, end_period_id=opening_period.id)
-        liability_fiscal_year_balances = library_obj.get_account_balance(cr, uid, liability_account_ids, ['balance'], start_period_id=opening_period.id, end_period_id=opening_period.id)
-        equity_fiscal_year_balances =    library_obj.get_account_balance(cr, uid, equity_account_ids, ['balance'], start_period_id=opening_period.id, end_period_id=opening_period.id)
-        income_fiscal_year_balance =     library_obj.get_account_balance(cr, uid, [income_account_id],  ['balance'], start_period_id=opening_period.id, end_period_id=opening_period.id)
-        expense_fiscal_year_balance =    library_obj.get_account_balance(cr, uid, [expense_account_id], ['balance'], start_period_id=opening_period.id, end_period_id=opening_period.id)
-      
-        
-        
+        asset_fiscal_year_balances =     library_obj.get_account_balance(cr, uid, asset_account_ids,  ['balance'], start_period_id=opening_period.id, end_period_id=opening_period.id,filter_type=filter_type)
+        liability_fiscal_year_balances = library_obj.get_account_balance(cr, uid, liability_account_ids, ['balance'], start_period_id=opening_period.id, end_period_id=opening_period.id,filter_type=filter_type)
+        equity_fiscal_year_balances =    library_obj.get_account_balance(cr, uid, equity_account_ids, ['balance'], start_period_id=opening_period.id, end_period_id=opening_period.id,filter_type=filter_type)
+        income_fiscal_year_balance =     library_obj.get_account_balance(cr, uid, [income_account_id],  ['balance'], start_period_id=opening_period.id, end_period_id=opening_period.id,filter_type=filter_type)
+        expense_fiscal_year_balance =    library_obj.get_account_balance(cr, uid, [expense_account_id], ['balance'], start_period_id=opening_period.id, end_period_id=opening_period.id,filter_type=filter_type)
+              
         #build total balances
         total_asset_balances = {
             'period':       asset_period_balances[category_account_ids['asset'].id]['balance'],
