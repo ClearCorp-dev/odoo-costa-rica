@@ -32,11 +32,6 @@ msgid "If selected, will display a historical unreconciled lines, taking into ac
 msgstr "Si se selecciona, se mostrarán las líneas sin conciliar históricas, teniendo en cuenta el final del período o la fecha seleccionada"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: view:conciliation.bank.report.wiz:0
-msgid "{'required':[('filter', '=', 'filter_period')]}"
-msgstr "{'required':[('filter', '=', 'filter_period')]}"
-
-#. module: l10n_cr_account_conciliation_bank_report
 #: field:conciliation.bank.report.wiz,special_period:0
 msgid "Special period"
 msgstr "Período especial"
@@ -98,11 +93,6 @@ msgstr "Conciliación Bancaria"
 #: selection:conciliation.bank.report.wiz,target_move:0
 msgid "All Posted Entries"
 msgstr "Todos los apuntes publicados"
-
-#. module: l10n_cr_account_conciliation_bank_report
-#: view:conciliation.bank.report.wiz:0
-msgid "{'required': [('filter', '=', 'filter_date')]}"
-msgstr "{'required': [('filter', '=', 'filter_date')]}"
 
 #. module: l10n_cr_account_conciliation_bank_report
 #: field:conciliation.bank.report.wiz,account_ids:0
