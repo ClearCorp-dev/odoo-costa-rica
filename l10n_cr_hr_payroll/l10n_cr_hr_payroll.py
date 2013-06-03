@@ -79,6 +79,17 @@ class hr_payslip_run(osv.osv):
         'period_id': fields.many2one('account.period', 'Force Period', readonly=True, states={'draft': [('readonly', False)]}),
       
     }
+    
+    def close_payslip_run(self, cr, uid, ids, context=None):
+        result = self.write(cr, uid, ids, {'state': 'close'}, context=context)
+        payslip_obj = self.pool.get('hr.payslip')
+        for batches in self.browse(cr, uid, ids, context=context):
+            payslip_ids = map(lambda x: x.id, batches.slip_ids)
+            for payslip in payslip_obj.browse(cr, uid, payslip_ids):
+                    if payslip.state == 'draft':
+                        raise osv.except_osv(_('Warning !'), _('You did not confirm some of the payroll'))
+                        break
+        return result
 
     def confirm_payslips(self, cr, uid, ids, context=None):
         payslip_obj = self.pool.get('hr.payslip')
