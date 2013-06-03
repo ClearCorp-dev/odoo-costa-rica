@@ -43,7 +43,7 @@ msgstr "Período especial"
 #. module: l10n_cr_account_conciliation_bank_report
 #: field:conciliation.bank.report.wiz,company_id:0
 msgid "Company"
-msgstr "Company"
+msgstr "Compañía"
 
 #. module: l10n_cr_account_conciliation_bank_report
 #: view:conciliation.bank.report.wiz:0
@@ -64,7 +64,7 @@ msgstr "{'invisible': True, 'required': False}"
 #. module: l10n_cr_account_conciliation_bank_report
 #: selection:conciliation.bank.report.wiz,filter:0
 msgid "Date"
-msgstr "Date"
+msgstr "Fecha"
 
 #. module: l10n_cr_account_conciliation_bank_report
 #: field:conciliation.bank.report.wiz,chart_account_id:0
@@ -101,7 +101,7 @@ msgstr "Conciliación Bancaria"
 #. module: l10n_cr_account_conciliation_bank_report
 #: selection:conciliation.bank.report.wiz,target_move:0
 msgid "All Posted Entries"
-msgstr "All Posted Entries"
+msgstr "Todos los apuntes publicados"
 
 #. module: l10n_cr_account_conciliation_bank_report
 #: view:conciliation.bank.report.wiz:0
@@ -177,7 +177,7 @@ msgstr "Fecha inicial"
 #. module: l10n_cr_account_conciliation_bank_report
 #: field:conciliation.bank.report.wiz,filter:0
 msgid "Filter by"
-msgstr "Filter by"
+msgstr "Filtrado por"
 
 #. module: l10n_cr_account_conciliation_bank_report
 #: selection:conciliation.bank.report.wiz,target_move:0
