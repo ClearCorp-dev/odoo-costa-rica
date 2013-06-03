@@ -260,6 +260,12 @@ msgid "CCSS/BP"
 msgstr "CCSS/BP"
 
 #. module: l10n_cr_hr_payroll
+#: code:addons/l10n_cr_hr_payroll/l10n_cr_hr_payroll.py:91
+#, python-format
+msgid "You did not confirm some of the payroll"
+msgstr "Usted no confirmó algunas de las nóminas"
+
+#. module: l10n_cr_hr_payroll
 #: selection:payroll.report.for.month,target_move:0
 msgid "All Posted Entries"
 msgstr "Todas las entradas publicadas"
