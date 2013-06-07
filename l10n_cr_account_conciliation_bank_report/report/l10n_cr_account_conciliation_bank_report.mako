@@ -24,9 +24,8 @@
         <div class="table list">
             <div class="table-header">
                 <div class="table-row labels no-wrap">
-                    <div class="table-cell first-column" style="width: 70px">${_('Chart of Accounts: ')}<br/>${get_chart_account_id(data).name}</div>
-                    <div class="table-cell" style="width: 70px">${_('Fiscal Year')}<br/>${get_fiscal_year(data).name}</div>
-                    <div class="table-cell" style="width: 70px">
+                    <div class="table-cell" style="width: 100px">${_('Fiscal Year')}<br/>${get_fiscal_year(data).name}</div>
+                    <div class="table-cell" style="width: 100px">
                         %if filter_form(data) == 'filter_date':
                             ${_('Dates Filter')}
                         %elif filter_form(data) == 'filter_period':
@@ -44,7 +43,7 @@
                         %endif
                     %endif
                     </div>
-                    <div class="table-cell first-column" style="width: 70px">${_('Target Moves')}<br/>${ display_target_move(data) }</div>
+                    <div class="table-cell" style="width: 100px">${_('Target Moves')}<br/>${ display_target_move(data) }</div>
                 </div>
             </div>          
         </div>
@@ -202,5 +201,37 @@
                 </div>
             </div>
          %endfor
+         <div class="table-row spacer">
+            <div class="table-cell">&nbsp;</div>
+         </div>
+         <% 
+           signatures = get_signatures_report(cr, uid, 'Conciliation Bank Report')
+           cont = 0
+         %>
+         %if len(signatures) > 0:
+            <div class="table header">
+                <div class="table-row">
+                    <div class="table-cell text">
+                        <p class="title">${_('Authorized by: ')}</p>
+                    </div>
+                </div>
+           </div>
+           <br/><br/>
+           <div class="table header">
+                <div class="table-row">
+                    <div class="table-cell text">
+                    %for user_sign in signatures:
+                        <div class="table-cell text">_________________________________________________________<br/>
+                                                        <p class="subtitle">${user_sign.name}</p>
+                                                        <p class="company"><i>${user_sign.job_id.name or ''}</i></p>
+                        </div>
+                        <br/><br/><br/>
+                    </div>
+                    %endfor                
+                </div>
+            </div>
+        %endif
+        <p style="page-break-after:always"></p>
     </body>
 </html>
+

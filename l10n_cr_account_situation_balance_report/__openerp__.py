@@ -21,7 +21,7 @@
 ##############################################################################
 
 {
-    'name': 'Account Financial Situation Balance Report',
+    'name': 'Situation Balance Report Webkit',
     'description': "Create the situation balance report",
     'version': '1.0',
     'author': 'CLEARCORP S.A.',

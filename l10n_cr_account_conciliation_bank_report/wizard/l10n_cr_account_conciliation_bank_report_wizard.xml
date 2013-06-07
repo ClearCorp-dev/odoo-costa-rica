@@ -14,10 +14,16 @@
                         <label nolabel="1" colspan="4" string="This report allows you to print or generate a pdf of your conciliation bank with details of all your payable/receivable account"/>
                     </xpath>                    
 
-                    <field name="account_ids" position="attributes">
-                        <attribute name="required">True</attribute>
+                    <field name="account_ids" position="replace">
+                        <group>
+                            <field name="account_ids" required="True" />
+                        </group>
                     </field>
                     
+                    <field name="amount_currency" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </field>
+                                        
                     <page string="Accounts" position="inside">
                         <group>
                             <field name="bank_balance" required="True"/>

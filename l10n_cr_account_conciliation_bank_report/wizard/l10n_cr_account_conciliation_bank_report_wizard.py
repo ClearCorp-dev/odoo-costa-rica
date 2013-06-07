@@ -31,6 +31,8 @@ class conciliationBankreportWizard(osv.osv_memory):
     _columns = {
         'bank_balance': fields.float('Bank Balance'),
         'account_ids':fields.many2one('account.account', 'Bank Account', domain="[('user_type.code','=','BKVI')]", help="Bank Account"),
+        #Redefine the filter options, because the conciliation bank doesn't have the option "No filters"
+        'filter': fields.selection([('filter_date', 'Date'), ('filter_period', 'Periods')], "Filter by", required=True),
     }
     
     _defaults = {

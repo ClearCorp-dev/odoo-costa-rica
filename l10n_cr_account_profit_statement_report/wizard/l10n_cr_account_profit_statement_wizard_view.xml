@@ -19,10 +19,13 @@
                         <attribute name="attrs">{'required': True}</attribute>
                     </field>
                     <field name="period_from" position="replace">
-                        <field colspan="4" widget="selection" name="period_from" string="Period" domain="[('state', '=', 'draft'),('special', '=', False)]" attrs="{'readonly':[('filter','!=','filter_period')], 'required':[('filter', '=', 'filter_period')]}"/>
+                        <field widget="selection" name="period_from" string="Period" domain="[('state', '=', 'draft'),('special', '=', False)]" attrs="{'readonly':[('filter','!=','filter_period')], 'required':[('filter', '=', 'filter_period')]}"/>                        
                     </field>
                     <field name="period_to" position="attributes">
                         <attribute name="attrs">{'invisible': True, 'required': False}</attribute>
+                    </field>
+                    <field name="special_period" position="attributes">
+                        <attribute name="invisible">True</attribute>
                     </field>
                      <field name="filter" position="attributes">
                         <attribute name="readonly">True</attribute>
@@ -30,9 +33,11 @@
                     <group string="Dates" position="attributes">
                         <attribute name="invisible">True</attribute>
                     </group>   
-                     <page string="Journals" position="replace">
-                         
-                     </page>                 
+                     <page string="Journals" position="replace" />
+                                    
+                     <page string="Advanced options" position="replace" />  
+                     
+                     <page string="Accounts" position="replace"/>
                </data>
             </field>
         </record>

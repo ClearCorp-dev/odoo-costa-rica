@@ -48,6 +48,7 @@ class conciliationBankreport(accountReportbase):
             'get_display_target_move': self.get_display_target_move,
             'get_bank_balance': self.get_bank_balance, 
             'get_parent_account': self.get_accounts_ids, 
+            'get_signatures_report':self.get_signatures_report,
         })
    
     def get_bank_balance(self, data):

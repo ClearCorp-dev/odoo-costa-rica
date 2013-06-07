@@ -11,7 +11,7 @@
              <field name="name">Conciliation Bank Report</field>
              <field name="report_rml">l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako</field>
              <field name="report_file">l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako</field>
-             <field name="webkit_header" ref="webkit_header_conciliation_bank"/> 
+             <field name="webkit_header" ref="report_webkit_lib.webkit_header_clearcorp_official_portrait" />  
          </record>
        
     </data>
