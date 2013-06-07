@@ -21,7 +21,7 @@
 ##############################################################################
 
 {
-    'name': 'Account Financial Profit Statement Report',
+    'name': 'Profit Statement Report Webkit',
     'description': "Create the Profit Statement report",
     'version': '1.0',
     'author': 'CLEARCORP S.A.',

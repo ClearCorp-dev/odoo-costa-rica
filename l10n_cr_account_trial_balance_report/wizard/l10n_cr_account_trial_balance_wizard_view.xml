@@ -32,9 +32,13 @@
                     <field name="date_to" position="attributes">
                         <attribute name="attrs">{'required':[('filter', '=', 'filter_date')]}</attribute>
                     </field>             
-                    <page string="Journals" position="replace">
-                         
-                    </page>                 
+                    <page string="Journals" position="replace" />
+                    
+                    <page string="Advanced options" position="replace" />
+                    
+                    <field name="special_period" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </field>
                </data>
             </field>
         </record>

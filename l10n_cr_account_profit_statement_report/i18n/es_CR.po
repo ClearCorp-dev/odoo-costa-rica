@@ -63,11 +63,6 @@ msgid "Variation"
 msgstr "Variación"
 
 #. module: l10n_cr_account_profit_statement_report
-#: view:profit.statement.report.wiz:0
-msgid "{'invisible': True, 'required': False}"
-msgstr "{'invisible': True, 'required': False}"
-
-#. module: l10n_cr_account_profit_statement_report
 #: selection:profit.statement.report.wiz,filter:0
 msgid "Date"
 msgstr "Fecha"
@@ -124,11 +119,6 @@ msgid "All Posted Entries"
 msgstr "Todos los apuntes publicados"
 
 #. module: l10n_cr_account_profit_statement_report
-#: view:profit.statement.report.wiz:0
-msgid "{'required': True}"
-msgstr "{'required': True}"
-
-#. module: l10n_cr_account_profit_statement_report
 #: help:profit.statement.report.wiz,fiscalyear_id:0
 msgid "Keep empty for all open fiscal year"
 msgstr "Mantener vacío para todos los años fiscales"
@@ -168,11 +158,6 @@ msgstr "Sin Filtros"
 #: report:addons/l10n_cr_account_profit_statement_report/report/l10n_cr_account_profit_statement_report.mako:35
 msgid "Prev. vs Sel."
 msgstr "Prev. vs Sel."
-
-#. module: l10n_cr_account_profit_statement_report
-#: view:profit.statement.report.wiz:0
-msgid "True"
-msgstr "True"
 
 #. module: l10n_cr_account_profit_statement_report
 #: model:ir.model,name:l10n_cr_account_profit_statement_report.model_profit_statement_report_wiz

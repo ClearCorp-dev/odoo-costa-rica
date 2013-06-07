@@ -21,7 +21,7 @@
 ##############################################################################
 
 {
-    'name': 'Account Financial Trial Balance Report',
+    'name': 'Trial Balance Report Webkit',
     'description': "Create the Trial Balance report",
     'version': '1.0',
     'author': 'CLEARCORP S.A.',

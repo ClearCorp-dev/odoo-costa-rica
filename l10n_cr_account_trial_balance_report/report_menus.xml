@@ -5,6 +5,6 @@
               name="Balance de comprobación"  
               parent="account.final_accounting_reports" 
               action="action_trial_balance_report_menu_webkit"  
-              id="menu_trial_balance_report"/>        
+              id="account.menu_general_Balance_report"/>        
     </data>
 </openerp>

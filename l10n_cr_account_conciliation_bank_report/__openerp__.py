@@ -37,7 +37,6 @@
     'init_xml': [],
     'demo_xml' : [],
     'update_xml': [
-                   'data/l10n_cr_account_conciliation_bank_webkit.xml',
                    'report/report.xml',                   
                    'wizard/l10n_cr_account_conciliation_bank_report_wizard.xml',
                    'report_menus.xml',

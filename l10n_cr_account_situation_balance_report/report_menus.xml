@@ -5,6 +5,6 @@
               name="Balance de situación"  
               parent="account.final_accounting_reports" 
               action="action_situation_balance_report_menu_webkit"  
-              id="menu_situation_balance_report"/>        
+              id="account.menu_account_report_bs"/>        
     </data>
 </openerp>
