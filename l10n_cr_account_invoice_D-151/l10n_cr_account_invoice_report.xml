@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+         <!--Account invoice report -->
+        <record id="view_account_invoice_report_tree_inherit" model="ir.ui.view">
+           <field name = "name">account.invoice.report.tree.inherit</field>
+           <field name = "model">account.invoice.report</field>
+           <field name="inherit_id" ref="account.view_account_invoice_report_tree"/>
+           <field name = "arch" type = "xml">
+                <xpath expr="/tree/field[@name='account_line_id']" position="after">
+                    <field name="d_151_type" invisible="1"/>
+                </xpath>
+           </field>
+        </record>
+        
+       <record id="view_account_invoice_report_search_inherit" model="ir.ui.view">
+           <field name = "name">account.invoice.report.search.inherit</field>
+           <field name = "model">account.invoice.report</field>
+           <field name = "type">form</field>
+           <field name="inherit_id" ref="account.view_account_invoice_report_search"/>
+           <field name = "arch" type = "xml">
+                <filter string="Refund" position="after">
+                    <field name="d_151_type"/>                
+                </filter>
+                <filter string="Type" position="after">
+                    <filter string="D-151 Type" icon="terp-stock_symbol-selection" context="{'group_by':'d_151_type'}"/>
+                </filter>
+           </field>
+        </record>
+    </data>
+</openerp>
