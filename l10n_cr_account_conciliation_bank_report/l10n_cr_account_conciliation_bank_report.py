@@ -20,28 +20,20 @@
 #
 ##############################################################################
 
-{
-    'name': 'Profit Statement Report Webkit',
-    'description': "Create the Profit Statement report",
-    'version': '1.0',
-    'author': 'CLEARCORP S.A.',
-    'category': 'Finance',
-    'website': "http://clearcorp.co.cr",
-    'images': [],
-    'depends': ['account',
-                'account_report_lib',
-                'account_report_signatures',],
-    'init_xml': [],
-    'demo_xml' : [],
-    'update_xml': [
-                   'report/report.xml',
-                   'l10n_cr_account_profit_statement_report.xml',
-                   'wizard/l10n_cr_account_profit_statement_wizard_view.xml',
-                   'report_menus.xml'
-                   ],
-    'test': [],
-    'active': False,
-    'installable': True,
-    'license': 'AGPL-3',
-}
+from osv import fields, orm, osv
+from tools.translate import _
 
+class acccountAccounttypeConciliationbank(orm.Model):
+    """
+        This class extend functions of account.account.type
+        
+        If include_conciliation_report is checked, all parent accounts that child account have some account type with include_conciliation_report in True,
+        they will appear in Conciliation Bank Wizard as a option account for print the report.
+        
+    """  
+    _name = "account.account.type"
+    _inherit = "account.account.type"
+    
+    _columns = {
+        'include_conciliation_report': fields.boolean('Include in conciliation bank report', help="If it's checked, the account that have this type is include in Conciliation Bank Report Wizard")
+    }

@@ -2,9 +2,9 @@
 <openerp>
     <data>
           <menuitem icon="STOCK_PRINT" 
-              name="Estado de Resultados"  
+              name="Profit And Loss"  
               parent="account.final_accounting_reports" 
               action="action_profit_statement_report_menu_webkit"  
-              id="menu_profit_statement_balance_report"/>        
+              id="account.menu_account_report_pl"/>        
     </data>
 </openerp>

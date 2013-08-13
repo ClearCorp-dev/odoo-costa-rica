@@ -9,7 +9,7 @@
     <body>
         <%setLang(user.lang)%>
         <%
-            bank_account = get_bank_account(data)
+            bank_account = get_accounts_ids(cr, uid, data)
         %>
         <div class="table header">
             <div class="table-row">
@@ -26,17 +26,17 @@
                 <div class="table-row labels no-wrap">
                     <div class="table-cell" style="width: 100px">${_('Fiscal Year')}<br/>${get_fiscal_year(data).name}</div>
                     <div class="table-cell" style="width: 100px">
-                        %if filter_form(data) == 'filter_date':
+                        %if get_filter(data) == 'filter_date':
                             ${_('Dates Filter')}
-                        %elif filter_form(data) == 'filter_period':
+                        %elif get_filter(data) == 'filter_period':
                             ${_('Periods Filter')}
                         %else:
                             ${_('No filters')}
                         %endif
                     <br/>
-                    %if filter_form(data) != 'filter_no':
+                    %if get_filter(data) != 'filter_no':
                         ${_('To:')}
-                        %if filter_form(data) == 'filter_date':
+                        %if get_filter(data) == 'filter_date':
                             ${ formatLang(get_date_to(data), date=True)}
                         %else:
                             ${get_end_period(data).name}
@@ -49,7 +49,7 @@
         </div>
         <br/><br/>
         <%
-            account_id = get_parent_account(data).id        
+            account_id = get_accounts_ids(cr, uid, data).id        
             bank_balance, bank_move_lines, account_is_foreign = get_data(cr, uid, data, account_id)
             input_bank_balance = get_bank_balance(data) or 0.0
         %>

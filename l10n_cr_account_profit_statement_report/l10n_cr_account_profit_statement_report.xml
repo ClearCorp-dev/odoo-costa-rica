@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Account Type -->
+        <record id="view_account_type_profit_form_inherit" model="ir.ui.view">
+            <field name="name">account.account.type.profit.form.inherit</field>
+            <field name="model">account.account.type</field>
+            <field name="inherit_id" ref="account.view_account_type_form"/>
+            <field name="arch" type="xml">
+                <field name="note" position="after"> 
+                    <group col="4" string="Configuration for Profit Statement Report">
+                        <field name="include_profit_statement_report"/>                    
+                   </group>
+                </field>
+           </field>
+        </record>
+    </data>
+</openerp>

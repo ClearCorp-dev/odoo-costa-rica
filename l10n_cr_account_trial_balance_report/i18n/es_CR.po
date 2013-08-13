@@ -6,14 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-07 21:06+0000\n"
-"PO-Revision-Date: 2013-06-07 21:06+0000\n"
+"POT-Creation-Date: 2013-08-12 22:26+0000\n"
+"PO-Revision-Date: 2013-08-12 22:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: l10n_cr_account_trial_balance_report
+#: view:trial.balance.report.wiz:0
+msgid "{'required':True}"
+msgstr "{'required':True}"
 
 #. module: l10n_cr_account_trial_balance_report
 #: report:addons/l10n_cr_account_trial_balance_report/report/l10n_cr_account_financial_report_trial_balance_report.mako:63
@@ -26,9 +31,19 @@ msgid "Trial Balance Report"
 msgstr "Reporte de Balance de Comprobación"
 
 #. module: l10n_cr_account_trial_balance_report
+#: view:trial.balance.report.wiz:0
+msgid "{'required':[('filter', '=', 'filter_date')]}"
+msgstr "{'required':[('filter', '=', 'filter_date')]}"
+
+#. module: l10n_cr_account_trial_balance_report
 #: report:addons/l10n_cr_account_trial_balance_report/report/l10n_cr_account_financial_report_trial_balance_report.mako:64
 msgid "Debit"
 msgstr "Débito"
+
+#. module: l10n_cr_account_trial_balance_report
+#: view:trial.balance.report.wiz:0
+msgid "[('type', '=', 'sum'),('account_type.code','=','TRIBAL')]"
+msgstr "[('type', '=', 'sum'),('account_type.code','=','TRIBAL')]"
 
 #. module: l10n_cr_account_trial_balance_report
 #: help:trial.balance.report.wiz,historic_strict:0
@@ -54,6 +69,16 @@ msgstr "Compañía"
 #: field:trial.balance.report.wiz,amount_currency:0
 msgid "With Currency"
 msgstr "Con moneda"
+
+#. module: l10n_cr_account_trial_balance_report
+#: view:trial.balance.report.wiz:0
+msgid "{'required':[('filter', '=', 'filter_period')]}"
+msgstr "{'required':[('filter', '=', 'filter_period')]}"
+
+#. module: l10n_cr_account_trial_balance_report
+#: view:trial.balance.report.wiz:0
+msgid "[('fiscalyear_id', '=', fiscalyear_id), ('special', '=', False)]"
+msgstr "[('fiscalyear_id', '=', fiscalyear_id), ('special', '=', False)]"
 
 #. module: l10n_cr_account_trial_balance_report
 #: model:ir.actions.act_window,name:l10n_cr_account_trial_balance_report.action_trial_balance_report_menu_webkit
@@ -113,14 +138,29 @@ msgid "Name"
 msgstr "Nombre"
 
 #. module: l10n_cr_account_trial_balance_report
+#: view:trial.balance.report.wiz:0
+msgid "{'invisible': True}"
+msgstr "{'invisible': True}"
+
+#. module: l10n_cr_account_trial_balance_report
 #: selection:trial.balance.report.wiz,target_move:0
 msgid "All Posted Entries"
 msgstr "Todos los apuntes publicados"
 
 #. module: l10n_cr_account_trial_balance_report
+#: view:trial.balance.report.wiz:0
+msgid "{'required': True}"
+msgstr "{'required': True}"
+
+#. module: l10n_cr_account_trial_balance_report
 #: help:trial.balance.report.wiz,fiscalyear_id:0
 msgid "Keep empty for all open fiscal year"
 msgstr "Mantener vacío para todos los años fiscales abiertos"
+
+#. module: l10n_cr_account_trial_balance_report
+#: help:trial.balance.report.wiz,amount_currency:0
+msgid "It adds the currency column on report if the currency differs from the company currency."
+msgstr "Añade una columna de moneda en el reporte si la moneda es diferente de la moneda de la compañía"
 
 #. module: l10n_cr_account_trial_balance_report
 #: field:trial.balance.report.wiz,period_to:0
@@ -149,9 +189,14 @@ msgid "No Filters"
 msgstr "Sin Filtros"
 
 #. module: l10n_cr_account_trial_balance_report
-#: report:addons/l10n_cr_account_trial_balance_report/report/l10n_cr_account_financial_report_trial_balance_report.mako:110
+#: report:addons/l10n_cr_account_trial_balance_report/report/l10n_cr_account_financial_report_trial_balance_report.mako:117
 msgid "Authorized by: "
 msgstr "Autorizado por: "
+
+#. module: l10n_cr_account_trial_balance_report
+#: view:trial.balance.report.wiz:0
+msgid "Advanced options"
+msgstr "Advanced options"
 
 #. module: l10n_cr_account_trial_balance_report
 #: report:addons/l10n_cr_account_trial_balance_report/report/l10n_cr_account_financial_report_trial_balance_report.mako:66
@@ -174,14 +219,19 @@ msgid "Chart of Accounts: "
 msgstr "Catálogo de cuentas: "
 
 #. module: l10n_cr_account_trial_balance_report
+#: view:trial.balance.report.wiz:0
+msgid "True"
+msgstr "True"
+
+#. module: l10n_cr_account_trial_balance_report
 #: report:addons/l10n_cr_account_trial_balance_report/report/l10n_cr_account_financial_report_trial_balance_report.mako:32
 msgid "Periods Filter"
 msgstr "Filtro de períodos"
 
 #. module: l10n_cr_account_trial_balance_report
-#: help:trial.balance.report.wiz,amount_currency:0
-msgid "It adds the currency column on report if the currency differs from the company currency."
-msgstr "Añade una columna de moneda en el reporte si la moneda es diferente de la moneda de la compañía"
+#: field:trial.balance.report.wiz,account_base_report:0
+msgid "Account Base Report"
+msgstr "Informe Financiero"
 
 #. module: l10n_cr_account_trial_balance_report
 #: report:addons/l10n_cr_account_trial_balance_report/report/l10n_cr_account_financial_report_trial_balance_report.mako:30
@@ -194,6 +244,7 @@ msgid "Include special period"
 msgstr "Incluir períodos especiales"
 
 #. module: l10n_cr_account_trial_balance_report
+#: view:trial.balance.report.wiz:0
 #: field:trial.balance.report.wiz,account_ids:0
 msgid "Accounts"
 msgstr "Cuentas"
@@ -233,3 +284,10 @@ msgstr "Todos los apuntes"
 msgid "Strict History"
 msgstr "Histórico estricto"
 
+#. module: account
+#: report:account.account.balance:0
+#: model:ir.actions.act_window,name:account.action_account_balance_menu
+#: model:ir.actions.report.xml,name:account.account_account_balance
+#: model:ir.ui.menu,name:account.menu_general_Balance_report
+msgid "Trial Balance"
+msgstr "Balance de comprobación"

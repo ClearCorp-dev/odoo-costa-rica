@@ -20,5 +20,6 @@
 #
 ##############################################################################
 
+import l10n_cr_account_profit_statement_report
 import report
 import wizard

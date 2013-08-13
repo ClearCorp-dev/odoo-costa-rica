@@ -26,23 +26,23 @@
                     <div class="table-cell first-column" style="width: 70px">${_('Chart of Accounts: ')}<br/>${get_chart_account_id(data).name}</div>
                     <div class="table-cell first-column" style="width: 70px">${_('Fiscal Year')}<br/>${get_fiscal_year(data).name}</div>
                     <div class="table-cell first-column" style="width: 70px">
-                        %if filter_form(data) == 'filter_date':
+                        %if get_filter(data) == 'filter_date':
                             ${_('Dates Filter')}
-                        %elif filter_form(data) == 'filter_period':
+                        %elif get_filter(data) == 'filter_period':
                             ${_('Periods Filter')}
                         %else:
                             ${_('No filters')}
                         %endif
                     <br/>
-                    %if filter_form(data) != 'filter_no':
+                    %if get_filter(data) != 'filter_no':
                         ${_('From:')}
-                            %if filter_form(data) == 'filter_date':
+                            %if get_filter(data) == 'filter_date':
                                 ${formatLang(get_date_from(data), date=True)}
                             %else:
                                 ${get_start_period(data).name}
                             %endif
                             ${_('To:')}
-                            %if filter_form(data) == 'filter_date':
+                            %if get_filter(data) == 'filter_date':
                                 ${ formatLang(get_date_to(data), date=True)}
                             %else:
                                 ${get_end_period(data).name}
@@ -69,31 +69,38 @@
             <div class="table-body"> 
                 <% row_even = False %>
                 <%
-                  accounts = get_accounts(cr, uid, data)
-                  total_result = get_data(cr, uid, data)                                
+                    final_list = get_data(cr, uid, data)
                 %>
-                 %for account in accounts:
-                     %if account.level == 0:
+                %for account in final_list:
+                     %if account['level'] == 0 or account['is_parent'] == 'True' :
                         <div class="table-row bold ${row_even and 'even' or 'odd'}">
-                     %elif account.child_id:
+                     %elif 'child' in account:
                         <div class="table-row bold ${row_even and 'even' or 'odd'}">
                      %else:
                         <div class="table-row ${row_even and 'even' or 'odd'}">
                     %endif             
-                            <div class="table-cell first-column">${account.code}</div>
-                            <div class="table-cell" style="padding-left:${account.level*10}px">${account.name}</div>
-                            <div class="table-cell amount">${formatLang(total_result[account.id]['initial_balance'])}</div>         
-                            <div class="table-cell amount">${formatLang(total_result[account.id]['debit'])}</div>
-                            <div class="table-cell amount" >${formatLang(total_result[account.id]['credit'])}</div>
-                            <div class="table-cell amount" >${formatLang(total_result[account.id]['balance'])}</div>
-                         <%
-                            if row_even:
-                                row_even = False
-                            else:
-                                row_even = True
-                        %>
+                            <div class="table-cell first-column">${account['code']}</div>
+                            <div class="table-cell" style="padding-left:${account['level']*10}px" >${account['name']}</div>
+                            %if account['is_parent'] == False:
+                                <div class="table-cell amount">${formatLang(account['initial_balance'])}</div>         
+                                <div class="table-cell amount">${formatLang(account['debit'])}</div>
+                                <div class="table-cell amount" >${formatLang(account['credit'])}</div>
+                                <div class="table-cell amount" >${formatLang(account['balance'])}</div>
+                           %else:
+                                <div class="table-cell amount">${account['initial_balance']}</div>         
+                                <div class="table-cell amount">${account['debit']}</div>
+                                <div class="table-cell amount" >${account['credit']}</div>
+                                <div class="table-cell amount" >${account['balance']}</div>                           
+                           %endif
+                                
+                    <%
+                        if row_even:
+                            row_even = False
+                        else:
+                            row_even = True
+                    %>
                     </div>
-                %endfor
+                %endfor      
             </div>
         </div>
         <div class="table-row spacer">
