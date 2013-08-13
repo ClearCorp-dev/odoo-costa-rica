@@ -24,6 +24,7 @@ import time
 import pooler
 from report import report_sxw
 from tools.translate import _
+from openerp.osv import fields, osv
 
 from openerp.addons.account_report_lib.account_report_base import accountReportbase
 
@@ -40,17 +41,12 @@ class conciliationBankreport(accountReportbase):
             'time': time,
             'cr' : cursor,
             'uid': uid,
+            'get_bank_balance': self.get_bank_balance,
             'get_amount': self.get_amount,
-            'get_bank_account': self.get_accounts_ids,
-            'get_chart_account_id': self.get_chart_account_id,
             'get_data': self.get_data,
-            'filter_form': self.get_filter,
-            'get_display_target_move': self.get_display_target_move,
-            'get_bank_balance': self.get_bank_balance, 
-            'get_parent_account': self.get_accounts_ids, 
-            'get_signatures_report':self.get_signatures_report,
         })
    
+    #Extract bank_balance from wizard.
     def get_bank_balance(self, data):
         return self._get_form_param('bank_balance', data)
     
@@ -123,53 +119,10 @@ class conciliationBankreport(accountReportbase):
         filters = {}
         account_foreign = False
         filter_data = []
-        
-        ########Parameters
-        fiscalyear = self.get_fiscalyear(data)
-        target_move = self.get_target_move(data)
-        historic_strict = self.get_historic_strict(data)
-        special_period = self.get_special_period(data)
-        filter_type = self.get_filter(data)
-
-        account_obj = self.pool.get('account.account')
-        account_webkit_report_library_obj = self.pool.get('account.webkit.report.library')
-        parent_account = account_obj.browse(cr, uid, parent_account_id)
-        child_account_ids = account_obj.search(cr, uid, [('parent_id','=',parent_account_id)])
-        child_accounts = child_account_ids and account_obj.browse(cr, uid, child_account_ids) or False
-
-        if not child_accounts:
-            return result_bank_balance, result_move_lines, account_foreign
-
-        if parent_account.report_currency_id:
-            account_currency = parent_account.report_currency_id
-        elif parent_account.currency_id:
-            account_currency = parent_account.currency_id
-        else:
-            account_currency = parent_account.company_id.currency_id
-        
-        if account_currency.id == parent_account.company_id.currency_id.id:
-            account_is_foreign = False
-        else:
-            account_is_foreign = True
-
         reconciled_account = None
         transit_accounts = []
         transit_account_ids = []
-        for child_account in child_accounts:
-            #TODO: get the user types for the reconciled_account from system properties
-            if child_account.user_type.code == 'BKRE':
-                reconciled_account = child_account
-            else:
-                if child_account.reconcile:
-                    transit_accounts.append(child_account)
-                    transit_account_ids.append(child_account.id)
-
-        #A reconciled_account and at least one transit_account is needed
-        if not (reconciled_account or transit_accounts):
-            return result_bank_balance, result_move_lines, account_foreign
-
-        #TODO: set input_bank_balance with data from wizard
-        input_bank_balance = 0.0
+        input_bank_balance = self.get_bank_balance(data) or 0.0 #Extract bank_balance from wizard
         bank_balance = 0.0
         accounting_balance = 0.0
         incomes_to_register = 0.0
@@ -177,8 +130,19 @@ class conciliationBankreport(accountReportbase):
         expenditures_to_register = 0.0
         debits_to_reconcile = 0.0
         accounting_total = 0.0
-        bank_total = 0.0
-
+        bank_total = 0.0        
+        
+        account_obj = self.pool.get('account.account')
+        account_webkit_report_library_obj = self.pool.get('account.webkit.report.library')
+        
+        #######################Parameters
+        fiscalyear = self.get_fiscalyear(data)
+        target_move = self.get_target_move(data)
+        historic_strict = self.get_historic_strict(data)
+        special_period = self.get_special_period(data)
+        filter_type = self.get_filter(data)
+        
+        #Build fiscal_year and filter_data
         if fiscalyear: 
             fiscal_year_id = fiscalyear.id
         else:
@@ -187,6 +151,7 @@ class conciliationBankreport(accountReportbase):
         if filter_type == 'filter_date':
             period_ids = False
             end_date = self.get_date_to(data)
+            
             #Build the filter data
             filter_data.append(None)
             filter_data.append(end_date)
@@ -194,15 +159,67 @@ class conciliationBankreport(accountReportbase):
         elif filter_type == 'filter_period':
             period_ids = [self.get_end_period(data).id]            
             end_date = False
+            
             #Build the filter data
             filter_data.append(None)
             filter_data.append(self.get_end_period(data))
         
-        #TODO: Set the max date or period list for the balance query from the wizard data
-        #      If the wizard is filtered by date, the max date is entered as is
-        #      If the wizard is filtered by period, the query needs the valid list of periods in a WHERE statement form
+        ######################Account configuration
+        #1. Get acccount_id (parent_account) selected in wizard       
+        parent_account = account_obj.browse(cr, uid, parent_account_id)
+
+        #2. Get child of this account
+        child_account_ids = account_obj.search(cr, uid, [('parent_id','=',parent_account_id)])
+        child_accounts = child_account_ids and account_obj.browse(cr, uid, child_account_ids) or False
+
+        #Return empty values if account doesn't have children.
+        if not child_accounts:
+            return result_bank_balance, result_move_lines, account_foreign
         
-        balance_query_filter = ''
+        #Check values 
+        for child_account in child_accounts:
+            '''
+                *** NOTE: This part required previous configuration ***
+                One of child_accounts must have include_conciliation_report attribute checked as True.
+                This account is reconciled_account, other accounts are transit_accounts.
+            '''
+            #Account with include_conciliation_report checked is reconciled_account
+            if child_account.user_type.include_conciliation_report == True:
+                reconciled_account = child_account
+            else:
+                #Others accounts are transit accounts.
+                if child_account.reconcile:
+                    transit_accounts.append(child_account)
+                    transit_account_ids.append(child_account.id)
+
+        #A reconciled_account and at least one transit_account is needed
+        #Return an error if those accounts don't exist.
+        if not reconciled_account:
+            raise osv.except_osv(_('Error !'),_('Reconciled account does not exist. Check your configuration!'))
+        
+        elif not transit_accounts:
+            raise osv.except_osv(_('Error !'),_('Transit account does not exist. Check your configuration!'))
+        
+        #######################################################################################################
+        
+        #############If accounts configuration is correct, procedeed with report.
+        #3. Check currency
+        if parent_account.report_currency_id:
+            account_currency = parent_account.report_currency_id
+        elif parent_account.currency_id:
+            account_currency = parent_account.currency_id
+        else:
+            account_currency = parent_account.company_id.currency_id
+        
+        #4. Define if account currency is same that company currency
+        if account_currency.id == parent_account.company_id.currency_id.id:
+            account_is_foreign = False
+        else:
+            account_is_foreign = True
+        
+        #######################################################################
+        
+        #Compute balances.        
         if account_is_foreign:            
             bank_balance = account_webkit_report_library_obj.get_account_balance(cr,
                                                 1,

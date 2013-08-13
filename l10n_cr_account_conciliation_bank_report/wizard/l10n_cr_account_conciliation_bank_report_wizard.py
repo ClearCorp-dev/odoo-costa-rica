@@ -21,19 +21,47 @@
 ##############################################################################
 
 from osv import fields, osv
+from openerp.tools.translate import _
 
 class conciliationBankreportWizard(osv.osv_memory):
 
     _inherit = "account.report.wiz"
     _name = "conciliation.bank.report.wiz"
     _description = "Conciliation Bank Report Wizard"
+
+    def _get_parent_accounts(self, cr, uid, context=None):
+        
+        if context is None:
+            context = {}
+                
+        res = []
+        account_obj = self.pool.get('account.account')
+
+        #Search accounts that have in user_type checked include_conciliation_report attribute. Then, return a tuple list with name and id for
+        #parent_id for this accounts
+        #Include accounts with type == 'view'
+        account_ids = account_obj.search(cr, uid, [('user_type.include_conciliation_report', '=', True)], context=context)
+        
+        if account_ids:
+            accounts = account_obj.browse(cr, uid, account_ids, context)
+            for account in accounts:   
+                if account.parent_id:            
+                    res.append((account.parent_id.id, account.parent_id.name)) #Append parent_id.id and parent_id.name for account.
+                
+        return res
     
+    '''
+        account_ids is define as a selection field, because with a domain can't obtain necessary data.
+        account_ids are all accounts that their parents user_type have include_conciliation_report attribute mark as True.
+        This configuration solves the problem of searching for a specific code in accounts and makes configurable the accounts that 
+        you want in the bank reconciliation report
+    '''
     _columns = {
         'bank_balance': fields.float('Bank Balance'),
-        'account_ids':fields.many2one('account.account', 'Bank Account', domain="[('user_type.code','=','BKVI')]", help="Bank Account"),
-        #Redefine the filter options, because the conciliation bank doesn't have the option "No filters"
-        'filter': fields.selection([('filter_date', 'Date'), ('filter_period', 'Periods')], "Filter by", required=True),
+        'filter': fields.selection([('filter_date', 'Date'), ('filter_period', 'Periods')], "Filter by"),
+        'account_ids': fields.selection(_get_parent_accounts, 'Bank Account'),
     }
+                 
     
     _defaults = {
         'filter': 'filter_period',

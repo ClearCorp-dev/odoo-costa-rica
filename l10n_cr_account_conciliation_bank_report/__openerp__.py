@@ -23,7 +23,16 @@
 
 {
     'name': 'Conciliation Bank Report Webkit',
-    'description': "Install the Conciliation Bank Report.",
+    'description': """Install the Conciliation Bank Report.
+        Configuration:
+        1. Configure type account that it will appear in wizard. This configuration is in Accounting -> Account -> Account Types and check
+        "Include in conciliation bank report" option.
+        
+        2. With previous configuration, accounts that will appears in wizard to generate report will be parents of account that match with type selected in 
+        previous configuration.
+        
+        3. With this configuration, Conciliation Bank Report has configuration for accounts that it will be necesary, that is reconciled and transit account.
+    """,
     'version': '1.0',
     'author': 'CLEARCORP S.A.',
     'category': 'Finance',
@@ -39,6 +48,7 @@
     'update_xml': [
                    'report/report.xml',                   
                    'wizard/l10n_cr_account_conciliation_bank_report_wizard.xml',
+                   'l10n_cr_account_conciliation_bank_report.xml',
                    'report_menus.xml',
                    ],
     'test': [],

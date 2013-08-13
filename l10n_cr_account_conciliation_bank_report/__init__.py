@@ -20,5 +20,6 @@
 #
 ##############################################################################
 
+import l10n_cr_account_conciliation_bank_report
 import wizard
 import report

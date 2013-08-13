@@ -30,14 +30,28 @@
                      <field name="filter" position="attributes">
                         <attribute name="readonly">True</attribute>
                     </field>
-                    <group string="Dates" position="attributes">
+                    <xpath expr="//group[@name='Dates']" position="attributes">
                         <attribute name="invisible">True</attribute>
-                    </group>   
-                     <page string="Journals" position="replace" />
-                                    
-                     <page string="Advanced options" position="replace" />  
+                    </xpath>   
+                    <group string="Journals" position="attributes">
+                        <attribute name="attrs">{'invisible': True}</attribute>
+                    </group>                                    
+                    <group string="Advanced options" position="attributes">
+                        <attribute name="attrs">{'invisible': True}</attribute>
+                    </group> 
                      
-                     <page string="Accounts" position="replace"/>
+                    <group string="Accounts" position="attributes">
+                        <attribute name="attrs">{'invisible': True}</attribute>
+                    </group>
+                    
+                    <field name="account_base_report" position="attributes">
+                        <attribute name="attrs">{'required':True}</attribute>
+                        <attribute name="domain">[('type', '=', 'sum'),('account_type.code','=','PROSTA')]</attribute>
+                    </field>
+                    
+                    <field name="account_base_report" position="after">
+                        <field name="base_compare_account" required="True" domain="[('user_type.include_profit_statement_report','=', True),('type','=','view')]"/>
+                    </field>
                </data>
             </field>
         </record>

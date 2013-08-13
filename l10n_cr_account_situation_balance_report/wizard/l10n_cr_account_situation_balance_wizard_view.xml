@@ -30,14 +30,25 @@
                      <field name="filter" position="attributes">
                         <attribute name="readonly">True</attribute>
                     </field>
-                    <group string="Dates" position="attributes">
+                    <group name="Dates" position="attributes">
                         <attribute name="invisible">True</attribute>
                     </group>   
-                  <page string="Journals" position="replace"/>                 
+                  <group string="Journals" position="attributes">
+                     <attribute name="attrs">{'invisible': True}</attribute>
+                  </group>                 
 
-                  <page string="Advanced options" position="replace" />  
-                 
-                  <page string="Accounts" position="replace"/>
+                  <group string="Advanced options" position="attributes">  
+                     <attribute name="attrs">{'invisible': True}</attribute>
+                  </group>
+                  
+                  <field name="account_base_report" position="attributes">
+                    <attribute name="attrs">{'required': True}</attribute>
+                  </field>
+               
+                  <group string="Accounts" position="attributes">  
+                     <attribute name="attrs">{'invisible': True}</attribute>
+                  </group>
+             
                </data>
             </field>
         </record>

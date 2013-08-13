@@ -20,86 +20,611 @@
 #
 ##############################################################################
 
+from copy import copy
 import pooler
 from report import report_sxw
 from tools.translate import _
+import types
+from osv import fields, orm
 
 from openerp.addons.account_report_lib.account_report_base import accountReportbase
 
 class profitStatementreport(accountReportbase):
     def __init__(self, cr, uid, name, context):
-        super(accountReportbase, self).__init__(cr, uid, name, context=context)
+        super(profitStatementreport, self).__init__(cr, uid, name, context=context)
         self.localcontext.update({
             'cr': cr,
             'uid': uid,
-            'get_fiscalyear': self.get_fiscalyear,
             'get_last_period': self.get_last_period,
-            'get_start_period': self.get_start_period,
-            'get_data': self.get_data,
-            'get_signatures_report':self.get_signatures_report,
+            'get_base_account_compare': self.get_base_account_compare,
+            'get_data': self.get_data,            
         })
-              
+        
+    #Get base account to compare result
+    def get_base_account_compare(self, data):
+        return self._get_info(data, 'base_compare_account', 'account.account')
+             
+    #Get last period based in period selected. 
     def get_last_period(self, cr, uid, data):
         start_period = self.get_start_period(data)
         return self.pool.get('account.period').get_last_period(cr,uid,start_period)
+   
+    '''
+        If the display_detail == display_flat, compute all the balance, debit, credit and initial_balance and return 
+        one result for each type account selected in the list.
+        @param child_list: Can be a list of ids (int) or a browse record list.
+    '''
+    def compute_data(self, cr, uid, result_dict, child_list):
+        balance = 0.0 
+         
+        #Child list can be a list of int or browse_record list
+        for c in child_list:
+            if isinstance(c, orm.browse_record):
+                if c.id in result_dict.keys():
+                    balance += result_dict[c.id]['balance']
+        
+            elif isinstance(c, int):
+                if c in result_dict.keys():
+                    balance += result_dict[c]['balance']
+
+        return balance
     
-    def get_data(self, cr, uid, data, context={}):
-        account_account_obj = self.pool.get('account.account')
-        account_period_obj = self.pool.get('account.period')
+    """ 
+        Main methods to compute data. Split account.financial.report types in different
+        methods to improve usabillity and maintenance. 
+    """
+    #Method for account.financial.report account_type type. 
+    def get_data_account_type(self, cr, uid, base_account, fiscal_year, filter_type, period, last_period, structure={}, final_list=[]):
+        
+        result_dict = {}
+        final_data_parent = {'child_list': []} #Define empty list, avoid problem when list is empty and key isn't created
+        final_data = {}
+        list_ids = []
+        child_list = []
+        
+        library_obj = self.pool.get('account.webkit.report.library') 
+        
+        #1. Extract children. It's a list of dictionaries.
+        child_list = structure['account_type_child']       
+        
+        #Extract base_account selected and add id into list_ids to compute data.
+        base_account_id = base_account.id
+        list_ids.append(base_account_id)
+        
+        '''
+            Display_detail = no_detail = special case
+        '''
+        #no_detail: Iterate in the list and compute result in one line.
+        if structure['display_detail'] == 'no_detail':
+            final_data_parent['name'] = structure['name']
+            final_data_parent['code'] = ''  
+            final_data_parent['is_parent'] = False
+            final_data_parent['level'] = 0
+            final_data_parent['display_detail'] = 'no_detail'   
+            
+            #In account type, iterate in child, because child is all accounts that
+            #match with account types selected.            
+         
+            for parent, child in child_list.iteritems():
+                #Add child id to compute data
+                final_data_parent['child_list'] = child
+                
+                for c in child:                   
+                    list_ids.append(c.id)
+                
+            if len(list_ids) > 0:                    
+                    #In this report, call method three times, calculate balance for                    
+                    #    period selected
+                    #    last period
+                    #    fiscal year
+                    
+                    #Period selected -> Change witch period take as start_period and end_period
+                    result_dict_period = library_obj.get_account_balance(cr, uid, 
+                                                                            list_ids, 
+                                                                            ['balance'],     
+                                                                            start_period_id=period.id, 
+                                                                            end_period_id=period.id,
+                                                                            filter_type=filter_type)
+                    
+                    #Last period
+                    result_dict_last_period = library_obj.get_account_balance(cr, uid, 
+                                                                            list_ids, 
+                                                                            ['balance'],     
+                                                                            start_period_id=last_period.id, 
+                                                                            end_period_id=last_period.id,
+                                                                            filter_type=filter_type)
+                    
+                    #Fiscal year
+                    result_dict_fiscal_year = library_obj.get_account_balance(cr, uid, 
+                                                                            list_ids, 
+                                                                            ['balance'],     
+                                                                            end_period_id=period.id, 
+                                                                            fiscal_year_id=fiscal_year.id, 
+                                                                            filter_type=filter_type)
+                    
+                    #Compute all result in one line
+                    #Balance for all accounts (compare with base_account_selected)
+                    balance_period = self.compute_data(cr, uid, result_dict_period, final_data_parent['child_list'])
+                    balance_last_period = self.compute_data(cr, uid, result_dict_last_period, final_data_parent['child_list'])
+                    balance_fiscal_year = self.compute_data(cr, uid, result_dict_fiscal_year, final_data_parent['child_list'])
+                    balance_total_variation = balance_period - balance_last_period
+                    
+                    ##Extract results for base_account selected in wizard.
+                    base_account_last_period = result_dict_last_period[base_account_id]['balance']
+                    base_account_period = result_dict_period[base_account_id]['balance']
+                    base_account_total_variation = base_account_period - balance_last_period
+                    base_account_fiscal_year = result_dict_fiscal_year[base_account_id]['balance']                    
+                    base_account_percentage_period = 100
+                    base_account_percentage_last_period = 100
+                    base_account_percentage_variation = base_account_last_period != 0 and (100 * base_account_total_variation / base_account_last_period) or 0
+                    base_account_percentage_fiscalyear = 100 
+                    
+                    #Update dictionary
+                    final_data_parent.update({
+                                             'balance_total_period': balance_period,
+                                             'balance_total_last_period': balance_last_period,
+                                             'balance_total_variation': balance_period - balance_last_period,
+                                             'balance_total_fiscal_year':base_account_fiscal_year,
+                                             'balance_total_percentage_period': base_account_last_period != 0 and (100 * balance_last_period / base_account_last_period) or 0,
+                                             'balance_total_percentage_last_period': base_account_period != 0 and (100 * balance_period / base_account_period) or 0,
+                                             'balance_total_percentage_variation': balance_last_period != 0 and (100 * balance_total_variation / balance_last_period) or 0,
+                                             'balance_total_percentage_fiscal_year': base_account_fiscal_year != 0 and (100 * balance_fiscal_year / base_account_fiscal_year) or 0,
+                                            })
+                    
+                    #Update the dictionary with final results.
+                    final_list.append(copy(final_data_parent))
+                       
+            else:
+                final_data_parent.update({
+                                             'balance_total_period': 0.0,
+                                             'balance_total_last_period': 0.0,
+                                             'balance_total_variation': 0.0,
+                                             'balance_total_fiscal_year':0.0,
+                                             'balance_total_percentage_period': 0.0,
+                                             'balance_total_percentage_last_period': 0.0,
+                                             'balance_total_percentage_variation': 0.0,
+                                             'balance_total_percentage_fiscal_year': 0.0,
+                                            })
+      
+                #Update the dictionary with final results.
+                final_list.append(copy(final_data_parent))                    
+            
+        else:  
+            '''
+                Optimization process: Call get_account_balance the least possible.
+            '''
+            if child_list:
+                #2. Create dictionaries for parent and children.
+                for parent, child in child_list.iteritems():
+                   final_data_parent['id'] = parent.id
+                   final_data_parent['name'] = parent.name
+                   final_data_parent['code'] = parent.code
+                   final_data_parent['is_parent'] = True #Distinct child from parent.
+                   final_data_parent['level'] = 0
+                   
+                   if child != []:
+                        final_data_parent['child_list'] = child
+                   else:
+                        final_data_parent['child_list'] = []
+ 
+                   if structure['display_detail'] == 'detail_flat':
+                        #Update keys to numbers, because this keys now show results
+                        final_data_parent['balance_total_period'] = 0.0
+                        final_data_parent['balance_total_last_period'] = 0.0
+                        final_data_parent['balance_total_variation'] = 0.0
+                        final_data_parent['balance_total_fiscal_year'] = 0.0
+                        final_data_parent['balance_total_percentage_period'] = 0.0,
+                        final_data_parent['balance_total_percentage_last_period'] = 0.0
+                        final_data_parent['balance_total_percentage_variation'] = 0.0
+                        final_data_parent['balance_total_percentage_fiscal_year'] = 0.0                        
+                        
+                        #Add parent into list
+                        final_list.append(copy(final_data_parent))
+                        
+                   elif structure['display_detail'] == 'detail_with_hierarchy':
+                        final_data_parent['balance_total_period'] = ''
+                        final_data_parent['balance_total_last_period'] = ''
+                        final_data_parent['balance_total_variation'] = ''
+                        final_data_parent['balance_total_fiscal_year'] = ''
+                        final_data_parent['balance_total_percentage_period'] = '',
+                        final_data_parent['balance_total_percentage_last_period'] = ''
+                        final_data_parent['balance_total_percentage_variation'] = ''
+                        final_data_parent['balance_total_percentage_fiscal_year'] = ''
+                        
+                        #Add parent into list
+                        final_list.append(copy(final_data_parent))
+                                   
+                        #Build child in a dictionary
+                        if 'child_list' in final_data_parent.keys():   
+                           for c in final_data_parent['child_list']:                                                        
+                               final_data['id'] = c.id
+                               final_data['level'] = c.level
+                               if 'child' in final_data:
+                                   final_data['child'] = c.child
+                               final_data['name'] = c.name
+                               final_data['code'] = c.code
+                               final_data['is_parent'] = False
+                               
+                               final_list.append(copy(final_data))                           
+                  
+                   #Add child in final list and id to compute data.
+                   for c in child:
+                       list_ids.append(c.id)
+                
+                if len(list_ids) > 0: 
+                      #Compute the balance for child ids list.         
+                      #Period selected -> Change witch period take as start_period and end_period
+                      result_dict_period = library_obj.get_account_balance(cr, uid, 
+                                                                            list_ids, 
+                                                                            ['balance'],     
+                                                                            start_period_id=period.id, 
+                                                                            end_period_id=period.id,
+                                                                            filter_type=filter_type)
+                    
+                      #Last period
+                      result_dict_last_period = library_obj.get_account_balance(cr, uid, 
+                                                                            list_ids, 
+                                                                            ['balance'],     
+                                                                            start_period_id=last_period.id, 
+                                                                            end_period_id=last_period.id,
+                                                                            filter_type=filter_type)
+                    
+                      #Fiscal year
+                      result_dict_fiscal_year = library_obj.get_account_balance(cr, uid, 
+                                                                            list_ids, 
+                                                                            ['balance'],     
+                                                                            end_period_id=period.id, 
+                                                                            fiscal_year_id=fiscal_year.id, 
+                                                                            filter_type=filter_type)
+                      
+                
+                ##Extract results for base_account selected in wizard.
+                base_account_last_period = result_dict_last_period[base_account_id]['balance']
+                base_account_period = result_dict_period[base_account_id]['balance']
+                base_account_total_variation = base_account_period - balance_last_period
+                base_account_fiscal_year = result_dict_fiscal_year[base_account_id]['balance']                    
+                base_account_percentage_period = 100
+                base_account_percentage_last_period = 100
+                base_account_percentage_variation = base_account_last_period != 0 and (100 * base_account_total_variation / base_account_last_period) or 0
+                base_account_percentage_fiscalyear = 100
+                
+                #Iterate again the list for improve performance. Compute results.
+                if structure['display_detail'] == 'detail_flat':
+                    #final_list has categories and child of this categories
+                    #Compute results for each category 
+                    for data in final_list:          
+                        if 'child_list' in data.keys():
+                            #Balance for all accounts (compare with base_account_selected)
+                            balance_period = self.compute_data(cr, uid, result_dict_period, data['child_list'])
+                            balance_last_period = self.compute_data(cr, uid, result_dict_last_period, data['child_list'])
+                            balance_fiscal_year = self.compute_data(cr, uid, result_dict_fiscal_year, data['child_list'])
+                            balance_total_variation = balance_period - balance_last_period
+
+                            #Update dictionary
+                            data.update({
+                                         'balance_total_period': balance_period,
+                                         'balance_total_last_period': balance_last_period,
+                                         'balance_total_variation': balance_period - balance_last_period,
+                                         'balance_total_fiscal_year':base_account_fiscal_year,
+                                         'balance_total_percentage_period': base_account_last_period != 0 and (100 * balance_last_period / base_account_last_period) or 0,
+                                         'balance_total_percentage_last_period': base_account_period != 0 and (100 * balance_period / base_account_period) or 0,
+                                         'balance_total_percentage_variation': balance_last_period != 0 and (100 * balance_total_variation / balance_last_period) or 0,
+                                         'balance_total_percentage_fiscal_year': base_account_fiscal_year != 0 and (100 * balance_fiscal_year / base_account_fiscal_year) or 0,
+                                        })
+                
+                #For this case, search id account in dictionary results and update dictionary. 
+                #Categories id can't be in dictionary result
+                elif structure['display_detail'] == 'detail_with_hierarchy':
+                    for data in final_list:
+                        if 'id' in data.keys():
+                            if data['is_parent'] == False and \
+                                (data['id'] in result_dict_period.keys() and data['id'] in result_dict_last_period.keys() and data['id'] in result_dict_fiscal_year.keys()):
+                                
+                                balance_total_period = result_dict_period[data['id']]['balance']
+                                balance_total_last_period = result_dict_last_period[data['id']]['balance']
+                                balance_fiscal_year = result_dict_fiscal_year[data['id']]['balance']
+                                balance_total_variation = balance_total_period - balance_total_last_period
+                                
+                                data.update({
+                                             'balance_total_period': balance_total_period,
+                                             'balance_total_last_period': balance_total_last_period,
+                                             'balance_total_fiscal_year': balance_fiscal_year,
+                                             'balance_total_variation': balance_total_variation,
+                                             'balance_total_percentage_period': base_account_last_period != 0 and (100 * balance_last_period / base_account_last_period) or 0,
+                                             'balance_total_percentage_last_period': base_account_period != 0 and (100 * balance_period / base_account_period) or 0,
+                                             'balance_total_percentage_variation': balance_total_last_period != 0 and (100 * balance_total_variation / balance_total_last_period) or 0,
+                                             'balance_total_percentage_fiscal_year': base_account_fiscal_year != 0 and (100 * balance_fiscal_year / base_account_fiscal_year) or 0,
+                                                                  
+                                             })
+
+        return final_list
+    
+    def get_data_accounts(self, cr, uid, base_account, fiscal_year, filter_type, period, last_period, structure={}, final_list=[]):
+        result_dict = {}
+        final_data_parent = {'child_list': []} #Define empty list, avoid problem when list is empty and key isn't created
+        final_data = {}
+        list_ids = []
+        child_list = []
+        
         library_obj = self.pool.get('account.webkit.report.library')
         
-        account_chart = self.get_chart_account_id(data)   
-        company_id = account_chart.company_id.id
-        category_account_ids = library_obj.get_category_accounts(cr, uid, company_id)
-        period = self.get_start_period(data)
+        #1. Extract children. It's a list of dictionaries.
+        child_list = structure['account_child']
         
+        #Extract base_account selected and add id into list_ids to compute data.
+        base_account_id = base_account[0].id
+        list_ids.append(base_account_id)
+        
+        '''
+            Display_detail = no_detail = special case
+        '''
+        #no_detail: Iterate in the list and compute result in one line.
+        if structure['display_detail'] == 'no_detail':
+            final_data_parent['name'] = structure['name']
+            final_data_parent['code'] = '' 
+            final_data_parent['is_parent'] = False
+            final_data_parent['level'] = 0
+            final_data_parent['display_detail'] = 'no_detail'   
+            
+            #In account type, iterate in child, because child is all accounts that
+            #match with account types selected.            
+         
+            for parent, child in child_list.iteritems():
+                #Add child id to compute data
+                final_data_parent['child_list'] = child
+                
+                for c in child:                   
+                    list_ids.append(c.id)
+                
+            if len(list_ids) > 0:                    
+                #In this report, call method three times, calculate balance for                    
+                #    period selected
+                #    last period
+                #    fiscal year
+                
+                #Period selected -> Change witch period take as start_period and end_period
+                result_dict_period = library_obj.get_account_balance(cr, uid, 
+                                                                        list_ids, 
+                                                                        ['balance'],     
+                                                                        start_period_id=period.id, 
+                                                                        end_period_id=period.id,
+                                                                        filter_type=filter_type)
+                
+                #Last period
+                result_dict_last_period = library_obj.get_account_balance(cr, uid, 
+                                                                        list_ids, 
+                                                                        ['balance'],     
+                                                                        start_period_id=last_period.id, 
+                                                                        end_period_id=last_period.id,
+                                                                        filter_type=filter_type)
+                
+                #Fiscal year
+                result_dict_fiscal_year = library_obj.get_account_balance(cr, uid, 
+                                                                        list_ids, 
+                                                                        ['balance'],     
+                                                                        end_period_id=period.id, 
+                                                                        fiscal_year_id=fiscal_year.id, 
+                                                                        filter_type=filter_type)
+                
+                #Compute all result in one line
+                #Balance for all accounts (compare with base_account_selected)
+                balance_period = self.compute_data(cr, uid, result_dict_period, final_data_parent['child_list'])
+                balance_last_period = self.compute_data(cr, uid, result_dict_last_period, final_data_parent['child_list'])
+                balance_fiscal_year = self.compute_data(cr, uid, result_dict_fiscal_year, final_data_parent['child_list'])
+                balance_total_variation = balance_period - balance_last_period
+                
+                ##Extract results for base_account selected in wizard.
+                base_account_last_period = result_dict_last_period[base_account_id]['balance']
+                base_account_period = result_dict_period[base_account_id]['balance']
+                base_account_total_variation = base_account_period - balance_last_period
+                base_account_fiscal_year = result_dict_fiscal_year[base_account_id]['balance']                    
+                base_account_percentage_period = 100
+                base_account_percentage_last_period = 100
+                base_account_percentage_variation = base_account_last_period != 0 and (100 * base_account_total_variation / base_account_last_period) or 0
+                base_account_percentage_fiscalyear = 100 
+                
+                #Update dictionary
+                final_data_parent.update({
+                                         'balance_total_period': balance_period,
+                                         'balance_total_last_period': balance_last_period,
+                                         'balance_total_variation': balance_period - balance_last_period,
+                                         'balance_total_fiscal_year':base_account_fiscal_year,
+                                         'balance_total_percentage_period': base_account_last_period != 0 and (100 * balance_last_period / base_account_last_period) or 0,
+                                         'balance_total_percentage_last_period': base_account_period != 0 and (100 * balance_period / base_account_period) or 0,
+                                         'balance_total_percentage_variation': balance_last_period != 0 and (100 * balance_total_variation / balance_last_period) or 0,
+                                         'balance_total_percentage_fiscal_year': base_account_fiscal_year != 0 and (100 * balance_fiscal_year / base_account_fiscal_year) or 0,
+                                        })
+                
+                #Update the dictionary with final results.
+                final_list.append(copy(final_data_parent))
+                       
+            else:
+                final_data_parent.update({
+                                             'balance_total_period': 0.0,
+                                             'balance_total_last_period': 0.0,
+                                             'balance_total_variation': 0.0,
+                                             'balance_total_fiscal_year':0.0,
+                                             'balance_total_percentage_period': 0.0,
+                                             'balance_total_percentage_last_period': 0.0,
+                                             'balance_total_percentage_variation': 0.0,
+                                             'balance_total_percentage_fiscal_year': 0.0,
+                                            })
+      
+                #Update the dictionary with final results.
+                final_list.append(copy(final_data_parent))  
+                
+        else:   
+            '''
+                Optimization process: Call get_account_balance the least possible.
+            '''      
+            if child_list:   
+                for parent, child in child_list.iteritems():
+                    final_data_parent['id'] = parent.id
+                    final_data_parent['name'] = parent.name
+                    final_data_parent['code'] = parent.code
+                    final_data_parent['is_parent'] = True #Distinct child from parent.
+                    final_data_parent['level'] = 0
+                    
+                    if child != []:
+                        final_data_parent['child_list'] = child
+                    else:
+                        final_data_parent['child_list'] = []
+                    
+                    final_data_parent['initial_balance'] = 0.0
+                    final_data_parent['debit'] = 0.0
+                    final_data_parent['credit'] = 0.0
+                    final_data_parent['balance'] = 0.0
+                    
+                    final_list.append(copy(final_data_parent)) 
+                    
+                    #For detail_flat, append parent.id, that is id for account selected in list.
+                    if structure['display_detail'] == 'detail_flat':                   
+                        list_ids.append(parent.id)
+                        
+                    #Build list of data child.
+                    if structure['display_detail'] == 'detail_with_hierarchy':
+                        for c in child:
+                            list_ids.append(c.id) #Add child.id
+                            
+                            if c.id != parent.id: #Avoid duplicate accounts.
+                                final_data['id'] = c.id
+                                final_data['level'] = c.level
+                                if 'child' in final_data:
+                                   final_data['child'] = c.child
+                                final_data['name'] = c.name
+                                final_data['code'] = c.code
+                                final_data['is_parent'] = False
+                                
+                                final_list.append(copy(final_data))
+                        
+                        #if parent.id don't exist in list, add it
+                        if parent.id not in list_ids:
+                            #Add parent.id 
+                            list_ids.append(parent.id)
+                            
+                if len(list_ids) > 0:
+                    #In this report, call method three times, calculate balance for                    
+                    #    period selected
+                    #    last period
+                    #    fiscal year
+                    
+                    #Period selected -> Change witch period take as start_period and end_period
+                    result_dict_period = library_obj.get_account_balance(cr, uid, 
+                                                                            list_ids, 
+                                                                            ['balance'],     
+                                                                            start_period_id=period.id, 
+                                                                            end_period_id=period.id,
+                                                                            filter_type=filter_type)
+                    
+                    #Last period
+                    result_dict_last_period = library_obj.get_account_balance(cr, uid, 
+                                                                            list_ids, 
+                                                                            ['balance'],     
+                                                                            start_period_id=last_period.id, 
+                                                                            end_period_id=last_period.id,
+                                                                            filter_type=filter_type)
+                    
+                    #Fiscal year
+                    result_dict_fiscal_year = library_obj.get_account_balance(cr, uid, 
+                                                                            list_ids, 
+                                                                            ['balance'],     
+                                                                            end_period_id=period.id, 
+                                                                            fiscal_year_id=fiscal_year.id, 
+                                                                            filter_type=filter_type)
+                
+                ##Extract results for base_account selected in wizard.
+                base_account_last_period = result_dict_last_period[base_account_id]['balance']
+                base_account_period = result_dict_period[base_account_id]['balance']
+                base_account_total_variation = base_account_period - base_account_last_period
+                base_account_fiscal_year = result_dict_fiscal_year[base_account_id]['balance']                    
+                base_account_percentage_period = 100
+                base_account_percentage_last_period = 100
+                base_account_percentage_variation = base_account_last_period != 0 and (100 * base_account_total_variation / base_account_last_period) or 0
+                base_account_percentage_fiscalyear = 100
+                    
+                #Iterate again the list for improve performance. Compute results.
+                #In this case, accounts in list and child are in final_list, isn't necesary check wich type of display is.
+                #Check only if id is in result_dict keys.
+                for data in final_list:
+                    if 'id' in data.keys():
+                        if (data['id'] in result_dict_period.keys() and data['id'] in result_dict_last_period.keys() \
+                              and data['id'] in result_dict_fiscal_year.keys()):
+                        
+                            balance_total_period = result_dict_period[data['id']]['balance']
+                            balance_total_last_period = result_dict_last_period[data['id']]['balance']
+                            balance_fiscal_year = result_dict_fiscal_year[data['id']]['balance']
+                            balance_total_variation = balance_total_period - balance_total_last_period
+                            
+                            data.update({
+                                         'balance_total_period': balance_total_period,
+                                         'balance_total_last_period': balance_total_last_period,
+                                         'balance_total_fiscal_year': balance_fiscal_year,
+                                         'balance_total_variation': balance_total_variation,
+                                         'balance_total_percentage_period': base_account_last_period != 0 and (100 * balance_last_period / base_account_last_period) or 0,
+                                         'balance_total_percentage_last_period': base_account_period != 0 and (100 * balance_period / base_account_period) or 0,
+                                         'balance_total_percentage_variation': balance_total_last_period != 0 and (100 * balance_total_variation / balance_total_last_period) or 0,
+                                         'balance_total_percentage_fiscal_year': base_account_fiscal_year != 0 and (100 * balance_fiscal_year / base_account_fiscal_year) or 0,
+                                                              
+                                         })
+
+        return final_list    
+
+    def get_total_result(self, cr, uid, main_structure, data, final_list=[]):
+        
+        account_period_obj = self.pool.get('account.period')
+        
+        period = self.get_start_period(data)
         last_period = account_period_obj.get_last_period(cr, uid, period)
         fiscal_year = self.get_fiscalyear(data)
         filter_type = self.get_filter(data)
         
-        #build account_ids list
-        income_account_ids = library_obj.get_account_child_ids(cr, uid, category_account_ids['income'])
-        expense_account_ids = library_obj.get_account_child_ids(cr, uid, category_account_ids['expense'])
+        #Get base_account to compare
+        base_account = self.get_base_account_compare(data)
         
-        #build accounts list
-        income_accounts = account_account_obj.browse(cr, uid, income_account_ids)
-        expense_accounts = account_account_obj.browse(cr, uid, expense_account_ids)
+        #################################################################################
         
-        #build balances
-        income_period_balances =        library_obj.get_account_balance(cr, uid, income_account_ids,  ['balance'], start_period_id=period.id, end_period_id=period.id,filter_type=filter_type)
-        expense_period_balances =       library_obj.get_account_balance(cr, uid, expense_account_ids, ['balance'], start_period_id=period.id, end_period_id=period.id,filter_type=filter_type)
-        income_last_period_balances =   library_obj.get_account_balance(cr, uid, income_account_ids,  ['balance'], start_period_id=last_period.id, end_period_id=last_period.id,filter_type=filter_type)
-        expense_last_period_balances =  library_obj.get_account_balance(cr, uid, expense_account_ids, ['balance'], start_period_id=last_period.id, end_period_id=last_period.id,filter_type=filter_type)
-        income_fiscal_year_balances =   library_obj.get_account_balance(cr, uid, income_account_ids,  ['balance'], end_period_id=period.id, fiscal_year_id=fiscal_year.id,filter_type=filter_type)
-        expense_fiscal_year_balances =  library_obj.get_account_balance(cr, uid, expense_account_ids, ['balance'], end_period_id=period.id, fiscal_year_id=fiscal_year.id, filter_type=filter_type)
-        
-        #build total balances
-        total_income_balances = {
-            'period':       income_period_balances[category_account_ids['income'].id]['balance'],
-            'last_period':  income_last_period_balances[category_account_ids['income'].id]['balance'],
-            'fiscal_year':  income_fiscal_year_balances[category_account_ids['income'].id]['balance'],
-        }
-        total_expense_balances = {
-            'period':       expense_period_balances[category_account_ids['expense'].id]['balance'],
-            'last_period':  expense_last_period_balances[category_account_ids['expense'].id]['balance'],
-            'fiscal_year':  expense_fiscal_year_balances[category_account_ids['expense'].id]['balance'],
-        }
+        '''
+            In the dictionary (main_structure['account_type_child'] or main_structure['account_child'])
+            the key is the account or type account and content is a list of child's account or 
+            all the accounts that match with type account in the list.
+        '''
             
-        return {
-            'income_accounts':              income_accounts,
-            'expense_accounts':             expense_accounts,
-            'income_account_ids':           income_account_ids,
-            'expense_account_ids':          expense_account_ids,
-            'total_income_balances':        total_income_balances,
-            'total_expense_balances':       total_expense_balances,
-            'income_period_balances':       income_period_balances,
-            'expense_period_balances':      expense_period_balances,
-            'income_last_period_balances':  income_last_period_balances,
-            'expense_last_period_balances': expense_last_period_balances,
-            'income_fiscal_year_balances':  income_fiscal_year_balances,
-            'expense_fiscal_year_balances': expense_fiscal_year_balances,
-        }
+        #The main account.financial.report (parent view) is always a dictionary.
+        #If the instance is a dictionary and doesn't has a parent_id is the main structure
+        #Child of main structure is a list.
         
+        #Clean list, avoid problem that repeat structure (print twice)
+        if final_list != []:
+            final_list = []
+        
+        if isinstance(main_structure, list) == True:         
+            #TODO: Implement account_report (Valor en informe)
+            for structure in main_structure:
+                if structure['type'] == 'account_type':
+                    final_list = self.get_data_account_type(cr, uid, base_account, fiscal_year, filter_type, period, last_period, structure, final_list)
+                    
+                elif structure['type'] == 'accounts':
+                    final_list = self.get_data_accounts(cr, uid, base_account, fiscal_year, filter_type,  period, last_period, structure, final_list)
+      
+        #Call the method only with a dictionary list.         
+        if type(main_structure) is types.DictType:
+            self.get_total_result(cr, uid, main_structure['child'], data, final_list)
+        
+        return final_list              
+    
+    #Call all the methods that extract data, and build final dictionary with all the result.
+    def get_data(self, cr, uid, data):
+        
+        #1. Extract the account_financial_report.
+        account_financial_report = self.get_account_base_report(data)
+        
+        #2. Call method that extract the account_financial_report
+        main_structure = self.pool.get('account.financial.report').get_structure_account_financial_report(cr, uid, account_financial_report.id)
+        
+        #3. Return a dictionary with all result. 
+        final_data = self.get_total_result(cr, uid, main_structure,data)
+
+        return  final_data       
 
 report_sxw.report_sxw(
     'report.l10n_cr_profit_statement_report',

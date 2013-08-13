@@ -13,26 +13,33 @@
                         <separator string="Conciliation Bank" colspan="4"/>
                         <label nolabel="1" colspan="4" string="This report allows you to print or generate a pdf of your conciliation bank with details of all your payable/receivable account"/>
                     </xpath>                    
-
-                    <field name="account_ids" position="replace">
-                        <group>
-                            <field name="account_ids" required="True" />
-                        </group>
+        
+                    <group string="Account Financial Report" position="attributes">                   
+                        <attribute name="attrs">{'invisible': True}</attribute>
+                    </group>
+                    
+                    <field name="filter" position="attributes">
+                        <attribute name="attrs">{'required': True}</attribute>
                     </field>
+                                 
+                   <group string="Accounts" position="replace">
+                       <group string="Accounts">
+                            <field name="account_ids" colspan="2" required="True" readonly="False"/>
+                       </group>
+                   </group>                   
                     
                     <field name="amount_currency" position="attributes">
                         <attribute name="invisible">True</attribute>
                     </field>
-                                        
-                    <page string="Accounts" position="inside">
-                        <group>
-                            <field name="bank_balance" required="True"/>
-                        </group>
-                    </page>
+                    
+                    <group string="Accounts" position="inside">                                        
+                        <field name="bank_balance" required="True"/>
+                    </group>
                     
                     <field name="chart_account_id" position="attributes">
                         <attribute name="attrs">{'required': True}</attribute>
                     </field>
+                    
                     <field name="target_move" position="attributes">
                         <attribute name="attrs">{'required': True}</attribute>
                     </field>
@@ -51,8 +58,11 @@
                     <field name="date_to" position="attributes">
                         <attribute name="attrs">{'required': [('filter', '=', 'filter_date')]}</attribute>
                     </field>
-                    <page string="Journals" position="replace">
-                    </page>
+                   
+                    <group string="Journals" position="attributes">
+                        <attribute name="attrs">{'invisible': True}</attribute>
+                    </group>
+                    
                 </data>
             </field>
         </record>

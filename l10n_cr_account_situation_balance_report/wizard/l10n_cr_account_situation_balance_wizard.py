@@ -20,13 +20,17 @@
 #
 ##############################################################################
 
-from osv import osv
+from osv import fields, osv
 
 class situationBalancereportWizard(osv.osv_memory):
     
     _inherit = "account.report.wiz"
     _name = "situation.balance.report.wiz"
     _description = "Situation Balance Report Wizard"
+
+    _columns = {
+        'account_base_report':fields.many2one('account.financial.report', string="Account Base Report",domain=[('parent_id','=', False), ('account_type.code','=','SITBAL')]),
+    }
 
     _defaults = {
             'filter': 'filter_period',

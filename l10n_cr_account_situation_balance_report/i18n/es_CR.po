@@ -6,19 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-07 19:29+0000\n"
-"PO-Revision-Date: 2013-06-07 19:29+0000\n"
+"POT-Creation-Date: 2013-08-12 22:12+0000\n"
+"PO-Revision-Date: 2013-08-12 22:12+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:152
-msgid "LIABILITY TOTAL"
-msgstr "TOTAL PASIVO"
 
 #. module: l10n_cr_account_situation_balance_report
 #: field:situation.balance.report.wiz,amount_currency:0
@@ -31,24 +26,19 @@ msgid "Action Situation Balance Report"
 msgstr "Generar Reporte Balance de Situación"
 
 #. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:34
+#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:32
 msgid "Per. vs. FY Open."
 msgstr "Per. vs. AF abierto."
 
 #. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:193
-msgid "EQUITY TOTAL"
-msgstr "TOTAL PATRIMONIO"
+#: help:situation.balance.report.wiz,amount_currency:0
+msgid "It adds the currency column on report if the currency differs from the company currency."
+msgstr "Añade una columna de moneda al reporte si la moneda es diferente de la moneda de la compañía"
 
 #. module: l10n_cr_account_situation_balance_report
 #: view:situation.balance.report.wiz:0
 msgid "Situation Balance Report"
 msgstr "Reporte Balance de Situación"
-
-#. module: l10n_cr_account_situation_balance_report
-#: field:situation.balance.report.wiz,period_from:0
-msgid "Start Period"
-msgstr "Período inicial"
 
 #. module: l10n_cr_account_situation_balance_report
 #: view:situation.balance.report.wiz:0
@@ -66,12 +56,12 @@ msgid "If selected, will display a historical unreconciled lines, taking into ac
 msgstr "Si se selecciona se despliega las líneas sin conciliar históricas dentro de la cuenta al final del período o fecha seleccionado"
 
 #. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:31
+#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:29
 msgid "Account<br />Name"
 msgstr "Account<br />Name"
 
 #. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:33
+#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:31
 msgid "Selected period"
 msgstr "Período seleccionado"
 
@@ -81,24 +71,24 @@ msgid "Company"
 msgstr "Compañía"
 
 #. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:21
+#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:19
 msgid "Situation Balance at "
 msgstr "Balance de situación del período "
 
 #. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:32
-msgid "Fiscal Year Opening"
-msgstr "Año fiscal abierto"
+#: help:situation.balance.report.wiz,special_period:0
+msgid "Include special period"
+msgstr "Incluir período especial"
 
 #. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:34
+#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:32
 msgid "Variation"
 msgstr "Variación"
 
 #. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:224
-msgid "LIABITLITY + EQUITY + PROFIT TOTAL"
-msgstr "TOTAL PASIVO + PATRIMONIO + UTILIDAD"
+#: view:situation.balance.report.wiz:0
+msgid "{'invisible': True, 'required': False}"
+msgstr "{'invisible': True, 'required': False}"
 
 #. module: l10n_cr_account_situation_balance_report
 #: selection:situation.balance.report.wiz,filter:0
@@ -111,7 +101,7 @@ msgid "Chart of Account"
 msgstr "Catálogo de cuentas"
 
 #. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:35
+#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:33
 msgid "Var."
 msgstr "Var."
 
@@ -137,19 +127,24 @@ msgid "End Date"
 msgstr "Fecha Final"
 
 #. module: l10n_cr_account_situation_balance_report
-#: view:situation.balance.report.wiz:0
-msgid "Dates"
-msgstr "Fechas"
+#: field:situation.balance.report.wiz,period_from:0
+msgid "Start Period"
+msgstr "Período inicial"
 
 #. module: l10n_cr_account_situation_balance_report
-#: field:situation.balance.report.wiz,special_period:0
-msgid "Special period"
-msgstr "Período especial"
+#: view:situation.balance.report.wiz:0
+msgid "{'invisible': True}"
+msgstr "{'invisible': True}"
 
 #. module: l10n_cr_account_situation_balance_report
 #: selection:situation.balance.report.wiz,target_move:0
 msgid "All Posted Entries"
 msgstr "Todos los apuntes publicados"
+
+#. module: l10n_cr_account_situation_balance_report
+#: view:situation.balance.report.wiz:0
+msgid "{'required': True}"
+msgstr "{'required': True}"
 
 #. module: l10n_cr_account_situation_balance_report
 #: help:situation.balance.report.wiz,fiscalyear_id:0
@@ -167,9 +162,9 @@ msgid "Fiscal Year"
 msgstr "Año fiscal"
 
 #. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:208
-msgid "LIABITLITY + EQUITY TOTAL"
-msgstr "TOTAL PASIVO + PATRIMONIO"
+#: field:situation.balance.report.wiz,historic_strict:0
+msgid "Strict History"
+msgstr "Histórico Estricto"
 
 #. module: l10n_cr_account_situation_balance_report
 #: selection:situation.balance.report.wiz,filter:0
@@ -177,7 +172,7 @@ msgid "No Filters"
 msgstr "Sin filtros"
 
 #. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:251
+#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:82
 msgid "Authorized by: "
 msgstr "Autorizado por: "
 
@@ -187,20 +182,19 @@ msgid "Advanced options"
 msgstr "Opciones avanzadas"
 
 #. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:111
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:232
-msgid "ASSET TOTAL"
-msgstr "TOTAL ACTIVO"
+#: field:situation.balance.report.wiz,special_period:0
+msgid "Special period"
+msgstr "Período especial"
 
 #. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:216
-msgid "PROFIT TOTAL"
-msgstr "TOTAL UTILIDAD"
+#: view:situation.balance.report.wiz:0
+msgid "True"
+msgstr "True"
 
 #. module: l10n_cr_account_situation_balance_report
-#: help:situation.balance.report.wiz,amount_currency:0
-msgid "It adds the currency column on report if the currency differs from the company currency."
-msgstr "Añade una columna de moneda al reporte si la moneda es diferente de la moneda de la compañía"
+#: field:situation.balance.report.wiz,account_base_report:0
+msgid "Account Base Report"
+msgstr "Informe Financiero Base"
 
 #. module: l10n_cr_account_situation_balance_report
 #: view:situation.balance.report.wiz:0
@@ -208,9 +202,9 @@ msgid "This report allows you to print or generate a pdf of your income statemen
 msgstr "Este informe le permite imprimir o generar un pdf de su cuenta de resultados"
 
 #. module: l10n_cr_account_situation_balance_report
-#: help:situation.balance.report.wiz,special_period:0
-msgid "Include special period"
-msgstr "Incluir período especial"
+#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:30
+msgid "Fiscal Year Opening"
+msgstr "Año fiscal abierto"
 
 #. module: l10n_cr_account_situation_balance_report
 #: view:situation.balance.report.wiz:0
@@ -224,7 +218,7 @@ msgid "Periods"
 msgstr "Períodos"
 
 #. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:30
+#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:28
 msgid "Account<br />Code"
 msgstr "Account<br />Code"
 
@@ -242,9 +236,4 @@ msgstr "Filtrado por"
 #: selection:situation.balance.report.wiz,target_move:0
 msgid "All Entries"
 msgstr "Todos los movimientos"
-
-#. module: l10n_cr_account_situation_balance_report
-#: field:situation.balance.report.wiz,historic_strict:0
-msgid "Strict History"
-msgstr "Histórico Estricto"
 

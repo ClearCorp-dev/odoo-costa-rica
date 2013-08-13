@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-05 21:12+0000\n"
-"PO-Revision-Date: 2013-06-05 21:12+0000\n"
+"POT-Creation-Date: 2013-08-12 14:35+0000\n"
+"PO-Revision-Date: 2013-08-12 14:35+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,12 +16,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: selection:conciliation.bank.report.wiz,filter:0
-msgid "No Filters"
-msgstr "Sin filtros"
+#: code:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.py:198
+#, python-format
+msgid "Reconciled account does not exist. Check your configuration!"
+msgstr "Cuenta de conciliación no existe. Revise su configuración!"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:86
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:85
 msgid "- Expenditures to register"
 msgstr "- Egresos por registrar"
 
@@ -31,17 +32,23 @@ msgid "It adds the currency column on report if the currency differs from the co
 msgstr "Añade una columna de moneda en el reporte si la moneda es diferente de la moneda de la compañía."
 
 #. module: l10n_cr_account_conciliation_bank_report
+#: code:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.py:201
+#, python-format
+msgid "Transit account does not exist. Check your configuration!"
+msgstr "Cuenta de tránsito de bancos no existe. Revise su configuración!"
+
+#. module: l10n_cr_account_conciliation_bank_report
 #: field:conciliation.bank.report.wiz,period_from:0
 msgid "Start Period"
 msgstr "Período Inicial"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:33
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:32
 msgid "Periods Filter"
 msgstr "Filtro por períodos"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:134
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:133
 msgid "Period"
 msgstr "Período"
 
@@ -51,23 +58,40 @@ msgid "This report allows you to print or generate a pdf of your conciliation ba
 msgstr "Este informe le permite imprimir o generar un pdf de su conciliación bancaria con los detalles de todas sus cuentas por pagar / por cobrar"
 
 #. module: l10n_cr_account_conciliation_bank_report
+#: model:ir.model,name:l10n_cr_account_conciliation_bank_report.model_account_account_type
+msgid "Account Type"
+msgstr "Tipo de cuenta"
+
+#. module: l10n_cr_account_conciliation_bank_report
 #: help:conciliation.bank.report.wiz,historic_strict:0
 msgid "If selected, will display a historical unreconciled lines, taking into account the end of the period or date selected"
 msgstr "Si se selecciona, se mostrarán las líneas sin conciliar históricas, teniendo en cuenta el final del período o la fecha seleccionada"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:74
+#: view:conciliation.bank.report.wiz:0
+msgid "{'required':[('filter', '=', 'filter_period')]}"
+msgstr "{'required':[('filter', '=', 'filter_period')]}"
+
+#. module: l10n_cr_account_conciliation_bank_report
+#: code:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.py:198
+#: code:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.py:201
+#, python-format
+msgid "Error !"
+msgstr "Error !"
+
+#. module: l10n_cr_account_conciliation_bank_report
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:73
 msgid "Ledger Balance"
 msgstr "Saldo en Libros"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: field:conciliation.bank.report.wiz,special_period:0
-msgid "Special period"
-msgstr "Período especial"
+#: field:account.account.type,include_profit_statement_report:0
+msgid "Include in Profit Statement Report"
+msgstr "Incluir en el Reporte de Estados de Resultados"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:122
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:184
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:121
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:183
 msgid "Incomes to register"
 msgstr "Ingresos por registrar"
 
@@ -82,7 +106,7 @@ msgid "With Currency"
 msgstr "Con moneda"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:155
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:154
 msgid "-- No partner --"
 msgstr "-- Sin empresa --"
 
@@ -94,12 +118,17 @@ msgid "Conciliation Bank Report"
 msgstr "Reporte de Conciliación Bancaria"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:92
+#: view:conciliation.bank.report.wiz:0
+msgid "{'invisible': True, 'required': False}"
+msgstr "{'invisible': True, 'required': False}"
+
+#. module: l10n_cr_account_conciliation_bank_report
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:91
 msgid "Ledger reconciled Total"
 msgstr "Total conciliado en Libros"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:133
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:132
 #: selection:conciliation.bank.report.wiz,filter:0
 msgid "Date"
 msgstr "Fecha"
@@ -115,8 +144,8 @@ msgid "Chart of Account"
 msgstr "Catálogo de cuentas"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:120
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:182
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:119
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:181
 msgid "Debits to reconcile"
 msgstr "Débitos por conciliar"
 
@@ -127,7 +156,7 @@ msgid "Journals"
 msgstr "Diarios"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:47
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:46
 #: field:conciliation.bank.report.wiz,target_move:0
 msgid "Target Moves"
 msgstr "Movimientos destino"
@@ -138,7 +167,7 @@ msgid "Select Charts of Accounts"
 msgstr "Seleccione el catálogo contable"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:39
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:38
 msgid "To:"
 msgstr "Hasta:"
 
@@ -148,7 +177,7 @@ msgid "End Date"
 msgstr "Fecha final"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:136
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:135
 msgid "Account"
 msgstr "Cuenta"
 
@@ -159,10 +188,15 @@ msgid "Conciliation Bank"
 msgstr "Conciliación Bancaria"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:118
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:180
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:117
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:179
 msgid "Credits to reconcile"
 msgstr "Créditos por conciliar"
+
+#. module: l10n_cr_account_conciliation_bank_report
+#: view:conciliation.bank.report.wiz:0
+msgid "{'invisible': True}"
+msgstr "{'invisible': True}"
 
 #. module: l10n_cr_account_conciliation_bank_report
 #: selection:conciliation.bank.report.wiz,target_move:0
@@ -170,10 +204,19 @@ msgid "All Posted Entries"
 msgstr "Todos los apuntes publicados"
 
 #. module: l10n_cr_account_conciliation_bank_report
+#: view:conciliation.bank.report.wiz:0
+msgid "{'required': [('filter', '=', 'filter_date')]}"
+msgstr "{'required': [('filter', '=', 'filter_date')]}"
+
+#. module: l10n_cr_account_conciliation_bank_report
 #: field:conciliation.bank.report.wiz,account_ids:0
-#: help:conciliation.bank.report.wiz,account_ids:0
 msgid "Bank Account"
 msgstr "Cuenta bancaria"
+
+#. module: l10n_cr_account_conciliation_bank_report
+#: view:conciliation.bank.report.wiz:0
+msgid "{'required': True}"
+msgstr "{'required': True}"
 
 #. module: l10n_cr_account_conciliation_bank_report
 #: help:conciliation.bank.report.wiz,fiscalyear_id:0
@@ -186,9 +229,14 @@ msgid "End Period"
 msgstr "Período final"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:140
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:139
 msgid "Amount"
 msgstr "Monto"
+
+#. module: l10n_cr_account_conciliation_bank_report
+#: view:conciliation.bank.report.wiz:0
+msgid "True"
+msgstr "True"
 
 #. module: l10n_cr_account_conciliation_bank_report
 #: field:conciliation.bank.report.wiz,historic_strict:0
@@ -196,21 +244,15 @@ msgid "Strict History"
 msgstr "Histórico estricto"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:76
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:75
 #: field:conciliation.bank.report.wiz,bank_balance:0
 msgid "Bank Balance"
 msgstr "Balance en Bancos"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:216
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:215
 msgid "Authorized by: "
 msgstr "Autorizado por: "
-
-#. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:124
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:186
-msgid "Expenditures to register"
-msgstr "Egresos por registrar"
 
 #. module: l10n_cr_account_conciliation_bank_report
 #: model:ir.model,name:l10n_cr_account_conciliation_bank_report.model_conciliation_bank_report_wiz
@@ -218,48 +260,84 @@ msgid "Conciliation Bank Report Wizard"
 msgstr "Asistente del repote de Conciliación Bancaria"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:139
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:138
 msgid "Label"
 msgstr "Etiqueta"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:62
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:61
 msgid "Balance according Bank"
 msgstr "Saldo según Banco"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:94
-msgid "Bank reconciled Total"
-msgstr "Total conciliado en Banco"
+#: help:account.account.type,include_profit_statement_report:0
+msgid "If it's checked, the account that have this type is include in Profit Statement Report Wizard as Base Account to compare."
+msgstr "Si está marcado, la cuenta que tenga este tipo es incluída en el asistente del Reporte de Estado de REsultados como cuenta base para comparar."
+
+#. module: l10n_cr_account_conciliation_bank_report
+#: view:account.account.type:0
+msgid "Configuration for Conciliation Bank Report"
+msgstr "Configuración para el Reporte de Conciliación Bancaria"
 
 #. module: l10n_cr_account_conciliation_bank_report
 #: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:27
-msgid "Chart of Accounts: "
-msgstr "Catálogo contable: "
-
-#. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:138
-msgid "Reference"
-msgstr "Referencia"
-
-#. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:82
-msgid "+ Credits to reconcile"
-msgstr "+ Créditos por conciliar"
-
-#. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:88
-msgid "- Debits to reconcile"
-msgstr "- Débitos por conciliar"
-
-#. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:28
 #: field:conciliation.bank.report.wiz,fiscalyear_id:0
 msgid "Fiscal Year"
 msgstr "Año fiscal"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:31
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:93
+msgid "Bank reconciled Total"
+msgstr "Total conciliado en Banco"
+
+#. module: l10n_cr_account_conciliation_bank_report
+#: help:account.account.type,include_conciliation_report:0
+msgid "If it's checked, the account that have this type is include in Conciliation Bank Report Wizard"
+msgstr "Si está chequeado, la cuenta que tenga este tipo es incluído en el asistente para el Reporte de Conciliación Bancaria"
+
+#. module: l10n_cr_account_conciliation_bank_report
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:123
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:185
+msgid "Expenditures to register"
+msgstr "Egresos por registrar"
+
+#. module: l10n_cr_account_conciliation_bank_report
+#: field:conciliation.bank.report.wiz,special_period:0
+msgid "Special period"
+msgstr "Período especial"
+
+#. module: l10n_cr_account_conciliation_bank_report
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:137
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: l10n_cr_account_conciliation_bank_report
+#: field:account.account.type,include_conciliation_report:0
+msgid "Include in conciliation bank report"
+msgstr "Incluir en el reporte de conciliación bancaria"
+
+#. module: l10n_cr_account_conciliation_bank_report
+#: field:conciliation.bank.report.wiz,filter:0
+msgid "Filter by"
+msgstr "Filtrado por"
+
+#. module: l10n_cr_account_conciliation_bank_report
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:81
+msgid "+ Credits to reconcile"
+msgstr "+ Créditos por conciliar"
+
+#. module: l10n_cr_account_conciliation_bank_report
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:87
+msgid "- Debits to reconcile"
+msgstr "- Débitos por conciliar"
+
+#. module: l10n_cr_account_conciliation_bank_report
+#: field:conciliation.bank.report.wiz,account_base_report:0
+msgid "Account Base Report"
+msgstr "Cuenta Base de comparación"
+
+#. module: l10n_cr_account_conciliation_bank_report
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:30
 msgid "Dates Filter"
 msgstr "Filtro por Fechas"
 
@@ -269,7 +347,7 @@ msgid "Include special period"
 msgstr "Incluir períodos especiales"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:80
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:79
 msgid "+ Incomes to register"
 msgstr "+ Ingresos por registrar"
 
@@ -279,12 +357,12 @@ msgid "Periods"
 msgstr "Períodos"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:35
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:34
 msgid "No filters"
 msgstr "Sin filtros"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:137
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:136
 msgid "Partner"
 msgstr "Empresa"
 
@@ -294,20 +372,20 @@ msgid "Start Date"
 msgstr "Fecha inicial"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:180
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:182
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:184
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:186
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:179
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:181
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:183
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:185
 msgid "Total"
 msgstr "Total"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: field:conciliation.bank.report.wiz,filter:0
-msgid "Filter by"
-msgstr "Filtrado por"
+#: view:conciliation.bank.report.wiz:0
+msgid "Account Financial Report"
+msgstr "Reporte Financiero"
 
 #. module: l10n_cr_account_conciliation_bank_report
-#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:135
+#: report:addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako:134
 msgid "Journal"
 msgstr "Diario"
 
