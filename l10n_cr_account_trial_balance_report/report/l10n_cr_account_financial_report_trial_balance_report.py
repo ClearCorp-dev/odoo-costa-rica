@@ -45,33 +45,114 @@ class trialBalancereport(accountReportbase):
         one result for each type account selected in the list.
         @param child_list: Can be a list of ids (int) or a browse record list.
     '''
-    def compute_data(self, cr, uid, result_dict, child_list):
-        balance = credit = debit = initial_balance = 0.0 
-         
-        #Child list can be a list of int or browse_record list
-        for c in child_list:
-            if isinstance(c, orm.browse_record):
-                if c.id in result_dict.keys():
-                    debit += result_dict[c.id]['debit']
-                    credit += result_dict[c.id]['credit']
-                    initial_balance += result_dict[c.id]['balance']
+    def compute_data(self, cr, uid, 
+                                result_dict, 
+                                child_list, 
+                                filter_type='', 
+                                filter_data=None, 
+                                fiscalyear=None, 
+                                target_move='all', 
+                                unreconcile = False, 
+                                historic_strict= False, 
+                                special_period = False, 
+                                all_accounts = True,
+                                context=None):
         
-            elif isinstance(c, int):
-                if c in result_dict.keys():
-                    debit += result_dict[c]['debit']
-                    credit += result_dict[c]['credit']
-                    initial_balance += result_dict[c]['balance']
-
-        balance = initial_balance + debit - credit
+        balance = 0.0
+        credit = 0.0
+        debit = 0.0
+        initial_balance = 0.0 
+        res = {}
+        list_accounts = []
+        account_report_lib = self.pool.get('account.webkit.report.library')
         
-        return balance, initial_balance, debit, credit    
+        #Distinct how return the results if in 4 singles variables or in a dictionary, where key is account_id
+        #With all_accounts = False, return a dictionary with account_id as key and four values: Balance, credit, debit and initial_balance
+        if all_accounts:
+            #Child list can be a list of int or browse_record list
+            for c in child_list:                
+                if isinstance(c, orm.browse_record):
+                    list_accounts.append(c.id)
+                    account_id = c.id
+                    
+                elif isinstance(c, int):
+                     list_accounts.append(c)   
+                     account_id = c
+                
+                if account_id in result_dict.keys():
+                    initial_balance += result_dict[account_id]['balance']                    
+                    
+            #Call get_move_lines method to calculate debit and credit 
+            move_lines = account_report_lib.get_move_lines(cr, uid, 
+                                         account_ids = list_accounts, 
+                                         filter_type=filter_type, 
+                                         filter_data=filter_data, 
+                                         fiscalyear=fiscalyear, 
+                                         target_move=target_move, 
+                                         unreconcile=unreconcile, 
+                                         historic_strict=historic_strict, 
+                                         special_period=special_period, 
+                                         context=context)
+            
+            # Compute debit and credit amounts                                
+            for line in move_lines:
+                debit += line.debit
+                credit += line.credit
+                
+            balance += initial_balance + debit - credit
+                
+            return balance, debit, credit, initial_balance
+        
+        else:
+            for c in child_list:
+                balance = 0.0 
+                credit = 0.0 
+                debit = 0.0 
+                initial_balance = 0.0               
+                
+                if isinstance(c, orm.browse_record):
+                    account_id = c.id
+                    
+                elif isinstance(c, int):
+                     account_id = c                
+            
+                initial_balance = result_dict[account_id]['balance']
+                
+                move_lines = account_report_lib.get_move_lines(cr, uid, 
+                                         account_ids = [account_id], 
+                                         filter_type=filter_type, 
+                                         filter_data=filter_data, 
+                                         fiscalyear=fiscalyear, 
+                                         target_move=target_move, 
+                                         unreconcile=unreconcile, 
+                                         historic_strict=historic_strict, 
+                                         special_period=special_period, 
+                                         context=context)
+                
+                # Compute debit and credit amounts                                
+                for line in move_lines:
+                    debit += line.debit
+                    credit += line.credit
+                    
+                balance += initial_balance + debit - credit
+                
+                res[account_id] = {
+                                   'initial_balance': initial_balance,
+                                   'debit': debit,
+                                   'credit': credit,
+                                   'balance': balance, 
+                                   
+                                   }
+                
+            return res
     
     """ 
         Main methods to compute data. Split account.financial.report types in different
         methods to improve usabillity and maintenance. 
     """
+    
     #Method for account.financial.report account_type type. 
-    def get_data_account_type(self, cr, uid, fiscal_year, filter_type,  target_move, chart_account_id, start_date, end_date, start_period_id, end_period_id, structure={}, final_list=[]):
+    def get_data_account_type(self, cr, uid, filter_data, fiscal_year, filter_type,  target_move, chart_account_id, start_date, end_date, start_period_id, end_period_id, structure={}, final_list=[]):
         
         result_dict = {}
         final_data_parent = {'child_list': []} #Define empty list, avoid problem when list is empty and key isn't created
@@ -86,8 +167,7 @@ class trialBalancereport(accountReportbase):
         
         '''
             Display_detail = no_detail = special case
-        '''
-        
+        '''        
         #no_detail: Iterate in the list and compute result in one line.
         if structure['display_detail'] == 'no_detail':
             final_data_parent['name'] = structure['name']
@@ -101,34 +181,42 @@ class trialBalancereport(accountReportbase):
             for parent, child in child_list.iteritems():
                 #Add child id to compute data
                 for c in child:
-                    final_data_parent['child_list'] = child
                     list_ids.append(c.id)
                 
             if len(list_ids) > 0:
-                    #Compute the balance, debit and credit for child ids list.  
-                    #Try to reduce numbers of call to get_account_balance method.       
-                    result_dict = library_obj.get_account_balance(cr,uid, 
-                                                                        list_ids, 
-                                                                        ['balance', 'debit', 'credit'],     
-                                                                        initial_balance=True,                                                                                   
-                                                                        fiscal_year_id=fiscal_year.id,                                                                                
-                                                                        state = target_move,
-                                                                        start_date= start_date,
-                                                                        end_date=end_date,
-                                                                        start_period_id = start_period_id,
-                                                                        end_period_id = end_period_id,
-                                                                        chart_account_id=chart_account_id.id,
-                                                                        filter_type=filter_type)
-                    #Compute all result in one line.
-                    balance, initial_balance, debit, credit = self.compute_data(cr, uid, result_dict, final_data_parent['child_list'])
-                    final_data_parent.update({
-                                             'initial_balance':initial_balance,
-                                             'credit':credit,
-                                             'debit':debit,
-                                             'balance': balance,
-                                            })
-                    #Update the dictionary with final results.
-                    final_list.append(copy(final_data_parent))
+                #Compute the balance, debit and credit for child ids list.  
+                #Try to reduce numbers of call to get_account_balance method.       
+                result_dict = library_obj.get_account_balance(cr,uid, 
+                                                                    list_ids, 
+                                                                    ['balance'],     
+                                                                    initial_balance=True,                                                                                   
+                                                                    fiscal_year_id=fiscal_year.id,                                                                                
+                                                                    state = target_move,
+                                                                    start_date= start_date,
+                                                                    end_date=end_date,
+                                                                    start_period_id = start_period_id,
+                                                                    end_period_id = end_period_id,
+                                                                    chart_account_id=chart_account_id.id,
+                                                                    filter_type=filter_type)
+                
+                #Compute all result in one line.
+                #list_ids have all the accounts.
+                all_accounts = True
+                balance, debit, credit, initial_balance = self.compute_data(cr, uid, 
+                                                        result_dict, 
+                                                        list_ids, 
+                                                        filter_type=filter_type, 
+                                                        filter_data=filter_data, 
+                                                        fiscalyear=fiscal_year, 
+                                                        target_move=target_move,
+                                                        all_accounts=all_accounts)
+    
+                final_data_parent.update({
+                                            'initial_balance':initial_balance,
+                                            'credit':credit,
+                                            'debit':debit,
+                                            'balance': balance,
+                                          })
                     
             else:
                 final_data_parent.update({
@@ -137,8 +225,9 @@ class trialBalancereport(accountReportbase):
                                              'debit':0.0,
                                              'balance': 0.0,
                                             })
-                #Update the dictionary with final results.
-                final_list.append(copy(final_data_parent))                    
+                
+            #Update the dictionary with final results.
+            final_list.append(copy(final_data_parent))                    
             
         else:  
             '''
@@ -198,7 +287,7 @@ class trialBalancereport(accountReportbase):
                       #Compute the balance, debit and credit for child ids list.         
                       result_dict = library_obj.get_account_balance(cr, uid, 
                                                                         list_ids, 
-                                                                        ['balance', 'debit', 'credit'],     
+                                                                        ['balance'],     
                                                                         initial_balance=True,                                                                                   
                                                                         fiscal_year_id=fiscal_year.id,                                                                                
                                                                         state = target_move,
@@ -213,10 +302,18 @@ class trialBalancereport(accountReportbase):
                 if structure['display_detail'] == 'detail_flat':
                     #final_list has categories and child of this categories
                     #Compute results for each category 
+                    all_accounts = True
                     for data in final_list:          
                         if 'child_list' in data.keys():
-                            balance, initial_balance, debit, credit = self.compute_data(cr, uid, result_dict, data['child_list'])
-                            data.update({
+                           balance, debit, credit, initial_balance = self.compute_data(cr, uid, 
+                                                        result_dict, 
+                                                        list_ids, 
+                                                        filter_type=filter_type, 
+                                                        filter_data=filter_data, 
+                                                        fiscalyear=fiscal_year, 
+                                                        target_move=target_move,
+                                                        all_accounts=all_accounts)
+                           data.update({
                                          'initial_balance': initial_balance,
                                          'debit': debit,
                                          'credit': credit,
@@ -226,19 +323,31 @@ class trialBalancereport(accountReportbase):
                 #For this case, search id account in dictionary results and update dictionary. 
                 #Categories id can't be in dictionary result
                 elif structure['display_detail'] == 'detail_with_hierarchy':
+                    #list_ids have all the accounts.
+                    #Call once this method with all accounts
+                    
+                    #In this case, res is a dictionary.
+                    all_accounts = False
+                    res = self.compute_data(cr, uid, result_dict, 
+                                                        list_ids,
+                                                        filter_type=filter_type, 
+                                                        filter_data=filter_data, 
+                                                        fiscalyear=fiscal_year, 
+                                                        target_move=target_move,
+                                                        all_accounts=all_accounts)
+                    
                     for data in final_list:
-                        if data['is_parent'] == False and data['id'] in result_dict.keys():
+                        if data['is_parent'] == False and data['id'] in res.keys():
                             data.update({
-                                         'initial_balance': result_dict[data['id']]['balance'],
-                                         'debit':  result_dict[data['id']]['debit'],
-                                         'credit':  result_dict[data['id']]['credit'],
-                                         'balance': result_dict[data['id']]['balance'] + result_dict[data['id']]['debit'] - result_dict[data['id']]['credit'],
+                                         'initial_balance': res[data['id']]['initial_balance'],
+                                         'debit':  res[data['id']]['debit'],
+                                         'credit':  res[data['id']]['credit'],
+                                         'balance': res[data['id']]['balance'],
                                         })
 
         return final_list
 
-    def get_data_accounts(self, cr, uid, fiscal_year, filter_type,  target_move, chart_account_id, start_date, end_date, start_period_id, end_period_id, structure={}, final_list=[]):
-
+    def get_data_accounts(self, cr, uid, filter_data, fiscal_year, filter_type,  target_move, chart_account_id, start_date, end_date, start_period_id, end_period_id, structure={}, final_list=[]):
         result_dict = {}
         final_data_parent = {'child_list': []} #Define empty list, avoid problem when list is empty and key isn't created
         final_data = {}
@@ -262,14 +371,13 @@ class trialBalancereport(accountReportbase):
             #In accounts, iterate in parent, parent is 
             #accounts selected in list.
             for parent, child in child_list.iteritems():
-                final_data_parent['child_list'] = child
                 list_ids.append(parent.id)
                 
             if len(list_ids) > 0:
                 #Compute the balance, debit and credit for child ids list.         
                 result_dict = library_obj.get_account_balance(cr, uid, 
                                                                 list_ids, 
-                                                                ['balance', 'debit', 'credit'],     
+                                                                ['balance'],     
                                                                 initial_balance=True,                                                                                   
                                                                 fiscal_year_id=fiscal_year.id,                                                                                
                                                                 state = target_move,
@@ -279,17 +387,27 @@ class trialBalancereport(accountReportbase):
                                                                 end_period_id = end_period_id,
                                                                 chart_account_id=chart_account_id.id,
                                                                 filter_type=filter_type)
+                
+                
                 #Compute all result in one line.
-                balance, initial_balance, debit, credit = self.compute_data(cr, uid, result_dict, list_ids)
+                #list_ids have all the accounts.
+                all_accounts = True
+                balance, debit, credit, initial_balance = self.compute_data(cr, uid, 
+                                                            result_dict, 
+                                                            list_ids, 
+                                                            filter_type=filter_type, 
+                                                            filter_data=filter_data, 
+                                                            fiscalyear=fiscal_year, 
+                                                            target_move=target_move,
+                                                            all_accounts=all_accounts)
+                
                 final_data_parent.update({
-                                         'initial_balance':initial_balance,
-                                         'credit':credit,
-                                         'debit':debit,
-                                         'balance': balance,
-                                        })
-                #Update the dictionary with final results.
-                final_list.append(copy(final_data_parent))
-                    
+                                             'initial_balance':0.0,
+                                             'credit':0.0,
+                                             'debit':0.0,
+                                             'balance': 0.0,
+                                            })
+          
             else:
                 final_data_parent.update({
                                              'initial_balance':0.0,
@@ -297,8 +415,9 @@ class trialBalancereport(accountReportbase):
                                              'debit':0.0,
                                              'balance': 0.0,
                                             })
-                #Update the dictionary with final results.
-                final_list.append(copy(final_data_parent)) 
+                
+            #Update the dictionary with final results.
+            final_list.append(copy(final_data_parent)) 
         
         else:            
             for parent, child in child_list.iteritems():
@@ -320,9 +439,7 @@ class trialBalancereport(accountReportbase):
                 
                 final_list.append(copy(final_data_parent)) 
                 
-                #For detail_flat, append parent.id, that is id for account selected in list.
-                if structure['display_detail'] == 'detail_flat':                   
-                    list_ids.append(parent.id)
+                list_ids.append(parent.id)
                     
                 #Build list of data child.
                 if structure['display_detail'] == 'detail_with_hierarchy':
@@ -339,12 +456,7 @@ class trialBalancereport(accountReportbase):
                             final_data['is_parent'] = False
                             
                             final_list.append(copy(final_data))
-                    
-                    #if parent.id don't exist in list, add it
-                    if parent.id not in list_ids:
-                        #Add parent.id 
-                        list_ids.append(parent.id)
-                        
+
             if len(list_ids) > 0:
                 #Compute the balance, debit and credit for child ids list.         
                 result_dict = library_obj.get_account_balance(cr, uid, 
@@ -363,13 +475,24 @@ class trialBalancereport(accountReportbase):
             #Iterate again the list for improve performance. Compute results.
             #In this case, accounts in list and child are in final_list, isn't necesary check wich type of display is.
             #Check only if id is in result_dict keys.
+            
+            #In this case, res is a dictionary.
+            all_accounts = False
+            res = self.compute_data(cr, uid, result_dict, 
+                                                list_ids,
+                                                filter_type=filter_type, 
+                                                filter_data=filter_data, 
+                                                fiscalyear=fiscal_year, 
+                                                target_move=target_move,
+                                                all_accounts=all_accounts)
+            
             for data in final_list:
-                if data['id'] in result_dict.keys():
+                if data['is_parent'] == False and data['id'] in res.keys():
                     data.update({
-                                 'initial_balance': result_dict[data['id']]['balance'],
-                                 'debit':  result_dict[data['id']]['debit'],
-                                 'credit':  result_dict[data['id']]['credit'],
-                                 'balance': result_dict[data['id']]['balance'] + result_dict[data['id']]['debit'] - result_dict[data['id']]['credit'],
+                                 'initial_balance': res[data['id']]['initial_balance'],
+                                 'debit':  res[data['id']]['debit'],
+                                 'credit':  res[data['id']]['credit'],
+                                 'balance': res[data['id']]['balance'],
                                 })
 
         return final_list
@@ -384,6 +507,8 @@ class trialBalancereport(accountReportbase):
     '''
         
     def get_total_result(self, cr, uid, main_structure, data, final_list=[]):
+        
+        filter_data = [] #contains the start and stop period or dates.
         
         fiscal_year = self.get_fiscalyear(data)
         
@@ -401,6 +526,10 @@ class trialBalancereport(accountReportbase):
             start_period_id = self.get_start_period(data).id
             end_period_id = self.get_end_period(data).id
             
+            #Build filter_data
+            filter_data.append(self.get_start_period(data))
+            filter_data.append(self.get_end_period(data))
+            
             start_date = False
             end_date = False
             
@@ -409,6 +538,10 @@ class trialBalancereport(accountReportbase):
             #el método recibe las fechas (en caso de filtro por fechas)
             start_date = self.get_date_from(data)
             end_date = self.get_date_to(data)
+            
+            #Build filter_data
+            filter_data.append(start_date)
+            filter_data.append(end_date)
             
             start_period_id = False
             end_period_id = False
@@ -441,10 +574,10 @@ class trialBalancereport(accountReportbase):
             #TODO: Implement account_report (Valor en informe)
             for structure in main_structure:
                 if structure['type'] == 'account_type':
-                    final_list = self.get_data_account_type(cr, uid, fiscal_year, filter_type,  target_move, chart_account_id, start_date, end_date, start_period_id, end_period_id, structure, final_list)
+                    final_list = self.get_data_account_type(cr, uid, filter_data, fiscal_year, filter_type,  target_move, chart_account_id, start_date, end_date, start_period_id, end_period_id, structure, final_list)
                     
                 elif structure['type'] == 'accounts':
-                    final_list = self.get_data_accounts(cr, uid, fiscal_year, filter_type,  target_move, chart_account_id, start_date, end_date, start_period_id, end_period_id, structure, final_list)
+                    final_list = self.get_data_accounts(cr, uid, filter_data, fiscal_year, filter_type,  target_move, chart_account_id, start_date, end_date, start_period_id, end_period_id, structure, final_list)
 
       
         #Call the method only with a dictionary list.         
