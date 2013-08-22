@@ -87,8 +87,8 @@ class profitStatementreport(accountReportbase):
         #1. Extract children. It's a list of dictionaries.
         child_list = structure['account_type_child']       
         
-        #Extract base_account selected and add id into list_ids to compute data.
-        base_account_id = base_account.id
+          #Extract base_account selected and add id into list_ids to compute data.
+        base_account_id = base_account[0].id
         list_ids.append(base_account_id)
         
         '''
@@ -108,7 +108,7 @@ class profitStatementreport(accountReportbase):
             for parent, child in child_list.iteritems():
                 #Add child id to compute data
                 final_data_parent['child_list'] = child
-                
+                                
                 for c in child:                   
                     list_ids.append(c.id)
                 
@@ -141,38 +141,43 @@ class profitStatementreport(accountReportbase):
                                                                             end_period_id=period.id, 
                                                                             fiscal_year_id=fiscal_year.id, 
                                                                             filter_type=filter_type)
-                    
-                    #Compute all result in one line
-                    #Balance for all accounts (compare with base_account_selected)
-                    balance_period = self.compute_data(cr, uid, result_dict_period, final_data_parent['child_list'])
-                    balance_last_period = self.compute_data(cr, uid, result_dict_last_period, final_data_parent['child_list'])
-                    balance_fiscal_year = self.compute_data(cr, uid, result_dict_fiscal_year, final_data_parent['child_list'])
-                    balance_total_variation = balance_period - balance_last_period
-                    
+                                      
                     ##Extract results for base_account selected in wizard.
                     base_account_last_period = result_dict_last_period[base_account_id]['balance']
                     base_account_period = result_dict_period[base_account_id]['balance']
-                    base_account_total_variation = base_account_period - balance_last_period
+                    base_account_total_variation = base_account_period - base_account_last_period
                     base_account_fiscal_year = result_dict_fiscal_year[base_account_id]['balance']                    
                     base_account_percentage_period = 100
                     base_account_percentage_last_period = 100
                     base_account_percentage_variation = base_account_last_period != 0 and (100 * base_account_total_variation / base_account_last_period) or 0
                     base_account_percentage_fiscalyear = 100 
                     
-                    #Update dictionary
-                    final_data_parent.update({
-                                             'balance_total_period': balance_period,
-                                             'balance_total_last_period': balance_last_period,
-                                             'balance_total_variation': balance_period - balance_last_period,
-                                             'balance_total_fiscal_year':base_account_fiscal_year,
-                                             'balance_total_percentage_period': base_account_last_period != 0 and (100 * balance_last_period / base_account_last_period) or 0,
-                                             'balance_total_percentage_last_period': base_account_period != 0 and (100 * balance_period / base_account_period) or 0,
-                                             'balance_total_percentage_variation': balance_last_period != 0 and (100 * balance_total_variation / balance_last_period) or 0,
-                                             'balance_total_percentage_fiscal_year': base_account_fiscal_year != 0 and (100 * balance_fiscal_year / base_account_fiscal_year) or 0,
-                                            })
+                    balance_period = 0.0
+                    balance_last_period = 0.0
+                    balance_fiscal_year = 0.0
+                    balance_total_variation = 0.0                
                     
-                    #Update the dictionary with final results.
-                    final_list.append(copy(final_data_parent))
+                    for parent, child in child_list.iteritems():
+                        #Get results for all groups that belongs to account_type.
+                        balance_period += self.compute_data(cr, uid, result_dict_period, child)
+                        balance_last_period += self.compute_data(cr, uid, result_dict_last_period, child)
+                        balance_fiscal_year += self.compute_data(cr, uid, result_dict_fiscal_year, child)
+                        balance_total_variation += balance_period - balance_last_period
+                        
+                        #Update dictionary
+                        final_data_parent.update({
+                                                 'balance_total_period': balance_period,
+                                                 'balance_total_last_period': balance_last_period,
+                                                 'balance_total_variation': balance_period - balance_last_period,
+                                                 'balance_total_fiscal_year':base_account_fiscal_year,
+                                                 'balance_total_percentage_last_period': base_account_last_period != 0 and (100 * balance_last_period / base_account_last_period) or 0,
+                                                 'balance_total_percentage_period': base_account_period != 0 and (100 * balance_period / base_account_period) or 0,
+                                                 'balance_total_percentage_variation': balance_last_period != 0 and (100 * balance_total_variation / balance_last_period) or 0,
+                                                 'balance_total_percentage_fiscal_year': base_account_fiscal_year != 0 and (100 * balance_fiscal_year / base_account_fiscal_year) or 0,
+                                                })
+                    
+                        #Update the dictionary with final results.
+                        final_list.append(copy(final_data_parent))
                        
             else:
                 final_data_parent.update({
@@ -198,8 +203,7 @@ class profitStatementreport(accountReportbase):
                 for parent, child in child_list.iteritems():
                    final_data_parent['id'] = parent.id
                    final_data_parent['name'] = parent.name
-                   final_data_parent['code'] = parent.code
-                   final_data_parent['is_parent'] = True #Distinct child from parent.
+                   final_data_parent['code'] = parent.code                   
                    final_data_parent['level'] = 0
                    
                    if child != []:
@@ -208,6 +212,7 @@ class profitStatementreport(accountReportbase):
                         final_data_parent['child_list'] = []
  
                    if structure['display_detail'] == 'detail_flat':
+                        final_data_parent['is_parent'] = False #Distinct child from parent.
                         #Update keys to numbers, because this keys now show results
                         final_data_parent['balance_total_period'] = 0.0
                         final_data_parent['balance_total_last_period'] = 0.0
@@ -222,6 +227,7 @@ class profitStatementreport(accountReportbase):
                         final_list.append(copy(final_data_parent))
                         
                    elif structure['display_detail'] == 'detail_with_hierarchy':
+                        final_data_parent['is_parent'] = True #Distinct child from parent.
                         final_data_parent['balance_total_period'] = ''
                         final_data_parent['balance_total_last_period'] = ''
                         final_data_parent['balance_total_variation'] = ''
@@ -281,7 +287,7 @@ class profitStatementreport(accountReportbase):
                 ##Extract results for base_account selected in wizard.
                 base_account_last_period = result_dict_last_period[base_account_id]['balance']
                 base_account_period = result_dict_period[base_account_id]['balance']
-                base_account_total_variation = base_account_period - balance_last_period
+                base_account_total_variation = base_account_period - base_account_last_period
                 base_account_fiscal_year = result_dict_fiscal_year[base_account_id]['balance']                    
                 base_account_percentage_period = 100
                 base_account_percentage_last_period = 100
@@ -331,7 +337,7 @@ class profitStatementreport(accountReportbase):
                                              'balance_total_fiscal_year': balance_fiscal_year,
                                              'balance_total_variation': balance_total_variation,
                                              'balance_total_percentage_period': base_account_last_period != 0 and (100 * balance_last_period / base_account_last_period) or 0,
-                                             'balance_total_percentage_last_period': base_account_period != 0 and (100 * balance_period / base_account_period) or 0,
+                                             'balance_total_percentage_last_period': base_account_period != 0 and (100 * balance_total_period / base_account_period) or 0,
                                              'balance_total_percentage_variation': balance_total_last_period != 0 and (100 * balance_total_variation / balance_total_last_period) or 0,
                                              'balance_total_percentage_fiscal_year': base_account_fiscal_year != 0 and (100 * balance_fiscal_year / base_account_fiscal_year) or 0,
                                                                   
@@ -366,15 +372,9 @@ class profitStatementreport(accountReportbase):
             final_data_parent['level'] = 0
             final_data_parent['display_detail'] = 'no_detail'   
             
-            #In account type, iterate in child, because child is all accounts that
-            #match with account types selected.            
-         
+            #For accounts append parents, no childs.         
             for parent, child in child_list.iteritems():
-                #Add child id to compute data
-                final_data_parent['child_list'] = child
-                
-                for c in child:                   
-                    list_ids.append(c.id)
+                list_ids.append(parent.id)
                 
             if len(list_ids) > 0:                    
                 #In this report, call method three times, calculate balance for                    
@@ -406,35 +406,39 @@ class profitStatementreport(accountReportbase):
                                                                         fiscal_year_id=fiscal_year.id, 
                                                                         filter_type=filter_type)
                 
-                #Compute all result in one line
-                #Balance for all accounts (compare with base_account_selected)
-                balance_period = self.compute_data(cr, uid, result_dict_period, final_data_parent['child_list'])
-                balance_last_period = self.compute_data(cr, uid, result_dict_last_period, final_data_parent['child_list'])
-                balance_fiscal_year = self.compute_data(cr, uid, result_dict_fiscal_year, final_data_parent['child_list'])
-                balance_total_variation = balance_period - balance_last_period
-                
                 ##Extract results for base_account selected in wizard.
                 base_account_last_period = result_dict_last_period[base_account_id]['balance']
                 base_account_period = result_dict_period[base_account_id]['balance']
-                base_account_total_variation = base_account_period - balance_last_period
+                base_account_total_variation = base_account_period - base_account_last_period
                 base_account_fiscal_year = result_dict_fiscal_year[base_account_id]['balance']                    
                 base_account_percentage_period = 100
                 base_account_percentage_last_period = 100
                 base_account_percentage_variation = base_account_last_period != 0 and (100 * base_account_total_variation / base_account_last_period) or 0
                 base_account_percentage_fiscalyear = 100 
                 
-                #Update dictionary
-                final_data_parent.update({
+                balance_period = 0.0
+                balance_last_period = 0.0
+                balance_fiscal_year = 0.0
+                balance_total_variation = 0.0
+                
+                for parent, child in child_list.iteritems():   
+                    balance_period += result_dict_period[parent.id]['balance']
+                    balance_last_period += result_dict_last_period[parent.id]['balance']
+                    balance_fiscal_year += result_dict_fiscal_year[parent.id]['balance']
+                    balance_total_variation += balance_period - balance_last_period
+                    
+                    #Update dictionary
+                    final_data_parent.update({
+                                         'balance_total_last_period': balance_last_period,   
+                                         'balance_total_percentage_last_period': base_account_last_period != 0 and (100 * (balance_last_period / base_account_last_period)) or 0,                                                                                      
                                          'balance_total_period': balance_period,
-                                         'balance_total_last_period': balance_last_period,
+                                         'balance_total_percentage_period': base_account_period != 0 and (100 * balance_period / base_account_period) or 0,                                             
                                          'balance_total_variation': balance_period - balance_last_period,
-                                         'balance_total_fiscal_year':base_account_fiscal_year,
-                                         'balance_total_percentage_period': base_account_last_period != 0 and (100 * balance_last_period / base_account_last_period) or 0,
-                                         'balance_total_percentage_last_period': base_account_period != 0 and (100 * balance_period / base_account_period) or 0,
-                                         'balance_total_percentage_variation': balance_last_period != 0 and (100 * balance_total_variation / balance_last_period) or 0,
+                                         'balance_total_fiscal_year':balance_fiscal_year,         
+                                         'balance_total_percentage_variation': balance_last_period != 0 and (100 * (balance_total_variation / balance_last_period)) or 0,
                                          'balance_total_percentage_fiscal_year': base_account_fiscal_year != 0 and (100 * balance_fiscal_year / base_account_fiscal_year) or 0,
                                         })
-                
+                    
                 #Update the dictionary with final results.
                 final_list.append(copy(final_data_parent))
                        
@@ -462,7 +466,7 @@ class profitStatementreport(accountReportbase):
                     final_data_parent['id'] = parent.id
                     final_data_parent['name'] = parent.name
                     final_data_parent['code'] = parent.code
-                    final_data_parent['is_parent'] = True #Distinct child from parent.
+                    final_data_parent['is_parent'] = False #In Both case, parents show numerics results
                     final_data_parent['level'] = 0
                     
                     if child != []:
@@ -560,8 +564,8 @@ class profitStatementreport(accountReportbase):
                                          'balance_total_last_period': balance_total_last_period,
                                          'balance_total_fiscal_year': balance_fiscal_year,
                                          'balance_total_variation': balance_total_variation,
-                                         'balance_total_percentage_period': base_account_last_period != 0 and (100 * balance_last_period / base_account_last_period) or 0,
-                                         'balance_total_percentage_last_period': base_account_period != 0 and (100 * balance_period / base_account_period) or 0,
+                                         'balance_total_percentage_period': base_account_period != 0 and (100 * balance_total_period / base_account_period) or 0,
+                                         'balance_total_percentage_last_period': base_account_last_period != 0 and (100 * balance_total_last_period / base_account_last_period) or 0,
                                          'balance_total_percentage_variation': balance_total_last_period != 0 and (100 * balance_total_variation / balance_total_last_period) or 0,
                                          'balance_total_percentage_fiscal_year': base_account_fiscal_year != 0 and (100 * balance_fiscal_year / base_account_fiscal_year) or 0,
                                                               

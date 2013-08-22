@@ -283,7 +283,7 @@ class situationBalancereport(accountReportbase):
                 
                 #Show and compute parent account and account selected.
                 elif structure['display_detail'] == 'detail_with_hierarchy':      
-                    final_list.append(copy(final_data_parent))
+                    #final_list.append(copy(final_data_parent))
                               
                     for parent, child in child_list.iteritems():
                         list_ids.append(parent.id)
