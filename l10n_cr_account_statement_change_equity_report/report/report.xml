@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+            
+        <record id="statement_changes_equity_report" model="ir.actions.report.xml">
+             <field name="report_type">webkit</field>             
+             <field name="report_name">l10n_cr_statement_change_equity_report</field>
+             <field name="model">account.account</field>
+             <field name="type">ir.actions.report.xml</field>
+             <field name="name">Statement Changes of Equity</field>
+             <field name="report_rml">l10n_cr_account_statement_change_equity_report/report/l10n_cr_account_statement_change_equity_report.mako</field>
+             <field name="report_file">l10n_cr_account_statement_change_equity_report/report/l10n_cr_account_statement_change_equity_report.mako</field>
+             <field name="webkit_header" ref="report_webkit_lib.webkit_header_clearcorp_official_portrait" />              
+        </record>
+        
+    </data>
+</openerp>
