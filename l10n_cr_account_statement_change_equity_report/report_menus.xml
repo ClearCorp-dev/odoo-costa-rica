@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+          <menuitem icon="STOCK_PRINT" 
+              name="Statement Changes of Equity"  
+              parent="account.final_accounting_reports" 
+              action="action_statement_change_equity_report_menu_webkit"  
+              id="menu_statement_changes_equity_report"/>        
+    </data>
+</openerp>
