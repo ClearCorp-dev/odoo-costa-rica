@@ -1,29 +1,13 @@
 <html>
     <head>
-        <style type="text/css">
+        <link rel='stylesheet' href='addons/account_webkit_report_library/webkit_headers/main.css' />
+        <style>
             ${css}
-
-            .list_table .act_as_row {
-                margin-top: 10px;
-                margin-bottom: 10px;
-                font-size:10px;
-            }
-
-            .account_line {
-                font-weight: bold;
-                font-size: 15px;
-                background-color:#F0F0F0;
-            }
-            
-            .account_line .act_as_cell {
-                height: 30px;
-                vertical-align: bottom;
-            }
-
         </style>
     </head>
 <body class = "data">
     %for run in objects :
+    <%setLang(user.lang)%>
     <%
     emp_by_dep = get_obj_by_dep(run)
     %>
@@ -62,127 +46,122 @@
             total_net_dep = 0.0
             total_emp_dep = 0
             %>
-            <div class="account_title bg" style="margin-top: 20px; font-size: 12px; width: 1080px;">${department[0]}</div>
-            <div class="act_as_table list_table">
-                <div class="act_as_thead">
-                <div class="act_as_row labels" style="font-weight: bold; font-size: 11x;">
-                <div class="act_as_cell first_column" style="width: 85px;  vertical-align: middle">${_('Id card')}</div>
-                <div class="act_as_cell" style="width: 230px;  vertical-align: middle">${_('Name')}</div>
-                <div class="act_as_cell" style="width: 85px;  vertical-align: middle">${_('Bank account')}</div>
-                <div class="act_as_cell amount" style="width: 40px;">${_('Hrs.')}<br />${_('Nor')}</div>
-                <div class="act_as_cell amount" style="width: 40px;">${_('Hrs.')}<br />${_('Ext')}</div>
-                <div class="act_as_cell amount">${_('Ingr.')}<br />${_('Normal')}</div>
-                <div class="act_as_cell amount">${_('Ingr.')}<br />${_('Extra')}</div>
-                <div class="act_as_cell amount">${_('Salary')}<br />${_('Gross')}</div>
-                <div class="act_as_cell amount">${_('Deducc.')}<br />${_('CCSS/BP')}</div>
-                <div class="act_as_cell amount">${_('Tax')}<br />${_('Rent')}</div>
-                <div class="act_as_cell amount">${_('Salary')}<br />${_('Net')}</div>
-            </div>
-            </div>
-            
-                <div class="act_as_tbody">       
-                %for slip in sorted(department[1], key=lambda slip: slip.employee_id.name):
-                <div class="act_as_row lines">           
-                    ## Id card
-                    <div class="act_as_cell first_column" style="width: 85px;">${slip.employee_id.identification_id or ''}</div>
-                    ## name
-                    <div class="act_as_cell">${slip.employee_id.name or '0'}</div>
-                    ## bank account
-                    <div class="act_as_cell">${slip.employee_id.bank_account_id.acc_number or ' '}</div>
-                    ## hn
-                    <div class="act_as_cell amount">${get_hn(slip.worked_days_line_ids) or '0'}</div>				
-                    ## he
-                    <div class="act_as_cell amount">${get_he(slip.worked_days_line_ids) or '0'}</div>
-                    ## basic
-                    <div class="act_as_cell amount">${formatLang(get_basic(slip.line_ids)) or '0'}</div>
-                    ## exs
-                    <div class="act_as_cell amount">${formatLang(get_exs(slip.line_ids)) or '0'}</div>
-                    ## gross
-                    <div class="act_as_cell amount ">${formatLang(get_gross(slip.line_ids)) or '0'}</div>
-                    ## ccss
-                    <div class="act_as_cell amount">${formatLang(get_ccss(slip.line_ids)) or '0'}</div>
-                    ## RENT
-                    <div class="act_as_cell amount">${formatLang(get_rent(slip.line_ids)) or '0'}</div>
-                    ## NET
-                    <div class="act_as_cell amount">${formatLang(get_net(slip.line_ids)) or '0'}</div>
-                <%
-                    ## Totals by Departament
-                    total_hn_dep += get_hn(slip.worked_days_line_ids)
-                    total_he_dep += get_he(slip.worked_days_line_ids)
-                    total_fe_dep += get_fe(slip.worked_days_line_ids)
-                    total_basic_dep += get_basic(slip.line_ids)
-                    total_exs_dep += get_exs(slip.line_ids)
-                    total_fes_dep += get_fes(slip.line_ids)
-                    total_gross_dep += get_gross(slip.line_ids)
-                    total_rent_dep += get_rent(slip.line_ids)
-                    total_ccss_dep += get_ccss(slip.line_ids)
-                    total_net_dep += get_net(slip.line_ids)
-                    total_emp_dep += 1
-
-                    ## Totals
-                    total_hn += get_hn(slip.worked_days_line_ids)
-                    total_he += get_he(slip.worked_days_line_ids)
-                    total_fe += get_fe(slip.worked_days_line_ids)
-                    total_basic += get_basic(slip.line_ids)
-                    total_exs += get_exs(slip.line_ids)
-                    total_fes += get_fes(slip.line_ids)
-                    total_gross += get_gross(slip.line_ids)
-                    total_rent += get_rent(slip.line_ids)
-                    total_ccss += get_ccss(slip.line_ids)
-                    total_net += get_net(slip.line_ids)
-                    total_emp += 1
-                %>
+            <div style="font-size: 16px; font-weight: bold; text-align: left;">${department[0]}</div>
+            <div class="table list">
+                <div class="table-header">
+                    <div class="table-row ${row_even and 'even' or 'odd'}">
+                        <div class="table-cell" style="width:14%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Id card')}</div>
+                        <div class="table-cell" style="width:17%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Name')}</div>
+                        <div class="table-cell" style="width:13%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Bank account')}</div>
+                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Hrs.')}<br />${_('Nor')}</div>
+                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Hrs.')}<br />${_('Ext')}</div>
+                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Ingr.')}<br />${_('Normal')}</div>
+                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Ingr.')}<br />${_('Extra')}</div>
+                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Salary')}<br />${_('Gross')}</div>
+                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Deducc.')}<br />${_('CCSS/BP')}</div>
+                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Tax')}<br />${_('Rent')}</div>
+                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Salary')}<br />${_('Net')}</div>
                     </div>
-                %endfor
-        </div>
-        <div class="act_as_tfoot">
-        <div class="act_as_row labels"  style="font-weight: bold; font-size: 11x">
-            <div class="act_as_cell first_column">${_('Total')}</div>
-            <div class="act_as_cell">${total_emp_dep} ${_('Employees')}</div>
-            <div class="act_as_cell"> </div>
-            <div class="act_as_cell amount">${total_hn_dep}</div>
-            <div class="act_as_cell amount">${total_he_dep}</div>
-            <div class="act_as_cell amount">${formatLang(total_basic_dep)}</div>
-            <div class="act_as_cell amount">${formatLang(total_exs_dep)}</div>
-            <div class="act_as_cell amount">${formatLang(total_gross_dep)}</div>
-            <div class="act_as_cell amount">${formatLang(total_ccss_dep)}</div>
-            <div class="act_as_cell amount">${formatLang(total_rent_dep)}</div>
-            <div class="act_as_cell amount">${formatLang(total_net_dep)}</div>
-        </div>
-            </div>
-            </div>
+                </div>
             
-               
-         %endfor   
-    <div class="act_as_table list_table " style="margin-top: 20px;">
-        <div class="act_as_tfoot">
-        <div class="act_as_row labels"  style="font-weight: bold; font-size: 11px;">
-            <div class="act_as_cell first_column" style="width: 85px; font-size: 12px; text-align: left">${_('TOTAL')}</div>
-            <div class="act_as_cell" style="width: 230px;">${total_emp} ${_('Employees')}</div>
-            <div class="act_as_cell"> </div>
-            <div class="act_as_cell amount" style="width: 40px;">${total_hn}</div>
-            <div class="act_as_cell amount" style="width: 40px;">${total_he}</div>
-            <div class="act_as_cell amount">${formatLang(total_basic)}</div>
-            <div class="act_as_cell amount">${formatLang(total_exs)}</div>
-            <div class="act_as_cell amount">${formatLang(total_gross)}</div>
-            <div class="act_as_cell amount">${formatLang(total_ccss)}</div>
-            <div class="act_as_cell amount">${formatLang(total_rent)}</div>
-            <div class="act_as_cell amount">${formatLang(total_net)}</div>
-        </div>
-        </div>
-    </div>
-    %endfor
-    <div class="act_as_table data_table" style="margin-top:30px">
-        <div class="act_as_tbody">
-        <div class="act_as_row" style="vertical-align: bottom">
-            <div class="act_as_cell" style="padding-top:80px;padding-bottom:5px"> ${_('BY:')} </div>
-            <div class="act_as_cell" style="padding-top:80px;padding-bottom:5px"> ${_('REVIEWED BY:')} </div>
-            <div class="act_as_cell" style="padding-top:80px;padding-bottom:5px"> ${_('APPROVED BY:')} </div>
-        </div>
+                <div class="table-body">
+                    %for slip in sorted(department[1], key=lambda slip: slip.employee_id.name):
+                    <div class="table-row ${row_even and 'even' or 'odd'}">
+                        ## Id card
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${slip.employee_id.identification_id or ''}</div>
+                        ## name
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${slip.employee_id.name or '0'}</div>
+                        ## bank account
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${slip.employee_id.bank_account_id.acc_number or ' '}</div>
+                        ## hn
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${get_hn(slip.worked_days_line_ids) or '0'}</div>				
+                        ## he
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${get_he(slip.worked_days_line_ids) or '0'}</div>
+                        ## basic
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_basic(slip.line_ids)) or '0'}</div>
+                        ## exs
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_exs(slip.line_ids)) or '0'}</div>
+                        ## gross
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_gross(slip.line_ids)) or '0'}</div>
+                        ## ccss
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_ccss(slip.line_ids)) or '0'}</div>
+                        ## RENT
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_rent(slip.line_ids)) or '0'}</div>
+                        ## NET
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_net(slip.line_ids)) or '0'}</div>
+                    <%
+                        ## Totals by Departament
+                        total_hn_dep += get_hn(slip.worked_days_line_ids)
+                        total_he_dep += get_he(slip.worked_days_line_ids)
+                        total_fe_dep += get_fe(slip.worked_days_line_ids)
+                        total_basic_dep += get_basic(slip.line_ids)
+                        total_exs_dep += get_exs(slip.line_ids)
+                        total_fes_dep += get_fes(slip.line_ids)
+                        total_gross_dep += get_gross(slip.line_ids)
+                        total_rent_dep += get_rent(slip.line_ids)
+                        total_ccss_dep += get_ccss(slip.line_ids)
+                        total_net_dep += get_net(slip.line_ids)
+                        total_emp_dep += 1
+
+                        ## Totals
+                        total_hn += get_hn(slip.worked_days_line_ids)
+                        total_he += get_he(slip.worked_days_line_ids)
+                        total_fe += get_fe(slip.worked_days_line_ids)
+                        total_basic += get_basic(slip.line_ids)
+                        total_exs += get_exs(slip.line_ids)
+                        total_fes += get_fes(slip.line_ids)
+                        total_gross += get_gross(slip.line_ids)
+                        total_rent += get_rent(slip.line_ids)
+                        total_ccss += get_ccss(slip.line_ids)
+                        total_net += get_net(slip.line_ids)
+                        total_emp += 1
+                    %>
+                    </div>
+                    %endfor
+                </div>
+                <div class="table-header">
+                    <div class="table-row ${row_even and 'even' or 'odd'}">
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${_('Total')}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${total_emp_dep} ${_('Employees')}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;"> </div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${total_hn_dep}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${total_he_dep}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_basic_dep)}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_exs_dep)}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_gross_dep)}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_ccss_dep)}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_rent_dep)}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_net_dep)}</div>
+                    </div>
+                </div>
             </div>
-    </div>   
-    <p style="page-break-after:always"></p>
-
-
+        %endfor   
+        <div class="table list">
+            <div class="table-header">
+                <div class="table-row ${row_even and 'even' or 'odd'}">
+                    <div class="table-cell" style="width:14%; text-align:left; border:silver 1px solid;">${_('TOTAL')}</div>
+                    <div class="table-cell" style="width:17%; text-align:left; border:silver 1px solid;">${total_emp} ${_('Employees')}</div>
+                    <div class="table-cell" style="width:13%; text-align:left; border:silver 1px solid;"> </div>
+                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${total_hn}</div>
+                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${total_he}</div>
+                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_basic)}</div>
+                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_exs)}</div>
+                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_gross)}</div>
+                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_ccss)}</div>
+                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_rent)}</div>
+                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_net)}</div>
+                </div>
+            </div>
+            <div class="table-body">
+                <div class="table-row ${row_even and 'even' or 'odd'}">
+                    <br /><br />
+                    <div style="font-size: 16px; font-weight: bold; text-align: left;"> ${_('BY:')} </div>
+                    <div style="font-size: 16px; font-weight: bold; text-align: left;"> ${_('REVIEWED BY:')} </div>
+                    <div style="font-size: 16px; font-weight: bold; text-align: left;"> ${_('APPROVED BY:')} </div>
+                </div>
+            </div>
+        </div>
+        <p style="page-break-after:always"></p>
+    %endfor
 </body>
 </html>

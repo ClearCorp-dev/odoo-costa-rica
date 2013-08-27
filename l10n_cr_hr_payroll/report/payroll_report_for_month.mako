@@ -1,7 +1,13 @@
 <!DOCTYPE html SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head></head>
+    <head>
+        <link rel='stylesheet' href='addons/account_webkit_report_library/webkit_headers/main.css' />
+        <style>
+            ${css}
+        </style>
+    </head>
     <body class = "data">
+        <%setLang(user.lang)%>
         <%
         period_from = data['form']['period_from'][0]
         period_to = data['form']['period_to'][0]
@@ -42,21 +48,21 @@
 
             %>
             
-            <div class="account_title bg" style="margin-top: 20px; font-size: 12px; width: 1080px;">${struct[0]}</div>
-            <div class="act_as_table list_table">
-                <div class="act_as_thead">
-                    <div class="act_as_row labels" style="font-weight: bold; font-size: 11x;">
-                        <div class="act_as_cell first_column" style="width: 85px;  vertical-align: middle">${_('Id card')}</div>
-                        <div class="act_as_cell" style="width: 230px;  vertical-align: middle">${_('Name')}</div>
-                        <div class="act_as_cell" style="width: 85px;  vertical-align: middle">${_('Bank account')}</div>
-                        <div class="act_as_cell amount" style="width: 40px;">${_('Hrs.')}<br />${_('Nor')}</div>
-                        <div class="act_as_cell amount" style="width: 40px;">${_('Hrs.')}<br />${_('Ext')}</div>
-                        <div class="act_as_cell amount">${_('Ingr.')}<br />${_('Normal')}</div>
-                        <div class="act_as_cell amount">${_('Ingr.')}<br />${_('Extra')}</div>
-                        <div class="act_as_cell amount">${_('Salary')}<br />${_('Gross')}</div>
-                        <div class="act_as_cell amount">${_('Deducc.')}<br />${_('CCSS/BP')}</div>
-                        <div class="act_as_cell amount">${_('Tax')}<br />${_('Rent')}</div>
-                        <div class="act_as_cell amount">${_('Salary')}<br />${_('Net')}</div>
+            <div style="font-size: 16px; font-weight: bold; text-align: left;">${struct[0]}</div>
+            <div class="table list">
+                <div class="table-header">
+                    <div class="table-row ${row_even and 'even' or 'odd'}">
+                        <div class="table-cell" style="width:14%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Id card')}</div>
+                        <div class="table-cell" style="width:17%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Name')}</div>
+                        <div class="table-cell" style="width:13%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Bank account')}</div>
+                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Hrs.')}<br />${_('Nor')}</div>
+                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Hrs.')}<br />${_('Ext')}</div>
+                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Ingr.')}<br />${_('Normal')}</div>
+                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Ingr.')}<br />${_('Extra')}</div>
+                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Salary')}<br />${_('Gross')}</div>
+                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Deducc.')}<br />${_('CCSS/BP')}</div>
+                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Tax')}<br />${_('Rent')}</div>
+                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Salary')}<br />${_('Net')}</div>
                     </div>
                 </div>
             
@@ -65,31 +71,31 @@
                 payslips_by_employee = get_payslips_by_employee(cr, uid, struct[1])
                 %>
             
-                <div class="act_as_tbody">       
+                <div class="table-body">
                 %for payslips in payslips_by_employee:
-                    <div class="act_as_row lines">
+                    <div class="table-row ${row_even and 'even' or 'odd'}">
                         ## Id card
-                        <div class="act_as_cell first_column" style="width: 85px;">${get_identification(cr, uid, payslips[1]) or ' '}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${get_identification(cr, uid, payslips[1]) or ' '}</div>
                         ## name
-                        <div class="act_as_cell">${payslips[0] or ' '}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${payslips[0] or ' '}</div>
                         ## bank account
-                        <div class="act_as_cell">${get_bank_account(cr, uid, payslips[1]) or ' '}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${get_bank_account(cr, uid, payslips[1]) or ' '}</div>
                         ## hn
-                        <div class="act_as_cell amount">${get_hn(cr, uid, payslips[1]) or '0'}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${get_hn(cr, uid, payslips[1]) or '0'}</div>
                         ## he
-                        <div class="act_as_cell amount">${get_he(cr, uid, payslips[1]) or '0'}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${get_he(cr, uid, payslips[1]) or '0'}</div>
                         ## basic
-                        <div class="act_as_cell amount">${formatLang(get_basic(cr, uid, payslips[1])) or '0'}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_basic(cr, uid, payslips[1])) or '0'}</div>
                         ## exs
-                        <div class="act_as_cell amount">${formatLang(get_exs(cr, uid, payslips[1])) or '0'}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_exs(cr, uid, payslips[1])) or '0'}</div>
                         ## gross
-                        <div class="act_as_cell amount ">${formatLang(get_gross(cr, uid, payslips[1])) or '0'}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_gross(cr, uid, payslips[1])) or '0'}</div>
                         ## ccss
-                        <div class="act_as_cell amount">${formatLang(get_ccss(cr, uid, payslips[1])) or '0'}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_ccss(cr, uid, payslips[1])) or '0'}</div>
                         ## RENT
-                        <div class="act_as_cell amount">${formatLang(get_rent(cr, uid, payslips[1])) or '0'}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_rent(cr, uid, payslips[1])) or '0'}</div>
                         ## NET
-                        <div class="act_as_cell amount">${formatLang(get_net(cr, uid, payslips[1])) or '0'}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_net(cr, uid, payslips[1])) or '0'}</div>
                         <%
                         ## Totals by Departament
                         total_hn_struct += get_hn(cr, uid, payslips[1])
@@ -116,46 +122,47 @@
                     </div>
                 %endfor
                 </div>
-                <div class="act_as_tfoot">
-                    <div class="act_as_row labels"  style="font-weight: bold; font-size: 11x">
-                        <div class="act_as_cell first_column">${_('Total')}</div>
-                        <div class="act_as_cell">${total_emp_struct} ${_('Employees')}</div>
-                        <div class="act_as_cell"> </div>
-                        <div class="act_as_cell amount">${total_hn_struct}</div>
-                        <div class="act_as_cell amount">${total_he_struct}</div>
-                        <div class="act_as_cell amount">${formatLang(total_basic_struct)}</div>
-                        <div class="act_as_cell amount">${formatLang(total_exs_struct)}</div>
-                        <div class="act_as_cell amount">${formatLang(total_gross_struct)}</div>
-                        <div class="act_as_cell amount">${formatLang(total_ccss_struct)}</div>
-                        <div class="act_as_cell amount">${formatLang(total_rent_struct)}</div>
-                        <div class="act_as_cell amount">${formatLang(total_net_struct)}</div>
+                <div class="table-header">
+                    <div class="table-row ${row_even and 'even' or 'odd'}">
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${_('Total')}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${total_emp_struct} ${_('Employees')}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;"> </div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${total_hn_struct}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${total_he_struct}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_basic_struct)}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_exs_struct)}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_gross_struct)}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_ccss_struct)}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_rent_struct)}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_net_struct)}</div>
                     </div>
                 </div>
             </div>
         %endfor
-        <div class="act_as_table list_table " style="margin-top: 20px;">
-            <div class="act_as_tfoot">
-                <div class="act_as_row labels"  style="font-weight: bold; font-size: 11px;">
-                    <div class="act_as_cell first_column" style="width: 85px; font-size: 12px; text-align: left">${_('TOTAL')}</div>
-                    <div class="act_as_cell" style="width: 230px;">${total_emp} ${_('Employees')}</div>
-                    <div class="act_as_cell"> </div>
-                    <div class="act_as_cell amount" style="width: 40px;">${total_hn}</div>
-                    <div class="act_as_cell amount" style="width: 40px;">${total_he}</div>
-                    <div class="act_as_cell amount">${formatLang(total_basic)}</div>
-                    <div class="act_as_cell amount">${formatLang(total_exs)}</div>
-                    <div class="act_as_cell amount">${formatLang(total_gross)}</div>
-                    <div class="act_as_cell amount">${formatLang(total_ccss)}</div>
-                    <div class="act_as_cell amount">${formatLang(total_rent)}</div>
-                    <div class="act_as_cell amount">${formatLang(total_net)}</div>
+        <div class="table list">
+            <div class="table-header">
+                <div class="table-row ${row_even and 'even' or 'odd'}">
+                    <div class="table-cell" style="width:14%; text-align:left; border:silver 1px solid;">${_('TOTAL')}</div>
+                    <div class="table-cell" style="width:17%; text-align:left; border:silver 1px solid;">${total_emp} ${_('Employees')}</div>
+                    <div class="table-cell" style="width:13%; text-align:left; border:silver 1px solid;"> </div>
+                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${total_hn}</div>
+                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${total_he}</div>
+                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_basic)}</div>
+                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_exs)}</div>
+                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_gross)}</div>
+                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_ccss)}</div>
+                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_rent)}</div>
+                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_net)}</div>
                 </div>
             </div>
         </div>
-        <div class="act_as_table data_table" style="margin-top:30px">
-            <div class="act_as_tbody">
-                <div class="act_as_row" style="vertical-align: bottom">
-                    <div class="act_as_cell" style="padding-top:80px;padding-bottom:5px"> ${_('BY:')} </div>
-                    <div class="act_as_cell" style="padding-top:80px;padding-bottom:5px"> ${_('REVIEWED BY:')} </div>
-                    <div class="act_as_cell" style="padding-top:80px;padding-bottom:5px"> ${_('APPROVED BY:')} </div>
+        <div class="table list">
+            <div class="table-body">
+                <div class="table-row ${row_even and 'even' or 'odd'}">
+                    <br /><br />
+                    <div style="font-size: 16px; font-weight: bold; text-align: left;"> ${_('BY:')} </div>
+                    <div style="font-size: 16px; font-weight: bold; text-align: left;"> ${_('REVIEWED BY:')} </div>
+                    <div style="font-size: 16px; font-weight: bold; text-align: left;"> ${_('APPROVED BY:')} </div>
                 </div>
             </div>
         </div>   

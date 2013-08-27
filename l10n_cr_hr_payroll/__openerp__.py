@@ -31,17 +31,21 @@ l10n_cr_hr_payroll.
     * Employee Contracts
     * Fortnightly Payroll Register
     * Payroll Report
+    * Report Employee by Periods
     """,
     'author': 'CLEARCORP S.A.',
     'website': 'http://www.clearcorp.co.cr',
     'depends': [
         'account',
+        'report_webkit_lib',
         'hr_payroll_account',
     ],
-    'update_xml': [
+    'data': [
+                    'security/ir.model.access.csv',
                     'l10n_cr_hr_payroll_view.xml',
                     'report/report.xml',
                     'wizard/payroll_report_for_month_wizard_view.xml',
+                    'wizard/report_employee_by_periods_wizard_view.xml',
                     'report_menus.xml',
                     ],
     'installable': True,

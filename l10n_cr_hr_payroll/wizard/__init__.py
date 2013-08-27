@@ -22,5 +22,6 @@
 
 
 import payroll_report_for_month_wizard
+import report_employee_by_periods_wizard
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
