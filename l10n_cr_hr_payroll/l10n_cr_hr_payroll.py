@@ -112,6 +112,7 @@ class HrPayslip(osv.osv):
 
     def onchange_employee_id(self, cr, uid, ids, date_from, date_to, employee_id=False, contract_id=False, context=None):
         res = super(HrPayslip, self).onchange_employee_id(cr, uid, ids, date_from, date_to, employee_id=employee_id, contract_id=contract_id, context=context)
+        contract = []
         
         if (not employee_id) or (not date_from) or (not date_to):
             return res
@@ -126,9 +127,11 @@ class HrPayslip(osv.osv):
         else:
             contract_id = [contract_id]
         
-        contract = contract_obj.browse(cr, uid, contract_id, context=context)[0]
+        contracts = contract_obj.browse(cr, uid, contract_id, context=context)
+        if len(contracts) > 0 and len(contracts) >= 2:
+            contract = contracts[0]
         schedule_pay = ''
-        if contract.schedule_pay:
+        if contract and contract.schedule_pay:
             #This is to translate the terms 
             if contract.schedule_pay == 'weekly':
                 schedule_pay = _('weekly')

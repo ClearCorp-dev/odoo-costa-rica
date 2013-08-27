@@ -21,12 +21,11 @@
 ##############################################################################
 
 from osv import osv, fields
+        
+class ReportEmployeeByPeriodsWizard(osv.osv):
 
-
-class PayrollReportForMonthWizard(osv.osv):
-
-    _name = "payroll.report.for.month"
-    _description = "Payroll Report for Month"
+    _name = "report.employee.by.periods"
+    _description = "Report Employee by Periods"
     
     _columns = {
         'company_id': fields.many2one('res.company', 'Company'),
@@ -43,7 +42,7 @@ class PayrollReportForMonthWizard(osv.osv):
     def _print_report(self, cursor, uid, ids, datas, context={}):
         return {
             'type': 'ir.actions.report.xml',
-            'report_name': 'l10n_cr_hr_payroll.account.payroll_report_for_month',
+            'report_name': 'l10n_cr_hr_payroll.account.report_employee_by_periods',
             'datas': datas}
 
     def action_validate(self, cr, uid, ids, context={}):
