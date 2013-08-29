@@ -232,7 +232,7 @@ class profitStatementreport(accountReportbase):
                         final_data_parent['balance_total_last_period'] = ''
                         final_data_parent['balance_total_variation'] = ''
                         final_data_parent['balance_total_fiscal_year'] = ''
-                        final_data_parent['balance_total_percentage_period'] = '',
+                        final_data_parent['balance_total_percentage_period'] = ''
                         final_data_parent['balance_total_percentage_last_period'] = ''
                         final_data_parent['balance_total_percentage_variation'] = ''
                         final_data_parent['balance_total_percentage_fiscal_year'] = ''
@@ -310,10 +310,10 @@ class profitStatementreport(accountReportbase):
                             data.update({
                                          'balance_total_period': balance_period,
                                          'balance_total_last_period': balance_last_period,
-                                         'balance_total_variation': balance_period - balance_last_period,
-                                         'balance_total_fiscal_year':base_account_fiscal_year,
-                                         'balance_total_percentage_period': base_account_last_period != 0 and (100 * balance_last_period / base_account_last_period) or 0,
-                                         'balance_total_percentage_last_period': base_account_period != 0 and (100 * balance_period / base_account_period) or 0,
+                                         'balance_total_variation': balance_total_variation,
+                                         'balance_total_fiscal_year':balance_fiscal_year,
+                                         'balance_total_percentage_period': base_account_period != 0 and (100 * balance_period / base_account_period) or 0,
+                                         'balance_total_percentage_last_period': base_account_last_period != 0 and (100 * balance_last_period / base_account_last_period) or 0,
                                          'balance_total_percentage_variation': balance_last_period != 0 and (100 * balance_total_variation / balance_last_period) or 0,
                                          'balance_total_percentage_fiscal_year': base_account_fiscal_year != 0 and (100 * balance_fiscal_year / base_account_fiscal_year) or 0,
                                         })
@@ -336,8 +336,8 @@ class profitStatementreport(accountReportbase):
                                              'balance_total_last_period': balance_total_last_period,
                                              'balance_total_fiscal_year': balance_fiscal_year,
                                              'balance_total_variation': balance_total_variation,
-                                             'balance_total_percentage_period': base_account_last_period != 0 and (100 * balance_last_period / base_account_last_period) or 0,
-                                             'balance_total_percentage_last_period': base_account_period != 0 and (100 * balance_total_period / base_account_period) or 0,
+                                             'balance_total_percentage_period': base_account_period != 0 and (100 * balance_total_period / base_account_period) or 0,
+                                             'balance_total_percentage_last_period': base_account_last_period != 0 and (100 * balance_total_last_period / base_account_last_period) or 0,
                                              'balance_total_percentage_variation': balance_total_last_period != 0 and (100 * balance_total_variation / balance_total_last_period) or 0,
                                              'balance_total_percentage_fiscal_year': base_account_fiscal_year != 0 and (100 * balance_fiscal_year / base_account_fiscal_year) or 0,
                                                                   
@@ -547,7 +547,7 @@ class profitStatementreport(accountReportbase):
                 base_account_percentage_fiscalyear = 100
                     
                 #Iterate again the list for improve performance. Compute results.
-                #In this case, accounts in list and child are in final_list, isn't necesary check wich type of display is.
+                #In this case, accounts in list and child are in final_list, isn't necessary check wich type of display is.
                 #Check only if id is in result_dict keys.
                 for data in final_list:
                     if 'id' in data.keys():
@@ -605,15 +605,17 @@ class profitStatementreport(accountReportbase):
             #TODO: Implement account_report (Valor en informe)
             for structure in main_structure:
                 if structure['type'] == 'account_type':
-                    final_list = self.get_data_account_type(cr, uid, base_account, fiscal_year, filter_type, period, last_period, structure, final_list)
+                    list_data = [] #Avoid repeat accounts when an account is in list and it's a child for account type selected.
+                    final_list += self.get_data_account_type(cr, uid, base_account, fiscal_year, filter_type, period, last_period, structure, list_data)
                     
                 elif structure['type'] == 'accounts':
-                    final_list = self.get_data_accounts(cr, uid, base_account, fiscal_year, filter_type,  period, last_period, structure, final_list)
+                    list_data = [] #Avoid repeat accounts when an account is in list and it's a child for account type selected.
+                    final_list += self.get_data_accounts(cr, uid, base_account, fiscal_year, filter_type,  period, last_period, structure, list_data)
       
         #Call the method only with a dictionary list.         
         if type(main_structure) is types.DictType:
             self.get_total_result(cr, uid, main_structure['child'], data, final_list)
-        
+
         return final_list              
     
     #Call all the methods that extract data, and build final dictionary with all the result.
