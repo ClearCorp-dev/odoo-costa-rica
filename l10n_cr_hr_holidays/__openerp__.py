@@ -27,16 +27,11 @@
     "sequence": 38,
     'complexity': "normal",
     'description': """
-Add all information on the employee form to manage contracts.
-=============================================================
-
-    * Contract
-    * Place of Birth,
-    * Medical Examination Date
-    * Company Vehicle
-
-You can assign several contracts per employee.
-    """,
+l10n_cr_hr_holidays
+===================
+    *Legal leaves per period
+    *Scheduled legal leaves calculations per period
+""",
     'author': 'CLEARCORP S.A.',
     'website': 'http://www.clearcorp.co.cr',
     'depends': [
