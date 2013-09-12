@@ -48,6 +48,7 @@ You can assign several contracts per employee.
              ],
     'installable': True,
     'auto_install': False,
+    'license': 'AGPL-3',
 }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
