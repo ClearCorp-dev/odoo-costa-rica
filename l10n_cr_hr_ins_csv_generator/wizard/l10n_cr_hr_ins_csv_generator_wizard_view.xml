@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+        <!-- Views -->
+        <record model="ir.ui.view" id ="ins_csv_generator_generator_wizard_create_form">
+            <field name="name">ins.csv.generator.generator.wizard.create.form</field>
+            <field name="model">hr.ins.csv.generator.generator.wizard</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form string="Wizard" version="7.0">
+                    <sheet>
+                        <field invisible="1" name="state"/>
+                        <group states="get">
+                            <p>Encoded text file: <field name="data" readonly="1" filename="name"/></p>
+                        </group>
+                        <group states="generate" colspan="4" col="2">
+                            <separator string="Fill the required fields" colspan="2"/>
+                            <field name="salary_rule_id"/>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                        </group>
+                    </sheet>
+                    <footer states="generate">
+                        <button type="object" name="generate_csv" string="Generate csv File" icon="gtk-ok"
+                            confirm="Are you sure you want to generate the csv file?" class="oe_highlight" />
+                        <button type="special" special="cancel" string="Cancel" class="oe_link" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <!-- Actions -->
+        <act_window id="action_generator_wizard_create"
+            name="INS csv Generator"
+            res_model="hr.ins.csv.generator.generator.wizard"
+            view_mode="form"
+            target="new"
+        />
+    </data>
+</openerp>

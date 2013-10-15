@@ -1,0 +1,213 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* ins_csv_generator
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-14 18:12+0000\n"
+"PO-Revision-Date: 2013-10-14 18:12+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ins_csv_generator
+#: field:hr.employee,ins_working_day:0
+msgid "Working Day"
+msgstr "Jornada Laboral"
+
+#. module: ins_csv_generator
+#: view:hr.ins.csv.generator.generator.wizard:0
+msgid "Encoded text file:"
+msgstr "Archivo de texto codificado"
+
+#. module: ins_csv_generator
+#: field:hr.employee,ins_id_type:0
+msgid "Id Type"
+msgstr "Tipo de Indentificación"
+
+#. module: ins_csv_generator
+#: model:ir.ui.menu,name:ins_csv_generator.menu_generator
+msgid "Generate INS File"
+msgstr "Generar Archivo INS"
+
+#. module: ins_csv_generator
+#: selection:hr.employee,ins_id_type:0
+msgid "Cédula Residencia"
+msgstr "Cédula Residencia"
+
+#. module: ins_csv_generator
+#: view:hr.ins.csv.generator.generator.wizard:0
+msgid "Wizard"
+msgstr "Asistente"
+
+#. module: ins_csv_generator
+#: selection:hr.employee,ins_working_day:0
+msgid "Tiempo completo"
+msgstr "Tiempo Completo"
+
+#. module: ins_csv_generator
+#: selection:hr.employee,ins_id_type:0
+msgid "Cédula Nacional"
+msgstr "Cédula Nacional"
+
+#. module: ins_csv_generator
+#: model:ir.model,name:ins_csv_generator.model_hr_employee
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: ins_csv_generator
+#: view:hr.employee:0
+msgid "Identification Information"
+msgstr "Información de Identificación"
+
+#. module: ins_csv_generator
+#: view:hr.ins.csv.generator.generator.wizard:0
+msgid "Generate csv File"
+msgstr "Generar Archivos csv"
+
+#. module: ins_csv_generator
+#: view:hr.employee:0
+msgid "Working Information"
+msgstr "Información Laboral"
+
+#. module: ins_csv_generator
+#: field:hr.employee,ins_paid_days:0
+msgid "Paid Days"
+msgstr "Días Pagados"
+
+#. module: ins_csv_generator
+#: field:hr.employee,ins_last_name1:0
+msgid "First Last Name"
+msgstr "Primer Apellido"
+
+#. module: ins_csv_generator
+#: field:hr.ins.csv.generator.generator.wizard,state:0
+msgid "State"
+msgstr "Estado"
+
+#. module: ins_csv_generator
+#: selection:hr.employee,ins_working_day:0
+msgid "Medio tiempo"
+msgstr "Medio Tiempo"
+
+#. module: ins_csv_generator
+#: selection:hr.ins.csv.generator.generator.wizard,state:0
+msgid "get"
+msgstr "Obtener"
+
+#. module: ins_csv_generator
+#: view:hr.ins.csv.generator.generator.wizard:0
+msgid "Fill the required fields"
+msgstr "Llenar los campos requeridos"
+
+#. module: ins_csv_generator
+#: view:hr.employee:0
+msgid "Others"
+msgstr "Others"
+
+#. module: ins_csv_generator
+#: field:hr.employee,ins_job_code:0
+msgid "Job Code"
+msgstr "Código de Trabajo"
+
+#. module: ins_csv_generator
+#: field:hr.employee,ins_last_name2:0
+msgid "Second Last Name"
+msgstr "Segundo Apellido"
+
+#. module: ins_csv_generator
+#: selection:hr.employee,ins_working_day:0
+msgid "Ocasional"
+msgstr "Ocasional"
+
+#. module: ins_csv_generator
+#: view:hr.ins.csv.generator.generator.wizard:0
+msgid "Are you sure you want to generate the csv file?"
+msgstr "¿Estás seguro que deseas generar el archivo csv?"
+
+#. module: ins_csv_generator
+#: field:hr.employee,ins_name:0
+#: field:hr.ins.csv.generator.generator.wizard,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: ins_csv_generator
+#: field:hr.employee,ins_paid_hours:0
+msgid "Paid Hours"
+msgstr "Horas Pagadas"
+
+#. module: ins_csv_generator
+#: selection:hr.employee,ins_working_day:0
+msgid "Por jornales"
+msgstr "Por Jornales"
+
+#. module: ins_csv_generator
+#: view:hr.employee:0
+msgid "Full Name Configuration"
+msgstr "Configuración de Nombre Completo"
+
+#. module: ins_csv_generator
+#: selection:hr.employee,ins_id_type:0
+msgid "Permiso Trabajo"
+msgstr "Permiso de Trabajo"
+
+#. module: ins_csv_generator
+#: selection:hr.ins.csv.generator.generator.wizard,state:0
+msgid "generate"
+msgstr "Generar"
+
+#. module: ins_csv_generator
+#: selection:hr.employee,ins_id_type:0
+msgid "Número Pasaporte"
+msgstr "Número de Pasaporte"
+
+#. module: ins_csv_generator
+#: view:hr.employee:0
+msgid "INS Information"
+msgstr "Información INS"
+
+#. module: ins_csv_generator
+#: field:hr.ins.csv.generator.generator.wizard,date_end:0
+msgid "Date End"
+msgstr "Fecha Final"
+
+#. module: ins_csv_generator
+#: model:ir.actions.act_window,name:ins_csv_generator.action_generator_wizard_create
+msgid "INS csv Generator"
+msgstr "Generador de csv INS"
+
+#. module: ins_csv_generator
+#: field:hr.employee,ins_exportable:0
+msgid "Export?"
+msgstr "Exportar?"
+
+#. module: ins_csv_generator
+#: field:hr.ins.csv.generator.generator.wizard,data:0
+msgid "File"
+msgstr "Archivo"
+
+#. module: ins_csv_generator
+#: view:hr.ins.csv.generator.generator.wizard:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: ins_csv_generator
+#: selection:hr.employee,ins_id_type:0
+msgid "Sin Documentos"
+msgstr "Sin Documentos"
+
+#. module: ins_csv_generator
+#: field:hr.ins.csv.generator.generator.wizard,date_start:0
+msgid "Date Start"
+msgstr "Fecha Inicial"
+
+#. module: ins_csv_generator
+#: field:hr.ins.csv.generator.generator.wizard,salary_rule_id:0
+msgid "Salary Rule"
+msgstr "Regla de Salario"
+

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+        <menuitem id="menu_generator"
+            parent="hr.menu_hr_main"
+            name="Generate INS File"
+            sequence="100"
+            action="action_generator_wizard_create"/>
+    </data>
+</openerp>

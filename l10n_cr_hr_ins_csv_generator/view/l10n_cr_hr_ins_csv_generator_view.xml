@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+        <!-- Views -->
+        <record model="ir.ui.view" id ="ins_csv_generator_employee_form_view">
+            <field name="name">ins.csv.generator.employee.form.view</field>
+            <field name="model">hr.employee</field>
+            <field name="priority" eval="16"/>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='HR Settings']" position="after">
+                    <page string="INS Information">
+                        <group name="ins_information_group" colspan="4" col="2">
+                            <group colspan="1" col="2">
+                                <separator string="Identification Information" colspan="2"/>
+                                <field name="ins_id_type"/>
+                                <field name="sinid"/>
+                            </group>
+                            <group colspan="1" col="2">
+                                <separator string="Full Name Configuration" colspan="2"/>
+                                <field name="ins_name"/>
+                                <field name="ins_last_name1"/>
+                                <field name="ins_last_name2"/>
+                            </group>
+                            <group colspan="1" col="2">
+                                <separator string="Working Information" colspan="2"/>
+                                <field name="ins_working_day"/>
+                                <field name="ins_paid_days"/>
+                                <field name="ins_paid_hours"/>
+                                <field name="ins_job_code"/>
+                            </group>
+                            <group colspan="1" col="2">
+                                <separator string="Others" colspan="2"/>
+                                <field name="ins_exportable"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
