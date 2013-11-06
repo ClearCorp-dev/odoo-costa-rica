@@ -1,0 +1,183 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* l10n_cr_exchange_rates
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-25 21:36+0000\n"
+"PO-Revision-Date: 2013-07-25 21:36+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_cr_exchange_rates
+#: constraint:account.move:0
+msgid "You can not create more than one move per period on centralized journal"
+msgstr "No puede crear más de un asiento por periodo en un diario centralizado"
+
+#. module: l10n_cr_exchange_rates
+#: constraint:account.move.line:0
+msgid "Company must be the same for its related account and period."
+msgstr "La compañía debe ser la misma para su cuenta y periodos relacionados"
+
+#. module: l10n_cr_exchange_rates
+#: model:ir.model,name:l10n_cr_exchange_rates.model_generate_exchange_rates_wizard
+msgid "generate.exchange.rates.wizard"
+msgstr "generate.exchange.rates.wizard"
+
+#. module: l10n_cr_exchange_rates
+#: sql_constraint:account.account:0
+msgid "The code of the account must be unique per company !"
+msgstr "¡El código de la cuenta debe ser único por compañía!"
+
+#. module: l10n_cr_exchange_rates
+#: field:account.account,exchange_rate_adjustment:0
+msgid "Exchange rate adjustment"
+msgstr "Ajuste de la tasa de cambio"
+
+#. module: l10n_cr_exchange_rates
+#: help:account.move.line,amount_exchange_rate:0
+msgid "The amount of exchange rate."
+msgstr "El monto de tipo de cambio."
+
+#. module: l10n_cr_exchange_rates
+#: view:generate.exchange.rates.wizard:0
+msgid "This wizard will generates an move about exchange rate of the moves that belong to the selected period."
+msgstr "Este asistente genera un asiento sobre el tipo de cambio de los asientos que pertenecen al período seleccionado."
+
+#. module: l10n_cr_exchange_rates
+#: field:generate.exchange.rates.wizard,journal_id:0
+msgid "Journal"
+msgstr "Diario"
+
+#. module: l10n_cr_exchange_rates
+#: view:generate.exchange.rates.wizard:0
+#: model:ir.actions.act_window,name:l10n_cr_exchange_rates.action_generate_exchange_rates_wizard
+#: model:ir.ui.menu,name:l10n_cr_exchange_rates.menu_generate_exchange_rates_wizard
+msgid "Generate move exchange rate adjustment"
+msgstr "Generar asiento de ajuste cambiario"
+
+#. module: l10n_cr_exchange_rates
+#: model:ir.model,name:l10n_cr_exchange_rates.model_account_move_line
+msgid "Journal Items"
+msgstr "Apuntes contables"
+
+#. module: l10n_cr_exchange_rates
+#: constraint:account.move.line:0
+msgid "You can not create journal items on an account of type view."
+msgstr "No puede crear asientos en una cuenta de tipo vista"
+
+#. module: l10n_cr_exchange_rates
+#: help:account.move.line,amount_base_import_exchange_rate:0
+msgid "Exchange rate in the system."
+msgstr "Tipo de cambio en el sistema."
+
+#. module: l10n_cr_exchange_rates
+#: model:ir.model,name:l10n_cr_exchange_rates.model_account_account
+msgid "Account"
+msgstr "Cuenta"
+
+#. module: l10n_cr_exchange_rates
+#: view:generate.exchange.rates.wizard:0
+msgid "Compute"
+msgstr "Crear"
+
+#. module: l10n_cr_exchange_rates
+#: help:generate.exchange.rates.wizard,journal_id:0
+#: help:generate.exchange.rates.wizard,period_id:0
+msgid "Choose the journal for the move automatically generated"
+msgstr "Elija el diario para el asiento generado automáticamente"
+
+#. module: l10n_cr_exchange_rates
+#: field:account.move.line,amount_base_import_exchange_rate:0
+msgid "Base amount exchange rate"
+msgstr "Monto base del tipo de cambio"
+
+#. module: l10n_cr_exchange_rates
+#: view:generate.exchange.rates.wizard:0
+msgid "Select the options do you need"
+msgstr "Seleccione las opciones que necesita"
+
+#. module: l10n_cr_exchange_rates
+#: sql_constraint:account.move.line:0
+msgid "Wrong credit or debit value in accounting entry !"
+msgstr "¡Valor haber o debe erróneo en el asiento contable!"
+
+#. module: l10n_cr_exchange_rates
+#: constraint:account.move.line:0
+msgid "You can not create journal items on closed account."
+msgstr "No puede crear asientos en cuentas cerradas"
+
+#. module: l10n_cr_exchange_rates
+#: model:ir.model,name:l10n_cr_exchange_rates.model_account_move
+msgid "Account Entry"
+msgstr "Asiento contable"
+
+#. module: l10n_cr_exchange_rates
+#: constraint:account.account:0
+msgid "Error ! You can not create recursive accounts."
+msgstr "¡Error! No se pueden crear cuentas recursivas."
+
+#. module: l10n_cr_exchange_rates
+#: field:generate.exchange.rates.wizard,reference:0
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: l10n_cr_exchange_rates
+#: constraint:account.account:0
+msgid "Configuration Error! \n"
+"You can not select an account type with a deferral method different of \"Unreconciled\" for accounts with internal type \"Payable/Receivable\"! "
+msgstr "¡Error de configuración! \n"
+"¡No se puede seleccionar un tipo de cuenta con un método diferente de aplazamiento \"no reconciliadas\" para las cuentas con el tipo interno \"por pagar / por cobrar\"! "
+
+#. module: l10n_cr_exchange_rates
+#: field:account.move.line,amount_exchange_rate:0
+msgid "Amount of exchange rate"
+msgstr "Importe de tipo de cambio"
+
+#. module: l10n_cr_exchange_rates
+#: field:generate.exchange.rates.wizard,period_id:0
+msgid "Period"
+msgstr "Período"
+
+#. module: l10n_cr_exchange_rates
+#: constraint:account.move.line:0
+msgid "The selected account of your Journal Entry forces to provide a secondary currency. You should remove the secondary currency on the account or select a multi-currency view on the journal."
+msgstr "La cuenta seleccionada en su asiento fuerza a tener una moneda secundaria. Debería eliminar la moneda secundaria de la cuenta o asignar al diario una vista multi-moneda"
+
+#. module: l10n_cr_exchange_rates
+#: constraint:account.move.line:0
+msgid "The date of your Journal Entry is not in the defined period! You should change the date or remove this constraint from the journal."
+msgstr "¡La fecha de su asiento no está en el periodo definido! Usted debería cambiar la fecha o borar esta restricción del diario."
+
+#. module: l10n_cr_exchange_rates
+#: help:account.account,exchange_rate_adjustment:0
+msgid "Choose if the account needed an adjusted exchange rate"
+msgstr "Elija si la cuenta requiere ajuste de tipo de cambio"
+
+#. module: l10n_cr_exchange_rates
+#: constraint:account.account:0
+msgid "Configuration Error! \n"
+"You can not define children to an account with internal type different of \"View\"! "
+msgstr "¡Error de configuración! "
+
+#. module: l10n_cr_exchange_rates
+#: view:generate.exchange.rates.wizard:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: l10n_cr_exchange_rates
+#: code:addons/l10n_cr_exchange_rates/wizard/l10n_cr_exchange_rates_wizard.py:51
+#, python-format
+msgid "Created Account Moves"
+msgstr "Asientos contables creados"
+
+#. module: l10n_cr_exchange_rates
+#: field:account.move.line,adjustment:0
+msgid "Adjustment"
+msgstr "Ajuste"
