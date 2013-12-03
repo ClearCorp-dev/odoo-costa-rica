@@ -30,6 +30,7 @@ class GenerateExchangeRatesWizard(osv.osv_memory):
         'reference': fields.char('Reference', size=256, required=True),
         'journal_id': fields.many2one('account.journal', 'Journal', required=True, help="Choose the journal for the move automatically generated"),
         'period_id': fields.many2one('account.period', 'Period', required=True, help="Choose the journal for the move automatically generated"),
+        'exchange_rate_date': fields.date('Exchange rate date', help="If not set, use the end of the period"),
     }
    
     def _get_period(self, cr, uid, context=None):
@@ -48,7 +49,8 @@ class GenerateExchangeRatesWizard(osv.osv_memory):
         reference = data[0].reference
         journal = data[0].journal_id
         period = data[0].period_id
-        created_move_id = account_move_obj.generate_adjustment_move(cr, uid, reference, journal, period, context=context)
+        exchange_rate_date = data[0].exchange_rate_date or False
+        created_move_id = account_move_obj.generate_adjustment_move(cr, uid, reference, journal, period, exchange_rate_date, context=context)
         return {
             'name': _('Created Account Moves'),
             'view_type': 'form',
