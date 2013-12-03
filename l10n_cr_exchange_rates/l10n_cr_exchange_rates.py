@@ -202,6 +202,7 @@ class AccountMove(osv.osv):
                              'move_id': move.id,
                              'period_id': move.period_id.id,
                              'journal_id': move.journal_id.id,
+                             'partner_id': False,
                              'currency_id': account.currency_id.id,
                              'amount_currency': 0.00,
                              'state': 'valid',
@@ -233,6 +234,7 @@ class AccountMove(osv.osv):
                              'move_id': move.id,
                              'period_id': move.period_id.id,
                              'journal_id': move.journal_id.id,
+                             'partner_id': False,
                              'currency_id': False,
                              'amount_currency': 0.00,
                              'state': 'valid',
@@ -257,13 +259,15 @@ class AccountMove(osv.osv):
                     'period_id': period.id,
                     'to_check': False,
                     'company_id': res_user.company_id.id,
+                    'partner_id': False,
                     }
         move_created_id = self.create(cr, uid, move_created)
         move_created = self.browse(cr, uid, move_created_id, context=context)
-        print exchange_rate_date
         if exchange_rate_date:
+            context.update({'date': exchange_rate_date,})
             exchange_rate_end_period = res_currency_obj._current_rate(cr, uid, [company_currency.id], exchange_rate_date, arg=None, context=context)[company_currency.id]
         else:
+            context.update({'date': period.date_stop,})
             exchange_rate_end_period = res_currency_obj._current_rate(cr, uid, [company_currency.id], period.date_stop, arg=None, context=context)[company_currency.id]
         lines_reconcile_ids = self.create_move_lines_reconcile(cr, uid, move_created, exchange_rate_end_period, context=context)
         lines_unreconcile_ids = self.create_move_lines_unreconcile(cr, uid, move_created, exchange_rate_end_period, context=context)
