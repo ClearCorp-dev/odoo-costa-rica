@@ -11,12 +11,16 @@
                         <label string="This wizard will generates an move about exchange rate of the moves that belong to the selected period." colspan="4"/>
                         <newline/>
                         <field name="reference" colspan="4"/>
-                        <field name="journal_id"/>
+                        <group colspan="4" col="4">                        
+                        <field name="journal_id" colspan="2"/>
                         <field name="period_id"/>
+                        <field name="exchange_rate_date"/>
+                        </group>
                         <separator colspan="4"/>
                         <group colspan="4" col="6">
-                           <label string="" colspan="2"/>
+                            <label string=""/>
                            <button icon="gtk-cancel" special="cancel" string="Cancel"/>
+                           <label string=""/>
                            <button icon="gtk-execute" string="Compute" name="generate_exchange_rates" type="object"/>
                         </group>
                      </form>
