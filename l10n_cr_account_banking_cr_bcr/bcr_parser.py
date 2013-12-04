@@ -90,12 +90,13 @@ class BCRParser( object ):
                         
                 #_account_number -> SECOND REVISION        
                 elif (l.find('MOVIMIENTO DE LA CUENTA  CORRIENTE No.', 0, len('MOVIMIENTO DE LA CUENTA  CORRIENTE No.')) > -1):
-                    account_str = self.extract_number(l)   
+                    #account_str = self.extract_number(l)   
                     #001-0246447-0
-                    account_1 = account_str[2:3] #1
-                    account_2 = account_str[4:]  #246447-0
-                    account_complete = account_1+self.extract_number(account_2)#12464470
-                    line_dict['account_number'] = self.extract_number(account_complete)
+                    #account_1 = account_str[2:3] #1
+                    #account_2 = account_str[4:]  #246447-0
+                    #account_complete = account_1+self.extract_number(account_2)#12464470
+                    #line_dict['account_number'] = self.extract_number(account_complete)
+                    line_dict['account_number'] = self.extract_accnumber(l)
                     if (l.find('DOLARES',0,len(l)) > -1):
                         line_dict['currencycode'] = 'USD'
                     else:
@@ -156,7 +157,7 @@ class BCRParser( object ):
         
         else:
             raise osv.except_osv(_('Error'),
-                        _('Error en la importación! La cuenta especificada en el archivo no coincide con la seleccionada en el asistente de importacion'))
+                        _('Error en la importacion! La cuenta especificada en el archivo no coincide con la seleccionada en el asistente de importacion'))
         
     def statement_lines ( self, rec):
         parser = BCRParser()
@@ -431,6 +432,15 @@ class BCRParser( object ):
         for character in result:
             cad = cad + character
         return cad
+    
+    def extract_accnumber(self, line):
+        cad = ''
+        result = re.findall(r'[0-9-]+', line)
+               
+        for character in result:
+            cad = cad + character
+        return cad
+        
 
     def extract_float ( self, amount ):
         cad = ''
@@ -528,12 +538,15 @@ class BCRParser( object ):
             
              #_account_number -> SECOND REVISION        
             elif (l.find('MOVIMIENTO DE LA CUENTA  CORRIENTE No.', 0, len('MOVIMIENTO DE LA CUENTA  CORRIENTE No.')) > -1):
-                account_str = self.extract_number(l)   
+                #account_str = self.extract_number(l)
                 #001-0246447-0
-                account_1 = account_str[2:3] #1
-                account_2 = account_str[4:]  #246447-0
-                account_complete = account_1+self.extract_number(account_2)#12464470
-                accnumber = self.extract_number(account_complete)         
+                #account_1 = account_str[2:3] #1
+                #account_2 = account_str[4:]  #246447-0
+                #account_complete = account_1+self.extract_number(account_2)#12464470
+                #accnumber = self.extract_number(account_complete)
+                #changed the account number comparison not
+                #to remove 0's from acc number
+                accnumber = self.extract_number(l)
                 break
         
         #If return True, the account_number in the wizard and the account in the file are the same.
