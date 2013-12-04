@@ -141,7 +141,7 @@ class BCRParser( object ):
                     line_dict['startingbalance'] = self.extract_float(l)
                         
                 #_closing_balance -> FIRST REVISION
-                if l.find('FINAL', 0, len('FINAL'))  > -1:
+                if l.find('DISPONIBLE', 0, len('DISPONIBLE'))  > -1:
                     line_dict['endingbalance'] = self.extract_float(l)
               
                 #_closing_balance -> SECOND REVISION    
