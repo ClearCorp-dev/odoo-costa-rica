@@ -27,6 +27,8 @@ from datetime import datetime
 from dateutil import parser
 from pprint import PrettyPrinter
 from copy import copy
+from openerp.osv import osv, fields
+from openerp.tools.translate import _
 
 class DaviviendaParser( object ):
     
@@ -55,53 +57,67 @@ class DaviviendaParser( object ):
             'currencycode': '', #currencycode
             'endingbalance': 0.0, #_closing_balance
             'bookingdate': '', #moving_date
-            'ammount': 0.0,
+            'amount': 0.0,
             'id': '',
         }
         
-        #currency_code (local_currency in the stament) extracted from account_number object from the wizard.
-        #account_number (local_account) extracted from account_number object from the wizard.
-        #date_to_str and date_from_str are the dates in wizard, both are strings
-        #the parameters come from davivienda_format in parser class.
-        line_dict['account_number'] = kwargs['account_number']
-        
-        line_dict['currencycode'] = kwargs['local_currency']
-        
-        line_dict['statementnr'] = kwargs['date_from_str'] + ' - '+ kwargs['date_to_str'] + 'Extracto Davivienda ' + line_dict['account_number'] #Interval time of the file.
-         
-        startingbalance = endingbalance = 0.0
+        #Separe the file in statements
         list_split = rec.split('\n')
-        
-        #transmission_number (Date when done the import)
-        date_obj= datetime.now()
-        line_dict['transref'] = date_obj.strftime("%d-%m-%Y %H:%M:%S")
-        #bookingdate
-        line_dict['bookingdate'] = date_obj.strftime("%d-%m-%Y %H:%M:%S")
-    
-        #with the first line compute the initial_balance
+        #Obtain the first line to know the account number
         fist_line = list_split[1]
         first_line_split = fist_line.split(';')
-        startingbalance = float(first_line_split[5].replace(",","")) + float(first_line_split[3].replace(",","")) - float(first_line_split[4].replace(",",""))
-        line_dict['startingbalance'] =  str(startingbalance)
         
-        #the ending_balance is the balance of the last line.        
-        last_position = (len(list_split) - 1)
-        last_line = list_split[last_position] 
-        #last line can be blanck, find the last line with data.
-        if last_line == "":
-            while True:
-                last_position -= 1
-                last_line = list_split[last_position]
-                if last_line is not "":
-                    break       
-        last_line_split = last_line.split(';')
-        endingbalance += float(last_line_split[5].replace(",",""))      
-        line_dict['endingbalance'] =  str(endingbalance)
+        account_number_wizard = kwargs['account_number']#from wizard
+        account_number_file = first_line_split[11]#from file.
         
-        line_dict['ammount'] = startingbalance + endingbalance
-        line_dict['id'] = kwargs['date_from_str'] + ' - '+ kwargs['date_to_str'] + ' Extracto Davivienda ' + line_dict['account_number']
+        #if the account_number in the file match with the account selected in the wizard, return True
+        if account_number_file.find(account_number_wizard) > -1:
+            #currency_code (local_currency in the stament) extracted from account_number object from the wizard.
+            #account_number (local_account) extracted from account_number object from the wizard.
+            #date_to_str and date_from_str are the dates in wizard, both are strings
+            #the parameters come from davivienda_format in parser class.
+            line_dict['account_number'] = kwargs['account_number']
+            
+            line_dict['currencycode'] = kwargs['local_currency']
+            
+            line_dict['statementnr'] = kwargs['date_from_str'] + ' - '+ kwargs['date_to_str'] + 'Extracto Davivienda ' + line_dict['account_number'] #Interval time of the file.
+             
+            startingbalance = endingbalance = 0.0
+            
+            #transmission_number (Date when done the import)
+            date_obj= datetime.now()
+            line_dict['transref'] = date_obj.strftime("%d-%m-%Y %H:%M:%S")
+            #bookingdate
+            line_dict['bookingdate'] = date_obj.strftime("%d-%m-%Y %H:%M:%S")
         
-        return line_dict
+            #with the first line compute the initial_balance
+            fist_line = list_split[1]
+            first_line_split = fist_line.split(';')
+            startingbalance = float(first_line_split[5].replace(",","")) + float(first_line_split[3].replace(",","")) - float(first_line_split[4].replace(",",""))
+            line_dict['startingbalance'] =  str(startingbalance)
+            
+            #the ending_balance is the balance of the last line.        
+            last_position = (len(list_split) - 1)
+            last_line = list_split[last_position] 
+            #last line can be blanck, find the last line with data.
+            if last_line == "":
+                while True:
+                    last_position -= 1
+                    last_line = list_split[last_position]
+                    if len(last_line) > 0 and last_line != "" and last_line != '\r':
+                        break       
+            last_line_split = last_line.split(';')
+            endingbalance += float(last_line_split[5].replace(",",""))      
+            line_dict['endingbalance'] =  str(endingbalance)
+            
+            line_dict['amount'] = str(startingbalance + endingbalance)
+            line_dict['id'] = kwargs['date_from_str'] + ' - '+ kwargs['date_to_str'] + ' Extracto Davivienda ' + line_dict['account_number']
+            
+            return line_dict
+        
+        else:
+            raise osv.except_osv(_('Error'),
+                        _('Error en la importación! La cuenta especificada en el archivo no coincide con la seleccionada en el asistente de importacion'))
     
     '''
     Parse all the lines in the file. Once the header is parser, the next step are the lines.
@@ -137,7 +153,7 @@ class DaviviendaParser( object ):
                 if last_line is not "":
                     break
                     
-        sub_list = list_split [start:end+1]
+        sub_list = list_split [start:end]
         for sub in sub_list:
             line = sub.split(';')
             #effective_date
@@ -165,7 +181,17 @@ class DaviviendaParser( object ):
            
             lines.append(copy(mapping))
                             
-        return lines    
+        return lines   
+    
+    #clear special characters in a row. 
+    def clean_special_characters(self, text_celd):
+        special_characters = {'\r':''}
+         
+        for i, j in special_characters.iteritems():
+            text = text_celd.replace(i, j)    
+            
+        #remove all the blank space.
+        return re.sub(r'\s', '', text) 
     
     """
     ** Kwargs parameter is used for a dynamic list of parameters. 
@@ -179,7 +205,8 @@ class DaviviendaParser( object ):
         If you need a new parameter, you specify its name and value, using the ** kwargs is a dictionary, 
         extract its value, with the respective key
     """
-    def parse_stamenent_record( self, rec, **kwargs):
+    
+    def parse_stamenent_record( self, rec, **kwargs): #parse the header.
 
         matchdict = dict()
         
@@ -187,7 +214,7 @@ class DaviviendaParser( object ):
         matchdict = self.statement_record(rec, **kwargs);
 
         # Remove members set to None
-        matchdict = dict( [( k, v ) for k, v in matchdict.iteritems() if v] )
+        #matchdict = dict( [( k, v ) for k, v in matchdict.iteritems() if v] )
 
         matchkeys = set( matchdict.keys() )
         needstrip = set( [ 'transref', 'account_number', 'statementnr', 'currencycode', 'endingbalance', 'bookingdate'] )
@@ -201,7 +228,7 @@ class DaviviendaParser( object ):
             matchdict[field] = float( matchdict[field].replace( ',', '.' ) )
 
         # Convert date fields
-        needdate = set( ["bookingdate"] )
+        needdate = set( ["bookingdate", "effective_date", "execution_date"] )
                 
         for field in matchkeys & needdate:            
             datestring = matchdict[field]
@@ -209,7 +236,8 @@ class DaviviendaParser( object ):
             matchdict[field] = date_obj
         
         return matchdict
-        
+    
+    #call the method that parse the header and the statements.    
     def parse( self, cr, data ):
         records = []
         # Some records are multiline
@@ -224,23 +252,9 @@ class DaviviendaParser( object ):
         output = []
 
         for rec in records:
+            #parse_stamenent_record parse the header and the statements
             output.append( self.parse_stamenent_record( rec ) )
                 
         return output
 
-
-def parse_file( filename ):
-    daviviendafile = open( filename, "r" )
-    p = DaviviendaParser().parse( daviviendafile.readlines() )
-
-
-def main():
-    """The main function, currently just calls a dummy filename
-
-    :returns: description
-    """
-    parse_file("testfile")
-
-if __name__ == '__main__':
-    main()
 

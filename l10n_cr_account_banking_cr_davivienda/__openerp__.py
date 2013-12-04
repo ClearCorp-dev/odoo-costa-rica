@@ -22,12 +22,14 @@
 
 {
     'name': 'Davivienda Account Banking',
-    'version': '0.5',
+    'version': '0.1',
     'license': 'AGPL-3',
     'author': 'CLEARCORP S.A.',
     'website': 'http://www.clearcorp.co.cr',
-    'category': 'Account Banking',
-    'depends': ['account_banking'],
+    'category': 'Accounting & Finance',
+    'depends': [
+                'account_banking_ccorp',
+                ],
     'init_xml': [],
     'update_xml': [],
     'demo_xml': [],
