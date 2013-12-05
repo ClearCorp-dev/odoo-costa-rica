@@ -31,11 +31,6 @@ msgid "The amount of exchange rate."
 msgstr "El monto de tipo de cambio."
 
 #. module: l10n_cr_exchange_rates
-#: view:generate.exchange.rates.wizard:0
-msgid "This wizard will generates an move about exchange rate of the moves that belong to the selected period."
-msgstr "Este asistente genera un asiento sobre el tipo de cambio de los asientos que pertenecen al período seleccionado."
-
-#. module: l10n_cr_exchange_rates
 #: field:generate.exchange.rates.wizard,journal_id:0
 msgid "Journal"
 msgstr "Diario"
@@ -72,6 +67,11 @@ msgstr "Ajuste de líneas no conciliables"
 #: view:generate.exchange.rates.wizard:0
 msgid "Compute"
 msgstr "Crear"
+
+#. module: l10n_cr_exchange_rates
+#: view:generate.exchange.rates.wizard:0
+msgid "This wizard will generates an move about exchange rate of the moves."
+msgstr "Este asistente genera un asiento sobre el tipo de cambio de los asientos."
 
 #. module: l10n_cr_exchange_rates
 #: help:generate.exchange.rates.wizard,journal_id:0
