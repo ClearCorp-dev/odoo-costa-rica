@@ -102,9 +102,11 @@ class AccountMove(osv.osv):
     def create_move_lines_reconcile(self, cr, uid, move, exchange_rate_end_period, context=None):
         move_line_obj = self.pool.get('account.move.line')
         account_account_obj = self.pool.get('account.account')
+        account_period_obj = self.pool.get('account.period')
         lines_created_ids = []
         account_reconcile_ids = account_account_obj.search(cr, uid, [('exchange_rate_adjustment', '=', True), ('reconcile', '=', True)], context=context)
-        line_reconcile_ids = move_line_obj.search(cr, uid, [('currency_id','!=',None), ('period_id','=',move.period_id.id), ('amount_currency','!=',0), ('account_id','in',account_reconcile_ids), ('adjustment','=',None), ('reconcile_id','=',None)], context=context)
+        periods_ids = account_period_obj.search(cr, uid, [('date_stop','<=',move.period_id.date_stop),('fiscalyear_id','=',move.period_id.fiscalyear_id.id)], context=context)
+        line_reconcile_ids = move_line_obj.search(cr, uid, [('currency_id','!=',None), ('period_id','in',periods_ids), ('amount_currency','!=',0), ('account_id','in',account_reconcile_ids), ('adjustment','=',None), ('reconcile_id','=',None)], context=context)
         lines_reconcile = move_line_obj.browse(cr, uid, line_reconcile_ids, context=context)
         
         for line in lines_reconcile:
@@ -135,7 +137,7 @@ class AccountMove(osv.osv):
                          'credit': credit,
                          'account_id':line.account_id.id,
                          'move_id': move.id,
-                         'period_id': line.period_id.id,
+                         'period_id': move.period_id.id,
                          'journal_id': line.journal_id.id,
                          'partner_id': line.partner_id.id,
                          'currency_id': line.account_id.currency_id.id,
@@ -153,65 +155,38 @@ class AccountMove(osv.osv):
         move_line_obj = self.pool.get('account.move.line')
         account_account_obj = self.pool.get('account.account')
         lines_created_ids = []
-        account_unreconcile_ids = account_account_obj.search(cr, uid, [('exchange_rate_adjustment', '=', True), ('reconcile', '=', False)], context=context)
-
+        account_unreconcile_ids = account_account_obj.search(cr, uid, [('exchange_rate_adjustment', '=', True), ('reconcile', '=', False), ('currency_id', '!=', None)], context=context)
         for account_id in account_unreconcile_ids:
-            total_credit = 0.00
-            total_debit = 0.00
-            adjustment_lines = []
-            line_unreconcile_ids = move_line_obj.search(cr, uid, [('currency_id','!=',None), ('period_id','=',move.period_id.id), ('amount_currency','!=',0), ('account_id','=',account_id), ('adjustment','=',None)], context=context)
-            lines_unreconcile = move_line_obj.browse(cr, uid, line_unreconcile_ids, context=context)
-            for line in lines_unreconcile:
-                if line.move_id.state == 'draft' or not line.amount_currency:
-                    continue
+            res = account_account_obj._account_account__compute(cr, uid, [account_id], ['balance', 'foreign_balance'], context=context)
+            foreign_balance = res[account_id]['foreign_balance']
+            balance = res[account_id]['balance']
+            account_difference = abs(foreign_balance) * exchange_rate_end_period - abs(balance)
+            if account_difference > 0.0 and foreign_balance > 0.0 or account_difference < 0.0 and foreign_balance < 0.0:
+                total_debit = abs(account_difference)
+                total_credit = 0.0
+            elif account_difference < 0.0 and foreign_balance > 0.0 or account_difference > 0.0 and foreign_balance < 0.0:
+                total_debit = 0.0
+                total_credit = abs(account_difference)
+            else:
+                continue
                 
-                adjustment_lines.append(line.id)
-                sign_amount_currency = line.amount_currency < 0 and -1 or 1
-                line_difference = 0
-                if line.credit != 0:
-                    line_difference = sign_amount_currency * line.amount_currency * exchange_rate_end_period - line.credit
-                elif line.debit != 0:
-                    line_difference = sign_amount_currency * line.amount_currency * exchange_rate_end_period - line.debit
-                
-                sign = line_difference < 0 and -1 or 1
-                if line_difference == 0:
-                    continue
-                elif line.credit == 0 and exchange_rate_end_period > line.amount_exchange_rate or line.debit == 0 and exchange_rate_end_period < line.amount_exchange_rate:
-                    total_debit += sign * line_difference
-                else:
-                    total_credit += sign * line_difference
-            
             account = account_account_obj.browse(cr, uid, account_id, context=context)
-            
-            if total_debit != 0.00 or total_credit != 0.00:
-                
-                if total_debit > total_credit:
-                    total_debit -= total_credit
-                    total_credit = 0.00
-                elif total_debit < total_credit:
-                    total_debit = 0.00
-                    total_credit -= total_debit
-                else:
-                    continue
-                
-                move_line = {
-                             'name': _('Unreconcile lines adjustment'),
-                             'debit': total_debit,
-                             'credit': total_credit,
-                             'account_id':account_id,
-                             'move_id': move.id,
-                             'period_id': move.period_id.id,
-                             'journal_id': move.journal_id.id,
-                             'partner_id': False,
-                             'currency_id': account.currency_id.id,
-                             'amount_currency': 0.00,
-                             'state': 'valid',
-                             'company_id': move.company_id.id,
-                             }
-                new_move_line_id = move_line_obj.create(cr, uid, move_line, context=context)
-                move_line_obj.write(cr, uid, adjustment_lines, {'adjustment' : new_move_line_id}, context=context)
-                lines_created_ids.append(new_move_line_id)
-        
+            move_line = {
+                         'name': _('Unreconcile lines adjustment'),
+                         'debit': total_debit,
+                         'credit': total_credit,
+                         'account_id':account_id,
+                         'move_id': move.id,
+                         'period_id': move.period_id.id,
+                         'journal_id': move.journal_id.id,
+                         'partner_id': False,
+                         'currency_id': account.currency_id.id,
+                         'amount_currency': 0.00,
+                         'state': 'valid',
+                         'company_id': move.company_id.id,
+                         }
+            new_move_line_id = move_line_obj.create(cr, uid, move_line, context=context)
+            lines_created_ids.append(new_move_line_id)
         return lines_created_ids
             
     def create_balance_line(self, cr, uid, move, res_user, name, context=None):    

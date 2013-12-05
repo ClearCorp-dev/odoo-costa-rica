@@ -15,7 +15,7 @@
             <field name="arch" type="xml">
                 <data>
                     <field name="currency_mode" position="after">
-                        <field name="exchange_rate_adjustment"/>
+                        <field name="exchange_rate_adjustment" attrs="{'invisible': [('currency_id', '=', False), ('reconcile', '=', False)]}"/>
                     </field>
                 </data>
             </field>

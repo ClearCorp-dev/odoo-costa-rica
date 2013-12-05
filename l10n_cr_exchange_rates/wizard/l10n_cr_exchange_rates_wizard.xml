@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                     <form string="Generate move exchange rate adjustment">
                         <separator string="Select the options do you need" colspan="4"/>
-                        <label string="This wizard will generates an move about exchange rate of the moves that belong to the selected period." colspan="4"/>
+                        <label string="This wizard will generates an move about exchange rate of the moves." colspan="4"/>
                         <newline/>
                         <field name="reference" colspan="4"/>
                         <group colspan="4" col="4">                        
