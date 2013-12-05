@@ -148,12 +148,11 @@ class DaviviendaParser( object ):
         #last line can be blanck, find the last line with data.
         if last_line == "":
             while True:
-                end -= 1
                 last_line = list_split[end]
                 if last_line is not "":
                     break
-                    
-        sub_list = list_split [start:end]
+                end -= 1
+        sub_list = list_split [start:end+1]
         for sub in sub_list:
             line = sub.split(';')
             #effective_date
