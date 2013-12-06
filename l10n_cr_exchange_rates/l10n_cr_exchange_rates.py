@@ -20,6 +20,7 @@
 #
 ##############################################################################
 
+import copy
 from osv import osv, fields
 from tools.translate import _
 
@@ -110,7 +111,7 @@ class AccountMove(osv.osv):
         lines_reconcile = move_line_obj.browse(cr, uid, line_reconcile_ids, context=context)
         
         for line in lines_reconcile:
-            if line.move_id.state == 'draft' or not line.amount_currency:
+            if not line.amount_currency:
                 continue
             
             sign_amount_currency = line.amount_currency < 0 and -1 or 1
@@ -154,7 +155,13 @@ class AccountMove(osv.osv):
     def create_move_lines_unreconcile(self, cr, uid, move, exchange_rate_end_period, context=None):
         move_line_obj = self.pool.get('account.move.line')
         account_account_obj = self.pool.get('account.account')
+        account_period_obj = self.pool.get('account.period')
+        
         lines_created_ids = []
+        context_copy = copy.copy(context)
+        start_period_id = account_period_obj.search(cr, uid, [('fiscalyear_id','=',move.period_id.fiscalyear_id.id),('special','=',False)],order='date_start asc')[0]
+        context.update({'period_from':start_period_id, 'period_to':move.period_id.id})
+        
         account_unreconcile_ids = account_account_obj.search(cr, uid, [('exchange_rate_adjustment', '=', True), ('reconcile', '=', False), ('currency_id', '!=', None)], context=context)
         for account_id in account_unreconcile_ids:
             res = account_account_obj._account_account__compute(cr, uid, [account_id], ['balance', 'foreign_balance'], context=context)
@@ -187,6 +194,8 @@ class AccountMove(osv.osv):
                          }
             new_move_line_id = move_line_obj.create(cr, uid, move_line, context=context)
             lines_created_ids.append(new_move_line_id)
+            
+            context = context_copy
         return lines_created_ids
             
     def create_balance_line(self, cr, uid, move, res_user, name, context=None):    
