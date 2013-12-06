@@ -155,6 +155,7 @@ class AccountMove(osv.osv):
         move_line_obj = self.pool.get('account.move.line')
         account_account_obj = self.pool.get('account.account')
         lines_created_ids = []
+        context.update({'period_from':move.period_id.id, 'period_to':move.period_id.id})
         account_unreconcile_ids = account_account_obj.search(cr, uid, [('exchange_rate_adjustment', '=', True), ('reconcile', '=', False), ('currency_id', '!=', None)], context=context)
         for account_id in account_unreconcile_ids:
             res = account_account_obj._account_account__compute(cr, uid, [account_id], ['balance', 'foreign_balance'], context=context)
