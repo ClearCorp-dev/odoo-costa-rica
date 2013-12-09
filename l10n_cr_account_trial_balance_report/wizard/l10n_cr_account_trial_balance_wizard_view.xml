@@ -18,6 +18,9 @@
                     <field name="fiscalyear_id" position="attributes">
                         <attribute name="attrs">{'required': True}</attribute>
                     </field>      
+                    <field name="out_format" position="attributes">
+                        <attribute name="attrs">{'required': True}</attribute>
+                    </field>
                     <field name="period_from" position="attributes">
                         <attribute name="domain">[('fiscalyear_id', '=', fiscalyear_id), ('special', '=', False)]</attribute>
                         <attribute name="attrs">{'required':[('filter', '=', 'filter_period')]}</attribute>
@@ -34,7 +37,7 @@
                     </field>
                                  
                     <group string="Journals" position="attributes">
-                        <attribute name="attrs">{'invisible': True}</attribute>
+                        <attribute name="attrs">{'invisible': True, 'required':False}</attribute>
                     </group>
                     
                     <group string="Advanced options" position="attributes">

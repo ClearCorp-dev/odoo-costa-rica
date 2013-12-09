@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-23 18:53+0000\n"
-"PO-Revision-Date: 2013-08-23 18:53+0000\n"
+"POT-Creation-Date: 2013-12-02 17:19+0000\n"
+"PO-Revision-Date: 2013-12-02 17:19+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,23 +26,20 @@ msgid "Until Period:"
 msgstr "Hasta el período:"
 
 #. module: l10n_cr_account_statement_change_equity_report
-#: view:statement.change.equity.report.wiz:0
-msgid "{'required':True}"
-msgstr "{'required':True}"
-
-#. module: l10n_cr_account_statement_change_equity_report
 #: help:statement.change.equity.report.wiz,amount_currency:0
 msgid "It adds the currency column on report if the currency differs from the company currency."
 msgstr "Añade la columna de moneda en el reporte si la moneda es diferente de la moneda de la compañía"
 
 #. module: l10n_cr_account_statement_change_equity_report
-#: view:statement.change.equity.report.wiz:0
-msgid "Period"
-msgstr "Período"
+#: code:addons/l10n_cr_account_statement_change_equity_report/wizard/l10n_cr_account_statement_change_equity_wizard.py:74
+#, python-format
+msgid "There is no template defined for the selected format. Check if aeroo report exist."
+msgstr "No existe una plantilla definida para el formato seleccionado. Debe existir un reporte de tipo aeroo."
 
 #. module: l10n_cr_account_statement_change_equity_report
 #: report:addons/l10n_cr_account_statement_change_equity_report/report/l10n_cr_account_statement_change_equity_report.mako:21
-#: model:ir.actions.report.xml,name:l10n_cr_account_statement_change_equity_report.statement_changes_equity_report
+#: model:ir.actions.report.xml,name:l10n_cr_account_statement_change_equity_report.statement_changes_equity_report_ods
+#: model:ir.actions.report.xml,name:l10n_cr_account_statement_change_equity_report.statement_changes_equity_report_odt
 #: model:ir.ui.menu,name:l10n_cr_account_statement_change_equity_report.menu_statement_changes_equity_report
 msgid "Statement Changes of Equity"
 msgstr "Estados de Cambios de Patrimonio"
@@ -63,9 +60,10 @@ msgid "Statement Change of Equity Report Wizard"
 msgstr "Asistente para el Estado de Cambios de Patrimonio"
 
 #. module: l10n_cr_account_statement_change_equity_report
-#: report:addons/l10n_cr_account_statement_change_equity_report/report/l10n_cr_account_statement_change_equity_report.mako:31
-msgid "Account<br />Name"
-msgstr "Cuenta<br />Nombre"
+#: code:addons/l10n_cr_account_statement_change_equity_report/wizard/l10n_cr_account_statement_change_equity_wizard.py:74
+#, python-format
+msgid "Error !"
+msgstr "Error !"
 
 #. module: l10n_cr_account_statement_change_equity_report
 #: report:addons/l10n_cr_account_statement_change_equity_report/report/l10n_cr_account_statement_change_equity_report.mako:33
@@ -106,7 +104,7 @@ msgstr "Var."
 #: view:statement.change.equity.report.wiz:0
 #: field:statement.change.equity.report.wiz,journal_ids:0
 msgid "Journals"
-msgstr "Journals"
+msgstr "Diarios"
 
 #. module: l10n_cr_account_statement_change_equity_report
 #: field:statement.change.equity.report.wiz,target_move:0
@@ -184,6 +182,11 @@ msgid "Prev. vs Sel."
 msgstr "Anterior. vs Sel."
 
 #. module: l10n_cr_account_statement_change_equity_report
+#: field:statement.change.equity.report.wiz,out_format:0
+msgid "Print Format"
+msgstr "Formato de impresión"
+
+#. module: l10n_cr_account_statement_change_equity_report
 #: field:statement.change.equity.report.wiz,account_base_report:0
 msgid "Account Base Report"
 msgstr "Informe Financiero Base"
@@ -208,11 +211,6 @@ msgstr "Períodos"
 #: model:ir.actions.act_window,name:l10n_cr_account_statement_change_equity_report.action_statement_change_equity_report_menu_webkit
 msgid "Action Statement Change of Equity Report"
 msgstr "Generar Reporte de Cambios de Estado de Patrimonio"
-
-#. module: l10n_cr_account_statement_change_equity_report
-#: report:addons/l10n_cr_account_statement_change_equity_report/report/l10n_cr_account_statement_change_equity_report.mako:30
-msgid "Account<br />Code"
-msgstr "Cuenta<br />Código"
 
 #. module: l10n_cr_account_statement_change_equity_report
 #: field:statement.change.equity.report.wiz,date_from:0

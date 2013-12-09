@@ -20,4 +20,4 @@
 #
 ##############################################################################
 
-import l10n_cr_account_financial_report_trial_balance_report
+import l10n_cr_account_report_trial_balance

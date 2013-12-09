@@ -21,17 +21,18 @@
 ##############################################################################
 
 from copy import copy
-import pooler
-from report import report_sxw
+from osv import fields, orm
 from tools.translate import _
 import types
-from osv import fields, orm
+import pooler
 
-from openerp.addons.account_report_lib.account_report_base import accountReportbase
+from openerp.addons.account_report_lib.account_report_base import accountReportbase #Library Base
 
-class profitStatementreport(accountReportbase):
+class Parser(accountReportbase):
+    
     def __init__(self, cr, uid, name, context):
-        super(profitStatementreport, self).__init__(cr, uid, name, context=context)
+        super(Parser, self).__init__(cr, uid, name, context=context)
+        
         self.localcontext.update({
             'cr': cr,
             'uid': uid,
@@ -40,7 +41,7 @@ class profitStatementreport(accountReportbase):
             'get_data': self.get_data,            
         })
         
-    #Get base account to compare result
+  #Get base account to compare result
     def get_base_account_compare(self, data):
         return self._get_info(data, 'base_compare_account', 'account.account')
              
@@ -54,6 +55,7 @@ class profitStatementreport(accountReportbase):
         one result for each type account selected in the list.
         @param child_list: Can be a list of ids (int) or a browse record list.
     '''
+    
     def compute_data(self, cr, uid, result_dict, child_list):
         balance = 0.0 
          
@@ -105,10 +107,7 @@ class profitStatementreport(accountReportbase):
             #In account type, iterate in child, because child is all accounts that
             #match with account types selected.            
          
-            for parent, child in child_list.iteritems():
-                #Add child id to compute data
-                final_data_parent['child_list'] = child
-                                
+            for parent, child in child_list.iteritems():                       
                 for c in child:                   
                     list_ids.append(c.id)
                 
@@ -157,27 +156,26 @@ class profitStatementreport(accountReportbase):
                     balance_fiscal_year = 0.0
                     balance_total_variation = 0.0                
                     
-                    for parent, child in child_list.iteritems():
-                        #Get results for all groups that belongs to account_type.
-                        balance_period += self.compute_data(cr, uid, result_dict_period, child)
-                        balance_last_period += self.compute_data(cr, uid, result_dict_last_period, child)
-                        balance_fiscal_year += self.compute_data(cr, uid, result_dict_fiscal_year, child)
-                        balance_total_variation += balance_period - balance_last_period
-                        
-                        #Update dictionary
-                        final_data_parent.update({
-                                                 'balance_total_period': balance_period,
-                                                 'balance_total_last_period': balance_last_period,
-                                                 'balance_total_variation': balance_period - balance_last_period,
-                                                 'balance_total_fiscal_year':base_account_fiscal_year,
-                                                 'balance_total_percentage_last_period': base_account_last_period != 0 and (100 * balance_last_period / base_account_last_period) or 0,
-                                                 'balance_total_percentage_period': base_account_period != 0 and (100 * balance_period / base_account_period) or 0,
-                                                 'balance_total_percentage_variation': balance_last_period != 0 and (100 * balance_total_variation / balance_last_period) or 0,
-                                                 'balance_total_percentage_fiscal_year': base_account_fiscal_year != 0 and (100 * balance_fiscal_year / base_account_fiscal_year) or 0,
-                                                })
+                    #Get results for all groups that belongs to account_type.
+                    balance_period += self.compute_data(cr, uid, result_dict_period, list_ids)
+                    balance_last_period += self.compute_data(cr, uid, result_dict_last_period, list_ids)
+                    balance_fiscal_year += self.compute_data(cr, uid, result_dict_fiscal_year, list_ids)
+                    balance_total_variation += balance_period - balance_last_period
                     
-                        #Update the dictionary with final results.
-                        final_list.append(copy(final_data_parent))
+                    #Update dictionary
+                    final_data_parent.update({
+                                             'balance_total_period': balance_period,
+                                             'balance_total_last_period': balance_last_period,
+                                             'balance_total_variation': balance_period - balance_last_period,
+                                             'balance_total_fiscal_year':base_account_fiscal_year,
+                                             'balance_total_percentage_last_period': base_account_last_period != 0 and (100 * balance_last_period / base_account_last_period) or 0,
+                                             'balance_total_percentage_period': base_account_period != 0 and (100 * balance_period / base_account_period) or 0,
+                                             'balance_total_percentage_variation': balance_last_period != 0 and (100 * balance_total_variation / balance_last_period) or 0,
+                                             'balance_total_percentage_fiscal_year': base_account_fiscal_year != 0 and (100 * balance_fiscal_year / base_account_fiscal_year) or 0,
+                                            })
+                
+                    #Update the dictionary with final results.
+                    final_list.append(copy(final_data_parent))
                        
             else:
                 final_data_parent.update({
@@ -206,6 +204,7 @@ class profitStatementreport(accountReportbase):
                    final_data_parent['code'] = parent.code                   
                    final_data_parent['level'] = 0
                    
+                   #child_list is use to compute final results and save child and the relation with parent.
                    if child != []:
                         final_data_parent['child_list'] = child
                    else:
@@ -245,8 +244,6 @@ class profitStatementreport(accountReportbase):
                            for c in final_data_parent['child_list']:                                                        
                                final_data['id'] = c.id
                                final_data['level'] = c.level
-                               if 'child' in final_data:
-                                   final_data['child'] = c.child
                                final_data['name'] = c.name
                                final_data['code'] = c.code
                                final_data['is_parent'] = False
@@ -493,8 +490,6 @@ class profitStatementreport(accountReportbase):
                             if c.id != parent.id: #Avoid duplicate accounts.
                                 final_data['id'] = c.id
                                 final_data['level'] = c.level
-                                if 'child' in final_data:
-                                   final_data['child'] = c.child
                                 final_data['name'] = c.name
                                 final_data['code'] = c.code
                                 final_data['is_parent'] = False
@@ -630,10 +625,5 @@ class profitStatementreport(accountReportbase):
         #3. Return a dictionary with all result. 
         final_data = self.get_total_result(cr, uid, main_structure,data)
 
-        return  final_data       
+        return  final_data   
 
-report_sxw.report_sxw(
-    'report.l10n_cr_profit_statement_report',
-    'account.account',
-    'addons/l10n_cr_account_profit_statement_report/report/l10n_cr_account_profit_statement_report.mako',
-    parser=profitStatementreport)

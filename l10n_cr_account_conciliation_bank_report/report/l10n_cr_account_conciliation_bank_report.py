@@ -27,25 +27,78 @@ from tools.translate import _
 from openerp.osv import fields, osv
 
 from openerp.addons.account_report_lib.account_report_base import accountReportbase
+from babel.localedata import list
 
-class conciliationBankreport(accountReportbase):
+class Parser(accountReportbase):
     
-    def __init__(self, cursor, uid, name, context):
+    def __init__(self, cr, uid, name, context):
         #change uid by 1, because 1 is the id for the admin user
         #problems with partner read.
-        super(conciliationBankreport, self).__init__(cursor, 1, name, context=context)
+        super(Parser, self).__init__(cr, 1, name, context=context)
         self.pool = pooler.get_pool(self.cr.dbname)
         self.cursor = self.cr
         
         self.localcontext.update({
             'time': time,
-            'cr' : cursor,
+            'cr' : cr,
             'uid': uid,
+            
             'get_bank_balance': self.get_bank_balance,
             'get_amount': self.get_amount,
-            'get_data': self.get_data,
+            'get_data': self.get_data,       
+            
+            #====================SET AND GET METHODS ===========================
+            'storage':{},
+            'set_data_template': self.set_data_template,
+            #===================================================================
         })
-   
+    
+    #===============================================================================
+    #    get_data_template set_data_template and methods are used to create a workarround 
+    #    (not found a way to have temporary variables in a template in aeroo). 
+    #    The set method calls the methods that do the calculations and stores them 
+    #    in a dictionary that is built into the localcontext, called storage. 
+    #    All values ​​are stored in this dictionary.
+    # 
+    #    Then get_data_template method that receives a string, which is the key of the dictionary, 
+    #    pass the value of the key we want and this method returns the value stored in this key.
+    # 
+    #    Set_data_template method is called in the template if odt as follows: 
+    #    <if test="set_data_template(cr, uid, data)"> </if>. 
+    #    In this way, we obtain the values ​​and can work with them directly in the template odt,
+    #     shaped <get_data_template('key')>.
+    #===============================================================================
+    
+    #set data to use in odt template. 
+    def set_data_template(self, cr, uid, data):        
+        account_id = self.get_accounts_ids(cr, uid, data).id               
+        bank_balance, bank_move_lines, account_is_foreign = self.get_data(cr, uid, data, account_id)
+        input_bank_balance = self.get_bank_balance(data)
+        
+        dict_update = {
+                       'account_id': account_id,
+                       'bank_move_lines': bank_move_lines,
+                       'account_is_foreign': account_is_foreign,
+                       'input_bank_balance': input_bank_balance,
+                       #========================================================
+                       'bank_balance': bank_balance['bank_balance'],
+                       'accounting_balance': bank_balance['accounting_balance'],
+                       'accounting_total': bank_balance['accounting_total'],
+                       'bank_total': bank_balance['bank_total'],
+                       #========================================================
+                       'incomes_to_register': bank_balance['incomes_to_register'],
+                       'credits_to_reconcile': bank_balance['credits_to_reconcile'],
+                       'expenditures_to_register': bank_balance['expenditures_to_register'],
+                       'debits_to_reconcile': bank_balance['debits_to_reconcile'],
+                       #*************************************************************
+                       #========================================================
+                       }
+        
+        self.localcontext['storage'].update(dict_update)
+        return False
+
+    #==========================================================================
+ 
     #Extract bank_balance from wizard.
     def get_bank_balance(self, data):
         return self._get_form_param('bank_balance', data)
@@ -404,9 +457,5 @@ class conciliationBankreport(accountReportbase):
         
         return result_bank_balance, result_move_lines, account_is_foreign
 
-report_sxw.report_sxw(
-    'report.conciliation_bank_report_webkit',
-    'account.account',
-    'addons/l10n_cr_account_conciliation_bank_report/report/l10n_cr_account_conciliation_bank_report.mako',
-    parser=conciliationBankreport)
+
 
