@@ -1,0 +1,58 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* l10n_cr_account_banking_cr_bcr
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-12-09 15:09+0000\n"
+"PO-Revision-Date: 2013-12-09 15:09+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_cr_account_banking_cr_bcr
+#: code:addons/l10n_cr_account_banking_cr_bcr/bcr_format.py:128
+#, python-format
+msgid "Import error"
+msgstr "Error de Importación"
+
+#. module: l10n_cr_account_banking_cr_bcr
+#: code:addons/l10n_cr_account_banking_cr_bcr/bcr_parser.py:239
+#, python-format
+msgid "There is not format implementend for this file."
+msgstr "No hay un formato implementedo para este archivo."
+
+#. module: l10n_cr_account_banking_cr_bcr
+#: code:addons/l10n_cr_account_banking_cr_bcr/bcr_format.py:133
+#, python-format
+msgid "BCR statement import"
+msgstr "Importador de Extractos BCR"
+
+#. module: l10n_cr_account_banking_cr_bcr
+#: code:addons/l10n_cr_account_banking_cr_bcr/bcr_parser.py:135
+#, python-format
+msgid "Error during import. The account specified in the file does not match the account selected in wizard"
+msgstr "Error durante la importación. La cuenta especificada en el archivo no corresponde a la cuenta selecionada en el wizard"
+
+#. module: l10n_cr_account_banking_cr_bcr
+#: code:addons/l10n_cr_account_banking_cr_bcr/bcr_parser.py:134
+#: code:addons/l10n_cr_account_banking_cr_bcr/bcr_parser.py:238
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: l10n_cr_account_banking_cr_bcr
+#: code:addons/l10n_cr_account_banking_cr_bcr/bcr_format.py:135
+#, python-format
+msgid "            This format is available through\n"
+"            the BCR  web interface.\n"
+"            "
+msgstr "            Este formato esta disponible a través\n"
+"            de la interfaz web del BCR.\n"
+"            "
+

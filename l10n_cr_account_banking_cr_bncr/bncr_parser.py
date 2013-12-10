@@ -62,15 +62,19 @@ class BNCRParser( object ):
         #Split the file in statements
         list_split = rec.split('\n')        
        
-        #currency_code (local_currency in the stament) extracted from account_number object from the wizard.
-        #account_number (local_account) extracted from account_number object from the wizard.
-        #date_to_str and date_from_str are the dates in wizard, both are strings
+        #currency_code (local_currency in the stament) extracted 
+        #from account_number object from the wizard.
+        #account_number (local_account) extracted from account_number
+        #object from the wizard. date_to_str and date_from_str are
+        #the dates in wizard, both are strings
         
         line_dict['account_number'] = kwargs['account_number']
         
         line_dict['currencycode'] = kwargs['local_currency']
         
-        line_dict['statementnr'] = kwargs['date_from_str'] + ' - '+ kwargs['date_to_str'] + ' Extracto BNCR ' + line_dict['account_number'] #Interval time of the file.
+        line_dict['statementnr'] = kwargs['date_from_str'] + ' - '+ \
+        kwargs['date_to_str'] + ' Extracto BNCR ' + \
+        line_dict['account_number'] #Interval time of the file.
         
         #transmission_number (Date when done the import)
         date_obj= datetime.now()
@@ -79,10 +83,12 @@ class BNCRParser( object ):
         line_dict['bookingdate'] = date_obj.strftime("%d-%m-%Y %H:%M:%S")
         
         '''
-            For the BNCR parser, the ending_balance comes from wizard. With total of debit and credit and the ending_balance
+            For the BNCR parser, the ending_balance comes from wizard. With
+            total of debit and credit and the ending_balance
             compute the initial_balance.
         '''
-        #extract the total of debit and credit from the file. The last statements and compute the startingbalance
+        #extract the total of debit and credit from the file.
+        #The last statements and compute the startingbalance
         last_position = (len(list_split) - 1)
         last_line = list_split[last_position] 
         #last line can be blanck, find the last line with data.
@@ -120,7 +126,9 @@ class BNCRParser( object ):
         line_dict['endingbalance'] =  str(kwargs['ending_balance'])
         
         line_dict['ammount'] = startingbalance + endingbalance
-        line_dict['id'] = kwargs['date_from_str'] + ' - '+ kwargs['date_to_str'] + ' Extracto BNCR ' + line_dict['account_number']
+        line_dict['id'] = kwargs['date_from_str'] + ' - '+ \
+        kwargs['date_to_str'] + ' Extracto BNCR ' + \
+        line_dict['account_number']
         
         return line_dict
         
@@ -197,14 +205,17 @@ class BNCRParser( object ):
      
     """
     ** Kwargs parameter is used for a dynamic list of parameters. 
-        The wizard imported extracts used in all parsers and not all parsers have all the necessary information in your file, 
+        The wizard imported extracts used in all parsers and not 
+        all parsers have all the necessary information in your file, 
         so get information from the wizard and passed by the ** kwargs. 
         Then in the parses that are needed, are extracted from the ** kwargs and if needed, 
         the parser still works the same way without this parameter.
         
-        The rest of the methods must receive this parameter. (As the method that parse the header and the lines). 
+        The rest of the methods must receive this parameter. (As the method 
+        that parse the header and the lines). 
         
-        If you need a new parameter, you specify its name and value, using the ** kwargs is a dictionary, 
+        If you need a new parameter, you specify its name and value,
+        using the ** kwargs is a dictionary, 
         extract its value, with the respective key
     """
     def parse_stamenent_record( self, rec, **kwargs):
@@ -218,7 +229,8 @@ class BNCRParser( object ):
         matchdict = dict( [( k, v ) for k, v in matchdict.iteritems() if v] )
 
         matchkeys = set( matchdict.keys() )
-        needstrip = set( [ 'transref', 'account_number', 'statementnr', 'currencycode', 'endingbalance', 'bookingdate'] )
+        needstrip = set( [ 'transref', 'account_number', 'statementnr',
+                          'currencycode', 'endingbalance', 'bookingdate'] )
 
         for field in matchkeys & needstrip:
             matchdict[field] = matchdict[field].strip()
@@ -252,7 +264,8 @@ class BNCRParser( object ):
         output = []
 
         for rec in records:
-            #parse_stament_record call the method that parse the header and the stament of the file.
+            #parse_stament_record call the method that
+            #parse the header and the stament of the file.
             output.append(self.parse_stamenent_record( rec ))
                 
         return output

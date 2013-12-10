@@ -120,7 +120,7 @@ class statement(models.mem_bank_statement):
 
 def raise_error(message, line):
     raise osv.osv.except_osv(_('Import error'),
-        'Error in import:%s\n\n%s' % (message, line))
+        _('Error in import:%s\n\n%s') % (message, line))
 
 class parser_davivienda( models.parser ):
     
@@ -171,11 +171,15 @@ class parser_davivienda( models.parser ):
         stmnt._closing_balance(records)
         stmnt._forward_available(records)
         stmnt._execution_date_transferred_amount (records)
-        stmnt._transaction_new(data)#call the method statement_lines in parser to parse all the lines in file and add to stament.
+        stmnt._transaction_new(data)
+        #call the method statement_lines in
+        #parser to parse all the lines in file and add to stament.
                   
         '''
-        A stament must have a header and transacctions. The method parse_stamenent_record parse the header and the 
-        method _transaction_new parse all the line (transactions) in the file. 
+        A stament must have a header and transacctions. The method
+        parse_stamenent_record parse the header and the 
+        method _transaction_new parse all the line 
+        (transactions) in the file. 
         '''
         if stmnt.is_valid():
             result.append(stmnt)

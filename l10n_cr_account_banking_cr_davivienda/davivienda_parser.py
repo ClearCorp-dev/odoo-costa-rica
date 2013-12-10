@@ -35,14 +35,17 @@ class DaviviendaParser( object ):
     #Define the header for the extract to import.
     '''
      ** Kwargs parameter is used for a dynamic list of parameters. 
-        The wizard imported extracts used in all parsers and not all parsers have all the necessary information in your file, 
+        The wizard imported extracts used in all parsers and not 
+        all parsers have all the necessary information in your file, 
         so get information from the wizard and passed by the ** kwargs. 
-        Then in the parses that are needed, are extracted from the ** kwargs and if needed, 
-        the parser still works the same way without this parameter.
+        Then in the parses that are needed, are extracted from the ** kwargs
+        and if needed, the parser still works the same way without this parameter.
         
-        The rest of the methods must receive this parameter. (As the method that parse the header and the lines). 
+        The rest of the methods must receive this parameter. (As 
+        the method that parse the header and the lines). 
         
-        If you need a new parameter, you specify its name and value, using the ** kwargs is a dictionary, 
+        If you need a new parameter, you specify its name and value,
+        using the ** kwargs is a dictionary, 
         extract its value, with the respective key
     '''
     def statement_record ( self, rec, **kwargs):
@@ -61,7 +64,7 @@ class DaviviendaParser( object ):
             'id': '',
         }
         
-        #Separe the file in statements
+        #Split the file in statements
         list_split = rec.split('\n')
         #Obtain the first line to know the account number
         fist_line = list_split[1]
@@ -70,17 +73,23 @@ class DaviviendaParser( object ):
         account_number_wizard = kwargs['account_number']#from wizard
         account_number_file = first_line_split[11]#from file.
         
-        #if the account_number in the file match with the account selected in the wizard, return True
+        #if the account_number in the file match with the account
+        #selected in the wizard, return True
         if account_number_file.find(account_number_wizard) > -1:
-            #currency_code (local_currency in the stament) extracted from account_number object from the wizard.
-            #account_number (local_account) extracted from account_number object from the wizard.
-            #date_to_str and date_from_str are the dates in wizard, both are strings
+            #currency_code (local_currency in the stament)
+            #extracted from account_number object from the wizard.
+            #account_number (local_account) extracted from 
+            #account_number object from the wizard.
+            #date_to_str and date_from_str are the dates in
+            #wizard, both are strings
             #the parameters come from davivienda_format in parser class.
             line_dict['account_number'] = kwargs['account_number']
             
             line_dict['currencycode'] = kwargs['local_currency']
             
-            line_dict['statementnr'] = kwargs['date_from_str'] + ' - '+ kwargs['date_to_str'] + 'Extracto Davivienda ' + line_dict['account_number'] #Interval time of the file.
+            line_dict['statementnr'] = kwargs['date_from_str'] + ' - '+ \
+            kwargs['date_to_str'] + 'Extracto Davivienda ' + \
+            line_dict['account_number'] #Interval time of the file.
              
             startingbalance = endingbalance = 0.0
             
@@ -93,7 +102,9 @@ class DaviviendaParser( object ):
             #with the first line compute the initial_balance
             fist_line = list_split[1]
             first_line_split = fist_line.split(';')
-            startingbalance = float(first_line_split[5].replace(",","")) + float(first_line_split[3].replace(",","")) - float(first_line_split[4].replace(",",""))
+            startingbalance = float(first_line_split[5].replace(",","")) + \
+            float(first_line_split[3].replace(",","")) - \
+            float(first_line_split[4].replace(",",""))
             line_dict['startingbalance'] =  str(startingbalance)
             
             #the ending_balance is the balance of the last line.        
@@ -111,16 +122,20 @@ class DaviviendaParser( object ):
             line_dict['endingbalance'] =  str(endingbalance)
             
             line_dict['amount'] = str(startingbalance + endingbalance)
-            line_dict['id'] = kwargs['date_from_str'] + ' - '+ kwargs['date_to_str'] + ' Extracto Davivienda ' + line_dict['account_number']
+            line_dict['id'] = kwargs['date_from_str'] + ' - ' + \
+            kwargs['date_to_str'] + ' Extracto Davivienda ' + \
+            line_dict['account_number']
             
             return line_dict
         
         else:
-            raise osv.except_osv(_('Error'),
-                        _('Error en la importación! La cuenta especificada en el archivo no coincide con la seleccionada en el asistente de importacion'))
+            raise osv.except_osv(_('Import Error'),
+                        _('The account specified in the file does not'
+                          ' match the account selected in wizard'))
     
     '''
-    Parse all the lines in the file. Once the header is parser, the next step are the lines.
+    Parse all the lines in the file. Once the header
+    is parser, the next step are the lines.
     '''     
     def statement_lines ( self, rec ):
         parser = DaviviendaParser()
@@ -158,9 +173,9 @@ class DaviviendaParser( object ):
             #effective_date
             date_str = line[0].replace("/","-")
             date= datetime.strptime(date_str, "%d-%m-%Y")               
-            mapping['effective_date'] = date #fecha_contable.                        
+            mapping['effective_date'] = date
             #execution_date
-            mapping['execution_date'] = date #fecha_movimiento
+            mapping['execution_date'] = date
                                    
             mapping['transfer_type'] = 'NTRF'
             mapping['reference'] = line[2] #Ref 1 
@@ -194,14 +209,17 @@ class DaviviendaParser( object ):
     
     """
     ** Kwargs parameter is used for a dynamic list of parameters. 
-        The wizard imported extracts used in all parsers and not all parsers have all the necessary information in your file, 
+        The wizard imported extracts used in all parsers 
+        and not all parsers have all the necessary information in your file, 
         so get information from the wizard and passed by the ** kwargs. 
         Then in the parses that are needed, are extracted from the ** kwargs and if needed, 
         the parser still works the same way without this parameter.
         
-        The rest of the methods must receive this parameter. (As the method that parse the header and the lines). 
+        The rest of the methods must receive this parameter. (As the 
+        method that parse the header and the lines). 
         
-        If you need a new parameter, you specify its name and value, using the ** kwargs is a dictionary, 
+        If you need a new parameter, you specify its name and value, 
+        using the ** kwargs is a dictionary, 
         extract its value, with the respective key
     """
     
@@ -216,7 +234,8 @@ class DaviviendaParser( object ):
         #matchdict = dict( [( k, v ) for k, v in matchdict.iteritems() if v] )
 
         matchkeys = set( matchdict.keys() )
-        needstrip = set( [ 'transref', 'account_number', 'statementnr', 'currencycode', 'endingbalance', 'bookingdate'] )
+        needstrip = set( [ 'transref', 'account_number', 'statementnr',
+                          'currencycode', 'endingbalance', 'bookingdate'])
 
         for field in matchkeys & needstrip:
             matchdict[field] = matchdict[field].strip()

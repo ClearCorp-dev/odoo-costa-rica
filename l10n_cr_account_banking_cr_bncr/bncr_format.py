@@ -70,7 +70,7 @@ class transaction(models.mem_bank_transaction):
 
 class statement(models.mem_bank_statement):
     '''
-    Bank statement imported data    '''
+    Bank statement imported data'''
       
     def _transmission_number(self, record):
         self.id = record['transref']
@@ -119,8 +119,8 @@ class statement(models.mem_bank_statement):
             transaction.id = ','.join([record[k] for k in ['infoline{0}'.format(i) for i in range(2,5)] if record.has_key(k)])
 
 def raise_error(message, line):
-    raise osv.osv.except_osv(_('Import error'),
-        'Error in import:%s\n\n%s' % (message, line))
+    raise osv.osv.except_osv(_('Import Error'),
+        _('Error in import:%s\n\n%s') % (message, line))
 
 class parser_bncr( models.parser ):
     
@@ -133,7 +133,7 @@ class parser_bncr( models.parser ):
     country_code = 'CR'
     doc = _('''\
             This format is available through
-            the National Bank  web interface.
+            the BNCR web interface.
             ''')
     
     '''
@@ -158,9 +158,7 @@ class parser_bncr( models.parser ):
             **kwargs have all the parameters that have the wizard and 
             has all the parameters passed from the wizard before calling 
             the method that parses the file.            
-        """        
-        #try:            
-        #pass to encoding with the correct type of file.
+        """
         data = base64.decodestring(statements_file)        
     
         records = parser.parse_stamenent_record(data,**kwargs)
@@ -172,8 +170,10 @@ class parser_bncr( models.parser ):
         stmnt._closing_balance(records)
         stmnt._forward_available(records)
         stmnt._execution_date_transferred_amount (records)
-        stmnt._transaction_new(data)#call the method statement_lines in parser to parse all the lines in file and add to stament.
-                  
+        stmnt._transaction_new(data)
+        #call the method statement_lines in parser 
+        #to parse all the lines in file and add to stament.
+        
         '''
         A stament must have a header and transacctions. The method parse_stamenent_record parse the header and the 
         method _transaction_new parse all the line (transactions) in the file. 
@@ -182,8 +182,5 @@ class parser_bncr( models.parser ):
             result.append(stmnt)
                   
         return result
-        '''
-        except:
-            raise osv.except_osv(_('Error'), _('The file have a invalid extension for this parser.\nThe valid extension are .txt or .csv'))
-        '''
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

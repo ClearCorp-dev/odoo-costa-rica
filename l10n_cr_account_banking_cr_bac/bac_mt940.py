@@ -78,6 +78,7 @@ class transaction(models.mem_bank_transaction):
 
         if not self.is_valid():
             logger.info("Invalid: %s", record)
+            
     def is_valid(self):
         '''
         We don't have remote_account so override base
@@ -146,7 +147,7 @@ class statement(models.mem_bank_statement):
 
 def raise_error(message, line):
     raise osv.osv.except_osv(_('Import error'),
-        'Error in import:%s\n\n%s' % (message, line))
+        _('Error in import:%s\n\n%s') % (message, line))
 
 class parser_bac_mt940(models.parser):
     code = 'BAC-MT940'
@@ -198,22 +199,21 @@ class parser_bac_mt940(models.parser):
             for statement_lines in statement_list:
                 stmnt = statement()
                 
-                """EXTRACCION DE DATOS """
+                """Data Extraction """
                 for record in statement_lines:               
                     records = parser.parse_record(record,**kwargs)
     
                     if records is not None:
-                        ############START PAGO CAPITAL INVERSION
+                        #Start PAGO CAPITAL INVERSION
                         if records['recordid'] == '60F':
                             start_balance = float(records['startingbalance'])
                         if records['recordid'] == '61':
                             amount = float(records['amount'])
                         if records['recordid'] == '86' and records['infoline1'] == 'PAGO CAPITAL INVERSION':
                             start_amount = amount
-                            start_balance += amount #con la suma ya realizada.
-                        ############END PAGO CAPITAL INVERSION
+                            start_balance += amount
                         
-                        ############START INVERSION COLOCADA
+                        #Start INVERSION COLOCADA
                         if records['recordid'] == '86':
                             cad = records['infoline1']
                             if cad.find('INVERSION COLOCADA') > 0:
@@ -223,7 +223,7 @@ class parser_bac_mt940(models.parser):
                             ending_balance = (inversion_colocada + float(records['endingbalance']))
     
                 if records is not None:            
-                    """ACTUALIZACION DE DATOS """
+                    """Data Update """
                     for record in statement_lines:   
                         if record is not None:             
                             records = parser.parse_record(record)    
@@ -240,8 +240,8 @@ class parser_bac_mt940(models.parser):
                                 dic = {'endingbalance': ending_balance}
                                 records.update(dic)
                                 
-                            #SI LA LINEA NO ES INVERSION COLOCADA O PAGO CAPITAL INVERSION, SE AGREGA A LA LISTA
-                            #PAGO_CAPITAL
+                            #If the line is not a "INVERSION COLOCADA" or "PAGO CAPITAL INVERSION",
+                            #it is added to the list "PAGO_CAPITAL"
                             if (records['recordid'] == '86'):
                                 cad = records['infoline1']
                                 
@@ -254,7 +254,6 @@ class parser_bac_mt940(models.parser):
                                         list_record.append(records)
                                 except:
                                     list_record.append(records)
-                            #####################################################################
                             
                             if (records['recordid'] != '61' and records['recordid'] != '86' ):
                                 list_record.append(records)                
@@ -277,7 +276,8 @@ class parser_bac_mt940(models.parser):
             return result
         
         else:
-            raise osv.except_osv(_('Error'),
-                        _('Error en la importación! La cuenta especificada en el archivo no coincide con la seleccionada en el asistente de importacion'))
+            raise osv.except_osv(_('Import Error'),
+                        _('The account specified in the file does not match'
+                          ' the account selected in wizard.'))
         
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -32,30 +32,11 @@ from openerp.osv import osv, fields
 
 class BCRParser( object ):
     """
-    Para noviembre de 2012 se cambia el formato del archivo del BCR. Se cambia el encabezado del archivo
-    así como el final del mismo. Además en la parte de abajo cambia el formato y visualización de los
-    saldos finales. 
-    
-    El cambio más evidente es el formato de la cuenta de banco, pasa de 1-246447-0 a 001-0246447-0
-    Revisión # 1                                                                         Revisión#2
-    Encabezado anterior:                                                                 Encabezado nuevo
-        BANCO DE COSTA RICA                                                              BANCO DE COSTA RICA
-        Movimiento de Cuenta Corriente 1-246447-0 Colones (puede ser Dólares o Dolares)  MOVIMIENTO DE LA CUENTA  CORRIENTE No. 001-0246447-0  COLONES (DOLARES)
-        Dueño: COMPA IA INMOBILIARIA CENTROA                                             DUENO: COMPA IA INMOBILIARIA CENTROAMERICANA CICCR S                            
-        Movimiento realizado el periodo del 01-10-2012 al 31-10-2012                     MOVIMIENTO REALIZADO                           DEL 01-11-2012 AL 30-11-2012
-    
-    Final de archivo
-    Revisión # 1                                                        Revisión #2
-    TOTALES DEL MOVIMIENTO CONTABILIZADO                                TOTALES DEL MOVIMIENTO CONTABILIZADO 
-          Cantidad  -------Monto--------                                CANTIDAD    -------MONTO-------- 
-    Débitos       239       81,876,681.22                               DEBITOS       209        67,553,414.30                                                                                                                                
-    Créditos       27       92,636,599.01                               CREDITOS        8        66,086,326.53
-
-    Saldo Inicial            21,682,799.04                              -------- SALDOS --------                            
-    Saldo Final              33,992,829.43                              INICIAL             33,992,829.43
-                                                                        FINAL               32,525,741.66
-    Solicitado el 01/11/2012 20:03:34                                   SOLICITADO EL 01-12-2012 A LAS 15:36:15:17                                       
+    BCR Parser object is intended to parse bank statements files 
+    from raw files. Constant changes in raw files are forcing this
+    module to keep in constant revision due to an external situation 
     """
+    
     def statement_record ( self, rec, **kwargs):
         lines = []
         line_dict = {}
@@ -90,12 +71,6 @@ class BCRParser( object ):
                         
                 #_account_number -> SECOND REVISION        
                 elif (l.find('MOVIMIENTO DE LA CUENTA  CORRIENTE No.', 0, len('MOVIMIENTO DE LA CUENTA  CORRIENTE No.')) > -1):
-                    #account_str = self.extract_number(l)   
-                    #001-0246447-0
-                    #account_1 = account_str[2:3] #1
-                    #account_2 = account_str[4:]  #246447-0
-                    #account_complete = account_1+self.extract_number(account_2)#12464470
-                    #line_dict['account_number'] = self.extract_number(account_complete)
                     line_dict['account_number'] = self.extract_accnumber(l)
                     if (l.find('DOLARES',0,len(l)) > -1):
                         line_dict['currencycode'] = 'USD'
@@ -157,7 +132,8 @@ class BCRParser( object ):
         
         else:
             raise osv.except_osv(_('Error'),
-                        _('Error en la importacion! La cuenta especificada en el archivo no coincide con la seleccionada en el asistente de importacion'))
+                        _('Error during import. The account specified in the file'
+                          ' does not match the account selected in wizard'))
         
     def statement_lines ( self, rec):
         parser = BCRParser()
@@ -399,8 +375,7 @@ class BCRParser( object ):
             #execution_date
             date_str = fields[1]
             date = datetime.strptime(date_str, "%d-%m-%y")
-            mapping['execution_date'] = date #fecha_movimiento                       
-           
+            mapping['execution_date'] = date
             mapping['local_currency'] = currencycode
             mapping['transfer_type'] = 'NTRF'
             mapping['reference'] = parser.extract_number(fields[2])
@@ -538,14 +513,6 @@ class BCRParser( object ):
             
              #_account_number -> SECOND REVISION        
             elif (l.find('MOVIMIENTO DE LA CUENTA  CORRIENTE No.', 0, len('MOVIMIENTO DE LA CUENTA  CORRIENTE No.')) > -1):
-                #account_str = self.extract_number(l)
-                #001-0246447-0
-                #account_1 = account_str[2:3] #1
-                #account_2 = account_str[4:]  #246447-0
-                #account_complete = account_1+self.extract_number(account_2)#12464470
-                #accnumber = self.extract_number(account_complete)
-                #changed the account number comparison not
-                #to remove 0's from acc number
                 accnumber = self.extract_number(l)
                 break
         
