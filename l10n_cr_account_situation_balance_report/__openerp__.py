@@ -21,22 +21,21 @@
 ##############################################################################
 
 {
-    'name': 'Situation Balance Report Webkit',
-    'description': "Create the situation balance report",
+    'name': 'Situation Balance Report',
     'version': '1.0',
     'author': 'CLEARCORP S.A.',
     'category': 'Finance',
+    'description': """"
+    Situation Balance Report.
+    =========================
+    Create the situation balance report""",    
     'website': "http://clearcorp.co.cr",
-    'images': [],
-    'depends': ['account_report_lib', 'account_report_signatures',
-                ],
-    'init_xml': [],
-    'demo_xml' : [],
-    'update_xml': ['report/report.xml',
-                   'wizard/l10n_cr_account_situation_balance_wizard_view.xml',
-                   'report_menus.xml'
-                   ],
-    'test': [],
+    'depends': ['account_report_lib', ],
+    'data': [
+             'report/report.xml',
+             'wizard/l10n_cr_account_situation_balance_wizard_view.xml',
+             'report_menus.xml'
+            ],
     'active': False,
     'installable': True,
     'license': 'AGPL-3',

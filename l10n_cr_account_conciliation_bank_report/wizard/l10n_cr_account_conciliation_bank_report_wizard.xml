@@ -13,7 +13,11 @@
                         <separator string="Conciliation Bank" colspan="4"/>
                         <label nolabel="1" colspan="4" string="This report allows you to print or generate a pdf of your conciliation bank with details of all your payable/receivable account"/>
                     </xpath>                    
-        
+                    
+                    <field name="out_format" position="attributes">
+                        <attribute name="attrs">{'required': True}</attribute>
+                    </field>
+                    
                     <group string="Account Financial Report" position="attributes">                   
                         <attribute name="attrs">{'invisible': True}</attribute>
                     </group>
@@ -60,7 +64,7 @@
                     </field>
                    
                     <group string="Journals" position="attributes">
-                        <attribute name="attrs">{'invisible': True}</attribute>
+                        <attribute name="attrs">{'invisible': True, 'required':False}</attribute>
                     </group>
                     
                 </data>

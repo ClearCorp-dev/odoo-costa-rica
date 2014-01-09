@@ -18,8 +18,12 @@
                      <field name="fiscalyear_id" position="attributes">
                         <attribute name="attrs">{'required': True}</attribute>
                     </field>
-                    <field name="period_from" position="replace">
-                        <field widget="selection" name="period_from" string="Period" domain="[('state', '=', 'draft'),('special', '=', False)]" attrs="{'readonly':[('filter','!=','filter_period')], 'required':[('filter', '=', 'filter_period')]}"/>                        
+                    <field name="out_format" position="attributes">
+                        <attribute name="attrs">{'required': True}</attribute>
+                    </field>
+                    <field name="period_from" position="attributes">
+                         <attribute name="domain">[('state', '=', 'draft'), ('special', '=', False),('fiscalyear_id', '=', fiscalyear_id)]</attribute>
+                         <attribute name="attrs">{'required': [('filter', '=', 'filter_period')]}</attribute>
                     </field>
                     <field name="period_to" position="attributes">
                         <attribute name="attrs">{'invisible': True, 'required': False}</attribute>
@@ -34,8 +38,8 @@
                         <attribute name="invisible">True</attribute>
                     </xpath>   
                     <group string="Journals" position="attributes">
-                        <attribute name="attrs">{'invisible': True}</attribute>
-                    </group>                                    
+                        <attribute name="attrs">{'invisible': True, 'required':False}</attribute>
+                    </group>                                   
                     <group string="Advanced options" position="attributes">
                         <attribute name="attrs">{'invisible': True}</attribute>
                     </group> 
@@ -65,16 +69,6 @@
             <field name="view_id" ref="profit_statement_report_view_webkit"/>
             <field name="target">new</field>
         </record>
-        
-        <record model="ir.values" id="action_profit_statement_report_values_webkit">
-            <field name="model_id" ref="account.model_account_account"/>
-            <field name="object" eval="1"/>
-            <field name="name">Profit Statement Report</field>
-            <field name="key2">client_print_multi</field>
-            <field name="value"
-                eval="'ir.actions.act_window,' +str(ref('action_profit_statement_report_menu_webkit'))"/>
-            <field name="key">action</field>
-            <field name="model">account.account</field>
-        </record>
+
     </data>
 </openerp>

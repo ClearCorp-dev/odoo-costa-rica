@@ -29,10 +29,10 @@ from osv import fields, orm
 
 from openerp.addons.account_report_lib.account_report_base import accountReportbase
 
-class trialBalancereport(accountReportbase):
+class Parser(accountReportbase):
     
     def __init__(self, cr, uid, name, context):      
-        super(trialBalancereport, self).__init__(cr, uid, name, context=context)
+        super(Parser, self).__init__(cr, uid, name, context=context)
         self.localcontext.update({
             'cr': cr,
             'uid':uid,
@@ -271,8 +271,8 @@ class trialBalancereport(accountReportbase):
                            for c in final_data_parent['child_list']:                                                        
                                final_data['id'] = c.id
                                final_data['level'] = c.level
-                               if 'child' in final_data:
-                                   final_data['child'] = c.child
+#                               if 'child' in final_data:
+#                                   final_data['child'] = c.child
                                final_data['name'] = c.name
                                final_data['code'] = c.code
                                final_data['is_parent'] = False
@@ -402,10 +402,10 @@ class trialBalancereport(accountReportbase):
                                                             all_accounts=all_accounts)
                 
                 final_data_parent.update({
-                                             'initial_balance':0.0,
-                                             'credit':0.0,
-                                             'debit':0.0,
-                                             'balance': 0.0,
+                                             'initial_balance':initial_balance,
+                                             'credit':credit,
+                                             'debit':debit,
+                                             'balance': balance,
                                             })
           
             else:
@@ -449,8 +449,8 @@ class trialBalancereport(accountReportbase):
                         if c.id != parent.id: #Avoid duplicate accounts.
                             final_data['id'] = c.id
                             final_data['level'] = c.level
-                            if 'child' in final_data:
-                               final_data['child'] = c.child
+#                            if 'child' in final_data:
+#                               final_data['child'] = c.child
                             final_data['name'] = c.name
                             final_data['code'] = c.code
                             final_data['is_parent'] = False
@@ -599,10 +599,3 @@ class trialBalancereport(accountReportbase):
         final_data = self.get_total_result(cr, uid, main_structure,data)
 
         return  final_data
-    
-report_sxw.report_sxw(
-    'report.l10n_cr_trial_balance_report',
-    'account.account',
-    'addons/l10n_cr_account_trial_balance_report/report/l10n_cr_account_financial_report_trial_balance_report.mako',
-    parser=trialBalancereport)
-

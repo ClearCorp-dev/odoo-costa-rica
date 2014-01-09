@@ -29,9 +29,9 @@ from osv import fields, orm
 
 from openerp.addons.account_report_lib.account_report_base import accountReportbase
 
-class statementChangesequityReport(accountReportbase):
+class Parser(accountReportbase):
     def __init__(self, cr, uid, name, context):
-        super(statementChangesequityReport, self).__init__(cr, uid, name, context=context)
+        super(Parser, self).__init__(cr, uid, name, context=context)
         self.localcontext.update({
             'cr': cr,
             'uid': uid,
@@ -134,7 +134,7 @@ class statementChangesequityReport(accountReportbase):
                         balance_total_variation += balance_period - balance_last_period
                         balance_total_variation_percentage = balance_last_period != 0 and ((100 * balance_total_variation) / balance_last_period) or 0,
                         
-                        #Update dictionary
+                    #Update dictionary
                     final_data_parent.update({
                                              'balance_total_period': balance_period,
                                              'balance_total_last_period': balance_last_period,
@@ -498,9 +498,3 @@ class statementChangesequityReport(accountReportbase):
         final_data = self.get_total_result(cr, uid, main_structure,data)
 
         return  final_data       
-
-report_sxw.report_sxw(
-    'report.l10n_cr_statement_change_equity_report',
-    'account.account',
-    'addons/l10n_cr_account_profit_statement_report/report/l10n_cr_account_statement_change_equity_report.mako',
-    parser=statementChangesequityReport)

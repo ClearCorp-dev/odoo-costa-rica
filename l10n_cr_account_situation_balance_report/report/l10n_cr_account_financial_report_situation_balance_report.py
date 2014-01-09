@@ -28,14 +28,15 @@ from osv import fields, orm
 
 from openerp.addons.account_report_lib.account_report_base import accountReportbase
 
-class situationBalancereport(accountReportbase):
+class Parser(accountReportbase):
     
     def __init__(self, cr, uid, name, context):      
-        super(situationBalancereport, self).__init__(cr, uid, name, context=context)
+        super(Parser, self).__init__(cr, uid, name, context=context)
         self.localcontext.update({
             'cr': cr,
             'uid':uid,
             'get_data': self.get_data,
+            'formatLang':self.formatLang, #Give format to numbers and percentages
         })
     
     '''
@@ -80,7 +81,6 @@ class situationBalancereport(accountReportbase):
         if structure['display_detail'] == 'no_detail':
             final_data_parent['name'] = structure['name']
             final_data_parent['code'] = ''
-            final_data_parent['is_parent'] = False
             final_data_parent['level'] = 0
             
             #In account type, iterate in child, because child is all accounts that
@@ -143,6 +143,7 @@ class situationBalancereport(accountReportbase):
                    final_data_parent['is_parent'] = True #Distinct child from parent.
                    final_data_parent['level'] = 0
                    
+                   #child_list is use to compute final results and save child and the relation with parent.
                    if child != []:
                         final_data_parent['child_list'] = child
                    else:
@@ -178,8 +179,6 @@ class situationBalancereport(accountReportbase):
                             
                             final_data['id'] = c.id
                             final_data['level'] = c.level
-                            if 'child' in final_data:
-                                final_data['child'] = c.child
                             final_data['name'] = c.name
                             final_data['code'] = c.code
                             final_data['is_parent'] = False
@@ -290,18 +289,17 @@ class situationBalancereport(accountReportbase):
                 total_fiscal_year = 0.0
                 total_variation = 0.0
                 
-                #Compute all result in one line.      
-                for parent, child in child_list.iteritems():                          
-                    total_period += self.compute_balances(cr, uid, result_dict_period_balance,child)
-                    total_fiscal_year += self.compute_balances(cr, uid, result_dict_fiscal_year_balance,child)                    
-                    total_variation += total_period - total_fiscal_year
-                
-                    final_data_parent.update({
-                                             'total_fiscal_year': total_fiscal_year,
-                                             'total_period': total_period,
-                                             'total_variation': total_variation,
-                                             'total_percent_variation': total_fiscal_year != 0 and (100 * total_variation / total_fiscal_year) or 0,
-                                            })
+                #Compute all result in one line.
+                total_period += self.compute_balances(cr, uid, result_dict_period_balance,child)
+                total_fiscal_year += self.compute_balances(cr, uid, result_dict_fiscal_year_balance,child)                    
+                total_variation += total_period - total_fiscal_year
+            
+                final_data_parent.update({
+                                         'total_fiscal_year': total_fiscal_year,
+                                         'total_period': total_period,
+                                         'total_variation': total_variation,
+                                         'total_percent_variation': total_fiscal_year != 0 and (100 * total_variation / total_fiscal_year) or 0,
+                                        })
                     
             else:
                 final_data_parent.update({
@@ -341,12 +339,9 @@ class situationBalancereport(accountReportbase):
                             
                             final_data['id'] = c.id
                             final_data['level'] = c.level
-                            if 'child' in final_data:
-                                final_data['child'] = c.child
                             final_data['name'] = c.name
                             final_data['code'] = c.code
-                            final_data['is_parent'] = False
-                                
+    
                             final_list.append(copy(final_data)) 
                                     
             if len(list_ids) > 0:
@@ -467,9 +462,4 @@ class situationBalancereport(accountReportbase):
         final_data = self.get_total_result(cr, uid, main_structure,data)
         
         return final_data
-        
-report_sxw.report_sxw(
-    'report.l10n_cr_situation_balance_report',
-    'account.account',
-    'addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako',
-    parser=situationBalancereport)
+

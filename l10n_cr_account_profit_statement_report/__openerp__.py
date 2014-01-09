@@ -21,25 +21,22 @@
 ##############################################################################
 
 {
-    'name': 'Profit Statement Report Webkit',
-    'description': "Create the Profit Statement report",
+    'name': 'Profit Statement Report',
     'version': '1.0',
     'author': 'CLEARCORP S.A.',
     'category': 'Finance',
+    'description': """
+    Profit Statement Report:
+    ========================
+    Install the Profit Statement Report""",    
     'website': "http://clearcorp.co.cr",
-    'images': [],
-    'depends': ['account',
-                'account_report_lib',
-                'account_report_signatures',],
-    'init_xml': [],
-    'demo_xml' : [],
-    'update_xml': [
-                   'report/report.xml',
-                   'l10n_cr_account_profit_statement_report.xml',
-                   'wizard/l10n_cr_account_profit_statement_wizard_view.xml',
-                   'report_menus.xml'
-                   ],
-    'test': [],
+    'depends': ['account_report_lib',],
+    'data': [
+             'report/report.xml',
+             'l10n_cr_account_profit_statement_report.xml',
+             'wizard/l10n_cr_account_profit_statement_wizard_view.xml',
+             'report_menus.xml'
+            ],
     'active': False,
     'installable': True,
     'license': 'AGPL-3',

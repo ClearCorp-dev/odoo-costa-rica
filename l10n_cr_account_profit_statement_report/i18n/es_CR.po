@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-12 20:08+0000\n"
-"PO-Revision-Date: 2013-08-12 20:08+0000\n"
+"POT-Creation-Date: 2013-12-02 17:08+0000\n"
+"PO-Revision-Date: 2013-12-02 17:08+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,34 +16,9 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: l10n_cr_account_profit_statement_report
-#: report:addons/l10n_cr_account_profit_statement_report/report/l10n_cr_account_profit_statement_report.mako:32
-msgid "Previous period"
-msgstr "Período anterior"
-
-#. module: l10n_cr_account_profit_statement_report
-#: report:addons/l10n_cr_account_profit_statement_report/report/l10n_cr_account_profit_statement_report.mako:22
-msgid "Until Period:"
-msgstr "Período hasta:"
-
-#. module: l10n_cr_account_profit_statement_report
-#: view:profit.statement.report.wiz:0
-msgid "{'required':True}"
-msgstr "{'required':True}"
-
-#. module: l10n_cr_account_profit_statement_report
-#: view:profit.statement.report.wiz:0
-msgid "[('type', '=', 'sum'),('account_type.code','=','PROSTA')]"
-msgstr "[('type', '=', 'sum'),('account_type.code','=','PROSTA')]"
-
-#. module: l10n_cr_account_profit_statement_report
 #: help:profit.statement.report.wiz,amount_currency:0
 msgid "It adds the currency column on report if the currency differs from the company currency."
 msgstr "Añade la columna de moneda en el reporte si la moneda es diferente de la moneda de la compañía."
-
-#. module: l10n_cr_account_profit_statement_report
-#: report:addons/l10n_cr_account_profit_statement_report/report/l10n_cr_account_profit_statement_report.mako:38
-msgid "Acum. Fiscal Year"
-msgstr "Acum. Año Fiscal"
 
 #. module: l10n_cr_account_profit_statement_report
 #: field:profit.statement.report.wiz,base_compare_account:0
@@ -56,9 +31,10 @@ msgid "Configuration for Profit Statement Report"
 msgstr "Configuración para el reporte de Estado de Resultados"
 
 #. module: l10n_cr_account_profit_statement_report
-#: view:profit.statement.report.wiz:0
-msgid "Period"
-msgstr "Período"
+#: code:addons/l10n_cr_account_profit_statement_report/wizard/l10n_cr_account_profit_statement_wizard.py:98
+#, python-format
+msgid "There is no template defined for the selected format. Check if aeroo report exist."
+msgstr "No existe una plantilla definida para el formato seleccionado. Debe existir un reporte de tipo aeroo"
 
 #. module: l10n_cr_account_profit_statement_report
 #: model:ir.model,name:l10n_cr_account_profit_statement_report.model_account_account_type
@@ -66,7 +42,6 @@ msgid "Account Type"
 msgstr "Tipo de cuenta"
 
 #. module: l10n_cr_account_profit_statement_report
-#: report:addons/l10n_cr_account_profit_statement_report/report/l10n_cr_account_profit_statement_report.mako:21
 #: view:profit.statement.report.wiz:0
 msgid "Profit Statement"
 msgstr "Estado de Resultados"
@@ -77,14 +52,15 @@ msgid "If selected, will display a historical unreconciled lines, taking into ac
 msgstr "Si se selecciona, se desplegará el histórico de las líneas no conciliadas, tomando en cuenta el final del período o la fecha seleccionada"
 
 #. module: l10n_cr_account_profit_statement_report
-#: report:addons/l10n_cr_account_profit_statement_report/report/l10n_cr_account_profit_statement_report.mako:31
-msgid "Account<br />Name"
-msgstr "Account<br />Name"
+#: code:addons/l10n_cr_account_profit_statement_report/wizard/l10n_cr_account_profit_statement_wizard.py:98
+#, python-format
+msgid "Error !"
+msgstr "Error !"
 
 #. module: l10n_cr_account_profit_statement_report
-#: report:addons/l10n_cr_account_profit_statement_report/report/l10n_cr_account_profit_statement_report.mako:34
-msgid "Selected period"
-msgstr "Período seleccionado"
+#: field:account.account.type,include_profit_statement_report:0
+msgid "Include in Profit Statement Report"
+msgstr "Incluir en el Reporte de Estados de Resultados"
 
 #. module: l10n_cr_account_profit_statement_report
 #: field:profit.statement.report.wiz,company_id:0
@@ -95,16 +71,6 @@ msgstr "Compañía"
 #: field:profit.statement.report.wiz,amount_currency:0
 msgid "With Currency"
 msgstr "Con moneda"
-
-#. module: l10n_cr_account_profit_statement_report
-#: report:addons/l10n_cr_account_profit_statement_report/report/l10n_cr_account_profit_statement_report.mako:36
-msgid "Variation"
-msgstr "Variación"
-
-#. module: l10n_cr_account_profit_statement_report
-#: view:profit.statement.report.wiz:0
-msgid "{'invisible': True, 'required': False}"
-msgstr "{'invisible': True, 'required': False}"
 
 #. module: l10n_cr_account_profit_statement_report
 #: selection:profit.statement.report.wiz,filter:0
@@ -120,11 +86,6 @@ msgstr "Este informe le permite imprimir o generar un pdf del Estado de Resultad
 #: field:profit.statement.report.wiz,chart_account_id:0
 msgid "Chart of Account"
 msgstr "Catálogo de cuentas"
-
-#. module: l10n_cr_account_profit_statement_report
-#: report:addons/l10n_cr_account_profit_statement_report/report/l10n_cr_account_profit_statement_report.mako:37
-msgid "Var."
-msgstr "Var."
 
 #. module: l10n_cr_account_profit_statement_report
 #: view:profit.statement.report.wiz:0
@@ -153,19 +114,9 @@ msgid "Start Period"
 msgstr "Período Inicial"
 
 #. module: l10n_cr_account_profit_statement_report
-#: view:profit.statement.report.wiz:0
-msgid "{'invisible': True}"
-msgstr "{'invisible': True}"
-
-#. module: l10n_cr_account_profit_statement_report
 #: selection:profit.statement.report.wiz,target_move:0
 msgid "All Posted Entries"
 msgstr "Todos los apuntes publicados"
-
-#. module: l10n_cr_account_profit_statement_report
-#: view:profit.statement.report.wiz:0
-msgid "{'required': True}"
-msgstr "{'required': True}"
 
 #. module: l10n_cr_account_profit_statement_report
 #: help:profit.statement.report.wiz,fiscalyear_id:0
@@ -198,14 +149,14 @@ msgid "No Filters"
 msgstr "Sin Filtros"
 
 #. module: l10n_cr_account_profit_statement_report
-#: report:addons/l10n_cr_account_profit_statement_report/report/l10n_cr_account_profit_statement_report.mako:95
-msgid "Authorized by: "
-msgstr "Autorizado por: "
-
-#. module: l10n_cr_account_profit_statement_report
 #: view:profit.statement.report.wiz:0
 msgid "Advanced options"
 msgstr "Opciones avanzadas"
+
+#. module: l10n_cr_account_profit_statement_report
+#: help:account.account.type,include_profit_statement_report:0
+msgid "If it's checked, the account that have this type is include in Profit Statement Report Wizard as Base Account to compare."
+msgstr "Si está marcado, la cuenta que tenga este tipo es incluída en el asistente del Reporte de Estado de REsultados como cuenta base para comparar."
 
 #. module: l10n_cr_account_profit_statement_report
 #: help:profit.statement.report.wiz,base_compare_account:0
@@ -218,14 +169,9 @@ msgid "Special period"
 msgstr "Período especial"
 
 #. module: l10n_cr_account_profit_statement_report
-#: report:addons/l10n_cr_account_profit_statement_report/report/l10n_cr_account_profit_statement_report.mako:36
-msgid "Prev. vs Sel."
-msgstr "Prev. vs Sel."
-
-#. module: l10n_cr_account_profit_statement_report
-#: view:profit.statement.report.wiz:0
-msgid "True"
-msgstr "True"
+#: field:profit.statement.report.wiz,out_format:0
+msgid "Print Format"
+msgstr "Formato de impresión"
 
 #. module: l10n_cr_account_profit_statement_report
 #: model:ir.model,name:l10n_cr_account_profit_statement_report.model_profit_statement_report_wiz
@@ -254,11 +200,6 @@ msgid "Periods"
 msgstr "Períodos"
 
 #. module: l10n_cr_account_profit_statement_report
-#: report:addons/l10n_cr_account_profit_statement_report/report/l10n_cr_account_profit_statement_report.mako:30
-msgid "Account<br />Code"
-msgstr "Account<br />Code"
-
-#. module: l10n_cr_account_profit_statement_report
 #: field:profit.statement.report.wiz,date_from:0
 msgid "Start Date"
 msgstr "Fecha inicial"
@@ -269,17 +210,7 @@ msgid "Filter by"
 msgstr "Filtrar por"
 
 #. module: l10n_cr_account_profit_statement_report
-#: report:addons/l10n_cr_account_profit_statement_report/report/l10n_cr_account_profit_statement_report.mako:22
-msgid "Fiscal Year:"
-msgstr "Año fiscal:"
-
-#. module: l10n_cr_account_profit_statement_report
 #: selection:profit.statement.report.wiz,target_move:0
 msgid "All Entries"
 msgstr "Todos los apuntes"
-
-#. module: account
-#: model:ir.ui.menu,name:account.menu_account_report_pl
-msgid "Profit And Loss"
-msgstr "Estado de Resultados"
 

@@ -5,6 +5,7 @@
               name="Statement Changes of Equity"  
               parent="account.final_accounting_reports" 
               action="action_statement_change_equity_report_menu_webkit"  
-              id="menu_statement_changes_equity_report"/>        
+              id="menu_statement_changes_equity_report"
+              sequence="50"/>        
     </data>
 </openerp>
