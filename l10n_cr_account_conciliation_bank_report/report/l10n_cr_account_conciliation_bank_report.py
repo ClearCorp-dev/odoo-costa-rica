@@ -27,7 +27,6 @@ from tools.translate import _
 from openerp.osv import fields, osv
 
 from openerp.addons.account_report_lib.account_report_base import accountReportbase
-from babel.localedata import list
 
 class Parser(accountReportbase):
     
