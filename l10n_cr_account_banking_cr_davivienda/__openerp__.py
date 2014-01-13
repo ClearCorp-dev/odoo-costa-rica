@@ -33,7 +33,7 @@
     'init_xml': [],
     'update_xml': [],
     'demo_xml': [],
-    'description': '',
+    'description': 'Module intended to import Davivienda\'s statements files',
     'active': False,
     'installable': True,
 }
