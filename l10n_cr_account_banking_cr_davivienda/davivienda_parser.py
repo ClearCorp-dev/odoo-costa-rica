@@ -108,10 +108,9 @@ class DaviviendaParser( object ):
             #with the first line compute the initial_balance
             fist_line = list_split[1]
             first_line_split = fist_line.split(';')
-            if from_card:
-                startingbalance = float(first_line_split[3].replace(",","")) - \
-                float(first_line_split[4].replace(",",""))
-            else:
+            #If it comes from credit/debit card account we don't have access to starting
+            #balance assuming 0.0
+            if not from_card:
                 startingbalance = float(first_line_split[5].replace(",","")) + \
                 float(first_line_split[3].replace(",","")) - \
                 float(first_line_split[4].replace(",",""))
@@ -130,6 +129,13 @@ class DaviviendaParser( object ):
             last_line_split = last_line.split(';')
             if not from_card:
                 endingbalance += float(last_line_split[5].replace(",",""))
+            #Calculating ending_balance assuming starting balance as 0.0
+            else:
+                for line in list_split[1:]:
+                    if line == '':
+                        break;
+                    line = line.split(';')
+                    endingbalance += -float(line[3].replace(",","")) + float(line[4].replace(",",""))
                   
             line_dict['endingbalance'] =  str(endingbalance)
             
