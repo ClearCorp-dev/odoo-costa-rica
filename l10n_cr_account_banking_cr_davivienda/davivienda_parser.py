@@ -99,7 +99,7 @@ class DaviviendaParser( object ):
             startingbalance = endingbalance = 0.0
             
             #transmission_number (Date when done the import)
-            date_obj= datetime.now()
+            date_obj = datetime.strptime(kwargs['date_from_str'],"%Y-%m-%d")
             #REVISAR
             line_dict['transref'] = date_obj.strftime("%d-%m-%Y %H:%M:%S")
             #bookingdate
