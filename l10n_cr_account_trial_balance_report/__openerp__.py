@@ -32,6 +32,7 @@
     'website': "http://clearcorp.co.cr",
     'depends': ['account_report_lib',],
     'data': [
+             'security/ir.model.access.csv',
              'report/report.xml',
              'wizard/l10n_cr_account_trial_balance_wizard_view.xml',
              'report_menus.xml'

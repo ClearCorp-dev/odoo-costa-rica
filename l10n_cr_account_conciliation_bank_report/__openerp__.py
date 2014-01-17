@@ -19,8 +19,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-
 {
     'name': 'Conciliation Bank Report',
     'version': '1.0',
@@ -42,6 +40,7 @@ Configuration:
     'website': "http://clearcorp.co.cr",
     'depends': ['account_report_lib',],
     'data': [
+                   'security/ir.model.access.csv',
                    'report/report.xml',                   
                    'wizard/l10n_cr_account_conciliation_bank_report_wizard.xml',
                    'l10n_cr_account_conciliation_bank_report.xml',
