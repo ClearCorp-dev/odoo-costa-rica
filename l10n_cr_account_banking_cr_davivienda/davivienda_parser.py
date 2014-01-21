@@ -71,7 +71,12 @@ class DaviviendaParser( object ):
         first_line_split = fist_line.split(';')
         
         account_number_wizard = kwargs['account_number']#from wizard
-        account_number_file = first_line_split[11]#from file.
+        from_card = False
+        try:
+            account_number_file = first_line_split[11]#from account file.
+        except:
+            from_card = True
+            account_number_file = first_line_split[10]#from credit or debit card file
         
         #if the account_number in the file match with the account
         #selected in the wizard, return True
@@ -88,23 +93,27 @@ class DaviviendaParser( object ):
             line_dict['currencycode'] = kwargs['local_currency']
             
             line_dict['statementnr'] = kwargs['date_from_str'] + ' - '+ \
-            kwargs['date_to_str'] + 'Extracto Davivienda ' + \
+            kwargs['date_to_str'] + ' Extracto Davivienda ' + \
             line_dict['account_number'] #Interval time of the file.
              
             startingbalance = endingbalance = 0.0
             
             #transmission_number (Date when done the import)
-            date_obj= datetime.now()
+            date_obj = datetime.strptime(kwargs['date_from_str'],"%Y-%m-%d")
+            #REVISAR
             line_dict['transref'] = date_obj.strftime("%d-%m-%Y %H:%M:%S")
             #bookingdate
             line_dict['bookingdate'] = date_obj.strftime("%d-%m-%Y %H:%M:%S")
-        
+            #FIN REVISAR
             #with the first line compute the initial_balance
             fist_line = list_split[1]
             first_line_split = fist_line.split(';')
-            startingbalance = float(first_line_split[5].replace(",","")) + \
-            float(first_line_split[3].replace(",","")) - \
-            float(first_line_split[4].replace(",",""))
+            #If it comes from credit/debit card account we don't have access to starting
+            #balance assuming 0.0
+            if not from_card:
+                startingbalance = float(first_line_split[5].replace(",","")) + \
+                float(first_line_split[3].replace(",","")) - \
+                float(first_line_split[4].replace(",",""))
             line_dict['startingbalance'] =  str(startingbalance)
             
             #the ending_balance is the balance of the last line.        
@@ -118,7 +127,16 @@ class DaviviendaParser( object ):
                     if len(last_line) > 0 and last_line != "" and last_line != '\r':
                         break       
             last_line_split = last_line.split(';')
-            endingbalance += float(last_line_split[5].replace(",",""))      
+            if not from_card:
+                endingbalance += float(last_line_split[5].replace(",",""))
+            #Calculating ending_balance assuming starting balance as 0.0
+            else:
+                for line in list_split[1:]:
+                    if line == '':
+                        break;
+                    line = line.split(';')
+                    endingbalance += -float(line[3].replace(",","")) + float(line[4].replace(",",""))
+                  
             line_dict['endingbalance'] =  str(endingbalance)
             
             line_dict['amount'] = str(startingbalance + endingbalance)
