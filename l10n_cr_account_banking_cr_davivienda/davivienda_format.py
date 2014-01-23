@@ -65,8 +65,7 @@ class transaction(models.mem_bank_transaction):
         '''
         We don't have remote_account so override base
         '''
-        return (self.execution_date
-                and self.transferred_amount and True) or False
+        return (self.execution_date and True) or False
 
 class statement(models.mem_bank_statement):
     '''

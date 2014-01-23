@@ -48,6 +48,8 @@ class DaviviendaParser( object ):
         using the ** kwargs is a dictionary, 
         extract its value, with the respective key
     '''
+    from_card = False
+    
     def statement_record ( self, rec, **kwargs):
         lines = []
         line_dict = {}
@@ -63,7 +65,7 @@ class DaviviendaParser( object ):
             'amount': 0.0,
             'id': '',
         }
-        
+        rec = rec.replace('ABONO A SU CUENTA .... GRACIA;','ABONO A SU CUENTA .... GRACIAS')
         #Split the file in statements
         list_split = rec.split('\n')
         #Obtain the first line to know the account number
@@ -71,11 +73,11 @@ class DaviviendaParser( object ):
         first_line_split = fist_line.split(';')
         
         account_number_wizard = kwargs['account_number']#from wizard
-        from_card = False
+        self.from_card = False
         try:
             account_number_file = first_line_split[11]#from account file.
         except:
-            from_card = True
+            self.from_card = True
             account_number_file = first_line_split[10]#from credit or debit card file
         
         #if the account_number in the file match with the account
@@ -110,7 +112,7 @@ class DaviviendaParser( object ):
             first_line_split = fist_line.split(';')
             #If it comes from credit/debit card account we don't have access to starting
             #balance assuming 0.0
-            if not from_card:
+            if not self.from_card:
                 startingbalance = float(first_line_split[5].replace(",","")) + \
                 float(first_line_split[3].replace(",","")) - \
                 float(first_line_split[4].replace(",",""))
@@ -127,7 +129,7 @@ class DaviviendaParser( object ):
                     if len(last_line) > 0 and last_line != "" and last_line != '\r':
                         break       
             last_line_split = last_line.split(';')
-            if not from_card:
+            if not self.from_card:
                 endingbalance += float(last_line_split[5].replace(",",""))
             #Calculating ending_balance assuming starting balance as 0.0
             else:
@@ -172,6 +174,7 @@ class DaviviendaParser( object ):
         line_dict = {}
         currencycode = ''
         
+        rec = rec.replace('ABONO A SU CUENTA .... GRACIA;','ABONO A SU CUENTA .... GRACIAS')
         list_split = rec.split('\n')
         entrada = False
         
@@ -186,6 +189,11 @@ class DaviviendaParser( object ):
                     break
                 end -= 1
         sub_list = list_split [start:end+1]
+        self.from_card = False
+        try:
+            sub_list[0].split(';')[11]
+        except:
+            self.from_card = True
         for sub in sub_list:
             line = sub.split(';')
             #effective_date
@@ -201,16 +209,27 @@ class DaviviendaParser( object ):
             mapping['name'] = line[1] #Description     
             mapping['id'] = line[1] #Description     
             
-            if line[10] == 'C':
-                credit = float(line[4].replace(",",""))
-                mapping['transferred_amount'] = credit    
-                mapping['creditmarker'] = 'C'
-            
+            if not self.from_card:
+                if line[10] == 'C':
+                    credit = float(line[4].replace(",",""))
+                    mapping['transferred_amount'] = credit    
+                    mapping['creditmarker'] = 'C'
+                
+                else:
+                    #In this case, the debit is negative.
+                    debit = float(line[3].replace(",",""))
+                    mapping['transferred_amount'] =  -1 * debit
             else:
-                #In this case, the debit is negative.
+                credit = float(line[4].replace(",",""))
                 debit = float(line[3].replace(",",""))
-                mapping['transferred_amount'] =  -1 * debit
-           
+                if credit:
+                    mapping['transferred_amount'] = credit    
+                    mapping['creditmarker'] = 'C'
+                
+                else:
+                    #In this case, the debit is negative.
+                    mapping['transferred_amount'] =  -1 * debit
+                    
             lines.append(copy(mapping))
                             
         return lines   
