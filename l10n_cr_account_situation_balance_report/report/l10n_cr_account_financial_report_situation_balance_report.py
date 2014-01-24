@@ -290,8 +290,8 @@ class Parser(accountReportbase):
                 total_variation = 0.0
                 
                 #Compute all result in one line.
-                total_period += self.compute_balances(cr, uid, result_dict_period_balance,child)
-                total_fiscal_year += self.compute_balances(cr, uid, result_dict_fiscal_year_balance,child)                    
+                total_period += self.compute_balances(cr, uid, result_dict_period_balance,list_ids)
+                total_fiscal_year += self.compute_balances(cr, uid, result_dict_fiscal_year_balance,list_ids)                    
                 total_variation += total_period - total_fiscal_year
             
                 final_data_parent.update({
