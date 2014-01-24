@@ -65,7 +65,9 @@ class DaviviendaParser( object ):
             'amount': 0.0,
             'id': '',
         }
+        rec = rec.replace('ABONO A SU CUENTA .... GRACIAS;','ABONO A SU CUENTA .... GRACIAS')
         rec = rec.replace('ABONO A SU CUENTA .... GRACIA;','ABONO A SU CUENTA .... GRACIAS')
+        
         #Split the file in statements
         list_split = rec.split('\n')
         #Obtain the first line to know the account number
@@ -94,9 +96,9 @@ class DaviviendaParser( object ):
             
             line_dict['currencycode'] = kwargs['local_currency']
             
-            line_dict['statementnr'] = kwargs['date_from_str'] + ' - '+ \
-            kwargs['date_to_str'] + ' Extracto Davivienda ' + \
-            line_dict['account_number'] #Interval time of the file.
+            print kwargs['real_account']
+            line_dict['statementnr'] = ' Davivienda ' + \
+            kwargs['real_account'] #Interval time of the file.
              
             startingbalance = endingbalance = 0.0
             
@@ -143,8 +145,8 @@ class DaviviendaParser( object ):
             
             line_dict['amount'] = str(startingbalance + endingbalance)
             line_dict['id'] = kwargs['date_from_str'] + ' - ' + \
-            kwargs['date_to_str'] + ' Extracto Davivienda ' + \
-            line_dict['account_number']
+            kwargs['date_to_str'] + ' Davivienda ' + \
+            kwargs['real_account']
             
             return line_dict
         
@@ -174,6 +176,7 @@ class DaviviendaParser( object ):
         line_dict = {}
         currencycode = ''
         
+        rec = rec.replace('ABONO A SU CUENTA .... GRACIAS;','ABONO A SU CUENTA .... GRACIAS')
         rec = rec.replace('ABONO A SU CUENTA .... GRACIA;','ABONO A SU CUENTA .... GRACIAS')
         list_split = rec.split('\n')
         entrada = False
