@@ -96,7 +96,6 @@ class DaviviendaParser( object ):
             
             line_dict['currencycode'] = kwargs['local_currency']
             
-            print kwargs['real_account']
             line_dict['statementnr'] = ' Davivienda ' + \
             kwargs['real_account'] #Interval time of the file.
              
@@ -104,11 +103,9 @@ class DaviviendaParser( object ):
             
             #transmission_number (Date when done the import)
             date_obj = datetime.strptime(kwargs['date_from_str'],"%Y-%m-%d")
-            #REVISAR
             line_dict['transref'] = date_obj.strftime("%d-%m-%Y %H:%M:%S")
             #bookingdate
             line_dict['bookingdate'] = date_obj.strftime("%d-%m-%Y %H:%M:%S")
-            #FIN REVISAR
             #with the first line compute the initial_balance
             fist_line = list_split[1]
             first_line_split = fist_line.split(';')
