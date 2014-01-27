@@ -12,8 +12,8 @@
                         <separator string="Situation Balance Report" colspan="4"/>
                         <label nolabel="1" colspan="4" string="This report allows you to print or generate a pdf of your income statement"/>
                     </xpath>
-                     <field name="target_move" position="attributes">
-                        <attribute name="invisible">True</attribute>
+                    <field name="target_move" position="attributes">
+                         <attribute name="attrs">{'required': True}</attribute>
                     </field>
                      <field name="fiscalyear_id" position="attributes">
                         <attribute name="attrs">{'required': True}</attribute>
@@ -24,6 +24,7 @@
                      <field name="period_from" position="attributes">
                          <attribute name="domain">[('state', '=', 'draft'), ('special', '=', False),('fiscalyear_id', '=', fiscalyear_id)]</attribute>
                          <attribute name="attrs">{'required': [('filter', '=', 'filter_period')]}</attribute>
+                         <attribute name="string">Period</attribute>
                     </field>
                     <field name="period_to" position="attributes">
                         <attribute name="attrs">{'invisible': True, 'required': False}</attribute>
