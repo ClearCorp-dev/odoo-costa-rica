@@ -76,7 +76,7 @@ class Parser(accountReportbase):
         methods to improve usabillity and maintenance. 
     """
     #Method for account.financial.report account_type type. 
-    def get_data_account_type(self, cr, uid, base_account, fiscal_year, filter_type, period, last_period, structure={}, final_list=[]):
+    def get_data_account_type(self, cr, uid, base_account, target_move, fiscal_year, filter_type, period, last_period, structure={}, final_list=[]):
         
         result_dict = {}
         final_data_parent = {'child_list': []} #Define empty list, avoid problem when list is empty and key isn't created
@@ -120,7 +120,9 @@ class Parser(accountReportbase):
                     #Period selected -> Change witch period take as start_period and end_period
                     result_dict_period = library_obj.get_account_balance(cr, uid, 
                                                                             list_ids, 
-                                                                            ['balance'],     
+                                                                            ['balance'],   
+                                                                            fiscal_year_id=fiscal_year.id,                                                                                
+                                                                            state = target_move,  
                                                                             start_period_id=period.id, 
                                                                             end_period_id=period.id,
                                                                             filter_type=filter_type)
@@ -129,6 +131,8 @@ class Parser(accountReportbase):
                     result_dict_last_period = library_obj.get_account_balance(cr, uid, 
                                                                             list_ids, 
                                                                             ['balance'],     
+                                                                            fiscal_year_id=fiscal_year.id,                                                                                
+                                                                            state = target_move,
                                                                             start_period_id=last_period.id, 
                                                                             end_period_id=last_period.id,
                                                                             filter_type=filter_type)
@@ -137,6 +141,7 @@ class Parser(accountReportbase):
                     result_dict_fiscal_year = library_obj.get_account_balance(cr, uid, 
                                                                             list_ids, 
                                                                             ['balance'],     
+                                                                            state = target_move,
                                                                             end_period_id=period.id, 
                                                                             fiscal_year_id=fiscal_year.id, 
                                                                             filter_type=filter_type)
@@ -260,6 +265,8 @@ class Parser(accountReportbase):
                       result_dict_period = library_obj.get_account_balance(cr, uid, 
                                                                             list_ids, 
                                                                             ['balance'],     
+                                                                            fiscal_year_id=fiscal_year.id,                                                                                
+                                                                            state = target_move,
                                                                             start_period_id=period.id, 
                                                                             end_period_id=period.id,
                                                                             filter_type=filter_type)
@@ -267,7 +274,9 @@ class Parser(accountReportbase):
                       #Last period
                       result_dict_last_period = library_obj.get_account_balance(cr, uid, 
                                                                             list_ids, 
-                                                                            ['balance'],     
+                                                                            ['balance'],   
+                                                                            fiscal_year_id=fiscal_year.id,                                                                                
+                                                                            state = target_move,  
                                                                             start_period_id=last_period.id, 
                                                                             end_period_id=last_period.id,
                                                                             filter_type=filter_type)
@@ -275,9 +284,10 @@ class Parser(accountReportbase):
                       #Fiscal year
                       result_dict_fiscal_year = library_obj.get_account_balance(cr, uid, 
                                                                             list_ids, 
-                                                                            ['balance'],     
+                                                                            ['balance'],   
+                                                                            fiscal_year_id=fiscal_year.id,                                                                                
+                                                                            state = target_move,  
                                                                             end_period_id=period.id, 
-                                                                            fiscal_year_id=fiscal_year.id, 
                                                                             filter_type=filter_type)
                       
                 
@@ -342,7 +352,7 @@ class Parser(accountReportbase):
 
         return final_list
     
-    def get_data_accounts(self, cr, uid, base_account, fiscal_year, filter_type, period, last_period, structure={}, final_list=[]):
+    def get_data_accounts(self, cr, uid, base_account, target_move, fiscal_year, filter_type, period, last_period, structure={}, final_list=[]):
         result_dict = {}
         final_data_parent = {'child_list': []} #Define empty list, avoid problem when list is empty and key isn't created
         final_data = {}
@@ -383,6 +393,8 @@ class Parser(accountReportbase):
                 result_dict_period = library_obj.get_account_balance(cr, uid, 
                                                                         list_ids, 
                                                                         ['balance'],     
+                                                                        fiscal_year_id=fiscal_year.id,                                                                                
+                                                                        state = target_move,
                                                                         start_period_id=period.id, 
                                                                         end_period_id=period.id,
                                                                         filter_type=filter_type)
@@ -391,6 +403,8 @@ class Parser(accountReportbase):
                 result_dict_last_period = library_obj.get_account_balance(cr, uid, 
                                                                         list_ids, 
                                                                         ['balance'],     
+                                                                        fiscal_year_id=fiscal_year.id,                                                                                
+                                                                        state = target_move,
                                                                         start_period_id=last_period.id, 
                                                                         end_period_id=last_period.id,
                                                                         filter_type=filter_type)
@@ -398,9 +412,10 @@ class Parser(accountReportbase):
                 #Fiscal year
                 result_dict_fiscal_year = library_obj.get_account_balance(cr, uid, 
                                                                         list_ids, 
-                                                                        ['balance'],     
+                                                                        ['balance'], 
+                                                                        fiscal_year_id=fiscal_year.id,                                                                                
+                                                                        state = target_move,    
                                                                         end_period_id=period.id, 
-                                                                        fiscal_year_id=fiscal_year.id, 
                                                                         filter_type=filter_type)
                 
                 ##Extract results for base_account selected in wizard.
@@ -511,6 +526,8 @@ class Parser(accountReportbase):
                     result_dict_period = library_obj.get_account_balance(cr, uid, 
                                                                             list_ids, 
                                                                             ['balance'],     
+                                                                            fiscal_year_id=fiscal_year.id,                                                                                
+                                                                            state = target_move,
                                                                             start_period_id=period.id, 
                                                                             end_period_id=period.id,
                                                                             filter_type=filter_type)
@@ -518,7 +535,9 @@ class Parser(accountReportbase):
                     #Last period
                     result_dict_last_period = library_obj.get_account_balance(cr, uid, 
                                                                             list_ids, 
-                                                                            ['balance'],     
+                                                                            ['balance'],    
+                                                                            fiscal_year_id=fiscal_year.id,                                                                                
+                                                                            state = target_move, 
                                                                             start_period_id=last_period.id, 
                                                                             end_period_id=last_period.id,
                                                                             filter_type=filter_type)
@@ -527,8 +546,9 @@ class Parser(accountReportbase):
                     result_dict_fiscal_year = library_obj.get_account_balance(cr, uid, 
                                                                             list_ids, 
                                                                             ['balance'],     
+                                                                            fiscal_year_id=fiscal_year.id,                                                                                
+                                                                            state = target_move,
                                                                             end_period_id=period.id, 
-                                                                            fiscal_year_id=fiscal_year.id, 
                                                                             filter_type=filter_type)
                 
                 ##Extract results for base_account selected in wizard.
@@ -576,6 +596,7 @@ class Parser(accountReportbase):
         last_period = account_period_obj.get_last_period(cr, uid, period)
         fiscal_year = self.get_fiscalyear(data)
         filter_type = self.get_filter(data)
+        target_move = self.get_target_move(data)
         
         #Get base_account to compare
         base_account = self.get_base_account_compare(data)
@@ -601,11 +622,11 @@ class Parser(accountReportbase):
             for structure in main_structure:
                 if structure['type'] == 'account_type':
                     list_data = [] #Avoid repeat accounts when an account is in list and it's a child for account type selected.
-                    final_list += self.get_data_account_type(cr, uid, base_account, fiscal_year, filter_type, period, last_period, structure, list_data)
+                    final_list += self.get_data_account_type(cr, uid, base_account, target_move, fiscal_year, filter_type, period, last_period, structure, list_data)
                     
                 elif structure['type'] == 'accounts':
                     list_data = [] #Avoid repeat accounts when an account is in list and it's a child for account type selected.
-                    final_list += self.get_data_accounts(cr, uid, base_account, fiscal_year, filter_type,  period, last_period, structure, list_data)
+                    final_list += self.get_data_accounts(cr, uid, base_account, target_move, fiscal_year, filter_type,  period, last_period, structure, list_data)
       
         #Call the method only with a dictionary list.         
         if type(main_structure) is types.DictType:
