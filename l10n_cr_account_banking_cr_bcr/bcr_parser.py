@@ -121,7 +121,7 @@ class BCRParser( object ):
                     line_dict['endingbalance'] = self.extract_float(l)
               
                 #_closing_balance -> SECOND REVISION    
-                elif l.find('Saldo Final', 0, len('Saldo Final'))  > -1:
+                elif l.find('Saldo Final', 0, len('Saldo Final'))  > -1 or l.find('FINAL', 0, len('FINAL'))  > -1:
                     line_dict['endingbalance'] = self.extract_float(l)
                         
             line_dict['ammount'] = float( line_dict['startingbalance'] ) + float( line_dict['endingbalance'] )
