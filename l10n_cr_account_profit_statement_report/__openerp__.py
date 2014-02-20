@@ -26,9 +26,10 @@
     'author': 'CLEARCORP S.A.',
     'category': 'Finance',
     'description': """
-    Profit Statement Report:
-    ========================
-    Install the Profit Statement Report""",    
+Profit Statement Report:
+==========================
+Install the Profit Statement Report
+    """,    
     'website': "http://clearcorp.co.cr",
     'depends': ['account_report_lib',],
     'data': [

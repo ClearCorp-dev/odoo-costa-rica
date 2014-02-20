@@ -25,10 +25,11 @@
     'version': '1.0',
     'author': 'CLEARCORP S.A.',
     'category': 'Finance',
-    'description': """"
-    Situation Balance Report.
-    =========================
-    Create the situation balance report""",    
+    'description': """
+Situation Balance Report:
+===========================
+Create the situation balance report
+    """,    
     'website': "http://clearcorp.co.cr",
     'depends': ['account_report_lib', ],
     'data': [

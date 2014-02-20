@@ -12,7 +12,7 @@
                         <field name="include_conciliation_report"/>                    
                    </group>
                 </field>
-           </field>
+            </field>
         </record>
     </data>
 </openerp>
