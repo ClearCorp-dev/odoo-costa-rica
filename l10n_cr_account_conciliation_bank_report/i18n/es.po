@@ -133,7 +133,7 @@ msgstr "Conciliación Bancaria"
 #. module: l10n_cr_account_conciliation_bank_report
 #: selection:conciliation.bank.report.wiz,sort_selection:0
 msgid "Name"
-msgstr "Name"
+msgstr "Nombre"
 
 #. module: l10n_cr_account_conciliation_bank_report
 #: selection:conciliation.bank.report.wiz,target_move:0

@@ -342,10 +342,9 @@ class Parser(accountReportbase):
                     else:
                         result_move_lines['expenditures_to_register'].append(line)
                         expenditures_to_register += line.credit
-                #print "No move"
                 continue
 
-            #Select the best contra move line (biggest amount, inverse amount from line)
+            #Select the best contramove line (biggest amount, inverse amount from line)
             contra_line = line
             for other_line in move.line_id:
                 if other_line.id == line.id:
