@@ -25,7 +25,7 @@
     'version': '1.0',
     'description': """
 Statement Change Equity Report.
-================================
+==================================
 Create the Statement Change Equity Report
     """,    
     'author': 'CLEARCORP S.A.',
@@ -34,8 +34,8 @@ Create the Statement Change Equity Report
     'depends': ['account_report_lib',],
     'data': [
                 'security/ir.model.access.csv',
-                'report/report.xml',            
                 'wizard/l10n_cr_account_statement_change_equity_wizard_view.xml',
+                'report/report.xml',
                 'report_menus.xml',
            ],
     'active': False,

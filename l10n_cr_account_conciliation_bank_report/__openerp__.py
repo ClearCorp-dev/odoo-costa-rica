@@ -26,9 +26,9 @@
     'category': 'Finance',
     'description': """
 Install the Conciliation Bank Report.
-=====================================
+========================================
 Configuration:
----------------
+-----------------
         1. Configure type account that it will appear in wizard. This configuration is in Accounting -> Account -> Account Types and check
         "Include in conciliation bank report" option.
         
@@ -41,8 +41,8 @@ Configuration:
     'depends': ['account_report_lib',],
     'data': [
                    'security/ir.model.access.csv',
-                   'report/report.xml',                   
                    'wizard/l10n_cr_account_conciliation_bank_report_wizard.xml',
+                   'report/report.xml',                                     
                    'l10n_cr_account_conciliation_bank_report.xml',
                    'report_menus.xml',
                    ],                

@@ -6,14 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-02 17:08+0000\n"
-"PO-Revision-Date: 2013-12-02 17:08+0000\n"
+"POT-Creation-Date: 2014-02-20 20:08+0000\n"
+"PO-Revision-Date: 2014-02-20 20:08+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: l10n_cr_account_profit_statement_report
+#: field:profit.statement.report.wiz,res_partners_ids:0
+msgid "Partners"
+msgstr "Empresas"
 
 #. module: l10n_cr_account_profit_statement_report
 #: help:profit.statement.report.wiz,amount_currency:0
@@ -29,6 +34,11 @@ msgstr "Cuenta base de Ingreso"
 #: view:account.account.type:0
 msgid "Configuration for Profit Statement Report"
 msgstr "Configuración para el reporte de Estado de Resultados"
+
+#. module: l10n_cr_account_profit_statement_report
+#: view:profit.statement.report.wiz:0
+msgid "Period"
+msgstr "Período"
 
 #. module: l10n_cr_account_profit_statement_report
 #: code:addons/l10n_cr_account_profit_statement_report/wizard/l10n_cr_account_profit_statement_wizard.py:98
@@ -63,6 +73,11 @@ msgid "Include in Profit Statement Report"
 msgstr "Incluir en el Reporte de Estados de Resultados"
 
 #. module: l10n_cr_account_profit_statement_report
+#: field:profit.statement.report.wiz,sort_selection:0
+msgid "Entries Sorted by"
+msgstr "Entradas ordenadas por"
+
+#. module: l10n_cr_account_profit_statement_report
 #: field:profit.statement.report.wiz,company_id:0
 msgid "Company"
 msgstr "Compañía"
@@ -74,6 +89,7 @@ msgstr "Con moneda"
 
 #. module: l10n_cr_account_profit_statement_report
 #: selection:profit.statement.report.wiz,filter:0
+#: selection:profit.statement.report.wiz,sort_selection:0
 msgid "Date"
 msgstr "Fecha"
 
@@ -112,6 +128,11 @@ msgstr "Fecha final"
 #: field:profit.statement.report.wiz,period_from:0
 msgid "Start Period"
 msgstr "Período Inicial"
+
+#. module: l10n_cr_account_profit_statement_report
+#: selection:profit.statement.report.wiz,sort_selection:0
+msgid "Name"
+msgstr "Nombre"
 
 #. module: l10n_cr_account_profit_statement_report
 #: selection:profit.statement.report.wiz,target_move:0
@@ -213,4 +234,9 @@ msgstr "Filtrar por"
 #: selection:profit.statement.report.wiz,target_move:0
 msgid "All Entries"
 msgstr "Todos los apuntes"
+
+#. module: l10n_cr_account_profit_statement_report
+#: model:ir.ui.menu,name:account.menu_account_report_pl
+msgid "Profit And Loss"
+msgstr "Estado de Resultados"
 

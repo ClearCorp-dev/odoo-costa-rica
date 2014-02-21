@@ -6,29 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-02 17:15+0000\n"
-"PO-Revision-Date: 2013-12-02 17:15+0000\n"
+"POT-Creation-Date: 2014-02-20 20:39+0000\n"
+"PO-Revision-Date: 2014-02-20 20:39+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: l10n_cr_account_situation_balance_report
-#: field:situation.balance.report.wiz,amount_currency:0
-msgid "With Currency"
-msgstr "Con Moneda"
-
-#. module: l10n_cr_account_situation_balance_report
-#: model:ir.actions.act_window,name:l10n_cr_account_situation_balance_report.action_situation_balance_report_menu_webkit
-msgid "Action Situation Balance Report"
-msgstr "Generar Reporte Balance de Situación"
-
-#. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:32
-msgid "Per. vs. FY Open."
-msgstr "Per. vs. AF abierto."
 
 #. module: l10n_cr_account_situation_balance_report
 #: help:situation.balance.report.wiz,amount_currency:0
@@ -44,7 +29,7 @@ msgstr "No existe una plantilla definida para el formato seleccionado. Debe exis
 #. module: l10n_cr_account_situation_balance_report
 #: view:situation.balance.report.wiz:0
 msgid "Situation Balance Report"
-msgstr "Reporte Balance de Situación"
+msgstr "Balance de Situación"
 
 #. module: l10n_cr_account_situation_balance_report
 #: model:ir.model,name:l10n_cr_account_situation_balance_report.model_situation_balance_report_wiz
@@ -63,9 +48,14 @@ msgid "Error !"
 msgstr "Error !"
 
 #. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:31
-msgid "Selected period"
-msgstr "Período seleccionado"
+#: field:situation.balance.report.wiz,special_period:0
+msgid "Special period"
+msgstr "Período especial"
+
+#. module: l10n_cr_account_situation_balance_report
+#: field:situation.balance.report.wiz,sort_selection:0
+msgid "Entries Sorted by"
+msgstr "Entradas ordenadas por"
 
 #. module: l10n_cr_account_situation_balance_report
 #: field:situation.balance.report.wiz,company_id:0
@@ -73,22 +63,13 @@ msgid "Company"
 msgstr "Compañía"
 
 #. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:19
-msgid "Situation Balance at "
-msgstr "Balance de situación del período "
-
-#. module: l10n_cr_account_situation_balance_report
-#: help:situation.balance.report.wiz,special_period:0
-msgid "Include special period"
-msgstr "Incluir período especial"
-
-#. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:32
-msgid "Variation"
-msgstr "Variación"
+#: field:situation.balance.report.wiz,amount_currency:0
+msgid "With Currency"
+msgstr "Con Moneda"
 
 #. module: l10n_cr_account_situation_balance_report
 #: selection:situation.balance.report.wiz,filter:0
+#: selection:situation.balance.report.wiz,sort_selection:0
 msgid "Date"
 msgstr "Fecha"
 
@@ -96,11 +77,6 @@ msgstr "Fecha"
 #: field:situation.balance.report.wiz,chart_account_id:0
 msgid "Chart of Account"
 msgstr "Catálogo de cuentas"
-
-#. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:33
-msgid "Var."
-msgstr "Var."
 
 #. module: l10n_cr_account_situation_balance_report
 #: view:situation.balance.report.wiz:0
@@ -127,6 +103,11 @@ msgstr "Fecha Final"
 #: field:situation.balance.report.wiz,period_from:0
 msgid "Start Period"
 msgstr "Período inicial"
+
+#. module: l10n_cr_account_situation_balance_report
+#: selection:situation.balance.report.wiz,sort_selection:0
+msgid "Name"
+msgstr "Nombre"
 
 #. module: l10n_cr_account_situation_balance_report
 #: selection:situation.balance.report.wiz,target_move:0
@@ -159,19 +140,14 @@ msgid "No Filters"
 msgstr "Sin filtros"
 
 #. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:82
-msgid "Authorized by: "
-msgstr "Autorizado por: "
+#: model:ir.actions.act_window,name:l10n_cr_account_situation_balance_report.action_situation_balance_report_menu_webkit
+msgid "Action Situation Balance Report"
+msgstr "Generar Reporte Balance de Situación"
 
 #. module: l10n_cr_account_situation_balance_report
 #: view:situation.balance.report.wiz:0
 msgid "Advanced options"
 msgstr "Opciones avanzadas"
-
-#. module: l10n_cr_account_situation_balance_report
-#: field:situation.balance.report.wiz,special_period:0
-msgid "Special period"
-msgstr "Período especial"
 
 #. module: l10n_cr_account_situation_balance_report
 #: field:situation.balance.report.wiz,out_format:0
@@ -189,9 +165,9 @@ msgid "This report allows you to print or generate a pdf of your income statemen
 msgstr "Este informe le permite imprimir o generar un pdf de su cuenta de resultados"
 
 #. module: l10n_cr_account_situation_balance_report
-#: report:addons/l10n_cr_account_situation_balance_report/report/l10n_cr_account_financial_report_situation_balance_report.mako:30
-msgid "Fiscal Year Opening"
-msgstr "Año fiscal abierto"
+#: help:situation.balance.report.wiz,special_period:0
+msgid "Include special period"
+msgstr "Incluir período especial"
 
 #. module: l10n_cr_account_situation_balance_report
 #: view:situation.balance.report.wiz:0

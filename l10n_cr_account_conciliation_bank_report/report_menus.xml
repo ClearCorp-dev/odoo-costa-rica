@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        
-        <menuitem icon="STOCK_PRINT" 
-            name="Conciliation Bank"
-            parent="account.next_id_22" 
-            action="action_conciliation_bank_report_menu_webkit"
-            id="menu_conciliation_bank"/>        
+        <menuitem id="menu_bank_reports" name="Banks" parent="account.menu_finance_generic_reporting" sequence="43"/> 
+        <menuitem action="action_conciliation_bank_report_menu_webkit" id="menu_action_conciliation_bank_report" parent="menu_bank_reports"/> 
     </data>
 </openerp>

@@ -315,26 +315,6 @@ class Parser(accountReportbase):
         
         move_obj = self.pool.get('account.move')
         move_line_obj = self.pool.get('account.move.line')
-        
-        """
-            Cambio realizado el 9 de enero de 2012
-            
-            Anteriormente, el método get_move_lines (del objeto account.webkit.report.library, librería estándar de los reportes, 
-            sólo se utilizaba en el reporte de Conciliación bancaria. El reporte de conciliación bancaria no recibe el período de inicio
-            por lo que el método de get_move_lines no contempla el período de inicio, necesario en el reporte de saldo de cuenta de bancos.
-            Se realiza el cambio tanto en el reporte de conciliación bancaria para que el período inicial no se tome en cuenta (inicializado en None)
-            y en la librería se especifica que si se encuentra en None no lo tome en cuenta y que si trae información lo utilice dentro del filtro
-            para sacar el rango de periodos que se digita en el wizard. 
-            
-            Se modifica tanto el reporte de conciliación bancaria, como la librería, para que el método funcione solamente con un período final o bien
-            con un rango de períodos, como trabaja el reporte de saldo de cuenta de bancos. 
-            
-            Para el caso de las fechas, se trabaja de la misma forma. (El saldo de cuentas de bancos si toma la fecha de inicio)
-            
-            OBSERVACIÓN -> data['form']['historic_strict'],las variables boleanas (historic_strict y special_period) se deben pasar
-            de esta forma, sino vienen como objetos y no con el valor real (True or False). Esto se hace desde el conciliation_bank.mako
-            
-        """     
                 
         unreconciled_move_lines = account_webkit_report_library_obj.get_move_lines(cr, 1, transit_account_ids, filter_type=filter_type, filter_data=filter_data, fiscalyear=fiscalyear, target_move=target_move, unreconcile = True, historic_strict=historic_strict, special_period=special_period, context=context)
         
@@ -362,10 +342,9 @@ class Parser(accountReportbase):
                     else:
                         result_move_lines['expenditures_to_register'].append(line)
                         expenditures_to_register += line.credit
-                print "No move"
                 continue
 
-            #Select the best contra move line (biggest amount, inverse amount from line)
+            #Select the best contramove line (biggest amount, inverse amount from line)
             contra_line = line
             for other_line in move.line_id:
                 if other_line.id == line.id:

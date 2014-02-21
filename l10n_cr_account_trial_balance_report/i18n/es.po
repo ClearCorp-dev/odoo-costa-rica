@@ -185,3 +185,7 @@ msgstr "Filtrado por"
 msgid "All Entries"
 msgstr "Todos los apuntes"
 
+#. module: l10n_cr_account_trial_balance_report
+#: model:ir.ui.menu,name:account.menu_general_Balance_report
+msgid "Trial Balance"
+msgstr "Balance de Comprobación"

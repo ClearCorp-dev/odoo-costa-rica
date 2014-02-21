@@ -26,9 +26,10 @@
     'author': 'CLEARCORP S.A.',
     'category': 'Finance',
     'description': """
-    Trial Balance Report.
-    =====================
-    Create the Trial Balance report""",
+Trial Balance Report.
+=======================
+Create the Trial Balance report
+    """,
     'website': "http://clearcorp.co.cr",
     'depends': ['account_report_lib',],
     'data': [
