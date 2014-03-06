@@ -67,6 +67,7 @@ class DaviviendaParser( object ):
         }
         rec = rec.replace('ABONO A SU CUENTA .... GRACIAS;','ABONO A SU CUENTA .... GRACIAS')
         rec = rec.replace('ABONO A SU CUENTA .... GRACIA;','ABONO A SU CUENTA .... GRACIAS')
+        rec = rec.replace('ABONO A SU CUENTA .... GRACI;','ABONO A SU CUENTA .... GRACIAS')
         
         #Split the file in statements
         list_split = rec.split('\n')
@@ -175,6 +176,7 @@ class DaviviendaParser( object ):
         
         rec = rec.replace('ABONO A SU CUENTA .... GRACIAS;','ABONO A SU CUENTA .... GRACIAS')
         rec = rec.replace('ABONO A SU CUENTA .... GRACIA;','ABONO A SU CUENTA .... GRACIAS')
+        rec = rec.replace('ABONO A SU CUENTA .... GRACI;','ABONO A SU CUENTA .... GRACIAS')
         list_split = rec.split('\n')
         entrada = False
         
