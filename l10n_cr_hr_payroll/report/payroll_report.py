@@ -36,7 +36,7 @@ class hr_payslip_run_report(report_sxw.rml_parse):
             'get_he':self.get_he,
             'get_fe':self.get_fe,
             'get_basic':self.get_basic,
-            'get_exs':self.get_exs,
+            'get_ext':self.get_ext,
             'get_fes':self.get_fes,
             'get_gross':self.get_gross,
             'get_ccss':self.get_ccss,
@@ -99,8 +99,8 @@ class hr_payslip_run_report(report_sxw.rml_parse):
         
         return res
         
-    def get_exs(self,line_ids):
-        code = 'EXS'
+    def get_ext(self,line_ids):
+        code = 'EXT'
         res = 0
         for line in line_ids:
             if line.code == code:
@@ -159,7 +159,7 @@ class hr_payslip_run_report(report_sxw.rml_parse):
 
 
     def get_rent(self,line_ids):
-        code = 'Renta'
+        code = 'RENTA'
         res = 0
         for line in line_ids:
             if line.code == code:

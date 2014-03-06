@@ -37,7 +37,7 @@ class ReportEmployeeByPeriods(report_sxw.rml_parse):
             'get_hn': self.get_hn,
             'get_he': self.get_he,
             'get_basic': self.get_basic,
-            'get_exs': self.get_exs,
+            'get_ext': self.get_ext,
             'get_gross': self.get_gross,
             'get_ccss': self.get_ccss,
             'get_rent': self.get_rent,
@@ -67,7 +67,7 @@ class ReportEmployeeByPeriods(report_sxw.rml_parse):
     def get_hn(self, cr, uid, payslip):
         code = 'HN'
         res = 0.00
-        for line in payslip.line_ids:
+        for line in payslip.worked_days_line_ids:
             if line.code == code:
                 res += line.number_of_hours
         return res
@@ -75,7 +75,7 @@ class ReportEmployeeByPeriods(report_sxw.rml_parse):
     def get_he(self, cr, uid, payslip):
         code = 'HE'
         res = 0.00
-        for line in payslip.line_ids:
+        for line in payslip.worked_days_line_ids:
             if line.code == code:
                 res += line.number_of_hours        
         return res
@@ -88,8 +88,8 @@ class ReportEmployeeByPeriods(report_sxw.rml_parse):
                 res += line.total
         return res
         
-    def get_exs(self, cr, uid, payslip):
-        code = 'EXS'
+    def get_ext(self, cr, uid, payslip):
+        code = 'EXT'
         res = 0.00
         for line in payslip.line_ids:
             if line.code == code:
@@ -130,7 +130,7 @@ class ReportEmployeeByPeriods(report_sxw.rml_parse):
 
 
     def get_rent(self, cr, uid, payslip):
-        code = 'Renta'
+        code = 'RENTA'
         res = 0.00
         for line in payslip.line_ids:
             if line.code == code:
