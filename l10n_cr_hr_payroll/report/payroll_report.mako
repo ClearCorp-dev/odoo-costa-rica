@@ -16,7 +16,7 @@
         total_he = 0.0
         total_fe = 0.0
         total_basic = 0.0
-        total_exs = 0.0
+        total_ext = 0.0
         total_fes = 0.0
         total_gross = 0.0
         total_basic = 0.0
@@ -37,7 +37,7 @@
             total_he_dep = 0.0
             total_fe_dep = 0.0
             total_basic_dep = 0.0
-            total_exs_dep = 0.0
+            total_ext_dep = 0.0
             total_fes_dep = 0.0
             total_gross_dep = 0.0
             total_basic_dep = 0.0
@@ -79,8 +79,8 @@
                         <div class="table-cell" style="text-align:left; border:silver 1px solid;">${get_he(slip.worked_days_line_ids) or '0'}</div>
                         ## basic
                         <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_basic(slip.line_ids)) or '0'}</div>
-                        ## exs
-                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_exs(slip.line_ids)) or '0'}</div>
+                        ## ext
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_ext(slip.line_ids)) or '0'}</div>
                         ## gross
                         <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_gross(slip.line_ids)) or '0'}</div>
                         ## ccss
@@ -95,7 +95,7 @@
                         total_he_dep += get_he(slip.worked_days_line_ids)
                         total_fe_dep += get_fe(slip.worked_days_line_ids)
                         total_basic_dep += get_basic(slip.line_ids)
-                        total_exs_dep += get_exs(slip.line_ids)
+                        total_ext_dep += get_ext(slip.line_ids)
                         total_fes_dep += get_fes(slip.line_ids)
                         total_gross_dep += get_gross(slip.line_ids)
                         total_rent_dep += get_rent(slip.line_ids)
@@ -108,7 +108,7 @@
                         total_he += get_he(slip.worked_days_line_ids)
                         total_fe += get_fe(slip.worked_days_line_ids)
                         total_basic += get_basic(slip.line_ids)
-                        total_exs += get_exs(slip.line_ids)
+                        total_ext += get_ext(slip.line_ids)
                         total_fes += get_fes(slip.line_ids)
                         total_gross += get_gross(slip.line_ids)
                         total_rent += get_rent(slip.line_ids)
@@ -127,7 +127,7 @@
                         <div class="table-cell" style="text-align:left; border:silver 1px solid;">${total_hn_dep}</div>
                         <div class="table-cell" style="text-align:left; border:silver 1px solid;">${total_he_dep}</div>
                         <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_basic_dep)}</div>
-                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_exs_dep)}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_ext_dep)}</div>
                         <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_gross_dep)}</div>
                         <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_ccss_dep)}</div>
                         <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_rent_dep)}</div>
@@ -145,7 +145,7 @@
                     <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${total_hn}</div>
                     <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${total_he}</div>
                     <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_basic)}</div>
-                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_exs)}</div>
+                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_ext)}</div>
                     <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_gross)}</div>
                     <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_ccss)}</div>
                     <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_rent)}</div>

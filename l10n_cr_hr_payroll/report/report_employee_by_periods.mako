@@ -23,7 +23,7 @@
         total_hn = 0.0
         total_he = 0.0
         total_basic = 0.0
-        total_exs = 0.0
+        total_ext = 0.0
         total_gross = 0.0
         total_basic = 0.0
         total_rent = 0.0
@@ -69,8 +69,8 @@
                     <div class="table-cell" style="text-align:left; border:silver 1px solid;">${get_he(cr, uid, payslip) or '0'}</div>
                     ## basic
                     <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_basic(cr, uid, payslip)) or '0'}</div>
-                    ## exs
-                    <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_exs(cr, uid, payslip)) or '0'}</div>
+                    ## ext
+                    <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_ext(cr, uid, payslip)) or '0'}</div>
                     ## gross
                     <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_gross(cr, uid, payslip)) or '0'}</div>
                     ## ccss
@@ -85,7 +85,7 @@
                     total_hn += get_hn(cr, uid, payslip)
                     total_he += get_he(cr, uid, payslip)
                     total_basic += get_basic(cr, uid, payslip)
-                    total_exs += get_exs(cr, uid, payslip)
+                    total_ext += get_ext(cr, uid, payslip)
                     total_gross += get_gross(cr, uid, payslip)
                     total_rent += get_rent(cr, uid, payslip)
                     total_ccss += get_ccss(cr, uid, payslip)
@@ -104,7 +104,7 @@
                     <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${total_hn}</div>
                     <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${total_he}</div>
                     <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_basic)}</div>
-                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_exs)}</div>
+                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_ext)}</div>
                     <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_gross)}</div>
                     <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_ccss)}</div>
                     <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_rent)}</div>
