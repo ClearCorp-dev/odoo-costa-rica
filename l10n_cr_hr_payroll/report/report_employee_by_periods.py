@@ -90,10 +90,13 @@ class ReportEmployeeByPeriods(report_sxw.rml_parse):
         
     def get_ext(self, cr, uid, payslip):
         code = 'EXT'
+        code2 = 'EXT-FE'
         res = 0.00
         for line in payslip.line_ids:
             if line.code == code:
-                res += line.total                
+                res += line.total
+            elif line.code == code2:
+                res += line.total
         res = res + self.get_retroactive(payslip)
         return res
         
@@ -109,6 +112,8 @@ class ReportEmployeeByPeriods(report_sxw.rml_parse):
         code = 'CCSS-EMP'
         code2 = 'CCSS-EMP-PEN'
         code3 = 'Banco Popular-EMP'
+        code4 = 'CCSS-IVM'
+        code5 = 'CCSS-SEM'
         res = 0.00
         for line in payslip.line_ids:
             if line.code == code:
@@ -116,6 +121,10 @@ class ReportEmployeeByPeriods(report_sxw.rml_parse):
             elif line.code == code2:
                 res += line.total
             elif line.code == code3:
+                res += line.total
+            elif line.code == code4:
+                res += line.total
+            elif line.code == code5:
                 res += line.total
         return res
     
