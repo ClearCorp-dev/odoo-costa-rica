@@ -68,6 +68,8 @@ class DaviviendaParser( object ):
         rec = rec.replace('ABONO A SU CUENTA .... GRACIAS;','ABONO A SU CUENTA .... GRACIAS')
         rec = rec.replace('ABONO A SU CUENTA .... GRACIA;','ABONO A SU CUENTA .... GRACIAS')
         rec = rec.replace('ABONO A SU CUENTA .... GRACI;','ABONO A SU CUENTA .... GRACIAS')
+        rec = rec.replace('\r\n','\n')
+        rec = rec.replace('\r','\n')
         
         #Split the file in statements
         list_split = rec.split('\n')
@@ -177,6 +179,8 @@ class DaviviendaParser( object ):
         rec = rec.replace('ABONO A SU CUENTA .... GRACIAS;','ABONO A SU CUENTA .... GRACIAS')
         rec = rec.replace('ABONO A SU CUENTA .... GRACIA;','ABONO A SU CUENTA .... GRACIAS')
         rec = rec.replace('ABONO A SU CUENTA .... GRACI;','ABONO A SU CUENTA .... GRACIAS')
+        rec = rec.replace('\r\n','\n')
+        rec = rec.replace('\r','\n')
         list_split = rec.split('\n')
         entrada = False
         
@@ -200,7 +204,7 @@ class DaviviendaParser( object ):
             line = sub.split(';')
             #effective_date
             date_str = line[0].replace("/","-")
-            date= datetime.strptime(date_str, "%d-%m-%Y")               
+            date= datetime.strptime(date_str, "%d-%m-%Y")
             mapping['effective_date'] = date
             #execution_date
             mapping['execution_date'] = date
