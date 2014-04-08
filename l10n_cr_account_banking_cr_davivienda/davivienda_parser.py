@@ -313,5 +313,3 @@ class DaviviendaParser( object ):
             output.append( self.parse_stamenent_record( rec ) )
                 
         return output
-
-
