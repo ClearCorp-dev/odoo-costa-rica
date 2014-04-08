@@ -32,7 +32,8 @@ Parser for Promerica's Bank Statements for the use with account_banking_ccorp mo
 
 Main Features
 -------------
-* Todo
+* Parse xlsx format bank statements.
+* Serve bank statements to account_banking_ccorp module.
 ''',
     'category': 'Accounting & Finance',
     'sequence': 3,
