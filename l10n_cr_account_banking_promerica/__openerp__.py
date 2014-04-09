@@ -39,12 +39,17 @@ Main Features
     'sequence': 3,
     'website' : 'http://clearcorp.co.cr',
     'images' : [],
-    'depends' : ['account'],
+    'depends' : [
+                 'account_banking_ccorp',
+                ],
     'data' : [],
     'init_xml' : [],
     'demo_xml' : [],
     'update_xml' : [],
     'test' : [],
+    'external_dependencies': {
+        'python': ['openpyxl'],
+    },
     'auto_install': False,
     'application': False,
     'installable': True,
