@@ -162,7 +162,7 @@ class parser_promerica(models.parser):
         data_rows = worksheet.rows[13:]
         data = []
         for row in data_rows:
-            if reduce(lambda result, value: result and (value is None),
+            if reduce(lambda result, value: result and (value is None or value == ''),
                       [cell.value for cell in row], True):
                 break
             data.append([cell.value for cell in row])
