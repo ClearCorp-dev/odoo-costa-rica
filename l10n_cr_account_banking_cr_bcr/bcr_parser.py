@@ -384,6 +384,8 @@ class BCRParser( object ):
             mapping['id'] = fields[3]
             
             #Extract debit and credit
+            if not fields[5].strip() and not fields[6].strip():
+                continue
             debit = fields[5]
             if (parser.extract_float(debit) is not ''): #debit
                 cad = parser.extract_float(debit)
