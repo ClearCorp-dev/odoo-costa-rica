@@ -52,7 +52,10 @@
                   <group string="Accounts" position="attributes">  
                      <attribute name="attrs">{'invisible': True}</attribute>
                   </group>
-             
+                  
+                  <group string="Partners" position="attributes">                   
+                        <attribute name="attrs">{'invisible': True}</attribute>
+                   </group>
                </data>
             </field>
         </record>

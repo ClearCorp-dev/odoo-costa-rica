@@ -26,9 +26,12 @@
     'author': 'CLEARCORP S.A.',
     'category': 'Finance',
     'description': """
-Profit Statement Report:
-==========================
-Install the Profit Statement Report
+Install the Profit Statement Report.
+=======================================
+Configuration:
+-----------------
+        1. Configure type account that it will appear in wizard. This configuration is in Accounting -> Account -> Account Types and check
+        "Include in Profit Statement report" option.
     """,    
     'website': "http://clearcorp.co.cr",
     'depends': ['account_report_lib',],

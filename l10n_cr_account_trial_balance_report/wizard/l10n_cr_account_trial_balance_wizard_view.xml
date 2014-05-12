@@ -57,6 +57,9 @@
                         <attribute name="domain">[('type', '=', 'sum'),('account_type.code','=','TRIBAL')]</attribute>
                     </field>
                     
+                    <group string="Partners" position="attributes">                   
+                        <attribute name="attrs">{'invisible': True}</attribute>
+                   </group>
                </data>
             </field>
         </record>
