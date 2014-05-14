@@ -54,6 +54,9 @@
                     <field name="account_base_report" position="after">
                         <field name="base_compare_account" required="True" domain="[('user_type.include_profit_statement_report','=', True),('type','=','view')]"/>
                     </field>
+                    <group string="Partners" position="attributes">                   
+                        <attribute name="attrs">{'invisible': True}</attribute>
+                    </group>
                </data>
             </field>
         </record>

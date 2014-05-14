@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <menuitem id="menu_bank_reports" name="Banks" parent="account.menu_finance_generic_reporting" sequence="43"/> 
-        <menuitem action="action_conciliation_bank_report_menu_webkit" id="menu_action_conciliation_bank_report" parent="menu_bank_reports"/> 
+        <menuitem 
+            action="action_conciliation_bank_report_menu_webkit" 
+            id="menu_action_conciliation_bank_report" 
+            parent="account_report_lib.menu_bank_reports"
+            groups="account.group_account_manager,account.group_account_user" /> 
     </data>
 </openerp>

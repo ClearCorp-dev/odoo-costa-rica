@@ -62,11 +62,12 @@
                     <field name="date_to" position="attributes">
                         <attribute name="attrs">{'required': [('filter', '=', 'filter_date')]}</attribute>
                     </field>
-                   
+                    <group string="Partners" position="attributes">                   
+                        <attribute name="attrs">{'invisible': True}</attribute>
+                    </group>
                     <group string="Journals" position="attributes">
                         <attribute name="attrs">{'invisible': True, 'required':False}</attribute>
-                    </group>
-                    
+                    </group>                    
                 </data>
             </field>
         </record>
