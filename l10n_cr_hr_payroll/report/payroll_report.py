@@ -46,6 +46,7 @@ class hr_payslip_run_report(report_sxw.rml_parse):
             'get_RETM':self.get_RETM,
             'get_RETS':self.get_RETS,
             'get_retroactive':self.get_retroactive,
+            'get_bon': self.get_bon,
         })
     
     def get_prefix(self,currency,company_id):
@@ -196,6 +197,14 @@ class hr_payslip_run_report(report_sxw.rml_parse):
     def get_retroactive(self, line_ids):
         res = 0
         res = self.get_RETS(line_ids) + self.get_RETM(line_ids)
+        return res
+
+    def get_bon(self,line_ids):
+        code = 'BON'
+        res = 0
+        for line in line_ids:
+            if line.code == code:
+                res += line.total
         return res
 
     def get_obj_by_dep(self,run):
