@@ -16,6 +16,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: l10n_cr_hr_payroll
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:64
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report_for_month.mako:66
+#: report:addons/l10n_cr_hr_payroll/report/report_employee_by_periods.mako:48
+msgid "Bonuses"
+msgstr ""
+
+#. module: l10n_cr_hr_payroll
 #: constraint:hr.contract:0
 msgid "Error! contract start-date must be lower then contract end-date."
 msgstr "¡Error! La fecha de inicio de contrato debe ser menor que la fecha de finalización."

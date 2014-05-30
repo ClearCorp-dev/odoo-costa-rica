@@ -16,6 +16,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: l10n_cr_hr_payroll
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:64
+#: report:addons/l10n_cr_hr_payroll/report/payroll_report_for_month.mako:66
+#: report:addons/l10n_cr_hr_payroll/report/report_employee_by_periods.mako:48
+msgid "Bonuses"
+msgstr "Bonificaciones"
+
+#. module: l10n_cr_hr_payroll
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report.mako:60
 #: report:addons/l10n_cr_hr_payroll/report/payroll_report_for_month.mako:62
 #: report:addons/l10n_cr_hr_payroll/report/report_employee_by_periods.mako:45

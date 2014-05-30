@@ -40,6 +40,7 @@ class ReportEmployeeByPeriods(report_sxw.rml_parse):
             'get_ext': self.get_ext,
             'get_gross': self.get_gross,
             'get_ccss': self.get_ccss,
+            'get_bon': self.get_bon,
             'get_rent': self.get_rent,
             'get_net': self.get_net,
             'get_RETM':self.get_RETM,
@@ -128,6 +129,13 @@ class ReportEmployeeByPeriods(report_sxw.rml_parse):
                 res += line.total
         return res
     
+    def get_bon(self, cr, uid, payslip):
+        code = 'BON'
+        res = 0.00
+        for line in payslip.line_ids:
+            if line.code == code:
+                res += line.total
+        return res
     
     def get_net(self, cr, uid, payslip):
         code = 'NETO'

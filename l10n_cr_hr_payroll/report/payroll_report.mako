@@ -22,6 +22,7 @@
         total_basic = 0.0
         total_rent = 0.0
         total_ccss = 0.0
+        total_bon = 0.0
         total_net = 0.0
         total_emp = 0
         %>
@@ -43,6 +44,7 @@
             total_basic_dep = 0.0
             total_rent_dep = 0.0
             total_ccss_dep = 0.0
+            total_bon_dep = 0.0
             total_net_dep = 0.0
             total_emp_dep = 0
             %>
@@ -53,14 +55,15 @@
                         <div class="table-cell" style="width:14%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Id card')}</div>
                         <div class="table-cell" style="width:17%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Name')}</div>
                         <div class="table-cell" style="width:13%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Bank account')}</div>
-                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Hrs.')}<br />${_('Nor')}</div>
-                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Hrs.')}<br />${_('Ext')}</div>
-                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Ingr.')}<br />${_('Normal')}</div>
-                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Ingr.')}<br />${_('Extra')}</div>
-                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Salary')}<br />${_('Gross')}</div>
-                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Deducc.')}<br />${_('CCSS/BP')}</div>
-                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Tax')}<br />${_('Rent')}</div>
-                        <div class="table-cell" style="width:7%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Salary')}<br />${_('Net')}</div>
+                        <div class="table-cell" style="width:6.22%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Hrs.')}<br />${_('Nor')}</div>
+                        <div class="table-cell" style="width:6.22%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Hrs.')}<br />${_('Ext')}</div>
+                        <div class="table-cell" style="width:6.22%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Ingr.')}<br />${_('Normal')}</div>
+                        <div class="table-cell" style="width:6.22%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Ingr.')}<br />${_('Extra')}</div>
+                        <div class="table-cell" style="width:6.22%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Salary')}<br />${_('Gross')}</div>
+                        <div class="table-cell" style="width:6.22%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Deducc.')}<br />${_('CCSS/BP')}</div>
+                        <div class="table-cell" style="width:6.22%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Bonuses')}</div>
+                        <div class="table-cell" style="width:6.22%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Tax')}<br />${_('Rent')}</div>
+                        <div class="table-cell" style="width:6.22%; background-color:silver; font-weight: bold; text-align:center; border:silver 1px solid;">${_('Salary')}<br />${_('Net')}</div>
                     </div>
                 </div>
             
@@ -85,6 +88,8 @@
                         <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_gross(slip.line_ids)) or '0'}</div>
                         ## ccss
                         <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_ccss(slip.line_ids)) or '0'}</div>
+                        ## bon
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_bon(slip.line_ids)) or '0'}</div>
                         ## RENT
                         <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(get_rent(slip.line_ids)) or '0'}</div>
                         ## NET
@@ -100,6 +105,7 @@
                         total_gross_dep += get_gross(slip.line_ids)
                         total_rent_dep += get_rent(slip.line_ids)
                         total_ccss_dep += get_ccss(slip.line_ids)
+                        total_bon_dep += get_bon(slip.line_ids)
                         total_net_dep += get_net(slip.line_ids)
                         total_emp_dep += 1
 
@@ -113,6 +119,7 @@
                         total_gross += get_gross(slip.line_ids)
                         total_rent += get_rent(slip.line_ids)
                         total_ccss += get_ccss(slip.line_ids)
+                        total_bon += get_bon(slip.line_ids)
                         total_net += get_net(slip.line_ids)
                         total_emp += 1
                     %>
@@ -130,26 +137,28 @@
                         <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_ext_dep)}</div>
                         <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_gross_dep)}</div>
                         <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_ccss_dep)}</div>
+                        <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_bon_dep)}</div>
                         <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_rent_dep)}</div>
                         <div class="table-cell" style="text-align:left; border:silver 1px solid;">${formatLang(total_net_dep)}</div>
                     </div>
                 </div>
             </div>
-        %endfor   
+        %endfor
         <div class="table list">
             <div class="table-header">
                 <div class="table-row ${row_even and 'even' or 'odd'}">
                     <div class="table-cell" style="width:14%; text-align:left; border:silver 1px solid;">${_('TOTAL')}</div>
                     <div class="table-cell" style="width:17%; text-align:left; border:silver 1px solid;">${total_emp} ${_('Employees')}</div>
                     <div class="table-cell" style="width:13%; text-align:left; border:silver 1px solid;"> </div>
-                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${total_hn}</div>
-                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${total_he}</div>
-                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_basic)}</div>
-                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_ext)}</div>
-                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_gross)}</div>
-                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_ccss)}</div>
-                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_rent)}</div>
-                    <div class="table-cell" style="width:7%; text-align:left; border:silver 1px solid;">${formatLang(total_net)}</div>
+                    <div class="table-cell" style="width:6.22%; text-align:left; border:silver 1px solid;">${total_hn}</div>
+                    <div class="table-cell" style="width:6.22%; text-align:left; border:silver 1px solid;">${total_he}</div>
+                    <div class="table-cell" style="width:6.22%; text-align:left; border:silver 1px solid;">${formatLang(total_basic)}</div>
+                    <div class="table-cell" style="width:6.22%; text-align:left; border:silver 1px solid;">${formatLang(total_ext)}</div>
+                    <div class="table-cell" style="width:6.22%; text-align:left; border:silver 1px solid;">${formatLang(total_gross)}</div>
+                    <div class="table-cell" style="width:6.22%; text-align:left; border:silver 1px solid;">${formatLang(total_ccss)}</div>
+                    <div class="table-cell" style="width:6.22%; text-align:left; border:silver 1px solid;">${formatLang(total_bon)}</div>
+                    <div class="table-cell" style="width:6.22%; text-align:left; border:silver 1px solid;">${formatLang(total_rent)}</div>
+                    <div class="table-cell" style="width:6.22%; text-align:left; border:silver 1px solid;">${formatLang(total_net)}</div>
                 </div>
             </div>
             <div class="table-body">
