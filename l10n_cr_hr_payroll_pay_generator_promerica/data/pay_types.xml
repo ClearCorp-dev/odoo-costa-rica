@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="0">
+        <record model="hr.payroll.pay.generator.pay.type" id="pay_type_promerica">
+            <field name="code">promerica</field>
+        </record>
+    </data>
+    <data noupdate="1">
+        <record model="hr.payroll.pay.generator.pay.type" id="pay_type_promerica">
+            <field name="name">Banco Promerica</field>
+            <field name="description">Banco Promerica Pay Type</field>
+        </record>
+    </data>
+</openerp>
