@@ -100,11 +100,11 @@ class BCRParser( object ):
                     line_dict['bookingdate'] = cad
                 
                 #date and hour -> SECOND REVISION                 
-                elif (l.find('SOLICITADO EL', 0, len('SOLICITADO EL'))  > -1):
+                elif (l.find('MOVIMIENTO REALIZADO', 0, len('MOVIMIENTO REALIZADO'))  > -1):
                     date =  hour = cad = ''
                     date = self.extract_date_regular_expresion(l)
                     if len(date) > 0:                   
-                        hour = self.extract_hour_regular_expresion(l)
+                        hour = "00:00:00"
                     cad = date + ' ' + hour                
                     line_dict['transref'] = cad
                     line_dict['bookingdate'] = cad        
@@ -439,8 +439,8 @@ class BCRParser( object ):
             #FORMAT DATE SECOND REVISION
             result = re.findall('[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}',date)      
         
-        for character in result:
-            cad = cad + character       
+        if result:
+            cad = result[0]
         return cad
     
     #with the pos parameter is said which of the two dates must be brought
