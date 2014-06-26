@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="0">
+        <record model="hr.payroll.pay.generator.pay.type" id="pay_type_bcr">
+            <field name="code">bcr</field>
+        </record>
+    </data>
+    <data noupdate="1">
+        <record model="hr.payroll.pay.generator.pay.type" id="pay_type_bcr">
+            <field name="name">Banco de Costa Rica</field>
+            <field name="description">Banco de Costa Rica Pay Type</field>
+        </record>
+    </data>
+</openerp>
