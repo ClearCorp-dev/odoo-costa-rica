@@ -90,12 +90,12 @@ class BCRParser( object ):
                     date_2 = self.extract_date_regular_expresion_line_format_2(l,1)
                        
                 #date and hour -> FIRST REVISION 
-                if (l.find('Solicitado el', 0, len('Solicitado el'))  > -1):
+                if (l.find('Movimiento realizado', 0, len('Movimiento realizado'))  > -1):
                     date =  hour = cad = ''
                     date = self.extract_date_regular_expresion(l)
                     if len(date) > 0:                   
-                        hour = self.extract_hour_regular_expresion(l)
-                    cad = date + ' ' + hour                
+                        hour = '00:00:00'
+                    cad = date + ' ' + hour
                     line_dict['transref'] = cad
                     line_dict['bookingdate'] = cad
                 
@@ -105,9 +105,9 @@ class BCRParser( object ):
                     date = self.extract_date_regular_expresion(l)
                     if len(date) > 0:                   
                         hour = "00:00:00"
-                    cad = date + ' ' + hour                
+                    cad = date + ' ' + hour
                     line_dict['transref'] = cad
-                    line_dict['bookingdate'] = cad        
+                    line_dict['bookingdate'] = cad
                                    
                 #_opening_balance -> FIRST REVISION
                 if l.find('Saldo Inicial', 0, len('Saldo Inicial'))  > -1:
