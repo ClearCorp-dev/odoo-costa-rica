@@ -97,6 +97,7 @@ class hr_payslip_run(osv.osv):
             payslip_ids = map(lambda x: x.id, batches.slip_ids)
             for payslip in payslip_obj.browse(cr, uid, payslip_ids):
                     if payslip.state == 'draft':
+                        payslip_obj.compute_sheet(cr, uid, [payslip.id], context=context)
                         payslip_obj.process_sheet(cr, uid, [payslip.id], context=context)
         return True
 
