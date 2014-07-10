@@ -1,4 +1,4 @@
-odoo-clearcorp
-==============
+odoo-costa-rica
+===============
 
-Odoo CLEARCORP Apps
+Odoo Costa Rica Localization Apps
