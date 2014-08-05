@@ -29,9 +29,9 @@ class PayrollReportForMonthWizard(osv.osv):
     _description = "Payroll Report for Month"
     
     _columns = {
-        'company_id': fields.many2one('res.company', 'Company', required=True),
-        'period_from': fields.many2one('account.period', 'Start Period', required=True),
-        'period_to': fields.many2one('account.period', 'End Period', required=True),
+        'company_id': fields.many2one('res.company', string="Company"),
+        'period_from': fields.many2one('account.period', string="Start Period"),
+        'period_to': fields.many2one('account.period', string="End Period"),
     }
     
     _defaults = {
