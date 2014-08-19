@@ -20,6 +20,15 @@
 #
 ##############################################################################
 
-import l10n_cr_hr_payroll
-import hr_settings_conf
-import res_company_inherit
+from openerp.osv import fields, orm
+from openerp.tools.translate import _
+
+class resCompanyInherit(orm.Model):
+    
+    _inherit = 'res.company'
+    
+    _columns = {
+        'first_limit': fields.float('First Limit'),
+        'second_limit':fields.float('Second Limit'), 
+    }
+    

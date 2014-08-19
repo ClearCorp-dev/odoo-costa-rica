@@ -90,3 +90,62 @@ class hr_employee(osv.osv):
     _constraints = [
         (_check_report_number_child, 'Error! The number of child to report must be greater or equal to zero.', ['report_number_child'])
     ]
+    
+class hrSalaryrule(orm.Model):
+    _inherit = 'hr.salary.rule'
+
+    _columns = {
+        'rent_apply': fields.boolean('Apply rent', help="If this rule is for rent"),
+    }
+    
+    _defaults = {
+        'amount_python_compute': '''
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_settings: hr.config.settings object where is, for example, rent limits. It is a browse record
+
+# Note: returned value have to be set in the variable 'result'
+
+result = contract.wage * 0.10''',
+        'condition_python':
+'''
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days
+# inputs: object containing the computed inputs
+# hr_settings: hr.config.settings object where is, for example, rent limits. It is a browse record
+
+# Note: returned value have to be set in the variable 'result'
+
+result = rules.NET > categories.NET * 0.10''',
+    }
+    
+    def satisfy_condition(self, cr, uid, rule_id, localdict, context=None):
+        """
+            Update dictionary 'localdict' to include hr.config.settings object
+            and then, use this object to get rent limits in python code on 
+            rule salary
+        """
+        
+        company_obj = self.pool.get('res.company')
+        company_id = company_obj._company_default_get(cr, uid, 'l10n.cr.hr.payroll', context=context) #module name
+        hr_settings_id = self.pool.get('hr.config.settings').search(cr, uid, [('rent_company_id','=', company_id)], context=context)
+        hr_settings = self.pool.get('hr.config.settings').browse(cr, uid, hr_settings_id, context=context)
+        
+        #Update localdict
+        localdict.update({'hr_settings':hr_settings})
+        
+        super(hrSalaryrule, self).satisfy_condition(cr, uid, rule_id, localdict, context=context)
+    
