@@ -18,12 +18,18 @@
                             <div name="first_limit">
                                 <label for="first_limit"/>
                                 <field name="first_limit" class="oe_inline"/>
-                                <label string="%%" for="first_limit"/>
                             </div>
                             <div name="second_limit">
                                 <label for="second_limit"/>
                                 <field name="second_limit" class="oe_inline"/>
-                                <label string="%%" for="second_limit"/>
+                            </div>
+                            <div name="amount_per_child">
+                                <label for="amount_per_child"/>
+                                <field name="amount_per_child" class="oe_inline"/>
+                            </div>
+                            <div name="amount_per_spouse">
+                                <label for="amount_per_spouse"/>
+                                <field name="amount_per_spouse" class="oe_inline"/>
                             </div>
                         </div>
                     </group>

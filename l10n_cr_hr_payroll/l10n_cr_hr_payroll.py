@@ -23,6 +23,7 @@
 import netsvc
 import tools
 from datetime import datetime
+from datetime import date, timedelta
 from openerp.tools.translate import _
 from openerp.osv import fields,osv, orm
 
@@ -63,8 +64,7 @@ class hrPaysliprun(orm.Model):
             ('weekly', 'Weekly'),
             ('bi-weekly', 'Bi-weekly'),
             ('bi-monthly', 'Bi-monthly'),
-            ], 'Scheduled Pay', select=True, readonly=True, states={'draft': [('readonly', False)]}),
-      
+            ], 'Scheduled Pay', select=True, readonly=True, states={'draft': [('readonly', False)]}),      
     }
     
 class hr_employee(osv.osv):
@@ -90,62 +90,59 @@ class hr_employee(osv.osv):
     _constraints = [
         (_check_report_number_child, 'Error! The number of child to report must be greater or equal to zero.', ['report_number_child'])
     ]
+
+class hrPayslipinherit(osv.osv_memory):
     
-class hrSalaryrule(orm.Model):
-    _inherit = 'hr.salary.rule'
-
-    _columns = {
-        'rent_apply': fields.boolean('Apply rent', help="If this rule is for rent"),
-    }
+    _inherit = 'hr.payslip'
     
-    _defaults = {
-        'amount_python_compute': '''
-# Available variables:
-#----------------------
-# payslip: object containing the payslips
-# employee: hr.employee object
-# contract: hr.contract object
-# rules: object containing the rules code (previously computed)
-# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
-# worked_days: object containing the computed worked days.
-# inputs: object containing the computed inputs.
-# hr_settings: hr.config.settings object where is, for example, rent limits. It is a browse record
-
-# Note: returned value have to be set in the variable 'result'
-
-result = contract.wage * 0.10''',
-        'condition_python':
-'''
-# Available variables:
-#----------------------
-# payslip: object containing the payslips
-# employee: hr.employee object
-# contract: hr.contract object
-# rules: object containing the rules code (previously computed)
-# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
-# worked_days: object containing the computed worked days
-# inputs: object containing the computed inputs
-# hr_settings: hr.config.settings object where is, for example, rent limits. It is a browse record
-
-# Note: returned value have to be set in the variable 'result'
-
-result = rules.NET > categories.NET * 0.10''',
-    }
-    
-    def satisfy_condition(self, cr, uid, rule_id, localdict, context=None):
-        """
-            Update dictionary 'localdict' to include hr.config.settings object
-            and then, use this object to get rent limits in python code on 
-            rule salary
-        """
+    #Get the previous payslip for an employee. Return all payslip that are in
+    #the same month than current payslip
+    def get_previous_payslips(self, cr, uid, employee, actual_payslip, context=None):
+        payslip_list = []
+        date_to = datetime.strptime(payslip.date_to, '%Y-%m-%d')
+        month_date_to = date_to.month
+        payslips_ids = self.pool.get('hr.payslip').search(cr, uid, [('employee_id','=', employee.id), ('date_to','<', payslip.date_to)], context=context)
         
-        company_obj = self.pool.get('res.company')
-        company_id = company_obj._company_default_get(cr, uid, 'l10n.cr.hr.payroll', context=context) #module name
-        hr_settings_id = self.pool.get('hr.config.settings').search(cr, uid, [('rent_company_id','=', company_id)], context=context)
-        hr_settings = self.pool.get('hr.config.settings').browse(cr, uid, hr_settings_id, context=context)
+        for empl_payslip in self.pool.get('hr.payslip').browse(cr, uid, payslip_ids, context=context):
+            temp_date = datetime.strptime(empl_payslip.date_to, '%Y-%m-%d')
+            if (temp_date.month == month_date_to) and (temp_date.year == month_date_to.year):
+                payslip_list.append(empl_payslip)
         
-        #Update localdict
-        localdict.update({'hr_settings':hr_settings})
-        
-        super(hrSalaryrule, self).satisfy_condition(cr, uid, rule_id, localdict, context=context)
+        return payslip_list
     
+    #get SBA for employee (Gross salary for an employee)
+    def get_SBA(self, cr, uid, employee, actual_payslip, context=None):
+        SBA = 0.0
+        payslip_list = self.get_previous_payslips(cr, uid, employee, actual_payslip, context=context) #list of previous payslips
+        
+        for payslip in payslip_list:
+            for line in payslip.lines:
+                 if line.code == 'BRUTO':
+                     SBA += line.total        
+        return SBA
+    
+    #Get quantity of days between two dates
+    def days_between_days(self, cr, uid, date_from, date_to, context=None):
+        d1 = datetime.strptime(date_from, "%Y-%m-%d")
+        d2 = datetime.strptime(date_to, "%Y-%m-%d")
+        return abs((d2 - d1).days)
+    
+    #Get number of payments per month
+    def payment_per_month(self, cr, uid, payslip, context=None):
+        payments = 0
+        
+        date_from = datetime.strptime(payslip.date_from, '%Y-%m-%d')
+        date_to = datetime.strptime(payslip.date_to, '%Y-%m-%d')
+        
+        days = self.days_between_days(cr, uid, date_from, date_to, context=context)
+        next_date = date_from + timedelta(days=days)
+        
+        month_date_to = date_to.month
+        month_date_next = next_date.month
+        
+        while(month_date_to == month_date_next):
+            payments += 1
+            next_date = date_from + timedelta(days=days)
+            month_date_next = next_date.month
+        
+        return payments
