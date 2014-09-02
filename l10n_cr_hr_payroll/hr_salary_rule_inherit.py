@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+   # -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -41,6 +41,8 @@ class hrRulesalary(osv.osv):
 # inputs: object containing the computed inputs.
 # hr_conf: object of hr.config.settings. It is a browse record
 # hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
 
 # Note: returned value have to be set in the variable 'result'
 
@@ -58,6 +60,8 @@ result = contract.wage * 0.10''',
 # inputs: object containing the computed inputs
 # hr_conf: object of hr.config.settings. It is a browse record
 # hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
 
 # Note: returned value have to be set in the variable 'result'
 
@@ -83,8 +87,12 @@ result = rules.NET > categories.NET * 0.10''',
         #Update localdict with new variable
         localdict.update({'hr_conf':hr_conf_obj})
         
-        hr_salary_rule_obj = self.pool.get('hr.salary') #object from hr salary rule to use in python code
+        hr_salary_rule_obj = self.pool.get('hr.salary.rule') #object from hr salary rule to use in python code
         localdict.update({'hr_salary_rule':hr_salary_rule_obj})
+        
+        #add cr, uid at dictionary as a variables in python code
+        localdict.update({'cr':cr})
+        localdict.update({'uid':uid})
         
         result = super(hrRulesalary, self).satisfy_condition(cr, uid, rule_id, localdict, context=context)
         return result
@@ -93,92 +101,93 @@ result = rules.NET > categories.NET * 0.10''',
         This function is designed to be called from python code in the salary rule.
         It receive as parameters the variables that can be used by default in 
         python code on salary rule.
-        
-        It receive hr_conf, a parameter and it is a hr.conf.settings object, but also,
-        it can be declare inside in function
+       
+       This function compute rent for a employee
     """
-    def compute_rent_employee(self, cr, uid, hr_conf, inputs, employee, categories):
-        range1 = 0.1
-        range2 = 0.15            
-
+    def compute_rent_employee(self, hr_conf, employee, SBT):
+        subtotal = 0.0
+        exceed_2 = 0.0
+        exceed_1 = 0.0
+        total = 0.0
+        
         limit1 = hr_conf.first_limit #From hr.conf.settings, it's in company
         limit2 = hr_conf.second_limit
 
         spouse_amount = hr_conf.amount_per_spouse
         child_amount = hr_conf.amount_per_child
 
-        if inputs.RENTA and inputs.RENTA.amount != 0:
-            result = inputs.RENTA.amount
-        else:
-            if inputs.NPM and inputs.NPM.amount != 0:
-                month_payments = inputs.NPM.amount
-            else:
-                month_payments = 2
-
         children_numbers = employee.report_number_child
-        siblings_amount = 0
+                
+        #exceed second limit
+        if SBT >= limit2: #(1.128.000)
+            exceed_2 = SBT - limit2
+            subtotal += limit2 * 0.15 #15% of limit2
+            limit_temp = (limit2 - limit1) * 0.10 #10% of difference between limits
+            subtotal += exceed_2 + limit_temp
+   
+        #exceed first limit
+        elif SBT >= limit1: #(752.000)
+            exceed_1 = SBT - limit1
+            subtotal += exceed_1 * 0.10 
         
         if employee.report_spouse:
-            siblings_amount += spouse_amount
-        siblings_amount += children_numbers * child_amount
-
-        if inputs.SBM and inputs.SBM.amount != 0:
-            monthly_amount = inputs.SBM.amount
+            total = subtotal - spouse_amount - (child_amount * num_hijos)
         else:
-            monthly_amount = categories.BRUTO * month_payments
-
-        range2_amount = monthly_amount - limit2
-        if range2_amount < 0:
-            range2_amount = 0
-    
-        range1_amount = monthly_amount - range2_amount - limit1
-        if range1_amount < 0:
-            range1_amount = 0
-    
-        rent = 0
-        rent += range1_amount * range1
-        rent += range2_amount * range2
-        rent = rent - siblings_amount
-        rent = rent / month_payments
-
-        if rent > 0:
-            result = rent
-        else:
-            result = 0
-    
+            total = subtotal - (child_amount * children_numbers)
+        
+        return total
+    """
+        This function is designed to be called from python code in the salary rule.
+        It receive as parameters the variables that can be used by default in 
+        python code on salary rule.
+        
+        It receive hr_conf, a parameter and it is a hr.conf.settings object, but also,
+        it can be declare inside in function
+    """
     def compute_total_rent(self, cr, uid, hr_conf, inputs, employee, categories, payslip):
         SBA = 0.0 #Previous Gross Salary
         SBP = 0.0 #Currently Gross Salary
         SBF = 0.0 #Future Gross Salary
         SBT = 0.0 #Gross Salary Total (this is SBA + SBP + SBF)
         rent_empl = 0.0
-        temp_rent = 0.0
         total_rent = 0.0
-        sbf_temp = 0.0        
+             
         #objects
         payslip_obj = self.pool.get('hr.payslip')
+        count = 1
                 
         #1. Get number of payments
-        payments = payslip_obj.payment_per_month(cr, uid, payslip)
+        month_payments = payslip_obj.payment_per_month(cr, uid, payslip)
         
         #2. Initialize variables
-        SBA = payslip_obj.get_SBA(cr, uid, employee, payslip)
-        SBP = categories.BRUTO
-        SBF = categories.BASE
-        rent_empl = self.compute_rent_employee(cr, uid, hr_conf, inputs, employee, categories)
+        SBF = categories.BASE 
+        temp_rent = 0.0        
         
-        while (payments > 0):
-            sbf_temp = SFB * payments - 1
-            SBF += sbf_temp 
-            temp_rent += rent_empl / payments
+        while (count <= month_payments):
+            #update data
+            SBA = payslip_obj.get_SBA(cr, uid, employee, payslip)
+            SBP = categories.BRUTO
+            #SBF
+            SBF = SBF * (month_payments - count)
+            #SBT
             SBT = SBA + SBP + SBF
-            #only check last payment
-            #if :
-                #total_rent += SBT / temp_rent
-            #else:
-                
-                
-        
-        
-        
+            #RENT
+            rent_empl = self.compute_rent_employee(hr_conf, employee, SBT)
+            temp_rent += rent_empl / count
+            if temp_rent < total_rent:
+                total_rent = temp_rent - total_rent
+            else:
+                total_rent+= temp_rent
+            count+=1
+            
+        return total_rent
     
+    """
+        Function that evaluated if compute rent applies to salary rule 
+    """
+    def python_expresion_rent(self, cr, uid, hr_conf, inputs, employee, categories, payslip):        
+        total = self.compute_total_rent(cr, uid, hr_conf, inputs, employee, categories, payslip)
+        if total > 0:
+            return True
+        else:
+            return False

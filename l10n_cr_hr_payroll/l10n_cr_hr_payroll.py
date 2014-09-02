@@ -99,9 +99,9 @@ class hrPayslipinherit(osv.osv_memory):
     #the same month than current payslip
     def get_previous_payslips(self, cr, uid, employee, actual_payslip, context=None):
         payslip_list = []
-        date_to = datetime.strptime(payslip.date_to, '%Y-%m-%d')
+        date_to = datetime.strptime(actual_payslip.date_to, '%Y-%m-%d')
         month_date_to = date_to.month
-        payslips_ids = self.pool.get('hr.payslip').search(cr, uid, [('employee_id','=', employee.id), ('date_to','<', payslip.date_to)], context=context)
+        payslip_ids = self.pool.get('hr.payslip').search(cr, uid, [('employee_id','=', employee.id), ('date_to','<', actual_payslip.date_to)], context=context)
         
         for empl_payslip in self.pool.get('hr.payslip').browse(cr, uid, payslip_ids, context=context):
             temp_date = datetime.strptime(empl_payslip.date_to, '%Y-%m-%d')
@@ -123,9 +123,7 @@ class hrPayslipinherit(osv.osv_memory):
     
     #Get quantity of days between two dates
     def days_between_days(self, cr, uid, date_from, date_to, context=None):
-        d1 = datetime.strptime(date_from, "%Y-%m-%d")
-        d2 = datetime.strptime(date_to, "%Y-%m-%d")
-        return abs((d2 - d1).days)
+        return abs((date_to - date_from).days)
     
     #Get number of payments per month
     def payment_per_month(self, cr, uid, payslip, context=None):
@@ -134,15 +132,15 @@ class hrPayslipinherit(osv.osv_memory):
         date_from = datetime.strptime(payslip.date_from, '%Y-%m-%d')
         date_to = datetime.strptime(payslip.date_to, '%Y-%m-%d')
         
-        days = self.days_between_days(cr, uid, date_from, date_to, context=context)
-        next_date = date_from + timedelta(days=days)
+        dbtw = (self.days_between_days(cr, uid, date_from, date_to, context=context)) + 1 #this is for take in account date from
+        next_date = date_from + timedelta(days=dbtw)
         
         month_date_to = date_to.month
         month_date_next = next_date.month
         
         while(month_date_to == month_date_next):
             payments += 1
-            next_date = date_from + timedelta(days=days)
+            next_date = next_date + timedelta(days=dbtw)
             month_date_next = next_date.month
         
         return payments
