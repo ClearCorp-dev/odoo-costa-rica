@@ -95,17 +95,30 @@ class hrPayslipinherit(osv.osv_memory):
     
     _inherit = 'hr.payslip'
     
+    #Get total payment per month
+    def get_qty_previous_payment(self, cr, uid, employee, actual_payslip, context=None):
+        payslip_ids = []
+        date_to = datetime.strptime(actual_payslip.date_to, '%Y-%m-%d')
+        if date_to.month < 10:
+            first = str(date_to.year) + "-" + "0"+str(date_to.month) + "-" + "01"
+        else:
+             first = str(date_to.year) + "-" +str(date_to.month) + "-" + "01"
+        first_date = datetime.strptime(first, '%Y-%m-%d')
+        payslip_ids = self.pool.get('hr.payslip').search(cr, uid, [('employee_id','=', employee.id), ('date_to', '>=', first_date), ('date_to','<', actual_payslip.date_from)], context=context)
+        return len(payslip_ids)
+        
     #Get the previous payslip for an employee. Return all payslip that are in
     #the same month than current payslip
     def get_previous_payslips(self, cr, uid, employee, actual_payslip, context=None):
         payslip_list = []
         date_to = datetime.strptime(actual_payslip.date_to, '%Y-%m-%d')
         month_date_to = date_to.month
+        year_date_to = date_to.year
         payslip_ids = self.pool.get('hr.payslip').search(cr, uid, [('employee_id','=', employee.id), ('date_to','<', actual_payslip.date_to)], context=context)
         
         for empl_payslip in self.pool.get('hr.payslip').browse(cr, uid, payslip_ids, context=context):
             temp_date = datetime.strptime(empl_payslip.date_to, '%Y-%m-%d')
-            if (temp_date.month == month_date_to) and (temp_date.year == month_date_to.year):
+            if (temp_date.month == month_date_to) and (temp_date.year == year_date_to):
                 payslip_list.append(empl_payslip)
         
         return payslip_list
@@ -116,31 +129,42 @@ class hrPayslipinherit(osv.osv_memory):
         payslip_list = self.get_previous_payslips(cr, uid, employee, actual_payslip, context=context) #list of previous payslips
         
         for payslip in payslip_list:
-            for line in payslip.lines:
+            for line in payslip.line_ids:
                  if line.code == 'BRUTO':
                      SBA += line.total        
         return SBA
+    
+    #get previous rent
+    def get_previous_rent(self, cr, uid, employee, actual_payslip, context=None):
+        rent = 0.0
+        payslip_list = self.get_previous_payslips(cr, uid, employee, actual_payslip, context=context) #list of previous payslips
+        
+        for payslip in payslip_list:
+            for line in payslip.line_ids:
+                 if line.code == 'RENTA':
+                     rent += line.total        
+        return rent
     
     #Get quantity of days between two dates
     def days_between_days(self, cr, uid, date_from, date_to, context=None):
         return abs((date_to - date_from).days)
     
     #Get number of payments per month
-    def payment_per_month(self, cr, uid, payslip, context=None):
+    def qty_future_payments(self, cr, uid, payslip, context=None):
         payments = 0
         
         date_from = datetime.strptime(payslip.date_from, '%Y-%m-%d')
         date_to = datetime.strptime(payslip.date_to, '%Y-%m-%d')
         
-        dbtw = (self.days_between_days(cr, uid, date_from, date_to, context=context)) + 1 #this is for take in account date from
-        next_date = date_from + timedelta(days=dbtw)
+        dbtw = (self.days_between_days(cr, uid, date_from, date_to, context=context)) + 1 #take in account previous date for start date
+        next_date = date_to + timedelta(days=dbtw)
         
         month_date_to = date_to.month
         month_date_next = next_date.month
         
-        while(month_date_to == month_date_next):
-            payments += 1
+        while(month_date_to == month_date_next):            
             next_date = next_date + timedelta(days=dbtw)
             month_date_next = next_date.month
+            payments += 1
         
         return payments

@@ -1,0 +1,155 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* l10n_cr_hr_payroll
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-08 19:39+0000\n"
+"PO-Revision-Date: 2014-09-08 19:39+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_cr_hr_payroll
+#: selection:hr.payslip.run,schedule_pay:0
+msgid "Bi-monthly"
+msgstr "Bi-mensual"
+
+#. module: l10n_cr_hr_payroll
+#: field:hr.config.settings,first_limit:0
+#: field:res.company,first_limit:0
+msgid "First Limit"
+msgstr "Primer Límite"
+
+#. module: l10n_cr_hr_payroll
+#: model:ir.model,name:l10n_cr_hr_payroll.model_hr_employee
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: l10n_cr_hr_payroll
+#: help:hr.employee,report_number_child:0
+msgid "Number of children to report for rent payment"
+msgstr "Número de hijos a reportar por el pago de la renta"
+
+#. module: l10n_cr_hr_payroll
+#: selection:hr.payslip.run,schedule_pay:0
+msgid "Quarterly"
+msgstr "Trimestral"
+
+#. module: l10n_cr_hr_payroll
+#: selection:hr.payslip.run,schedule_pay:0
+msgid "Semi-annually"
+msgstr "Semestral"
+
+#. module: l10n_cr_hr_payroll
+#: field:hr.config.settings,amount_per_spouse:0
+#: field:res.company,amount_per_spouse:0
+msgid "Amount per spouse"
+msgstr "Monto por cónyugue"
+
+#. module: l10n_cr_hr_payroll
+#: view:hr.config.settings:0
+msgid "Rent Configuration"
+msgstr "Configuración de Renta"
+
+#. module: l10n_cr_hr_payroll
+#: field:hr.config.settings,rent_company_id:0
+msgid "Company"
+msgstr "Compañía"
+
+#. module: l10n_cr_hr_payroll
+#: selection:hr.payslip.run,schedule_pay:0
+msgid "Monthly"
+msgstr "Mensual"
+
+#. module: l10n_cr_hr_payroll
+#: model:ir.model,name:l10n_cr_hr_payroll.model_hr_payslip_run
+msgid "Payslip Batches"
+msgstr "Lotes de Nóminas"
+
+#. module: l10n_cr_hr_payroll
+#: view:hr.payslip.run:0
+msgid "Schedule pay"
+msgstr "Plazo de pago"
+
+#. module: l10n_cr_hr_payroll
+#: model:ir.model,name:l10n_cr_hr_payroll.model_hr_payslip
+msgid "Pay Slip"
+msgstr "Nómina"
+
+#. module: l10n_cr_hr_payroll
+#: selection:hr.payslip.run,schedule_pay:0
+msgid "Fortnightly"
+msgstr "Quincenal"
+
+#. module: l10n_cr_hr_payroll
+#: model:ir.model,name:l10n_cr_hr_payroll.model_res_company
+msgid "Companies"
+msgstr "Compañias"
+
+#. module: l10n_cr_hr_payroll
+#: model:ir.model,name:l10n_cr_hr_payroll.model_hr_contract
+msgid "Contract"
+msgstr "Contrato"
+
+#. module: l10n_cr_hr_payroll
+#: selection:hr.payslip.run,schedule_pay:0
+msgid "Annually"
+msgstr "Anualmente"
+
+#. module: l10n_cr_hr_payroll
+#: field:hr.config.settings,second_limit:0
+#: field:res.company,second_limit:0
+msgid "Second Limit"
+msgstr "Segundo Límite"
+
+#. module: l10n_cr_hr_payroll
+#: field:hr.payslip.run,schedule_pay:0
+msgid "Scheduled Pay"
+msgstr "Plazo de pago"
+
+#. module: l10n_cr_hr_payroll
+#: constraint:hr.employee:0
+msgid "Error! The number of child to report must be greater or equal to zero."
+msgstr "Error! El número de hijos a reportar debe ser mayor o igual a cero"
+
+#. module: l10n_cr_hr_payroll
+#: field:hr.employee,report_number_child:0
+msgid "Number of children to report"
+msgstr "Número de hijos a reportar"
+
+#. module: l10n_cr_hr_payroll
+#: field:hr.config.settings,amount_per_child:0
+#: field:res.company,amount_per_child:0
+msgid "Amount per Child"
+msgstr "Monto por hijos"
+
+#. module: l10n_cr_hr_payroll
+#: model:ir.model,name:l10n_cr_hr_payroll.model_hr_config_settings
+msgid "hr.config.settings"
+msgstr "Parámetros de configuración de RRHH"
+
+#. module: l10n_cr_hr_payroll
+#: field:hr.employee,report_spouse:0
+msgid "Report Spouse"
+msgstr "Reportar cónyugue"
+
+#. module: l10n_cr_hr_payroll
+#: selection:hr.payslip.run,schedule_pay:0
+msgid "Bi-weekly"
+msgstr "Bi-semanal"
+
+#. module: l10n_cr_hr_payroll
+#: help:hr.employee,report_spouse:0
+msgid "If this employee reports his spouse for rent payment"
+msgstr "Si este empleado reporta su cónyuge para el pago de la renta"
+
+#. module: l10n_cr_hr_payroll
+#: selection:hr.payslip.run,schedule_pay:0
+msgid "Weekly"
+msgstr "Semanal"

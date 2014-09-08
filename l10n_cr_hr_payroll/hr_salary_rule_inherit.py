@@ -121,9 +121,9 @@ result = rules.NET > categories.NET * 0.10''',
         #exceed second limit
         if SBT >= limit2: #(1.128.000)
             exceed_2 = SBT - limit2
-            subtotal += limit2 * 0.15 #15% of limit2
+            subtotal += exceed_2 * 0.15 #15% of limit2
             limit_temp = (limit2 - limit1) * 0.10 #10% of difference between limits
-            subtotal += exceed_2 + limit_temp
+            subtotal += limit_temp
    
         #exceed first limit
         elif SBT >= limit1: #(752.000)
@@ -136,6 +136,7 @@ result = rules.NET > categories.NET * 0.10''',
             total = subtotal - (child_amount * children_numbers)
         
         return total
+    
     """
         This function is designed to be called from python code in the salary rule.
         It receive as parameters the variables that can be used by default in 
@@ -145,49 +146,52 @@ result = rules.NET > categories.NET * 0.10''',
         it can be declare inside in function
     """
     def compute_total_rent(self, cr, uid, hr_conf, inputs, employee, categories, payslip):
+        """
+            This function computes, based on previous gross salary and future 
+            base salary, the rent amount for current payslip. This is a "dynamic"
+            way to compute amount rent for each payslip
+        """
+        
+        """Principal variables"""
         SBA = 0.0 #Previous Gross Salary
         SBP = 0.0 #Currently Gross Salary
-        SBF = 0.0 #Future Gross Salary
+        SBF = 0.0 #Future Base Salary
         SBT = 0.0 #Gross Salary Total (this is SBA + SBP + SBF)
-        rent_empl = 0.0
-        total_rent = 0.0
-             
-        #objects
+        
+        """Objects"""
         payslip_obj = self.pool.get('hr.payslip')
-        count = 1
+        
+        """Other variables"""
+        rent_empl_total = 0.0
+        total_curr_rent = 0.0
+        total_paid_rent= 0.0
+        total_payments = 0
                 
-        #1. Get number of payments
-        month_payments = payslip_obj.payment_per_month(cr, uid, payslip)
+        """"Get total payments"""
+        previous_payments = payslip_obj.get_qty_previous_payment(cr, uid, employee, payslip)
+        future_payments = payslip_obj.qty_future_payments(cr, uid, payslip)
+        actual_payment = 1
+        total_payments = previous_payments + actual_payment + future_payments
         
-        #2. Initialize variables
-        SBF = categories.BASE 
-        temp_rent = 0.0        
-        
-        while (count <= month_payments):
-            #update data
-            SBA = payslip_obj.get_SBA(cr, uid, employee, payslip)
-            SBP = categories.BRUTO
-            #SBF
-            SBF = SBF * (month_payments - count)
-            #SBT
-            SBT = SBA + SBP + SBF
-            #RENT
-            rent_empl = self.compute_rent_employee(hr_conf, employee, SBT)
-            temp_rent += rent_empl / count
-            if temp_rent < total_rent:
-                total_rent = temp_rent - total_rent
-            else:
-                total_rent+= temp_rent
-            count+=1
+        """Update payments amount"""
+        SBA = payslip_obj.get_SBA(cr, uid, employee, payslip)
+        SBP = categories.BRUTO
+        SBF = categories.BASE * future_payments
+        SBT = SBA + SBP + SBF
             
-        return total_rent
+        """Compute rent"""
+        rent_empl_total = self.compute_rent_employee(hr_conf, employee, SBT) #Rent for a complete month
+        total_paid_rent = payslip_obj.get_previous_rent(cr,uid,employee,payslip) #Rent already paid
+        total_curr_rent = (rent_empl_total - total_paid_rent) / (future_payments + actual_payment) 
+            
+        return total_curr_rent
     
     """
         Function that evaluated if compute rent applies to salary rule 
     """
     def python_expresion_rent(self, cr, uid, hr_conf, inputs, employee, categories, payslip):        
         total = self.compute_total_rent(cr, uid, hr_conf, inputs, employee, categories, payslip)
-        if total > 0:
+        if total != 0.0:
             return True
         else:
             return False

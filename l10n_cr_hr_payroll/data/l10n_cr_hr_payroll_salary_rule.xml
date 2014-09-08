@@ -244,7 +244,51 @@
             <field name="amount_percentage">4.1600</field>
         </record> 
           
-        <!-- INCLUIR TODAS LAS REGLAS DE RENTA -->
+        <record id="hr_payroll_rules_rent" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll_deduction_salary"/>
+            <field name="name">Renta</field>
+            <field name="code">RENTA</field>
+            <field name="sequence">216</field>
+            <field name="appears_on_report">True</field>
+            <field name="condition_select">python</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result = hr_salary_rule.python_expresion_rent(cr, uid, hr_conf, inputs, employee, categories, payslip)
+            </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result= hr_salary_rule.compute_total_rent(cr, uid, hr_conf, inputs, employee, categories, payslip)
+            </field>
+        </record>
                 
         <record id="hr_payroll_rules_extra_hour_1_5" model="hr.salary.rule">
             <field name="category_id" ref="hr_payroll_aditional_pay_salary"/>
@@ -253,11 +297,43 @@
             <field name="sequence">50</field>
             <field name="appears_on_report">True</field>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = worked_days.HE</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result = worked_days.HE
+            </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                wage_hour = ((contract.wage * 2 / 30) / 8) * 1.5
-                result = worked_days.HE.number_of_hours * wage_hour
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+wage_hour = ((contract.wage * 2 / 30) / 8) * 1.5
+result = worked_days.HE.number_of_hours * wage_hour
            </field>
         </record>
         
@@ -268,12 +344,44 @@
             <field name="sequence">51</field>
             <field name="appears_on_report">True</field>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = worked_days.FE</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result = worked_days.FE
+            </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                wage_day = contract.wage / 13.846153846
-                wage_hour = contract.wage / 110.769230769
-                result = worked_days.FE.number_of_hours * wage_hour + worked_days.FE.number_of_days * wage_day
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+wage_day = contract.wage / 13.846153846
+wage_hour = contract.wage / 110.769230769
+result = worked_days.FE.number_of_hours * wage_hour + worked_days.FE.number_of_days * wage_day
            </field>
         </record>
         
@@ -284,11 +392,42 @@
             <field name="sequence">52</field>
             <field name="appears_on_report">True</field>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = worked_days.HEF</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result = worked_days.HEF</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                wage_hour = ((contract.wage * 2 / 30) / 8) * 2
-                result = worked_days.HEF.number_of_hours * wage_hour
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+wage_hour = ((contract.wage * 2 / 30) / 8) * 2
+result = worked_days.HEF.number_of_hours * wage_hour
            </field>
         </record>
         
@@ -299,12 +438,44 @@
             <field name="sequence">53</field>
             <field name="appears_on_report">True</field>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = worked_days.AUS</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result = worked_days.AUS
+            </field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                wage_day = contract.wage / 13.846153846
-                wage_hour = contract.wage / 110.769230769
-                result = worked_days.AUS.number_of_hours * wage_hour + worked_days.AUS.number_of_days * wage_day
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+wage_day = contract.wage / 13.846153846
+wage_hour = contract.wage / 110.769230769
+result = worked_days.AUS.number_of_hours * wage_hour + worked_days.AUS.number_of_days * wage_day
            </field>
         </record>
         
@@ -315,11 +486,42 @@
             <field name="sequence">50</field>
             <field name="appears_on_report">True</field>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = worked_days.HE</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result = worked_days.HE</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                wage_hour = ((contract.wage * 4 / 30) / 8) * 1.5
-                result = worked_days.HE.number_of_hours * wage_hour
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+wage_hour = ((contract.wage * 4 / 30) / 8) * 1.5
+result = worked_days.HE.number_of_hours * wage_hour
            </field>
         </record>
         
@@ -330,12 +532,43 @@
             <field name="sequence">51</field>
             <field name="appears_on_report">True</field>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = worked_days.FE</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result = worked_days.FE</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                wage_day = contract.wage / 6.923076923
-                wage_hour = contract.wage / 55.384615385
-                result = worked_days.FE.number_of_hours * wage_hour + worked_days.FE.number_of_days * wage_day
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+wage_day = contract.wage / 6.923076923
+wage_hour = contract.wage / 55.384615385
+result = worked_days.FE.number_of_hours * wage_hour + worked_days.FE.number_of_days * wage_day
            </field>
         </record>
         
@@ -346,11 +579,42 @@
             <field name="sequence">52</field>
             <field name="appears_on_report">True</field>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = worked_days.HEF</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result = worked_days.HEF</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                wage_hour = ((contract.wage * 4 / 30) / 8) * 2
-                result = worked_days.HEF.number_of_hours * wage_hour
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+wage_hour = ((contract.wage * 4 / 30) / 8) * 2
+result = worked_days.HEF.number_of_hours * wage_hour
            </field>
         </record>
         
@@ -361,12 +625,43 @@
             <field name="sequence">53</field>
             <field name="appears_on_report">True</field>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = worked_days.AUS</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result = worked_days.AUS</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                wage_day = contract.wage / 6.923076923
-                wage_hour = contract.wage / 55.384615385
-                result = worked_days.AUS.number_of_hours * wage_hour + worked_days.AUS.number_of_days * wage_day
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+wage_day = contract.wage / 6.923076923
+wage_hour = contract.wage / 55.384615385
+result = worked_days.AUS.number_of_hours * wage_hour + worked_days.AUS.number_of_days * wage_day
            </field>
         </record>
         
@@ -377,9 +672,41 @@
             <field name="sequence">219</field>
             <field name="appears_on_report">True</field>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = inputs.BON</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result = inputs.BON</field>
             <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = inputs.BON.amount</field>
+            <field name="amount_python_compute">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result = inputs.BON.amount</field>
         </record>
         
         <record id="hr_payroll_rules_aditional_pay" model="hr.salary.rule">
@@ -389,9 +716,41 @@
             <field name="sequence">54</field>
             <field name="appears_on_report">True</field>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = inputs.SOP</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result = inputs.SOP</field>
             <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = inputs.SOP.amount</field>
+            <field name="amount_python_compute">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result = inputs.SOP.amount</field>
         </record>
         
         <record id="hr_payroll_rules_contractual_pay" model="hr.salary.rule">
@@ -423,12 +782,43 @@
             <field name="sequence">55</field>
             <field name="appears_on_report">True</field>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = worked_days.RETB</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result = worked_days.RETB</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                wage_day = contract.wage / 6.923076923
-                wage_hour = contract.wage / 55.384615385
-                result = worked_days.RETS.number_of_hours * wage_hour + worked_days.RETS.number_of_days * wage_day
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+wage_day = contract.wage / 6.923076923
+wage_hour = contract.wage / 55.384615385
+result = worked_days.RETS.number_of_hours * wage_hour + worked_days.RETS.number_of_days * wage_day
             </field>
         </record>
         
@@ -457,11 +847,42 @@
             <field name="sequence">60</field>
             <field name="appears_on_report">True</field>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = worked_days.HE</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result = worked_days.HE</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                wage_hour = contract.wage * 1.5 
-                result = worked_days.HE.number_of_hours * wage_hour
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+wage_hour = contract.wage * 1.5 
+result = worked_days.HE.number_of_hours * wage_hour
            </field>
         </record>
         
@@ -472,11 +893,42 @@
             <field name="sequence">61</field>
             <field name="appears_on_report">True</field>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = worked_days.FE</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result = worked_days.FE</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                wage_hour = contract.wage 
-                result = worked_days.FE.number_of_hours * wage_hour
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+wage_hour = contract.wage 
+result = worked_days.FE.number_of_hours * wage_hour
            </field>
         </record>
         
@@ -487,11 +939,42 @@
             <field name="sequence">62</field>
             <field name="appears_on_report">True</field>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = worked_days.HEF</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result = worked_days.HEF</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">
-                wage_hour = contract.wage * 2 
-                result = worked_days.HE.number_of_hours * wage_hour
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+wage_hour = contract.wage * 2 
+result = worked_days.HE.number_of_hours * wage_hour
            </field>
         </record>
         
@@ -502,11 +985,42 @@
             <field name="sequence">63</field>
             <field name="appears_on_report">True</field>
             <field name="condition_select">python</field>
-            <field name="condition_python">result = worked_days.AUS</field>
+            <field name="condition_python">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result = worked_days.AUS</field>
             <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = 0.00</field>
-        </record>
-        
+            <field name="amount_python_compute">
+# Available variables:
+#----------------------
+# payslip: object containing the payslips
+# employee: hr.employee object
+# contract: hr.contract object
+# rules: object containing the rules code (previously computed)
+# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# worked_days: object containing the computed worked days.
+# inputs: object containing the computed inputs.
+# hr_conf: object of hr.config.settings. It is a browse record
+# hr_salary_rule: object for call hr_salary_rule functions
+# cr: cursor 
+# uid: uid
+
+# Note: returned value have to be set in the variable 'result'
+result = 0.00</field>
+        </record>        
     </data>   
 </openerp>        
       

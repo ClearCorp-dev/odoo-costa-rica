@@ -42,8 +42,8 @@ This is the Costa Rica OpenERP localization and consists of:
         'hr_payroll_extended',
     ],
     'data': [
-             #'data/l10n_cr_hr_payroll_salary_rule_category.xml',
-             #'data/l10n_cr_hr_payroll_salary_rule.xml',
+             'data/l10n_cr_hr_payroll_salary_rule_category.xml',
+             'data/l10n_cr_hr_payroll_salary_rule.xml',
              'hr_config_settings.xml',
              'l10n_cr_hr_payroll_view.xml',
             ],

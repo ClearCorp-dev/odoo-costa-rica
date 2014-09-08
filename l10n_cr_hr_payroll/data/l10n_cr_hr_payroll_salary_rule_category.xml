@@ -42,6 +42,12 @@
             <field name="code">PATRON</field>
         </record>
         
+        <record id="hr_payroll_deduction_salary" model="hr.salary.rule.category">
+            <field name="name">Deduccion</field>
+            <field name="code">DED</field>
+            <field name="note">Estas deducciones afectarán directamente al salario neto</field>
+        </record>
+        
         <record id="hr_payroll_absence_salary" model="hr.salary.rule.category">
             <field name="name">Deducciones por ausencias</field>
             <field name="code">DPA</field>
