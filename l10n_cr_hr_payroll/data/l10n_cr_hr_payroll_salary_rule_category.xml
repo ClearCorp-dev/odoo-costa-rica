@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>
+    <data noupdate="1">
         <!-- HR SALARY RULE CATEGORIES-->
         <record id="hr_payroll_base_salary" model="hr.salary.rule.category">
             <field name="name">Base</field>

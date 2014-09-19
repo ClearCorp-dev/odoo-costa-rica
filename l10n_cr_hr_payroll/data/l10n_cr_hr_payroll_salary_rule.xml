@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <openerp>
-    <data>
+    <data noupdate="1">
         <!-- HR SALARY RULES-->
 
         <record id="hr_payroll_rules_base" model="hr.salary.rule">
