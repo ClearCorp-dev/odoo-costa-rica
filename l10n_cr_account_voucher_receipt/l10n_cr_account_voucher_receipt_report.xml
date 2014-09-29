@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- QWeb Reports -->
+        <report
+            id="money_receipt"
+            model="account.voucher"
+            string="Money Receipt"
+            report_type="qweb-pdf"
+            name="l10n_cr_account_voucher_receipt.report_money_receipt_trans"
+            file="l10n_cr_account_voucher_receipt.report_money_receipt_trans"
+        />
+    </data>
+</openerp>

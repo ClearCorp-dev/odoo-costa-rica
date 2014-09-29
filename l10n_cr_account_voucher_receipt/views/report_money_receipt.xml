@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <template id="report_money_receipt">
+                    <t t-call="report.external_layout">
+                        <div class="page">
+                            <div class="row">
+                                <div class="col-xs-5 col-xs-offset-7">
+                                    <span t-if="o.state == 'draft'">Draft</span>
+                                    <span t-if="o.state == 'cancel'">Cancelled</span>
+                                    <span t-if="o.state == 'proforma'">Pro-forma</span>
+                                    <span t-if="o.state == 'proforma'">Posted</span>
+                                    <span> Money Receipt</span>
+                                </div>
+                            </div>
+                            <h2>
+                                <span t-if="o.type == 'sale'">Sale</span>
+                                <span t-if="o.type == 'purchase'">Purchase</span>
+                                <span t-if="o.type == 'payment'">Payment</span>
+                                <span t-if="o.type == 'receipt'">Receipt</span>
+                                <span t-field="o.reference"/>
+                            </h2>
+                            <div class="row mt32 mb32">
+                                <div class="col-xs-3" t-if="o.date">
+                                    <strong>Date:</strong>
+                                    <p t-field="o.date"/>
+                                </div>
+                            </div>
+                            <p t-if="o.partner_id">
+                                <strong>Received From:</strong>
+                                <span t-field="o.partner_id"/>
+                            </p>
+                            <p t-if="o.amount">
+                                <strong>The Amount:</strong>
+                                <span t-field="o.amount"
+                                    t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                            </p>
+                            <p t-if="o.amount">
+                                <strong>In Words:</strong>
+                                <t t-if="o.currency_id">
+                                    <span t-esc="get_text_amount(o.amount, o.currency_id.id, o.partner_id.lang)"/>
+                                </t>
+                            </p>
+                            <p t-if="o.name">
+                                <strong>By Concept:</strong>
+                                <span t-field="o.name"/>
+                            </p>
+                            <p t-if="o.narration">
+                                <strong>Notes:</strong>
+                                <span t-field="o.narration"/>
+                            </p>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div class="row">
+                                <div class="col-xs-5 col-xs-offset-7">
+                                    <strong>__________________________________</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+        </template>
+        <template id="report_money_receipt_trans">
+            <t t-call="report.html_container">
+                <t t-foreach="doc_ids" t-as="doc_id">
+                    <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'l10n_cr_account_voucher_receipt.report_money_receipt')"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</openerp>

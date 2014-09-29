@@ -1,0 +1,104 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* l10n_cr_account_voucher_receipt
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-29 15:42+0000\n"
+"PO-Revision-Date: 2014-09-29 15:42+0000\n"
+"Last-Translator: Glen Sojo <glen.sojo@clearcorp.co.cr>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_cr_account_voucher_receipt
+#: view:website:l10n_cr_account_voucher_receipt.report_money_receipt
+msgid "By Concept:"
+msgstr "Por concepto de:"
+
+#. module: l10n_cr_account_voucher_receipt
+#: view:website:l10n_cr_account_voucher_receipt.report_money_receipt
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: l10n_cr_account_voucher_receipt
+#: code:addons/l10n_cr_account_voucher_receipt/report/l10n_cr_account_voucher_receipt_report.py:55
+#, python-format
+msgid "Currency not supported by this report."
+msgstr "Moneda no soportada por este reporte."
+
+#. module: l10n_cr_account_voucher_receipt
+#: view:website:l10n_cr_account_voucher_receipt.report_money_receipt
+msgid "Date:"
+msgstr "Fecha:"
+
+#. module: l10n_cr_account_voucher_receipt
+#: view:website:l10n_cr_account_voucher_receipt.report_money_receipt
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: l10n_cr_account_voucher_receipt
+#: view:website:l10n_cr_account_voucher_receipt.report_money_receipt
+msgid "In Words:"
+msgstr "En letras:"
+
+#. module: l10n_cr_account_voucher_receipt
+#: code:addons/l10n_cr_account_voucher_receipt/report/l10n_cr_account_voucher_receipt_report.py:70
+#, python-format
+msgid "Language not supported by this report."
+msgstr "Lenguaje no soportador por este reporte."
+
+#. module: l10n_cr_account_voucher_receipt
+#: model:ir.actions.report.xml,name:l10n_cr_account_voucher_receipt.money_receipt
+#: view:website:l10n_cr_account_voucher_receipt.report_money_receipt
+msgid "Money Receipt"
+msgstr "Recibo de dinero"
+
+#. module: l10n_cr_account_voucher_receipt
+#: view:website:l10n_cr_account_voucher_receipt.report_money_receipt
+msgid "Notes:"
+msgstr "Notas:"
+
+#. module: l10n_cr_account_voucher_receipt
+#: view:website:l10n_cr_account_voucher_receipt.report_money_receipt
+msgid "Payment"
+msgstr "Pago"
+
+#. module: l10n_cr_account_voucher_receipt
+#: view:website:l10n_cr_account_voucher_receipt.report_money_receipt
+msgid "Posted"
+msgstr "Contabilizado"
+
+#. module: l10n_cr_account_voucher_receipt
+#: view:website:l10n_cr_account_voucher_receipt.report_money_receipt
+msgid "Pro-forma"
+msgstr "Pro-forma"
+
+#. module: l10n_cr_account_voucher_receipt
+#: view:website:l10n_cr_account_voucher_receipt.report_money_receipt
+msgid "Purchase"
+msgstr "Compra"
+
+#. module: l10n_cr_account_voucher_receipt
+#: view:website:l10n_cr_account_voucher_receipt.report_money_receipt
+msgid "Receipt"
+msgstr "Recibo"
+
+#. module: l10n_cr_account_voucher_receipt
+#: view:website:l10n_cr_account_voucher_receipt.report_money_receipt
+msgid "Received From:"
+msgstr "Recibido de:"
+
+#. module: l10n_cr_account_voucher_receipt
+#: view:website:l10n_cr_account_voucher_receipt.report_money_receipt
+msgid "Sale"
+msgstr "Venta"
+
+#. module: l10n_cr_account_voucher_receipt
+#: view:website:l10n_cr_account_voucher_receipt.report_money_receipt
+msgid "The Amount:"
+msgstr "El monto:"
