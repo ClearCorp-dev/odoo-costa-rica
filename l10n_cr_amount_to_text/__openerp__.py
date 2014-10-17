@@ -30,7 +30,7 @@
 Convert amounts to text
 =======================
 This module allows you to convert numerical values to text values.""",
-    'author': 'CLEARCORP S.A.',
+    'author': 'ClearCorp',
     'website': 'http://clearcorp.co.cr',
     'complexity': 'easy',
     'images' : [],
