@@ -27,8 +27,10 @@
     'sequence': 5,
     'summary': 'Voucher Money Receipts',
     'description': """
-Description is pending""", # TODO: Create description
-    'author': 'CLEARCORP S.A.',
+Localizated Money Receipts
+==========================
+Money Receipt used in Costa Rica.""",
+    'author': 'ClearCorp',
     'website': 'http://clearcorp.co.cr',
     'complexity': 'easy',
     'images' : [],
