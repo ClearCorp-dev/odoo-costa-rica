@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-from account_banking_ccorp.parsers import models
+from openerp.addons.account_banking_ccorp.parsers import models
 from openerp.tools.translate import _
 from davivienda_parser import DaviviendaParser
 import re
