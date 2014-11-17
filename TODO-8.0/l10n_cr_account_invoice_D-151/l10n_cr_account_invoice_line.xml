@@ -10,12 +10,12 @@
            <field name = "arch" type = "xml">
                 <xpath expr="/form/sheet[@string='Supplier Invoice']/notebook/page[@string='Invoice']/field/tree/field[@name='name']" position="after">
                     <field name="type_invoice" invisible="1"/>
-                    <field name="d_151_type" attrs="{'required':[('type_invoice', '=','in_invoice')]}"/>                            
+                    <field name="d_151_type" attrs="{'invisible':[('type_invoice', '!=','in_invoice'),('type_invoice','!=','in_refund')], 'required':['|',('type_invoice', '=','in_invoice'),('type_invoice', '=','in_refund')]}"/>
                 </xpath>
            </field>
-        </record>        
-               
-        <record model = "ir.ui.view" id = "account_type_D151_inherit">
+        </record>
+
+        <record id="account_type_D151_inherit" model="ir.ui.view">
             <field name = "name">account.type.D151.inherit</field>
             <field name = "model">account.invoice.line</field>
             <field name = "type">tree</field>
@@ -23,10 +23,9 @@
             <field name = "arch" type = "xml">
                 <field name="price_unit" position="after">
                     <field name="type_invoice" invisible="1"/>
-                    <field name="d_151_type" attrs="{'invisible':[('type_invoice', '!=','in_invoice')], 'required':[('type_invoice', '=','in_invoice')]}"/>                    
+                    <field name="d_151_type" attrs="{'invisible':[('type_invoice', '!=','in_invoice'),('type_invoice','!=','in_refund')], 'required':['|',('type_invoice', '=','in_invoice'),('type_invoice', '=','in_refund')]}"/>
                 </field>
             </field>
-        </record>      
-      
+        </record>
     </data>
 </openerp>
