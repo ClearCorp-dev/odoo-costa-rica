@@ -20,7 +20,7 @@
            <field name="inherit_id" ref="account.view_account_invoice_report_search"/>
            <field name = "arch" type = "xml">
                 <filter string="Refund" position="after">
-                    <field name="d_151_type"/>                
+                    <field name="d_151_type"/>
                 </filter>
                 <filter string="Type" position="after">
                     <filter string="D-151 Type" icon="terp-stock_symbol-selection" context="{'group_by':'d_151_type'}"/>
