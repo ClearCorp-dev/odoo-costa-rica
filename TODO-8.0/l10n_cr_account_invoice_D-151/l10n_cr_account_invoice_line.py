@@ -20,39 +20,22 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, osv, orm
+from openerp.osv import fields, osv
 
-class accountInvoiceD151(orm.Model):
-    
-    _name = 'account.invoice'
-    _inherit = 'account.invoice'
+class accountInvoicelineD151(osv.Model):
 
-    #Work arround to get the type of the invoice from context
-    def _get_type_invoice(self, cr, uid, context=None):
-        if context is None:
-            context = {}
-        return context.get('type')
-
-    #This field add category D-151 to invoice line.
-    _columns = {
-        'type_invoice': fields.char(string='Invoice type', size=64)
-    }
-    
-    #Get the type of invoice for category D-151    
-    _defaults = {
-        'type_invoice': _get_type_invoice,
-    }
-
-class accountInvoicelineD151(orm.Model):
-    
-    _name = 'account.invoice.line'
     _inherit = 'account.invoice.line'
 
-    #Work arround to get the type of the invoice from context
     def _get_type_invoice(self, cr, uid, context=None):
         if context is None:
             context = {}
         return context.get('type')
+
+    def _get_type_invoice_line(self, cr, uid, ids, field_name, arg, context=None):
+        res={}
+        for line in self.browse(cr, uid, ids,context=context):
+            res[line.id] = line.invoice_id.type
+        return res
 
     #This field add category D-151 to invoice line.
     _columns = {
@@ -62,10 +45,9 @@ class accountInvoicelineD151(orm.Model):
                                        ('SP','Profesional services'),
                                        ('M','Commissions'),
                                        ('I','Interest')], string="D-151 Type"),
-       
-        'type_invoice': fields.char(string='Invoice type', size=64)
+        'type_invoice': fields.function(_get_type_invoice_line, type='char', string='Invoice type', size=64)
     }
-    
+
     #Get the type of invoice for category D-151    
     _defaults = {
         'type_invoice': _get_type_invoice,
