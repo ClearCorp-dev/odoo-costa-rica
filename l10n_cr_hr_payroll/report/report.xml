@@ -3,7 +3,7 @@
     <data>
         
       <report auto="False"
-            id="hr_payroll.payslip_report"
+            id="hr_payroll.action_report_payslip"
             model="hr.payslip"
             name="hr_payroll_payslip_report"
             file="l10n_cr_hr_payroll/report/hr_payroll_payslip_report.mako"
