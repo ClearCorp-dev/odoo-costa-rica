@@ -22,7 +22,7 @@
 
 import time
 import pooler
-from report import report_sxw
+from openerp.report import report_sxw
 import locale
 
 class hrPaysliprunReport(report_sxw.rml_parse):
@@ -205,7 +205,7 @@ class hrPaysliprunReport(report_sxw.rml_parse):
             for payslip in run.slip_ids:
                 if payslip.employee_id.department_id.name == dep:
                     dep_emp.append(payslip)
-                obj_by_dep.append(dep_emp)
+            obj_by_dep.append(dep_emp)
         i = 0
         for dep in dep_list:
             tup_temp = (dep, obj_by_dep[i])

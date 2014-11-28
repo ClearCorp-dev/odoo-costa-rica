@@ -20,12 +20,11 @@
 #
 ##############################################################################
 
-import netsvc
-import tools
-from datetime import datetime
-from datetime import date, timedelta
-from openerp.tools.translate import _
+import openerp.tools
 from openerp.osv import fields,osv, orm
+from datetime import datetime, date, timedelta
+from openerp.tools.translate import _
+
 
 class hrContract(orm.Model):
     """
@@ -91,7 +90,7 @@ class hr_employee(osv.osv):
         (_check_report_number_child, 'Error! The number of child to report must be greater or equal to zero.', ['report_number_child'])
     ]
 
-class hrPayslipinherit(osv.osv_memory):
+class hrPayslipinherit(osv.osv):
     
     _inherit = 'hr.payslip'
     

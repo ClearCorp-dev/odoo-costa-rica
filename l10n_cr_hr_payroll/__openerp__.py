@@ -35,8 +35,10 @@ This is the Costa Rica OpenERP localization and consists of:
     - Salary Rule Category
     - Withholding tax structure
     - Rent (Applied to Costa Rican's Law)
+TODO:
+    - Reports
     """,
-    'author': 'CLEARCORP S.A.',
+    'author': 'ClearCorp',
     'website': 'http://www.clearcorp.co.cr',
     'depends': [
         'report_webkit_lib',
@@ -46,13 +48,13 @@ This is the Costa Rica OpenERP localization and consists of:
              ''
              'data/l10n_cr_hr_payroll_salary_rule_category.xml',
              'data/l10n_cr_hr_payroll_salary_rule.xml',
-             'wizard/hr_payroll_report_for_month_wizard_view.xml',
-             'wizard/hr_payroll_report_employee_by_periods_wizard_view.xml',
+             #'wizard/hr_payroll_report_for_month_wizard_view.xml',
+             #'wizard/hr_payroll_report_employee_by_periods_wizard_view.xml',
              'hr_config_settings.xml',
              'l10n_cr_hr_payroll_view.xml',
-             'report/report.xml',
-             'report/report_menus.xml',
-             'security/ir.model.access.csv',
+             #'report/report.xml',
+             #'report/report_menus.xml',
+             #'security/ir.model.access.csv',
             ],
     'installable': True,
     'auto_install': False,

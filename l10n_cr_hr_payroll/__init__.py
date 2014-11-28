@@ -24,5 +24,5 @@ import l10n_cr_hr_payroll
 import hr_config_settings
 import res_company_inherit
 import hr_salary_rule_inherit
-import wizard
-import report
+#import wizard
+#import report
