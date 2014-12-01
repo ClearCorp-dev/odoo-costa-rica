@@ -124,9 +124,9 @@ result = rules.NET > categories.NET * 0.10''',
             exceed_1 = SBT - limit1
             subtotal += exceed_1 * 0.10 #10% of limit1
         
-        if employee.report_spouse:
-            total = subtotal - spouse_amount - (child_amount * num_hijos)
-        else:
+        if subtotal and employee.report_spouse:
+            total = subtotal - spouse_amount - (child_amount * children_numbers)
+        elif subtotal:
             total = subtotal - (child_amount * children_numbers)
         
         return total
