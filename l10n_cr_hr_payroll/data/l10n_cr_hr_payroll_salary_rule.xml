@@ -85,7 +85,7 @@
             <field name="amount_select">percentage</field>
             <field name="amount_percentage_base">BRUTO</field>
             <field name="quantity">1</field>            
-            <field name="amount_percentage">1.0000</field>
+            <field name="amount_percentage">4.9200</field>
         </record>
         
         <record id="hr_payroll_rules_SEM_head" model="hr.salary.rule">
@@ -138,14 +138,14 @@
         
         <record id="hr_payroll_rules_INA_agrobusiness" model="hr.salary.rule">
             <field name="category_id" ref="hr_payroll_head_salary"/> 
-            <field name="name">INA Act Agricola</field>
+            <field name="name">INA Act No Agricola</field>
             <field name="code">INA</field>
             <field name="sequence">209</field>
             <field name="condition_select">none</field>
             <field name="amount_select">percentage</field>
             <field name="amount_percentage_base">BRUTO</field>
             <field name="quantity">1</field>            
-            <field name="amount_percentage">0.5000</field>
+            <field name="amount_percentage">1.5000</field>
         </record>
         
         <record id="hr_payroll_rules_BP" model="hr.salary.rule">
@@ -198,8 +198,8 @@
         
         <record id="hr_payroll_rules_INA_LPT" model="hr.salary.rule">
             <field name="category_id" ref="hr_payroll_head_salary"/> 
-            <field name="name">INA</field>
-            <field name="code">INA-LPT</field>
+            <field name="name">INS</field>
+            <field name="code">INS-LPT</field>
             <field name="sequence">214</field>
             <field name="condition_select">none</field>
             <field name="amount_select">percentage</field>
