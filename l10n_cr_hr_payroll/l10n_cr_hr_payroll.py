@@ -24,6 +24,7 @@ import openerp.tools
 from openerp.osv import fields,osv, orm
 from datetime import datetime, date, timedelta
 from openerp.tools.translate import _
+from openerp import models, fields, api
 
 
 class hrContract(orm.Model):
@@ -66,7 +67,7 @@ class hrPaysliprun(orm.Model):
             ], 'Scheduled Pay', select=True, readonly=True, states={'draft': [('readonly', False)]}),      
     }
     
-class hr_employee(osv.osv):
+class hr_employee(models.Model):
     _name = "hr.employee"
     _description = "Employee"
     _inherit = "hr.employee"
@@ -77,10 +78,14 @@ class hr_employee(osv.osv):
                 return False
         return True
     
-    _columns = {
-        'report_spouse': fields.boolean('Report Spouse', help="If this employee reports his spouse for rent payment"),
-        'report_number_child': fields.integer('Number of children to report', help="Number of children to report for rent payment"),        
-    }
+    @api.onchange('marital')
+    def _onchange_marital(self):
+        self.report_spouse = False
+        
+    marital= fields.Selection([('single', 'Single'), ('married', 'Married'), ('widower', 'Widower'), ('divorced', 'Divorced')], String = 'Marital')
+    report_spouse= fields.boolean('Report Spouse', help="If this employee reports his spouse for rent payment")
+    report_number_child= fields.integer('Number of children to report', help="Number of children to report for rent payment")       
+    
     
     _defaults = {
         'report_number_child': 0,

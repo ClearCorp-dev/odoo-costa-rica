@@ -41,8 +41,8 @@ TODO:
     'author': 'ClearCorp',
     'website': 'http://www.clearcorp.co.cr',
     'depends': [
-        'report_webkit_lib',
-        'hr_payroll_extended',
+        #'report_webkit_lib',
+        #'hr_payroll_extended',
     ],
     'data': [
              ''
