@@ -21,12 +21,13 @@
 ##############################################################################
 
 import openerp.tools
-from openerp.osv import fields,osv, orm
+from openerp.osv import fields, osv
 from datetime import datetime, date, timedelta
 from openerp.tools.translate import _
 
 
-class hrContract(orm.Model):
+
+class hrContract(osv.Model):
     """
     Employee contract based on the visa, work permits
     allows to configure different Salary structure
@@ -51,7 +52,7 @@ class hrContract(orm.Model):
         'schedule_pay': 'monthly',
     }
 
-class hrPaysliprun(orm.Model):
+class hrPaysliprun(osv.Model):
     _inherit = 'hr.payslip.run'
     _columns = {
         'schedule_pay': fields.selection([
@@ -66,31 +67,9 @@ class hrPaysliprun(orm.Model):
             ], 'Scheduled Pay', select=True, readonly=True, states={'draft': [('readonly', False)]}),      
     }
     
-class hr_employee(osv.osv):
-    _name = "hr.employee"
-    _description = "Employee"
-    _inherit = "hr.employee"
-    
-    def _check_report_number_child(self, cr, uid, ids, context=None):
-        for employee in self.browse(cr, uid, ids, context=context):
-            if employee.report_number_child < 0:
-                return False
-        return True
-    
-    _columns = {
-        'report_spouse': fields.boolean('Report Spouse', help="If this employee reports his spouse for rent payment"),
-        'report_number_child': fields.integer('Number of children to report', help="Number of children to report for rent payment"),        
-    }
-    
-    _defaults = {
-        'report_number_child': 0,
-    }
-    
-    _constraints = [
-        (_check_report_number_child, 'Error! The number of child to report must be greater or equal to zero.', ['report_number_child'])
-    ]
 
-class hrPayslipinherit(osv.osv):
+
+class hrPayslipinherit(osv.Model):
     
     _inherit = 'hr.payslip'
     
