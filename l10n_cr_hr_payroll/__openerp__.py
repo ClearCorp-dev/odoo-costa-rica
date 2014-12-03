@@ -52,8 +52,6 @@ TODO:
              'wizard/hr_payroll_report_employee_by_periods_wizard_view.xml',
              'hr_config_settings.xml',
              'l10n_cr_hr_payroll_view.xml',
-             'views/report_hr_payroll_employee_by_periods.xml',
-             'hr_payroll_employee_by_periods_report.xml',
              #'report/report.xml',
              #'report/report_menus.xml',
              #'security/ir.model.access.csv',
