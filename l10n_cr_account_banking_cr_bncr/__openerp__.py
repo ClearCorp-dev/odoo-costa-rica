@@ -28,7 +28,7 @@
     'website': 'http://www.clearcorp.co.cr',
     'category': 'Accounting & Finance',
     'depends': [
-                'account_banking_ccorp_dg',
+                'account_banking_ccorp',
                 ],
     'init_xml': [],
     'update_xml': [],
