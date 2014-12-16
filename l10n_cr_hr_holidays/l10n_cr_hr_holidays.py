@@ -19,31 +19,21 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from openerp.osv import osv, fields
 
-{
-    'name': 'l10n_cr_hr_holidays',
-    'version': '1.0',
-    'category': 'Human Resources',
-    "sequence": 38,
-    'complexity': "normal",
-    'description': """
-l10n_cr_hr_holidays
-===================
-    *Legal leaves per period
-    *Scheduled legal leaves calculations per period
-""",
-    'author': 'CLEARCORP S.A.',
-    'website': 'http://www.clearcorp.co.cr',
-    'depends': [
-        'hr_holidays'
-    ],
-    'data': [
-             'l10n_cr_hr_holidays_view.xml',
-             'leaves_per_period_scheduled_task.xml',
-             ],
-    'installable': True,
-    'auto_install': False,
-    'license': 'AGPL-3',
-}
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+class hr_employee(osv.Model):
+    
+    def add_legal_leaves_per_period(self, cr, uid, ids=[], context={}):
+        if not ids:
+            ids = self.search(cr, uid, [], context=context)
+        employees = self.browse(cr, uid, ids, context=context)
+        for employee_obj in employees:
+            sum = employee_obj.remaining_leaves + employee_obj.leaves_per_period
+            self.write(cr, uid, employee_obj.id, {'remaining_leaves': sum}, context=context)
+    
+    _inherit="hr.employee"
+    
+    _columns= {
+               'leaves_per_period': fields.float(string='Legal Leaves per Period',
+                                                 help='Total number of legal leaves to be added to this employee per period.')
+               }
