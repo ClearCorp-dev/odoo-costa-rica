@@ -68,7 +68,6 @@ def encodeInsCsv(cr, uid, date_start, date_end, code, context=None):
                                  _encode(tuple[1]),
                                  "",#Observations are not added automatically
                                  _encode(employee.ins_job_code)))
-        
         dbname = cr.dbname
         pool = pooler.get_pool(dbname)
         employee_obj = pool.get('hr.employee')
