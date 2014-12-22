@@ -27,7 +27,7 @@
         Add category to account.invoice.line for apply the D-151 
         Add category in the account.move
     """,
-    'author': 'CLEARCORP S.A.',
+    'author': 'ClearCorp',
     'website': 'http://www.clearcorp.co.cr',
     'depends': [
         'account',

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+        <record id="view_account_invoice_report_search_inherit" model="ir.ui.view">
+           <field name = "name">account.invoice.report.search.inherit</field>
+           <field name = "model">account.invoice.report</field>
+           <field name = "type">search</field>
+           <field name="inherit_id" ref="account.view_account_invoice_report_search"/>
+           <field name = "arch" type = "xml">
+                <xpath expr="//search/filter[@string='Refund']" position="after">
+                    <field name="d_151_type"/>
+                </xpath>
+                <xpath expr="//search/group/filter[@string='Company']" position="after">
+                    <filter string="D-151 Type" context="{'group_by':'d_151_type'}"/>
+                </xpath>
+           </field>
+        </record>
+    </data>
+</openerp>
