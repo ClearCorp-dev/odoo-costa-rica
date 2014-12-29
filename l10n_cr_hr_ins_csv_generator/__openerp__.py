@@ -23,7 +23,7 @@
 {
     "name" : 'Costa Rica INS csv Generator',
     "version" : '1.0',
-    "author" : 'CLEARCORP S.A.',
+    "author" : 'ClearCorp',
     'complexity': 'normal',
     "description": """
 Module build for the generation of custom files to upload information to the INS systems
