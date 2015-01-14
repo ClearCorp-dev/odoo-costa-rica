@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <openerp>
     <data>
+           <!--Account invoice report -->
         <record id="view_account_invoice_report_search_inherit" model="ir.ui.view">
            <field name = "name">account.invoice.report.search.inherit</field>
            <field name = "model">account.invoice.report</field>
