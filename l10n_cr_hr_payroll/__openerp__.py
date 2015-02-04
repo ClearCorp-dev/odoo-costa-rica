@@ -19,43 +19,46 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+
 {
-    'name': 'Hr Payroll Localization - Costa Rica',
+    'name': 'Payroll Localization - Costa Rica',
     'version': '1.0',
     'category': 'Localization',
     "sequence": 38,
-    'complexity': "normal",
+    'complexity': 'normal',
     'description': """
-Hr Payroll Localization - Costa Rica.
-======================================
+Payroll Localization - Costa Rica
+=================================
 Description
 ------------
 This is the Costa Rica OpenERP localization and consists of:
-    - Salary Rule Structure
-    - Salary Rule Category
-    - Withholding tax structure
-    - Rent (Applied to Costa Rican's Law)
-TODO:
-    - Reports
-    """,
+* Salary Rule Structure
+* Salary Rule Category
+* Withholding tax structure
+* Rent (Applied to Costa Rican's Law)
+* Reports""",
     'author': 'ClearCorp',
     'website': 'http://www.clearcorp.co.cr',
     'depends': [
-        #'report_webkit_lib',
-        'hr_payroll_extended',
-    ],
+                'hr_payroll_extended',
+                ],
     'data': [
-             ''
              'data/l10n_cr_hr_payroll_salary_rule_category.xml',
              'data/l10n_cr_hr_payroll_salary_rule.xml',
-             #'wizard/hr_payroll_report_for_month_wizard_view.xml',
+             'data/report_paperformat.xml',
+             'wizard/hr_payroll_report_for_month_wizard_view.xml',
              'wizard/hr_payroll_report_employee_by_periods_wizard_view.xml',
              'hr_config_settings.xml',
              'l10n_cr_hr_payroll_view.xml',
-             #'report/report.xml',
-             #'report/report_menus.xml',
-             #'security/ir.model.access.csv',
-            ],
+             'views/report_employee_by_periods.xml',
+             'views/report_employee_by_months.xml',
+             'views/report_payslipdetails.xml',
+             'views/report_payslip_run.xml',
+             'views/report_payslip.xml',
+             'report/report.xml',
+             'report/report_menus.xml',
+             'security/ir.model.access.csv',
+             ],
     'installable': True,
     'auto_install': False,
     'application': True,

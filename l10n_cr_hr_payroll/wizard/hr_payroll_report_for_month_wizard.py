@@ -21,36 +21,36 @@
 ##############################################################################
 
 import time
-from openerp.osv import fields,osv, orm
+from openerp import models, fields, api
 
-class PayrollReportForMonthWizard(osv.osv):
 
-    _name = "payroll.report.for.month"
-    _description = "Payroll Report for Month"
-    
-    _columns = {
-        'company_id': fields.many2one('res.company', 'Company',),
-        'period_from': fields.many2one('account.period', 'Start Period',),
-        'period_to': fields.many2one('account.period', 'End Period',),
-    }
-    
+class PayrollReportForMonthWizard(models.TransientModel):
+
+    _name = 'payroll.report.for.month'
+    _description = 'Payroll Report for Month'
+
+    company_id= fields.Many2one('res.company', 'Company',)
+    period_from= fields.Many2one('account.period', 'Start Period',)
+    period_to= fields.Many2one('account.period', 'End Period',)
+
     _defaults = {
         'company_id': lambda self, cr, uid, context: \
                 self.pool.get('res.users').browse(cr, uid, uid,
                     context=context).company_id.id,
     }
-    
-    def _print_report(self, cursor, uid, ids, datas, context={}):
-        return {
-            'type': 'ir.actions.report.xml',
-            'report_name': 'hr_payroll_report_for_month',
-            'datas': datas}
 
-    def action_validate(self, cr, uid, ids, context={}):
-        datas = {}
-        datas['ids'] = context.get('active_ids', [])
-        datas['model'] = context.get('active_model', 'ir.ui.menu')
-        datas['form'] = self.read(cr, uid, ids, ['company_id',  'period_from', 'period_to'], context=context)[0]
-        return self._print_report(cr, uid, ids, datas, context=context)
+    @api.multi
+    def print_report(self):
+        p_from= self.env['account.period'].search([('id','=',self.period_from.id)])[0].date_start
+        p_to= self.env['account.period'].search([('id','=',self.period_to.id)])[0].date_stop
+        data = {
+            'form': {
+                'period_from':p_from,
+                'period_to': p_to,
+            }
+        }
+        res = self.env['report'].get_action(self.company_id,
+            'l10n_cr_hr_payroll.report_employee_by_months', data=data)
+        return res
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

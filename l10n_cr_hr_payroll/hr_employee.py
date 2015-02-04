@@ -19,32 +19,32 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+
 from openerp import models, fields, api
 
+
 class hr_employee(models.Model):
-    _name = "hr.employee"
-    _description = "Employee"
-    _inherit = "hr.employee"
-    
+
+    _inherit = 'hr.employee'
+
     def _check_report_number_child(self, cr, uid, ids, context=None):
         for employee in self.browse(cr, uid, ids, context=context):
             if employee.report_number_child < 0:
                 return False
         return True
-    
+
     @api.onchange('marital')
     def _onchange_marital(self):
         self.report_spouse = False
-        
+
     marital= fields.Selection([('single', 'Single'), ('married', 'Married'), ('widower', 'Widower'), ('divorced', 'Divorced')], String = 'Marital')
     report_spouse= fields.Boolean('Report Spouse', help="If this employee reports his spouse for rent payment")
     report_number_child= fields.Integer('Number of children to report', help="Number of children to report for rent payment")       
-    
-    
+
     _defaults = {
         'report_number_child': 0,
     }
-    
+
     _constraints = [
         (_check_report_number_child, 'Error! The number of child to report must be greater or equal to zero.', ['report_number_child'])
     ]

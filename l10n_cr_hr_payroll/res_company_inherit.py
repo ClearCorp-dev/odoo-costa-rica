@@ -20,14 +20,15 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, orm
+from openerp.osv import fields, osv
 from openerp.tools.translate import _
 import openerp.addons.decimal_precision as dp
 
-class resCompanyInherit(orm.Model):
-    
+
+class resCompanyInherit(osv.Model):
+
     _inherit = 'res.company'
-    
+
     _columns = {
         'first_limit': fields.float('First Limit', digits_compute=dp.get_precision('Payroll')),
         'second_limit':fields.float('Second Limit', digits_compute=dp.get_precision('Payroll')), 
@@ -35,4 +36,3 @@ class resCompanyInherit(orm.Model):
         'amount_per_spouse': fields.float('Amount per spouse', digits_compute=dp.get_precision('Payroll')),
         
     }
-    
