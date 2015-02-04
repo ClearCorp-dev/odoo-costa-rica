@@ -25,7 +25,7 @@ from openerp.tools.translate import _
 from openerp.osv import fields, osv
 
 
-class hrRulesalary(osv.model):
+class hrRulesalary(osv.Model):
 
     _inherit = 'hr.salary.rule'
 
