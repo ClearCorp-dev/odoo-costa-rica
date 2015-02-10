@@ -44,7 +44,7 @@ class accountInvoicelineD151(osv.Model):
                                        ('A','Rent'),
                                        ('SP','Profesional services'),
                                        ('M','Commissions'),
-                                       ('I','Interest')], string="D-151 Type"),
+                                       ('I','Interest')], string='D-151 Type'),
         'type_invoice': fields.function(_get_type_invoice_line, type='char', string='Invoice type', size=64)
     }
 
