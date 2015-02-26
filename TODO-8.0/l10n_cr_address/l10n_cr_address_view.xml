@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Inherited views -->
+        <!-- res.partner -->
+        <record id="view_partner_form" model="ir.ui.view">
+            <field name="name">Partner Form</field>
+            <field name="model">res.partner</field>
+            <field name="priority" eval="16" />
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <xpath
+                    expr="//form/sheet/group/group/div/div[@class='address_format']/field[@name='state_id']"
+                    position="before">
+                    <field name="district_id" placeholder="District"
+                        style="width: 40%%" options='{"no_open": True}'
+                        on_change="onchange_district(district_id)"
+                        attrs="{'readonly': [('use_parent_address','=',True)]}" />
+                    <field name="county_id" class="oe_no_button"
+                        placeholder="County" style="width: 37%%"
+                        options='{"no_open": True}' on_change="onchange_county(county_id)"
+                        attrs="{'readonly': [('use_parent_address','=',True)]}" />
+                </xpath>
+                <xpath
+                    expr="//form/sheet/group/group/div/field[@name='country_id']"
+                    position="before">
+                    <field name="region_id" placeholder="Region"
+                        class="oe_no_button" options="{'no_open': True}"
+                        attrs="{'readonly': [('use_parent_address','=',True)]}" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
