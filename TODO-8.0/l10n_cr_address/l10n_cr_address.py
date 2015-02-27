@@ -24,8 +24,10 @@ from openerp.osv import osv, fields
 
 
 class Region(osv.Model):
+    """Region"""
 
     _name = 'res.country.region'
+    _description = __doc__
 
     _columns = {
         'name': fields.char('Name', required=True),
@@ -36,8 +38,10 @@ class Region(osv.Model):
 
 
 class County(osv.Model):
+    """County"""
 
     _name = 'res.country.county'
+    _description = __doc__
 
     _columns = {
         'name': fields.char('Name', required=True),
@@ -48,8 +52,10 @@ class County(osv.Model):
 
 
 class District(osv.Model):
+    """District"""
 
     _name = 'res.country.district'
+    _description = __doc__
 
     _columns = {
         'name': fields.char('Name', required=True),
