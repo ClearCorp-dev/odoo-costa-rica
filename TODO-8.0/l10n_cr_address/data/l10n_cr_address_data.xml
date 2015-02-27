@@ -1,0 +1,3474 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="True">
+        <!-- Regions -->
+        <record id="Central_region" model="res.country.region">
+            <field name="code">1</field>
+            <field name="name">Central</field>
+            <field name="country_id" ref="base.cr"/>
+        </record>
+        <record id="Chorotega_region" model="res.country.region">
+            <field name="code">2</field>
+            <field name="name">Chorotega</field>
+            <field name="country_id" ref="base.cr"/>
+        </record>
+        <record id="PacificoCentral_region" model="res.country.region">
+            <field name="code">3</field>
+            <field name="name">Pacífico Central</field>
+            <field name="country_id" ref="base.cr"/>
+        </record>
+        <record id="Brunca_region" model="res.country.region">
+            <field name="code">4</field>
+            <field name="name">Brunca</field>
+            <field name="country_id" ref="base.cr"/>
+        </record>
+        <record id="HuetarAtlantica_region" model="res.country.region">
+            <field name="code">5</field>
+            <field name="name">Huetar Atlántica</field>
+            <field name="country_id" ref="base.cr"/>
+        </record>
+        <record id="HuetarNorte_region" model="res.country.region">
+            <field name="code">6</field>
+            <field name="name">Huetar Norte</field>
+            <field name="country_id" ref="base.cr"/>
+        </record>
+
+        <!-- States -->
+        <record id="state_SJ" model="res.country.state">
+            <field name="code">1</field>
+            <field name="name">San Jos&#233;</field>
+            <field name="country_id" ref="base.cr"/>
+        </record>
+        <record id="state_A" model="res.country.state">
+            <field name="code">2</field>
+            <field name="name">Alajuela</field>
+            <field name="country_id" ref="base.cr"/>
+        </record>
+        <record id="state_C" model="res.country.state">
+            <field name="code">3</field>
+            <field name="name">Cartago</field>
+            <field name="country_id" ref="base.cr"/>
+        </record>
+        <record id="state_H" model="res.country.state">
+            <field name="code">4</field>
+            <field name="name">Heredia</field>
+            <field name="country_id" ref="base.cr"/>
+        </record>
+        <record id="state_G" model="res.country.state">
+            <field name="code">5</field>
+            <field name="name">Guanacaste</field>
+            <field name="country_id" ref="base.cr"/>
+        </record>
+        <record id="state_P" model="res.country.state">
+            <field name="code">6</field>
+            <field name="name">Puntarenas</field>
+            <field name="country_id" ref="base.cr"/>
+        </record>
+        <record id="state_L" model="res.country.state">
+            <field name="code">7</field>
+            <field name="name">Lim&#243;n</field>
+            <field name="country_id" ref="base.cr"/>
+        </record>
+
+        <!-- Counties San Jose -->
+        <record id="county_101" model="res.country.county">
+            <field name="name">San José</field>
+            <field name="code">101</field>
+            <field name="state_id" ref="state_SJ"/>
+        </record>
+        <record id="county_102" model="res.country.county">
+            <field name="name">Escazú</field>
+            <field name="code">102</field>
+            <field name="state_id" ref="state_SJ"/>
+        </record>
+        <record id="county_103" model="res.country.county">
+            <field name="name">Desamparados</field>
+            <field name="code">103</field>
+            <field name="state_id" ref="state_SJ"/>
+        </record>
+        <record id="county_104" model="res.country.county">
+            <field name="name">Puriscal</field>
+            <field name="code">104</field>
+            <field name="state_id" ref="state_SJ"/>
+        </record>
+        <record id="county_105" model="res.country.county">
+            <field name="name">Tarrazú</field>
+            <field name="code">105</field>
+            <field name="state_id" ref="state_SJ"/>
+        </record>
+        <record id="county_106" model="res.country.county">
+            <field name="name">Aserrí</field>
+            <field name="code">106</field>
+            <field name="state_id" ref="state_SJ"/>
+        </record>
+        <record id="county_107" model="res.country.county">
+            <field name="name">Mora</field>
+            <field name="code">107</field>
+            <field name="state_id" ref="state_SJ"/>
+        </record>
+        <record id="county_108" model="res.country.county">
+            <field name="name">Goicoechea</field>
+            <field name="code">108</field>
+            <field name="state_id" ref="state_SJ"/>
+        </record>
+        <record id="county_109" model="res.country.county">
+            <field name="name">Santa Ana</field>
+            <field name="code">109</field>
+            <field name="state_id" ref="state_SJ"/>
+        </record>
+        <record id="county_110" model="res.country.county">
+            <field name="name">Alajuelita</field>
+            <field name="code">110</field>
+            <field name="state_id" ref="state_SJ"/>
+        </record>
+        <record id="county_111" model="res.country.county">
+            <field name="name">Vásquez de Coronado</field>
+            <field name="code">111</field>
+            <field name="state_id" ref="state_SJ"/>
+        </record>
+        <record id="county_112" model="res.country.county">
+            <field name="name">Acosta</field>
+            <field name="code">112</field>
+            <field name="state_id" ref="state_SJ"/>
+        </record>
+        <record id="county_113" model="res.country.county">
+            <field name="name">Tibás</field>
+            <field name="code">113</field>
+            <field name="state_id" ref="state_SJ"/>
+        </record>
+        <record id="county_114" model="res.country.county">
+            <field name="name">Moravia</field>
+            <field name="code">114</field>
+            <field name="state_id" ref="state_SJ"/>
+        </record>
+        <record id="county_115" model="res.country.county">
+            <field name="name">Montes de Oca</field>
+            <field name="code">115</field>
+            <field name="state_id" ref="state_SJ" />
+        </record>
+        <record id="county_116" model="res.country.county">
+            <field name="name">Turrubares</field>
+            <field name="code">116</field>
+            <field name="state_id" ref="state_SJ"/>
+        </record>
+        <record id="county_117" model="res.country.county">
+            <field name="name">Dota</field>
+            <field name="code">117</field>
+            <field name="state_id" ref="state_SJ"/>
+        </record>
+        <record id="county_118" model="res.country.county">
+            <field name="name">Curridabat</field>
+            <field name="code">118</field>
+            <field name="state_id" ref="state_SJ"/>
+        </record>
+        <record id="county_119" model="res.country.county">
+            <field name="name">Pérez Zeledón</field>
+            <field name="code">119</field>
+            <field name="state_id" ref="state_SJ"/>
+        </record>
+        <record id="county_120" model="res.country.county">
+            <field name="name">León Cortés Castro</field>
+            <field name="code">120</field>
+            <field name="state_id" ref="state_SJ"/>
+        </record>
+
+        <!-- Counties Alajuela -->
+        <record id="county_201" model="res.country.county">
+            <field name="name">Alajuela</field>
+            <field name="code">201</field>
+            <field name="state_id" ref="state_A"/>
+        </record>
+        <record id="county_202" model="res.country.county">
+            <field name="name">San Ramón</field>
+            <field name="code">202</field>
+            <field name="state_id" ref="state_A"/>
+        </record>
+        <record id="county_203" model="res.country.county">
+            <field name="name">Grecia</field>
+            <field name="code">203</field>
+            <field name="state_id" ref="state_A"/>
+        </record>
+        <record id="county_204" model="res.country.county">
+            <field name="name">San Mateo</field>
+            <field name="code">204</field>
+            <field name="state_id" ref="state_A"/>
+        </record>
+        <record id="county_205" model="res.country.county">
+            <field name="name">Atenas</field>
+            <field name="code">205</field>
+            <field name="state_id" ref="state_A"/>
+        </record>
+        <record id="county_206" model="res.country.county">
+            <field name="name">Naranjo</field>
+            <field name="code">206</field>
+            <field name="state_id" ref="state_A"/>
+        </record>
+        <record id="county_207" model="res.country.county">
+            <field name="name">Palmares</field>
+            <field name="code">207</field>
+            <field name="state_id" ref="state_A"/>
+        </record>
+        <record id="county_208" model="res.country.county">
+            <field name="name">Poás</field>
+            <field name="code">208</field>
+            <field name="state_id" ref="state_A"/>
+        </record>
+        <record id="county_209" model="res.country.county">
+            <field name="name">Orotina</field>
+            <field name="code">209</field>
+            <field name="state_id" ref="state_A"/>
+        </record>
+        <record id="county_210" model="res.country.county">
+            <field name="name">San Carlos</field>
+            <field name="code">210</field>
+            <field name="state_id" ref="state_A"/>
+        </record>
+        <record id="county_211" model="res.country.county">
+            <field name="name">Alfaro Ruiz</field>
+            <field name="code">211</field>
+            <field name="state_id" ref="state_A"/>
+        </record>
+        <record id="county_212" model="res.country.county">
+            <field name="name">Valverde Vega</field>
+            <field name="code">212</field>
+            <field name="state_id" ref="state_A"/>
+        </record>
+        <record id="county_213" model="res.country.county">
+            <field name="name">Upala</field>
+            <field name="code">213</field>
+            <field name="state_id" ref="state_A"/>
+        </record>
+        <record id="county_214" model="res.country.county">
+            <field name="name">Los Chiles</field>
+            <field name="code">214</field>
+            <field name="state_id" ref="state_A"/>
+        </record>
+        <record id="county_215" model="res.country.county">
+            <field name="name">Guatuso</field>
+            <field name="code">215</field>
+            <field name="state_id" ref="state_A"/>
+        </record>
+
+        <!-- Counties Cartago -->
+        <record id="county_301" model="res.country.county">
+            <field name="name">Cartago</field>
+            <field name="code">301</field>
+            <field name="state_id" ref="state_C"/>
+        </record>
+        <record id="county_302" model="res.country.county">
+            <field name="name">Paraíso</field>
+            <field name="code">202</field>
+            <field name="state_id" ref="state_C"/>
+        </record>
+        <record id="county_303" model="res.country.county">
+            <field name="name">La Unión</field>
+            <field name="code">303</field>
+            <field name="state_id" ref="state_C"/>
+        </record>
+        <record id="county_304" model="res.country.county">
+            <field name="name">Jiménez</field>
+            <field name="code">304</field>
+            <field name="state_id" ref="state_C"/>
+        </record>
+        <record id="county_305" model="res.country.county">
+            <field name="name">Turrialba</field>
+            <field name="code">305</field>
+            <field name="state_id" ref="state_C"/>
+        </record>
+        <record id="county_306" model="res.country.county">
+            <field name="name">Alvarado</field>
+            <field name="code">306</field>
+            <field name="state_id" ref="state_C"/>
+        </record>
+        <record id="county_307" model="res.country.county">
+            <field name="name">Oreamuno</field>
+            <field name="code">307</field>
+            <field name="state_id" ref="state_C"/>
+        </record>
+        <record id="county_308" model="res.country.county">
+            <field name="name">El Guarco</field>
+            <field name="code">308</field>
+            <field name="state_id" ref="state_C" />
+        </record>
+
+        <!-- Counties Heredia -->
+        <record id="county_401" model="res.country.county">
+            <field name="name">Heredia</field>
+            <field name="code">401</field>
+            <field name="state_id" ref="state_H"/>
+        </record>
+        <record id="county_402" model="res.country.county">
+            <field name="name">Barva</field>
+            <field name="code">402</field>
+            <field name="state_id" ref="state_H"/>
+        </record>
+        <record id="county_403" model="res.country.county">
+            <field name="name">Santo Domingo</field>
+            <field name="code">403</field>
+            <field name="state_id" ref="state_H"/>
+        </record>
+        <record id="county_404" model="res.country.county">
+            <field name="name">Santa Bárbara</field>
+            <field name="code">404</field>
+            <field name="state_id" ref="state_H"/>
+        </record>
+        <record id="county_405" model="res.country.county">
+            <field name="name">San Rafael</field>
+            <field name="code">405</field>
+            <field name="state_id" ref="state_H"/>
+        </record>
+        <record id="county_406" model="res.country.county">
+            <field name="name">San Isidro</field>
+            <field name="code">406</field>
+            <field name="state_id" ref="state_H"/>
+        </record>
+        <record id="county_407" model="res.country.county">
+            <field name="name">Belén</field>
+            <field name="code">407</field>
+            <field name="state_id" ref="state_H"/>
+        </record>
+        <record id="county_408" model="res.country.county">
+            <field name="name">Flores</field>
+            <field name="code">408</field>
+            <field name="state_id" ref="state_H"/>
+        </record>
+        <record id="county_409" model="res.country.county">
+            <field name="name">San Pablo</field>
+            <field name="code">409</field>
+            <field name="state_id" ref="state_H"/>
+        </record>
+        <record id="county_410" model="res.country.county">
+            <field name="name">Sarapiquí</field>
+            <field name="code">410</field>
+            <field name="state_id" ref="state_H"/>
+        </record>
+
+        <!-- Counties Guanacaste -->
+        <record id="county_501" model="res.country.county">
+            <field name="name">Liberia</field>
+            <field name="code">501</field>
+            <field name="state_id" ref="state_G"/>
+        </record>
+        <record id="county_502" model="res.country.county">
+            <field name="name">Nicoya</field>
+            <field name="code">502</field>
+            <field name="state_id" ref="state_G"/>
+        </record>
+        <record id="county_503" model="res.country.county">
+            <field name="name">Santa Cruz</field>
+            <field name="code">503</field>
+            <field name="state_id" ref="state_G"/>
+        </record>
+        <record id="county_504" model="res.country.county">
+            <field name="name">Bagaces</field>
+            <field name="code">504</field>
+            <field name="state_id" ref="state_G"/>
+        </record>
+        <record id="county_505" model="res.country.county">
+            <field name="name">Carrillo</field>
+            <field name="code">505</field>
+            <field name="state_id" ref="state_G"/>
+        </record>
+        <record id="county_506" model="res.country.county">
+            <field name="name">Cañas</field>
+            <field name="code">506</field>
+            <field name="state_id" ref="state_G"/>
+        </record>
+        <record id="county_507" model="res.country.county">
+            <field name="name">Abangares</field>
+            <field name="code">507</field>
+            <field name="state_id" ref="state_G"/>
+        </record>
+        <record id="county_508" model="res.country.county">
+            <field name="name">Tilarán</field>
+            <field name="code">508</field>
+            <field name="state_id" ref="state_G"/>
+        </record>
+        <record id="county_509" model="res.country.county">
+            <field name="name">Nandayure</field>
+            <field name="code">509</field>
+            <field name="state_id" ref="state_G"/>
+        </record>
+        <record id="county_510" model="res.country.county">
+            <field name="name">La Cruz</field>
+            <field name="code">510</field>
+            <field name="state_id" ref="state_G"/>
+        </record>
+        <record id="county_511" model="res.country.county">
+            <field name="name">Hojancha</field>
+            <field name="code">511</field>
+            <field name="state_id" ref="state_G"/>
+        </record>
+
+        <!-- Counties Puntarenas-->
+        <record id="county_601" model="res.country.county">
+            <field name="name">Puntarenas</field>
+            <field name="code">601</field>
+            <field name="state_id" ref="state_P"/>
+        </record>
+        <record id="county_602" model="res.country.county">
+            <field name="name">Esparza</field>
+            <field name="code">602</field>
+            <field name="state_id" ref="state_P"/>
+        </record>
+        <record id="county_603" model="res.country.county">
+            <field name="name">Buenos Aires</field>
+            <field name="code">603</field>
+            <field name="state_id" ref="state_P"/>
+        </record>
+        <record id="county_604" model="res.country.county">
+            <field name="name">Montes de Oro</field>
+            <field name="code">604</field>
+            <field name="state_id" ref="state_P"/>
+        </record>
+        <record id="county_605" model="res.country.county">
+            <field name="name">Osa</field>
+            <field name="code">605</field>
+            <field name="state_id" ref="state_P"/>
+        </record>
+        <record id="county_606" model="res.country.county">
+            <field name="name">Quepos</field>
+            <field name="code">606</field>
+            <field name="state_id" ref="state_P"/>
+        </record>
+        <record id="county_607" model="res.country.county">
+            <field name="name">Golfito</field>
+            <field name="code">607</field>
+            <field name="state_id" ref="state_P"/>
+        </record>
+        <record id="county_608" model="res.country.county">
+            <field name="name">Coto Brus</field>
+            <field name="code">608</field>
+            <field name="state_id" ref="state_P"/>
+        </record>
+        <record id="county_609" model="res.country.county">
+            <field name="name">Parrita</field>
+            <field name="code">609</field>
+            <field name="state_id" ref="state_P"/>
+        </record>
+        <record id="county_610" model="res.country.county">
+            <field name="name">Corredores</field>
+            <field name="code">610</field>
+            <field name="state_id" ref="state_P"/>
+        </record>
+        <record id="county_611" model="res.country.county">
+            <field name="name">Garabito</field>
+            <field name="code">611</field>
+            <field name="state_id" ref="state_P"/>
+        </record>
+
+        <!-- Counties Limon -->
+        <record id="county_701" model="res.country.county">
+            <field name="name">Limón</field>
+            <field name="code">701</field>
+            <field name="state_id" ref="state_L"/>
+        </record>
+        <record id="county_702" model="res.country.county">
+            <field name="name">Pococí</field>
+            <field name="code">702</field>
+            <field name="state_id" ref="state_L"/>
+        </record>
+        <record id="county_703" model="res.country.county">
+            <field name="name">Siquirres</field>
+            <field name="code">703</field>
+            <field name="state_id" ref="state_L"/>
+        </record>
+        <record id="county_704" model="res.country.county">
+            <field name="name">Talamanca</field>
+            <field name="code">704</field>
+            <field name="state_id" ref="state_L"/>
+        </record>
+        <record id="county_705" model="res.country.county">
+            <field name="name">Matina</field>
+            <field name="code">705</field>
+            <field name="state_id" ref="state_L"/>
+        </record>
+        <record id="county_706" model="res.country.county">
+            <field name="name">Guácimo</field>
+            <field name="code">706</field>
+            <field name="state_id" ref="state_L"/>
+        </record>
+
+        <!-- Districts Central San Jose, San Jose -->
+        <record id="district_10101" model="res.country.district">
+            <field name="name">Carmen</field>
+            <field name="code">10101</field>
+            <field name="county_id" ref="county_101"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10102" model="res.country.district">
+            <field name="name">Merced</field>
+            <field name="code">10102</field>
+            <field name="county_id" ref="county_101"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10103" model="res.country.district">
+            <field name="name">Hospital</field>
+            <field name="code">10103</field>
+            <field name="county_id" ref="county_101"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10104" model="res.country.district">
+            <field name="name">Catedral</field>
+            <field name="code">10104</field>
+            <field name="county_id" ref="county_101"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10105" model="res.country.district">
+            <field name="name">Zapote</field>
+            <field name="code">10105</field>
+            <field name="county_id" ref="county_101"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10106" model="res.country.district">
+            <field name="name">San Francisco de Dos Ríos</field>
+            <field name="code">10106</field>
+            <field name="county_id" ref="county_101"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10107" model="res.country.district">
+            <field name="name">Uruca</field>
+            <field name="code">10107</field>
+            <field name="county_id" ref="county_101"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10108" model="res.country.district">
+            <field name="name">Mata Redonda</field>
+            <field name="code">10108</field>
+            <field name="county_id" ref="county_101"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10109" model="res.country.district">
+            <field name="name">Pavas</field>
+            <field name="code">10109</field>
+            <field name="county_id" ref="county_101"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10110" model="res.country.district">
+            <field name="name">Hatillo</field>
+            <field name="code">10110</field>
+            <field name="county_id" ref="county_101"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10111" model="res.country.district">
+            <field name="name">San Sebastián</field>
+            <field name="code">10111</field>
+            <field name="county_id" ref="county_101"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+         <!-- Districts Escazu, San Jose -->
+         <record id="district_10201" model="res.country.district">
+            <field name="name">Escazú</field>
+            <field name="code">10201</field>
+            <field name="county_id" ref="county_102"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10202" model="res.country.district">
+            <field name="name">San Antonio</field>
+            <field name="code">10202</field>
+            <field name="county_id" ref="county_102"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10203" model="res.country.district">
+            <field name="name">San Rafael</field>
+            <field name="code">10203</field>
+            <field name="county_id" ref="county_102"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts Desamparados, San Jose -->
+        <record id="district_10301" model="res.country.district">
+            <field name="name">Desamparados</field>
+            <field name="code">10301</field>
+            <field name="county_id" ref="county_103"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10302" model="res.country.district">
+            <field name="name">San Miguel</field>
+            <field name="code">10302</field>
+            <field name="county_id" ref="county_103"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10303" model="res.country.district">
+            <field name="name">San Juan de Dios</field>
+            <field name="code">10303</field>
+            <field name="county_id" ref="county_103"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10304" model="res.country.district">
+            <field name="name">San Rafael Arriba</field>
+            <field name="code">10304</field>
+            <field name="county_id" ref="county_103"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10305" model="res.country.district">
+            <field name="name">San Antonio</field>
+            <field name="code">10305</field>
+            <field name="county_id" ref="county_103"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10306" model="res.country.district">
+            <field name="name">Frailes</field>
+            <field name="code">10306</field>
+            <field name="county_id" ref="county_103"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10307" model="res.country.district">
+            <field name="name">Patarrá</field>
+            <field name="code">10307</field>
+            <field name="county_id" ref="county_103"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10308" model="res.country.district">
+            <field name="name">San Cristóbal</field>
+            <field name="code">10308</field>
+            <field name="county_id" ref="county_103"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10309" model="res.country.district">
+            <field name="name">Rosario</field>
+            <field name="code">10309</field>
+            <field name="county_id" ref="county_103"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10310" model="res.country.district">
+            <field name="name">Damas</field>
+            <field name="code">10310</field>
+            <field name="county_id" ref="county_103"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10311" model="res.country.district">
+            <field name="name">San Rafael Abajo</field>
+            <field name="code">10311</field>
+            <field name="county_id" ref="county_103"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10312" model="res.country.district">
+            <field name="name">Gravilias</field>
+            <field name="code">10312</field>
+            <field name="county_id" ref="county_103"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10313" model="res.country.district">
+            <field name="name">Los Guido</field>
+            <field name="code">10313</field>
+            <field name="county_id" ref="county_103"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts Puriscal, San Jose -->
+        <record id="district_10401" model="res.country.district">
+            <field name="name">Santiago</field>
+            <field name="code">10401</field>
+            <field name="county_id" ref="county_104"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10402" model="res.country.district">
+            <field name="name">Mercedes Sur</field>
+            <field name="code">10402</field>
+            <field name="county_id" ref="county_104"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10403" model="res.country.district">
+            <field name="name">Barbacoas</field>
+            <field name="code">10403</field>
+            <field name="county_id" ref="county_104"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10404" model="res.country.district">
+            <field name="name">Grifo Alto</field>
+            <field name="code">10404</field>
+            <field name="county_id" ref="county_104"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10405" model="res.country.district">
+            <field name="name">San Rafael</field>
+            <field name="code">10405</field>
+            <field name="county_id" ref="county_104"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10406" model="res.country.district">
+            <field name="name">Candelaria</field>
+            <field name="code">10406</field>
+            <field name="county_id" ref="county_104"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10407" model="res.country.district">
+            <field name="name">Desamparaditos</field>
+            <field name="code">10407</field>
+            <field name="county_id" ref="county_104"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10408" model="res.country.district">
+            <field name="name">San Antonio</field>
+            <field name="code">10408</field>
+            <field name="county_id" ref="county_104"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10409" model="res.country.district">
+            <field name="name">Chires</field>
+            <field name="code">10409</field>
+            <field name="county_id" ref="county_104"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  Tarrazu, San Jose -->
+        <record id="district_10501" model="res.country.district">
+            <field name="name">San Marcos</field>
+            <field name="code">10501</field>
+            <field name="county_id" ref="county_105"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10502" model="res.country.district">
+            <field name="name">San Lorenzo</field>
+            <field name="code">10502</field>
+            <field name="county_id" ref="county_105"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10503" model="res.country.district">
+            <field name="name">San Carlos</field>
+            <field name="code">10503</field>
+            <field name="county_id" ref="county_105"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  Aserri, San Jose -->
+        <record id="district_10601" model="res.country.district">
+            <field name="name">Aserri</field>
+            <field name="code">10601</field>
+            <field name="county_id" ref="county_106"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10602" model="res.country.district">
+            <field name="name">Tarbaca</field>
+            <field name="code">10602</field>
+            <field name="county_id" ref="county_106"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10603" model="res.country.district">
+            <field name="name">Vuelta de Jorco</field>
+            <field name="code">10603</field>
+            <field name="county_id" ref="county_106"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10604" model="res.country.district">
+            <field name="name">San Gabriel</field>
+            <field name="code">10604</field>
+            <field name="county_id" ref="county_106"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10605" model="res.country.district">
+            <field name="name">La Legua</field>
+            <field name="code">10605</field>
+            <field name="county_id" ref="county_106"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10606" model="res.country.district">
+            <field name="name">Monterrey</field>
+            <field name="code">10606</field>
+            <field name="county_id" ref="county_106"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10607" model="res.country.district">
+            <field name="name">Salitrillos</field>
+            <field name="code">10607</field>
+            <field name="county_id" ref="county_106"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts Mora, San Jose -->
+        <record id="district_10701" model="res.country.district">
+            <field name="name">Colón</field>
+            <field name="code">10701</field>
+            <field name="county_id" ref="county_107"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10702" model="res.country.district">
+            <field name="name">Guayabo</field>
+            <field name="code">10702</field>
+            <field name="county_id" ref="county_107"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10703" model="res.country.district">
+            <field name="name">Tabarcia</field>
+            <field name="code">10703</field>
+            <field name="county_id" ref="county_107"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10704" model="res.country.district">
+            <field name="name">Piedras Negras</field>
+            <field name="code">10704</field>
+            <field name="county_id" ref="county_107"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10705" model="res.country.district">
+            <field name="name">Picagres</field>
+            <field name="code">10705</field>
+            <field name="county_id" ref="county_107"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts Goicochea, San Jose -->
+        <record id="district_10801" model="res.country.district">
+            <field name="name">Guadalupe</field>
+            <field name="code">10801</field>
+            <field name="county_id" ref="county_108"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10802" model="res.country.district">
+            <field name="name">San Francisco</field>
+            <field name="code">10802</field>
+            <field name="county_id" ref="county_108"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10803" model="res.country.district">
+            <field name="name">Calle Blancos</field>
+            <field name="code">10803</field>
+            <field name="county_id" ref="county_108"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10804" model="res.country.district">
+            <field name="name">Mata de Plátano</field>
+            <field name="code">10804</field>
+            <field name="county_id" ref="county_108"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10805" model="res.country.district">
+            <field name="name">Ipís</field>
+            <field name="code">10805</field>
+            <field name="county_id" ref="county_108"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10806" model="res.country.district">
+            <field name="name">Rancho Redondo</field>
+            <field name="code">10806</field>
+            <field name="county_id" ref="county_108"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10807" model="res.country.district">
+            <field name="name">Purral</field>
+            <field name="code">10807</field>
+            <field name="county_id" ref="county_108"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  Santa Ana, San Jose -->
+        <record id="district_10901" model="res.country.district">
+            <field name="name">Santa Ana</field>
+            <field name="code">10901</field>
+            <field name="county_id" ref="county_109"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10902" model="res.country.district">
+            <field name="name">Salitral</field>
+            <field name="code">10902</field>
+            <field name="county_id" ref="county_109"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10903" model="res.country.district">
+            <field name="name">Pozos</field>
+            <field name="code">10903</field>
+            <field name="county_id" ref="county_109"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10904" model="res.country.district">
+            <field name="name">Uruca</field>
+            <field name="code">10904</field>
+            <field name="county_id" ref="county_109"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10905" model="res.country.district">
+            <field name="name">Piedades</field>
+            <field name="code">10905</field>
+            <field name="county_id" ref="county_109"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_10906" model="res.country.district">
+            <field name="name">Brasil</field>
+            <field name="code">10906</field>
+            <field name="county_id" ref="county_109"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  Alajuelita, San Jose -->
+        <record id="district_11001" model="res.country.district">
+            <field name="name">Alajuelita</field>
+            <field name="code">11001</field>
+            <field name="county_id" ref="county_110"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11002" model="res.country.district">
+            <field name="name">San Josecito</field>
+            <field name="code">11002</field>
+            <field name="county_id" ref="county_110"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11003" model="res.country.district">
+            <field name="name">San Antonio</field>
+            <field name="code">11003</field>
+            <field name="county_id" ref="county_110"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11004" model="res.country.district">
+            <field name="name">Concepción</field>
+            <field name="code">11004</field>
+            <field name="county_id" ref="county_110"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11005" model="res.country.district">
+            <field name="name">San Felipe</field>
+            <field name="code">11005</field>
+            <field name="county_id" ref="county_110"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  Coronado, San Jose -->
+        <record id="district_11101" model="res.country.district">
+            <field name="name">San Isidro</field>
+            <field name="code">11101</field>
+            <field name="county_id" ref="county_111"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11102" model="res.country.district">
+            <field name="name">San Rafael</field>
+            <field name="code">11102</field>
+            <field name="county_id" ref="county_111"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11103" model="res.country.district">
+            <field name="name">Dulce Nombre</field>
+            <field name="code">11103</field>
+            <field name="county_id" ref="county_111"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11104" model="res.country.district">
+            <field name="name">Patalillo</field>
+            <field name="code">11104</field>
+            <field name="county_id" ref="county_111"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11105" model="res.country.district">
+            <field name="name">Cascajal</field>
+            <field name="code">11105</field>
+            <field name="county_id" ref="county_111"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  Acosta, San Jose -->
+        <record id="district_11201" model="res.country.district">
+            <field name="name">San Ignacio</field>
+            <field name="code">11201</field>
+            <field name="county_id" ref="county_112"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11202" model="res.country.district">
+            <field name="name">Guaitil</field>
+            <field name="code">11202</field>
+            <field name="county_id" ref="county_112"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11203" model="res.country.district">
+            <field name="name">Palmichal</field>
+            <field name="code">11203</field>
+            <field name="county_id" ref="county_112"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11204" model="res.country.district">
+            <field name="name">Cangrejal</field>
+            <field name="code">11204</field>
+            <field name="county_id" ref="county_112"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11205" model="res.country.district">
+            <field name="name">Sabanillas</field>
+            <field name="code">11205</field>
+            <field name="county_id" ref="county_112"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  Tibas, San Jose -->
+        <record id="district_11301" model="res.country.district">
+            <field name="name">San Juan</field>
+            <field name="code">11301</field>
+            <field name="county_id" ref="county_113"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11302" model="res.country.district">
+            <field name="name">Cinco Esquinas</field>
+            <field name="code">11302</field>
+            <field name="county_id" ref="county_113"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11303" model="res.country.district">
+            <field name="name">Anselmo Llorente</field>
+            <field name="code">11303</field>
+            <field name="county_id" ref="county_113"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11304" model="res.country.district">
+            <field name="name">León XIII</field>
+            <field name="code">11304</field>
+            <field name="county_id" ref="county_113"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11305" model="res.country.district">
+            <field name="name">Colima</field>
+            <field name="code">11305</field>
+            <field name="county_id" ref="county_113"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  Tibas, San Jose -->
+        <record id="district_11401" model="res.country.district">
+            <field name="name">San Vicente</field>
+            <field name="code">11401</field>
+            <field name="county_id" ref="county_114"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11402" model="res.country.district">
+            <field name="name">San Jerónimo</field>
+            <field name="code">11402</field>
+            <field name="county_id" ref="county_114"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11403" model="res.country.district">
+            <field name="name">La Trinidad</field>
+            <field name="code">11403</field>
+            <field name="county_id" ref="county_114"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  Montes de Oca, San Jose -->
+        <record id="district_11501" model="res.country.district">
+            <field name="name">San Pedro</field>
+            <field name="code">11501</field>
+            <field name="county_id" ref="county_115"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11502" model="res.country.district">
+            <field name="name">Sabanilla</field>
+            <field name="code">11502</field>
+            <field name="county_id" ref="county_115"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11503" model="res.country.district">
+            <field name="name">Mercedes</field>
+            <field name="code">11503</field>
+            <field name="county_id" ref="county_115"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11504" model="res.country.district">
+            <field name="name">San Rafael</field>
+            <field name="code">11504</field>
+            <field name="county_id" ref="county_115"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  Turrubares, San Jose -->
+        <record id="district_11601" model="res.country.district">
+            <field name="name">San Pablo</field>
+            <field name="code">11601</field>
+            <field name="county_id" ref="county_116"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11602" model="res.country.district">
+            <field name="name">San Pedro</field>
+            <field name="code">11602</field>
+            <field name="county_id" ref="county_116"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11603" model="res.country.district">
+            <field name="name">San Juan de Mata</field>
+            <field name="code">11603</field>
+            <field name="county_id" ref="county_116"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11604" model="res.country.district">
+            <field name="name">San Luis</field>
+            <field name="code">11604</field>
+            <field name="county_id" ref="county_116"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11605" model="res.country.district">
+            <field name="name">Carara</field>
+            <field name="code">11605</field>
+            <field name="county_id" ref="county_116"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  Dota, San Jose -->
+        <record id="district_11701" model="res.country.district">
+            <field name="name">Santa María</field>
+            <field name="code">11701</field>
+            <field name="county_id" ref="county_117"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11702" model="res.country.district">
+            <field name="name">Jardín</field>
+            <field name="code">11702</field>
+            <field name="county_id" ref="county_117"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11703" model="res.country.district">
+            <field name="name">Copey</field>
+            <field name="code">11703</field>
+            <field name="county_id" ref="county_117"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  Curridabat, San Jose -->
+        <record id="district_11801" model="res.country.district">
+            <field name="name">Curridabat</field>
+            <field name="code">11801</field>
+            <field name="county_id" ref="county_118"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11802" model="res.country.district">
+            <field name="name">Granadilla</field>
+            <field name="code">11802</field>
+            <field name="county_id" ref="county_118"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11803" model="res.country.district">
+            <field name="name">Sánchez</field>
+            <field name="code">11803</field>
+            <field name="county_id" ref="county_118"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_11804" model="res.country.district">
+            <field name="name">Tirrases</field>
+            <field name="code">11804</field>
+            <field name="county_id" ref="county_118"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  Perez Zeledon, San Jose -->
+        <record id="district_11901" model="res.country.district">
+            <field name="name">San Isidro</field>
+            <field name="code">11901</field>
+            <field name="county_id" ref="county_119"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_11902" model="res.country.district">
+            <field name="name">General</field>
+            <field name="code">11902</field>
+            <field name="county_id" ref="county_119"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_11903" model="res.country.district">
+            <field name="name">Daniel Flores</field>
+            <field name="code">11903</field>
+            <field name="county_id" ref="county_119"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_11904" model="res.country.district">
+            <field name="name">Rivas</field>
+            <field name="code">11904</field>
+            <field name="county_id" ref="county_119"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_11905" model="res.country.district">
+            <field name="name">San Pedro</field>
+            <field name="code">11905</field>
+            <field name="county_id" ref="county_119"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+         <record id="district_11906" model="res.country.district">
+            <field name="name">Platanares</field>
+            <field name="code">11906</field>
+            <field name="county_id" ref="county_119"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_11907" model="res.country.district">
+            <field name="name">Pejibaye</field>
+            <field name="code">11907</field>
+            <field name="county_id" ref="county_119"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_11908" model="res.country.district">
+            <field name="name">Cajón</field>
+            <field name="code">11908</field>
+            <field name="county_id" ref="county_119"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_11909" model="res.country.district">
+            <field name="name">Barú</field>
+            <field name="code">11909</field>
+            <field name="county_id" ref="county_119"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_11910" model="res.country.district">
+            <field name="name">Río Nuevo</field>
+            <field name="code">11910</field>
+            <field name="county_id" ref="county_119"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_11911" model="res.country.district">
+            <field name="name">Páramo</field>
+            <field name="code">11911</field>
+            <field name="county_id" ref="county_119"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+
+        <!-- Districts  Leon Cortez, San Jose -->
+        <record id="district_12001" model="res.country.district">
+            <field name="name">San Pablo</field>
+            <field name="code">12001</field>
+            <field name="county_id" ref="county_120"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_12002" model="res.country.district">
+            <field name="name">San Andrés</field>
+            <field name="code">12002</field>
+            <field name="county_id" ref="county_120"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_12003" model="res.country.district">
+            <field name="name">Llano Bonito</field>
+            <field name="code">12003</field>
+            <field name="county_id" ref="county_120"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_12004" model="res.country.district">
+            <field name="name">San Isidro</field>
+            <field name="code">12004</field>
+            <field name="county_id" ref="county_120"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_12005" model="res.country.district">
+            <field name="name">Santa Cruz</field>
+            <field name="code">12005</field>
+            <field name="county_id" ref="county_120"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_12006" model="res.country.district">
+            <field name="name">San Antonio</field>
+            <field name="code">12006</field>
+            <field name="county_id" ref="county_120"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Alajuela, Alajuela-->
+        <record id="district_20101" model="res.country.district">
+            <field name="name">Alajuela</field>
+            <field name="code">20101</field>
+            <field name="county_id" ref="county_201"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20102" model="res.country.district">
+            <field name="name">San José</field>
+            <field name="code">20102</field>
+            <field name="county_id" ref="county_201"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20103" model="res.country.district">
+            <field name="name">Carrizal</field>
+            <field name="code">20103</field>
+            <field name="county_id" ref="county_201"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20104" model="res.country.district">
+            <field name="name">San Antonio</field>
+            <field name="code">20104</field>
+            <field name="county_id" ref="county_201"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20105" model="res.country.district">
+            <field name="name">Guácima</field>
+            <field name="code">20105</field>
+            <field name="county_id" ref="county_201"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20106" model="res.country.district">
+            <field name="name">San Isidro</field>
+            <field name="code">20106</field>
+            <field name="county_id" ref="county_201"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20107" model="res.country.district">
+            <field name="name">Sabanilla</field>
+            <field name="code">20107</field>
+            <field name="county_id" ref="county_201"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20108" model="res.country.district">
+            <field name="name">San Rafael</field>
+            <field name="code">20108</field>
+            <field name="county_id" ref="county_201"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20109" model="res.country.district">
+            <field name="name">Río Segundo</field>
+            <field name="code">20109</field>
+            <field name="county_id" ref="county_201"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20110" model="res.country.district">
+            <field name="name">Desamparados</field>
+            <field name="code">20110</field>
+            <field name="county_id" ref="county_201"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20111" model="res.country.district">
+            <field name="name">Turrucares</field>
+            <field name="code">20111</field>
+            <field name="county_id" ref="county_201"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20112" model="res.country.district">
+            <field name="name">Tambor</field>
+            <field name="code">20112</field>
+            <field name="county_id" ref="county_201"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20113" model="res.country.district">
+            <field name="name">La Garita</field>
+            <field name="code">20113</field>
+            <field name="county_id" ref="county_201"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+         <record id="district_20114" model="res.country.district">
+            <field name="name">Sarapiquí</field>
+            <field name="code">20114</field>
+            <field name="county_id" ref="county_201"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+
+        <!-- Districts  de San Ramon, Alajuela-->
+        <record id="district_20201" model="res.country.district">
+            <field name="name">San Ramón</field>
+            <field name="code">20201</field>
+            <field name="county_id" ref="county_202"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20202" model="res.country.district">
+            <field name="name">Santiago</field>
+            <field name="code">20202</field>
+            <field name="county_id" ref="county_202"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20203" model="res.country.district">
+            <field name="name">San Juan</field>
+            <field name="code">20203</field>
+            <field name="county_id" ref="county_203"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+         <record id="district_20204" model="res.country.district">
+            <field name="name">Piedades Norte</field>
+            <field name="code">20204</field>
+            <field name="county_id" ref="county_203"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20205" model="res.country.district">
+            <field name="name">Piedades Sur</field>
+            <field name="code">20205</field>
+            <field name="county_id" ref="county_203"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20206" model="res.country.district">
+            <field name="name">San Rafael</field>
+            <field name="code">20206</field>
+            <field name="county_id" ref="county_203"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+       <record id="district_20207" model="res.country.district">
+            <field name="name">San Isidro</field>
+            <field name="code">20207</field>
+            <field name="county_id" ref="county_203"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20208" model="res.country.district">
+            <field name="name">Angeles</field>
+            <field name="code">20208</field>
+            <field name="county_id" ref="county_203"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20209" model="res.country.district">
+            <field name="name">Alfaro</field>
+            <field name="code">20209</field>
+            <field name="county_id" ref="county_203"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20210" model="res.country.district">
+            <field name="name">Volio</field>
+            <field name="code">20210</field>
+            <field name="county_id" ref="county_203"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20211" model="res.country.district">
+            <field name="name">Concepción</field>
+            <field name="code">20211</field>
+            <field name="county_id" ref="county_203"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20212" model="res.country.district">
+            <field name="name">Zapotal</field>
+            <field name="code">20212</field>
+            <field name="county_id" ref="county_203"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20213" model="res.country.district">
+            <field name="name">San Isidro de Peñas Blancas</field>
+            <field name="code">20213</field>
+            <field name="county_id" ref="county_203"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+
+        <!-- Districts  de Grecia, Alajuela-->
+        <record id="district_20301" model="res.country.district">
+            <field name="name">Grecia</field>
+            <field name="code">20301</field>
+            <field name="county_id" ref="county_203"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20302" model="res.country.district">
+            <field name="name">San Isidro</field>
+            <field name="code">20302</field>
+            <field name="county_id" ref="county_203"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20303" model="res.country.district">
+            <field name="name">San José</field>
+            <field name="code">20303</field>
+            <field name="county_id" ref="county_203"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20304" model="res.country.district">
+            <field name="name">San Roque</field>
+            <field name="code">20304</field>
+            <field name="county_id" ref="county_203"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20305" model="res.country.district">
+            <field name="name">Tacares</field>
+            <field name="code">20305</field>
+            <field name="county_id" ref="county_203"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20306" model="res.country.district">
+            <field name="name">Río Cuarto</field>
+            <field name="code">20306</field>
+            <field name="county_id" ref="county_203"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_20307" model="res.country.district">
+            <field name="name">Puente Piedra</field>
+            <field name="code">20307</field>
+            <field name="county_id" ref="county_203"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20308" model="res.country.district">
+            <field name="name">Bolívar</field>
+            <field name="code">20308</field>
+            <field name="county_id" ref="county_203"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de San Mateo, Alajuela-->
+        <record id="district_20401" model="res.country.district">
+            <field name="name">San Mateo</field>
+            <field name="code">20401</field>
+            <field name="county_id" ref="county_204"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_20402" model="res.country.district">
+            <field name="name">Desmonte</field>
+            <field name="code">20402</field>
+            <field name="county_id" ref="county_204"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_20403" model="res.country.district">
+            <field name="name">Jesús María</field>
+            <field name="code">20403</field>
+            <field name="county_id" ref="county_204"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+
+        <!-- Districts  de Atenas, Alajuela-->
+        <record id="district_20501" model="res.country.district">
+            <field name="name">Atenas</field>
+            <field name="code">20501</field>
+            <field name="county_id" ref="county_205"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20502" model="res.country.district">
+            <field name="name">Jesús</field>
+            <field name="code">20502</field>
+            <field name="county_id" ref="county_205"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20503" model="res.country.district">
+            <field name="name">Mercedes</field>
+            <field name="code">20503</field>
+            <field name="county_id" ref="county_205"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20504" model="res.country.district">
+            <field name="name">San Isidro</field>
+            <field name="code">20504</field>
+            <field name="county_id" ref="county_205"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20505" model="res.country.district">
+            <field name="name">Concepción</field>
+            <field name="code">20505</field>
+            <field name="county_id" ref="county_205"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20506" model="res.country.district">
+            <field name="name">San José</field>
+            <field name="code">20506</field>
+            <field name="county_id" ref="county_205"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20507" model="res.country.district">
+            <field name="name">Santa Eulalia</field>
+            <field name="code">20507</field>
+            <field name="county_id" ref="county_205"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20508" model="res.country.district">
+            <field name="name">Escobal</field>
+            <field name="code">20508</field>
+            <field name="county_id" ref="county_205"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Naranjo, Alajuela-->
+        <record id="district_20601" model="res.country.district">
+            <field name="name">Naranjo</field>
+            <field name="code">20601</field>
+            <field name="county_id" ref="county_206"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20602" model="res.country.district">
+            <field name="name">San Miguel</field>
+            <field name="code">20602</field>
+            <field name="county_id" ref="county_206"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20603" model="res.country.district">
+            <field name="name">San José</field>
+            <field name="code">20603</field>
+            <field name="county_id" ref="county_206"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20604" model="res.country.district">
+            <field name="name">Cirrí Sur</field>
+            <field name="code">20604</field>
+            <field name="county_id" ref="county_206"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20605" model="res.country.district">
+            <field name="name">San Jerónimo</field>
+            <field name="code">20605</field>
+            <field name="county_id" ref="county_206"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20606" model="res.country.district">
+            <field name="name">San Juan</field>
+            <field name="code">20606</field>
+            <field name="county_id" ref="county_206"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20607" model="res.country.district">
+            <field name="name">Rosario</field>
+            <field name="code">20607</field>
+            <field name="county_id" ref="county_206"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Palmares, Alajuela-->
+        <record id="district_20701" model="res.country.district">
+            <field name="name">Palmares</field>
+            <field name="code">20701</field>
+            <field name="county_id" ref="county_207"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20702" model="res.country.district">
+            <field name="name">Zaragoza</field>
+            <field name="code">20702</field>
+            <field name="county_id" ref="county_207"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20703" model="res.country.district">
+            <field name="name">Buenos Aires</field>
+            <field name="code">20703</field>
+            <field name="county_id" ref="county_207"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20704" model="res.country.district">
+            <field name="name">Santiago</field>
+            <field name="code">20704</field>
+            <field name="county_id" ref="county_207"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20705" model="res.country.district">
+            <field name="name">Candelaria</field>
+            <field name="code">20705</field>
+            <field name="county_id" ref="county_207"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20706" model="res.country.district">
+            <field name="name">Esquipulas</field>
+            <field name="code">20706</field>
+            <field name="county_id" ref="county_207"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20707" model="res.country.district">
+            <field name="name">La Granja</field>
+            <field name="code">20707</field>
+            <field name="county_id" ref="county_207"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Poas, Alajuela-->
+        <record id="district_20801" model="res.country.district">
+            <field name="name">San Pedro</field>
+            <field name="code">20801</field>
+            <field name="county_id" ref="county_208"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20802" model="res.country.district">
+            <field name="name">San Juan</field>
+            <field name="code">20802</field>
+            <field name="county_id" ref="county_208"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20803" model="res.country.district">
+            <field name="name">San Rafael</field>
+            <field name="code">20803</field>
+            <field name="county_id" ref="county_208"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20804" model="res.country.district">
+            <field name="name">Carrillos</field>
+            <field name="code">20804</field>
+            <field name="county_id" ref="county_208"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_20805" model="res.country.district">
+            <field name="name">Sabana Redonda</field>
+            <field name="code">20805</field>
+            <field name="county_id" ref="county_208"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Orotina, Alajuela-->
+        <record id="district_20901" model="res.country.district">
+            <field name="name">Orotina</field>
+            <field name="code">20901</field>
+            <field name="county_id" ref="county_209"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_20902" model="res.country.district">
+            <field name="name">Mastate</field>
+            <field name="code">20902</field>
+            <field name="county_id" ref="county_209"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_20903" model="res.country.district">
+            <field name="name">Hacienda Vieja</field>
+            <field name="code">20903</field>
+            <field name="county_id" ref="county_209"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_20904" model="res.country.district">
+            <field name="name">Coyolar</field>
+            <field name="code">20904</field>
+            <field name="county_id" ref="county_209"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_20905" model="res.country.district">
+            <field name="name">Ceiba</field>
+            <field name="code">20905</field>
+            <field name="county_id" ref="county_209"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+
+        <!-- Districts  de San Carlos, Alajuela-->
+        <record id="district_21001" model="res.country.district">
+            <field name="name">Quesada</field>
+            <field name="code">21001</field>
+            <field name="county_id" ref="county_210"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21002" model="res.country.district">
+            <field name="name">Florencia</field>
+            <field name="code">21002</field>
+            <field name="county_id" ref="county_210"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21003" model="res.country.district">
+            <field name="name">Buenavista</field>
+            <field name="code">21003</field>
+            <field name="county_id" ref="county_210"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21004" model="res.country.district">
+            <field name="name">Aguas Zarcas</field>
+            <field name="code">21004</field>
+            <field name="county_id" ref="county_210"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21005" model="res.country.district">
+            <field name="name">Venecia</field>
+            <field name="code">21005</field>
+            <field name="county_id" ref="county_210"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21006" model="res.country.district">
+            <field name="name">Pital</field>
+            <field name="code">21006</field>
+            <field name="county_id" ref="county_210"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21007" model="res.country.district">
+            <field name="name">Fortuna</field>
+            <field name="code">21007</field>
+            <field name="county_id" ref="county_210"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21008" model="res.country.district">
+            <field name="name">Tigra</field>
+            <field name="code">21008</field>
+            <field name="county_id" ref="county_210"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21009" model="res.country.district">
+            <field name="name">Palmera</field>
+            <field name="code">21009</field>
+            <field name="county_id" ref="county_210"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21010" model="res.country.district">
+            <field name="name">Venado</field>
+            <field name="code">21010</field>
+            <field name="county_id" ref="county_210"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21011" model="res.country.district">
+            <field name="name">Cutris</field>
+            <field name="code">21011</field>
+            <field name="county_id" ref="county_210"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21012" model="res.country.district">
+            <field name="name">Monterrey</field>
+            <field name="code">21012</field>
+            <field name="county_id" ref="county_210"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21013" model="res.country.district">
+            <field name="name">Pocosol</field>
+            <field name="code">21013</field>
+            <field name="county_id" ref="county_210"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+
+        <!-- Districts  de Alfaro Ruiz, Alajuela-->
+        <record id="district_21101" model="res.country.district">
+            <field name="name">Zarcero</field>
+            <field name="code">21101</field>
+            <field name="county_id" ref="county_211"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_21102" model="res.country.district">
+            <field name="name">Laguna</field>
+            <field name="code">21102</field>
+            <field name="county_id" ref="county_211"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_21103" model="res.country.district">
+            <field name="name">Tapezco</field>
+            <field name="code">21103</field>
+            <field name="county_id" ref="county_211"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_21104" model="res.country.district">
+            <field name="name">Guadalupe</field>
+            <field name="code">21104</field>
+            <field name="county_id" ref="county_211"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_21105" model="res.country.district">
+            <field name="name">Palmira</field>
+            <field name="code">21105</field>
+            <field name="county_id" ref="county_211"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_21106" model="res.country.district">
+            <field name="name">Zapote</field>
+            <field name="code">21106</field>
+            <field name="county_id" ref="county_211"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_21107" model="res.country.district">
+            <field name="name">Brisas</field>
+            <field name="code">21107</field>
+            <field name="county_id" ref="county_211"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Valverde Vega, Alajuela-->
+        <record id="district_21201" model="res.country.district">
+            <field name="name">Sarchí Norte</field>
+            <field name="code">21201</field>
+            <field name="county_id" ref="county_212"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_21202" model="res.country.district">
+            <field name="name">Sarchí Sur</field>
+            <field name="code">21202</field>
+            <field name="county_id" ref="county_212"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_21203" model="res.country.district">
+            <field name="name">Toro Amarillo</field>
+            <field name="code">21203</field>
+            <field name="county_id" ref="county_212"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_21204" model="res.country.district">
+            <field name="name">San Pedro</field>
+            <field name="code">21204</field>
+            <field name="county_id" ref="county_212"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+         <record id="district_21205" model="res.country.district">
+            <field name="name">Rodríguez</field>
+            <field name="code">21205</field>
+            <field name="county_id" ref="county_212"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Upala, Alajuela-->
+        <record id="district_21301" model="res.country.district">
+            <field name="name">Upala</field>
+            <field name="code">21301</field>
+            <field name="county_id" ref="county_213"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21302" model="res.country.district">
+            <field name="name">Aguas Claras</field>
+            <field name="code">21302</field>
+            <field name="county_id" ref="county_213"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21303" model="res.country.district">
+            <field name="name">Pizote</field>
+            <field name="code">21303</field>
+            <field name="county_id" ref="county_213"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21304" model="res.country.district">
+            <field name="name">Bijagua</field>
+            <field name="code">21304</field>
+            <field name="county_id" ref="county_213"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21305" model="res.country.district">
+            <field name="name">Delicias</field>
+            <field name="code">21305</field>
+            <field name="county_id" ref="county_213"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21306" model="res.country.district">
+            <field name="name">Dos Ríos</field>
+            <field name="code">21306</field>
+            <field name="county_id" ref="county_213"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21307" model="res.country.district">
+            <field name="name">Yolillal</field>
+            <field name="code">21307</field>
+            <field name="county_id" ref="county_213"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+
+        <!-- Districts  de Los Chiles, Alajuela-->
+        <record id="district_21401" model="res.country.district">
+            <field name="name">Los Chiles</field>
+            <field name="code">21401</field>
+            <field name="county_id" ref="county_214"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21402" model="res.country.district">
+            <field name="name">Caño Negro</field>
+            <field name="code">21402</field>
+            <field name="county_id" ref="county_214"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21403" model="res.country.district">
+            <field name="name">Amparo</field>
+            <field name="code">21403</field>
+            <field name="county_id" ref="county_214"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21404" model="res.country.district">
+            <field name="name">San Jorge</field>
+            <field name="code">21404</field>
+            <field name="county_id" ref="county_214"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+
+        <!-- Districts  de Guatuso, Alajuela-->
+        <record id="district_21501" model="res.country.district">
+            <field name="name">San Rafael</field>
+            <field name="code">21501</field>
+            <field name="county_id" ref="county_215"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21502" model="res.country.district">
+            <field name="name">Buenavista</field>
+            <field name="code">21502</field>
+            <field name="county_id" ref="county_215"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_21503" model="res.country.district">
+            <field name="name">Cote</field>
+            <field name="code">21503</field>
+            <field name="county_id" ref="county_215"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+
+        <!-- Districts  de Cartago, Cartago-->
+        <record id="district_30101" model="res.country.district">
+            <field name="name">Oriental</field>
+            <field name="code">30101</field>
+            <field name="county_id" ref="county_301"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30102" model="res.country.district">
+            <field name="name">Occidental</field>
+            <field name="code">30102</field>
+            <field name="county_id" ref="county_301"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30103" model="res.country.district">
+            <field name="name">Carmen</field>
+            <field name="code">30103</field>
+            <field name="county_id" ref="county_301"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30104" model="res.country.district">
+            <field name="name">San Nicolás</field>
+            <field name="code">30104</field>
+            <field name="county_id" ref="county_301"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30105" model="res.country.district">
+            <field name="name">Aguacaliente</field>
+            <field name="code">30105</field>
+            <field name="county_id" ref="county_301"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30106" model="res.country.district">
+            <field name="name">Guadalupe</field>
+            <field name="code">30106</field>
+            <field name="county_id" ref="county_301"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30107" model="res.country.district">
+            <field name="name">Corralillo</field>
+            <field name="code">30107</field>
+            <field name="county_id" ref="county_301"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30108" model="res.country.district">
+            <field name="name">Tierra Blanca</field>
+            <field name="code">30108</field>
+            <field name="county_id" ref="county_301"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30109" model="res.country.district">
+            <field name="name">Dulce Nombre</field>
+            <field name="code">30109</field>
+            <field name="county_id" ref="county_301"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30110" model="res.country.district">
+            <field name="name">Llano Grande</field>
+            <field name="code">30110</field>
+            <field name="county_id" ref="county_301"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30111" model="res.country.district">
+            <field name="name">Quebradilla</field>
+            <field name="code">30111</field>
+            <field name="county_id" ref="county_301"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Paraiso, Cartago-->
+        <record id="district_30201" model="res.country.district">
+            <field name="name">Paraíso</field>
+            <field name="code">30201</field>
+            <field name="county_id" ref="county_302"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30202" model="res.country.district">
+            <field name="name">Santiago</field>
+            <field name="code">30202</field>
+            <field name="county_id" ref="county_302"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30203" model="res.country.district">
+            <field name="name">Orosi</field>
+            <field name="code">30203</field>
+            <field name="county_id" ref="county_302"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30204" model="res.country.district">
+            <field name="name">Cachí</field>
+            <field name="code">30204</field>
+            <field name="county_id" ref="county_302"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30205" model="res.country.district">
+            <field name="name">Llanos de Santa Lucia</field>
+            <field name="code">30205</field>
+            <field name="county_id" ref="county_302"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de La Union, Cartago-->
+        <record id="district_30301" model="res.country.district">
+            <field name="name">Tres Ríos</field>
+            <field name="code">30301</field>
+            <field name="county_id" ref="county_303"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30302" model="res.country.district">
+            <field name="name">San Diego</field>
+            <field name="code">30302</field>
+            <field name="county_id" ref="county_303"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30303" model="res.country.district">
+            <field name="name">San Juan</field>
+            <field name="code">30303</field>
+            <field name="county_id" ref="county_303"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30304" model="res.country.district">
+            <field name="name">San Rafael</field>
+            <field name="code">30304</field>
+            <field name="county_id" ref="county_303"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30305" model="res.country.district">
+            <field name="name">Concepción</field>
+            <field name="code">30305</field>
+            <field name="county_id" ref="county_303"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30306" model="res.country.district">
+            <field name="name">Dulce Nombre</field>
+            <field name="code">30306</field>
+            <field name="county_id" ref="county_303"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30307" model="res.country.district">
+            <field name="name">San Ramón</field>
+            <field name="code">30307</field>
+            <field name="county_id" ref="county_303"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30308" model="res.country.district">
+            <field name="name">Río Azul</field>
+            <field name="code">30308</field>
+            <field name="county_id" ref="county_303"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Jimenez, Cartago-->
+        <record id="district_30401" model="res.country.district">
+            <field name="name">Juan Viñas</field>
+            <field name="code">30401</field>
+            <field name="county_id" ref="county_304"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30402" model="res.country.district">
+            <field name="name">Tucurrique</field>
+            <field name="code">30402</field>
+            <field name="county_id" ref="county_304"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30403" model="res.country.district">
+            <field name="name">Pejibaye</field>
+            <field name="code">30403</field>
+            <field name="county_id" ref="county_304"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Turrialba, Cartago-->
+        <record id="district_30501" model="res.country.district">
+            <field name="name">Turrialba</field>
+            <field name="code">30501</field>
+            <field name="county_id" ref="county_305"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30502" model="res.country.district">
+            <field name="name">La Suiza</field>
+            <field name="code">30502</field>
+            <field name="county_id" ref="county_305"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30503" model="res.country.district">
+            <field name="name">Peralta</field>
+            <field name="code">30503</field>
+            <field name="county_id" ref="county_305"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30504" model="res.country.district">
+            <field name="name">Santa Cruz</field>
+            <field name="code">30504</field>
+            <field name="county_id" ref="county_305"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30505" model="res.country.district">
+            <field name="name">Santa Teresita</field>
+            <field name="code">30505</field>
+            <field name="county_id" ref="county_305"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30506" model="res.country.district">
+            <field name="name">Pavones</field>
+            <field name="code">30506</field>
+            <field name="county_id" ref="county_305"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30507" model="res.country.district">
+            <field name="name">Tuis</field>
+            <field name="code">30507</field>
+            <field name="county_id" ref="county_305"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30508" model="res.country.district">
+            <field name="name">Tayutic</field>
+            <field name="code">30508</field>
+            <field name="county_id" ref="county_305"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30509" model="res.country.district">
+            <field name="name">Santa Rosa</field>
+            <field name="code">30509</field>
+            <field name="county_id" ref="county_305"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30510" model="res.country.district">
+            <field name="name">Tres Equis</field>
+            <field name="code">30510</field>
+            <field name="county_id" ref="county_305"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30511" model="res.country.district">
+            <field name="name">La Isabel</field>
+            <field name="code">30511</field>
+            <field name="county_id" ref="county_305"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30512" model="res.country.district">
+            <field name="name">Chirripo</field>
+            <field name="code">30512</field>
+            <field name="county_id" ref="county_305"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Alvarado, Cartago-->
+        <record id="district_30601" model="res.country.district">
+            <field name="name">Pacayas</field>
+            <field name="code">30601</field>
+            <field name="county_id" ref="county_306"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30602" model="res.country.district">
+            <field name="name">Cervantes</field>
+            <field name="code">30602</field>
+            <field name="county_id" ref="county_306"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30603" model="res.country.district">
+            <field name="name">Capellades</field>
+            <field name="code">30603</field>
+            <field name="county_id" ref="county_306"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Oreamuno, Cartago-->
+        <record id="district_30701" model="res.country.district">
+            <field name="name">San Rafael</field>
+            <field name="code">30701</field>
+            <field name="county_id" ref="county_307"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30702" model="res.country.district">
+            <field name="name">Cot</field>
+            <field name="code">30702</field>
+            <field name="county_id" ref="county_307"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30703" model="res.country.district">
+            <field name="name">Potrero Cerrado</field>
+            <field name="code">30703</field>
+            <field name="county_id" ref="county_307"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30704" model="res.country.district">
+            <field name="name">Cipreses</field>
+            <field name="code">30704</field>
+            <field name="county_id" ref="county_307"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30705" model="res.country.district">
+            <field name="name">Santa Rosa</field>
+            <field name="code">30705</field>
+            <field name="county_id" ref="county_307"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Guarco, Cartago-->
+        <record id="district_30801" model="res.country.district">
+            <field name="name">El Tejar</field>
+            <field name="code">30801</field>
+            <field name="county_id" ref="county_308"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30802" model="res.country.district">
+            <field name="name">San Isidro</field>
+            <field name="code">30802</field>
+            <field name="county_id" ref="county_308"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30803" model="res.country.district">
+            <field name="name">Tobosi</field>
+            <field name="code">30803</field>
+            <field name="county_id" ref="county_308"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_30804" model="res.country.district">
+            <field name="name">Patio de Agua</field>
+            <field name="code">30804</field>
+            <field name="county_id" ref="county_308"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Heredia, Heredia-->
+        <record id="district_40101" model="res.country.district">
+            <field name="name">Heredia</field>
+            <field name="code">40101</field>
+            <field name="county_id" ref="county_401"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40102" model="res.country.district">
+            <field name="name">Mercedes</field>
+            <field name="code">40102</field>
+            <field name="county_id" ref="county_401"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40103" model="res.country.district">
+            <field name="name">San Francisco</field>
+            <field name="code">40103</field>
+            <field name="county_id" ref="county_401"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40104" model="res.country.district">
+            <field name="name">Ulloa</field>
+            <field name="code">40104</field>
+            <field name="county_id" ref="county_401"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40105" model="res.country.district">
+            <field name="name">Vara Blanca</field>
+            <field name="code">40105</field>
+            <field name="county_id" ref="county_401"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Barva, Heredia-->
+        <record id="district_40201" model="res.country.district">
+            <field name="name">Barva</field>
+            <field name="code">40201</field>
+            <field name="county_id" ref="county_402"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40202" model="res.country.district">
+            <field name="name">San Pedro</field>
+            <field name="code">40202</field>
+            <field name="county_id" ref="county_402"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40203" model="res.country.district">
+            <field name="name">San Pablo</field>
+            <field name="code">40203</field>
+            <field name="county_id" ref="county_402"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40204" model="res.country.district">
+            <field name="name">San Roque</field>
+            <field name="code">40204</field>
+            <field name="county_id" ref="county_402"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40205" model="res.country.district">
+            <field name="name">Santa Lucía</field>
+            <field name="code">40205</field>
+            <field name="county_id" ref="county_402"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40206" model="res.country.district">
+            <field name="name">San José de la Montaña</field>
+            <field name="code">40206</field>
+            <field name="county_id" ref="county_402"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Santo Domingo, Heredia-->
+        <record id="district_40301" model="res.country.district">
+            <field name="name">Santo Domingo</field>
+            <field name="code">40301</field>
+            <field name="county_id" ref="county_403"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40302" model="res.country.district">
+            <field name="name">San Vicente</field>
+            <field name="code">40302</field>
+            <field name="county_id" ref="county_403"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40303" model="res.country.district">
+            <field name="name">San Miguel</field>
+            <field name="code">40303</field>
+            <field name="county_id" ref="county_403"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40304" model="res.country.district">
+            <field name="name">Paracito</field>
+            <field name="code">40304</field>
+            <field name="county_id" ref="county_403"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40305" model="res.country.district">
+            <field name="name">Santo Tomás</field>
+            <field name="code">40305</field>
+            <field name="county_id" ref="county_403"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40306" model="res.country.district">
+            <field name="name">Santa Rosa</field>
+            <field name="code">40306</field>
+            <field name="county_id" ref="county_403"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40307" model="res.country.district">
+            <field name="name">Tures</field>
+            <field name="code">40307</field>
+            <field name="county_id" ref="county_403"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40308" model="res.country.district">
+            <field name="name">Pará</field>
+            <field name="code">40308</field>
+            <field name="county_id" ref="county_403"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Santa Barbara, Heredia-->
+        <record id="district_40401" model="res.country.district">
+            <field name="name">Santa Bárbara</field>
+            <field name="code">40401</field>
+            <field name="county_id" ref="county_404"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40402" model="res.country.district">
+            <field name="name">San Pedro</field>
+            <field name="code">40402</field>
+            <field name="county_id" ref="county_404"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40403" model="res.country.district">
+            <field name="name">San Juan</field>
+            <field name="code">40403</field>
+            <field name="county_id" ref="county_404"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40404" model="res.country.district">
+            <field name="name">Jesús</field>
+            <field name="code">40404</field>
+            <field name="county_id" ref="county_404"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40405" model="res.country.district">
+            <field name="name">Santo Domingo del Roble</field>
+            <field name="code">40405</field>
+            <field name="county_id" ref="county_404"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40406" model="res.country.district">
+            <field name="name">Puraba</field>
+            <field name="code">40406</field>
+            <field name="county_id" ref="county_404"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de San Rafael, Heredia-->
+        <record id="district_40501" model="res.country.district">
+            <field name="name">San Rafael</field>
+            <field name="code">40501</field>
+            <field name="county_id" ref="county_405"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40502" model="res.country.district">
+            <field name="name">San Josecito</field>
+            <field name="code">40502</field>
+            <field name="county_id" ref="county_405"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40503" model="res.country.district">
+            <field name="name">Santiago</field>
+            <field name="code">40503</field>
+            <field name="county_id" ref="county_405"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40504" model="res.country.district">
+            <field name="name">Angeles</field>
+            <field name="code">40504</field>
+            <field name="county_id" ref="county_405"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40505" model="res.country.district">
+            <field name="name">Concepción</field>
+            <field name="code">40505</field>
+            <field name="county_id" ref="county_405"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de San Isidro, Heredia-->
+        <record id="district_40601" model="res.country.district">
+            <field name="name">San Isidro</field>
+            <field name="code">40601</field>
+            <field name="county_id" ref="county_406"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40602" model="res.country.district">
+            <field name="name">San Jose</field>
+            <field name="code">40602</field>
+            <field name="county_id" ref="county_406"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40603" model="res.country.district">
+            <field name="name">Concepción</field>
+            <field name="code">40603</field>
+            <field name="county_id" ref="county_406"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40604" model="res.country.district">
+            <field name="name">San Francisco</field>
+            <field name="code">40604</field>
+            <field name="county_id" ref="county_406"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Belen, Heredia-->
+        <record id="district_40701" model="res.country.district">
+            <field name="name">San Antonio</field>
+            <field name="code">40701</field>
+            <field name="county_id" ref="county_407"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40702" model="res.country.district">
+            <field name="name">La Rivera</field>
+            <field name="code">40702</field>
+            <field name="county_id" ref="county_407"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40703" model="res.country.district">
+            <field name="name">Asunción</field>
+            <field name="code">40703</field>
+            <field name="county_id" ref="county_407"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Flores, Heredia-->
+        <record id="district_40801" model="res.country.district">
+            <field name="name">San Joaquín</field>
+            <field name="code">40801</field>
+            <field name="county_id" ref="county_408"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40802" model="res.country.district">
+            <field name="name">Barrantes</field>
+            <field name="code">40802</field>
+            <field name="county_id" ref="county_408"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+        <record id="district_40803" model="res.country.district">
+            <field name="name">Llorente</field>
+            <field name="code">40803</field>
+            <field name="county_id" ref="county_408"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de San Pablo, Heredia-->
+        <record id="district_40901" model="res.country.district">
+            <field name="name">San Pablo</field>
+            <field name="code">40901</field>
+            <field name="county_id" ref="county_409"/>
+            <field name="region_id" ref="Central_region"/>
+        </record>
+
+        <!-- Districts  de Sarapiqui, Heredia-->
+        <record id="district_41001" model="res.country.district">
+            <field name="name">Puerto Viejo</field>
+            <field name="code">41001</field>
+            <field name="county_id" ref="county_410"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_41002" model="res.country.district">
+            <field name="name">La Virgen</field>
+            <field name="code">41002</field>
+            <field name="county_id" ref="county_410"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_41003" model="res.country.district">
+            <field name="name">Horquetas</field>
+            <field name="code">41003</field>
+            <field name="county_id" ref="county_410"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_41004" model="res.country.district">
+            <field name="name">Llanuras del Gaspar</field>
+            <field name="code">41004</field>
+            <field name="county_id" ref="county_410"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+        <record id="district_41005" model="res.country.district">
+            <field name="name">Cureña</field>
+            <field name="code">41005</field>
+            <field name="county_id" ref="county_410"/>
+            <field name="region_id" ref="HuetarNorte_region"/>
+        </record>
+
+        <!-- Districts  de Liberia, Guanacaste-->
+        <record id="district_50101" model="res.country.district">
+            <field name="name">Liberia</field>
+            <field name="code">50101</field>
+            <field name="county_id" ref="county_501"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50102" model="res.country.district">
+            <field name="name">Cañas Dulces</field>
+            <field name="code">50102</field>
+            <field name="county_id" ref="county_501"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50103" model="res.country.district">
+            <field name="name">Mayorga</field>
+            <field name="code">50103</field>
+            <field name="county_id" ref="county_501"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50104" model="res.country.district">
+            <field name="name">Nacascolo</field>
+            <field name="code">50104</field>
+            <field name="county_id" ref="county_501"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50105" model="res.country.district">
+            <field name="name">Curubande</field>
+            <field name="code">50105</field>
+            <field name="county_id" ref="county_501"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+
+        <!-- Districts  de Nicoya, Guanacaste-->
+        <record id="district_50201" model="res.country.district">
+            <field name="name">Nicoya</field>
+            <field name="code">50201</field>
+            <field name="county_id" ref="county_502"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50202" model="res.country.district">
+            <field name="name">Mansión</field>
+            <field name="code">50202</field>
+            <field name="county_id" ref="county_502"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50203" model="res.country.district">
+            <field name="name">San Antonio</field>
+            <field name="code">50203</field>
+            <field name="county_id" ref="county_502"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50204" model="res.country.district">
+            <field name="name">Quebrada Honda</field>
+            <field name="code">50204</field>
+            <field name="county_id" ref="county_502"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50205" model="res.country.district">
+            <field name="name">Sámara</field>
+            <field name="code">50205</field>
+            <field name="county_id" ref="county_502"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50206" model="res.country.district">
+            <field name="name">Nosara</field>
+            <field name="code">50206</field>
+            <field name="county_id" ref="county_502"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50207" model="res.country.district">
+            <field name="name">Belén de Nosarita</field>
+            <field name="code">50207</field>
+            <field name="county_id" ref="county_502"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+
+        <!-- Districts  de Santa Cruz, Guanacaste-->
+        <record id="district_50301" model="res.country.district">
+            <field name="name">Santa Cruz</field>
+            <field name="code">50301</field>
+            <field name="county_id" ref="county_503"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50302" model="res.country.district">
+            <field name="name">Bolsón</field>
+            <field name="code">50302</field>
+            <field name="county_id" ref="county_503"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50303" model="res.country.district">
+            <field name="name">Veintisiete de Abril</field>
+            <field name="code">50303</field>
+            <field name="county_id" ref="county_503"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50304" model="res.country.district">
+            <field name="name">Tempate</field>
+            <field name="code">50304</field>
+            <field name="county_id" ref="county_503"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50305" model="res.country.district">
+            <field name="name">Cartagena</field>
+            <field name="code">50305</field>
+            <field name="county_id" ref="county_503"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50306" model="res.country.district">
+            <field name="name">Cuajiniquil</field>
+            <field name="code">50306</field>
+            <field name="county_id" ref="county_503"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50307" model="res.country.district">
+            <field name="name">Diriá</field>
+            <field name="code">50307</field>
+            <field name="county_id" ref="county_503"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50308" model="res.country.district">
+            <field name="name">Cabo Velas</field>
+            <field name="code">50308</field>
+            <field name="county_id" ref="county_503"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50309" model="res.country.district">
+            <field name="name">Tamarindo</field>
+            <field name="code">50309</field>
+            <field name="county_id" ref="county_503"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+
+        <!-- Districts  de Bagaces, Guanacaste-->
+        <record id="district_50401" model="res.country.district">
+            <field name="name">Bagaces</field>
+            <field name="code">50401</field>
+            <field name="county_id" ref="county_504"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50402" model="res.country.district">
+            <field name="name">Fortuna</field>
+            <field name="code">50402</field>
+            <field name="county_id" ref="county_504"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50403" model="res.country.district">
+            <field name="name">Mogote</field>
+            <field name="code">50403</field>
+            <field name="county_id" ref="county_504"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50404" model="res.country.district">
+            <field name="name">Río Naranjo</field>
+            <field name="code">50404</field>
+            <field name="county_id" ref="county_504"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+
+        <!-- Districts  de Carrillo, Guanacaste-->
+        <record id="district_50501" model="res.country.district">
+            <field name="name">Filadelfia</field>
+            <field name="code">50501</field>
+            <field name="county_id" ref="county_505"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50502" model="res.country.district">
+            <field name="name">Palmira</field>
+            <field name="code">50502</field>
+            <field name="county_id" ref="county_505"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50503" model="res.country.district">
+            <field name="name">Sardinal</field>
+            <field name="code">50503</field>
+            <field name="county_id" ref="county_505"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50504" model="res.country.district">
+            <field name="name">Belén</field>
+            <field name="code">50504</field>
+            <field name="county_id" ref="county_505"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+
+        <!-- Districts  de Canas, Guanacaste-->
+        <record id="district_50601" model="res.country.district">
+            <field name="name">Cañas</field>
+            <field name="code">50601</field>
+            <field name="county_id" ref="county_506"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50602" model="res.country.district">
+            <field name="name">Palmira</field>
+            <field name="code">50602</field>
+            <field name="county_id" ref="county_506"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50603" model="res.country.district">
+            <field name="name">San Miguel</field>
+            <field name="code">50603</field>
+            <field name="county_id" ref="county_506"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50604" model="res.country.district">
+            <field name="name">Bebedero</field>
+            <field name="code">50604</field>
+            <field name="county_id" ref="county_506"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50605" model="res.country.district">
+            <field name="name">Porozal</field>
+            <field name="code">50605</field>
+            <field name="county_id" ref="county_506"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+
+        <!-- Districts  de Abangares, Guanacaste-->
+        <record id="district_50701" model="res.country.district">
+            <field name="name">Juntas</field>
+            <field name="code">50701</field>
+            <field name="county_id" ref="county_507"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50702" model="res.country.district">
+            <field name="name">Sierra</field>
+            <field name="code">50702</field>
+            <field name="county_id" ref="county_507"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50703" model="res.country.district">
+            <field name="name">San Juan</field>
+            <field name="code">50703</field>
+            <field name="county_id" ref="county_507"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50704" model="res.country.district">
+            <field name="name">Colorado</field>
+            <field name="code">50704</field>
+            <field name="county_id" ref="county_507"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+
+        <!-- Districts  de Tilaran, Guanacaste-->
+        <record id="district_50801" model="res.country.district">
+            <field name="name">Tilarán</field>
+            <field name="code">50801</field>
+            <field name="county_id" ref="county_508"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50802" model="res.country.district">
+            <field name="name">Quebrada Grande</field>
+            <field name="code">50802</field>
+            <field name="county_id" ref="county_508"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50803" model="res.country.district">
+            <field name="name">Tronadora</field>
+            <field name="code">50803</field>
+            <field name="county_id" ref="county_508"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50804" model="res.country.district">
+            <field name="name">Santa Rosa</field>
+            <field name="code">50804</field>
+            <field name="county_id" ref="county_508"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50805" model="res.country.district">
+            <field name="name">Líbano</field>
+            <field name="code">50805</field>
+            <field name="county_id" ref="county_508"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50806" model="res.country.district">
+            <field name="name">Tierras Morenas</field>
+            <field name="code">50806</field>
+            <field name="county_id" ref="county_508"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50807" model="res.country.district">
+            <field name="name">Arenal</field>
+            <field name="code">50807</field>
+            <field name="county_id" ref="county_508"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+
+        <!-- Districts  de Nandayure, Guanacaste-->
+        <record id="district_50901" model="res.country.district">
+            <field name="name">Carmona</field>
+            <field name="code">50901</field>
+            <field name="county_id" ref="county_509"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50902" model="res.country.district">
+            <field name="name">Santa Rita</field>
+            <field name="code">50902</field>
+            <field name="county_id" ref="county_509"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50903" model="res.country.district">
+            <field name="name">Zapotal</field>
+            <field name="code">50903</field>
+            <field name="county_id" ref="county_509"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50904" model="res.country.district">
+            <field name="name">San Pablo</field>
+            <field name="code">50904</field>
+            <field name="county_id" ref="county_509"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50905" model="res.country.district">
+            <field name="name">Porvenir</field>
+            <field name="code">50905</field>
+            <field name="county_id" ref="county_509"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_50906" model="res.country.district">
+            <field name="name">Bejuco</field>
+            <field name="code">50906</field>
+            <field name="county_id" ref="county_509"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+
+        <!-- Districts  de La Cruz, Guanacaste-->
+        <record id="district_51001" model="res.country.district">
+            <field name="name">La Cruz</field>
+            <field name="code">51001</field>
+            <field name="county_id" ref="county_510"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_51002" model="res.country.district">
+            <field name="name">Santa Cecilia</field>
+            <field name="code">51002</field>
+            <field name="county_id" ref="county_510"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_51003" model="res.country.district">
+            <field name="name">Garita</field>
+            <field name="code">51003</field>
+            <field name="county_id" ref="county_510"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_51004" model="res.country.district">
+            <field name="name">Santa Elena</field>
+            <field name="code">51004</field>
+            <field name="county_id" ref="county_510"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+
+        <!-- Districts  de Hojancha, Guanacaste-->
+        <record id="district_51101" model="res.country.district">
+            <field name="name">Hojancha</field>
+            <field name="code">51101</field>
+            <field name="county_id" ref="county_511"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_51102" model="res.country.district">
+            <field name="name">Monte Romo</field>
+            <field name="code">51102</field>
+            <field name="county_id" ref="county_511"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_51103" model="res.country.district">
+            <field name="name">Puerto Carrillo</field>
+            <field name="code">51103</field>
+            <field name="county_id" ref="county_511"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+        <record id="district_51104" model="res.country.district">
+            <field name="name">Huacas</field>
+            <field name="code">51104</field>
+            <field name="county_id" ref="county_511"/>
+            <field name="region_id" ref="Chorotega_region"/>
+        </record>
+
+        <!-- Districts  de Puntarenas, Puntarenas-->
+        <record id="district_60101" model="res.country.district">
+            <field name="name">Puntarenas</field>
+            <field name="code">60101</field>
+            <field name="county_id" ref="county_601"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60102" model="res.country.district">
+            <field name="name">Pitahaya</field>
+            <field name="code">60102</field>
+            <field name="county_id" ref="county_601"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60103" model="res.country.district">
+            <field name="name">Chomes</field>
+            <field name="code">60103</field>
+            <field name="county_id" ref="county_601"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60104" model="res.country.district">
+            <field name="name">Lepanto</field>
+            <field name="code">60104</field>
+            <field name="county_id" ref="county_601"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60105" model="res.country.district">
+            <field name="name">Paquera</field>
+            <field name="code">60105</field>
+            <field name="county_id" ref="county_601"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60106" model="res.country.district">
+            <field name="name">Manzanillo</field>
+            <field name="code">60106</field>
+            <field name="county_id" ref="county_601"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60107" model="res.country.district">
+            <field name="name">Guacimal</field>
+            <field name="code">60107</field>
+            <field name="county_id" ref="county_601"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60108" model="res.country.district">
+            <field name="name">Barranca</field>
+            <field name="code">60108</field>
+            <field name="county_id" ref="county_601"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60109" model="res.country.district">
+            <field name="name">Monte Verde</field>
+            <field name="code">60109</field>
+            <field name="county_id" ref="county_601"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60110" model="res.country.district">
+            <field name="name">Isla del Coco</field>
+            <field name="code">60110</field>
+            <field name="county_id" ref="county_601"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60111" model="res.country.district">
+            <field name="name">Cóbano</field>
+            <field name="code">60111</field>
+            <field name="county_id" ref="county_601"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60112" model="res.country.district">
+            <field name="name">Chacarita</field>
+            <field name="code">60112</field>
+            <field name="county_id" ref="county_601"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60113" model="res.country.district">
+            <field name="name">Chira</field>
+            <field name="code">60113</field>
+            <field name="county_id" ref="county_601"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60114" model="res.country.district">
+            <field name="name">Acapulco</field>
+            <field name="code">60114</field>
+            <field name="county_id" ref="county_601"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60115" model="res.country.district">
+            <field name="name">El Roble</field>
+            <field name="code">60115</field>
+            <field name="county_id" ref="county_601"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60116" model="res.country.district">
+            <field name="name">Arancibia</field>
+            <field name="code">60116</field>
+            <field name="county_id" ref="county_601"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+
+        <!-- Districts  de Esparza, Puntarenas-->
+        <record id="district_60201" model="res.country.district">
+            <field name="name">Espíritu Santo</field>
+            <field name="code">60201</field>
+            <field name="county_id" ref="county_602"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60202" model="res.country.district">
+            <field name="name">San Juan Grande</field>
+            <field name="code">60202</field>
+            <field name="county_id" ref="county_602"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60203" model="res.country.district">
+            <field name="name">Macacona</field>
+            <field name="code">60203</field>
+            <field name="county_id" ref="county_602"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60204" model="res.country.district">
+            <field name="name">San Rafael</field>
+            <field name="code">60204</field>
+            <field name="county_id" ref="county_602"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60205" model="res.country.district">
+            <field name="name">San Jerónimo</field>
+            <field name="code">60205</field>
+            <field name="county_id" ref="county_602"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+
+        <!-- Districts  de Buenos Aires, Puntarenas-->
+        <record id="district_60301" model="res.country.district">
+            <field name="name">Buenos Aires</field>
+            <field name="code">60301</field>
+            <field name="county_id" ref="county_603"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_60302" model="res.country.district">
+            <field name="name">Volcán</field>
+            <field name="code">60302</field>
+            <field name="county_id" ref="county_603"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_60303" model="res.country.district">
+            <field name="name">Potrero Grande</field>
+            <field name="code">60303</field>
+            <field name="county_id" ref="county_603"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_60304" model="res.country.district">
+            <field name="name">Boruca</field>
+            <field name="code">60304</field>
+            <field name="county_id" ref="county_603"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_60305" model="res.country.district">
+            <field name="name">Pilas</field>
+            <field name="code">60305</field>
+            <field name="county_id" ref="county_603"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_60306" model="res.country.district">
+            <field name="name">Colinas</field>
+            <field name="code">60306</field>
+            <field name="county_id" ref="county_603"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_60307" model="res.country.district">
+            <field name="name">Chánguena</field>
+            <field name="code">60307</field>
+            <field name="county_id" ref="county_603"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_60308" model="res.country.district">
+            <field name="name">Bioley</field>
+            <field name="code">60308</field>
+            <field name="county_id" ref="county_603"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_60309" model="res.country.district">
+            <field name="name">Brunka</field>
+            <field name="code">60309</field>
+            <field name="county_id" ref="county_603"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+
+        <!-- Districts  de Buenos Aires, Puntarenas-->
+        <record id="district_60401" model="res.country.district">
+            <field name="name">Miramar</field>
+            <field name="code">60401</field>
+            <field name="county_id" ref="county_604"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60402" model="res.country.district">
+            <field name="name">Unión</field>
+            <field name="code">60402</field>
+            <field name="county_id" ref="county_604"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60403" model="res.country.district">
+            <field name="name">San Isidro</field>
+            <field name="code">60403</field>
+            <field name="county_id" ref="county_604"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+
+        <!-- Districts  de Buenos Aires, Puntarenas-->
+        <record id="district_60501" model="res.country.district">
+            <field name="name">Puerto Cortés</field>
+            <field name="code">60501</field>
+            <field name="county_id" ref="county_605"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_60502" model="res.country.district">
+            <field name="name">Palmar</field>
+            <field name="code">60502</field>
+            <field name="county_id" ref="county_605"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_60503" model="res.country.district">
+            <field name="name">Sierpe</field>
+            <field name="code">60503</field>
+            <field name="county_id" ref="county_605"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_60504" model="res.country.district">
+            <field name="name">Bahía Ballena</field>
+            <field name="code">60504</field>
+            <field name="county_id" ref="county_605"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_60505" model="res.country.district">
+            <field name="name">Piedras Blancas</field>
+            <field name="code">60505</field>
+            <field name="county_id" ref="county_605"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+
+        <!-- Districts  de Aguirre, Puntarenas-->
+        <record id="district_60601" model="res.country.district">
+            <field name="name">Quepos</field>
+            <field name="code">60601</field>
+            <field name="county_id" ref="county_606"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60602" model="res.country.district">
+            <field name="name">Savegre</field>
+            <field name="code">60602</field>
+            <field name="county_id" ref="county_606"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_60603" model="res.country.district">
+            <field name="name">Naranjito</field>
+            <field name="code">60603</field>
+            <field name="county_id" ref="county_606"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+
+        <!-- Districts  de Golfito, Puntarenas-->
+        <record id="district_60701" model="res.country.district">
+            <field name="name">Golfito</field>
+            <field name="code">60701</field>
+            <field name="county_id" ref="county_607"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_60702" model="res.country.district">
+            <field name="name">Puerto Jiménez</field>
+            <field name="code">60702</field>
+            <field name="county_id" ref="county_607"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_60703" model="res.country.district">
+            <field name="name">Guaycará</field>
+            <field name="code">60703</field>
+            <field name="county_id" ref="county_607"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_60704" model="res.country.district">
+            <field name="name">Pavones</field>
+            <field name="code">60704</field>
+            <field name="county_id" ref="county_607"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+
+        <!-- Districts  de Coto Brus, Puntarenas-->
+        <record id="district_60801" model="res.country.district">
+            <field name="name">San Vito</field>
+            <field name="code">60801</field>
+            <field name="county_id" ref="county_608"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_60802" model="res.country.district">
+            <field name="name">Sabalito</field>
+            <field name="code">60802</field>
+            <field name="county_id" ref="county_608"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_60803" model="res.country.district">
+            <field name="name">Agua Buena</field>
+            <field name="code">60803</field>
+            <field name="county_id" ref="county_608"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_60804" model="res.country.district">
+            <field name="name">Limoncito</field>
+            <field name="code">60804</field>
+            <field name="county_id" ref="county_608"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_60805" model="res.country.district">
+            <field name="name">Pittier</field>
+            <field name="code">60805</field>
+            <field name="county_id" ref="county_608"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+
+        <!-- Districts  de Parrita, Puntarenas-->
+        <record id="district_60901" model="res.country.district">
+            <field name="name">Parrita</field>
+            <field name="code">60901</field>
+            <field name="county_id" ref="county_609"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+
+        <!-- Districts  de Parrita, Puntarenas-->
+        <record id="district_61001" model="res.country.district">
+            <field name="name">Corredores</field>
+            <field name="code">61001</field>
+            <field name="county_id" ref="county_610"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_61002" model="res.country.district">
+            <field name="name">La Cuesta</field>
+            <field name="code">61002</field>
+            <field name="county_id" ref="county_610"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_61003" model="res.country.district">
+            <field name="name">Paso Canoas</field>
+            <field name="code">61003</field>
+            <field name="county_id" ref="county_610"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+        <record id="district_61004" model="res.country.district">
+            <field name="name">Laurel</field>
+            <field name="code">61004</field>
+            <field name="county_id" ref="county_610"/>
+            <field name="region_id" ref="Brunca_region"/>
+        </record>
+
+        <!-- Districts  de Garabito, Puntarenas-->
+        <record id="district_61101" model="res.country.district">
+            <field name="name">Jacó</field>
+            <field name="code">61101</field>
+            <field name="county_id" ref="county_611"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+        <record id="district_61102" model="res.country.district">
+            <field name="name">Tárcoles</field>
+            <field name="code">61102</field>
+            <field name="county_id" ref="county_611"/>
+            <field name="region_id" ref="PacificoCentral_region"/>
+        </record>
+
+        <!-- Districts  de Limon, Limon-->
+        <record id="district_70101" model="res.country.district">
+            <field name="name">Limon</field>
+            <field name="code">70101</field>
+            <field name="county_id" ref="county_701"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70102" model="res.country.district">
+            <field name="name">Valle La Estrella</field>
+            <field name="code">70102</field>
+            <field name="county_id" ref="county_701"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70103" model="res.country.district">
+            <field name="name">Río Blanco</field>
+            <field name="code">70103</field>
+            <field name="county_id" ref="county_701"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70104" model="res.country.district">
+            <field name="name">Matama</field>
+            <field name="code">70104</field>
+            <field name="county_id" ref="county_701"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+
+        <!-- Districts  de Pococi, Limon-->
+        <record id="district_70201" model="res.country.district">
+            <field name="name">Guápiles</field>
+            <field name="code">70201</field>
+            <field name="county_id" ref="county_702"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70202" model="res.country.district">
+            <field name="name">Jiménez</field>
+            <field name="code">70202</field>
+            <field name="county_id" ref="county_702"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70203" model="res.country.district">
+            <field name="name">Rita</field>
+            <field name="code">70203</field>
+            <field name="county_id" ref="county_702"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70204" model="res.country.district">
+            <field name="name">Roxana</field>
+            <field name="code">70204</field>
+            <field name="county_id" ref="county_702"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70205" model="res.country.district">
+            <field name="name">Cariari</field>
+            <field name="code">70205</field>
+            <field name="county_id" ref="county_702"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70206" model="res.country.district">
+            <field name="name">Colorado</field>
+            <field name="code">70206</field>
+            <field name="county_id" ref="county_702"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+
+        <!-- Districts  de Siquirres, Limon-->
+        <record id="district_70301" model="res.country.district">
+            <field name="name">Siquirres</field>
+            <field name="code">70301</field>
+            <field name="county_id" ref="county_703"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70302" model="res.country.district">
+            <field name="name">Pacuarito</field>
+            <field name="code">70302</field>
+            <field name="county_id" ref="county_703"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70303" model="res.country.district">
+            <field name="name">Florida</field>
+            <field name="code">70303</field>
+            <field name="county_id" ref="county_703"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70304" model="res.country.district">
+            <field name="name">Germania</field>
+            <field name="code">70304</field>
+            <field name="county_id" ref="county_703"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70305" model="res.country.district">
+            <field name="name">Cairo</field>
+            <field name="code">70305</field>
+            <field name="county_id" ref="county_703"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70306" model="res.country.district">
+            <field name="name">Alegría</field>
+            <field name="code">70306</field>
+            <field name="county_id" ref="county_703"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+
+        <!-- Districts  de Talamanca, Limon-->
+        <record id="district_70401" model="res.country.district">
+            <field name="name">Bratsi</field>
+            <field name="code">70401</field>
+            <field name="county_id" ref="county_704"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70402" model="res.country.district">
+            <field name="name">Sixaola</field>
+            <field name="code">70402</field>
+            <field name="county_id" ref="county_704"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70403" model="res.country.district">
+            <field name="name">Cahuita</field>
+            <field name="code">70403</field>
+            <field name="county_id" ref="county_704"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70404" model="res.country.district">
+            <field name="name">Telire</field>
+            <field name="code">70404</field>
+            <field name="county_id" ref="county_704"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+
+        <!-- Districts  de Matina, Limon-->
+        <record id="district_70501" model="res.country.district">
+            <field name="name">Matina</field>
+            <field name="code">70501</field>
+            <field name="county_id" ref="county_705"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70502" model="res.country.district">
+            <field name="name">Batán</field>
+            <field name="code">70502</field>
+            <field name="county_id" ref="county_705"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70503" model="res.country.district">
+            <field name="name">Carrandí</field>
+            <field name="code">70503</field>
+            <field name="county_id" ref="county_705"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+
+        <!-- Districts  de Guacimo, Limon-->
+        <record id="district_70601" model="res.country.district">
+            <field name="name">Guácimo</field>
+            <field name="code">70601</field>
+            <field name="county_id" ref="county_706"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70602" model="res.country.district">
+            <field name="name">Mercedes</field>
+            <field name="code">70602</field>
+            <field name="county_id" ref="county_706"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70603" model="res.country.district">
+            <field name="name">Pocora</field>
+            <field name="code">70603</field>
+            <field name="county_id" ref="county_706"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70604" model="res.country.district">
+            <field name="name">Río Jiménez</field>
+            <field name="code">70604</field>
+            <field name="county_id" ref="county_706"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+        <record id="district_70605" model="res.country.district">
+            <field name="name">Duacarí</field>
+            <field name="code">70605</field>
+            <field name="county_id" ref="county_706"/>
+            <field name="region_id" ref="HuetarAtlantica_region"/>
+        </record>
+    </data>
+</openerp>
