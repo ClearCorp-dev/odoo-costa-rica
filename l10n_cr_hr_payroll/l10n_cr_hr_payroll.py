@@ -90,7 +90,10 @@ class hrPayslipinherit(osv.Model):
         date_to = datetime.strptime(actual_payslip.date_to, '%Y-%m-%d')
         month_date_to = date_to.month
         year_date_to = date_to.year
-        payslip_ids = self.pool.get('hr.payslip').search(cr, uid, [('employee_id','=', employee.id), ('date_to','<', actual_payslip.date_to)], context=context)
+        payslip_ids = self.pool.get('hr.payslip').search(cr, uid, [('employee_id','=', employee.id), ('date_to','<=', actual_payslip.date_to)], context=context)
+        if actual_payslip.id in payslip_ids:
+            position = payslip_ids.index(actual_payslip.id) 
+            del payslip_ids[position] 
         
         for empl_payslip in self.pool.get('hr.payslip').browse(cr, uid, payslip_ids, context=context):
             temp_date = datetime.strptime(empl_payslip.date_to, '%Y-%m-%d')
@@ -105,8 +108,11 @@ class hrPayslipinherit(osv.Model):
         
         for payslip in payslip_list:
             for line in payslip.line_ids:
-                 if line.code == 'BRUTO':
-                     SBA += line.total
+                if line.code == 'BRUTO':
+                    if payslip.credit_note:
+                        SBA -= line.total
+                    else:
+                        SBA += line.total
         return SBA
 
     #get previous rent
@@ -116,8 +122,11 @@ class hrPayslipinherit(osv.Model):
         
         for payslip in payslip_list:
             for line in payslip.line_ids:
-                 if line.code == 'RENTA':
-                     rent += line.total
+                if line.code == 'RENTA':
+                    if payslip.credit_note:
+                        rent -= line.total
+                    else:
+                        rent += line.total
         return rent
 
     #Get quantity of days between two dates

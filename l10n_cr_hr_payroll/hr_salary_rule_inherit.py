@@ -140,16 +140,27 @@ result = rules.NET > categories.NET * 0.10''',
             base salary, the rent amount for current payslip. This is a "dynamic"
             way to compute amount rent for each payslip
         """
-
+        """Objects"""
+        payslip_obj = self.pool.get('hr.payslip')
+        
+        """
+            If the payslip is a refund, we need to use the same amount calculated above
+        """
+        if payslip.credit_note:
+            original_name = payslip.name.replace(_('Refund: '),'')
+            original_payslip_id = payslip_obj.search(cr, uid, [('name','=',original_name),('employee_id','=', employee.id), ('date_to', '=', payslip.date_to), ('date_from','=', payslip.date_from)])[0]
+            original_payslip = payslip_obj.browse(cr, uid, original_payslip_id)
+            for line in original_payslip.line_ids:
+                if line.code == 'RENTA':
+                    return line.total
+            return 0.0
+        
         """Principal variables"""
         SBA = 0.0 #Previous Gross Salary
         SBP = 0.0 #Currently Gross Salary
         SBF = 0.0 #Future Base Salary
         SBT = 0.0 #Gross Salary Total (this is SBA + SBP + SBF)
-
-        """Objects"""
-        payslip_obj = self.pool.get('hr.payslip')
-
+        
         """Other variables"""
         rent_empl_total = 0.0
         total_curr_rent = 0.0
