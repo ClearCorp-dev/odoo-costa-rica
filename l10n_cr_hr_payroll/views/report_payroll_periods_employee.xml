@@ -7,7 +7,7 @@
                     <div class="page">
                         <div align="center">
                             <h3>Payroll by Periods</h3>
-                            <h4>from <span t-esc="data['period_from']" /> to <span t-esc="data['period_to']" /></h4>
+                            <h4>from <span t-esc="formatLang(data['period_from'], date=True)" /> to <span t-esc="formatLang(data['period_from'], date=True)" /></h4>
                         </div>
                         <br/>
                         <br/>
@@ -54,34 +54,34 @@
                                         </tr>
                                         <tr t-foreach="payslips" t-as="payslip">
                                             <td name="HN">
-                                                <span t-esc="get_worked_days_hours(payslip, code='HN')" />
+                                                <span t-esc="formatLang(get_worked_days_hours(payslip, code='HN'), dp='Account')" />
                                             </td>
                                             <td name="HE">
-                                                <span t-esc="get_worked_days_hours(payslip, code='HE')" />
+                                                <span t-esc="formatLang(get_worked_days_hours(payslip, code='HE'), dp='Account')" />
                                             </td>
                                             <td name="BASE">
-                                                <span t-esc="get_line_total(payslip, code='BASE')" />
+                                                <span t-esc="formatLang(get_line_total(payslip, code='BASE'), dp='Account')" />
                                             </td>
                                             <td name="EXT">
-                                                <span t-esc="get_line_total_group(payslip, code=['EXT','EXT-FE'])" />
+                                                <span t-esc="formatLang(get_line_total_group(payslip, code=['EXT','EXT-FE']), dp='Account')" />
                                             </td>
                                             <td>
-                                                <span t-esc="get_line_total(payslip, code='BRUTO')" />
+                                                <span t-esc="formatLang(get_line_total(payslip, code='BRUTO'), dp='Account')" />
                                             </td>
                                             <td>
-                                                <span t-esc="get_line_total_group(payslip, code=['CCSS-EMP','CCSS-EMP-PEN','Banco Popular-EMP','CCSS-IVM','CCSS-SEM'])" />
+                                                <span t-esc="formatLang(get_line_total_group(payslip, code=['CCSS-EMP','CCSS-EMP-PEN','Banco Popular-EMP','CCSS-IVM','CCSS-SEM']), dp='Account')" />
                                             </td>
                                             <td>
-                                                <span t-esc="get_line_total(payslip, code='BON')" />
+                                                <span t-esc="formatLang(get_line_total(payslip, code='BON'), dp='Account')" />
                                             </td>
                                             <td>
-                                                <span t-esc="get_line_total(payslip, code='RENTA')" />
+                                                <span t-esc="formatLang(get_line_total(payslip, code='RENTA'), dp='Account')" />
                                             </td>
                                             <td>
-                                                <span t-esc="get_line_total(payslip, code='NETO')" />
+                                                <span t-esc="formatLang(get_line_total(payslip, code='NETO'), dp='Account')" />
                                             </td>
                                             <td>
-                                                <span t-esc="get_line_total(payslip, code='DEVENGADO')" />
+                                                <span t-esc="formatLang(get_line_total(payslip, code='DEVENGADO'), dp='Account')" />
                                             </td>
                                         </tr>
                                     </t>
