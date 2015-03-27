@@ -20,5 +20,5 @@
 #
 ##############################################################################
 
-import hr_payroll_report_for_month_wizard
-import hr_payroll_report_employee_by_periods_wizard
+import payroll_by_periods
+import payroll_by_periods_employee
