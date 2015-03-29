@@ -25,7 +25,7 @@ msgstr "Monto por hijo"
 #: field:hr.config.settings,amount_per_spouse:0
 #: field:res.company,amount_per_spouse:0
 msgid "Amount per spouse"
-msgstr "Monto por esposa"
+msgstr "Monto por cónyuge"
 
 #. module: l10n_cr_hr_payroll
 #: view:website:l10n_cr_hr_payroll.report_payroll_periods
@@ -57,7 +57,7 @@ msgstr "Descartar"
 #. module: l10n_cr_hr_payroll
 #: model:ir.model,name:l10n_cr_hr_payroll.model_res_company
 msgid "Companies"
-msgstr "Companías"
+msgstr "Compañías"
 
 #. module: l10n_cr_hr_payroll
 #: field:hr.config.settings,rent_company_id:0
@@ -140,7 +140,7 @@ msgstr "Filtros"
 #: field:hr.config.settings,first_limit:0
 #: field:res.company,first_limit:0
 msgid "First Limit"
-msgstr ""
+msgstr "Primer límite"
 
 #. module: l10n_cr_hr_payroll
 #: view:l10n.cr.hr.payroll.by.periods:l10n_cr_hr_payroll.view_payroll_by_periods_form
@@ -174,7 +174,7 @@ msgstr "ID"
 #. module: l10n_cr_hr_payroll
 #: help:hr.employee,report_spouse:0
 msgid "If this employee reports his spouse for rent payment"
-msgstr "Si este empleado report su esposa para pago de renta"
+msgstr "Si este empleado report su cónyuge para pago de renta"
 
 #. module: l10n_cr_hr_payroll
 #: field:l10n.cr.hr.payroll.by.periods,write_uid:0
@@ -212,12 +212,12 @@ msgstr "Hrs Nor"
 #. module: l10n_cr_hr_payroll
 #: field:hr.employee,report_number_child:0
 msgid "Number of children to report"
-msgstr "Numero de hijos a reportar"
+msgstr "Número de hijos a reportar"
 
 #. module: l10n_cr_hr_payroll
 #: help:hr.employee,report_number_child:0
 msgid "Number of children to report for rent payment"
-msgstr "Numero de hijo a reportar para el pago de renta"
+msgstr "Número de hijos a reportar para el pago de renta"
 
 #. module: l10n_cr_hr_payroll
 #: view:website:l10n_cr_hr_payroll.report_payroll_periods
@@ -295,7 +295,7 @@ msgstr "Configuración de renta"
 #. module: l10n_cr_hr_payroll
 #: field:hr.employee,report_spouse:0
 msgid "Report Spouse"
-msgstr "Reportar Esposa"
+msgstr "Reportar cónyuge"
 
 #. module: l10n_cr_hr_payroll
 #: view:l10n.cr.hr.payroll.by.periods.employee:l10n_cr_hr_payroll.view_payroll_by_periods_employee_form
@@ -306,7 +306,7 @@ msgstr "Reporte empleado por periodos"
 #: field:hr.config.settings,second_limit:0
 #: field:res.company,second_limit:0
 msgid "Second Limit"
-msgstr "Second Limit"
+msgstr "Segundo límite"
 
 #. module: l10n_cr_hr_payroll
 #: field:l10n.cr.hr.payroll.by.periods,period_from:0
