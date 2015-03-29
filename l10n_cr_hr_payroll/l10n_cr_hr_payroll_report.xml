@@ -19,11 +19,11 @@
             <field name="paperformat_id" ref="paperformat_us_landscape" />
         </record>
 
-        <report id="hr_payroll_payslip_run_report" model="hr.payslip.run"
-            string="report payslip run" report_type="qweb-pdf"
+        <report id="payslip_run_report" model="hr.payslip.run"
+            string="Payslip Batches" report_type="qweb-pdf"
             name="l10n_cr_hr_payroll.report_payslip_run" file="l10n_cr_hr_payroll.report_payslip_run"
             menu="True" />
-        <record id="hr_payroll_payslip_run_report" model="ir.actions.report.xml">
+        <record id="payslip_run_report" model="ir.actions.report.xml">
             <field name="paperformat_id" ref="paperformat_us_landscape" />
         </record>
     </data>

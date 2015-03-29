@@ -6,115 +6,88 @@
                 <t t-call="report.internal_layout">
                     <div class="page">
                         <div align="center">
-                          <t t-foreach="docs" t-as="r"> 
+                            <t t-foreach="docs" t-as="batch"> 
+                                <h3>Payslip Batches</h3>
                                 <h3>
-                                   <!-- <span t-field="r.slip_ids.company_id" /> -->
+                                    <span t-field="batch.name" />
                                 </h3>
-                                <h3>REPORTE DE PLANILLA </h3>
-                                <h3>
-                                    <span t-field="r.name" /><br/>
-                                    Periodo del
-                                    <span t-field="r.date_start" />
-                                    al
-                                    <span t-field="r.date_end" />
-                                </h3>
-                                <br />
-                           <t t-foreach="get_obj_by_dep(docs)" t-as="run">
-                             <h4 align="left">
-                                Departamento:
-                                <span t-esc="run[0]" />
-                            </h4>
-                            <br/>
-                            <table class="table table-condensed">
-                                <thead>
-                                    <tr>
-                                        <th>ID card</th>
-                                        <th>Name</th>
-                                        <th>Bank account</th>
-                                        <th>Hrs.Nor</th>
-                                        <th>Hrs.Ext</th>
-                                        <th>Ingr.Normal</th>
-                                        <th>Ingr.Extra</th>
-                                        <th>Salary Gross</th>
-                                        <th>Deducc.CCSS/BP</th>
-                                        <th>Bonuses</th>
-                                        <th>Tax Rent</th>
-                                        <th>Salary Net</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                        <tr>
-                                         <t t-set="name_related"
-                                                t-value="get_name(run[1])" />
-                                            <td>
-                                                <span t-esc="name_related"/>
-                                            </td>
-                                            <t t-set="idcard"
-                                                t-value="get_identification(run[1])" />
-                                            <td>
-                                                <span t-esc="idcard" />
-                                            </td>
-                                            <t t-set="acc"
-                                                t-value="get_bank_account(run[1])" />
-                                            <td>
-                                                <span t-esc="acc" />
-                                            </td>
-                                            <t t-set="hn"
-                                                t-value="get_hn(run[1])" />
-                                            <td>
-                                                <span t-esc="hn" />
-                                            </td>
-                                            <t t-set="he"
-                                                t-value="get_he(run[1])" />
-                                            <td>
-                                                <span t-esc="he" />
-                                            </td>
-                                            <t t-set="basic"
-                                                t-value="get_basic(run[1])" />
-                                            <td>
-                                                <span t-esc="basic" />
-                                            </td>
-                                            <t t-set="ext"
-                                                t-value="get_ext(run[1])" />
-                                            <td>
-                                                <span t-esc="ext" />
-                                            </td>
-                                            <t t-set="gross"
-                                                t-value="get_gross(run[1])" />
-                                            <td>
-                                                <span t-esc="gross" />
-                                            </td>
-                                            <t t-set="ccss"
-                                                t-value="get_ccss(run[1])" />
-                                            <td>
-                                                <span t-esc="ccss" />
-                                            </td>
-                                            <t t-set="bonus"
-                                                t-value="get_bon(run[1])" />
-                                            <td>
-                                                <span t-esc="bonus" />
-                                            </td>
-                                            <t t-set="rent"
-                                                t-value="get_rent(run[1])" />
-                                            <td>
-                                                <span t-esc="rent" />
-                                            </td>
-                                            <t t-set="neto"
-                                                t-value="get_net(run[1])" />
-                                            <td>
-                                                <span t-esc="neto" />
-                                            </td> 
-                                        </tr>
-                                </tbody>
-                            </table>
-                          
-                           </t>
+                                <h3>from <span t-field="batch.date_start" /> to <span t-field="batch.date_end" /></h3>
+                                <t t-set="data_dict" t-value="get_payslips_by_department(batch)" />
+                                <t t-foreach="data_dict.keys()" t-as="department_id">
+                                    <t t-set="department_data" t-value="data_dict[department_id]" />
+                                    <t t-set="department" t-value="department_data[0]" />
+                                    <t t-set="payslips" t-value="department_data[1]" />
+                                    <h4 align="left"> Department: <span t-field="department.name" /></h4>
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>ID card</th>
+                                                <th>Name</th>
+                                                <th>Bank account</th>
+                                                <th>Nrm Hrs</th>
+                                                <th>Ext Hrs</th>
+                                                <th>Base</th>
+                                                <th>Extra</th>
+                                                <th>Gross</th>
+                                                <th>Deduct.CCSS/BP</th>
+                                                <th>Bonuses</th>
+                                                <th>Rent</th>
+                                                <th>Net</th>
+                                                <th>Paid</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr t-foreach="payslips" t-as="payslip">
+                                                <td name="employee">
+                                                    <span t-field="payslip.employee_id" />
+                                                </td>
+                                                <td name="identification">
+                                                    <span t-field="payslip.employee_id.identification_id" />
+                                                </td>
+                                                <td name="bank_account">
+                                                    <t t-if="payslip.employee_id.bank_account_id" >
+                                                        <span t-field="payslip.employee_id.bank_account_id.acc_number" />
+                                                    </t>
+                                                </td>
+                                                <td name="HN">
+                                                    <span t-esc="formatLang(get_worked_days_hours(payslip, code='HN'), dp='Account')" />
+                                                </td>
+                                                <td name="HE">
+                                                    <span t-esc="formatLang(get_worked_days_hours(payslip, code='HE'), dp='Account')" />
+                                                </td>
+                                                <td name="BASE">
+                                                    <span t-esc="formatLang(get_line_total(payslip, code='BASE'), dp='Account')" />
+                                                </td>
+                                                <td name="EXT">
+                                                    <span t-esc="formatLang(get_line_total_group(payslip, code=['EXT','EXT-FE']), dp='Account')" />
+                                                </td>
+                                                <td>
+                                                    <span t-esc="formatLang(get_line_total(payslip, code='BRUTO'), dp='Account')" />
+                                                </td>
+                                                <td>
+                                                    <span t-esc="formatLang(get_line_total_group(payslip, code=['CCSS-EMP','CCSS-EMP-PEN','Banco Popular-EMP','CCSS-IVM','CCSS-SEM']), dp='Account')" />
+                                                </td>
+                                                <td>
+                                                    <span t-esc="formatLang(get_line_total(payslip, code='BON'), dp='Account')" />
+                                                </td>
+                                                <td>
+                                                    <span t-esc="formatLang(get_line_total(payslip, code='RENTA'), dp='Account')" />
+                                                </td>
+                                                <td>
+                                                    <span t-esc="formatLang(get_line_total(payslip, code='NETO'), dp='Account')" />
+                                                </td>
+                                                <td>
+                                                    <span t-esc="formatLang(get_line_total(payslip, code='DEVENGADO'), dp='Account')" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </t>
+                            </t>
                         </div>
-                     </div>
-                  </t>
-               </t>
+                    </div>
+                </t>
+            </t>
         </template>
      </data>
  </openerp>

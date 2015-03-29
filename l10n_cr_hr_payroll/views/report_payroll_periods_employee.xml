@@ -21,8 +21,8 @@
                                         <th>ID card</th>
                                         <th>Name</th>
                                         <th>Bank account</th>
-                                        <th>Hrs.Nor</th>
-                                        <th>Hrs.Ext</th>
+                                        <th>Nrm Hrs</th>
+                                        <th>Ext Hrs</th>
                                         <th>Base</th>
                                         <th>Extra</th>
                                         <th>Gross</th>
