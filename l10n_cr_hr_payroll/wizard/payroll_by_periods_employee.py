@@ -24,10 +24,11 @@ import time
 from openerp import models, fields, api
 
 
-class PayrollReportForMonthWizard(models.TransientModel):
+class PayrollByPeriodEmployee(models.TransientModel):
+    """Payroll by Period Employee"""
 
-    _name = 'payroll.report.for.month'
-    _description = 'Payroll Report for Month'
+    _name = 'l10n.cr.hr.payroll.by.periods.employee'
+    _description = __doc__
 
     company_id= fields.Many2one('res.company', 'Company',)
     period_from= fields.Many2one('account.period', 'Start Period',)
@@ -36,7 +37,7 @@ class PayrollReportForMonthWizard(models.TransientModel):
     _defaults = {
         'company_id': lambda self, cr, uid, context: \
                 self.pool.get('res.users').browse(cr, uid, uid,
-                    context=context).company_id.id,
+                     context=context).company_id.id,
     }
 
     @api.multi
@@ -44,13 +45,11 @@ class PayrollReportForMonthWizard(models.TransientModel):
         p_from= self.env['account.period'].search([('id','=',self.period_from.id)])[0].date_start
         p_to= self.env['account.period'].search([('id','=',self.period_to.id)])[0].date_stop
         data = {
-            'form': {
-                'period_from':p_from,
-                'period_to': p_to,
-            }
+            'period_from':p_from,
+            'period_to': p_to,
         }
         res = self.env['report'].get_action(self.company_id,
-            'l10n_cr_hr_payroll.report_employee_by_months', data=data)
+            'l10n_cr_hr_payroll.report_payroll_periods_employee', data=data)
         return res
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
