@@ -51,6 +51,7 @@ This is the Costa Rica OpenERP localization and consists of:
              'views/report_payroll_periods.xml',
              'views/report_payroll_periods_employee.xml',
              'views/report_payslip_run.xml',
+             'views/report_payslip.xml',
              'wizard/payroll_by_periods.xml',
              'wizard/payroll_by_periods_employee.xml',
              'l10n_cr_hr_payroll_report.xml',
