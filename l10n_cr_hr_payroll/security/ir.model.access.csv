@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_payroll_struct,access_payroll_struct,model_hr_payroll_structure,group_user,1,0,0,0
+access_payroll_worked_daysaccess_payroll_worked_days,accreditation_database manager,model_hr_payslip_worked_days,group_user,1,0,0,0
+access_payroll_line,access_payroll_line,model_hr_payslip_line,group_user,1,0,0,0
