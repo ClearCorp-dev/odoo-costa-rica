@@ -48,6 +48,7 @@ This is the Costa Rica OpenERP localization and consists of:
              'data/report_paperformat.xml',
              'hr_config_settings.xml',
              'l10n_cr_hr_payroll_view.xml',
+             'security/ir.model.access.csv',
              'views/report_payroll_periods.xml',
              'views/report_payroll_periods_employee.xml',
              'views/report_payslip_run.xml',
