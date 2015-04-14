@@ -41,10 +41,10 @@
                                         <t t-set="payslips" t-value="employee_data[1]" />
                                         <tr>
                                             <td t-att-rowspan="len(payslips) + 1">
-                                                <span t-field="employee.name" />
+                                                <span t-field="employee.identification_id"/>
                                             </td>
                                             <td t-att-rowspan="len(payslips) + 1">
-                                                <span t-field="employee.identification_id" />
+                                                <span t-field="employee.name"/>
                                             </td>
                                             <td t-att-rowspan="len(payslips) + 1">
                                                 <t t-if="employee.bank_account_id">
