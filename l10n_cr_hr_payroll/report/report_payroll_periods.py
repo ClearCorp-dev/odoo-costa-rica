@@ -88,25 +88,37 @@ class PayrollReportByPeriods(report_sxw.rml_parse):
             res[employee_id] = (employee, employee_payslips)
         return res
 
-    def _get_worked_days_hours(self, payslip, code='HN'):
+    def _get_worked_days_hours(self, payslips, code='HN'):
         total = 0.00
-        for line in payslip.worked_days_line_ids:
-            if line.code == code:
-                total += line.number_of_hours
+        for payslip in payslips:
+            for line in payslip.worked_days_line_ids:
+                if line.code == code:
+                    if payslip.credit_note:
+                        total -= line.number_of_hours
+                    else:
+                        total += line.number_of_hours
         return total
 
-    def _get_line_total(self, payslip, code='BASE'):
+    def _get_line_total(self, payslips, code='BASE'):
         total = 0.00
-        for line in payslip.line_ids:
-            if line.code == code:
-                total += line.total
+        for payslip in payslips:
+            for line in payslip.line_ids:
+                if line.code == code:
+                    if payslip.credit_note:
+                        total -= line.total
+                    else:
+                        total += line.total
         return total
 
-    def _get_line_total_group(self, payslip, code=['EXT','EXT-FE']):
+    def _get_line_total_group(self, payslips, code=['EXT','EXT-FE']):
         total = 0.00
-        for line in payslip.line_ids:
-            if line.code in code:
-                total += line.total
+        for payslip in payslips:
+            for line in payslip.line_ids:
+                if line.code in code:
+                    if payslip.credit_note:
+                        total -= line.total
+                    else:
+                        total += line.total
         return total
 
 

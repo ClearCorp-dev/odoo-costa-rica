@@ -21,6 +21,7 @@
                                         <th>ID card</th>
                                         <th>Name</th>
                                         <th>Bank account</th>
+                                        <th>Payslip</th>
                                         <th>Nrm Hrs</th>
                                         <th>Ext Hrs</th>
                                         <th>Base</th>
@@ -53,6 +54,9 @@
                                             </td>
                                         </tr>
                                         <tr t-foreach="payslips" t-as="payslip">
+                                            <td>
+                                                <span t-esc="payslip.name" />
+                                            </td>
                                             <td name="HN">
                                                 <span t-esc="formatLang(get_worked_days_hours(payslip, code='HN'), dp='Account')" />
                                             </td>
