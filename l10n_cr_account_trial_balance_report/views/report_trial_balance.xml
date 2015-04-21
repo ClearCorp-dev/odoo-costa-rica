@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="report_trial_balance">
+            <div class="header">
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <img t-if="company.logo"
+                            t-att-src="'data:image/png;base64,%s' % company.logo"
+                            style="max-height: 100px;" />
+                    </div>
+                    <div class="col-xs-8">
+                        <table>
+                            <tr>
+                                <td style="text-align:center;">
+                                    <h2>
+                                        <strong>
+                                            <span
+                                                style="margin:0px;margin-bottom:30px;"
+                                                t-field="company.name">
+                                            </span>
+                                        </strong>
+                                    </h2>
+                                    <h2>
+                                        <strong>Trial Balance
+                                        </strong>
+                                    </h2>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <br />
+                <div class="row zero_min_height">
+                    <div class="col-xs-12">
+                        <div style="border-bottom: 1px solid black;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="page">
+                <div class="col-xs-12">
+                    <table class="table table-condensed">
+                        <thead style="background-color:#E0E0E0">
+                            <tr style="border: 1px" >
+                                <th style=" border: 1px" class="text-center">Chart of Accounts</th>
+                                <th style=" border: 1px" class="text-center">Fiscal Year</th>
+                                <th style=" border: 1px" class="text-center">Filters by:</th>
+                                <th style=" border: 1px" class="text-center">Movements destination</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align:center;">
+                                    <span t-esc=" get_chart_account_id(data).name">
+                                    </span>
+                                </td>
+                                <td style="text-align:center;">
+                                    <span t-esc="get_fiscal_year(data).name">
+                                    </span>
+                                </td>
+                                <td style="text-align:center;">
+                                    <t t-if="get_filter(data) == 'filter_date'">
+                                        <span>Dates</span><br></br>
+                                        <span>From:</span>
+                                        <span t-esc="formatLang(get_date_from(data), date=True)" />
+                                        <span>To:</span>
+                                        <span t-esc="formatLang(get_date_to(data), date=True)" />
+                                    </t>
+                                    <t t-if="get_filter(data) == 'filter_period'">
+                                        <span>Periods</span><br></br>
+                                        <span>From:</span>
+                                        <span t-esc="get_start_period(data).name" />
+                                        <span>To:</span>
+                                        <span t-esc=" get_end_period(data).name" />
+                                    </t>
+                                    <t t-if="get_filter(data) == 'filter_no'">
+                                        <span>No Filters</span>
+                                    </t>
+                                </td>
+                                <td style="text-align:center;">
+                                    <span t-esc="display_target_move(data)">
+                                    </span>
+                                </td>
+                            </tr>
+                                
+                            <tr>
+                                <td >
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-condensed">
+                        <thead style="background-color:#E0E0E0">
+                            <tr style="border: 1px" >
+                                <th style="border: 1px solid #000000 "
+                                        class="text-center">Account</th>
+                                <th style="border: 1px solid #000000 "
+                                        class="text-center">Initial Balance</th>
+                                <th style="border: 1px solid #000000 "
+                                        class="text-center">Debit</th>
+                                <th style="border: 1px solid #000000 "
+                                        class="text-center">Credit</th>
+                                <th style="border: 1px solid #000000 "
+                                        class="text-center">Balance</th>
+                            </tr>
+                            <tbody>
+                                <t t-foreach="get_data(data)" t-as="account">
+                                    <t t-if="account['level'] == 0 or account['level'] == 1"> <!-- if is parent -->
+                                        <tr>
+                                            <t t-foreach="range(account['level']-1)" t-as="level">
+                                            </t>
+                                            <td style="border: 1px solid #000000 "
+                                                class="text-center">
+                                                <span t-esc="account['code']"></span>
+                                                <span t-esc="account['name']"></span>
+                                            </td >
+                                            <td style="border: 1px solid #000000 "
+                                                class="text-center">
+                                                <span t-esc="formatLang(account['initial_balance'])"></span>
+                                            </td >
+                                            <td style="border: 1px solid #000000 "
+                                                class="text-center">
+                                                <span t-esc="formatLang(account['debit'])"></span>
+                                            </td>
+                                            <td style="border: 1px solid #000000 "
+                                                class="text-center">
+                                                <span t-esc="formatLang(account['credit'])"></span>
+                                            </td>
+                                            <td style="border: 1px solid #000000 "
+                                                class="text-center">
+                                                <span t-esc="formatLang(account['balance'])"></span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <t t-foreach="range(account['level']-1)" t-as="level">
+                                        <tr>
+                                            <td style="border: 1px solid #000000 "
+                                                class="text-center">
+                                                <span t-esc="account['code']"></span>
+                                                <span t-esc="account['name']"></span>
+                                            </td>
+                                            <td style="border: 1px solid #000000 "
+                                                class="text-center">
+                                                <span t-esc="formatLang(account['initial_balance'])"></span>
+                                            </td >
+                                            <td style="border: 1px solid #000000 "
+                                                class="text-center">
+                                                <span t-esc="formatLang(account['debit'])"></span>
+                                            </td>
+                                            <td style="border: 1px solid #000000 "
+                                                class="text-center">
+                                                <span t-esc="formatLang(account['credit'])"></span>
+                                            </td>
+                                            <td style="border: 1px solid #000000 "
+                                                class="text-center">
+                                                <span t-esc="formatLang(account['balance'])"></span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </tbody>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="footer" style="font-size:15px;">
+                <div class="text-center" style="border-top: 1px solid black;">
+                    <div class="row">
+                        <div class="col-xs-12" style="text-align:center;">
+                            <span>Odoo:</span>
+                            <span t-esc="time.strftime('%d-%m-%Y')" />
+                            <span t-esc="time.strftime('%H:%M')"/>
+                            <span> - </span>
+                            <span t-esc="user.name"></span>
+                            <span> - </span>
+                            <span t-esc="user.login" />
+                        </div>
+                    </div>
+                    <ul class="list-inline">
+                        <li>Page:</li>
+                        <li>
+                            <span class="page" />
+                        </li>
+                        <li>/</li>
+                        <li>
+                            <span class="topage" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </template>
+    </data>
+</openerp>

@@ -23,7 +23,7 @@
 {
     'name': 'Trial Balance Report',
     'version': '1.0',
-    'author': 'CLEARCORP S.A.',
+    'author': 'Clearcorp',
     'category': 'Finance',
     'description': """
 Trial Balance Report.
@@ -31,12 +31,16 @@ Trial Balance Report.
 Create the Trial Balance report
     """,
     'website': "http://clearcorp.co.cr",
-    'depends': ['account_report_lib',],
+    'depends': ['account_report_lib',
+                'report',
+                'account',
+                ],
     'data': [
              'security/ir.model.access.csv',
              'report/report.xml',
              'wizard/l10n_cr_account_trial_balance_wizard_view.xml',
-             'report_menus.xml'
+             'report_menus.xml',
+             'views/report_trial_balance.xml',
             ],
     'active': False,
     'installable': True,
