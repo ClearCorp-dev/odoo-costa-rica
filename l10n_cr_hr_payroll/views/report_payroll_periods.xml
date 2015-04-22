@@ -34,7 +34,7 @@
                             <t t-set="subtotal_paid" t-value="0" />
                             <br/>
                             <br/>
-                            <table class="table table-condensed" style="page-break-inside:avoid; page-break-after:avoid;">
+                            <table name="structure" class="table table-condensed" style="page-break-inside:avoid; page-break-after:avoid;">
                                 <h4>Structure: <span t-esc="structSlip[0]" /></h4>
                                 <thead>
                                     <tr style="page-break-inside:avoid; page-break-after:avoid;">
@@ -179,7 +179,7 @@
                         </t>
                         <br/>
                         <br/>
-                        <table class="table table-condensed" style="page-break-inside:avoid; page-break-after:avoid;">
+                        <table name="total" class="table table-condensed" style="page-break-inside:avoid; page-break-after:avoid;">
                             <div align="center">
                                 <h3>General Total</h3>
                             </div>
