@@ -13,12 +13,22 @@
                                 </h3>
                                 <h3>from <span t-field="batch.date_start" /> to <span t-field="batch.date_end" /></h3>
                                 <t t-set="data_dict" t-value="get_payslips_by_department(batch)" />
+                                <t t-set="total_nrm_hrs" t-value="0" />
+                                <t t-set="total_ext_hrs" t-value="0" />
+                                <t t-set="total_base" t-value="0" />
+                                <t t-set="total_extra" t-value="0" />
+                                <t t-set="total_gross" t-value="0" />
+                                <t t-set="total_deduct" t-value="0" />
+                                <t t-set="total_bonuses" t-value="0" />
+                                <t t-set="total_rent" t-value="0" />
+                                <t t-set="total_net" t-value="0" />
+                                <t t-set="total_paid" t-value="0" />
                                 <t t-foreach="data_dict.keys()" t-as="department_id">
                                     <t t-set="department_data" t-value="data_dict[department_id]" />
                                     <t t-set="department" t-value="department_data[0]" />
                                     <t t-set="payslips" t-value="department_data[1]" />
                                     <h4 align="left"> Department: <span t-field="department.name" /></h4>
-                                    <table class="table table-condensed">
+                                    <table name="department" class="table table-condensed">
                                         <thead>
                                             <tr>
                                                 <th>ID card</th>
@@ -51,38 +61,116 @@
                                                 </td>
                                                 <td name="HN">
                                                     <span t-esc="formatLang(get_worked_days_hours(payslip, code='HN'), dp='Account')" />
+                                                    <t t-set="nrm_hrs" t-value="get_worked_days_hours(payslip, code='HN')" />
+                                                    <t t-set="total_nrm_hrs" t-value="total_nrm_hrs+nrm_hrs" />
+                                                    <span t-esc="formatLang(nrm_hrs, dp='Account')" />
                                                 </td>
                                                 <td name="HE">
-                                                    <span t-esc="formatLang(get_worked_days_hours(payslip, code='HE'), dp='Account')" />
+                                                    <t t-set="ext_hrs" t-value="get_worked_days_hours(payslip, code='HE')" />
+                                                    <t t-set="total_ext_hrs" t-value="total_ext_hrs+ext_hrs" />
+                                                    <span t-esc="formatLang(ext_hrs, dp='Account')" />
                                                 </td>
                                                 <td name="BASE">
-                                                    <span t-esc="formatLang(get_line_total(payslip, code='BASE'), dp='Account')" />
+                                                    <t t-set="base" t-value="get_line_total(payslip, code='BASE')" />
+                                                    <t t-set="total_base" t-value="total_base+base" />
+                                                    <span t-esc="formatLang(base, dp='Account')" />
                                                 </td>
                                                 <td name="EXT">
-                                                    <span t-esc="formatLang(get_line_total_group(payslip, code=['EXT','EXT-FE']), dp='Account')" />
+                                                    <t t-set="extra" t-value="get_line_total_group(payslip, code=['EXT','EXT-FE'])" />
+                                                    <t t-set="total_extra" t-value="total_extra+extra" />
+                                                    <span t-esc="formatLang(extra, dp='Account')" />
                                                 </td>
                                                 <td>
-                                                    <span t-esc="formatLang(get_line_total(payslip, code='BRUTO'), dp='Account')" />
+                                                    <t t-set="gross" t-value="get_line_total(payslip, code='BRUTO')" />
+                                                    <t t-set="total_gross" t-value="total_gross+gross" />
+                                                    <span t-esc="formatLang(gross, dp='Account')" />
                                                 </td>
                                                 <td>
-                                                    <span t-esc="formatLang(get_line_total_group(payslip, code=['CCSS-EMP','CCSS-EMP-PEN','Banco Popular-EMP','CCSS-IVM','CCSS-SEM']), dp='Account')" />
+                                                    <t t-set="deduct" t-value="get_line_total_group(payslip, code=['CCSS-EMP','CCSS-EMP-PEN','Banco Popular-EMP','CCSS-IVM','CCSS-SEM'])" />
+                                                    <t t-set="total_deduct" t-value="total_deduct+deduct" />
+                                                    <span t-esc="formatLang(deduct, dp='Account')" />
                                                 </td>
                                                 <td>
-                                                    <span t-esc="formatLang(get_line_total(payslip, code='BON'), dp='Account')" />
+                                                    <t t-set="bonuses" t-value="get_line_total(payslip, code='BON')" />
+                                                    <t t-set="total_bonuses" t-value="total_bonuses+bonuses" />
+                                                    <span t-esc="formatLang(bonuses, dp='Account')" />
                                                 </td>
                                                 <td>
-                                                    <span t-esc="formatLang(get_line_total(payslip, code='RENTA'), dp='Account')" />
+                                                    <t t-set="rent" t-value="get_line_total(payslip, code='RENTA')" />
+                                                    <t t-set="total_rent" t-value="total_rent+rent" />
+                                                    <span t-esc="formatLang(rent, dp='Account')" />
                                                 </td>
                                                 <td>
-                                                    <span t-esc="formatLang(get_line_total(payslip, code='NETO'), dp='Account')" />
+                                                    <t t-set="net" t-value="get_line_total(payslip, code='NETO')" />
+                                                    <t t-set="total_net" t-value="total_net+net" />
+                                                    <span t-esc="formatLang(net, dp='Account')" />
                                                 </td>
                                                 <td>
-                                                    <span t-esc="formatLang(get_line_total(payslip, code='DEVENGADO'), dp='Account')" />
+                                                    <t t-set="paid" t-value="get_line_total(payslip, code='DEVENGADO')" />
+                                                    <t t-set="total_paid" t-value="total_paid+paid" />
+                                                    <span t-esc="formatLang(paid, dp='Account')" />
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </t>
+                                <br/>
+                                <br/>
+                                <table name="total" class="table table-condensed" style="page-break-inside:avoid; page-break-after:avoid;">
+                                    <div align="center">
+                                        <h3>General Total</h3>
+                                    </div>
+                                    <thead>
+                                        <tr style="page-break-inside:avoid; page-break-after:avoid;">
+                                            <th> </th>
+                                            <th>Nrm Hrs</th>
+                                            <th>Ext Hrs</th>
+                                            <th>Base</th>
+                                            <th>Extra</th>
+                                            <th>Gross</th>
+                                            <th>Deduct.CCSS/BP</th>
+                                            <th>Bonuses</th>
+                                            <th>Rent</th>
+                                            <th>Net</th>
+                                            <th>Paid</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="page-break-inside:avoid; page-break-after:avoid;">
+                                            <th>Total</th>
+                                            <th>
+                                                <span t-esc="formatLang(total_nrm_hrs, dp='Account')" />
+                                            </th>
+                                            <th>
+                                                <span t-esc="formatLang(total_ext_hrs, dp='Account')" />
+                                            </th>
+                                            <th>
+                                                <span t-esc="formatLang(total_base, dp='Account')" />
+                                            </th>
+                                            <th>
+                                                <span t-esc="formatLang(total_extra, dp='Account')" />
+                                            </th>
+                                            <th>
+                                                <span t-esc="formatLang(total_gross, dp='Account')" />
+                                            </th>
+                                            <th>
+                                                <span t-esc="formatLang(total_deduct, dp='Account')" />
+                                            </th>
+                                            <th>
+                                                <span t-esc="formatLang(total_bonuses, dp='Account')" />
+                                            </th>
+                                            <th>
+                                                <span t-esc="formatLang(total_rent, dp='Account')" />
+                                            </th>
+                                            <th>
+                                                <span t-esc="formatLang(total_net, dp='Account')" />
+                                            </th>
+                                            <th>
+                                                <span t-esc="formatLang(total_paid, dp='Account')" />
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </t>
                         </div>
                     </div>
