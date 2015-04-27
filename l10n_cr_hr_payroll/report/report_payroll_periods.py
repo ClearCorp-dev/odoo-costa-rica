@@ -95,9 +95,9 @@ class PayrollReportByPeriods(report_sxw.rml_parse):
             for line in payslip.worked_days_line_ids:
                 if line.code == code:
                     if payslip.credit_note:
-                        total -= line.number_of_hours + number_of_hours * 8.0 #normal schedule in Costa Rica
+                        total -= line.number_of_hours + line.number_of_days * 8.0 #normal schedule in Costa Rica
                     else:
-                        total += line.number_of_hours + number_of_hours * 8.0
+                        total += line.number_of_hours + line.number_of_days * 8.0
         return total
         
     def _get_worked_days_hours_group(self, payslip, code=['HE','HEF','FE']):
@@ -105,9 +105,9 @@ class PayrollReportByPeriods(report_sxw.rml_parse):
         for line in payslip.worked_days_line_ids:
             if line.code in code:
                 if payslip.credit_note:
-                    total -= line.number_of_hours + number_of_hours * 8.0 #normal schedule in Costa Rica
+                    total -= line.number_of_hours + line.number_of_days * 8.0 #normal schedule in Costa Rica
                 else:
-                    total += line.number_of_hours + number_of_hours * 8.0
+                    total += line.number_of_hours + line.number_of_days * 8.0
         return total
 
     def _get_line_total(self, payslips, code='BASE'):
