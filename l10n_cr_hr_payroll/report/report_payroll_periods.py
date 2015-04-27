@@ -33,6 +33,7 @@ class PayrollReportByPeriods(report_sxw.rml_parse):
             'get_payslips_by_struct': self._get_payslips_by_struct,
             'get_payslips_by_employee': self._get_payslips_by_employee,
             'get_worked_days_hours': self._get_worked_days_hours,
+            'get_worked_days_hours_group': self._get_worked_days_hours_group,
             'get_line_total': self._get_line_total,
             'get_line_total_group': self._get_line_total_group,
         })
@@ -98,6 +99,16 @@ class PayrollReportByPeriods(report_sxw.rml_parse):
                     else:
                         total += line.number_of_hours
         return total
+        
+    def _get_worked_days_hours_group(self, payslip, code=['HE','HEF','FE']):
+        total = 0.00
+        for line in payslip.worked_days_line_ids:
+            if line.code in code:
+                if payslip.credit_note:
+                    total -= line.number_of_hours
+                else:
+                    total += line.number_of_hours
+        return total
 
     def _get_line_total(self, payslips, code='BASE'):
         total = 0.00
@@ -110,7 +121,7 @@ class PayrollReportByPeriods(report_sxw.rml_parse):
                         total += line.total
         return total
 
-    def _get_line_total_group(self, payslips, code=['EXT','EXT-FE']):
+    def _get_line_total_group(self, payslips, code=['EXT','EXT-FE','FE']):
         total = 0.00
         for payslip in payslips:
             for line in payslip.line_ids:

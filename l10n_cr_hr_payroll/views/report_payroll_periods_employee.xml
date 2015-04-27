@@ -61,13 +61,13 @@
                                                 <span t-esc="formatLang(get_worked_days_hours(payslip, code='HN'), dp='Account')" />
                                             </td>
                                             <td name="HE">
-                                                <span t-esc="formatLang(get_worked_days_hours(payslip, code='HE'), dp='Account')" />
+                                                <span t-esc="formatLang(get_worked_days_hours_group(payslip, code=['HE','HEF','FE']), dp='Account')" />
                                             </td>
                                             <td name="BASE">
                                                 <span t-esc="formatLang(get_line_total(payslip, code='BASE'), dp='Account')" />
                                             </td>
                                             <td name="EXT">
-                                                <span t-esc="formatLang(get_line_total_group(payslip, code=['EXT','EXT-FE']), dp='Account')" />
+                                                <span t-esc="formatLang(get_line_total_group(payslip, code=['EXT','EXT-FE','FE']), dp='Account')" />
                                             </td>
                                             <td>
                                                 <span t-esc="formatLang(get_line_total(payslip, code='BRUTO'), dp='Account')" />

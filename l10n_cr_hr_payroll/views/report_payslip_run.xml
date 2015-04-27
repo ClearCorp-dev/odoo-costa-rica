@@ -66,7 +66,7 @@
                                                     <span t-esc="formatLang(nrm_hrs, dp='Account')" />
                                                 </td>
                                                 <td name="HE">
-                                                    <t t-set="ext_hrs" t-value="get_worked_days_hours(payslip, code='HE')" />
+                                                    <t t-set="ext_hrs" t-value="get_worked_days_hours_group(payslip, code='['HE','HEF','FE'])" />
                                                     <t t-set="total_ext_hrs" t-value="total_ext_hrs+ext_hrs" />
                                                     <span t-esc="formatLang(ext_hrs, dp='Account')" />
                                                 </td>
@@ -76,7 +76,7 @@
                                                     <span t-esc="formatLang(base, dp='Account')" />
                                                 </td>
                                                 <td name="EXT">
-                                                    <t t-set="extra" t-value="get_line_total_group(payslip, code=['EXT','EXT-FE'])" />
+                                                    <t t-set="extra" t-value="get_line_total_group(payslip, code=['EXT','EXT-FE','FE'])" />
                                                     <t t-set="total_extra" t-value="total_extra+extra" />
                                                     <span t-esc="formatLang(extra, dp='Account')" />
                                                 </td>

@@ -31,6 +31,7 @@ class PayslipRunReport(report_sxw.rml_parse):
         self.localcontext.update({
             'get_payslips_by_department':self._get_payslips_by_department,
             'get_worked_days_hours': self._get_worked_days_hours,
+            'get_worked_days_hours_group': self._get_worked_days_hours_group,
             'get_line_total': self._get_line_total,
             'get_line_total_group': self._get_line_total_group,
         })
@@ -60,6 +61,16 @@ class PayslipRunReport(report_sxw.rml_parse):
             if line.code == code:
                 total += line.number_of_hours
         return total
+        
+    def _get_worked_days_hours_group(self, payslip, code=['HE','HEF','FE']):
+        total = 0.00
+        for line in payslip.worked_days_line_ids:
+            if line.code in code:
+                if payslip.credit_note:
+                    total -= line.number_of_hours
+                else:
+                    total += line.number_of_hours
+        return total
 
     def _get_line_total(self, payslip, code='BASE'):
         total = 0.00
@@ -68,7 +79,7 @@ class PayslipRunReport(report_sxw.rml_parse):
                 total += line.total
         return total
 
-    def _get_line_total_group(self, payslip, code=['EXT','EXT-FE']):
+    def _get_line_total_group(self, payslip, code=['EXT','EXT-FE','FE']):
         total = 0.00
         for line in payslip.line_ids:
             if line.code in code:
