@@ -20,11 +20,11 @@
 #
 ##############################################################################
 import types
-import pooler
-from report import report_sxw
-from tools.translate import _
+from openerp import pooler
+from openerp.report import report_sxw
+from openerp.tools.translate import _
 from copy import copy
-from osv import fields, orm
+from openerp.osv import fields, orm, osv
 
 from openerp.addons.account_report_lib.account_report_base import accountReportbase
 
@@ -462,17 +462,22 @@ class Parser(accountReportbase):
         if type(main_structure) is types.DictType:
             self.get_total_result(cr, uid, main_structure['child'], data, final_list)
         
-        return final_list        
+        return final_list
         
-    def get_data(self, cr, uid, data):
+    def get_data(self, data):
          #1. Extract the account_financial_report.
         account_financial_report = self.get_account_base_report(data)
         
         #2. Call method that extract the account_financial_report
-        main_structure = self.pool.get('account.financial.report').get_structure_account_financial_report(cr, uid, account_financial_report.id)
+        main_structure = self.pool.get('account.financial.report').get_structure_account_financial_report(self.cr, self.uid, account_financial_report.id)
         
         #3. Return a dictionary with all result. 
-        final_data = self.get_total_result(cr, uid, main_structure,data)
+        final_data = self.get_total_result(self.cr, self.uid, main_structure,data)
         
         return final_data
-
+    
+class report_partnerledger(osv.AbstractModel):
+    _name = 'report.l10n_cr_account_situation_balance_report.report_situation_balance'
+    _inherit = 'report.abstract_report'
+    _template = 'l10n_cr_account_situation_balance_report.report_situation_balance'
+    _wrapped_report_class = Parser

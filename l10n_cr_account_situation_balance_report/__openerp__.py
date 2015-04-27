@@ -23,7 +23,7 @@
 {
     'name': 'Situation Balance Report',
     'version': '1.0',
-    'author': 'CLEARCORP S.A.',
+    'author': 'Clearcorp',
     'category': 'Finance',
     'description': """
 Situation Balance Report:
@@ -36,7 +36,8 @@ Create the situation balance report
              'security/ir.model.access.csv',
              'report/report.xml',
              'wizard/l10n_cr_account_situation_balance_wizard_view.xml',
-             'report_menus.xml'
+             'report_menus.xml',
+             'views/report_situation_balance.xml',
             ],
     'active': False,
     'installable': True,
