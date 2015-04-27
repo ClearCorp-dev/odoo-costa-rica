@@ -2,3 +2,4 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 hr_payroll.access_hr_payroll_structure_user,hr.payroll.structure,hr_payroll.model_hr_payroll_structure,base.group_user,1,0,0,0
 hr_payroll.access_hr_payslip_worked_days_user ,hr.payslip.worked_days,hr_payroll.model_hr_payslip_worked_days,base.group_user,1,0,0,0
 hr_payroll.access_hr_payslip_line_user,hr.payslip.line,hr_payroll.model_hr_payslip_line,base.group_user,1,0,0,0
+access_account_period_user,account.period,account.model_account_period,base.group_user,1,0,0,0
