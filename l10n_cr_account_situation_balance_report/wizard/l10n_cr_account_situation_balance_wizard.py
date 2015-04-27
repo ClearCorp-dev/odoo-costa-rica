@@ -20,26 +20,36 @@
 #
 ##############################################################################
 
-{
-    'name': 'Situation Balance Report',
-    'version': '1.0',
-    'author': 'CLEARCORP S.A.',
-    'category': 'Finance',
-    'description': """
-Situation Balance Report:
-===========================
-Create the situation balance report
-    """,    
-    'website': "http://clearcorp.co.cr",
-    'depends': ['account_report_lib', ],
-    'data': [
-             'security/ir.model.access.csv',
-             'report/report.xml',
-             'wizard/l10n_cr_account_situation_balance_wizard_view.xml',
-             'report_menus.xml'
-            ],
-    'active': False,
-    'installable': True,
-    'license': 'AGPL-3',
-}
+from openerp.osv import fields, osv
 
+class situationBalancereportWizard(osv.osv_memory):
+    
+    _inherit = "account.report.wiz"
+    _name = "situation.balance.report.wiz"
+    _description = "Situation Balance Report Wizard"
+
+    _columns = {
+        'account_base_report':fields.many2one('account.financial.report', string="Account Base Report",domain=[('parent_id','=', False), ('account_type.code','=','SITBAL')]),
+    }
+
+    _defaults = {
+            'filter': 'filter_period',
+    }
+
+    def _print_report(self, cr, uid, ids, data, context=None):
+        mimetype = self.pool.get('report.mimetypes')
+        report_obj = self.pool.get('ir.actions.report.xml')
+        report_name = 'l10n_cr_account_situation_balance_report.report_situation_balance'
+        
+        context = context or {}
+        
+        
+        return {
+            'type': 'ir.actions.report.xml',
+            'report_name': report_name,
+            'datas': data,
+            'context':context
+        }
+
+
+situationBalancereportWizard()
