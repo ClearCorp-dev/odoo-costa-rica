@@ -88,10 +88,11 @@ class PayslipRunReport(report_sxw.rml_parse):
     def _get_line_total_group(self, payslip, code=['EXT','EXT-FE','FE']):
         total = 0.00
         for line in payslip.line_ids:
-            if payslip.credit_note:
-                total -= line.total
-            else:
-                total += line.total
+            if line.code == code:
+                if payslip.credit_note:
+                    total -= line.total
+                else:
+                    total += line.total
         return total
 
 
