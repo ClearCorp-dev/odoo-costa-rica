@@ -33,10 +33,7 @@ class ResPartner(osv.Model):
         default = default.copy()
         default.update({'name': name + _(' (Copy)')})
         return super(ResPartner, self).copy_data(cr, uid, id, default=default, context=context)
-    
-    _columns = {
-        'ref': fields.char(string="Reference", required=True)
-    }
+
     _sql_constraints = [
         ('name_reference_unique',
         'UNIQUE(ref,name)',

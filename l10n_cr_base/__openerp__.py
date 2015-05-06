@@ -32,7 +32,7 @@ This module add a constraint for name and reference of partner.
     'website': "http://clearcorp.co.cr",
     'depends': ['base'
                 ],
-    'data': [
+    'data': ['res_partner.xml'
              ],
     'active': False,
     'installable': True,
