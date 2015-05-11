@@ -5,6 +5,6 @@
               name="Profit And Loss"  
               parent="account.final_accounting_reports" 
               action="action_profit_statement_report_menu_webkit"  
-              id="account.menu_account_report_pl"/>        
+              id="account.menu_account_report_pl"/>
     </data>
 </openerp>

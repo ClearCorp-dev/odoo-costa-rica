@@ -21,10 +21,10 @@
 ##############################################################################
 
 from copy import copy
-from osv import fields, orm
-from tools.translate import _
+from openerp.osv import fields, osv, orm
+from openerp.tools.translate import _
 import types
-import pooler
+from openerp import pooler
 
 from openerp.addons.account_report_lib.account_report_base import accountReportbase #Library Base
 
@@ -38,7 +38,7 @@ class Parser(accountReportbase):
             'uid': uid,
             'get_last_period': self.get_last_period,
             'get_base_account_compare': self.get_base_account_compare,
-            'get_data': self.get_data,            
+            'get_data': self.get_data,
         })
         
   #Get base account to compare result
@@ -46,9 +46,9 @@ class Parser(accountReportbase):
         return self._get_info(data, 'base_compare_account', 'account.account')
              
     #Get last period based in period selected. 
-    def get_last_period(self, cr, uid, data):
+    def get_last_period(self, data):
         start_period = self.get_start_period(data)
-        return self.pool.get('account.period').get_last_period(cr,uid,start_period)
+        return self.pool.get('account.period').get_last_period(self.cr,self.uid,start_period)
    
     '''
         If the display_detail == display_flat, compute all the balance, debit, credit and initial_balance and return 
@@ -377,13 +377,13 @@ class Parser(accountReportbase):
             final_data_parent['code'] = '' 
             final_data_parent['is_parent'] = False
             final_data_parent['level'] = 0
-            final_data_parent['display_detail'] = 'no_detail'   
+            final_data_parent['display_detail'] = 'no_detail'
             
             #For accounts append parents, no childs.         
             for parent, child in child_list.iteritems():
                 list_ids.append(parent.id)
                 
-            if len(list_ids) > 0:                    
+            if len(list_ids) > 0:
                 #In this report, call method three times, calculate balance for                    
                 #    period selected
                 #    last period
@@ -494,15 +494,17 @@ class Parser(accountReportbase):
                     final_list.append(copy(final_data_parent)) 
                     
                     #For detail_flat, append parent.id, that is id for account selected in list.
-                    if structure['display_detail'] == 'detail_flat':                   
+                    if structure['display_detail'] == 'detail_flat':
                         list_ids.append(parent.id)
                         
                     #Build list of data child.
                     if structure['display_detail'] == 'detail_with_hierarchy':
                         for c in child:
                             list_ids.append(c.id) #Add child.id
+                            parent_type = type(parent)
+                            c_type = type(c)
                             
-                            if c.id != parent.id: #Avoid duplicate accounts.
+                            if c.name != parent.name: #Avoid duplicate accounts.
                                 final_data['id'] = c.id
                                 final_data['level'] = c.level
                                 final_data['name'] = c.name
@@ -526,7 +528,7 @@ class Parser(accountReportbase):
                     result_dict_period = library_obj.get_account_balance(cr, uid, 
                                                                             list_ids, 
                                                                             ['balance'],     
-                                                                            fiscal_year_id=fiscal_year.id,                                                                                
+                                                                            fiscal_year_id=fiscal_year.id,
                                                                             state = target_move,
                                                                             start_period_id=period.id, 
                                                                             end_period_id=period.id,
@@ -536,7 +538,7 @@ class Parser(accountReportbase):
                     result_dict_last_period = library_obj.get_account_balance(cr, uid, 
                                                                             list_ids, 
                                                                             ['balance'],    
-                                                                            fiscal_year_id=fiscal_year.id,                                                                                
+                                                                            fiscal_year_id=fiscal_year.id,
                                                                             state = target_move, 
                                                                             start_period_id=last_period.id, 
                                                                             end_period_id=last_period.id,
@@ -545,8 +547,8 @@ class Parser(accountReportbase):
                     #Fiscal year
                     result_dict_fiscal_year = library_obj.get_account_balance(cr, uid, 
                                                                             list_ids, 
-                                                                            ['balance'],     
-                                                                            fiscal_year_id=fiscal_year.id,                                                                                
+                                                                            ['balance'],
+                                                                            fiscal_year_id=fiscal_year.id,
                                                                             state = target_move,
                                                                             end_period_id=period.id, 
                                                                             filter_type=filter_type)
@@ -555,7 +557,7 @@ class Parser(accountReportbase):
                 base_account_last_period = result_dict_last_period[base_account_id]['balance']
                 base_account_period = result_dict_period[base_account_id]['balance']
                 base_account_total_variation = base_account_period - base_account_last_period
-                base_account_fiscal_year = result_dict_fiscal_year[base_account_id]['balance']                    
+                base_account_fiscal_year = result_dict_fiscal_year[base_account_id]['balance']
                 base_account_percentage_period = 100
                 base_account_percentage_last_period = 100
                 base_account_percentage_variation = base_account_last_period != 0 and (100 * base_account_total_variation / base_account_last_period) or 0
@@ -583,7 +585,7 @@ class Parser(accountReportbase):
                                          'balance_total_percentage_last_period': base_account_last_period != 0 and (100 * balance_total_last_period / base_account_last_period) or 0,
                                          'balance_total_percentage_variation': balance_total_last_period != 0 and (100 * balance_total_variation / balance_total_last_period) or 0,
                                          'balance_total_percentage_fiscal_year': base_account_fiscal_year != 0 and (100 * balance_fiscal_year / base_account_fiscal_year) or 0,
-                                                              
+                                          
                                          })
 
         return final_list    
@@ -617,7 +619,7 @@ class Parser(accountReportbase):
         if final_list != []:
             final_list = []
         
-        if isinstance(main_structure, list) == True:         
+        if isinstance(main_structure, list) == True:
             #TODO: Implement account_report (Valor en informe)
             for structure in main_structure:
                 if structure['type'] == 'account_type':
@@ -632,19 +634,24 @@ class Parser(accountReportbase):
         if type(main_structure) is types.DictType:
             self.get_total_result(cr, uid, main_structure['child'], data, final_list)
 
-        return final_list              
+        return final_list
     
     #Call all the methods that extract data, and build final dictionary with all the result.
-    def get_data(self, cr, uid, data):
+    def get_data(self, data):
         
         #1. Extract the account_financial_report.
         account_financial_report = self.get_account_base_report(data)
         
         #2. Call method that extract the account_financial_report
-        main_structure = self.pool.get('account.financial.report').get_structure_account_financial_report(cr, uid, account_financial_report.id)
+        main_structure = self.pool.get('account.financial.report').get_structure_account_financial_report(self.cr, self.uid, account_financial_report.id)
         
         #3. Return a dictionary with all result. 
-        final_data = self.get_total_result(cr, uid, main_structure,data)
+        final_data = self.get_total_result(self.cr, self.uid, main_structure,data)
 
-        return  final_data   
+        return  final_data
 
+class report_partnerledger(osv.AbstractModel):
+    _name = 'report.l10n_cr_account_profit_statement_report.report_profit_statement'
+    _inherit = 'report.abstract_report'
+    _template = 'l10n_cr_account_profit_statement_report.report_profit_statement'
+    _wrapped_report_class = Parser

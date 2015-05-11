@@ -9,8 +9,8 @@
             <field name="arch" type="xml">
                 <field name="note" position="after"> 
                     <group col="4" string="Configuration for Profit Statement Report">
-                        <field name="include_profit_statement_report"/>                    
-                   </group>
+                        <field name="include_profit_statement_report"/>
+                    </group>
                 </field>
            </field>
         </record>
