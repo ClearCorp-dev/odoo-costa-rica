@@ -20,23 +20,26 @@
 #
 ##############################################################################
 
-import pooler
-from report import report_sxw
-from tools.translate import _
+from openerp import pooler
+from openerp.report import report_sxw
+from openerp.tools.translate import _
 from copy import copy
 import types
-from osv import fields, orm
+import locale
+from openerp.osv import osv, orm
+from openerp import models, fields
 
 from openerp.addons.account_report_lib.account_report_base import accountReportbase
 
 class Parser(accountReportbase):
     
-    def __init__(self, cr, uid, name, context):      
+    def __init__(self, cr, uid, name, context):
         super(Parser, self).__init__(cr, uid, name, context=context)
         self.localcontext.update({
             'cr': cr,
             'uid':uid,
-            'pool': pooler,
+            'context':context,
+            #'pool': pooler,
             'get_data':self.get_data,
         })
    
@@ -45,6 +48,7 @@ class Parser(accountReportbase):
         one result for each type account selected in the list.
         @param child_list: Can be a list of ids (int) or a browse record list.
     '''
+        
     def compute_data(self, cr, uid, 
                                 result_dict, 
                                 child_list, 
@@ -76,11 +80,11 @@ class Parser(accountReportbase):
                     account_id = c.id
                     
                 elif isinstance(c, int):
-                     list_accounts.append(c)   
+                     list_accounts.append(c)
                      account_id = c
                 
                 if account_id in result_dict.keys():
-                    initial_balance += result_dict[account_id]['balance']                    
+                    initial_balance += result_dict[account_id]['balance']
                     
             #Call get_move_lines method to calculate debit and credit 
             move_lines = account_report_lib.get_move_lines(cr, uid, 
@@ -587,15 +591,25 @@ class Parser(accountReportbase):
         return final_list              
     
     #Call all the methods that extract data, and build final dictionary with all the result.
-    def get_data(self, cr, uid, data):
+    def get_data(self, data):
         
         #1. Extract the account_financial_report.
         account_financial_report = self.get_account_base_report(data)
         
         #2. Call method that extract the account_financial_report
-        main_structure = self.pool.get('account.financial.report').get_structure_account_financial_report(cr, uid, account_financial_report.id)
+        main_structure_obj = self.pool.get('account.financial.report')
+        main_structure = main_structure_obj.get_structure_account_financial_report(self.cr, self.uid, account_financial_report.id)
         
         #3. Return a dictionary with all result. 
-        final_data = self.get_total_result(cr, uid, main_structure,data)
+        final_data = self.get_total_result(self.cr, self.uid, main_structure,data)
 
         return  final_data
+    
+
+class report_partnerledger(osv.AbstractModel):
+    _name = 'report.l10n_cr_account_trial_balance_report.report_trial_balance'
+    _inherit = 'report.abstract_report'
+    _template = 'l10n_cr_account_trial_balance_report.report_trial_balance'
+    _wrapped_report_class = Parser
+
+
