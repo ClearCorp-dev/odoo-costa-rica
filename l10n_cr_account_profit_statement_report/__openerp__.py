@@ -23,7 +23,7 @@
 {
     'name': 'Profit Statement Report',
     'version': '1.0',
-    'author': 'CLEARCORP S.A.',
+    'author': 'Clearcorp',
     'category': 'Finance',
     'description': """
 Install the Profit Statement Report.
@@ -34,13 +34,17 @@ Configuration:
         "Include in Profit Statement report" option.
     """,    
     'website': "http://clearcorp.co.cr",
-    'depends': ['account_report_lib',],
+    'depends': ['account_report_lib',
+                'report',
+                ],
     'data': [
              'security/ir.model.access.csv',
+             'data/report_paperformat.xml',
              'report/report.xml',
              'l10n_cr_account_profit_statement_report.xml',
              'wizard/l10n_cr_account_profit_statement_wizard_view.xml',
-             'report_menus.xml'
+             'report_menus.xml',
+             'views/report_profit_statement.xml',
             ],
     'active': False,
     'installable': True,
