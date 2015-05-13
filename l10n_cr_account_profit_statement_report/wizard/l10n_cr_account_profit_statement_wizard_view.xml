@@ -37,7 +37,7 @@
                         <attribute name="invisible">True</attribute>
                     </xpath>
                     <group string="Journals" position="attributes">
-                        <attribute name ="required">False</attribute>
+                        <attribute name="attrs">{'invisible': True}</attribute>
                     </group>
                     <group string="Advanced options" position="attributes">
                         <attribute name="attrs">{'invisible': True}</attribute>

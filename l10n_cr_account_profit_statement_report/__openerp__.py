@@ -23,7 +23,7 @@
 {
     'name': 'Profit Statement Report',
     'version': '1.0',
-    'author': 'Clearcorp',
+    'author': 'ClearCorp',
     'category': 'Finance',
     'description': """
 Install the Profit Statement Report.

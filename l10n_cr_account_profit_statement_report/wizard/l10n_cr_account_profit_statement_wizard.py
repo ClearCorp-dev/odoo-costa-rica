@@ -37,13 +37,14 @@ class profitStatementreportWizard(osv.osv_memory):
     
     _columns = {
         'base_compare_account': fields.many2one('account.account', string='Base Income Account', help="This account is the base for compare all other accounts in report."),
-        'journal_ids': fields.many2many('account.journal', string='Journals fabio', required=False),
-    }    
-    
+        'out_format': fields.selection([('pdf','PDF')], 'Print Format'),
+        }
+
     _defaults = {
             'filter': 'filter_period',
-            'journals_ids': [],
-    }
+            'out_format': 'pdf',
+            
+            }
 
     def pre_print_report(self, cr, uid, ids, data, context=None):
         if context is None:

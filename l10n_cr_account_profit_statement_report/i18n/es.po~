@@ -186,7 +186,7 @@ msgstr "Ultima actualización en"
 #. module: l10n_cr_account_profit_statement_report
 #: view:website:l10n_cr_account_profit_statement_report.report_profit_statement
 msgid "Movements Destination:"
-msgstr "Movimientos Destino:"
+msgstr "Movements Destination:"
 
 #. module: l10n_cr_account_profit_statement_report
 #: selection:profit.statement.report.wiz,sort_selection:0
