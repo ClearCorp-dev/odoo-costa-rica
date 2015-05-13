@@ -37,7 +37,7 @@
                     </field>
                                  
                     <group string="Journals" position="attributes">
-                        <attribute name="attrs">{'invisible': False, 'required':False}</attribute>
+                        <attribute name="attrs">{'invisible': True}</attribute>
                     </group>
                     
                     <group string="Advanced options" position="attributes">
@@ -53,7 +53,7 @@
                     </group>
                     
                     <field name="account_base_report" position="attributes">
-                        <attribute name="attrs">{'required':False}</attribute>
+                        <attribute name="attrs">{'required':True}</attribute>
                         <attribute name="domain">[('type', '=', 'sum'),('account_type.code','=','TRIBAL')]</attribute>
                     </field>
                     
