@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="report_profit_statement">
+            <div class="header">
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <img t-if="company.logo"
+                            t-att-src="'data:image/png;base64,%s' % company.logo"
+                            style="max-height: 100px;" />
+                    </div>
+                    <div class="col-xs-9 text-left">
+                        <table>
+                            <tr>
+                                <td style="text-align:left;">
+                                    <h4><strong><span
+                                        style="margin:0px;margin-bottom:30px;"
+                                        t-field="company.name">
+                                    </span></strong></h4>
+                                    <h4><strong>Profit Statement</strong></h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4><strong>Fiscal year: </strong>
+                                        <span t-esc="get_fiscal_year(data).name"> - </span>
+                                        <strong><span >Period to:</span></strong>
+                                        <span t-esc="get_start_period(data).name"></span>
+                                    </h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4><strong>Movements Destination: </strong>
+                                        <span t-esc="display_target_move(data)"></span>
+                                    </h4>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <br />
+                <div class="row zero_min_height">
+                    <div class="col-xs-12">
+                        <div style="border-bottom: 1px solid black;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="page">
+                <table class="table table-condensed" >
+                    <thead style="background-color:#E0E0E0" >
+                        <tr style="border: 1px" colspan="5">
+                            <th width="35%" style="border: 1px solid #000000 " class="text-center">Account</th>
+                            <th width="10%" style="border: 1px solid #000000 " class="text-center">
+                                <span>Previous period</span> 
+                                <span t-esc="get_last_period(data).name"></span>
+                            </th>
+                            <th width="6%" style="border: 1px solid #000000 " class="text-center">
+                                <span>V %</span> 
+                            </th>
+                            <th width="10%" style="border: 1px solid #000000 " class="text-center">
+                               <span>Selected period</span>
+                               <span t-esc="get_start_period(data).name"></span>
+                                </th>
+                            <th width="6%" style="border: 1px solid #000000 " class="text-center">
+                                <span>V %</span> 
+                            </th>
+                            <th width="10%" style="border: 1px solid #000000 " class="text-center">
+                                <span>Variation Prev. Vs Sel.</span> 
+                                <span t-esc="get_start_period(data).name"></span>
+                            </th>
+                            <th width="6%" style="border: 1px solid #000000 " class="text-center">
+                                <span>V %</span>
+                            </th>
+                            <th width="11%" style="border: 1px solid  #000000 "
+                                class="text-center">Acc.Fiscal Year
+                                <span t-esc="get_fiscal_year(data).name"></span>
+                            </th>
+                            <th width="6%" style="border: 1px solid #000000 " class="text-center">
+                                <span>V %</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="get_data(data)" t-as="account">
+                            <t t-if=" account['level'] == 0 or account['level'] == 1">
+                                <t for-each="range(account['level']-1)" t-as="level">
+                                    <tr>
+                                        <td style="border: 1px solid #000000 "
+                                            class="text-center">
+                                            <strong><span t-esc="account['code']">
+                                            </span>
+                                            <span>-</span>
+                                            <span t-esc="account['name']">
+                                            </span></strong>
+                                        </td>
+                                        <td style="border: 1px solid #000000 "
+                                            class="text-center">
+                                            <strong><span t-esc="formatLang(account['balance_total_last_period'])">
+                                            </span></strong>
+                                        </td>
+                                        <td style="border: 1px solid #000000"
+                                            class="text-center">
+                                            <strong><span t-esc="formatLang(account['balance_total_percentage_last_period'])">
+                                            </span></strong>
+                                        </td>
+                                        <td style="border: 1px solid #000000"
+                                            class="text-center">
+                                            <strong><span t-esc="formatLang(account['balance_total_period'])">
+                                            </span></strong>
+                                        </td>
+                                        <td style="border: 1px solid #000000"
+                                            class="text-center">
+                                            <strong><span t-esc="formatLang(account['balance_total_percentage_period'])">
+                                            </span></strong>
+                                        </td>
+                                        <td style="border: 1px solid #000000"
+                                            class="text-center">
+                                            <strong><span t-esc="formatLang(account['balance_total_variation'])">
+                                            </span></strong>
+                                        </td>
+                                        <td style="border: 1px solid #000000 "
+                                            class="text-center">
+                                            <strong><span t-esc="formatLang(account['balance_total_percentage_variation'])"> 
+                                            </span></strong>
+                                        </td>
+                                        <td style="border: 1px solid #000000 "
+                                            class="text-center">
+                                            <strong><span t-esc="formatLang(account['balance_total_fiscal_year'])"> 
+                                            </span></strong>
+                                        </td>
+                                        <td style="border: 1px solid #000000 "
+                                            class="text-center">
+                                            <strong><span t-esc="formatLang(account['balance_total_percentage_fiscal_year'])"> 
+                                            </span></strong>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                            <t t-foreach="range(account['level']-1)" t-as="level">
+                                <tr>
+                                    <td style="border: 1px solid #000000 "
+                                        class="text-center">
+                                        <span t-esc="account['code']">
+                                        </span>
+                                        <span>-</span>
+                                        <span t-esc="account['name']">
+                                        </span>
+                                    </td>
+                                    <td style="border: 1px solid #000000 "
+                                        class="text-center">
+                                        <span t-esc="formatLang(account['balance_total_last_period'])">
+                                        </span>
+                                    </td>
+                                    <td style="border: 1px solid #000000"
+                                        class="text-center">
+                                        <span t-esc="formatLang(account['balance_total_percentage_last_period'])">
+                                        </span>
+                                    </td>
+                                    <td style="border: 1px solid #000000"
+                                        class="text-center">
+                                        <span t-esc="formatLang(account['balance_total_period'])">
+                                        </span>
+                                    </td>
+                                    <td style="border: 1px solid #000000"
+                                        class="text-center">
+                                        <span t-esc="formatLang(account['balance_total_percentage_period'])">
+                                        </span>
+                                    </td>
+                                    <td style="border: 1px solid #000000"
+                                        class="text-center">
+                                        <span t-esc="formatLang(account['balance_total_variation'])">
+                                        </span>
+                                    </td>
+                                    <td style="border: 1px solid #000000 "
+                                        class="text-center">
+                                        <span t-esc="formatLang(account['balance_total_percentage_variation'])"> 
+                                        </span>
+                                    </td>
+                                    <td style="border: 1px solid #000000 "
+                                        class="text-center">
+                                        <span t-esc="formatLang(account['balance_total_fiscal_year'])"> 
+                                        </span>
+                                    </td>
+                                    <td style="border: 1px solid #000000 "
+                                        class="text-center">
+                                        <span t-esc="formatLang(account['balance_total_percentage_fiscal_year'])"> 
+                                        </span>
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+             <br />
+            <br />
+            <div class="footer" style="font-size:15px;">
+                <div class="text-center" style="border-top: 1px solid black;">
+                    <div class="row">
+                        <div class="col-xs-12" style="text-align:center;">
+                            <span>Odoo:</span>
+                            <span t-esc="time.strftime('%d-%m-%Y')" />
+                            <span t-esc="time.strftime('%H:%M')"/>
+                            <span> - </span>
+                            <span t-esc="user.name"></span>
+                            <span> - </span>
+                            <span t-esc="user.login" />
+                        </div>
+                    </div>
+                    <ul class="list-inline">
+                        <li>Page:</li>
+                        <li>
+                            <span class="page" />
+                        </li>
+                        <li>/</li>
+                        <li>
+                            <span class="topage" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </template>
+    </data>
+</openerp>

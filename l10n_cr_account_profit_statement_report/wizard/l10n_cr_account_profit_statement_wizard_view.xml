@@ -5,7 +5,8 @@
             <field name="name">Profit Statement Report</field>
             <field name="model">profit.statement.report.wiz</field>
             <field name="type">form</field>
-            <field name="inherit_id" ref="account_report_lib.account_report_lib_wizard_view"/>
+            <field name="priority" eval="50" />
+            <field name="inherit_id" ref="account_report_lib.account_report_lib_wizard_form_view"/>
             <field name="arch" type="xml">
                 <data>
                     <xpath expr="/form/label[@string='']" position="replace">
@@ -34,10 +35,10 @@
                     </field>
                     <xpath expr="//group[@name='Dates']" position="attributes">
                         <attribute name="invisible">True</attribute>
-                    </xpath>   
+                    </xpath>
                     <group string="Journals" position="attributes">
-                        <attribute name="attrs">{'invisible': True, 'required':False}</attribute>
-                    </group>                                   
+                        <attribute name="attrs">{'invisible': True}</attribute>
+                    </group>
                     <group string="Advanced options" position="attributes">
                         <attribute name="attrs">{'invisible': True}</attribute>
                     </group> 

@@ -20,8 +20,8 @@
 #
 ##############################################################################
 
-from osv import osv, fields
-from tools.translate import _
+from openerp.osv import fields, osv
+from openerp.tools.translate import _
 
 class profitStatementreportWizard(osv.osv_memory):
     
@@ -36,30 +36,36 @@ class profitStatementreportWizard(osv.osv_memory):
     #===========================================================================
     
     _columns = {
-        'base_compare_account': fields.many2one('account.account', string='Base Income Account', help="This account is the base for compare all other accounts in report.")        
-    }    
-    
+        'base_compare_account': fields.many2one('account.account', string='Base Income Account', help="This account is the base for compare all other accounts in report."),
+        'out_format': fields.selection([('pdf','PDF')], 'Print Format'),
+        }
+
     _defaults = {
             'filter': 'filter_period',
-    }
+            'out_format': 'pdf',
+            
+            }
 
-    def pre_print_report(self, cr, uid, ids, data, context=None):       
+    def pre_print_report(self, cr, uid, ids, data, context=None):
         if context is None:
             context = {}
             
         # read the bank_banlance, because this field don't belongs to the account.report.wiz
         # this field is added by conciliation.bank.report.wiz and add to data['form']                
-        vals = self.read(cr, uid, ids,['base_compare_account'], context=context)[0] #this method read the field and included it in the form (account.common.report has this method)
-        data['form'].update(vals)        
+        vals = self.read(cr, uid, ids,['base_compare_account'], context=context)
+        #this method read the field and included it in the form (account.common.report has this method)
+        for value in vals:
+            dict = {'id':value['id'],'base_compare_account':value['base_compare_account'][0]}
+            data['form'].update(dict)
         return data
        
     def _print_report(self, cr, uid, ids, data, context=None):
         mimetype = self.pool.get('report.mimetypes')
         report_obj = self.pool.get('ir.actions.report.xml')
-        report_name = ''
-      
+        report_name = 'l10n_cr_account_profit_statement_report.report_profit_statement'
+        
         context = context or {}
-    
+        
         # we update form with display account value
         data = self.pre_print_report(cr, uid, ids, data, context=context)
         
@@ -84,7 +90,7 @@ class profitStatementreportWizard(osv.osv_memory):
         #=======================================================================
         
         #1. Find out_format selected
-        out_format_obj = mimetype.browse(cr, uid, [int(data['form']['out_format'])], context)[0]
+        """out_format_obj = mimetype.browse(cr, uid, [int(data['form']['out_format'])], context)[0]
 
         #2. Check out_format and set report_name for each format
         if out_format_obj.code == 'oo-pdf':
@@ -104,11 +110,11 @@ class profitStatementreportWizard(osv.osv_memory):
             data.update({'model': report_xml.model, 'report_type':'aeroo', 'id': report_xml.id})
             
             #Write out_format choosed in wizard
-            report_xml.write({'out_format': out_format_obj.id}, context=context)
-           
-            return {
-                'type': 'ir.actions.report.xml',
-                'report_name': report_name,
-                'datas': data,
-                'context':context
-            }
+            report_xml.write({'out_format': out_format_obj.id}, context=context)"""
+        
+        return {
+            'type': 'ir.actions.report.xml',
+            'report_name': report_name,
+            'datas': data,
+            'context':context
+        }

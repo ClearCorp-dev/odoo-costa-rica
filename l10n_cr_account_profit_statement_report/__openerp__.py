@@ -20,19 +20,34 @@
 #
 ##############################################################################
 
-from osv import fields, orm, osv
-from tools.translate import _
+{
+    'name': 'Profit Statement Report',
+    'version': '1.0',
+    'author': 'ClearCorp',
+    'category': 'Finance',
+    'description': """
+Install the Profit Statement Report.
+=======================================
+Configuration:
+-----------------
+        1. Configure type account that it will appear in wizard. This configuration is in Accounting -> Account -> Account Types and check
+        "Include in Profit Statement report" option.
+    """,    
+    'website': "http://clearcorp.co.cr",
+    'depends': ['account_report_lib',
+                'report',
+                ],
+    'data': [
+             'security/ir.model.access.csv',
+             'data/report_paperformat.xml',
+             'report/report.xml',
+             'l10n_cr_account_profit_statement_report.xml',
+             'wizard/l10n_cr_account_profit_statement_wizard_view.xml',
+             'report_menus.xml',
+             'views/report_profit_statement.xml',
+            ],
+    'active': False,
+    'installable': True,
+    'license': 'AGPL-3',
+}
 
-class acccountAccounttypeProfitstatement(orm.Model):
-    """
-        This class extend functions of account.account.type
-        
-        If include_profit_statement_report is checked, those accounts that have this account_type and type == 'view' are include in Profit Statement Report.
-        
-    """  
-    _name = "account.account.type"
-    _inherit = "account.account.type"
-    
-    _columns = {
-        'include_profit_statement_report': fields.boolean('Include in Profit Statement Report', help="If it's checked, the account that have this type is include in Profit Statement Report Wizard as Base Account to compare.")
-    }

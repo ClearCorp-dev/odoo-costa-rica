@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <!-- QWeb Reports -->
+        <report id="action_report_profit_statement" 
+        model="account.account"
+        string="Profit Statement"
+        report_type="qweb-pdf"
+        name="l10n_cr_account_profit_statement_report.report_profit_statement" 
+        file="l10n_cr_account_profit_statement_report.report_profit_statement"
+        menu="False"
+        />
+         <record id="action_report_profit_statement" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="paperformat_us_landscape"/>
+        </record>
+    </data>
+</openerp>
