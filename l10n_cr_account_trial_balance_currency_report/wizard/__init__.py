@@ -19,4 +19,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import l10n_cr_account_trial_balance_currency
+
+import l10n_cr_account_trial_balance_wizard

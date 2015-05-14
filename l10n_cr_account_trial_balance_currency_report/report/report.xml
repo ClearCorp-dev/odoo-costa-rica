@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <!-- QWeb Reports -->
+        <report id="action_report_trial_balance_currency" 
+        model="account.account"
+        string="Trial Balance Currency Report" 
+        report_type="qweb-pdf"
+        name="l10n_cr_account_trial_balance_currency_report.report_trial_balance_currency" 
+        file="l10n_cr_account_trial_balance_currency_report.report_trial_balance_currency"
+        menu="False"
+        />
+    </data>
+</openerp>

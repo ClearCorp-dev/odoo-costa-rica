@@ -19,4 +19,30 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import l10n_cr_account_trial_balance_currency
+
+{
+    'name': 'Trial Balance Currency Report',
+    'version': '1.0',
+    'author': 'ClearCorp',
+    'category': 'Finance',
+    'description': """
+Trial Balance Currency Report.
+=======================
+Create the Trial Balance Currency report
+    """,
+    'website': "http://clearcorp.co.cr",
+    'depends': ['account_report_lib',
+                'report',
+                'account',
+                ],
+    'data': [
+             'report/report.xml',
+             'wizard/l10n_cr_account_trial_balance_wizard_view.xml',
+             'report_menus.xml',
+             'views/report_trial_balance_currency.xml',
+            ],
+    'active': False,
+    'installable': True,
+    'license': 'AGPL-3',
+}
+
