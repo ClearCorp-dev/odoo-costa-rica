@@ -5,6 +5,6 @@
           name="Trial Balance Currency"
           parent="account.final_accounting_reports" 
           action="action_report_trial_balance_currency"
-          id="account.menu_general_Balance_report"/>
+          id="menu_general_Balance_report"/>
     </data>
 </openerp>

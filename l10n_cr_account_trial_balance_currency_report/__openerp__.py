@@ -27,7 +27,7 @@
     'category': 'Finance',
     'description': """
 Trial Balance Currency Report.
-=======================
+==============================
 Create the Trial Balance Currency report
     """,
     'website': "http://clearcorp.co.cr",

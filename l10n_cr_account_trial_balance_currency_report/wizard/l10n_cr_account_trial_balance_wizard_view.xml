@@ -2,14 +2,14 @@
 <openerp>
     <data>
         <record id="trial_balance_currency_report_view" model="ir.ui.view">
-            <field name="name">Trial Balance Currency Report</field>
+            <field name="name">Balance Account Report</field>
             <field name="model">trial.balance.currency.report.wiz</field>
             <field name="type">form</field>
             <field name="inherit_id" ref="account_report_lib.account_report_lib_wizard_form_view"/>
             <field name="arch" type="xml">
                 <data>
                     <xpath expr="/form/label[@string='']" position="replace">
-                        <separator string="Trial Balance" colspan="4"/>
+                        <separator string="Account Balance" colspan="4"/>
                         <label nolabel="1" colspan="4" string="This report allows you to print or generate a pdf of your trial balance"/>
                     </xpath>
                     <field name="chart_account_id" position="attributes">
@@ -37,7 +37,7 @@
                     </field>
                                  
                     <group string="Journals" position="attributes">
-                        <attribute name="attrs">{'invisible': False, 'required':False}</attribute>
+                        <attribute name="attrs">{'invisible': True}</attribute>
                     </group>
                     
                     <group string="Advanced options" position="attributes">
@@ -53,7 +53,7 @@
                     </group>
                     
                     <field name="account_base_report" position="attributes">
-                        <attribute name="attrs">{'required':False}</attribute>
+                        <attribute name="attrs">{'required':True}</attribute>
                         <attribute name="domain">[('type', '=', 'sum'),('account_type.code','=','TRIBAL')]</attribute>
                     </field>
                     
@@ -65,7 +65,7 @@
         </record>
         
          <record id="action_report_trial_balance_currency" model="ir.actions.act_window">
-            <field name="name">Action Trial Balance Currency Report</field>
+            <field name="name">Action Balance Account Report</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">trial.balance.currency.report.wiz</field>
             <field name="view_type">form</field>

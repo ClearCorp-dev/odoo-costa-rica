@@ -39,7 +39,7 @@ class Parser(accountReportbase):
             'cr': cr,
             'uid':uid,
             'context':context,
-            #'pool': pooler,
+            'pool': pooler,
             'get_data':self.get_data,
         })
    
@@ -66,6 +66,9 @@ class Parser(accountReportbase):
         credit = 0.0
         debit = 0.0
         initial_balance = 0.0 
+        currency = ''
+        amount_currency = 0.0
+        foreign_balance = 0.0
         res = {}
         list_accounts = []
         account_report_lib = self.pool.get('account.webkit.report.library')
@@ -74,7 +77,7 @@ class Parser(accountReportbase):
         #With all_accounts = False, return a dictionary with account_id as key and four values: Balance, credit, debit and initial_balance
         if all_accounts:
             #Child list can be a list of int or browse_record list
-            for c in child_list:                
+            for c in child_list:
                 if isinstance(c, orm.browse_record):
                     list_accounts.append(c.id)
                     account_id = c.id
@@ -85,6 +88,8 @@ class Parser(accountReportbase):
                 
                 if account_id in result_dict.keys():
                     initial_balance += result_dict[account_id]['balance']
+                    
+                    currency= result_dict[account_id]['currency']
                     
             #Call get_move_lines method to calculate debit and credit 
             move_lines = account_report_lib.get_move_lines(cr, uid, 
@@ -102,26 +107,31 @@ class Parser(accountReportbase):
             for line in move_lines:
                 debit += line.debit
                 credit += line.credit
-                
+                currency = line.currency_id.name
+                amount_currency = line.amount_currency
+                foreign_balance = 0.0 # falta Revisar
             balance += initial_balance + debit - credit
                 
-            return balance, debit, credit, initial_balance
+            return balance, debit, credit, initial_balance,currency, amount_currency, foreign_balance
         
         else:
             for c in child_list:
                 balance = 0.0 
                 credit = 0.0 
                 debit = 0.0 
-                initial_balance = 0.0               
+                initial_balance = 0.0
+                currency = ''
+                amount_currency = 0.0
+                foreign_balance = 0.0
                 
                 if isinstance(c, orm.browse_record):
                     account_id = c.id
                     
                 elif isinstance(c, int):
-                     account_id = c                
+                     account_id = c
             
                 initial_balance = result_dict[account_id]['balance']
-                
+                foreign_balance = result_dict[account_id]['foreign_balance']
                 move_lines = account_report_lib.get_move_lines(cr, uid, 
                                          account_ids = [account_id], 
                                          filter_type=filter_type, 
@@ -137,14 +147,18 @@ class Parser(accountReportbase):
                 for line in move_lines:
                     debit += line.debit
                     credit += line.credit
-                    
+                    currency = line.currency_id.name
+                    amount_currency = line.amount_currency
                 balance += initial_balance + debit - credit
-                
+                foreign_balance += foreign_balance
                 res[account_id] = {
                                    'initial_balance': initial_balance,
                                    'debit': debit,
                                    'credit': credit,
                                    'balance': balance, 
+                                   'currency':currency,
+                                   'amount_currency':amount_currency,
+                                   'foreign_balance': foreign_balance,
                                    
                                    }
                 
@@ -167,7 +181,7 @@ class Parser(accountReportbase):
         library_obj = self.pool.get('account.webkit.report.library') 
         
         #1. Extract children. It's a list of dictionaries.
-        child_list = structure['account_type_child']       
+        child_list = structure['account_type_child']
         
         '''
             Display_detail = no_detail = special case
@@ -178,7 +192,7 @@ class Parser(accountReportbase):
             final_data_parent['code'] = '' 
             final_data_parent['is_parent'] = False
             final_data_parent['level'] = 0
-            final_data_parent['display_detail'] = 'no_detail'   
+            final_data_parent['display_detail'] = 'no_detail'
             
             #In account type, iterate in child, because child is all accounts that
             #match with account types selected.
@@ -189,12 +203,12 @@ class Parser(accountReportbase):
                 
             if len(list_ids) > 0:
                 #Compute the balance, debit and credit for child ids list.  
-                #Try to reduce numbers of call to get_account_balance method.       
+                #Try to reduce numbers of call to get_account_balance method.  
                 result_dict = library_obj.get_account_balance(cr,uid, 
                                                                     list_ids, 
-                                                                    ['balance'],     
-                                                                    initial_balance=True,                                                                                   
-                                                                    fiscal_year_id=fiscal_year.id,                                                                                
+                                                                    ['balance','foreign_balance'],
+                                                                    initial_balance=True,
+                                                                    fiscal_year_id=fiscal_year.id,
                                                                     state = target_move,
                                                                     start_date= start_date,
                                                                     end_date=end_date,
@@ -202,11 +216,11 @@ class Parser(accountReportbase):
                                                                     end_period_id = end_period_id,
                                                                     chart_account_id=chart_account_id.id,
                                                                     filter_type=filter_type)
-                
+                #foreign_balance = result_dict[]
                 #Compute all result in one line.
                 #list_ids have all the accounts.
                 all_accounts = True
-                balance, debit, credit, initial_balance = self.compute_data(cr, uid, 
+                balance, debit, credit, initial_balance, currency, amount_currency, foreign_balance = self.compute_data(cr, uid,
                                                         result_dict, 
                                                         list_ids, 
                                                         filter_type=filter_type, 
@@ -220,6 +234,9 @@ class Parser(accountReportbase):
                                             'credit':credit,
                                             'debit':debit,
                                             'balance': balance,
+                                            'currency':currency,
+                                            'amount_currency':amount_currency,
+                                            'foreign_balance':foreign_balance,
                                           })
                     
             else:
@@ -228,10 +245,13 @@ class Parser(accountReportbase):
                                              'credit':0.0,
                                              'debit':0.0,
                                              'balance': 0.0,
+                                             'currency':'',
+                                             'amount_currency': 0.0,
+                                             'foreign_balance': 0.0,
                                             })
                 
             #Update the dictionary with final results.
-            final_list.append(copy(final_data_parent))                    
+            final_list.append(copy(final_data_parent))
             
         else:  
             '''
@@ -257,6 +277,9 @@ class Parser(accountReportbase):
                         final_data_parent['debit'] = 0.0
                         final_data_parent['credit'] = 0.0
                         final_data_parent['balance'] = 0.0
+                        final_data_parent['currency'] = ''
+                        final_data_parent['amount_currency'] = 0.0
+                        final_data_parent['foreign_balance'] = 0.0
                         
                         #Add parent into list
                         final_list.append(copy(final_data_parent))
@@ -266,13 +289,16 @@ class Parser(accountReportbase):
                         final_data_parent['debit'] = ''
                         final_data_parent['credit'] = ''
                         final_data_parent['balance'] = ''
+                        final_data_parent['currency'] = ''
+                        final_data_parent['amount_currency'] = ''
+                        final_data_parent['foreign_balance'] = ''
                         
                         #Add parent into list
                         final_list.append(copy(final_data_parent))
                                    
                         #Build child in a dictionary
-                        if 'child_list' in final_data_parent.keys():   
-                           for c in final_data_parent['child_list']:                                                        
+                        if 'child_list' in final_data_parent.keys():
+                           for c in final_data_parent['child_list']:
                                final_data['id'] = c.id
                                final_data['level'] = c.level
 #                               if 'child' in final_data:
@@ -281,19 +307,19 @@ class Parser(accountReportbase):
                                final_data['code'] = c.code
                                final_data['is_parent'] = False
                                
-                               final_list.append(copy(final_data))                           
+                               final_list.append(copy(final_data))
                   
                    #Add child in final list and id to compute data.
                    for c in child:
                        list_ids.append(c.id)
                 
                 if len(list_ids) > 0: 
-                      #Compute the balance, debit and credit for child ids list.         
+                      #Compute the balance, debit and credit for child ids list.
                       result_dict = library_obj.get_account_balance(cr, uid, 
                                                                         list_ids, 
-                                                                        ['balance'],     
-                                                                        initial_balance=True,                                                                                   
-                                                                        fiscal_year_id=fiscal_year.id,                                                                                
+                                                                        ['balance','foreign_balance'],
+                                                                        initial_balance=True,
+                                                                        fiscal_year_id=fiscal_year.id,
                                                                         state = target_move,
                                                                         start_date= start_date,
                                                                         end_date=end_date,
@@ -307,9 +333,9 @@ class Parser(accountReportbase):
                     #final_list has categories and child of this categories
                     #Compute results for each category 
                     all_accounts = True
-                    for data in final_list:          
+                    for data in final_list:
                         if 'child_list' in data.keys():
-                           balance, debit, credit, initial_balance = self.compute_data(cr, uid, 
+                           balance, debit, credit, initial_balance, currency, amount_currency, foreign_balance = self.compute_data(cr, uid, 
                                                         result_dict, 
                                                         list_ids, 
                                                         filter_type=filter_type, 
@@ -322,6 +348,9 @@ class Parser(accountReportbase):
                                          'debit': debit,
                                          'credit': credit,
                                          'balance': balance,
+                                         'currency': currency,
+                                         'amount_currency': amount_currency,
+                                         'foreign_balance': foreign_balance,
                                          })
                         
                 #For this case, search id account in dictionary results and update dictionary. 
@@ -347,6 +376,9 @@ class Parser(accountReportbase):
                                          'debit':  res[data['id']]['debit'],
                                          'credit':  res[data['id']]['credit'],
                                          'balance': res[data['id']]['balance'],
+                                         'currency': res[data['id']]['currency'],
+                                         'amount_currency': res[data['id']]['amount_currency'],
+                                         'foreign_balance': res[data['id']]['foreign_balance'],
                                         })
 
         return final_list
@@ -370,7 +402,7 @@ class Parser(accountReportbase):
             final_data_parent['id'] = structure['code'] 
             final_data_parent['is_parent'] = True
             final_data_parent['level'] = 0    
-            final_data_parent['display_detail'] = 'no_detail'        
+            final_data_parent['display_detail'] = 'no_detail'
             
             #In accounts, iterate in parent, parent is 
             #accounts selected in list.
@@ -381,9 +413,9 @@ class Parser(accountReportbase):
                 #Compute the balance, debit and credit for child ids list.         
                 result_dict = library_obj.get_account_balance(cr, uid, 
                                                                 list_ids, 
-                                                                ['balance'],     
-                                                                initial_balance=True,                                                                                   
-                                                                fiscal_year_id=fiscal_year.id,                                                                                
+                                                                ['balance','foreign_balance'],
+                                                                initial_balance=True,
+                                                                fiscal_year_id=fiscal_year.id,
                                                                 state = target_move,
                                                                 start_date= start_date,
                                                                 end_date=end_date,
@@ -396,7 +428,7 @@ class Parser(accountReportbase):
                 #Compute all result in one line.
                 #list_ids have all the accounts.
                 all_accounts = True
-                balance, debit, credit, initial_balance = self.compute_data(cr, uid, 
+                balance, debit, credit, initial_balance, currency, amount_currency, foreign_balance = self.compute_data(cr, uid, 
                                                             result_dict, 
                                                             list_ids, 
                                                             filter_type=filter_type, 
@@ -410,6 +442,9 @@ class Parser(accountReportbase):
                                              'credit':credit,
                                              'debit':debit,
                                              'balance': balance,
+                                             'currency': currency,
+                                             'amount_currency': amount_currency,
+                                             'foreign_balance': foreign_balance,
                                             })
           
             else:
@@ -418,6 +453,9 @@ class Parser(accountReportbase):
                                              'credit':0.0,
                                              'debit':0.0,
                                              'balance': 0.0,
+                                             'currency':'',
+                                             'amount_currency': 0.0,
+                                             'foreign_balance':0.0,
                                             })
                 
             #Update the dictionary with final results.
@@ -440,6 +478,9 @@ class Parser(accountReportbase):
                 final_data_parent['debit'] = 0.0
                 final_data_parent['credit'] = 0.0
                 final_data_parent['balance'] = 0.0
+                final_data_parent['currency'] = ''
+                final_data_parent['amount_currency'] = 0.0
+                final_data_parent['foreign_balance'] = 0.0
                 
                 final_list.append(copy(final_data_parent)) 
                 
@@ -465,9 +506,9 @@ class Parser(accountReportbase):
                 #Compute the balance, debit and credit for child ids list.         
                 result_dict = library_obj.get_account_balance(cr, uid, 
                                                                     list_ids, 
-                                                                    ['balance', 'debit', 'credit'],     
-                                                                    initial_balance=True,                                                                                   
-                                                                    fiscal_year_id=fiscal_year.id,                                                                                
+                                                                    ['balance', 'debit', 'credit','foreign_balance'],
+                                                                    initial_balance=True,
+                                                                    fiscal_year_id=fiscal_year.id,
                                                                     state = target_move,
                                                                     start_date= start_date,
                                                                     end_date=end_date,
@@ -497,6 +538,9 @@ class Parser(accountReportbase):
                                  'debit':  res[data['id']]['debit'],
                                  'credit':  res[data['id']]['credit'],
                                  'balance': res[data['id']]['balance'],
+                                 'currency': res[data['id']]['currency'],
+                                 'amount_currency': res[data['id']]['amount_currency'],
+                                 'foreign_balance': res[data['id']]['foreign_balance']
                                 })
 
         return final_list
@@ -517,7 +561,7 @@ class Parser(accountReportbase):
         fiscal_year = self.get_fiscalyear(data)
         
         #get the filters
-        filter_type = self.get_filter(data)        
+        filter_type = self.get_filter(data)
                
         target_move = self.get_target_move(data)
         
@@ -574,7 +618,7 @@ class Parser(accountReportbase):
         if final_list != []:
             final_list = []
         
-        if isinstance(main_structure, list) == True:         
+        if isinstance(main_structure, list) == True:
             #TODO: Implement account_report (Valor en informe)
             for structure in main_structure:
                 if structure['type'] == 'account_type':
@@ -588,7 +632,7 @@ class Parser(accountReportbase):
         if type(main_structure) is types.DictType:
             self.get_total_result(cr, uid, main_structure['child'], data, final_list)
         
-        return final_list              
+        return final_list
     
     #Call all the methods that extract data, and build final dictionary with all the result.
     def get_data(self, data):
