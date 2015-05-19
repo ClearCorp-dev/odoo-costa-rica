@@ -322,10 +322,6 @@ msgstr "Con moneda"
 msgid "[('fiscalyear_id', '=', fiscalyear_id), ('special', '=', False)]"
 msgstr "[('fiscalyear_id', '=', fiscalyear_id), ('special', '=', False)]"
 
-#. module: l10n_cr_account_trial_balance_currency_report
-#: view:trial.balance.currency.report.wiz:l10n_cr_account_trial_balance_currency_report.trial_balance_currency_report_view
-msgid "[('type', '=', 'sum'),('account_type.code','=','TRIBAL')]"
-msgstr "[('type', '=', 'sum'),('account_type.code','=','TRIBAL')]"
 
 #. module: l10n_cr_account_trial_balance_currency_report
 #: view:trial.balance.currency.report.wiz:l10n_cr_account_trial_balance_currency_report.trial_balance_currency_report_view
