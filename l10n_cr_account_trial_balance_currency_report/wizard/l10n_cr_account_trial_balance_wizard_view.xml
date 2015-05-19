@@ -54,7 +54,7 @@
                     
                     <field name="account_base_report" position="attributes">
                         <attribute name="attrs">{'required':True}</attribute>
-                        <attribute name="domain">[('type', '=', 'sum'),('account_type.code','=','TRIBAL')]</attribute>
+                        <attribute name="domain">[('type', '=', 'sum'),('account_type.code','=','TRIBALCU')]</attribute>
                     </field>
                     
                     <group string="Partners" position="attributes">

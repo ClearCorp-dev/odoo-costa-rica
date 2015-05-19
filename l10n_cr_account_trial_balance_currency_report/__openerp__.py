@@ -29,6 +29,12 @@
 Trial Balance Currency Report.
 ==============================
 Create the Trial Balance Currency report
+
+Configuration:
+ 1. Configure type account that it will appear in wizard. 
+ This configuration is in Accounting -> Financial Reports -> Account Reports and 
+ select in field "Base Catalog Account Type" choose option create a new Base Catalog Account Type 
+ with code "TRIBACU".
     """,
     'website': "http://clearcorp.co.cr",
     'depends': ['account_report_lib',
