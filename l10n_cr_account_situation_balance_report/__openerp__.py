@@ -33,6 +33,7 @@ Create the situation balance report
     'website': "http://clearcorp.co.cr",
     'depends': ['account_report_lib', ],
     'data': [
+             'data/report_paperformat.xml',
              'security/ir.model.access.csv',
              'report/report.xml',
              'wizard/l10n_cr_account_situation_balance_wizard_view.xml',

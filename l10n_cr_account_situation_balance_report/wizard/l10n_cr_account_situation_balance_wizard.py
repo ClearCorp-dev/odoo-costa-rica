@@ -30,10 +30,12 @@ class situationBalancereportWizard(osv.osv_memory):
 
     _columns = {
         'account_base_report':fields.many2one('account.financial.report', string="Account Base Report",domain=[('parent_id','=', False), ('account_type.code','=','SITBAL')]),
+        'out_format': fields.selection([('pdf','PDF')], 'Print Format'),
     }
 
     _defaults = {
             'filter': 'filter_period',
+            'out_format': 'pdf',
     }
 
     def _print_report(self, cr, uid, ids, data, context=None):

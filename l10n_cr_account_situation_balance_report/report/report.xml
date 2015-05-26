@@ -10,5 +10,8 @@
         file="l10n_cr_account_situation_balance_report.report_situation_balance"
         menu="False"
         />
+        <record id="action_report_situation_balance" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="paperformat_us_landscape"/>
+        </record>
     </data>
 </openerp>
