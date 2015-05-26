@@ -113,55 +113,65 @@
                                 <t t-foreach="get_data(data)" t-as="account">
                                     <t t-if="account['level'] == 0 or account['level'] == 1"> <!-- if is parent -->
                                         <tr>
-                                            <t t-foreach="range(account['level']-1)" t-as="level">
-                                            </t>
                                             <td style="border: 1px solid #000000 "
-                                                class="text-center">
-                                                <span t-esc="account['code']"></span>
-                                                <span t-esc="account['name']"></span>
+                                                class="text-left">
+                                                <t t-foreach="range(account['level']-1)" t-as="level">
+                                                    <span style="white-space: pre;"> </span>
+                                                </t>
+                                                <strong><span t-esc="account['code']"></span>
+                                                <span t-esc="account['name']"></span></strong>
                                             </td >
                                             <td style="border: 1px solid #000000 "
                                                 class="text-center">
-                                                <span t-esc="formatLang(account['initial_balance'])"></span>
+                                                <strong><span t-esc="formatLang(account['initial_balance'])"></span>
+                                                </strong>
                                             </td >
                                             <td style="border: 1px solid #000000 "
                                                 class="text-center">
-                                                <span t-esc="formatLang(account['debit'])"></span>
+                                                <strong><span t-esc="formatLang(account['debit'])"></span>
+                                                </strong>
                                             </td>
                                             <td style="border: 1px solid #000000 "
                                                 class="text-center">
-                                                <span t-esc="formatLang(account['credit'])"></span>
+                                                <strong><span t-esc="formatLang(account['credit'])"></span>
+                                                </strong>
                                             </td>
                                             <td style="border: 1px solid #000000 "
                                                 class="text-center">
-                                                <span t-esc="formatLang(account['balance'])"></span>
+                                                <strong><span t-esc="formatLang(account['balance'])"></span>
+                                                </strong>
                                             </td>
                                         </tr>
                                     </t>
-                                    <t t-foreach="range(account['level']-1)" t-as="level">
-                                        <tr>
-                                            <td style="border: 1px solid #000000 "
-                                                class="text-center">
-                                                <span t-esc="account['code']"></span>
-                                                <span t-esc="account['name']"></span>
-                                            </td>
-                                            <td style="border: 1px solid #000000 "
-                                                class="text-center">
-                                                <span t-esc="formatLang(account['initial_balance'])"></span>
-                                            </td >
-                                            <td style="border: 1px solid #000000 "
-                                                class="text-center">
-                                                <span t-esc="formatLang(account['debit'])"></span>
-                                            </td>
-                                            <td style="border: 1px solid #000000 "
-                                                class="text-center">
-                                                <span t-esc="formatLang(account['credit'])"></span>
-                                            </td>
-                                            <td style="border: 1px solid #000000 "
-                                                class="text-center">
-                                                <span t-esc="formatLang(account['balance'])"></span>
-                                            </td>
-                                        </tr>
+                                    <t t-if="account['level'] > 0 or account['level'] > 1">
+                                        <t t-if="account['level'] > 1">
+                                            <tr>
+                                                <td style="border: 1px solid #000000 "
+                                                    class="text-left">
+                                                    <t t-foreach="range(account['level']-1)" t-as="level">
+                                                        <span style="white-space: pre;">  </span>
+                                                    </t>
+                                                    <span t-esc="account['code']"></span>
+                                                    <span t-esc="account['name']"></span>
+                                                </td>
+                                                <td style="border: 1px solid #000000 "
+                                                    class="text-center">
+                                                    <span t-esc="formatLang(account['initial_balance'])"></span>
+                                                </td >
+                                                <td style="border: 1px solid #000000 "
+                                                    class="text-center">
+                                                    <span t-esc="formatLang(account['debit'])"></span>
+                                                </td>
+                                                <td style="border: 1px solid #000000 "
+                                                    class="text-center">
+                                                    <span t-esc="formatLang(account['credit'])"></span>
+                                                </td>
+                                                <td style="border: 1px solid #000000 "
+                                                    class="text-center">
+                                                    <span t-esc="formatLang(account['balance'])"></span>
+                                                </td>
+                                            </tr>
+                                        </t>
                                     </t>
                                 </t>
                             </tbody>
