@@ -72,43 +72,46 @@
                     <tbody>
                         <t t-foreach="get_data(data)" t-as="account">
                             <t t-if=" account['level'] == 0 or account['level'] == 1">
-                                <t for-each="range(account['level']-1)" t-as="level">
-                                   
-                                    <tr>
-                                        <td style="border: 1px solid #000000 "
-                                            class="text-center">
-                                            <strong><span t-esc="account['code']"> -
-                                            </span>
-                                            <span t-esc="account['name']"> 
-                                            </span></strong>
-                                        </td>
-                                        <td style="border: 1px solid #000000 "
-                                            class="text-center">
-                                            <strong><span t-esc="formatLang(account['total_fiscal_year'])"> 
-                                            </span></strong>
-                                        </td>
-                                        <td style="border: 1px solid #000000 "
-                                            class="text-center">
-                                            <strong><span t-esc="formatLang(account['total_period'])"> 
-                                            </span></strong>
-                                        </td>
-                                        <td style="border: 1px solid #000000 "
-                                            class="text-center">
-                                            <strong><span t-esc="formatLang(account['total_variation'])"> 
-                                            </span></strong>
-                                        </td>
-                                        <td style="border: 1px solid #000000 "
-                                            class="text-center">
-                                            <strong><span t-esc="formatLang(account['total_percent_variation'])"> 
-                                            </span></strong>
-                                        </td>
-                                    </tr>
-                                </t>
-                            </t>
-                            <t t-foreach="range(account['level']-1)" t-as="level">
                                 <tr>
                                     <td style="border: 1px solid #000000 "
+                                        class="text-left">
+                                        <t t-foreach="range(account['level']-1)" t-as="level">
+                                            <span style="white-space: pre;"> </span>
+                                        </t>
+                                        <strong><span t-esc="account['code']"> -
+                                        </span>
+                                        <span t-esc="account['name']"> 
+                                        </span></strong>
+                                    </td>
+                                    <td style="border: 1px solid #000000 "
                                         class="text-center">
+                                        <strong><span t-esc="formatLang(account['total_fiscal_year'])"> 
+                                        </span></strong>
+                                    </td>
+                                    <td style="border: 1px solid #000000 "
+                                        class="text-center">
+                                        <strong><span t-esc="formatLang(account['total_period'])"> 
+                                        </span></strong>
+                                    </td>
+                                    <td style="border: 1px solid #000000 "
+                                        class="text-center">
+                                        <strong><span t-esc="formatLang(account['total_variation'])"> 
+                                        </span></strong>
+                                    </td>
+                                    <td style="border: 1px solid #000000 "
+                                        class="text-center">
+                                        <strong><span t-esc="formatLang(account['total_percent_variation'])"> 
+                                        </span></strong>
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-if="account['level'] > 0 or account['level'] > 1">
+                                <tr>
+                                    <td style="border: 1px solid #000000 "
+                                        class="text-left">
+                                        <t t-foreach="range(account['level']-1)" t-as="level">
+                                            <span style="white-space: pre;">  </span>
+                                        </t>
                                         <span t-esc="account['code']"> -
                                         </span>
                                         <span t-esc="account['name']">

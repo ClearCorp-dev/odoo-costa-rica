@@ -39,8 +39,8 @@
                         <attribute name="invisible">True</attribute>
                     </group>   
                   <group string="Journals" position="attributes">
-                        <attribute name="attrs">{'invisible': False, 'required':False}</attribute>
-                   </group>                
+                        <attribute name="attrs">{'invisible': True, 'required':False}</attribute>
+                   </group>
                   <group string="Advanced options" position="attributes">  
                      <attribute name="attrs">{'invisible': True}</attribute>
                   </group>

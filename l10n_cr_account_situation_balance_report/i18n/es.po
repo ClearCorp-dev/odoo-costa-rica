@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-27 15:41+0000\n"
-"PO-Revision-Date: 2015-04-27 15:41+0000\n"
+"POT-Creation-Date: 2015-05-26 20:54+0000\n"
+"PO-Revision-Date: 2015-05-26 20:54+0000\n"
 "Last-Translator: Fabio Vilchez\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -137,12 +137,12 @@ msgstr "Mantener vacío para todo el año fiscal abierto"
 #. module: l10n_cr_account_situation_balance_report
 #: field:situation.balance.report.wiz,write_uid:0
 msgid "Last Updated by"
-msgstr "Última actulización por"
+msgstr "Última actualización por"
 
 #. module: l10n_cr_account_situation_balance_report
 #: field:situation.balance.report.wiz,write_date:0
 msgid "Last Updated on"
-msgstr "Última actulización en"
+msgstr "Última actualización en"
 
 #. module: l10n_cr_account_situation_balance_report
 #: view:website:l10n_cr_account_situation_balance_report.report_situation_balance
@@ -161,6 +161,11 @@ msgstr "Sin filtros"
 
 #. module: l10n_cr_account_situation_balance_report
 #: view:website:l10n_cr_account_situation_balance_report.report_situation_balance
+msgid "Odoo:"
+msgstr "Odoo:"
+
+#. module: l10n_cr_account_situation_balance_report
+#: view:website:l10n_cr_account_situation_balance_report.report_situation_balance
 msgid "Open fiscal year"
 msgstr "Año fiscal abierto"
 
@@ -170,15 +175,20 @@ msgid "PDF"
 msgstr "PDF"
 
 #. module: l10n_cr_account_situation_balance_report
+#: view:website:l10n_cr_account_situation_balance_report.report_situation_balance
+msgid "Page:"
+msgstr "Página:"
+
+#. module: l10n_cr_account_situation_balance_report
 #: view:situation.balance.report.wiz:l10n_cr_account_situation_balance_report.situation_balance_report_view_webkit
 #: field:situation.balance.report.wiz,res_partners_ids:0
 msgid "Partners"
-msgstr "Enpresas"
+msgstr "Empresas"
 
 #. module: l10n_cr_account_situation_balance_report
 #: view:situation.balance.report.wiz:l10n_cr_account_situation_balance_report.situation_balance_report_view_webkit
 msgid "Period"
-msgstr "Periodo"
+msgstr "Período"
 
 #. module: l10n_cr_account_situation_balance_report
 #: selection:situation.balance.report.wiz,filter:0
@@ -198,7 +208,7 @@ msgstr "Seleccionar catálogo de cuentas"
 #. module: l10n_cr_account_situation_balance_report
 #: view:website:l10n_cr_account_situation_balance_report.report_situation_balance
 msgid "Selected period"
-msgstr "Periodo selecionado"
+msgstr "Período actual"
 
 #. module: l10n_cr_account_situation_balance_report
 #: model:ir.actions.report.xml,name:l10n_cr_account_situation_balance_report.action_report_situation_balance
@@ -267,24 +277,19 @@ msgid "With Currency"
 msgstr "Con Moneda"
 
 #. module: l10n_cr_account_situation_balance_report
-#: selection:situation.balance.report.wiz,out_format:0
-msgid "XLS"
-msgstr "XLS"
-
-#. module: l10n_cr_account_situation_balance_report
 #: view:situation.balance.report.wiz:l10n_cr_account_situation_balance_report.situation_balance_report_view_webkit
 msgid "[('state', '=', 'draft'), ('special', '=', False),('fiscalyear_id', '=', fiscalyear_id)]"
 msgstr "[('state', '=', 'draft'), ('special', '=', False),('fiscalyear_id', '=', fiscalyear_id)]"
 
 #. module: l10n_cr_account_situation_balance_report
 #: view:situation.balance.report.wiz:l10n_cr_account_situation_balance_report.situation_balance_report_view_webkit
-msgid "{'invisible': False, 'required':False}"
-msgstr "{'invisible': False, 'required':False}"
+msgid "{'invisible': True, 'required': False}"
+msgstr "{'invisible': True, 'required': False}"
 
 #. module: l10n_cr_account_situation_balance_report
 #: view:situation.balance.report.wiz:l10n_cr_account_situation_balance_report.situation_balance_report_view_webkit
-msgid "{'invisible': True, 'required': False}"
-msgstr "{'invisible': True, 'required': False}"
+msgid "{'invisible': True, 'required':False}"
+msgstr "{'invisible': True, 'required':False}"
 
 #. module: l10n_cr_account_situation_balance_report
 #: view:situation.balance.report.wiz:l10n_cr_account_situation_balance_report.situation_balance_report_view_webkit
@@ -300,4 +305,3 @@ msgstr "{'required': True}"
 #: view:situation.balance.report.wiz:l10n_cr_account_situation_balance_report.situation_balance_report_view_webkit
 msgid "{'required': [('filter', '=', 'filter_period')]}"
 msgstr "{'required': [('filter', '=', 'filter_period')]}"
-
