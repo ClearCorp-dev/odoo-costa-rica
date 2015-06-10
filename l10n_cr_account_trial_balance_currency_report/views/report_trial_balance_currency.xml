@@ -37,7 +37,6 @@
                         </table>
                     </div>
                 </div>
-                <br />
                 <div class="row zero_min_height">
                     <div class="col-xs-12">
                         <div style="border-bottom: 1px solid black;"></div>
@@ -230,7 +229,6 @@
                     </table>
                 </div>
             </div>
-            <br />
             <br />
             <div class="footer" style="font-size:15px;">
                 <div class="text-center" style="border-top: 1px solid black;">
