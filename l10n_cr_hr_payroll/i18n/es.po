@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-29 00:33+0000\n"
-"PO-Revision-Date: 2015-03-29 00:33+0000\n"
+"POT-Creation-Date: 2015-06-17 15:05+0000\n"
+"PO-Revision-Date: 2015-06-17 15:05+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,16 +16,50 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: l10n_cr_hr_payroll
+#: model:email.template,body_html:l10n_cr_hr_payroll.email_template_payslip
+msgid "\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Collaborator ${object.employee_id.name},</p>\n"
+"    <p>Attached payslip.</p>\n"
+"    <p>If you have any question, do not hesitate to contact me.</p>\n"
+"</div>\n"
+"            "
+msgstr "\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Colaborador ${object.employee_id.name},</p>\n"
+"    <p>Se adjunta comprobante de pago de su planilla.</p>\n"
+"    <p>En caso de preguntas, no dude en contactarme.</p>\n"
+"</div>\n"
+"            "
+
+#. module: l10n_cr_hr_payroll
+#: model:email.template,report_name:l10n_cr_hr_payroll.email_template_payslip
+msgid "${object.name or ''}"
+msgstr "${object.name or ''}"
+
+#. module: l10n_cr_hr_payroll
+#: model:email.template,subject:l10n_cr_hr_payroll.email_template_payslip
+msgid "${object.name|safe}"
+msgstr "${object.name|safe}"
+
+#. module: l10n_cr_hr_payroll
 #: field:hr.config.settings,amount_per_child:0
 #: field:res.company,amount_per_child:0
 msgid "Amount per Child"
-msgstr "Monto por hijo"
+msgstr "Monto por hijos"
 
 #. module: l10n_cr_hr_payroll
 #: field:hr.config.settings,amount_per_spouse:0
 #: field:res.company,amount_per_spouse:0
 msgid "Amount per spouse"
-msgstr "Monto por cónyuge"
+msgstr "Monto por cónyugue"
+
+#. module: l10n_cr_hr_payroll
+#: selection:hr.payslip.run,schedule_pay:0
+msgid "Annually"
+msgstr "Anualmente"
 
 #. module: l10n_cr_hr_payroll
 #: view:website:l10n_cr_hr_payroll.report_payroll_periods
@@ -42,6 +76,16 @@ msgid "Base"
 msgstr "Base"
 
 #. module: l10n_cr_hr_payroll
+#: selection:hr.payslip.run,schedule_pay:0
+msgid "Bi-monthly"
+msgstr "Bi-semanal"
+
+#. module: l10n_cr_hr_payroll
+#: selection:hr.payslip.run,schedule_pay:0
+msgid "Bi-weekly"
+msgstr "Bi-semanal"
+
+#. module: l10n_cr_hr_payroll
 #: view:website:l10n_cr_hr_payroll.report_payroll_periods
 #: view:website:l10n_cr_hr_payroll.report_payroll_periods_employee
 #: view:website:l10n_cr_hr_payroll.report_payslip_run
@@ -55,9 +99,14 @@ msgid "Cancel"
 msgstr "Descartar"
 
 #. module: l10n_cr_hr_payroll
+#: field:hr.job,code:0
+msgid "Code"
+msgstr "Código"
+
+#. module: l10n_cr_hr_payroll
 #: model:ir.model,name:l10n_cr_hr_payroll.model_res_company
 msgid "Companies"
-msgstr "Compañías"
+msgstr "Compañias"
 
 #. module: l10n_cr_hr_payroll
 #: field:hr.config.settings,rent_company_id:0
@@ -82,6 +131,11 @@ msgstr "Creado por"
 #: field:l10n.cr.hr.payroll.by.periods.employee,create_date:0
 msgid "Created on"
 msgstr "Creado el"
+
+#. module: l10n_cr_hr_payroll
+#: help:hr.payslip,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr "Fecha del último mensaje publicado en el registro."
 
 #. module: l10n_cr_hr_payroll
 #: view:website:l10n_cr_hr_payroll.report_payroll_periods
@@ -114,7 +168,7 @@ msgstr "Periodo final"
 #. module: l10n_cr_hr_payroll
 #: constraint:hr.employee:0
 msgid "Error! The number of child to report must be greater or equal to zero."
-msgstr "Error! El número de hijos a reportar debe ser mayor o igual a cero."
+msgstr "Error! El número de hijos a reportar debe ser mayor o igual a cero"
 
 #. module: l10n_cr_hr_payroll
 #: view:website:l10n_cr_hr_payroll.report_payroll_periods
@@ -140,7 +194,27 @@ msgstr "Filtros"
 #: field:hr.config.settings,first_limit:0
 #: field:res.company,first_limit:0
 msgid "First Limit"
-msgstr "Primer límite"
+msgstr "Primer Límite"
+
+#. module: l10n_cr_hr_payroll
+#: field:hr.payslip,message_follower_ids:0
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: l10n_cr_hr_payroll
+#: field:hr.payslip.run,period_id:0
+msgid "Force Period"
+msgstr "Forzar período"
+
+#. module: l10n_cr_hr_payroll
+#: field:hr.payslip,forced_period_id:0
+msgid "Force period"
+msgstr "Forzar periodo"
+
+#. module: l10n_cr_hr_payroll
+#: selection:hr.payslip.run,schedule_pay:0
+msgid "Fortnightly"
+msgstr "Quincenal"
 
 #. module: l10n_cr_hr_payroll
 #: view:l10n.cr.hr.payroll.by.periods:l10n_cr_hr_payroll.view_payroll_by_periods_form
@@ -150,10 +224,21 @@ msgstr "Opciones generales"
 
 #. module: l10n_cr_hr_payroll
 #: view:website:l10n_cr_hr_payroll.report_payroll_periods
+#: view:website:l10n_cr_hr_payroll.report_payslip_run
+msgid "General Total"
+msgstr "Total General"
+
+#. module: l10n_cr_hr_payroll
+#: view:website:l10n_cr_hr_payroll.report_payroll_periods
 #: view:website:l10n_cr_hr_payroll.report_payroll_periods_employee
 #: view:website:l10n_cr_hr_payroll.report_payslip_run
 msgid "Gross"
 msgstr "Bruto"
+
+#. module: l10n_cr_hr_payroll
+#: help:hr.payslip,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
+msgstr "Contiene el resumen del chatter (nº de mensajes, ...). Este resumen viene directamente en formato HTML para poder ser insertado en las vistas kanban."
 
 #. module: l10n_cr_hr_payroll
 #: field:l10n.cr.hr.payroll.by.periods,id:0
@@ -172,9 +257,29 @@ msgid "ID card"
 msgstr "ID"
 
 #. module: l10n_cr_hr_payroll
+#: help:hr.payslip,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr "Si está marcado, hay nuevos mensajes que requieren su atención."
+
+#. module: l10n_cr_hr_payroll
 #: help:hr.employee,report_spouse:0
 msgid "If this employee reports his spouse for rent payment"
-msgstr "Si este empleado report su cónyuge para pago de renta"
+msgstr "Si este empleado reporta su cónyuge para el pago de la renta"
+
+#. module: l10n_cr_hr_payroll
+#: field:hr.payslip,message_is_follower:0
+msgid "Is a Follower"
+msgstr "Es un seguidor"
+
+#. module: l10n_cr_hr_payroll
+#: model:ir.model,name:l10n_cr_hr_payroll.model_hr_job
+msgid "Job Description"
+msgstr "Descripción del trabajo"
+
+#. module: l10n_cr_hr_payroll
+#: field:hr.payslip,message_last_post:0
+msgid "Last Message Date"
+msgstr "Fecha del último mensaje"
 
 #. module: l10n_cr_hr_payroll
 #: field:l10n.cr.hr.payroll.by.periods,write_uid:0
@@ -187,6 +292,21 @@ msgstr "Ultima actualización por"
 #: field:l10n.cr.hr.payroll.by.periods.employee,write_date:0
 msgid "Last Updated on"
 msgstr "Ultima actualización el"
+
+#. module: l10n_cr_hr_payroll
+#: field:hr.payslip,message_ids:0
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: l10n_cr_hr_payroll
+#: help:hr.payslip,message_ids:0
+msgid "Messages and communication history"
+msgstr "Mensajes e historial de comunicación"
+
+#. module: l10n_cr_hr_payroll
+#: selection:hr.payslip.run,schedule_pay:0
+msgid "Monthly"
+msgstr "Mensual"
 
 #. module: l10n_cr_hr_payroll
 #: view:website:l10n_cr_hr_payroll.report_payroll_periods
@@ -217,14 +337,14 @@ msgstr "Número de hijos a reportar"
 #. module: l10n_cr_hr_payroll
 #: help:hr.employee,report_number_child:0
 msgid "Number of children to report for rent payment"
-msgstr "Número de hijos a reportar para el pago de renta"
+msgstr "Número de hijos a reportar por el pago de la renta"
 
 #. module: l10n_cr_hr_payroll
 #: view:website:l10n_cr_hr_payroll.report_payroll_periods
 #: view:website:l10n_cr_hr_payroll.report_payroll_periods_employee
 #: view:website:l10n_cr_hr_payroll.report_payslip_run
 msgid "Paid"
-msgstr "Devengado"
+msgstr "Pagado"
 
 #. module: l10n_cr_hr_payroll
 #: model:ir.model,name:l10n_cr_hr_payroll.model_hr_payslip
@@ -245,6 +365,11 @@ msgid "Payroll Report by Periods Employee"
 msgstr "Reporte de nomina por periodos empleado"
 
 #. module: l10n_cr_hr_payroll
+#: model:ir.model,name:l10n_cr_hr_payroll.model_payroll_report_for_month
+msgid "Payroll Report for Month"
+msgstr "Informe de Nómina para el mes"
+
+#. module: l10n_cr_hr_payroll
 #: model:ir.model,name:l10n_cr_hr_payroll.model_l10n_cr_hr_payroll_by_periods
 msgid "Payroll by Period"
 msgstr "Nómina por periodo"
@@ -262,6 +387,11 @@ msgid "Payroll by Periods"
 msgstr "Nómina por periodos"
 
 #. module: l10n_cr_hr_payroll
+#: view:website:l10n_cr_hr_payroll.report_payroll_periods_employee
+msgid "Payslip"
+msgstr "Nómina"
+
+#. module: l10n_cr_hr_payroll
 #: model:ir.actions.report.xml,name:l10n_cr_hr_payroll.payslip_run_report
 #: model:ir.model,name:l10n_cr_hr_payroll.model_hr_payslip_run
 #: view:website:l10n_cr_hr_payroll.report_payslip_run
@@ -269,10 +399,20 @@ msgid "Payslip Batches"
 msgstr "Lotes de nómina"
 
 #. module: l10n_cr_hr_payroll
+#: field:hr.employee,personal_email:0
+msgid "Personal Email"
+msgstr "Email Personal"
+
+#. module: l10n_cr_hr_payroll
 #: view:l10n.cr.hr.payroll.by.periods:l10n_cr_hr_payroll.view_payroll_by_periods_form
 #: view:l10n.cr.hr.payroll.by.periods.employee:l10n_cr_hr_payroll.view_payroll_by_periods_employee_form
 msgid "Print"
 msgstr "Imprimir"
+
+#. module: l10n_cr_hr_payroll
+#: selection:hr.payslip.run,schedule_pay:0
+msgid "Quarterly"
+msgstr "Trimestral"
 
 #. module: l10n_cr_hr_payroll
 #: code:addons/l10n_cr_hr_payroll/hr_salary_rule_inherit.py:150
@@ -290,12 +430,17 @@ msgstr "Renta"
 #. module: l10n_cr_hr_payroll
 #: view:hr.config.settings:l10n_cr_hr_payroll.view_human_resources_configuration_inherit
 msgid "Rent Configuration"
-msgstr "Configuración de renta"
+msgstr "Configuración de Renta"
+
+#. module: l10n_cr_hr_payroll
+#: model:ir.model,name:l10n_cr_hr_payroll.model_report_employee_by_periods
+msgid "Report Employee by Periods"
+msgstr "Informe de Empleado por períodos"
 
 #. module: l10n_cr_hr_payroll
 #: field:hr.employee,report_spouse:0
 msgid "Report Spouse"
-msgstr "Reportar cónyuge"
+msgstr "Reportar cónyugue"
 
 #. module: l10n_cr_hr_payroll
 #: view:l10n.cr.hr.payroll.by.periods.employee:l10n_cr_hr_payroll.view_payroll_by_periods_employee_form
@@ -303,10 +448,25 @@ msgid "Report employee by periods"
 msgstr "Reporte empleado por periodos"
 
 #. module: l10n_cr_hr_payroll
+#: field:hr.payslip.run,schedule_pay:0
+msgid "Scheduled Pay"
+msgstr "Frecuencia de pago"
+
+#. module: l10n_cr_hr_payroll
 #: field:hr.config.settings,second_limit:0
 #: field:res.company,second_limit:0
 msgid "Second Limit"
-msgstr "Segundo límite"
+msgstr "Segundo Límite"
+
+#. module: l10n_cr_hr_payroll
+#: selection:hr.payslip.run,schedule_pay:0
+msgid "Semi-annually"
+msgstr "Semestral"
+
+#. module: l10n_cr_hr_payroll
+#: view:hr.payslip:l10n_cr_hr_payroll.hr_payslip_view_form2_inherit
+msgid "Send by Email"
+msgstr "Enviar nómina"
 
 #. module: l10n_cr_hr_payroll
 #: field:l10n.cr.hr.payroll.by.periods,period_from:0
@@ -319,6 +479,37 @@ msgstr "Periodo inicial"
 #: view:website:l10n_cr_hr_payroll.report_payroll_periods_employee
 msgid "Structure:"
 msgstr "Estructura"
+
+#. module: l10n_cr_hr_payroll
+#: field:hr.payslip,message_summary:0
+msgid "Summary"
+msgstr "Resumen"
+
+#. module: l10n_cr_hr_payroll
+#: view:website:l10n_cr_hr_payroll.report_payroll_periods
+#: view:website:l10n_cr_hr_payroll.report_payslip_run
+msgid "Total"
+msgstr "Total"
+
+#. module: l10n_cr_hr_payroll
+#: field:hr.payslip,message_unread:0
+msgid "Unread Messages"
+msgstr "Mensajes sin leer"
+
+#. module: l10n_cr_hr_payroll
+#: field:hr.payslip,website_message_ids:0
+msgid "Website Messages"
+msgstr "Mensajes del sitio web"
+
+#. module: l10n_cr_hr_payroll
+#: help:hr.payslip,website_message_ids:0
+msgid "Website communication history"
+msgstr "Historial de comunicaciones del sitio web"
+
+#. module: l10n_cr_hr_payroll
+#: selection:hr.payslip.run,schedule_pay:0
+msgid "Weekly"
+msgstr "Semanal"
 
 #. module: l10n_cr_hr_payroll
 #: view:website:l10n_cr_hr_payroll.report_payroll_periods
@@ -339,3 +530,4 @@ msgstr "o"
 #: view:website:l10n_cr_hr_payroll.report_payslip_run
 msgid "to"
 msgstr "hasta"
+
