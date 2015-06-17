@@ -39,7 +39,8 @@ class hr_employee(models.Model):
 
     marital= fields.Selection([('single', 'Single'), ('married', 'Married'), ('widower', 'Widower'), ('divorced', 'Divorced')], String = 'Marital')
     report_spouse= fields.Boolean('Report Spouse', help="If this employee reports his spouse for rent payment")
-    report_number_child= fields.Integer('Number of children to report', help="Number of children to report for rent payment")       
+    report_number_child= fields.Integer('Number of children to report', help="Number of children to report for rent payment")
+    personal_email=fields.Char('Personal Email')
 
     _defaults = {
         'report_number_child': 0,

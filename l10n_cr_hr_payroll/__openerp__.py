@@ -42,7 +42,7 @@ This is the Costa Rica OpenERP localization and consists of:
     'depends': [
                 'hr_payroll_extended',
                 ],
-    'data': [
+    'data': ['data/l10n_cr_hr_payslip_action_data.xml',
              'data/l10n_cr_hr_payroll_salary_rule_category.xml',
              'data/l10n_cr_hr_payroll_salary_rule.xml',
              'data/report_paperformat.xml',

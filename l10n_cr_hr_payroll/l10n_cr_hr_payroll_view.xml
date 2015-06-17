@@ -10,8 +10,8 @@
             <field name="inherit_id" ref="hr.view_employee_form"/>
             <field name="arch" type="xml">
                 <data>
-                    <xpath expr="//page[@string='Personal Information']/group/group[@string='Status']/field[@name='marital']" position="after">
-                        <field name="report_spouse" attrs="{'invisible': [('marital', 'not in', ('married'))]}"/>
+                    <xpath expr="//page[@string='Personal Information']/group/group[@string='Contact Information']/field[@name='address_home_id']" position="after">
+                        <field name="personal_email"/>
                     </xpath>
                 </data>
             </field>
@@ -27,6 +27,20 @@
                     <field name="children" position="after">
                         <field name="report_number_child"/>
                     </field>
+                </data>
+            </field>
+        </record>
+        <!--Employee Children-->
+        <record id="hr_payslip_view_form2_inherit" model="ir.ui.view">
+            <field name="name">hr.payslip.view.form2.inherit</field>
+            <field name="model">hr.payslip</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <button name="cancel_sheet" position="after">
+                        <button name="action_payslip_send" string="Send by Email" type="object" states="done" class="oe_highlight"/>
+                    </button>
                 </data>
             </field>
         </record>
