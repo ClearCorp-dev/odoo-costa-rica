@@ -30,8 +30,8 @@ class generatorWizardCreate(osv.TransientModel):
 
     _columns = {
         'name': fields.char('Name', size=128),
-        'salary_rule_id': fields.many2one(
-            'hr.salary.rule', 'Salary Rule', required=True),
+        'salary_rule_ids': fields.many2many(
+            'hr.salary.rule', string='Salary Rules', required=True),
         'date_start': fields.date('Date Start', required=True),
         'date_end': fields.date('Date End', required=True),
         'data': fields.binary('File', readonly=True),
@@ -48,9 +48,10 @@ class generatorWizardCreate(osv.TransientModel):
     def generate_csv(self, cr, uid, ids, context=None):
         this = self.browse(cr, uid, ids)[0]
         this.name = 'ins_generated_file.csv'
+        codes = [rule.code for rule in this.salary_rule_ids]
         out = custom_encoder.encodeInsCsv(
             cr, uid, this.date_start, this.date_end,
-            this.salary_rule_id.code, context)
+            codes, context)
         self.write(cr, uid, ids, {
                 'state': 'get',
                 'data': out,

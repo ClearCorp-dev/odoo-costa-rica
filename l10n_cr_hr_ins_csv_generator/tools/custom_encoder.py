@@ -26,14 +26,14 @@ import csv
 import openerp.pooler as pooler
 
 
-def encodeInsCsv(cr, uid, date_start, date_end, code, context=None):
-    def _information_export(_buffer, cr, uid, code, context):
+def encodeInsCsv(cr, uid, date_start, date_end, codes, context=None):
+    def _information_export(_buffer, cr, uid, codes, context):
         def _get_user_wage(
-                cr, uid, pool, date_start, date_end, code, id, context):
+                cr, uid, pool, date_start, date_end, codes, _id, context):
             payslip_obj = pool.get('hr.payslip')
             payslip_ids = payslip_obj.search(
                 cr, uid, [
-                    ('employee_id', '=', id),
+                    ('employee_id', '=', _id),
                     ('date_to', '>=', date_start),
                     ('date_to', '<=', date_end)
                 ], context=context)
@@ -42,7 +42,7 @@ def encodeInsCsv(cr, uid, date_start, date_end, code, context=None):
             wage_sum = 0
             for payslip in payslips:
                 for line in payslip.line_ids:
-                    if line.salary_rule_id.code == code:
+                    if line.salary_rule_id.code in codes:
                         wage_sum += line.total
             return int(wage_sum)
 
@@ -87,12 +87,12 @@ def encodeInsCsv(cr, uid, date_start, date_end, code, context=None):
         for employee in employees:
             ins_wage = _get_user_wage(
                 cr, uid, pool, date_start, date_end,
-                code, employee.id, context)
+                codes, employee.id, context)
             tmp_employees.append((employee, ins_wage))
         _process(tmp_employees, _buffer)
 
     _buffer = cStringIO.StringIO()
-    _information_export(_buffer, cr, uid, code, context)
+    _information_export(_buffer, cr, uid, codes, context)
     out = base64.encodestring(_buffer.getvalue())
     _buffer.close()
     return out
