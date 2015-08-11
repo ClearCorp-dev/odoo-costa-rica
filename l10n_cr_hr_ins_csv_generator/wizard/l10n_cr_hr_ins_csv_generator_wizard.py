@@ -19,39 +19,43 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import base64
-import cStringIO
 
 from openerp.osv import osv, fields
 from ..tools import custom_encoder
 
+
 class generatorWizardCreate(osv.TransientModel):
-    
+
     _name = "hr.ins.csv.generator.generator.wizard"
-    
+
     _columns = {
-                'name': fields.char('Name', size=128),
-                'salary_rule_id':fields.many2one('hr.salary.rule','Salary Rule', required=True),
-                'date_start': fields.date('Date Start', required=True),
-                'date_end': fields.date('Date End', required=True),
-                'data': fields.binary('File', readonly=True),
-                'state': fields.selection([('generate','generate'), # generate file
-                                           ('get','get')], string="State"), # get the file
-                }
-    
+        'name': fields.char('Name', size=128),
+        'salary_rule_id': fields.many2one(
+            'hr.salary.rule', 'Salary Rule', required=True),
+        'date_start': fields.date('Date Start', required=True),
+        'date_end': fields.date('Date End', required=True),
+        'data': fields.binary('File', readonly=True),
+        'state': fields.selection([
+                ('generate', 'Generate'),  # generate file
+                ('get', 'Get')  # get the file
+            ], string='State'),
+    }
+
     _defaults = {
-                 'state': 'generate',
-                 }
+        'state': 'generate',
+    }
 
     def generate_csv(self, cr, uid, ids, context=None):
         this = self.browse(cr, uid, ids)[0]
         this.name = 'ins_generated_file.csv'
-        out = custom_encoder.encodeInsCsv(cr, uid, this.date_start,this.date_end,
-                                          this.salary_rule_id.code, context)
+        out = custom_encoder.encodeInsCsv(
+            cr, uid, this.date_start, this.date_end,
+            this.salary_rule_id.code, context)
         self.write(cr, uid, ids, {
-                                  'state': 'get',
-                                  'data': out,
-                                  'name':this.name}, context=context)
+                'state': 'get',
+                'data': out,
+                'name': this.name,
+            }, context=context)
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'hr.ins.csv.generator.generator.wizard',

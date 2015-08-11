@@ -22,34 +22,37 @@
 
 from openerp.osv import osv, fields
 
-class hrEmployee(osv.Model):
+
+class Employee(osv.Model):
+
     _inherit = 'hr.employee'
-    
+
     _defaults = {
-                 'ins_exportable': True,
-                 'ins_working_day': 'Tiempo completo',
-                 'ins_paid_days': 30,
-                 'ins_paid_hours': 240,
-                 }
-    
+        'ins_exportable': True,
+        'ins_working_day': 'Tiempo completo',
+        'ins_paid_days': 30,
+        'ins_paid_hours': 240,
+    }
+
     _columns = {
-                'ins_exportable': fields.boolean('Export?'),
-                'ins_id_type': fields.selection([
-                                                 ('CN','Cédula Nacional'),
-                                                 ('CR','Cédula Residencia'),
-                                                 ('NP', 'Número Pasaporte'),
-                                                 ('PT','Permiso Trabajo'),
-                                                 ('SD','Sin Documentos'),
-                                                 ], 'Id Type'),
-                'ins_name': fields.char('Name', size=128),
-                'ins_last_name1': fields.char('First Last Name', size=128),
-                'ins_last_name2': fields.char('Second Last Name', size=128),
-                'ins_working_day': fields.selection([('Tiempo completo','Tiempo completo'),
-                                                 ('Medio tiempo','Medio tiempo'),
-                                                 ('Ocasional','Ocasional'),
-                                                 ('Por jornales','Por jornales'),
-                                                 ],'Working Day'),
-                'ins_paid_days': fields.integer('Paid Days'),
-                'ins_paid_hours': fields.integer('Paid Hours'),
-                'ins_job_code': fields.char('Job Code'),
-                }
+        'ins_exportable': fields.boolean('Export?'),
+        'ins_id_type': fields.selection([
+                ('CN', 'Cédula Nacional'),
+                ('CR', 'Cédula Residencia'),
+                ('NP', 'Número Pasaporte'),
+                ('PT', 'Permiso Trabajo'),
+                ('SD', 'Sin Documentos'),
+            ], 'Id Type'),
+        'ins_name': fields.char('Name', size=128),
+        'ins_last_name1': fields.char('First Last Name', size=128),
+        'ins_last_name2': fields.char('Second Last Name', size=128),
+        'ins_working_day': fields.selection([
+                ('Tiempo completo', 'Tiempo completo'),
+                ('Medio tiempo', 'Medio tiempo'),
+                ('Ocasional', 'Ocasional'),
+                ('Por jornales', 'Por jornales'),
+            ], 'Working Day'),
+        'ins_paid_days': fields.integer('Paid Days'),
+        'ins_paid_hours': fields.integer('Paid Hours'),
+        'ins_job_code': fields.char('Job Code'),
+    }
