@@ -21,32 +21,29 @@
 ##############################################################################
 
 {
-    "name" : 'Costa Rica INS csv Generator',
-    "version" : '1.0',
-    "author" : 'ClearCorp',
+    'name': 'Costa Rica INS csv Generator',
+    'version': '1.0',
+    'author': 'ClearCorp',
     'complexity': 'normal',
-    "description": """
-Module build for the generation of custom files to upload information to the INS systems
+    'description': """
+Module build for the generation of custom files to
+ upload information to the INS systems.
     """,
-    "category": 'Human Resources',
-    "sequence": 4,
-    "website" : "http://clearcorp.co.cr",
-    "images" : [],
-    "icon" : False,
-    "depends" : [
-                 'hr_payroll',
-                 ],
-    "data" : [
-              'wizard/l10n_cr_hr_ins_csv_generator_wizard_view.xml',
-              'wizard/l10n_cr_hr_ins_csv_generator_wizard_menu.xml',
-              'view/l10n_cr_hr_ins_csv_generator_view.xml',
-              ],
-    "init_xml" : [],
-    "demo_xml" : [],
-    "update_xml" : [],
-    "test" : [],
-    "auto_install": False,
-    "application": False,
-    "installable": True,
+    'category': 'Human Resources',
+    'sequence': 4,
+    'website': 'http://clearcorp.co.cr',
+    'images': [],
+    'depends': [
+        'hr_payroll',
+    ],
+    'data': [
+        'wizard/l10n_cr_hr_ins_csv_generator_wizard_view.xml',
+        'wizard/l10n_cr_hr_ins_csv_generator_wizard_menu.xml',
+        'view/l10n_cr_hr_ins_csv_generator_view.xml',
+    ],
+    'test': [],
+    'auto_install': False,
+    'application': False,
+    'installable': True,
     'license': 'AGPL-3',
 }
