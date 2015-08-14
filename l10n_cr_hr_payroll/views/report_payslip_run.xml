@@ -47,7 +47,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr t-foreach="payslips" t-as="payslip">
+                                            <tr style="page-break-inside: avoid;" t-foreach="payslips" t-as="payslip">
                                                 <td name="employee">
                                                     <span t-field="payslip.employee_id" />
                                                 </td>
