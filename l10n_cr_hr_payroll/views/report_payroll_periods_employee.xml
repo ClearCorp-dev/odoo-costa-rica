@@ -53,7 +53,7 @@
                                                 </t>
                                             </td>
                                         </tr>
-                                        <tr t-foreach="payslips" t-as="payslip">
+                                        <tr style="page-break-inside: avoid;" t-foreach="payslips" t-as="payslip">
                                             <td>
                                                 <span t-esc="payslip.name" />
                                             </td>
