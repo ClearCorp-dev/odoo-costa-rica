@@ -1,14 +1,14 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
 #	* l10n_cr_hr_payroll_pay_generator_bcr
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.0\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-26 15:33+0000\n"
-"PO-Revision-Date: 2014-06-26 15:33+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2015-08-19 18:30+0000\n"
+"PO-Revision-Date: 2015-08-19 18:30+0000\n"
+"Last-Translator: Glen Sojo <glen.sojo@clearcorp.co.cr>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,60 +16,51 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: l10n_cr_hr_payroll_pay_generator_bcr
-#: code:addons/l10n_cr_hr_payroll_pay_generator_bcr/report/l10n_cr_hr_payroll_pay_generator_bcr_report.py:49
-#, python-format
+#: view:website:l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr
+msgid "Amount"
+msgstr "Importe"
+
+#. module: l10n_cr_hr_payroll_pay_generator_bcr
+#: model:ir.actions.report.xml,name:l10n_cr_hr_payroll_pay_generator_bcr.action_report_payroll_bcr
+msgid "BCR Payment Report"
+msgstr "Reporte de pagos BCR"
+
+#. module: l10n_cr_hr_payroll_pay_generator_bcr
+#: view:website:l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr
+msgid "Bank Account"
+msgstr "Cuenta bancaria"
+
+#. module: l10n_cr_hr_payroll_pay_generator_bcr
+#: view:website:l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr
 msgid "Concept"
 msgstr "Concepto"
 
 #. module: l10n_cr_hr_payroll_pay_generator_bcr
-#: code:addons/l10n_cr_hr_payroll_pay_generator_bcr/report/l10n_cr_hr_payroll_pay_generator_bcr_report.py:52
-#, python-format
-msgid "Office"
-msgstr "Oficina"
-
-#. module: l10n_cr_hr_payroll_pay_generator_bcr
-#: code:addons/l10n_cr_hr_payroll_pay_generator_bcr/report/l10n_cr_hr_payroll_pay_generator_bcr_report.py:67
-#, python-format
-msgid "Sequence"
-msgstr "Consecutivo"
-
-#. module: l10n_cr_hr_payroll_pay_generator_bcr
-#: model:ir.actions.report.xml,name:l10n_cr_hr_payroll_pay_generator_bcr.payroll_report_bcr
-msgid "Payroll Generator Banco de Costa Rica Report"
-msgstr "Reporte generador de nomina Banco de Costa Rica"
-
-#. module: l10n_cr_hr_payroll_pay_generator_bcr
-#: code:addons/l10n_cr_hr_payroll_pay_generator_bcr/report/l10n_cr_hr_payroll_pay_generator_bcr_report.py:55
-#, python-format
-msgid "Bank Account"
-msgstr "Cuenta Bancaria"
-
-#. module: l10n_cr_hr_payroll_pay_generator_bcr
-#: code:addons/l10n_cr_hr_payroll_pay_generator_bcr/report/l10n_cr_hr_payroll_pay_generator_bcr_report.py:58
-#, python-format
+#: view:website:l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr
 msgid "Currency"
 msgstr "Moneda"
 
 #. module: l10n_cr_hr_payroll_pay_generator_bcr
-#: code:addons/l10n_cr_hr_payroll_pay_generator_bcr/report/l10n_cr_hr_payroll_pay_generator_bcr_report.py:70
-#, python-format
-msgid "Amount"
-msgstr "Monto"
-
-#. module: l10n_cr_hr_payroll_pay_generator_bcr
-#: code:addons/l10n_cr_hr_payroll_pay_generator_bcr/report/l10n_cr_hr_payroll_pay_generator_bcr_report.py:61
-#, python-format
-msgid "Identification"
-msgstr "Identificación"
-
-#. module: l10n_cr_hr_payroll_pay_generator_bcr
-#: code:addons/l10n_cr_hr_payroll_pay_generator_bcr/report/l10n_cr_hr_payroll_pay_generator_bcr_report.py:64
-#, python-format
+#: view:website:l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr
 msgid "Employee Name"
-msgstr "Nombre del Empleado"
+msgstr "Nombre del empleado"
 
 #. module: l10n_cr_hr_payroll_pay_generator_bcr
-#: code:addons/l10n_cr_hr_payroll_pay_generator_bcr/report/l10n_cr_hr_payroll_pay_generator_bcr_report.py:73
-#, python-format
-msgid "Identification Type"
-msgstr "Tipo de Identificación"
+#: field:report.l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: l10n_cr_hr_payroll_pay_generator_bcr
+#: view:website:l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr
+msgid "Id Type"
+msgstr "Tipo de identificación"
+
+#. module: l10n_cr_hr_payroll_pay_generator_bcr
+#: view:website:l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr
+msgid "Office"
+msgstr "Oficina"
+
+#. module: l10n_cr_hr_payroll_pay_generator_bcr
+#: view:website:l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr
+msgid "Sequence"
+msgstr "Consecutivo"
