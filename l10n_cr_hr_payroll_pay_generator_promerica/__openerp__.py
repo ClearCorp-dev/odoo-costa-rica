@@ -26,21 +26,15 @@
     'category': 'Human Resources',
     'sequence': 3,
     'summary': 'Payroll generator for Promerica',
-    'description': """
-Promerica Payroll Generators
-============================
-
-Payroll generator for Promerica Bank""",
-    'author': 'CLEARCORP S.A.',
+    'author': 'ClearCorp',
     'website': 'http://clearcorp.co.cr',
-    'complexity': 'easy',
-    'images' : [],
     'depends': ['hr_payroll_pay_generator'],
     'data': [
-             'data/pay_types.xml',
-             'report/report.xml',
-             ],
-    'test' : [],
+        'data/pay_types.xml',
+        'views/report_payroll_promerica.xml',
+        'l10n_cr_hr_payroll_pay_generator_promerica_report.xml',
+    ],
+    'test': [],
     'demo': [],
     'installable': True,
     'auto_install': False,
