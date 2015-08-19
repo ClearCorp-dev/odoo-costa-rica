@@ -15,7 +15,7 @@
         </template>
         <template id="report_payroll_bcr">
             <div class="workbook">
-                <div class="worksheet" name="BAC" fixpages="1" wpages="1" hpages="0">
+                <div class="worksheet" name="BCR" fixpages="1" wpages="1" hpages="0">
                     <t t-call="l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr_header"></t>
                     <table>
                         <thead>
@@ -47,6 +47,7 @@
                                 <td><span t-esc="sequence"></span></td>
                                 <td><span t-esc="compute_payslip_lines(o._cr, o, salary_rule_id)['amount']"/></td>
                                 <td><span>1</span></td>
+                                <t t-set="sequence" t-value="sequence + 1"/>
                             </tr>
                         </tbody>
                     </table>
