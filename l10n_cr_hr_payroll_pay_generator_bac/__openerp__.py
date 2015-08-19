@@ -26,21 +26,18 @@
     'category': 'Human Resources',
     'sequence': 3,
     'summary': 'Payroll generator for BAC San Jose',
-    'description': """
-BAC Payroll Generators
-======================
-
-Payroll generator for BAC San Jose Bank""",
-    'author': 'CLEARCORP S.A.',
+    'author': 'ClearCorp',
     'website': 'http://clearcorp.co.cr',
-    'complexity': 'easy',
-    'images' : [],
-    'depends': ['hr_payroll_pay_generator'],
+    'depends': [
+        'hr_payroll_pay_generator',
+        'report_xls_template',
+    ],
     'data': [
-             'data/pay_types.xml',
-             'report/report.xml',
-             ],
-    'test' : [],
+        'data/pay_types.xml',
+        'views/report_payroll_bac.xml',
+        'l10n_cr_hr_payroll_pay_generator_bac_report.xml',
+    ],
+    'test': [],
     'demo': [],
     'installable': True,
     'auto_install': False,

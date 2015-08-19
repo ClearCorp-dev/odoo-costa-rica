@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+    <data>
+        <template id="report_payroll_bac_header">
+            <table>
+                <tbody>
+                    <tr>
+                        <td rowspan="4" colspan="4" easyfx="font: bold on, height 400; align: horiz center,vert center; border: right medium, top medium, left medium, bottom medium">
+                            <span t-field="res_company.name"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </template>
+        <template id="report_payroll_bac">
+            <div class="workbook">
+                <div class="worksheet" name="BAC" fixpages="1" wpages="1" hpages="0">
+                    <t t-call="l10n_cr_hr_payroll_pay_generator_bac.report_payroll_bac_header"></t>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th easyfx="font: bold on; align: horiz center; border: bottom medium">Reference</th>
+                                <th colwidth="30" easyfx="font: bold on; align: horiz center; border: bottom medium">Employee</th>
+                                <th colwidth="20" easyfx="font: bold on; align: horiz center; border: bottom medium">Bank Account</th>
+                                <th colwidth="25" easyfx="font: bold on; align: horiz center; border: bottom medium">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="docs" t-as="o">
+                                <td><span t-field="o.number"/></td>
+                                <td><span t-field="o.employee_id"/></td>
+                                <td>
+                                    <t t-if="o.employee_id.bank_account_id">
+                                        <span t-field="o.employee_id.bank_account_id.acc_number"/>
+                                    </t>
+                                </td>
+                                <td><span t-esc="compute_payslip_lines(o._cr, o, salary_rule_id)['amount']"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </template>
+    </data>
+</openerp>
