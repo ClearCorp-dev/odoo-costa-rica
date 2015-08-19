@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+    <data>
+        <template id="report_payroll_bcr_header">
+            <table>
+                <tbody>
+                    <tr>
+                        <td rowspan="4" colspan="9" easyfx="font: bold on, height 400; align: horiz center,vert center; border: right medium, top medium, left medium, bottom medium">
+                            <span t-field="res_company.name"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </template>
+        <template id="report_payroll_bcr">
+            <div class="workbook">
+                <div class="worksheet" name="BAC" fixpages="1" wpages="1" hpages="0">
+                    <t t-call="l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr_header"></t>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th easyfx="font: bold on; align: horiz center; border: bottom medium">Concept</th>
+                                <th easyfx="font: bold on; align: horiz center; border: bottom medium">Office</th>
+                                <th colwidth="20" easyfx="font: bold on; align: horiz center; border: bottom medium">Bank Account</th>
+                                <th easyfx="font: bold on; align: horiz center; border: bottom medium">Currency</th>
+                                <th easyfx="font: bold on; align: horiz center; border: bottom medium">Id</th>
+                                <th colwidth="30" easyfx="font: bold on; align: horiz center; border: bottom medium">Employee Name</th>
+                                <th easyfx="font: bold on; align: horiz center; border: bottom medium">Sequence</th>
+                                <th colwidth="25" easyfx="font: bold on; align: horiz center; border: bottom medium">Amount</th>
+                                <th easyfx="font: bold on; align: horiz center; border: bottom medium">Id Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="sequence" t-value="1"/>
+                            <tr t-foreach="docs" t-as="o">
+                                <td><span>2</span></td>
+                                <td><span>1</span></td>
+                                <td>
+                                    <t t-if="o.employee_id.bank_account_id">
+                                        <span t-field="o.employee_id.bank_account_id.acc_number"/>
+                                    </t>
+                                </td>
+                                <td><span>1</span></td>
+                                <td><span t-field="o.employee_id.identification_id"/></td>
+                                <td><span t-field="o.employee_id"/></td>
+                                <td><span t-esc="sequence"></span></td>
+                                <td><span t-esc="compute_payslip_lines(o._cr, o, salary_rule_id)['amount']"/></td>
+                                <td><span>1</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </template>
+    </data>
+</openerp>

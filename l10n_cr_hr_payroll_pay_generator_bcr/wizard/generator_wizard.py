@@ -20,27 +20,32 @@
 #
 ##############################################################################
 
-from openerp.osv import osv, fields
+from openerp import models, api
 
-class PayGenerator(osv.TransientModel):
+
+class PayGenerator(models.TransientModel):
 
     _inherit = 'hr.payroll.pay.generator.generator.wizard'
 
-    def generator_exectute(self, cr, uid, ids, context=None):
-        res = super(PayGenerator, self).generator_exectute(cr, uid, ids, context=context)
-        wizard = self.browse(cr, uid, ids[0], context=context)
-        if wizard.pay_type_id.code == 'bcr':
-            # return bcr report
-            employee_ids = [employee.id for employee in wizard.employee_ids]
+    @api.multi
+    def generator_exectute(self):
+        assert len(self) == 1, \
+            'This option should only be used for a single id at a time.'
+
+        if self.pay_type_id.code == 'bcr':
+            # Filter payslips by pay type
+            payslip_obj = self.env['hr.payslip']
+            slip_ids = payslip_obj.search([
+                ('payslip_run_id', '=', self.payslip_run_id.id),
+                ('employee_id', 'in', self.employee_ids.ids)
+            ])
             data = {
-                    'payslip_run_id': wizard.payslip_run_id.id,
-                    'employee_ids': employee_ids,
-                    'salary_rule_id': wizard.salary_rule_id.id,
+                'ids': slip_ids.ids,
+                'salary_rule_id': self.salary_rule_id.id
             }
-            return {
-                'type': 'ir.actions.report.xml',
-                'report_name': 'l10n_cr_hr_payroll_pay_generator_bcr_report',
-                'datas': data,
-                'context': context
-            }
-        return res
+            # return bac report
+            return self.env['report'].get_action(
+                slip_ids,
+                'l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr',
+                data=data)
+        return super(PayGenerator, self).generator_exectute()

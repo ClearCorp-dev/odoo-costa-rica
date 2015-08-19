@@ -26,25 +26,18 @@
     'category': 'Human Resources',
     'sequence': 3,
     'summary': 'Payroll generator for Banco de Costa Rica',
-    'description': """
-Banco de Costa Rica Payroll Generators
-======================================
-
-Payroll generator for Banco de Costa Rica Bank
-
-Important Information
----------------------
-* Bank Account Number Must use the format XXX-XXXXXXX in order to be used by report. In case it is not full account will be used""",
-    'author': 'CLEARCORP S.A.',
+    'author': 'ClearCorp',
     'website': 'http://clearcorp.co.cr',
-    'complexity': 'easy',
-    'images' : [],
-    'depends': ['hr_payroll_pay_generator'],
+    'depends': [
+        'hr_payroll_pay_generator',
+        'report_xls_template',
+    ],
     'data': [
-             'data/pay_types.xml',
-             'report/report.xml',
-             ],
-    'test' : [],
+        'data/pay_types.xml',
+        'views/report_payroll_bcr.xml',
+        'l10n_cr_hr_payroll_pay_generator_bcr_report.xml',
+    ],
+    'test': [],
     'demo': [],
     'installable': True,
     'auto_install': False,

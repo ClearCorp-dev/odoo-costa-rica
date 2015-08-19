@@ -20,4 +20,4 @@
 #
 ##############################################################################
 
-import l10n_cr_hr_payroll_pay_generator_bcr_report
+import report_payroll_bcr
