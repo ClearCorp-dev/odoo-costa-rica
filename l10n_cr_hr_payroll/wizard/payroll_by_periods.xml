@@ -13,6 +13,7 @@
                     <group string="Filters">
                         <group>
                             <field name="filter" required="True"/>
+                            <field name="format" required="True" />
                         </group>
                         <group>
                             <field name="period_from" 

@@ -21,6 +21,7 @@
 ##############################################################################
 
 import report_payroll_periods
+import report_payroll_xls
 import report_payroll_periods_employee
 import report_payslip_run
 
