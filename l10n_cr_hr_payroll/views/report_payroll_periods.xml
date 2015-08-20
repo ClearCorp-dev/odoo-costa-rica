@@ -40,7 +40,7 @@
                                     <tr style="page-break-inside:avoid; page-break-after:avoid;">
                                         <th>ID card</th>
                                         <th>Name</th>
-                                        <th>Bank account</th>
+                                        <th>Bank Account</th>
                                         <th>Nrm Hrs</th>
                                         <th>Ext Hrs</th>
                                         <th>Base</th>
@@ -61,10 +61,10 @@
                                         <t t-set="payslips" t-value="employee_data[1]" />
                                         <tr style="page-break-inside:avoid; page-break-after:avoid;">
                                             <td>
-                                                <span t-field="employee.name" />
+                                                <span t-field="employee.identification_id" />
                                             </td>
                                             <td>
-                                                <span t-field="employee.identification_id" />
+                                                <span t-field="employee.name" />
                                             </td>
                                             <td>
                                                 <t t-if="employee.bank_account_id">
