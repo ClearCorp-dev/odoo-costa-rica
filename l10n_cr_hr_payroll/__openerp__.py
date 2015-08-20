@@ -22,13 +22,14 @@
 
 {
     'name': 'Payroll Localization - Costa Rica',
-    'version': '1.0',
+    'version': '1.1',
     'category': 'Localization',
     'sequence': 38,
     'author': 'ClearCorp',
     'website': 'http://www.clearcorp.co.cr',
     'depends': [
         'hr_payroll_extended',
+        'report_xls_template',
     ],
     'data': [
         'data/l10n_cr_hr_payslip_action_data.xml',
@@ -39,7 +40,9 @@
         'l10n_cr_hr_payroll_view.xml',
         'security/ir.model.access.csv',
         'views/report_payroll_periods.xml',
+        'views/report_payroll_xls.xml',
         'views/report_payroll_periods_employee.xml',
+        'views/report_payroll_xls_employee.xml',
         'views/report_payslip_run.xml',
         'views/report_payslip.xml',
         'wizard/payroll_by_periods.xml',
