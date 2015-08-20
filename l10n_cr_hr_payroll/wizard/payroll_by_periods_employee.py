@@ -23,8 +23,8 @@
 from openerp import models, fields, api
 
 
-class PayrollByPeriodEmployee(models.TransientModel):
-    """Payroll by Period Employee"""
+class PayrollReportEmployee(models.TransientModel):
+    """Payroll Report Employee"""
 
     _name = 'l10n.cr.hr.payroll.by.periods.employee'
     _description = __doc__

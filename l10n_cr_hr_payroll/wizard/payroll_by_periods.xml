@@ -3,7 +3,7 @@
 <openerp>
     <data>
         <record id="view_payroll_by_periods_form" model="ir.ui.view">
-            <field name="name">Payroll Report by Periods</field>
+            <field name="name">Payroll Report</field>
             <field name="model">l10n.cr.hr.payroll.by.periods</field>
             <field name="arch" type="xml">
                 <form string="Payroll by Periods">
@@ -37,7 +37,7 @@
             </field>
         </record>
         <record id="action_payroll_by_periods" model="ir.actions.act_window">
-            <field name="name">Payroll Report by Periods</field>
+            <field name="name">Payroll Report</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">l10n.cr.hr.payroll.by.periods</field>
             <field name="view_type">form</field>
