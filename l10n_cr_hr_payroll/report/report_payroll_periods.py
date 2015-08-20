@@ -20,15 +20,15 @@
 #
 ##############################################################################
 
-import time
 from openerp.report import report_sxw
 from openerp import models
-from openerp.tools.translate import _
+
 
 class PayrollReportByPeriods(report_sxw.rml_parse):
 
     def __init__(self, cr, uid, name, context):
-        super(PayrollReportByPeriods, self).__init__(cr, uid, name, context=context)
+        super(PayrollReportByPeriods, self).__init__(
+                cr, uid, name, context=context)
         self.localcontext.update({
             'get_payslips_by_struct': self._get_payslips_by_struct,
             'get_payslips_by_employee': self._get_payslips_by_employee,
@@ -41,8 +41,10 @@ class PayrollReportByPeriods(report_sxw.rml_parse):
     def _get_payslips_by_period(self, start_period, stop_period):
         payslip_obj = self.pool.get('hr.payslip')
         payslips = []
-        payslips_ids = payslip_obj.search(self.cr, self.uid,
-            [('date_from', '>=' ,start_period),('date_to', '<=' , stop_period)])
+        payslips_ids = payslip_obj.search(
+            self.cr, self.uid,
+            [('date_from', '>=', start_period),
+             ('date_to', '<=', stop_period)])
         if len(payslips_ids) > 0:
             payslips = payslip_obj.browse(self.cr, self.uid, payslips_ids)
         return payslips
@@ -95,20 +97,26 @@ class PayrollReportByPeriods(report_sxw.rml_parse):
             for line in payslip.worked_days_line_ids:
                 if line.code == code:
                     if payslip.credit_note:
-                        total -= line.number_of_hours + line.number_of_days * 8.0 #normal schedule in Costa Rica
+                        # normal schedule in Costa Rica
+                        total -= line.number_of_hours + \
+                            line.number_of_days * 8.0
                     else:
-                        total += line.number_of_hours + line.number_of_days * 8.0
+                        total += line.number_of_hours + \
+                            line.number_of_days * 8.0
         return total
-        
-    def _get_worked_days_hours_group(self, payslips, code=['HE','HEF','FE']):
+
+    def _get_worked_days_hours_group(self, payslips, code=['HE', 'HEF', 'FE']):
         total = 0.00
         for payslip in payslips:
             for line in payslip.worked_days_line_ids:
                 if line.code in code:
                     if payslip.credit_note:
-                        total -= line.number_of_hours + line.number_of_days * 8.0 #normal schedule in Costa Rica
+                        # normal schedule in Costa Rica
+                        total -= line.number_of_hours + \
+                            line.number_of_days * 8.0
                     else:
-                        total += line.number_of_hours + line.number_of_days * 8.0
+                        total += line.number_of_hours + \
+                            line.number_of_days * 8.0
         return total
 
     def _get_line_total(self, payslips, code='BASE'):
@@ -122,7 +130,7 @@ class PayrollReportByPeriods(report_sxw.rml_parse):
                         total += line.total
         return total
 
-    def _get_line_total_group(self, payslips, code=['EXT','EXT-FE','FE']):
+    def _get_line_total_group(self, payslips, code=['EXT', 'EXT-FE', 'FE']):
         total = 0.00
         for payslip in payslips:
             for line in payslip.line_ids:
@@ -135,9 +143,9 @@ class PayrollReportByPeriods(report_sxw.rml_parse):
 
 
 class report_payroll_periods(models.AbstractModel):
-   _name = 'report.l10n_cr_hr_payroll.report_payroll_periods'
-   _inherit = 'report.abstract_report'
-   _template = 'l10n_cr_hr_payroll.report_payroll_periods'
-   _wrapped_report_class = PayrollReportByPeriods
+    _name = 'report.l10n_cr_hr_payroll.report_payroll_periods'
+    _inherit = 'report.abstract_report'
+    _template = 'l10n_cr_hr_payroll.report_payroll_periods'
+    _wrapped_report_class = PayrollReportByPeriods
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

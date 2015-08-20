@@ -7,7 +7,7 @@
                     <div class="page">
                         <div align="center">
                             <h3>Payroll by Periods</h3>
-                            <h4>from <span t-esc="formatLang(data['period_from'], date=True)" /> to <span t-esc="formatLang(data['period_from'], date=True)" /></h4>
+                            <h4>from <span t-esc="formatLang(data['period_from'], date=True)" /> to <span t-esc="formatLang(data['period_to'], date=True)" /></h4>
                         </div>
                         <t t-set="total_nrm_hrs" t-value="0" />
                         <t t-set="total_ext_hrs" t-value="0" />
