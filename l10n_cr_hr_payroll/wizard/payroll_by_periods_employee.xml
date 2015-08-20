@@ -10,11 +10,20 @@
                         <field name="company_id" attrs="{'required':True}" />
                     </group>
                     <group string="Filters">
-                        <group colspan="4" name="Periods">
-                            <field name="period_from" attrs="{'required':True}"
+                        <group>
+                            <field name="filter" required="True"/>
+                        </group>
+                        <group>
+                            <field name="period_from" 
+                                attrs="{'required': [('filter', '=', 'period')], 'invisible': [('filter', '!=', 'period')]}"
                                 domain="[('company_id', '=', company_id)]" />
-                            <field name="period_to" attrs="{'required':True}"
+                            <field name="period_to"
+                                attrs="{'required': [('filter', '=', 'period')], 'invisible': [('filter', '!=', 'period')]}"
                                 domain="[('company_id', '=', company_id)]" />
+                            <field name="date_from"
+                                attrs="{'required': [('filter', '=', 'date')], 'invisible': [('filter', '!=', 'date')]}"/>
+                            <field name="date_to"
+                                attrs="{'required': [('filter', '=', 'date')], 'invisible': [('filter', '!=', 'date')]}"/>
                         </group>
                     </group>
                     <footer>

@@ -20,7 +20,6 @@
 #
 ##############################################################################
 
-import time
 from openerp import models, fields, api
 
 
@@ -30,26 +29,40 @@ class PayrollByPeriodEmployee(models.TransientModel):
     _name = 'l10n.cr.hr.payroll.by.periods.employee'
     _description = __doc__
 
-    company_id= fields.Many2one('res.company', 'Company',)
-    period_from= fields.Many2one('account.period', 'Start Period',)
-    period_to= fields.Many2one('account.period', 'End Period',)
+    company_id = fields.Many2one('res.company', string='Company')
+    filter = fields.Selection(
+        [('date', 'Date'), ('period', 'Period')],
+        string='Filter', default='period')
+    period_from = fields.Many2one('account.period', string='Start Period')
+    period_to = fields.Many2one('account.period', string='End Period')
+    date_from = fields.Date('Start Date')
+    date_to = fields.Date('End Date')
 
     _defaults = {
-        'company_id': lambda self, cr, uid, context: \
-                self.pool.get('res.users').browse(cr, uid, uid,
-                     context=context).company_id.id,
+        'company_id': lambda self, cr, uid, context:
+            self.pool.get('res.users').browse(
+                cr, uid, uid,
+                context=context).company_id.id,
     }
 
     @api.multi
     def print_report(self):
-        p_from= self.env['account.period'].search([('id','=',self.period_from.id)])[0].date_start
-        p_to= self.env['account.period'].search([('id','=',self.period_to.id)])[0].date_stop
+        if self.filter == 'period':
+            date_from = self.env['account.period'].search(
+                [('id', '=', self.period_from.id)])[0].date_start
+            date_to = self.env['account.period'].search(
+                [('id', '=', self.period_to.id)])[0].date_stop
+        else:
+            date_from = self.date_from
+            date_to = self.date_to
         data = {
-            'period_from':p_from,
-            'period_to': p_to,
+            'period_from': date_from,
+            'period_to': date_to,
         }
-        res = self.env['report'].get_action(self.company_id,
-            'l10n_cr_hr_payroll.report_payroll_periods_employee', data=data)
+        res = self.env['report'].get_action(
+            self.company_id,
+            'l10n_cr_hr_payroll.report_payroll_periods_employee',
+            data=data)
         return res
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
