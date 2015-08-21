@@ -30,6 +30,9 @@ class PayrollReportEmployee(models.TransientModel):
     _description = __doc__
 
     company_id = fields.Many2one('res.company', string='Company')
+    format = fields.Selection(
+        [('qweb-pdf', 'PDF'), ('qweb-xls', 'XLS')],
+        string='Format', default='qweb-pdf')
     filter = fields.Selection(
         [('date', 'Date'), ('period', 'Period')],
         string='Filter', default='period')
@@ -59,10 +62,16 @@ class PayrollReportEmployee(models.TransientModel):
             'period_from': date_from,
             'period_to': date_to,
         }
-        res = self.env['report'].get_action(
-            self.company_id,
-            'l10n_cr_hr_payroll.report_payroll_periods_employee',
-            data=data)
+        if self.format == 'qweb-pdf':
+            res = self.env['report'].get_action(
+                self.company_id,
+                'l10n_cr_hr_payroll.report_payroll_periods_employee',
+                data=data)
+        else:
+            res = self.env['report'].get_action(
+                self.company_id,
+                'l10n_cr_hr_payroll.report_payroll_xls_employee',
+                data=data)
         return res
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
