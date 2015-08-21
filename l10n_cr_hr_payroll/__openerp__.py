@@ -44,6 +44,7 @@
         'views/report_payroll_periods_employee.xml',
         'views/report_payroll_xls_employee.xml',
         'views/report_payslip_run.xml',
+        'views/report_payslip_run_xls.xml',
         'views/report_payslip.xml',
         'wizard/payroll_by_periods.xml',
         'wizard/payroll_by_periods_employee.xml',

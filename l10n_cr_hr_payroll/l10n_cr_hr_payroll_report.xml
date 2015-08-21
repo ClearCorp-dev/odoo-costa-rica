@@ -40,5 +40,11 @@
         <record id="payslip_run_report" model="ir.actions.report.xml">
             <field name="paperformat_id" ref="paperformat_us_landscape" />
         </record>
+        <report id="action_payslip_run_xls_report"
+            model="hr.payslip.run"
+            string="Payslip Batches XLS"
+            report_type="qweb-xls"
+            name="l10n_cr_hr_payroll.report_payslip_run_xls"
+            file="l10n_cr_hr_payroll.report_payslip_run_xls"/>
     </data>
 </openerp>

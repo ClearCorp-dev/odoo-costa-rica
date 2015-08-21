@@ -25,5 +25,6 @@ import report_payroll_xls
 import report_payroll_periods_employee
 import report_payroll_xls_employee
 import report_payslip_run
+import report_payslip_run_xls
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
