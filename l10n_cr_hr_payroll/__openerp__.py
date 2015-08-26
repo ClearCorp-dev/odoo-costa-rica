@@ -38,6 +38,7 @@
         'data/report_paperformat.xml',
         'hr_config_settings.xml',
         'l10n_cr_hr_payroll_view.xml',
+        'security/l10n_cr_hr_payroll_security.xml',
         'security/ir.model.access.csv',
         'views/report_payroll_periods.xml',
         'views/report_payroll_xls.xml',
