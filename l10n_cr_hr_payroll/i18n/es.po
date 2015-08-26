@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-21 21:07+0000\n"
-"PO-Revision-Date: 2015-08-21 21:07+0000\n"
+"POT-Creation-Date: 2015-08-26 17:20+0000\n"
+"PO-Revision-Date: 2015-08-26 17:20+0000\n"
 "Last-Translator: Glen Sojo <glen.sojo@clearcorp.co.cr>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -210,7 +210,7 @@ msgstr "Filtros"
 #: field:hr.config.settings,first_limit:0
 #: field:res.company,first_limit:0
 msgid "First Limit"
-msgstr "Primer Límite"
+msgstr "Primer límite"
 
 #. module: l10n_cr_hr_payroll
 #: field:hr.payslip,message_follower_ids:0
@@ -242,7 +242,7 @@ msgstr "Opciones generales"
 #: view:website:l10n_cr_hr_payroll.report_payslip_run
 #: view:website:l10n_cr_hr_payroll.report_payslip_run_xls
 msgid "General Total"
-msgstr "Total General"
+msgstr "Total general"
 
 #. module: l10n_cr_hr_payroll
 #: view:website:l10n_cr_hr_payroll.report_payroll_periods
@@ -395,7 +395,7 @@ msgstr "Nómina"
 #: view:website:l10n_cr_hr_payroll.report_payroll_xls_employee_header
 #: view:website:l10n_cr_hr_payroll.report_payroll_xls_header
 msgid "Payroll Report"
-msgstr "Reporte Nómina"
+msgstr "Reporte nómina"
 
 #. module: l10n_cr_hr_payroll
 #: model:ir.actions.act_window,name:l10n_cr_hr_payroll.action_payroll_by_periods_employee
@@ -453,7 +453,7 @@ msgstr "Período"
 #. module: l10n_cr_hr_payroll
 #: field:hr.employee,personal_email:0
 msgid "Personal Email"
-msgstr "Email Personal"
+msgstr "Email personal"
 
 #. module: l10n_cr_hr_payroll
 #: view:l10n.cr.hr.payroll.by.periods:l10n_cr_hr_payroll.view_payroll_by_periods_form
@@ -496,7 +496,7 @@ msgstr "Reporte empleado por periodos"
 #: field:hr.config.settings,second_limit:0
 #: field:res.company,second_limit:0
 msgid "Second Limit"
-msgstr "Segundo Límite"
+msgstr "Segundo límite"
 
 #. module: l10n_cr_hr_payroll
 #: view:hr.payslip:l10n_cr_hr_payroll.hr_payslip_view_form2_inherit
