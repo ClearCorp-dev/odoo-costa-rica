@@ -36,6 +36,7 @@
         'data/l10n_cr_hr_payroll_salary_rule_category.xml',
         'data/l10n_cr_hr_payroll_salary_rule.xml',
         'data/report_paperformat.xml',
+        'data/l10n_cr_hr_payroll_inputs.xml',
         'hr_config_settings.xml',
         'l10n_cr_hr_payroll_view.xml',
         'security/l10n_cr_hr_payroll_security.xml',

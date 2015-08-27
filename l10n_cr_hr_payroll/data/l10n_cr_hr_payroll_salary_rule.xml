@@ -123,7 +123,7 @@ result= hr_salary_rule.compute_total_rent(cr, uid, company, inputs, employee, ca
 
         <record id="hr_payroll_rules_retroactive_pay" model="hr.salary.rule">
             <field name="category_id" ref="hr_payroll_aditional_pay_salary"/>
-            <field name="name">Pago Retoractivo</field>
+            <field name="name">Pago Retroactivo</field>
             <field name="code">RET</field>
             <field name="sequence">55</field>
             <field name="appears_on_report">True</field>
@@ -162,7 +162,7 @@ result = inputs.RET</field>
 # uid: uid
 
 # Note: returned value have to be set in the variable 'result'
-result = inputs.BON.amount
+result = inputs.RET.amount
             </field>
         </record>
 
@@ -170,7 +170,7 @@ result = inputs.BON.amount
             <field name="category_id" ref="hr_payroll_bon_salary"/>
             <field name="name">Bonificación</field>
             <field name="code">BON</field>
-            <field name="sequence">219</field>
+            <field name="sequence">120</field>
             <field name="appears_on_report">True</field>
             <field name="condition_select">python</field>
             <field name="condition_python">
@@ -434,7 +434,7 @@ result = worked_days.HEF.number_of_hours * wage_hour * 2 + worked_days.HEF.numbe
             <field name="category_id" ref="hr_payroll_absence_salary"/>
             <field name="name">Rebajo por Ausencias-1.0 - Mensual</field>
             <field name="code">Ausencias</field>
-            <field name="sequence">53</field>
+            <field name="sequence">110</field>
             <field name="appears_on_report">True</field>
             <field name="condition_select">python</field>
             <field name="condition_python">
@@ -487,7 +487,7 @@ result = worked_days.AUS.number_of_hours * wage_hour + worked_days.AUS.number_of
             <field name="appears_on_report">True</field>
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = categories.CONTRATO + categories.SOP</field>
+            <field name="amount_python_compute">result = categories.CONTRATO / 2 + categories.SOP</field>
         </record>
 
         <record id="hr_payroll_rules_extra_hour_1_5_fortnightly" model="hr.salary.rule">
@@ -689,7 +689,7 @@ result = worked_days.AUS.number_of_hours * wage_hour + worked_days.AUS.number_of
             <field name="appears_on_report">True</field>
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = categories.CONTRATO + categories.SOP</field>
+            <field name="amount_python_compute">result = categories.CONTRATO * 12 / 26 + categories.SOP</field>
         </record>
 
         <record id="hr_payroll_rules_extra_hour_1_5_biweekly" model="hr.salary.rule">
@@ -892,7 +892,7 @@ result = worked_days.AUS.number_of_hours * wage_hour + worked_days.AUS.number_of
             <field name="appears_on_report">True</field>
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
-            <field name="amount_python_compute">result = categories.CONTRATO + categories.SOP</field>
+            <field name="amount_python_compute">result = categories.CONTRATO * 12 / 52 + categories.SOP</field>
         </record>
 
         <record id="hr_payroll_rules_extra_hour_1_5_weekly" model="hr.salary.rule">
@@ -1288,6 +1288,7 @@ result = 0.00</field>
         <record id="data_structure_monthly" model="hr.payroll.structure">
             <field name="name">Estructura Mensual</field>
             <field name="code">MENSUAL</field>
+            <field name="parent_id" eval="False"/>
             <field name="rule_ids" eval="[(4, ref('hr_payroll_rules_gross')),
                                           (4, ref('hr_payroll_rules_net')),
                                           (4, ref('hr_payroll_rules_worker_ssc')),
@@ -1311,6 +1312,7 @@ result = 0.00</field>
         <record id="data_structure_fortnightly" model="hr.payroll.structure">
             <field name="name">Estructura Quincenal</field>
             <field name="code">QUINCENAL</field>
+            <field name="parent_id" eval="False"/>
             <field name="rule_ids" eval="[(4, ref('hr_payroll_rules_gross')),
                                           (4, ref('hr_payroll_rules_net')),
                                           (4, ref('hr_payroll_rules_worker_ssc')),
@@ -1334,6 +1336,7 @@ result = 0.00</field>
         <record id="data_structure_biweekly" model="hr.payroll.structure">
             <field name="name">Estructura Bisemanal</field>
             <field name="code">BISEMANAL</field>
+            <field name="parent_id" eval="False"/>
             <field name="rule_ids" eval="[(4, ref('hr_payroll_rules_gross')),
                                           (4, ref('hr_payroll_rules_net')),
                                           (4, ref('hr_payroll_rules_worker_ssc')),
@@ -1357,6 +1360,7 @@ result = 0.00</field>
         <record id="data_structure_weekly" model="hr.payroll.structure">
             <field name="name">Estructura Semanal</field>
             <field name="code">SEMANAL</field>
+            <field name="parent_id" eval="False"/>
             <field name="rule_ids" eval="[(4, ref('hr_payroll_rules_gross')),
                                           (4, ref('hr_payroll_rules_net')),
                                           (4, ref('hr_payroll_rules_worker_ssc')),
@@ -1380,6 +1384,7 @@ result = 0.00</field>
         <record id="data_structure_per_hour" model="hr.payroll.structure">
             <field name="name">Estructura Jornal</field>
             <field name="code">JORNAL</field>
+            <field name="parent_id" eval="False"/>
             <field name="rule_ids" eval="[(4, ref('hr_payroll_rules_gross')),
                                           (4, ref('hr_payroll_rules_net')),
                                           (4, ref('hr_payroll_rules_worker_ssc')),
