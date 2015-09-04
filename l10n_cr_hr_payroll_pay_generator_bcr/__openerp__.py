@@ -20,27 +20,27 @@
 #
 ##############################################################################
 
-from openerp.osv import osv, fields
-
-class PayGenerator(osv.TransientModel):
-
-    _inherit = 'hr.payroll.pay.generator.generator.wizard'
-
-    def generator_exectute(self, cr, uid, ids, context=None):
-        res = super(PayGenerator, self).generator_exectute(cr, uid, ids, context=context)
-        wizard = self.browse(cr, uid, ids[0], context=context)
-        if wizard.pay_type_id.code == 'bcr':
-            # return bcr report
-            employee_ids = [employee.id for employee in wizard.employee_ids]
-            data = {
-                    'payslip_run_id': wizard.payslip_run_id.id,
-                    'employee_ids': employee_ids,
-                    'salary_rule_id': wizard.salary_rule_id.id,
-            }
-            return {
-                'type': 'ir.actions.report.xml',
-                'report_name': 'l10n_cr_hr_payroll_pay_generator_bcr_report',
-                'datas': data,
-                'context': context
-            }
-        return res
+{
+    'name': 'BCR Payroll Pay Generator',
+    'version': '1.0',
+    'category': 'Human Resources',
+    'sequence': 3,
+    'summary': 'Payroll generator for Banco de Costa Rica',
+    'author': 'ClearCorp',
+    'website': 'http://clearcorp.co.cr',
+    'depends': [
+        'hr_payroll_pay_generator',
+        'report_xls_template',
+    ],
+    'data': [
+        'data/pay_types.xml',
+        'views/report_payroll_bcr.xml',
+        'l10n_cr_hr_payroll_pay_generator_bcr_report.xml',
+    ],
+    'test': [],
+    'demo': [],
+    'installable': True,
+    'auto_install': False,
+    'application': False,
+    'license': 'AGPL-3',
+}

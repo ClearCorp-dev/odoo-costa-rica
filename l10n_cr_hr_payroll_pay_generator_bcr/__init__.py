@@ -20,34 +20,5 @@
 #
 ##############################################################################
 
-{
-    'name': 'BCR Payroll Pay Generator',
-    'version': '1.0',
-    'category': 'Human Resources',
-    'sequence': 3,
-    'summary': 'Payroll generator for Banco de Costa Rica',
-    'description': """
-Banco de Costa Rica Payroll Generators
-======================================
-
-Payroll generator for Banco de Costa Rica Bank
-
-Important Information
----------------------
-* Bank Account Number Must use the format XXX-XXXXXXX in order to be used by report. In case it is not full account will be used""",
-    'author': 'CLEARCORP S.A.',
-    'website': 'http://clearcorp.co.cr',
-    'complexity': 'easy',
-    'images' : [],
-    'depends': ['hr_payroll_pay_generator'],
-    'data': [
-             'data/pay_types.xml',
-             'report/report.xml',
-             ],
-    'test' : [],
-    'demo': [],
-    'installable': True,
-    'auto_install': False,
-    'application': False,
-    'license': 'AGPL-3',
-}
+import report
+import wizard

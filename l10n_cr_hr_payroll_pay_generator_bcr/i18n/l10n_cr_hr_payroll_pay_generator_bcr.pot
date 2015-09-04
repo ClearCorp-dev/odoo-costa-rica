@@ -1,0 +1,66 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* l10n_cr_hr_payroll_pay_generator_bcr
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-19 18:30+0000\n"
+"PO-Revision-Date: 2015-08-19 18:30+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_cr_hr_payroll_pay_generator_bcr
+#: view:website:l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr
+msgid "Amount"
+msgstr ""
+
+#. module: l10n_cr_hr_payroll_pay_generator_bcr
+#: model:ir.actions.report.xml,name:l10n_cr_hr_payroll_pay_generator_bcr.action_report_payroll_bcr
+msgid "BCR Payment Report"
+msgstr ""
+
+#. module: l10n_cr_hr_payroll_pay_generator_bcr
+#: view:website:l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr
+msgid "Bank Account"
+msgstr ""
+
+#. module: l10n_cr_hr_payroll_pay_generator_bcr
+#: view:website:l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr
+msgid "Concept"
+msgstr ""
+
+#. module: l10n_cr_hr_payroll_pay_generator_bcr
+#: view:website:l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr
+msgid "Currency"
+msgstr ""
+
+#. module: l10n_cr_hr_payroll_pay_generator_bcr
+#: view:website:l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr
+msgid "Employee Name"
+msgstr ""
+
+#. module: l10n_cr_hr_payroll_pay_generator_bcr
+#: field:report.l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr,id:0
+msgid "ID"
+msgstr ""
+
+#. module: l10n_cr_hr_payroll_pay_generator_bcr
+#: view:website:l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr
+msgid "Id Type"
+msgstr ""
+
+#. module: l10n_cr_hr_payroll_pay_generator_bcr
+#: view:website:l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr
+msgid "Office"
+msgstr ""
+
+#. module: l10n_cr_hr_payroll_pay_generator_bcr
+#: view:website:l10n_cr_hr_payroll_pay_generator_bcr.report_payroll_bcr
+msgid "Sequence"
+msgstr ""

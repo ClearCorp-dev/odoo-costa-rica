@@ -20,4 +20,4 @@
 #
 ##############################################################################
 
-import generator_wizard
+import report_payroll_bcr
