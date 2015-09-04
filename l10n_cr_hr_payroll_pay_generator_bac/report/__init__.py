@@ -20,27 +20,4 @@
 #
 ##############################################################################
 
-from openerp.osv import osv, fields
-
-class PayGenerator(osv.TransientModel):
-
-    _inherit = 'hr.payroll.pay.generator.generator.wizard'
-
-    def generator_exectute(self, cr, uid, ids, context=None):
-        res = super(PayGenerator, self).generator_exectute(cr, uid, ids, context=context)
-        wizard = self.browse(cr, uid, ids[0], context=context)
-        if wizard.pay_type_id.code == 'bac':
-            # return bac report
-            employee_ids = [employee.id for employee in wizard.employee_ids]
-            data = {
-                    'payslip_run_id': wizard.payslip_run_id.id,
-                    'employee_ids': employee_ids,
-                    'salary_rule_id': wizard.salary_rule_id.id,
-            }
-            return {
-                'type': 'ir.actions.report.xml',
-                'report_name': 'l10n_cr_hr_payroll_pay_generator_bac_report',
-                'datas': data,
-                'context': context
-            }
-        return res
+import report_payroll_bac
