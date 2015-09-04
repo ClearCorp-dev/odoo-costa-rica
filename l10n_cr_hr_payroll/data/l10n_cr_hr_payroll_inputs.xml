@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <openerp>
-    <data>
+    <data noupdate="1">
         <record id="data_input_value_1" model="hr.payroll.extended.input.value">
             <field name="code">RET</field>
             <field name="type">other_inputs</field>
