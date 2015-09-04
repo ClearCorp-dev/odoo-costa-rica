@@ -74,7 +74,7 @@
                                                 <span t-esc="formatLang(get_line_total(payslip, code='BRUTO'), dp='Account')" />
                                             </td>
                                             <td>
-                                                <span t-esc="formatLang(get_line_total_group(payslip, code=['CCSS-EMP','CCSS-EMP-PEN','Banco Popular-EMP','CCSS-IVM','CCSS-SEM']), dp='Account')" />
+                                                <span t-esc="formatLang(get_line_total_group(payslip, code=['CSO']), dp='Account')" />
                                             </td>
                                             <td>
                                                 <span t-esc="formatLang(get_line_total(payslip, code='BON'), dp='Account')" />

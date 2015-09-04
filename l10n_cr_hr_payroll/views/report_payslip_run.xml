@@ -85,7 +85,7 @@
                                                     <span t-esc="formatLang(gross, dp='Account')" />
                                                 </td>
                                                 <td>
-                                                    <t t-set="deduct" t-value="get_line_total_group(payslip, code=['CCSS-EMP','CCSS-EMP-PEN','Banco Popular-EMP','CCSS-IVM','CCSS-SEM'])" />
+                                                    <t t-set="deduct" t-value="get_line_total_group(payslip, code=['CSO'])" />
                                                     <t t-set="total_deduct" t-value="total_deduct+deduct" />
                                                     <span t-esc="formatLang(deduct, dp='Account')" />
                                                 </td>
