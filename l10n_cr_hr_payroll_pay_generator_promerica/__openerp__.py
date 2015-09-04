@@ -20,4 +20,24 @@
 #
 ##############################################################################
 
-import l10n_cr_hr_payroll_pay_generator_promerica_report
+{
+    'name': 'Promerica Payroll Pay Generator',
+    'version': '1.0',
+    'category': 'Human Resources',
+    'sequence': 3,
+    'summary': 'Payroll generator for Promerica',
+    'author': 'ClearCorp',
+    'website': 'http://clearcorp.co.cr',
+    'depends': ['hr_payroll_pay_generator'],
+    'data': [
+        'data/pay_types.xml',
+        'views/report_payroll_promerica.xml',
+        'l10n_cr_hr_payroll_pay_generator_promerica_report.xml',
+    ],
+    'test': [],
+    'demo': [],
+    'installable': True,
+    'auto_install': False,
+    'application': False,
+    'license': 'AGPL-3',
+}

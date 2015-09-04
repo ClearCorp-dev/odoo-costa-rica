@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+    <data>
+        <report id="action_report_payroll_promerica"
+            model="hr.payslip"
+            string="Promerica Payment Report"
+            report_type="qweb-xls"
+            name="l10n_cr_hr_payroll_pay_generator_promerica.report_payroll_promerica"
+            file="l10n_cr_hr_payroll_pay_generator_promerica.report_payroll_promerica"
+            menu="False"/>
+    </data>
+</openerp>

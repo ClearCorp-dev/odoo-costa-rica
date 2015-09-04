@@ -20,5 +20,4 @@
 #
 ##############################################################################
 
-import report
-import wizard
+import generator_wizard
