@@ -24,9 +24,10 @@ from openerp.report import report_sxw
 from openerp import models
 
 
-class PayslipRunReport(report_sxw.rml_parse):
+class ReportPayslipRunXLS(report_sxw.rml_parse):
     def __init__(self, cr, uid, name, context):
-        super(PayslipRunReport, self).__init__(cr, uid, name, context=context)
+        super(ReportPayslipRunXLS, self).__init__(
+                cr, uid, name, context=context)
         self.localcontext.update({
             'get_payslips_by_department': self._get_payslips_by_department,
             'get_worked_days_hours': self._get_worked_days_hours,
@@ -102,7 +103,8 @@ class PayslipRunReport(report_sxw.rml_parse):
 
 
 class report_payslip_run(models.AbstractModel):
-    _name = 'report.l10n_cr_hr_payroll.report_payslip_run'
+    _name = 'report.l10n_cr_hr_payroll.report_payslip_run_xls'
     _inherit = 'report.abstract_report'
-    _template = 'l10n_cr_hr_payroll.report_payslip_run'
-    _wrapped_report_class = PayslipRunReport
+    _template = 'l10n_cr_hr_payroll.report_payslip_run_xls'
+    _wrapped_report_class = ReportPayslipRunXLS
+    _report_render_type = 'qweb-xls'

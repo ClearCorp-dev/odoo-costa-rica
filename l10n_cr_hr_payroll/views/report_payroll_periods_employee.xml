@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <openerp>
     <data>
         <template id="report_payroll_periods_employee">
@@ -7,7 +8,7 @@
                     <div class="page">
                         <div align="center">
                             <h3>Payroll by Periods</h3>
-                            <h4>from <span t-esc="formatLang(data['period_from'], date=True)" /> to <span t-esc="formatLang(data['period_from'], date=True)" /></h4>
+                            <h4>from <span t-esc="formatLang(data['period_from'], date=True)" /> to <span t-esc="formatLang(data['period_to'], date=True)" /></h4>
                         </div>
                         <br/>
                         <br/>
@@ -73,7 +74,7 @@
                                                 <span t-esc="formatLang(get_line_total(payslip, code='BRUTO'), dp='Account')" />
                                             </td>
                                             <td>
-                                                <span t-esc="formatLang(get_line_total_group(payslip, code=['CCSS-EMP','CCSS-EMP-PEN','Banco Popular-EMP','CCSS-IVM','CCSS-SEM']), dp='Account')" />
+                                                <span t-esc="formatLang(get_line_total_group(payslip, code=['CSO']), dp='Account')" />
                                             </td>
                                             <td>
                                                 <span t-esc="formatLang(get_line_total(payslip, code='BON'), dp='Account')" />

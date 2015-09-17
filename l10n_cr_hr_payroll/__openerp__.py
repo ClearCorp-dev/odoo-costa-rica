@@ -22,42 +22,37 @@
 
 {
     'name': 'Payroll Localization - Costa Rica',
-    'version': '1.0',
+    'version': '1.1',
     'category': 'Localization',
-    "sequence": 38,
-    'complexity': 'normal',
-    'description': """
-Payroll Localization - Costa Rica
-=================================
-Description
-------------
-This is the Costa Rica OpenERP localization and consists of:
-* Salary Rule Structure
-* Salary Rule Category
-* Withholding tax structure
-* Rent (Applied to Costa Rican's Law)
-* Reports""",
+    'sequence': 38,
     'author': 'ClearCorp',
     'website': 'http://www.clearcorp.co.cr',
     'depends': [
-                'hr_payroll_extended',
-                ],
-    'data': ['data/l10n_cr_hr_payslip_action_data.xml',
-             'data/l10n_cr_hr_payroll_salary_rule_category.xml',
-             'data/l10n_cr_hr_payroll_salary_rule.xml',
-             'data/report_paperformat.xml',
-             'hr_config_settings.xml',
-             'l10n_cr_hr_payroll_view.xml',
-             'security/ir.model.access.csv',
-             'views/report_payroll_periods.xml',
-             'views/report_payroll_periods_employee.xml',
-             'views/report_payslip_run.xml',
-             'views/report_payslip.xml',
-             'wizard/payroll_by_periods.xml',
-             'wizard/payroll_by_periods_employee.xml',
-             'l10n_cr_hr_payroll_report.xml',
-             'l10n_cr_hr_payroll_menu.xml',
-             ],
+        'hr_payroll_extended',
+        'report_xls_template',
+    ],
+    'data': [
+        'data/l10n_cr_hr_payslip_action_data.xml',
+        'data/l10n_cr_hr_payroll_salary_rule_category.xml',
+        'data/l10n_cr_hr_payroll_salary_rule.xml',
+        'data/report_paperformat.xml',
+        'data/l10n_cr_hr_payroll_inputs.xml',
+        'hr_config_settings.xml',
+        'l10n_cr_hr_payroll_view.xml',
+        'security/l10n_cr_hr_payroll_security.xml',
+        'security/ir.model.access.csv',
+        'views/report_payroll_periods.xml',
+        'views/report_payroll_xls.xml',
+        'views/report_payroll_periods_employee.xml',
+        'views/report_payroll_xls_employee.xml',
+        'views/report_payslip_run.xml',
+        'views/report_payslip_run_xls.xml',
+        'views/report_payslip.xml',
+        'wizard/payroll_by_periods.xml',
+        'wizard/payroll_by_periods_employee.xml',
+        'l10n_cr_hr_payroll_report.xml',
+        'l10n_cr_hr_payroll_menu.xml',
+    ],
     'installable': True,
     'auto_install': False,
     'application': True,

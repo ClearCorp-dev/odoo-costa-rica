@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+    <data noupdate="1">
+        <record id="data_input_value_1" model="hr.payroll.extended.input.value">
+            <field name="code">RET</field>
+            <field name="type">other_inputs</field>
+        </record>
+        <record id="data_input_value_2" model="hr.payroll.extended.input.value">
+            <field name="code">BON</field>
+            <field name="type">other_inputs</field>
+        </record>
+        <record id="data_input_value_3" model="hr.payroll.extended.input.value">
+            <field name="code">SOP</field>
+            <field name="type">other_inputs</field>
+        </record>
+        <record id="data_input_value_4" model="hr.payroll.extended.input.value">
+            <field name="code">FE</field>
+            <field name="type">worked_days</field>
+        </record>
+        <record id="data_input_value_5" model="hr.payroll.extended.input.value">
+            <field name="code">HEF</field>
+            <field name="type">worked_days</field>
+        </record>
+        <record id="data_input_value_6" model="hr.payroll.extended.input.value">
+            <field name="code">AUS</field>
+            <field name="type">worked_days</field>
+        </record>
+    </data>
+</openerp>

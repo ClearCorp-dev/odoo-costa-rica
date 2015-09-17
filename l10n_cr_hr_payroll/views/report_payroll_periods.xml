@@ -7,7 +7,7 @@
                     <div class="page">
                         <div align="center">
                             <h3>Payroll by Periods</h3>
-                            <h4>from <span t-esc="formatLang(data['period_from'], date=True)" /> to <span t-esc="formatLang(data['period_from'], date=True)" /></h4>
+                            <h4>from <span t-esc="formatLang(data['period_from'], date=True)" /> to <span t-esc="formatLang(data['period_to'], date=True)" /></h4>
                         </div>
                         <t t-set="total_nrm_hrs" t-value="0" />
                         <t t-set="total_ext_hrs" t-value="0" />
@@ -40,7 +40,7 @@
                                     <tr style="page-break-inside:avoid; page-break-after:avoid;">
                                         <th>ID card</th>
                                         <th>Name</th>
-                                        <th>Bank account</th>
+                                        <th>Bank Account</th>
                                         <th>Nrm Hrs</th>
                                         <th>Ext Hrs</th>
                                         <th>Base</th>
@@ -61,10 +61,10 @@
                                         <t t-set="payslips" t-value="employee_data[1]" />
                                         <tr style="page-break-inside:avoid; page-break-after:avoid;">
                                             <td>
-                                                <span t-field="employee.name" />
+                                                <span t-field="employee.identification_id" />
                                             </td>
                                             <td>
-                                                <span t-field="employee.identification_id" />
+                                                <span t-field="employee.name" />
                                             </td>
                                             <td>
                                                 <t t-if="employee.bank_account_id">
@@ -102,7 +102,7 @@
                                                 <span t-esc="formatLang(gross, dp='Account')" />
                                             </td>
                                             <td>
-                                                <t t-set="deduct" t-value="get_line_total_group(payslips, code=['CCSS-EMP','CCSS-EMP-PEN','Banco Popular-EMP','CCSS-IVM','CCSS-SEM'])" />
+                                                <t t-set="deduct" t-value="get_line_total_group(payslips, code=['CSO'])" />
                                                 <t t-set="subtotal_deduct" t-value="subtotal_deduct+deduct" />
                                                 <t t-set="total_deduct" t-value="total_deduct+deduct" />
                                                 <span t-esc="formatLang(deduct, dp='Account')" />

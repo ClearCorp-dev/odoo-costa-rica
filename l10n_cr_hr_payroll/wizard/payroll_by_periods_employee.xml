@@ -2,7 +2,7 @@
 <openerp>
     <data>
         <record id="view_payroll_by_periods_employee_form" model="ir.ui.view">
-            <field name="name">Payroll Report by Periods Employee</field>
+            <field name="name">Payroll Report Employee</field>
             <field name="model">l10n.cr.hr.payroll.by.periods.employee</field>
             <field name="arch" type="xml">
                 <form string="Report employee by periods" version="7.0">
@@ -10,11 +10,21 @@
                         <field name="company_id" attrs="{'required':True}" />
                     </group>
                     <group string="Filters">
-                        <group colspan="4" name="Periods">
-                            <field name="period_from" attrs="{'required':True}"
+                        <group>
+                            <field name="filter" required="True"/>
+                            <field name="format" required="True" />
+                        </group>
+                        <group>
+                            <field name="period_from" 
+                                attrs="{'required': [('filter', '=', 'period')], 'invisible': [('filter', '!=', 'period')]}"
                                 domain="[('company_id', '=', company_id)]" />
-                            <field name="period_to" attrs="{'required':True}"
+                            <field name="period_to"
+                                attrs="{'required': [('filter', '=', 'period')], 'invisible': [('filter', '!=', 'period')]}"
                                 domain="[('company_id', '=', company_id)]" />
+                            <field name="date_from"
+                                attrs="{'required': [('filter', '=', 'date')], 'invisible': [('filter', '!=', 'date')]}"/>
+                            <field name="date_to"
+                                attrs="{'required': [('filter', '=', 'date')], 'invisible': [('filter', '!=', 'date')]}"/>
                         </group>
                     </group>
                     <footer>
@@ -28,7 +38,7 @@
         </record>
 
         <record id="action_payroll_by_periods_employee" model="ir.actions.act_window">
-            <field name="name">Payroll Report by Periods Employee</field>
+            <field name="name">Payroll Report Employee</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">l10n.cr.hr.payroll.by.periods.employee</field>
             <field name="view_type">form</field>

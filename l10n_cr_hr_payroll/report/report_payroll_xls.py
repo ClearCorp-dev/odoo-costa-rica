@@ -24,10 +24,10 @@ from openerp.report import report_sxw
 from openerp import models
 
 
-class PayrollReportByPeriods(report_sxw.rml_parse):
+class ReportPayrollXLS(report_sxw.rml_parse):
 
     def __init__(self, cr, uid, name, context):
-        super(PayrollReportByPeriods, self).__init__(
+        super(ReportPayrollXLS, self).__init__(
                 cr, uid, name, context=context)
         self.localcontext.update({
             'get_payslips_by_struct': self._get_payslips_by_struct,
@@ -143,9 +143,9 @@ class PayrollReportByPeriods(report_sxw.rml_parse):
 
 
 class report_payroll_periods(models.AbstractModel):
-    _name = 'report.l10n_cr_hr_payroll.report_payroll_periods'
+    _name = 'report.l10n_cr_hr_payroll.report_payroll_xls'
     _inherit = 'report.abstract_report'
-    _template = 'l10n_cr_hr_payroll.report_payroll_periods'
-    _wrapped_report_class = PayrollReportByPeriods
+    _template = 'l10n_cr_hr_payroll.report_payroll_xls'
+    _wrapped_report_class = ReportPayrollXLS
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

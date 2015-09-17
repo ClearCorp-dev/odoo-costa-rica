@@ -31,9 +31,9 @@
                                     <table name="department" class="table table-condensed">
                                         <thead>
                                             <tr>
-                                                <th>ID card</th>
+                                                <th>ID Card</th>
                                                 <th>Name</th>
-                                                <th>Bank account</th>
+                                                <th>Bank Account</th>
                                                 <th>Nrm Hrs</th>
                                                 <th>Ext Hrs</th>
                                                 <th>Base</th>
@@ -48,11 +48,11 @@
                                         </thead>
                                         <tbody>
                                             <tr style="page-break-inside: avoid;" t-foreach="payslips" t-as="payslip">
-                                                <td name="employee">
-                                                    <span t-field="payslip.employee_id" />
-                                                </td>
                                                 <td name="identification">
                                                     <span t-field="payslip.employee_id.identification_id" />
+                                                </td>
+                                                <td name="employee">
+                                                    <span t-field="payslip.employee_id" />
                                                 </td>
                                                 <td name="bank_account">
                                                     <t t-if="payslip.employee_id.bank_account_id" >
@@ -60,7 +60,6 @@
                                                     </t>
                                                 </td>
                                                 <td name="HN">
-                                                    <span t-esc="formatLang(get_worked_days_hours(payslip, code='HN'), dp='Account')" />
                                                     <t t-set="nrm_hrs" t-value="get_worked_days_hours(payslip, code='HN')" />
                                                     <t t-set="total_nrm_hrs" t-value="total_nrm_hrs+nrm_hrs" />
                                                     <span t-esc="formatLang(nrm_hrs, dp='Account')" />
@@ -86,7 +85,7 @@
                                                     <span t-esc="formatLang(gross, dp='Account')" />
                                                 </td>
                                                 <td>
-                                                    <t t-set="deduct" t-value="get_line_total_group(payslip, code=['CCSS-EMP','CCSS-EMP-PEN','Banco Popular-EMP','CCSS-IVM','CCSS-SEM'])" />
+                                                    <t t-set="deduct" t-value="get_line_total_group(payslip, code=['CSO'])" />
                                                     <t t-set="total_deduct" t-value="total_deduct+deduct" />
                                                     <span t-esc="formatLang(deduct, dp='Account')" />
                                                 </td>
