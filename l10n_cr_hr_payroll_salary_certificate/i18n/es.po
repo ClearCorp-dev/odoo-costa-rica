@@ -1,0 +1,142 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* l10n_cr_hr_payroll_salary_certificate
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-12-18 17:38+0000\n"
+"PO-Revision-Date: 2015-12-18 17:38+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid ",\n"
+"	                                performance the post"
+msgstr ",\n"
+"	                                desempeñando el puesto"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid ", \n"
+"	                                with No identification"
+msgstr ", \n"
+"	                                con No de cédula"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid ",  accruing monthly salary of"
+msgstr ",  devengando un salario mensual de"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid ", in letter"
+msgstr ", en letras"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid ", works for the company"
+msgstr ", labora para la empresa"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid "Attentively,"
+msgstr "Atentamente,"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid "Brute Salary:"
+msgstr "Salario bruto:"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid "By this means we state that"
+msgstr "Por este medio hacemos contar"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: code:addons/l10n_cr_hr_payroll_salary_certificate/report/report_salary_certificate.py:121
+#, python-format
+msgid "Currency not supported by this report."
+msgstr "Moneda no es compatible con este informe."
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid "Department:"
+msgstr "Departamento:"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid "Human resources"
+msgstr "Recursos humanos"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: field:report.l10n_cr_hr_payroll_salary_certificate.report_salary_certificate,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid "It extends the present request of the interested in the city of:"
+msgstr "Se extiende la presente petición del interesado en la ciudad de:"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid "Net Salary:"
+msgstr "Salario neto:"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid "Page:"
+msgstr "Página:"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid "Phone:"
+msgstr "Teléfono:"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: model:ir.actions.report.xml,name:l10n_cr_hr_payroll_salary_certificate.action_salary_certificate_report
+msgid "Report Salary Certtificate"
+msgstr "Reporte de constancia salarial"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid "Social charges:"
+msgstr "Cargas sociales:"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid "The employee has not tree months of works"
+msgstr "El empleado no tiene tres meses de laborar"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid "To who's interested"
+msgstr "A quién interese"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid "User Name:"
+msgstr "Nombre del usuario:"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid "With struct:"
+msgstr "Con una estructura:"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid "from the"
+msgstr "desde el"
+
+#. module: l10n_cr_hr_payroll_salary_certificate
+#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
+msgid "the day"
+msgstr "al día"
+
