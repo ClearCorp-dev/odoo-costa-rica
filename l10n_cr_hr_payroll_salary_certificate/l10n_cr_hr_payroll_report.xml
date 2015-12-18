@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- QWeb Report -->
+        <report id="action_salary_certificate_report" 
+        model="hr.employee"
+        string="Report Salary Certtificate" 
+        report_type="qweb-pdf"
+        name="l10n_cr_hr_payroll_salary_certificate.report_salary_certificate"
+        file="l10n_cr_hr_payroll_salary_certificate.report_salary_certificate"
+        menu="True"
+        />
+    </data>
+</openerp>
