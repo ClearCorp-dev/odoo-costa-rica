@@ -70,14 +70,16 @@ class ReportSalaryCertificate(report_sxw.rml_parse):
 
     def _validate_contract(self, contract):
         date = datetime.now() - timedelta(days=90)
-        if datetime.strptime(contract.date_start, '%d-%m-%Y') <= date:
+        if not contract:
+            return False
+        if datetime.strptime(contract.date_start, '%Y-%m-%d') <= date:
             return True
         return False
 
     def _get_payslip_employee(self, employee_id, contract_id):
         payslip_obj = self.pool.get('hr.payslip')
         date = datetime.now() - timedelta(days=90)
-        date_str = datetime.strftime(date, '%d-%m-%Y')
+        date_str = datetime.strftime(date, '%Y-%m-%d')
         payslip_ids = payslip_obj.search(
             self.cr, self.uid, [('date_from', '>=', date_str),
                                 ('date_to', '<=', fields.Date.today()),
