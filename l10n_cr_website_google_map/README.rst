@@ -2,12 +2,11 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-=======
-Website
-=======
+=============================
+Costa Rica Website Google Map
+=============================
 
-This module was written to Build Your Enterprise Website and update google maps
-location for Costa Rica
+This module was written to update google maps location for Costa Rica.
 
 Credits
 =======
