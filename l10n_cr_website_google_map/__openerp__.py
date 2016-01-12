@@ -21,11 +21,11 @@
 ##############################################################################
 
 {
-    'name': 'Website Costa Rica',
+    'name': 'Website Google Map Costa Rica',
     'version': '1.0',
     'category': 'Website',
     'sequence': 10,
-    'summary': 'Website Google Map Costa Rica',
+    'summary': 'Google Map for Costa Rica',
     'author': 'ClearCorp',
     'website': 'http://clearcorp.co.cr',
     'depends': ['website_google_map'],
