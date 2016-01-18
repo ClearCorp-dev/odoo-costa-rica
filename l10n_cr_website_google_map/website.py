@@ -40,7 +40,7 @@ class res_partner(models.Model):
             'size': "%sx%s" % (height, width),
             'markers': '%s|%s,%s' % (marker, partner.partner_latitude or '',
                                      partner.partner_longitude or ''),
-            'zoom': 17,
+            'zoom': partner.partner_zoom,
             'sensor': 'false',
 
         }
@@ -62,3 +62,4 @@ class res_partner(models.Model):
     partner_latitude = fields.Float(digits=(16, 7))
     partner_longitude = fields.Float(digits=(16, 7))
     maps_url = fields.Char('Maps Url', size=512)
+    partner_zoom = fields.Integer('Zoom')

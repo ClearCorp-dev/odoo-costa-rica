@@ -9,6 +9,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='date_localization']" position="after">
 	                <field name="maps_url"/>
+	                <field name="partner_zoom"/>
                 </xpath>
             </field>
         </record>
