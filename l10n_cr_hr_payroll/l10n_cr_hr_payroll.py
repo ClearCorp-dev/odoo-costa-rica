@@ -63,16 +63,20 @@ class hrPaysliprun(osv.Model):
             ('weekly', 'Weekly'),
             ('bi-weekly', 'Bi-weekly'),
             ('bi-monthly', 'Bi-monthly'),
-            ], 'Scheduled Pay', select=True, readonly=True, states={'draft': [('readonly', False)]}),      
+            ], 'Scheduled Pay', select=True, readonly=True,
+               states={'draft': [('readonly', False)]}),
     }
 
 
 class hrPayslipinherit(osv.Model):
-    _name='hr.payslip'
-    _inherit = ['mail.thread','hr.payslip']
 
-    #Get total payment per month
-    def get_qty_previous_payment(self, cr, uid, employee, actual_payslip, context=None):
+    _name = 'hr.payslip'
+
+    _inherit = ['mail.thread', 'hr.payslip']
+
+    # Get total payment per month
+    def get_qty_previous_payment(self, cr, uid, employee, actual_payslip,
+                                 context=None):
         payslip_ids = []
         date_to = datetime.strptime(actual_payslip.date_to, '%Y-%m-%d')
         if date_to.month < 10:
@@ -83,8 +87,8 @@ class hrPayslipinherit(osv.Model):
         payslip_ids = self.pool.get('hr.payslip').search(cr, uid, [('employee_id','=', employee.id), ('date_to', '>=', first_date), ('date_to','<', actual_payslip.date_from)], context=context)
         return len(payslip_ids)
 
-    #Get the previous payslip for an employee. Return all payslip that are in
-    #the same month than current payslip
+    # Get the previous payslip for an employee. Return all payslip that are in
+    # the same month than current payslip
     def get_previous_payslips(self, cr, uid, employee, actual_payslip, context=None):
         payslip_list = []
         date_to = datetime.strptime(actual_payslip.date_to, '%Y-%m-%d')
@@ -101,7 +105,7 @@ class hrPayslipinherit(osv.Model):
                 payslip_list.append(empl_payslip)
         return payslip_list
 
-    #get SBA for employee (Gross salary for an employee)
+    # get SBA for employee (Gross salary for an employee)
     def get_SBA(self, cr, uid, employee, actual_payslip, context=None):
         SBA = 0.0
         payslip_list = self.get_previous_payslips(cr, uid, employee, actual_payslip, context=context) #list of previous payslips
@@ -115,11 +119,11 @@ class hrPayslipinherit(osv.Model):
                         SBA += line.total
         return SBA
 
-    #get previous rent
+    # get previous rent
     def get_previous_rent(self, cr, uid, employee, actual_payslip, context=None):
         rent = 0.0
         payslip_list = self.get_previous_payslips(cr, uid, employee, actual_payslip, context=context) #list of previous payslips
-        
+
         for payslip in payslip_list:
             for line in payslip.line_ids:
                 if line.code == 'RENTA':
@@ -129,21 +133,25 @@ class hrPayslipinherit(osv.Model):
                         rent += line.total
         return rent
 
-    #Get quantity of days between two dates
+    # Get quantity of days between two dates
     def days_between_days(self, cr, uid, date_from, date_to, context=None):
         return abs((date_to - date_from).days)
 
-    #Get number of payments per month
+    # Get number of payments per month
     def qty_future_payments(self, cr, uid, payslip, context=None):
         payments = 0
 
         date_from = datetime.strptime(payslip.date_from, '%Y-%m-%d')
         date_to = datetime.strptime(payslip.date_to, '%Y-%m-%d')
 
-        dbtw = (self.days_between_days(cr, uid, date_from, date_to, context=context)) + 1 #take in account previous date for start date
-        next_date = date_to + timedelta(days=dbtw)
+        dbtw = (self.days_between_days(cr, uid, date_from, date_to, context=context)) + 1#take in account previous date for start date
 
+        next_date = date_to + timedelta(days=dbtw)
         month_date_to = date_to.month
+
+        if month_date_to == 2:
+            next_date = next_date - timedelta(days=2)
+
         month_date_next = next_date.month
 
         while(month_date_to == month_date_next):
@@ -151,7 +159,7 @@ class hrPayslipinherit(osv.Model):
             month_date_next = next_date.month
             payments += 1
         return payments
-    
+
     def action_payslip_send(self, cr, uid, ids, context=None):
         '''
         This function opens a window to compose an email, with the payslip template message loaded by default
@@ -165,7 +173,7 @@ class hrPayslipinherit(osv.Model):
         try:
             compose_form_id = ir_model_data.get_object_reference(cr, uid, 'mail', 'email_compose_message_wizard_form')[1]
         except ValueError:
-            compose_form_id = False 
+            compose_form_id = False
         ctx = dict()
         ctx.update({
             'default_model': 'hr.payslip',

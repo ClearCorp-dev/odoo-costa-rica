@@ -37,7 +37,8 @@ class hrRulesalary(osv.Model):
 # employee: hr.employee object
 # contract: hr.contract object
 # rules: object containing the rules code (previously computed)
-# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# categories: object containing the computed salary rule categories
+(sum of amount of all rules belonging to that category).
 # worked_days: object containing the computed worked days.
 # inputs: object containing the computed inputs.
 # company: object of res_company. It is a browse record
@@ -56,7 +57,8 @@ result = contract.wage * 0.10''',
 # employee: hr.employee object
 # contract: hr.contract object
 # rules: object containing the rules code (previously computed)
-# categories: object containing the computed salary rule categories (sum of amount of all rules belonging to that category).
+# categories: object containing the computed salary rule categories
+(sum of amount of all rules belonging to that category).
 # worked_days: object containing the computed worked days
 # inputs: object containing the computed inputs
 # company: object of res_company. It is a browse record
@@ -126,19 +128,20 @@ result = rules.NET > categories.NET * 0.10''',
             total = subtotal - (child_amount * children_numbers)
         return total
 
-#===============================================================================
-#     This function is designed to be called from python code in the salary rule.
-#     It receive as parameters the variables that can be used by default in 
+# =============================================================================
+#     This function is designed to be called from python code in the salary
+# rule.
+#     It receive as parameters the variables that can be used by default in
 #     python code on salary rule.
-# 
 #     It receive company, a parameter and it is a res.company object, but also,
 #     it can be declare inside in function
-#===============================================================================
-    def compute_total_rent(self, cr, uid, company, inputs, employee, categories, payslip):
+# =============================================================================
+    def compute_total_rent(self, cr, uid, company, inputs, employee,
+                           categories, payslip):
         """
-            This function computes, based on previous gross salary and future 
-            base salary, the rent amount for current payslip. This is a "dynamic"
-            way to compute amount rent for each payslip
+            This function computes, based on previous gross salary and future
+            base salary, the rent amount for current payslip. This is a
+            "dynamic" way to compute amount rent for each payslip
         """
         """Objects"""
         payslip_obj = self.pool.get('hr.payslip')
