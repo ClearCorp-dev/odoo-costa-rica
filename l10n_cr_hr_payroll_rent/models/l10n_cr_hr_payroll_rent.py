@@ -39,7 +39,10 @@ class HrRuleSalary(models.Model):
     _inherit = 'hr.salary.rule'
 
     def compute_rent_employee(self, company, employee, SBT):
-        super(HrRuleSalary, self).compute_rent_employee()
+        res = super(HrRuleSalary, self).compute_rent_employee(company,
+                                                              employee, SBT)
+        if not employee.contract_id.currency_id:
+            return res
         subtotal = 0.0
         exceed_2 = 0.0
         exceed_1 = 0.0
@@ -52,8 +55,12 @@ class HrRuleSalary(models.Model):
             {'date': fields.Date.today()}).compute(
                 company.second_limit, employee.contract_id.currency_id)
 
-        spouse_amount = company.amount_per_spouse
-        child_amount = company.amount_per_child
+        spouse_amount = company.rent_currency_id.with_context(
+            {'date': fields.Date.today()}).compute(
+                company.amount_per_spouse, employee.contract_id.currency_id)
+        child_amount = company.rent_currency_id.with_context(
+            {'date': fields.Date.today()}).compute(
+                company.amount_per_child, employee.contract_id.currency_id)
 
         children_numbers = employee.report_number_child
 
