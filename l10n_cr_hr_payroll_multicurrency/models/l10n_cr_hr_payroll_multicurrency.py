@@ -23,7 +23,7 @@ class HrConfigSettings(models.TransientModel):
     def get_default_rent_currency_id(self, cr, uid, fields, context=None):
         company_obj = self.pool.get('res.company')
         company_id = company_obj._company_default_get(
-            cr, uid, 'l10n_cr_hr_payroll_rent', context=context)
+            cr, uid, 'l10n_cr_hr_payroll_multicurrency', context=context)
         company = company_obj.browse(cr, uid, company_id, context=context)
         return {'rent_currency_id': company.rent_currency_id.id}
 

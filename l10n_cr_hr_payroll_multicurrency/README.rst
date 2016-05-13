@@ -2,9 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-==================
-HR Payroll Rent CR
-==================
+===========================
+HR Payroll MultiCurrency CR
+===========================
 
 This module was written to extend the functionality of calculate the rent with
 multicurrency in Costa Rica

@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'HR Payroll Rent C.R.',
+    'name': 'HR Payroll Multicurrency C.R.',
     'summary': 'Multicurrency rent to payroll',
     'version': '8.0.1.0',
     'category': 'Extra-tools',
@@ -16,8 +16,9 @@
     'auto_install': False,
     'depends': [
         'l10n_cr_hr_payroll',
+        'hr_payroll_multicurrency',
     ],
     'data': [
-        "views/l10n_cr_hr_payroll_rent_view.xml",
+        "views/l10n_cr_hr_payroll_multicurrency_view.xml",
     ],
 }
