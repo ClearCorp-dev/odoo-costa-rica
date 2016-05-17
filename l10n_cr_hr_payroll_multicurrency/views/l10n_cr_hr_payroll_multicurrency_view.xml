@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 ClearCorp
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<openerp>
+    <data>
+
+        <record id="human_resources_configuration_inherit" model="ir.ui.view">
+            <field name="name">human.resources.configuration</field>
+            <field name="model">hr.config.settings</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="l10n_cr_hr_payroll.view_human_resources_configuration_inherit"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//form/group[@name='rent_group']/div/div[@name='amount_per_spouse']" position="after">
+                          <div name="rent_currency_id">
+                                <label for="rent_currency_id"/>
+                                <field name="rent_currency_id" class="oe_inline"/>
+                            </div>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</openerp>
