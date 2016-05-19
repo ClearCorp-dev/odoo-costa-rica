@@ -91,7 +91,7 @@ result = rules.NET > categories.NET * 0.10''',
         result = super(hrRulesalary, self).satisfy_condition(cr, uid, rule_id, localdict, context=context)
         return result
 
-    def compute_rent_employee(self, company, employee, SBT):
+    def compute_rent_employee(self, company, employee, SBT, payslip):
         """This function is designed to be called from python code in the salary rule.
         It receive as parameters the variables that can be used by default in 
         python code on salary rule.
@@ -183,7 +183,7 @@ result = rules.NET > categories.NET * 0.10''',
         SBT = SBA + SBP + SBF
 
         """Compute rent"""
-        rent_empl_total = self.compute_rent_employee(company, employee, SBT) #Rent for a complete month
+        rent_empl_total = self.compute_rent_employee(company, employee, SBT, payslip) #Rent for a complete month
         total_paid_rent = payslip_obj.get_previous_rent(cr,uid,employee,payslip) #Rent already paid
         total_curr_rent = (rent_empl_total - total_paid_rent) / (future_payments + actual_payment) 
 

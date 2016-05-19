@@ -2,7 +2,7 @@
 # © 2016 ClearCorp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, fields
+from openerp import models, fields, api
 
 
 class ResCompany(models.Model):
@@ -38,9 +38,10 @@ class HrRuleSalary(models.Model):
 
     _inherit = 'hr.salary.rule'
 
-    def compute_rent_employee(self, company, employee, SBT):
-        res = super(HrRuleSalary, self).compute_rent_employee(company,
-                                                              employee, SBT)
+    def compute_rent_employee(self, company, employee, SBT, payslip):
+        res = super(HrRuleSalary, self).compute_rent_employee(
+            company, employee, SBT, payslip)
+
         if not employee.contract_id.currency_id:
             return res
         subtotal = 0.0
@@ -49,17 +50,17 @@ class HrRuleSalary(models.Model):
         total = 0.0
 
         limit1 = company.rent_currency_id.with_context(
-            {'date': fields.Date.today()}).compute(
+            {'date': payslip.date_to}).compute(
                 company.first_limit, employee.contract_id.currency_id)
         limit2 = company.rent_currency_id.with_context(
-            {'date': fields.Date.today()}).compute(
+            {'date': payslip.date_to}).compute(
                 company.second_limit, employee.contract_id.currency_id)
 
         spouse_amount = company.rent_currency_id.with_context(
-            {'date': fields.Date.today()}).compute(
+            {'date': payslip.date_to}).compute(
                 company.amount_per_spouse, employee.contract_id.currency_id)
         child_amount = company.rent_currency_id.with_context(
-            {'date': fields.Date.today()}).compute(
+            {'date': payslip.date_to}).compute(
                 company.amount_per_child, employee.contract_id.currency_id)
 
         children_numbers = employee.report_number_child
