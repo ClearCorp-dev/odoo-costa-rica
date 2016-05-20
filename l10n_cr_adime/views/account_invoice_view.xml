@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="oerp_view_invoice_form_inherits" model="ir.ui.view">
+            <field name="name">account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="type">form</field>
+            <field name="priority">2000</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <field name="residual" position="before">
+                    <field name="adime_total"/>
+                </field>
+                <field name="account_id" position="after">
+                    <field name="paid_ontime"/>
+                </field>
+                
+                
+                <field name="account_id" position="after">
+                    <field name="is_adime"/>
+                </field>
+                
+                
+            </field>
+        </record>
+    </data>
+</openerp>
+
