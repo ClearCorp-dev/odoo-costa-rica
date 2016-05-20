@@ -22,7 +22,7 @@
 
 {
     'name': 'Payroll Localization - Costa Rica',
-    'version': '1.1',
+    'version': '8.0.1.1',
     'category': 'Localization',
     'sequence': 38,
     'author': 'ClearCorp',

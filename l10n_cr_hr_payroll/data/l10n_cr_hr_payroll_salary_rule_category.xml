@@ -108,5 +108,11 @@
             <field name="note">Categoría utilizada para pagos adicionales después del salario neto (reintegros y otros ingresos exentos de toda deducción).</field>
         </record>
         
+        <record id="hr_payroll_extra_hours_salary" model="hr.salary.rule.category">
+            <field name="name">Horas extras</field>
+            <field name="code">HEX</field>
+            <field name="note">Categoría utilizada para pagos horas extras después del salario Ordinario (Horas extras).</field>
+        </record>
+        
     </data>
 </openerp>
