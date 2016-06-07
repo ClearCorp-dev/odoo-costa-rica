@@ -2,9 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-==============
+===========================
 Costa Rica Adime Management
-==============
+===========================
 
 This module was written to Add a check to the customer and the product,
 if both are satisfied estimated 5% of the bill and then by a
@@ -16,7 +16,8 @@ Credits
 Contributors
 ------------
 
-* Dago Gallo <dago.gallo@clearcorp.cr>
+* Dago Gallo <dago.gallo@clearcorp.co.cr>
+* Glen Sojo <glen.sojo@clearcorp.co.cr>
 
 
 Maintainer

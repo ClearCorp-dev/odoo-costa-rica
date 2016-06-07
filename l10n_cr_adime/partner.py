@@ -3,13 +3,13 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp.osv import fields, osv
-import openerp.addons.decimal_precision as dp
 
 
 class res_partner(osv.osv):
+
     _inherit = 'res.partner'
+
     _columns = {
         'adime_id': fields.many2one('adime.assigned', 'Porcentaje Adime'),
         'is_adime': fields.boolean('Socio Adime'),
     }
-res_partner()
