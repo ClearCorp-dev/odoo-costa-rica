@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 ClearCorp
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<openerp>
+    <data>
+        <record model="ir.actions.act_window" id="action_adime_percentage">
+            <field name="name">Adime Percentages</field>
+            <field name="res_model">l10n.cr.adime.percentage</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <act_window id="action_invoice_pay_adime"
+            multi="True"
+            key2="client_action_multi"
+            name="Pay ADIME Invoices"
+            res_model="l10n.cr.adime.pay.invoices.wizard"
+            src_model="account.invoice"
+            view_mode="form"
+            target="new"
+            view_type="form" />
+
+        <menuitem id="menu_adime_percentage"
+            name="Adime Percentages"
+            groups="account.group_account_manager"
+            parent="account.menu_configuration_misc"
+            action="action_adime_percentage"
+            sequence="30"
+        />
+    </data>
+</openerp>

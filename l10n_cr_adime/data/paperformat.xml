@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 ClearCorp
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<openerp>
+    <data>
+        <record id="paperformat_us_landscape_adime" model="report.paperformat">
+            <field name="name"> US Letter Landscape Adime</field>
+            <field name="default" eval="True"/>
+            <field name="format">Letter</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">20</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+    </data>
+</openerp>

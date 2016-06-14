@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 ClearCorp
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<openerp>
+    <data>
+        <!-- form -->
+        <record id="view_invoice_form" model="ir.ui.view">
+            <field name="name">Adime Invoice Form</field>
+            <field name="model">account.invoice</field>
+            <field name="type">form</field>
+            <field name="priority" eval="16"/>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <field name="residual" position="before">
+                    <field name="adime_total" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                </field>
+                <field name="account_id" position="after">
+                    <field name="paid_ontime"/>
+                    <field name="is_adime"/>
+                    <field name="paid_adime"/>
+                </field>
+                <field name="date_due" position="after">
+                    <field name="payment_date"/>
+                </field>
+            </field>
+        </record>
+        <!-- tree -->
+        <record id="view_invoice_tree" model="ir.ui.view">
+            <field name="name">Adime Invoice Tree</field>
+            <field name="model">account.invoice</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="16"/>
+            <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="arch" type="xml">
+                <field name="amount_total" position="after">
+                    <field name="adime_total"/>
+                    <field name="paid_ontime"/>
+                    <field name="paid_adime"/>
+                </field>
+            </field>
+        </record>
+        <!-- search -->
+        <record id="view_invoice_search" model="ir.ui.view">
+            <field name="name">Adime Invoice Search</field>
+            <field name="model">account.invoice</field>
+            <field name="type">search</field>
+            <field name="priority" eval="16"/>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search/group" position="after">
+                    <separator/>
+                    <filter name="adime_invoices" string="Adime Invoices" domain="[('is_adime','=', True)]" help="Adime Invoices"/>
+                    <separator/>
+                    <filter name="adime_paid" string="Adime Paid" domain="[('paid_adime','=', True)]" help="Paid Adime Invoices"/>
+                    <filter name="adime_unpaid" string="Adime Unpaid" domain="[('paid_adime','=', False)]" help="Unpaid Adime Invoices"/>
+                    <separator/>
+                    <filter name="adime_paid_ontime" string="Adime Paid on Time" domain="[('paid_ontime','=', True)]" help="Paid on time Adime Invoices"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

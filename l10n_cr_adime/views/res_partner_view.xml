@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 ClearCorp
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<openerp>
+    <data>
+        <record id="view_partner_property_form" model="ir.ui.view">
+            <field name="name">res.partner.product.property.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='sales_purchases']/group/group/field[@name='supplier']" position="after">
+                    <field name="is_adime"/>
+                    <label for="adime_product"/>
+                </xpath>
+                <field name="user_id" position="after">
+                   <field name="adime_id" attrs="{'invisible':[('is_adime', '=', False)], 'required':[('is_adime', '=', True)]}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
