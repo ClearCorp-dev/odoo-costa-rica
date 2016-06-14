@@ -2,31 +2,26 @@
 # © 2016 ClearCorp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp.osv import fields, osv
-
-STATES = [
-    ('draft', 'Borrador'), ('confirmed', 'Confirmado'),
-    ('done', 'Procesado'), ('cancel', 'Cancelado')]
+from openerp import models, fields, api
 
 
-class AdimeAssigned(osv.osv):
+class AdimeAssigned(models.Model):
 
-    _name = 'adime.assigned'
+    _name = 'l10n.cr.adime.percentage'
 
-    _columns = {
-        'code': fields.char('Codigo', size=64, readonly=True),
-        'name': fields.char('Nombre', size=64, required=True),
-        'percentaje': fields.float('Aporte Adime', required=True),
-    }
+    name = fields.Char('Name', size=64, required=True)
+    percentage = fields.Float('Percentage', required=True)
 
-    def create(self, cr, uid, vals, context=None):
-        vals['code'] = self.pool.get(
-            'ir.sequence').get(cr, uid, 'adime.assigned')
-        res = super(AdimeAssigned, self).create(cr, uid, vals, context=context)
-        return res
+    @api.multi
+    def name_get(self):
+        result = []
+        for adime in self:
+            result.append(
+                (adime.id, '%s (%.2f%%)' % (adime.name, adime.percentage)))
+        return result
 
 
-class AdimeReport(osv.osv):
+"""class AdimeReport(osv.osv):
 
     _name = 'adime.report'
 
@@ -146,4 +141,4 @@ class adime_partner_line(osv.osv):
         'name': fields.char('Nombre', size=64, readonly=True),
         'partner_id': fields.many2one('res.partner', 'Socio', required=True),
         'subtotal': fields.float('Subtotal', required=True),
-    }
+    }"""

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+    <data>
+        <template id="report_adime_payment">
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <div class="page">
+                        <t t-if="o and 'company_id' in o">
+                            <t t-set="company" t-value="o.company_id"></t>
+                        </t>
+                        <t t-if="not o or not 'company_id' in o">
+                            <t t-set="company" t-value="res_company"></t>
+                        </t>
+                        <div class="row">
+                            <h2>ADIME Invoices Report</h2>
+                        </div>
+                        <div class="row">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Invoice</th>
+                                        <th class="text-center">Customer</th>
+                                        <th class="text-center">Date</th>
+                                        <th class="text-center">Due Date</th>
+                                        <th class="text-center">Payment Date</th>
+                                        <th class="text-center">Paid on time</th>
+                                        <th class="text-right">Total</th>
+                                        <th class="text-right">Subtotal</th>
+                                        <th class="text-right">Adime Amount</th>
+                                        <th class="text-center">Adime Paid</th>
+                                        <th class="text-center">Currency</th>
+                                        <th class="text-right">Adime Amount Company Currency</th>
+                                        <th class="text-center">State</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="docs" t-as="doc">
+                                        <tr>
+                                            <td>
+                                                <span t-field="doc.number"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.partner_id"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.date_invoice"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.date_due"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.payment_date"/>
+                                            </td>
+                                            <td>
+                                                <t t-if="doc.paid_ontime">
+                                                    <span>Yes</span>
+                                                </t>
+                                                <t t-if="not doc.paid_ontime">
+                                                    <span>No</span>
+                                                </t>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="doc.amount_total"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="doc.amount_untaxed"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="doc.adime_total"/>
+                                            </td>
+                                            <td>
+                                                <t t-if="doc.paid_adime">
+                                                    <span>Yes</span>
+                                                </t>
+                                                <t t-if="not doc.paid_adime">
+                                                    <span>No</span>
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.currency_id"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="get_amount_currency(doc.currency_id, company.currency_id, doc.adime_total)"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.state"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+        <report id="action_report_adime_payment"
+            string="ADIME Payment Report"
+            model="account.invoice" 
+            report_type="qweb-pdf"
+            file="report_adime_payment" 
+            name="l10n_cr_adime.report_adime_payment" 
+        />
+        <record id="action_report_adime_payment" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="paperformat_us_landscape_adime"/>
+        </record>
+    </data>
+</openerp>
