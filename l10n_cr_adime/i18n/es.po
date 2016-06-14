@@ -41,7 +41,7 @@ msgstr "Facturas Adime"
 #: view:account.invoice:l10n_cr_adime.view_invoice_search
 #: view:website:l10n_cr_adime.report_adime_payment
 msgid "Adime Paid"
-msgstr "Adime pagadp"
+msgstr "Adime pagado"
 
 #. module: l10n_cr_adime
 #: view:account.invoice:l10n_cr_adime.view_invoice_search
@@ -68,7 +68,7 @@ msgstr "Adime no pagado"
 #. module: l10n_cr_adime
 #: field:account.invoice,is_adime:0
 msgid "Admine Invoice"
-msgstr "Factura Admine"
+msgstr "Factura Adime"
 
 #. module: l10n_cr_adime
 #: view:l10n.cr.adime.pay.invoices.wizard:l10n_cr_adime.view_pay_adime_invoices_form
