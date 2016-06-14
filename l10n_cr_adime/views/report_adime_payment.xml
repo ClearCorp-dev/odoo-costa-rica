@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 ClearCorp
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
 
 <openerp>
     <data>
@@ -96,7 +98,7 @@
             </t>
         </template>
         <report id="action_report_adime_payment"
-            string="ADIME Payment Report"
+            string="ADIME Invoices Report"
             model="account.invoice" 
             report_type="qweb-pdf"
             file="report_adime_payment" 

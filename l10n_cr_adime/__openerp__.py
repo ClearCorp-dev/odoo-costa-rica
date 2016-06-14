@@ -20,6 +20,7 @@
         'account_voucher',
     ],
     'data': [
+        'security/ir.model.access.csv',
         'data/paperformat.xml',
         'views/adime_percentage_view.xml',
         'views/res_partner_view.xml',

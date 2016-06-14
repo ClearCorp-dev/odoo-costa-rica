@@ -1,0 +1,254 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* l10n_cr_adime
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-14 20:35+0000\n"
+"PO-Revision-Date: 2016-06-14 20:35+0000\n"
+"Last-Translator: Glen Sojo <glen.sojo@clearcorp.co.cr>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_cr_adime
+#: view:website:l10n_cr_adime.report_adime_payment
+#: model:ir.actions.report.xml,name:l10n_cr_adime.action_report_adime_payment
+msgid "ADIME Invoices Report"
+msgstr "Reporte de facturas ADIME"
+
+#. module: l10n_cr_adime
+#: field:account.invoice,adime_total:0
+#: view:website:l10n_cr_adime.report_adime_payment
+msgid "Adime Amount"
+msgstr "Monto Adime"
+
+#. module: l10n_cr_adime
+#: view:website:l10n_cr_adime.report_adime_payment
+msgid "Adime Amount Company Currency"
+msgstr "Monto Adime divisa compañía"
+
+#. module: l10n_cr_adime
+#: view:account.invoice:l10n_cr_adime.view_invoice_search
+msgid "Adime Invoices"
+msgstr "Facturas Adime"
+
+#. module: l10n_cr_adime
+#: view:account.invoice:l10n_cr_adime.view_invoice_search
+#: view:website:l10n_cr_adime.report_adime_payment
+msgid "Adime Paid"
+msgstr "Adime pagadp"
+
+#. module: l10n_cr_adime
+#: view:account.invoice:l10n_cr_adime.view_invoice_search
+msgid "Adime Paid on Time"
+msgstr "Adime pagado a tiempo"
+
+#. module: l10n_cr_adime
+#: view:l10n.cr.adime.percentage:l10n_cr_adime.view_adime_percentage_search
+#: field:res.partner,adime_id:0
+msgid "Adime Percentage"
+msgstr "Porcentaje Adime"
+
+#. module: l10n_cr_adime
+#: model:ir.actions.act_window,name:l10n_cr_adime.action_adime_percentage
+#: model:ir.ui.menu,name:l10n_cr_adime.menu_adime_percentage
+msgid "Adime Percentages"
+msgstr "Porcentajes Adime"
+
+#. module: l10n_cr_adime
+#: view:account.invoice:l10n_cr_adime.view_invoice_search
+msgid "Adime Unpaid"
+msgstr "Adime no pagado"
+
+#. module: l10n_cr_adime
+#: field:account.invoice,is_adime:0
+msgid "Admine Invoice"
+msgstr "Factura Admine"
+
+#. module: l10n_cr_adime
+#: view:l10n.cr.adime.pay.invoices.wizard:l10n_cr_adime.view_pay_adime_invoices_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: l10n_cr_adime
+#: field:l10n.cr.adime.pay.invoices.wizard,create_uid:0
+#: field:l10n.cr.adime.percentage,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: l10n_cr_adime
+#: field:l10n.cr.adime.pay.invoices.wizard,create_date:0
+#: field:l10n.cr.adime.percentage,create_date:0
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: l10n_cr_adime
+#: view:website:l10n_cr_adime.report_adime_payment
+msgid "Currency"
+msgstr "Divisa"
+
+#. module: l10n_cr_adime
+#: view:website:l10n_cr_adime.report_adime_payment
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: l10n_cr_adime
+#: view:website:l10n_cr_adime.report_adime_payment
+msgid "Date"
+msgstr "Fecha"
+
+#. module: l10n_cr_adime
+#: field:l10n.cr.adime.pay.invoices.wizard,display_name:0
+#: field:l10n.cr.adime.percentage,display_name:0
+#: field:report.l10n_cr_adime.report_adime_payment,display_name:0
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: l10n_cr_adime
+#: view:website:l10n_cr_adime.report_adime_payment
+msgid "Due Date"
+msgstr "Fecha vencimiento"
+
+#. module: l10n_cr_adime
+#: field:l10n.cr.adime.pay.invoices.wizard,id:0
+#: field:l10n.cr.adime.percentage,id:0
+#: field:report.l10n_cr_adime.report_adime_payment,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: l10n_cr_adime
+#: model:ir.model,name:l10n_cr_adime.model_account_invoice
+#: view:website:l10n_cr_adime.report_adime_payment
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: l10n_cr_adime
+#: field:res.partner,is_adime:0
+msgid "Is Adime"
+msgstr "Es Adime"
+
+#. module: l10n_cr_adime
+#: field:l10n.cr.adime.pay.invoices.wizard,__last_update:0
+#: field:l10n.cr.adime.percentage,__last_update:0
+#: field:report.l10n_cr_adime.report_adime_payment,__last_update:0
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: l10n_cr_adime
+#: field:l10n.cr.adime.pay.invoices.wizard,write_uid:0
+#: field:l10n.cr.adime.percentage,write_uid:0
+msgid "Last Updated by"
+msgstr "Última modificación por"
+
+#. module: l10n_cr_adime
+#: field:l10n.cr.adime.pay.invoices.wizard,write_date:0
+#: field:l10n.cr.adime.percentage,write_date:0
+msgid "Last Updated on"
+msgstr "Última modificación el"
+
+#. module: l10n_cr_adime
+#: field:l10n.cr.adime.percentage,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: l10n_cr_adime
+#: view:l10n.cr.adime.pay.invoices.wizard:l10n_cr_adime.view_pay_adime_invoices_form
+msgid "Once invoices are paid, you will not be able\n"
+"                        to modify them."
+msgstr "Una vez que las facturas sean pagadas, no serás capaz\n"
+"                        de modificarlas."
+
+#. module: l10n_cr_adime
+#: view:account.invoice:l10n_cr_adime.view_invoice_search
+msgid "Paid Adime Invoices"
+msgstr "Facturas Adime pagadas"
+
+#. module: l10n_cr_adime
+#: field:account.invoice,paid_ontime:0
+#: view:website:l10n_cr_adime.report_adime_payment
+msgid "Paid on time"
+msgstr "Pagada a tiempo"
+
+#. module: l10n_cr_adime
+#: view:account.invoice:l10n_cr_adime.view_invoice_search
+msgid "Paid on time Adime Invoices"
+msgstr "Facturas Adime pagadas a tiempo"
+
+#. module: l10n_cr_adime
+#: field:account.invoice,paid_adime:0
+msgid "Paid to partner (Adime)"
+msgstr "Pagada al cliente (Adime)"
+
+#. module: l10n_cr_adime
+#: model:ir.model,name:l10n_cr_adime.model_res_partner
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: l10n_cr_adime
+#: model:ir.actions.act_window,name:l10n_cr_adime.action_invoice_pay_adime
+#: view:l10n.cr.adime.pay.invoices.wizard:l10n_cr_adime.view_pay_adime_invoices_form
+msgid "Pay ADIME Invoices"
+msgstr "Pagar facturas ADIME"
+
+#. module: l10n_cr_adime
+#: view:l10n.cr.adime.pay.invoices.wizard:l10n_cr_adime.view_pay_adime_invoices_form
+msgid "Pay Invoices"
+msgstr "Pagar Facturas"
+
+#. module: l10n_cr_adime
+#: field:account.invoice,payment_date:0
+#: view:website:l10n_cr_adime.report_adime_payment
+msgid "Payment Date"
+msgstr "Fecha pago"
+
+#. module: l10n_cr_adime
+#: field:l10n.cr.adime.percentage,percentage:0
+msgid "Percentage"
+msgstr "Porcentaje"
+
+#. module: l10n_cr_adime
+#: code:addons/l10n_cr_adime/wizard/pay_adime_invoices.py:26
+#, python-format
+msgid "Selected invoice(s) cannot be paid (ADIME) as they are not ADIME invoices."
+msgstr "Las facturas seleccionadas no pueden ser pagadas (ADIME) debido a que no son facturas ADIME."
+
+#. module: l10n_cr_adime
+#: code:addons/l10n_cr_adime/wizard/pay_adime_invoices.py:22
+#, python-format
+msgid "Selected invoice(s) cannot be paid (ADIME) as they are not in \"Paid\" state."
+msgstr "Las facturas seleccionadas no pueden ser pagadas (ADIME) debido a que no están en estado \"Pagado\"."
+
+#. module: l10n_cr_adime
+#: view:website:l10n_cr_adime.report_adime_payment
+msgid "State"
+msgstr "Estado"
+
+#. module: l10n_cr_adime
+#: view:website:l10n_cr_adime.report_adime_payment
+msgid "Subtotal"
+msgstr "Subtotal"
+
+#. module: l10n_cr_adime
+#: view:website:l10n_cr_adime.report_adime_payment
+msgid "Total"
+msgstr "Total"
+
+#. module: l10n_cr_adime
+#: view:account.invoice:l10n_cr_adime.view_invoice_search
+msgid "Unpaid Adime Invoices"
+msgstr "Facturas Adime sin pagar"
+
+#. module: l10n_cr_adime
+#: view:website:l10n_cr_adime.report_adime_payment
+msgid "Yes"
+msgstr "Si"
+
+#. module: l10n_cr_adime
+#: view:l10n.cr.adime.pay.invoices.wizard:l10n_cr_adime.view_pay_adime_invoices_form
+msgid "or"
+msgstr "o"
