@@ -41,7 +41,7 @@
 	                                with No identification <span t-field="o.identification_id"/>, works for the company
 	                                <span t-field="company.name"/> from the <span t-field="contract.date_start"/>,
 	                                performance the post <span t-field="o.job_id"/>,  accruing monthly salary of 
-	                                <span t-field="contract.wage"/>, in letter <span t-esc="text_amount"/>.
+	                                <span t-field="company.currency_id.symbol"/><span t-field="contract.wage"/>, in letter <span t-esc="text_amount"/>.
 	                            </p>
 	                        </div>
                             <t t-if="payslips_ids['payslips']">
@@ -51,13 +51,13 @@
                                     <p><b>With a <span t-field="contract.schedule_pay"/> payment</b></p>
                                     <t t-set="gross_total" t-value="get_line_total(payslips, code='BRUTO')"/>
                                     <t t-set="gross" t-value="gross_total / qty"/>
-                                        <p><b>Brute Salary:  <span t-esc="gross"/></b></p>
+                                        <p><b>Brute Salary:  <span t-field="company.currency_id.symbol"/><span t-esc="gross"/></b></p>
                                     <t t-set="cso_total" t-value="get_line_total_group(payslips, code=['CSO'])"/>
                                     <t t-set="CSO" t-value="cso_total / qty"/>
-                                        <p><b>Social charges:  <span t-esc="CSO"/></b></p>
+                                        <p><b>Social charges:  <span t-field="company.currency_id.symbol"/><span t-esc="CSO"/></b></p>
                                     <t t-set="net_total" t-value="get_line_total(payslips, code='NETO')"/>
                                     <t t-set="Net" t-value="net_total / qty"/>
-                                        <p><b>Net Salary:  <span t-esc="Net"/></b></p>
+                                        <p><b>Net Salary:  <span t-field="company.currency_id.symbol"/><span t-esc="Net"/></b></p>
                                 </div>
                             </t>
 	                         <div class="col-xs-12" style="margin-top: 25px">
