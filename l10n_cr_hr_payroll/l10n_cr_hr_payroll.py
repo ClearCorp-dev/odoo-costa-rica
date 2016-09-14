@@ -74,6 +74,46 @@ class hrPayslipinherit(osv.Model):
 
     _inherit = ['mail.thread', 'hr.payslip']
 
+    _track = {
+        'state': {
+            'l10n_cr_hr_payroll.mt_payslip_draft': lambda self, cr, uid,
+                obj, ctx=None: obj.state == 'draft',
+            'l10n_cr_hr_payroll.mt_payslip_verify': lambda self, cr, uid,
+                obj, ctx=None: obj.state == 'verify',
+            'l10n_cr_hr_payroll.mt_payslip_done': lambda self, cr, uid,
+                obj, ctx=None: obj.state == 'done',
+            'l10n_cr_hr_payroll.mt_payslip_cancel': lambda self, cr, uid,
+                obj, ctx=None: obj.state == 'cancel',
+        },
+    }
+
+    _columns = {
+
+        'state': fields.selection([
+            ('draft', 'Draft'),
+            ('verify', 'Waiting'),
+            ('done', 'Done'),
+            ('cancel', 'Rejected'),
+        ], 'Status', select=True, readonly=True,
+            copy=False, track_visibility='onchange',
+            help='* When the payslip is created the status is \'Draft\'.\
+            \n* If the payslip is under verification, the status is \'Waiting\'. \
+            \n* If the payslip is confirmed then status is set to \'Done\'.\
+            \n* When user cancel payslip the status is \'Rejected\'.'),
+    }
+
+    def create(self, cr, uid, values, context=None):
+        """ Override to avoid automatic logging of creation """
+        if context is None:
+            context = {}
+        payslip_id = super(hrPayslipinherit, self).create(cr, uid, values, context=context)
+        employee_id = values.get('employee_id', False)
+        employee = self.pool['hr.employee'].browse(cr, uid, employee_id, context=context)
+        if employee and employee.address_home_id:
+            context = dict(context, mail_create_nolog=True, mail_create_nosubscribe=True)
+            self.message_subscribe(cr, uid, [payslip_id], [employee.address_home_id.id], context=context)
+        return payslip_id  
+
     # Get total payment per month
     def get_qty_previous_payment(self, cr, uid, employee, actual_payslip,
                                  context=None):
