@@ -41,6 +41,13 @@
                     <button name="cancel_sheet" position="after">
                         <button name="action_payslip_send" string="Send by Email" type="object" states="done" class="oe_highlight"/>
                     </button>
+                    <xpath expr="//form/sheet" position="after">
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"
+                            groups="base.group_user" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </xpath>
                 </data>
             </field>
         </record>
