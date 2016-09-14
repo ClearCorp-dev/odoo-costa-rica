@@ -1,0 +1,63 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* l10n_cr_hr_attendance_payslip_overtime
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-14 05:51+0000\n"
+"PO-Revision-Date: 2016-09-14 05:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_cr_hr_attendance_payslip_overtime
+#: code:addons/l10n_cr_hr_attendance_payslip_overtime/models/hr_attendance_payslip.py:36
+#, python-format
+msgid "Attendance Working Day Hours"
+msgstr "Horas de trabajo Día"
+
+#. module: l10n_cr_hr_attendance_payslip_overtime
+#: code:addons/l10n_cr_hr_attendance_payslip_overtime/models/hr_attendance_payslip.py:60
+#, python-format
+msgid "Attendance Working Extra Day Hours"
+msgstr "Horas extra de trabajo Día"
+
+#. module: l10n_cr_hr_attendance_payslip_overtime
+#: code:addons/l10n_cr_hr_attendance_payslip_overtime/models/hr_attendance_payslip.py:68
+#, python-format
+msgid "Attendance Working Extra Mix Hours"
+msgstr "Horas extra de trabajo Mixto"
+
+#. module: l10n_cr_hr_attendance_payslip_overtime
+#: code:addons/l10n_cr_hr_attendance_payslip_overtime/models/hr_attendance_payslip.py:76
+#, python-format
+msgid "Attendance Working Extra Night Hours"
+msgstr "Horas extra de trabajo Noche"
+
+#. module: l10n_cr_hr_attendance_payslip_overtime
+#: code:addons/l10n_cr_hr_attendance_payslip_overtime/models/hr_attendance_payslip.py:44
+#, python-format
+msgid "Attendance Working Mix Hours"
+msgstr "Horas de trabajo Mixto"
+
+#. module: l10n_cr_hr_attendance_payslip_overtime
+#: code:addons/l10n_cr_hr_attendance_payslip_overtime/models/hr_attendance_payslip.py:52
+#, python-format
+msgid "Attendance Working Night Hours"
+msgstr "Horas de trabajo Noche"
+
+#. module: l10n_cr_hr_attendance_payslip_overtime
+#: model:ir.model,name:l10n_cr_hr_attendance_payslip_overtime.model_hr_contract
+msgid "Contract"
+msgstr "Contrato"
+
+#. module: l10n_cr_hr_attendance_payslip_overtime
+#: model:ir.model,name:l10n_cr_hr_attendance_payslip_overtime.model_hr_payslip
+msgid "Pay Slip"
+msgstr "Nómina"
+
