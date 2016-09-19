@@ -32,9 +32,31 @@ class PaySlip(osv.Model):
     _inherit = 'hr.payslip'
 
     def get_attendances_dictionary(self, cr, uid, contract, context=None):
+        input_value_obj = self.pool.get('hr.payroll.extended.input.value')
+        
+        input_hd_id = input_value_obj.search(cr, uid, [('code','=','HD'), ('type','=','worked_days')], context=context)
+        input_hm_id = input_value_obj.search(cr, uid, [('code','=','HM'), ('type','=','worked_days')], context=context)
+        input_hn_id = input_value_obj.search(cr, uid, [('code','=','HN'), ('type','=','worked_days')], context=context)
+        input_hed_id = input_value_obj.search(cr, uid, [('code','=','HED'), ('type','=','worked_days')], context=context)
+        input_hem_id = input_value_obj.search(cr, uid, [('code','=','HEM'), ('type','=','worked_days')], context=context)
+        input_hen_id = input_value_obj.search(cr, uid, [('code','=','HEN'), ('type','=','worked_days')], context=context)
+        
+        if not input_hd_id or not input_hm_id or not input_hn_id or not input_hed_id \
+            or not input_hem_id or not input_hen_id:
+            raise osv.except_osv(
+                            _('Error!'),
+                            _('You need to create Input Values HD, HM, HN, HED, HEM, HEN'))
+        input_hd_id = input_hd_id[0]
+        input_hm_id = input_hm_id[0]
+        input_hn_id = input_hn_id[0]
+        input_hed_id = input_hed_id[0]
+        input_hem_id = input_hem_id[0]
+        input_hen_id = input_hen_id[0]
+
         attendances_day = {
             'name': _("Attendance Working Day Hours"),
             'sequence': 1,
+            'work_code': input_hd_id,
             'code': 'HD',
             'number_of_days': 0.0,
             'number_of_hours': 0.0,
@@ -43,6 +65,7 @@ class PaySlip(osv.Model):
         attendances_mix = {
             'name': _("Attendance Working Mix Hours"),
             'sequence': 1,
+            'work_code': input_hm_id,
             'code': 'HM',
             'number_of_days': 0.0,
             'number_of_hours': 0.0,
@@ -51,6 +74,7 @@ class PaySlip(osv.Model):
         attendances_night = {
             'name': _("Attendance Working Night Hours"),
             'sequence': 1,
+            'work_code': input_hn_id,
             'code': 'HN',
             'number_of_days': 0.0,
             'number_of_hours': 0.0,
@@ -59,6 +83,7 @@ class PaySlip(osv.Model):
         attendances_extra_day = {
             'name': _("Attendance Working Extra Day Hours"),
             'sequence': 1,
+            'work_code': input_hed_id,
             'code': 'HED',
             'number_of_days': 0.0,
             'number_of_hours': 0.0,
@@ -67,6 +92,7 @@ class PaySlip(osv.Model):
         attendances_extra_mix = {
             'name': _("Attendance Working Extra Mix Hours"),
             'sequence': 1,
+            'work_code': input_hem_id,
             'code': 'HEM',
             'number_of_days': 0.0,
             'number_of_hours': 0.0,
@@ -75,6 +101,7 @@ class PaySlip(osv.Model):
         attendances_extra_night = {
             'name': _("Attendance Working Extra Night Hours"),
             'sequence': 1,
+            'work_code': input_hen_id,
             'code': 'HEN',
             'number_of_days': 0.0,
             'number_of_hours': 0.0,

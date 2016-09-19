@@ -15,6 +15,7 @@
     'installable': True,
     'active': False,
     'depends': [
+        'hr_payroll_extended',
         'hr_attendance_payslip',
     ],
     'data': [
