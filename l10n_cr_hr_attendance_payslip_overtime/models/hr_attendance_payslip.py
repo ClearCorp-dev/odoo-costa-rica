@@ -138,7 +138,7 @@ class PaySlip(osv.Model):
             attendance_out_date = self.get_timezone_date(cr, uid, user.tz, attendance_out_date, context=context)
         
         #Compare hours
-        if attendance_in_date.hour >= 5 and attendance_out_date.hour < 19:
+        if attendance_in_date.hour >= 5 and attendance_out_date.hour <= 19:
             if attendance_in_date.day == attendance_out_date.day:
                 #comes after 5 and leave before 19->day
                 attendances_day['number_of_days'] += 1.0
