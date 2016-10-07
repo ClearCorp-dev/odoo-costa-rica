@@ -22,50 +22,31 @@
 
 import openerp.tools
 from openerp.osv import fields, osv
+from openerp import models, fields as fields2
 from datetime import datetime, date, timedelta
 from openerp.tools.translate import _
 
 
-class hrContract(osv.Model):
+class Contract(models.Model):
     """Employee contract based on the visa, work permits
     allows to configure different Salary structure"""
 
     _inherit = 'hr.contract'
-    _columns = {
-        'schedule_pay': fields.selection([
-            ('fortnightly', 'Fortnightly'),
-            ('monthly', 'Monthly'),
-            ('quarterly', 'Quarterly'),
-            ('semi-annually', 'Semi-annually'),
-            ('annually', 'Annually'),
-            ('weekly', 'Weekly'),
-            ('bi-weekly', 'Bi-weekly'),
-            ('bi-monthly', 'Bi-monthly'),
-            ], 'Scheduled Pay', select=True),
-    }
+
+    schedule_pay = fields2.Selection(selection_add=[
+        ('fortnightly', 'Fortnightly')])
 
     _defaults = {
         'schedule_pay': 'monthly',
     }
 
 
-class hrPaysliprun(osv.Model):
+class PayslipRun(models.Model):
 
     _inherit = 'hr.payslip.run'
 
-    _columns = {
-        'schedule_pay': fields.selection([
-            ('fortnightly', 'Fortnightly'),
-            ('monthly', 'Monthly'),
-            ('quarterly', 'Quarterly'),
-            ('semi-annually', 'Semi-annually'),
-            ('annually', 'Annually'),
-            ('weekly', 'Weekly'),
-            ('bi-weekly', 'Bi-weekly'),
-            ('bi-monthly', 'Bi-monthly'),
-            ], 'Scheduled Pay', select=True, readonly=True,
-               states={'draft': [('readonly', False)]}),
-    }
+    schedule_pay = fields2.Selection(selection_add=[
+        ('fortnightly', 'Fortnightly')])
 
 
 class hrPayslipinherit(osv.Model):
