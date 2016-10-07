@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-14 03:21+0000\n"
-"PO-Revision-Date: 2016-05-14 03:21+0000\n"
-"Last-Translator: Fabio Vilchez <fabio.vilchez@clearcorp.co.cr>\n"
+"POT-Creation-Date: 2016-10-07 20:08+0000\n"
+"PO-Revision-Date: 2016-10-07 20:08+0000\n"
+"Last-Translator: Glen Sojo <glen.sojo@clearcorp.co.cr>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -153,6 +153,18 @@ msgid "Department:"
 msgstr "Departamento:"
 
 #. module: l10n_cr_hr_payroll
+#: field:l10n.cr.hr.payroll.by.periods,display_name:0
+#: field:l10n.cr.hr.payroll.by.periods.employee,display_name:0
+#: field:report.l10n_cr_hr_payroll.report_payroll_periods,display_name:0
+#: field:report.l10n_cr_hr_payroll.report_payroll_periods_employee,display_name:0
+#: field:report.l10n_cr_hr_payroll.report_payroll_xls,display_name:0
+#: field:report.l10n_cr_hr_payroll.report_payroll_xls_employee,display_name:0
+#: field:report.l10n_cr_hr_payroll.report_payslip_run,display_name:0
+#: field:report.l10n_cr_hr_payroll.report_payslip_run_xls,display_name:0
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: l10n_cr_hr_payroll
 #: model:ir.model,name:l10n_cr_hr_payroll.model_hr_employee
 msgid "Employee"
 msgstr "Empleado"
@@ -285,7 +297,7 @@ msgstr "ID"
 #: view:website:l10n_cr_hr_payroll.report_payslip_run
 #: view:website:l10n_cr_hr_payroll.report_payslip_run_xls
 msgid "ID Card"
-msgstr "ID"
+msgstr "ID de identificación"
 
 #. module: l10n_cr_hr_payroll
 #: view:website:l10n_cr_hr_payroll.report_payroll_periods
@@ -293,7 +305,7 @@ msgstr "ID"
 #: view:website:l10n_cr_hr_payroll.report_payroll_xls
 #: view:website:l10n_cr_hr_payroll.report_payroll_xls_employee
 msgid "ID card"
-msgstr "ID"
+msgstr "ID de identificación"
 
 #. module: l10n_cr_hr_payroll
 #: help:hr.payslip,message_unread:0
@@ -314,6 +326,18 @@ msgstr "Es un seguidor"
 #: field:hr.payslip,message_last_post:0
 msgid "Last Message Date"
 msgstr "Fecha del último mensaje"
+
+#. module: l10n_cr_hr_payroll
+#: field:l10n.cr.hr.payroll.by.periods,__last_update:0
+#: field:l10n.cr.hr.payroll.by.periods.employee,__last_update:0
+#: field:report.l10n_cr_hr_payroll.report_payroll_periods,__last_update:0
+#: field:report.l10n_cr_hr_payroll.report_payroll_periods_employee,__last_update:0
+#: field:report.l10n_cr_hr_payroll.report_payroll_xls,__last_update:0
+#: field:report.l10n_cr_hr_payroll.report_payroll_xls_employee,__last_update:0
+#: field:report.l10n_cr_hr_payroll.report_payslip_run,__last_update:0
+#: field:report.l10n_cr_hr_payroll.report_payslip_run_xls,__last_update:0
+msgid "Last Modified on"
+msgstr "Last Modified on"
 
 #. module: l10n_cr_hr_payroll
 #: field:l10n.cr.hr.payroll.by.periods,write_uid:0
@@ -577,4 +601,3 @@ msgstr "o"
 #: view:website:l10n_cr_hr_payroll.report_payslip_run
 msgid "to"
 msgstr "hasta"
-
