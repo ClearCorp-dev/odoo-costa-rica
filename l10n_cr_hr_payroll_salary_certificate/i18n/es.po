@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-07 19:52+0000\n"
-"PO-Revision-Date: 2016-10-07 19:52+0000\n"
+"POT-Creation-Date: 2016-10-07 22:17+0000\n"
+"PO-Revision-Date: 2016-10-07 22:17+0000\n"
 "Last-Translator: Glen Sojo <glen.sojo@clearcorp.co.cr>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -60,7 +60,7 @@ msgid "By this means we state that"
 msgstr "Por este medio hacemos contar"
 
 #. module: l10n_cr_hr_payroll_salary_certificate
-#: code:addons/l10n_cr_hr_payroll_salary_certificate/report/report_salary_certificate.py:123
+#: code:addons/l10n_cr_hr_payroll_salary_certificate/report/report_salary_certificate.py:128
 #, python-format
 msgid "Currency not supported by this report."
 msgstr "Moneda no compatible con este informe."
@@ -132,8 +132,8 @@ msgstr "A quién interese"
 
 #. module: l10n_cr_hr_payroll_salary_certificate
 #: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
-msgid "With a"
-msgstr "Con un pago"
+msgid "With a payment planned"
+msgstr "Con un pago planeado"
 
 #. module: l10n_cr_hr_payroll_salary_certificate
 #: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
@@ -142,10 +142,6 @@ msgstr "desde el"
 
 #. module: l10n_cr_hr_payroll_salary_certificate
 #: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
-msgid "payment"
-msgstr "pago"
-
-#. module: l10n_cr_hr_payroll_salary_certificate
-#: view:website:l10n_cr_hr_payroll_salary_certificate.report_salary_certificate
 msgid "the day"
 msgstr "el día"
+

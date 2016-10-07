@@ -48,7 +48,7 @@
                                 <div class="col-xs-12" style="margin-top: 45px">
                                     <t t-set="payslips" t-value="payslips_ids['payslips']"/>
                                     <t t-set="qty" t-value="payslips_ids['quantity']"/>
-                                    <p><b>With a <span t-field="contract.schedule_pay"/> payment</b></p>
+                                    <p><b>With a payment planned <span style="text-transform:lowercase;" t-field="contract.schedule_pay"/></b></p>
                                     <t t-set="gross_total" t-value="get_line_total(payslips, code='BRUTO')"/>
                                     <t t-set="gross" t-value="gross_total / qty"/>
                                         <p><b>Brute Salary:  <span t-field="company.currency_id.symbol"/><span t-esc="gross"/></b></p>

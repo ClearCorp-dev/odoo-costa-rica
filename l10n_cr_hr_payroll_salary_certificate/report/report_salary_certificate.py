@@ -64,8 +64,10 @@ class ReportSalaryCertificate(report_sxw.rml_parse):
             self.cr, self.uid, [('employee_id', '=', employee_id),
                                 ('date_start', '<=', fields.Date.today()), '|',
                                 ('date_end', '>=', fields.Date.today()),
-                                ('date_end', '=', False)], limit=1)
-        contract = contract_obj.browse(self.cr, self.uid, contract_id)
+                                ('date_end', '=', False)], limit=1,
+            context=self.localcontext)
+        contract = contract_obj.browse(
+            self.cr, self.uid, contract_id, context=self.localcontext)
         return contract
 
     def _validate_contract(self, contract):
@@ -85,8 +87,11 @@ class ReportSalaryCertificate(report_sxw.rml_parse):
                                 ('date_to', '<=', fields.Date.today()),
                                 ('employee_id', '=', employee_id),
                                 ('contract_id', '=', contract_id),
-                                ('state', '=', 'done')])
-        payslips = payslip_obj.browse(self.cr, self.uid, payslip_ids)
+                                ('state', '=', 'done')],
+            context=self.localcontext)
+        print self.localcontext
+        payslips = payslip_obj.browse(
+            self.cr, self.uid, payslip_ids, context=self.localcontext)
         res = {
             'payslips': payslips,
             'quantity': len(payslips),
